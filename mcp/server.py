@@ -89,7 +89,7 @@ _INSTRUCTIONS = (
     "already PRICED INTO positioning. `positioning_extremes` scans WHERE positioning is most stretched across "
     "all markets. Pair it with commodity_pulse / bond_pulse (news + positioning). A single STOCK has no futures "
     "positioning → its lens is OPTIONS (options_sentiment). Narrate the PLAIN reads for a beginner. "
-    "💰 FUNDAMENTALS (company financial statements): `financials(tickers)` reads or COMPARES up to 5 companies' "
+    "💰 FUNDAMENTALS (company financial statements): `financials(tickers)` reads or COMPARES up to 8 companies' "
     "income/balance/cash-flow — revenue, growth, margins, FCF, and (US filers) EDGAR note-level quality-of-"
     "earnings (deferred revenue, stock comp, tax). Use it for an explicit financials / งบการเงิน ask, a "
     "fundamentals COMPARE ('which of these is more profitable', 'compare Apple vs TSMC vs Samsung'), or "
@@ -1693,7 +1693,7 @@ def positioning_extremes(
     return mdx()._get("/v1/positioning/extremes", p).data
 
 @mcp.tool(title="Financials", annotations=_RO)
-def financials(tickers: Annotated[Union[str, List[str]], _dts("1–5 comma-separated MarketDX tickers of COMMON STOCKS to read/compare "
+def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separated MarketDX tickers of COMMON STOCKS to read/compare "
                                           "financial statements for ('AAPL.US', or 'AAPL.US,MSFT.US,2330.TW'). Resolve "
                                           "NAMES → tickers with find_stock first ('Apple'→AAPL.US); a bare symbol "
                                           "(AAPL) also works. NOT for ETF/commodity/bond/crypto — no company financials.")],
@@ -1730,14 +1730,22 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–5 comma-separ
                                                      "period's date so cross-currency companies compare — margins/growth "
                                                      "are currency-neutral anyway. A multi-company compare defaults to USD.")] = None) -> dict:
     """⭐ Company FINANCIAL STATEMENTS — income / balance / cash-flow + auto-detected abnormality SIGNALS.
-    Read ONE company or COMPARE up to 5 (revenue, growth, margins, ROE, FCF…). Data is a clean, current, normalized
+    Read ONE company or COMPARE up to 8 (revenue, growth, margins, ROE, FCF…).
+    🔴 To compare/analyse SEVERAL companies, pass them ALL in ONE call (`tickers='TSLA.US,MSFT.US'`) — do NOT call once
+    per company; a single call aligns them on a common basis + currency and costs a fraction of N separate calls. Pick
+    ONE `period` per question too (quarterly figures ALREADY carry YoY vs the same quarter — no extra annual call needed).
+    Data is a clean, current, normalized
     feed uniform across EVERY industry (banks, autos-with-captive-finance, insurance, REITs). 🎚 ONE dial = `fields`:
     leave it EMPTY for the DIGEST (the safe, small default — headline + ratios + capital-return + signals; covers
     most compares); set it only for specific line items, a whole statement ('income'|'balance'|'cashflow'), or 'all'.
     ⏱ `period` picks the time window (5y / 2022 / 2022-2023 / 5q / 2024Q2), mapped to each company's fiscal year.
     🌐 Cross-currency compares handled — `currency=USD` (auto for multi-company); totals convert at each period's DATE.
     🗣 The digest carries a plain `read` — narrate margins/growth/FCF/ROE in everyday words. Facts, not advice.
-    📏 LIMITS (relay them if the user asks beyond): ≤5 companies/call · ≤20 specific fields/call · ~4–5 years history.
+    🚩 The digest may carry `_notes` — deterministic per-period flags that a year's per-share/YoY figures aren't
+    comparable (share splits & share-class/Up-C re-bases, goodwill/asset impairments or divestitures, debt carve-outs,
+    one-period source misparses). The movement and its comparability WARNING are FACTS; each note's `likely_causes` is
+    an INFERRED guess at WHY — treat it as a lead to VERIFY, not a stated fact (research it before asserting a cause).
+    📏 LIMITS (relay them if the user asks beyond): ≤8 companies/call · ≤20 specific fields/call · ~4–5 years history.
     A non-equity (ETF/commodity/bond/crypto) or unlisted name → that entry is `ok:false` (say financials don't apply).
     🔴 `asset_pulse` on a stock ALREADY embeds the digest — call `financials` only for a DEDICATED read/compare, a
     specific-`fields`/statement pull, or `all`, NOT as a second call right after asset_pulse.
@@ -1756,6 +1764,9 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–5 comma-separ
         params["currency"] = currency.strip().upper()
     elif len(tks) > 1:
         params["currency"] = "USD"  # a compare → a common currency by default
+    # text render — same data as JSON but a compact table (abbreviated numbers), ~70% fewer tokens; the LLM wants the
+    # big picture, not exact digits. (asset_pulse's fundamentals embed keeps JSON — it extracts structured fields.)
+    params["format"] = "text"
     return mdx()._get("/v1/financials", params).data
 
 @mcp.tool(name="find_fsconcept", title="Find Financial-Statement Field", annotations=_RO)
@@ -1780,6 +1791,106 @@ def find_fsconcept(q: Annotated[str, _dq(
     field_key(s) VERBATIM to `financials(fields=…)`. Empty candidates → refine with a sharper English term and
     call again; never guess a field_key."""
     return mdx()._get("/v1/financials/find", {"q": q, "statement": statement, "limit": _lim(limit, default=8, ceiling=25)}).data
+
+
+@mcp.tool(name="screen_growth", title="Screen by Growth Pattern", annotations=_RO)
+def screen_growth(
+        concept: Annotated[str, _dq(
+            "A growth CONCEPT_KEY (from find_fsconcept, type:'growth') — one of: 'consecutive_growth' (grew above a "
+            "threshold EVERY year for N years), 'compound_growth' (CAGR over N years — the AVERAGE, not every year), "
+            "'decelerating' / 'accelerating' (growth-rate slowing / speeding up — the 2nd derivative), "
+            "'decline_bottoming' (contraction easing) / 'decline_accelerating' (shrinking faster), 'stable_growth', "
+            "'erratic_growth', 'growth_turned_negative', 'latest_yoy', 'qoq_momentum', 'profitless_growth'.")],
+        metric: Annotated[Optional[str], _d(
+            "The field/ratio to measure — a field_key/ratio_key (resolve via find_fsconcept if unsure). Default "
+            "'revenue'. Works on LEVELS and RATIOS: 'net_income', 'free_cash_flow', 'net_margin', 'roe', 'capex_to_da'.")] = None,
+        n: Annotated[Optional[int], _d(
+            "The window/streak parameter the concept needs: YEARS for consecutive_growth/compound_growth (2/3/4/5), "
+            "or the minimum CONSECUTIVE PERIODS for decelerating/accelerating/decline_accelerating.")] = None,
+        threshold: Annotated[Optional[float], _d(
+            "The growth threshold as a FRACTION (0.10 = 10%). consecutive_growth: every year must exceed it; "
+            "compound_growth: the CAGR must; latest_yoy/qoq_momentum: the latest reading must.")] = None,
+        basis: Annotated[Optional[str], _d(
+            "OPTIONAL basis: 'A' annual (default for multi-year patterns), 'Q' quarterly YoY (timeliest, default for "
+            "the 2nd-derivative quadrants), 'T' rolling-TTM.")] = None,
+        limit: Annotated[Optional[int], _d("Max stocks (default 50, max 200).")] = None) -> dict:
+    """EXECUTE a growth screen resolved from find_fsconcept (a candidate with type:'growth'). Growth concepts are
+    PARAMETRIC — you FILL the params you extracted from the question; the server builds the query deterministically.
+    Routing: 'grew >10% EVERY year for 3y' → concept='consecutive_growth', metric='revenue', n=3, threshold=0.10;
+    'grew ~10% ON AVERAGE over 5y' → concept='compound_growth', n=5, threshold=0.10; 'which companies are slowing
+    down' → concept='decelerating', basis='Q'. Returns {count, stocks:[{head_listing_id, ticker, name}]}. NOTE:
+    coverage grows as the fundamentals mart fills — the quarterly/TTM 2nd-derivative needs ~7+ quarters of history."""
+    params = {"concept": concept, "metric": metric or "revenue", "limit": _lim(limit, default=50, ceiling=200)}
+    if n is not None:
+        params["N"] = n
+    if threshold is not None:
+        params["threshold"] = threshold
+    if basis:
+        params["basis"] = basis
+    return mdx()._get("/v1/financials/screen-growth", params).data
+
+
+@mcp.tool(name="find_fspattern", title="Find Financial Pattern", annotations=_RO)
+def find_fspattern(q: Annotated[str, _dq(
+        "An ENGLISH description of a temporal PATTERN / shape to screen on — 'below the sector average', 'growth "
+        "accelerating', 'margin expanding', 'grew every year', 'net loss shrinking', 'debt rising faster than "
+        "equity'. 🔴 ENGLISH ONLY (translate first). Resolves the SHAPE only; resolve the underlying METRIC "
+        "separately via find_fsconcept.")],
+        limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
+    """FREE resolver — a temporal PATTERN → a `concept_key` + the `params` to feed `query_fsscreener`. The screener
+    grammar is TWO-PART: find_fspattern gives the SHAPE (accelerating, below_average, consecutive_growth, a
+    relation…), find_fsconcept gives the METRIC (net_margin, pe, revenue…). Returns ranked `patterns` {concept_key,
+    kind (level/cohort/quadrant/relation), label, definition, params-to-fill}. Pick one, fill its params (EXCEPT the
+    `metric`/`metricA`/`metricB` — those come from find_fsconcept), then pass it as a condition to query_fsscreener.
+    Say the pattern in the NATURAL direction the user asked; the server applies sign/polarity for you."""
+    return mdx()._get("/v1/financials/find-pattern", {"q": q, "limit": _lim(limit, default=8, ceiling=25)}).data
+
+
+@mcp.tool(name="query_fsscreener", title="Screen Stocks by Financial Conditions", annotations=_RO)
+def query_fsscreener(
+        conditions: Annotated[List[dict], _d(
+            "A JSON array of AND-ed conditions (INTERSECT). Build each from find_fsconcept (the METRIC) + "
+            "find_fspattern (the SHAPE). THREE condition shapes:\n"
+            "  • COHORT-BENCHMARK (a metric vs its peer average): {'concept':'<metric>', 'op':'below'|'above', "
+            "'vs_cohort':{'stat':'pooled'|'median'[, 'country':'US'][, 'gics':'4530'][, 'size':['large']]}}  — "
+            "e.g. P/E below the market average → {'concept':'pe','op':'below','vs_cohort':{'stat':'pooled'}}.\n"
+            "  • PATTERN on one metric: {'concept':'<metric>', 'pattern':'<concept_key from find_fspattern>', "
+            "'params':{…the pattern's params…}}  — e.g. net income accelerating → {'concept':'net_income',"
+            "'pattern':'accelerating','params':{'N':2}}.\n"
+            "  • RELATION between two metrics: {'metricA':'<m1>', 'relation':'<rel>', 'metricB':'<m2>'}.\n"
+            "Metrics are canonical keys from find_fsconcept (pe, ev_ebitda, net_margin, gross_margin, roe, roic, "
+            "debt_to_equity, dividend_yield, revenue, net_income…). Empty vs_cohort = the WHOLE market.")],
+        gics: Annotated[Optional[str], _d(
+            "OPTIONAL sector scope — a GICS code prefix from find_gics ('45'=IT, '4530'=semis). Restricts the screen "
+            "to that sector. (Same as putting it in `filters.gics`; either works.)")] = None,
+        country: Annotated[Optional[str], _d("OPTIONAL ISO-2 issuer-domicile scope ('US','CN','TH') — restrict to that country.")] = None,
+        size: Annotated[Optional[str], _d("OPTIONAL size tier ('large'|'mid'|'small'|'micro') — e.g. exclude micro-caps.")] = None,
+        market_cap_min: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn) — cut small-cap noise.")] = None,
+        filters: Annotated[Optional[dict], _d(
+            "OPTIONAL extra PRE-filters as a dict: {'market_cap_max':…, 'region':'EU', 'theme':'<megatrend id>'}. "
+            "(gics/country/size/market_cap_min are also top-level args above — use whichever is convenient.)")] = None,
+        sort_by: Annotated[Optional[str], _d(
+            "OPTIONAL metric to RANK results by (direction auto from the ratio's better-is-high/low). Default = market cap.")] = None,
+        limit: Annotated[Optional[int], _d("Max stocks (default 50).")] = None) -> dict:
+    """EXECUTE a multi-condition FUNDAMENTALS screen — the answer to 'find stocks where <metric> is <shape> AND …'.
+    🔴 This is the ONLY tool that filters by MARGINS, RETURNS (ROE/ROIC), VALUATION-vs-PEERS, GROWTH SHAPES, or a
+    metric RELATION — `screen_stocks` does valuation LEVELS only, `screen_growth` is a single growth pattern. Compose
+    `conditions` from find_fsconcept (metric) + find_fspattern (shape); the server resolves Field Polarity and
+    INTERSECTs them. Returns {count, conditions:[resolution trace + `eligible` coverage], stocks:[{ticker, name}]}.
+    count=0 → read conditions[].eligible: 0 = metric not populated (data-depth), >0 = data exists but nothing matched
+    (loosen the threshold / cohort)."""
+    # fold the top-level scope args into `filters` (screen_stocks-style convenience — the LLM naturally reaches for a
+    # bare `gics=`; put it wherever, it lands in the same pre-filter).
+    f = dict(filters or {})
+    for k, v in (("gics", gics), ("country", country), ("size", size), ("market_cap_min", market_cap_min)):
+        if v is not None:
+            f[k] = v
+    params = {"conditions": json.dumps(conditions), "limit": _lim(limit, default=50, ceiling=5000)}
+    if f:
+        params["filters"] = json.dumps(f)
+    if sort_by:
+        params["sort_by"] = sort_by
+    return mdx()._get("/v1/financials/screen", params).data
 
 _CURVE_TENORS = ("3M", "2Y", "5Y", "10Y", "30Y")
 # country/bond words → ISO2, for pinning a yield-curve country from a free-text query (single tokens; matched
