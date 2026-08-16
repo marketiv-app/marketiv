@@ -2173,6 +2173,8 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
                      min_cagr: Annotated[Optional[float], _d("Min 5-year dividend CAGR, %.")] = None,
                      min_market_cap_usd: Annotated[Optional[float], _d("Min market cap, USD.")] = None,
                      max_market_cap_usd: Annotated[Optional[float], _d("Max market cap, USD.")] = None,
+                     max_payout: Annotated[Optional[float], _d("Max payout ratio — 'high yield but payout NOT stretched'. "
+                                                               "Fraction (0.7) or percent (70).")] = None,
                      order_by: Annotated[Optional[str], _d("`yield` (default) | `streak` | `cagr`.")] = None,
                      limit: Annotated[Optional[int], _d(_LIMIT)] = None) -> dict:
     """💰 THE income screener — "which stocks in <a group> pay a high / reliable / growing DIVIDEND?"
@@ -2183,7 +2185,8 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
         For a sector by NAME, resolve first with `find_gics` ('banks'→4010) then pass the code. Combine freely.
       • `order_by` = `yield` (default) | `streak` (reliability — longest clean run in our window) | `cagr`
         (fastest dividend growth). Filters: `min_yield`/`max_yield` (PERCENT, e.g. 3 = 3%; max guards against
-        traps), `min_streak_years` (≤10, see below), `min_cagr` (%), `min/max_market_cap_usd`.
+        traps), `min_streak_years` (≤10, see below), `min_cagr` (%), `min/max_market_cap_usd`, `max_payout`
+        (ceiling on payout_ratio — high yield with payout ≤ this = safer, not stretched).
     🔴 `no_cut_streak_yrs` is a bounded RELIABILITY signal — consecutive no-cut years within a **10-year**
     tracking window, so it CAPS AT 10 (10 = never cut across the whole decade, i.e. survived the 2020 &
     2022 stress). It is NOT the company's full dividend age: DO NOT report "~50-year king / 69-year streak"
@@ -2202,6 +2205,7 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
               "min_yield": min_yield, "max_yield": max_yield,
               "min_streak_years": min_streak_years, "min_cagr": min_cagr,
               "min_market_cap_usd": min_market_cap_usd, "max_market_cap_usd": max_market_cap_usd,
+              "max_payout": max_payout,
               "order_by": order_by, "limit": _lim(limit, default=15, ceiling=50)}
     return mdx()._get("/v1/stocks/dividends", params).data
 
