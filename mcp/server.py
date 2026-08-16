@@ -15,7 +15,7 @@ from __future__ import annotations
 import os, json, pathlib, contextvars
 from dataclasses import asdict, is_dataclass
 from typing import Annotated, Any, Optional, List, Literal, Union
-from pydantic import Field, AliasChoices
+from pydantic import Field, AliasChoices, BaseModel
 
 from mcp.server.fastmcp import FastMCP, Context
 from mcp.server.transport_security import TransportSecuritySettings
@@ -204,13 +204,16 @@ _GICS = ("GICS code prefix(es), CSV — sector `25` / industry-group `2550` / in
 _NEWS_TYPE = "News CATEGORY (exact names only, e.g. `macro_economic`, `commodity_supply`, `earnings_results`)."
 _PID = "The portfolio's id (call list_portfolios first if the user says 'my portfolio' without a number)."
 
-def _lim(n: Optional[int], default: int = 20, ceiling: int = 50) -> int:
+def _lim(n: Optional[int], default: int = 20, ceiling: int = 50, floor: int = 1) -> int:
     """Bound a list tool's page size so the result stays context-friendly. Heavily-covered assets
     (GOLD, oil, mega-caps) have hundreds of impact articles — dumping them all overflows the client's
-    context. `None` → default; the LLM may raise it up to `ceiling`, then should page/narrow instead."""
+    context. `None` → default; the LLM may raise it up to `ceiling`, then should page/narrow instead.
+    `floor` guards TOP-K RESOLVERS (find_stock/find_fsconcept/…): they return a CANDIDATE LIST the client
+    PICKS from, so a client setting limit=1 would collapse them to rank-#1 and break the design — floor it
+    (e.g. 5) so a candidate list always comes back."""
     if n is None:
         return default
-    return max(1, min(int(n), ceiling))
+    return max(floor, min(int(n), ceiling))
 
 # News exists only from here (backfill floor; still walking backward). There is NO news before this.
 # Price/EOD history, by contrast, goes back decades — so historical volatility is answerable, news isn't.
@@ -698,7 +701,7 @@ def find_stock(q: Annotated[Optional[str], _dq("Free-text to resolve to ONE exac
                    "country silently 0-matches). Accepts a country NAME or an ISO-2 code; the server "
                    "normalizes ('South Korea'->KR, 'UK'/'England'->GB, 'Switzerland'->CH), so pass the NAME "
                    "when unsure. NEVER guess a 2-letter code ('CH' is Switzerland not China)."))] = None,
-               limit: Annotated[Optional[int], _d("Max candidate matches per query (small is fine — take the top).")] = None):
+               limit: Annotated[Optional[int], _d("Max candidate matches (default handles it). Returns a CANDIDATE LIST for YOU to pick the fit — do NOT set it to 1 (min 5 anyway); rank #1 isn't always the answer.")] = None):
     """Resolve ANY free-text — a company NAME, a ticker (full or prefix), an alias, a phrase, or a
     non-English name — to the EXACT MarketDX `ticker`. 🔴 Use this BEFORE asset_pulse / stock_impact
     whenever you're not 100% sure of the exact ticker — ESPECIALLY for NON-US companies: MarketDX uses
@@ -747,7 +750,7 @@ def find_stock(q: Annotated[Optional[str], _dq("Free-text to resolve to ONE exac
     if queries:
         resp = mdx()._http._client.post(
             "/v1/stocks/resolve",
-            json={"queries": queries, "country": country, "limit": _lim(limit, default=5, ceiling=25)})
+            json={"queries": queries, "country": country, "limit": _lim(limit, default=5, ceiling=25, floor=5)})
         resp.raise_for_status()
         data = resp.json()
         for r in data.get("results", []):
@@ -756,7 +759,7 @@ def find_stock(q: Annotated[Optional[str], _dq("Free-text to resolve to ONE exac
     if not q:
         raise ValueError("pass q=<name> (single) or queries=[…] (batch)")
     rows = mdx()._get("/v1/stocks", {"q": q, "country": country,
-                                     "limit": _lim(limit, default=8, ceiling=25)}).data.get("matches", [])
+                                     "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data.get("matches", [])
     return [{k: m[k] for k in _FIND_KEEP if k in m} for m in rows]
 
 @mcp.tool(title="Theme Players", annotations=_RO)
@@ -1791,7 +1794,7 @@ def find_fsconcept(q: Annotated[str, _dq(
     = the headline line; curated:true = an exact name/alias hit, high confidence). Then pass the chosen
     concept(s) VERBATIM to `financials(fields=…)`. Empty candidates → refine with a sharper English term and
     call again; never guess a concept."""
-    return mdx()._get("/v1/financials/find", {"q": q, "statement": statement, "limit": _lim(limit, default=8, ceiling=25)}).data
+    return mdx()._get("/v1/financials/find", {"q": q, "statement": statement, "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data
 
 
 @mcp.tool(name="screen_growth", title="Screen by Growth Pattern", annotations=_RO)
@@ -1844,23 +1847,50 @@ def find_fspattern(q: Annotated[str, _dq(
     kind (level/cohort/quadrant/relation), label, definition, params-to-fill}. Pick one, fill its params (EXCEPT the
     `metric`/`metricA`/`metricB` — those come from find_fsconcept), then pass it as a condition to query_fsscreener.
     Say the pattern in the NATURAL direction the user asked; the server applies sign/polarity for you."""
-    return mdx()._get("/v1/financials/find-pattern", {"q": q, "limit": _lim(limit, default=8, ceiling=25)}).data
+    return mdx()._get("/v1/financials/find-pattern", {"q": q, "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data
+
+
+class ScreenCondition(BaseModel):
+    """ONE AND-ed screen condition. COMMON form = a metric + a shape + its value: copy find_fsconcept's `concept`
+    into `concept`, find_fspattern's `pattern` into `pattern` (both VERBATIM), then set the ONE value the pattern
+    needs. RELATION form (rare) = compare two metrics: set metricA + relation + metricB instead."""
+    concept: Optional[str] = Field(None, description="The METRIC — find_fsconcept's `concept` verbatim (pe, roe, net_margin, revenue, debt_to_equity, …).")
+    pattern: Optional[str] = Field(None, description="The SHAPE — find_fspattern's `pattern` verbatim (above, below, between, low, high, accelerating, below_average, compound_growth, …).")
+    threshold: Optional[float] = Field(None, description="Value for `above`/`below`. Ratios are FRACTIONS (roe 0.20 = 20%); a whole-number percent (20) is auto-rescaled.")
+    min: Optional[float] = Field(None, description="Lower bound for `between`.")
+    max: Optional[float] = Field(None, description="Upper bound for `between`.")
+    n: Optional[int] = Field(None, description="Window in YEARS for growth/consecutive patterns (e.g. compound_growth over n=3).")
+    percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` (0.1 = cheapest/priciest 10%).")
+    vs_cohort: Optional[dict] = Field(None, description="Only for cohort patterns (below_average/above_average): the BENCHMARK peer group {country?, gics?, size?, stat?} — SEPARATE from the top-level selection scope. Omit = whole market.")
+    metricA: Optional[str] = Field(None, description="RELATION form only: the first metric.")
+    relation: Optional[str] = Field(None, description="RELATION form only: how metricA compares to metricB.")
+    metricB: Optional[str] = Field(None, description="RELATION form only: the second metric.")
+
+
+def _cond_to_api(c: ScreenCondition) -> dict:
+    """Typed condition → the news-api's shape (metric/pattern + nested params). Keeps the client's schema flat."""
+    if c.metricA and c.metricB and c.relation:
+        return {"metricA": c.metricA, "relation": c.relation, "metricB": c.metricB}
+    p: dict = {}
+    if c.threshold is not None: p["threshold"] = c.threshold
+    if c.min is not None: p["min"] = c.min
+    if c.max is not None: p["max"] = c.max
+    if c.n is not None: p["N"] = c.n
+    if c.percentile is not None:
+        # low = cheap tail (max_percentile) · high = expensive tail (min_percentile)
+        p["min_percentile" if (c.pattern or "") in ("high", "expensive", "priciest") else "max_percentile"] = c.percentile
+    d: dict = {"concept": c.concept, "pattern": c.pattern, "params": p}
+    if c.vs_cohort: d["vs_cohort"] = c.vs_cohort
+    return d
 
 
 @mcp.tool(name="query_fsscreener", title="Screen Stocks by Financial Conditions", annotations=_RO)
 def query_fsscreener(
-        conditions: Annotated[List[dict], _d(
-            "A JSON array of AND-ed conditions (INTERSECT). Build each from find_fsconcept (the METRIC) + "
-            "find_fspattern (the SHAPE). THREE condition shapes:\n"
-            "  • COHORT-BENCHMARK (a metric vs its peer average): {'concept':'<metric>', 'op':'below'|'above', "
-            "'vs_cohort':{'stat':'pooled'|'median'[, 'country':'US'][, 'gics':'4530'][, 'size':['large']]}}  — "
-            "e.g. P/E below the market average → {'concept':'pe','op':'below','vs_cohort':{'stat':'pooled'}}.\n"
-            "  • PATTERN on one metric: {'concept':'<metric>', 'pattern':'<pattern from find_fspattern>', "
-            "'params':{…the pattern's params…}}  — e.g. net income accelerating → {'concept':'net_income',"
-            "'pattern':'accelerating','params':{'N':2}}.\n"
-            "  • RELATION between two metrics: {'metricA':'<m1>', 'relation':'<rel>', 'metricB':'<m2>'}.\n"
-            "Metrics are canonical keys from find_fsconcept (pe, ev_ebitda, net_margin, gross_margin, roe, roic, "
-            "debt_to_equity, dividend_yield, revenue, net_income…). Empty vs_cohort = the WHOLE market.")],
+        conditions: Annotated[List[ScreenCondition], _d(
+            "AND-ed conditions (INTERSECT). Build each from find_fsconcept (→ `concept`) + find_fspattern (→ "
+            "`pattern`), then its value. e.g. roe>20% & low debt → [{concept:'roe',pattern:'above',threshold:0.20}, "
+            "{concept:'debt_to_equity',pattern:'below',threshold:0.5}]; P/E below market avg → "
+            "[{concept:'pe',pattern:'below_average'}]; cheapest 10% by P/E → [{concept:'pe',pattern:'low',percentile:0.1}].")],
         gics: Annotated[Optional[str], _d(
             "OPTIONAL sector scope — a GICS code prefix from find_gics ('45'=IT, '4530'=semis). Restricts the screen "
             "to that sector. (Same as putting it in `filters.gics`; either works.)")] = None,
@@ -1886,7 +1916,7 @@ def query_fsscreener(
     for k, v in (("gics", gics), ("country", country), ("size", size), ("market_cap_min", market_cap_min)):
         if v is not None:
             f[k] = v
-    params = {"conditions": json.dumps(conditions), "limit": _lim(limit, default=50, ceiling=5000)}
+    params = {"conditions": json.dumps([_cond_to_api(c) for c in conditions]), "limit": _lim(limit, default=50, ceiling=5000)}
     if f:
         params["filters"] = json.dumps(f)
     if sort_by:
@@ -2461,7 +2491,7 @@ def find_hs(q: Annotated[str, _dq(
       • ENUMERATE a conglomerate's material lines and call once per line (a whole-description search lands on
         the dominant line only). FREE — enumerate broadly, then pull metered trade data selectively.
     Feeds the `codes` of `search_trade` / `top_partners` / `top_traders` / `trade_balance`."""
-    return _ext("/v1/ext/hs/find", {"q": q, "type": type, "limit": _lim(limit, default=15, ceiling=50)})
+    return _ext("/v1/ext/hs/find", {"q": q, "type": type, "limit": _lim(limit, default=15, ceiling=50, floor=5)})
 
 @mcp.tool(name="search_trade", title="Trade Flows Over Time", annotations=_RO)
 def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO / M49 (`Thailand`/`THA`/`764`); resolved server-side.")],
@@ -2555,7 +2585,7 @@ def find_series(q: Annotated[str, _dq("A macro concept ONLY, in ANY language —
     rate/ratio as its level (`lin`). PICK by intent: core vs headline (CPILFESL vs CPIAUCSL), SA vs NSA, PCE vs
     CPI. `curated:true` + high popularity = the canonical pick. Empty candidates = FRED doesn't have it (ISM/PMI;
     commodity SPOT prices → use commodity_pulse) — say so, don't fabricate. Feeds `fred_series`."""
-    return _ext("/v1/ext/fred/find", {"q": q, "country": country, "limit": _lim(limit, default=8, ceiling=25)})
+    return _ext("/v1/ext/fred/find", {"q": q, "country": country, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
 
 @mcp.tool(name="fred_series", title="Macro Series + Analysis (FRED)", annotations=_RO)
 def fred_series(series_id: Annotated[str, _d("ONE FRED series_id from find_series (never guess). Comma-sep = rejected; compare two = call twice + diff.")],
@@ -2591,7 +2621,7 @@ def find_indicator(q: Annotated[str, _dq("A cross-country STRUCTURAL concept in 
     capita (living standards) · `.PP` = PPP. `curated:true` + `database=WB_WDI` = the canonical pick; higher
     `coverage.economies` = more widely reported. Empty = not in the World Bank set — say so, don't fabricate.
     Feeds `wb_series`."""
-    return _ext("/v1/ext/wb/find", {"q": q, "country": country, "limit": _lim(limit, default=8, ceiling=25)})
+    return _ext("/v1/ext/wb/find", {"q": q, "country": country, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
 
 @mcp.tool(name="wb_series", title="World Bank Data + Analysis", annotations=_RO)
 def wb_series(indicator: Annotated[str, _d("ONE indicator id from find_indicator (never guess), e.g. WB_WDI_NE_CON_PRVT_ZS.")],
