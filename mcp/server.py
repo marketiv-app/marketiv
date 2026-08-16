@@ -1724,7 +1724,7 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
                    "  • 'all' → every reported line (a forensic dive; large).\n"
                    "  • a GRANULAR line NOT in the KEYS above (investment properties, construction in progress, "
                    "held-to-maturity securities, accrued interest, accumulated OCI…) → resolve it with "
-                   "`find_fsconcept` FIRST, then pass the returned field_key here verbatim.\n"
+                   "`find_fsconcept` FIRST, then pass the returned concept here verbatim.\n"
                    "Unreported line → `unavailable_fields` (+ `available_fields` and sometimes a `resolved_via_rule` "
                    "proxy — use it and say which); state absences plainly, never fabricate.")] = None,
                currency: Annotated[Optional[str], _d("Convert ABSOLUTE totals to this currency (e.g. USD) at each "
@@ -1772,7 +1772,7 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
 
 @mcp.tool(name="find_fsconcept", title="Find Financial-Statement Field", annotations=_RO)
 def find_fsconcept(q: Annotated[str, _dq(
-        "An ENGLISH financial-statement LINE-ITEM or metric concept to resolve to the exact field_key for "
+        "An ENGLISH financial-statement LINE-ITEM or metric concept to resolve to the exact concept for "
         "`financials` — 'investment properties', 'held to maturity securities', 'construction in progress', "
         "'accrued interest receivable', 'deferred tax liabilities', 'accumulated OCI', 'minority interest'. "
         "🔴 ENGLISH ONLY: translate any language to its English accounting term FIRST (投資不動産→'investment "
@@ -1781,16 +1781,16 @@ def find_fsconcept(q: Annotated[str, _dq(
         statement: Annotated[Optional[str], _d(
         "OPTIONAL — narrow to 'balance' | 'income' | 'cashflow' when you know which statement the line sits on.")] = None,
         limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
-    """FREE resolver — a SPECIFIC financial-statement line-item / metric concept → the exact `field_key` to pass
+    """FREE resolver — a SPECIFIC financial-statement line-item / metric concept → the exact `concept` to pass
     to `financials(fields=…)`. Use this ONLY for a GRANULAR / uncommon line the common `financials` field keys
     don't cover (investment properties, construction in progress, held-to-maturity / available-for-sale
     securities, accrued interest, revaluation reserve, minority interest, accumulated OCI, the EPS variants…);
     for COMMON items (revenue, margins, capex, debt, cash, EPS, dividends) call `financials` directly — no
-    round-trip. Returns ranked `candidates` {field_key, label, statement, parent, is_core, kind, curated, sim,
+    round-trip. Returns ranked `candidates` {concept, label, statement, parent, is_core, kind, curated, sim,
     + a `definition` ONLY when the name isn't self-evident}. PICK by label/definition + statement (is_core=true
     = the headline line; curated:true = an exact name/alias hit, high confidence). Then pass the chosen
-    field_key(s) VERBATIM to `financials(fields=…)`. Empty candidates → refine with a sharper English term and
-    call again; never guess a field_key."""
+    concept(s) VERBATIM to `financials(fields=…)`. Empty candidates → refine with a sharper English term and
+    call again; never guess a concept."""
     return mdx()._get("/v1/financials/find", {"q": q, "statement": statement, "limit": _lim(limit, default=8, ceiling=25)}).data
 
 
@@ -1803,7 +1803,7 @@ def screen_growth(
             "'decline_bottoming' (contraction easing) / 'decline_accelerating' (shrinking faster), 'stable_growth', "
             "'erratic_growth', 'growth_turned_negative', 'latest_yoy', 'qoq_momentum', 'profitless_growth'.")],
         metric: Annotated[Optional[str], _d(
-            "The field/ratio to measure — a field_key/ratio_key (resolve via find_fsconcept if unsure). Default "
+            "The field/ratio to measure — a concept (resolve via find_fsconcept if unsure). Default "
             "'revenue'. Works on LEVELS and RATIOS: 'net_income', 'free_cash_flow', 'net_margin', 'roe', 'capex_to_da'.")] = None,
         n: Annotated[Optional[int], _d(
             "The window/streak parameter the concept needs: YEARS for consecutive_growth/compound_growth (2/3/4/5), "
@@ -1838,9 +1838,9 @@ def find_fspattern(q: Annotated[str, _dq(
         "equity'. 🔴 ENGLISH ONLY (translate first). Resolves the SHAPE only; resolve the underlying METRIC "
         "separately via find_fsconcept.")],
         limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
-    """FREE resolver — a temporal PATTERN → a `concept_key` + the `params` to feed `query_fsscreener`. The screener
+    """FREE resolver — a temporal PATTERN → a `pattern` + the `params` to feed `query_fsscreener`. The screener
     grammar is TWO-PART: find_fspattern gives the SHAPE (accelerating, below_average, consecutive_growth, a
-    relation…), find_fsconcept gives the METRIC (net_margin, pe, revenue…). Returns ranked `patterns` {concept_key,
+    relation…), find_fsconcept gives the METRIC (net_margin, pe, revenue…). Returns ranked `patterns` {pattern,
     kind (level/cohort/quadrant/relation), label, definition, params-to-fill}. Pick one, fill its params (EXCEPT the
     `metric`/`metricA`/`metricB` — those come from find_fsconcept), then pass it as a condition to query_fsscreener.
     Say the pattern in the NATURAL direction the user asked; the server applies sign/polarity for you."""
@@ -1855,7 +1855,7 @@ def query_fsscreener(
             "  • COHORT-BENCHMARK (a metric vs its peer average): {'concept':'<metric>', 'op':'below'|'above', "
             "'vs_cohort':{'stat':'pooled'|'median'[, 'country':'US'][, 'gics':'4530'][, 'size':['large']]}}  — "
             "e.g. P/E below the market average → {'concept':'pe','op':'below','vs_cohort':{'stat':'pooled'}}.\n"
-            "  • PATTERN on one metric: {'concept':'<metric>', 'pattern':'<concept_key from find_fspattern>', "
+            "  • PATTERN on one metric: {'concept':'<metric>', 'pattern':'<pattern from find_fspattern>', "
             "'params':{…the pattern's params…}}  — e.g. net income accelerating → {'concept':'net_income',"
             "'pattern':'accelerating','params':{'N':2}}.\n"
             "  • RELATION between two metrics: {'metricA':'<m1>', 'relation':'<rel>', 'metricB':'<m2>'}.\n"
