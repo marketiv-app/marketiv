@@ -1924,6 +1924,8 @@ def query_fsscreener(
     🚩 A VALUATION screen adds `metrics.earnings_quality_ocf_ni` per stock = operating-cash ÷ net-income: if it's ≪1 or
     NEGATIVE, a low P/E is likely ONE-OFF / non-cash earnings (holding-co mark-to-market, crypto revaluation) — REAL data
     but not recurring, so it's "cheap for the wrong reason", NOT genuinely undervalued → say so, don't headline it as cheap.
+    (Caveat: for BANKS / INSURERS this ratio is naturally high/erratic — their operating cash flow isn't comparable to an
+    industrial's; don't read a high value there as quality. A trailing-12-month LOSS-maker has NO P/E → the field is null.)
     count=0 → read conditions[].eligible: 0 = metric not populated (data-depth), >0 = data exists but nothing matched
     (loosen the threshold / cohort)."""
     # fold the top-level scope args into `filters` (screen_stocks-style convenience — the LLM naturally reaches for a
