@@ -1919,7 +1919,11 @@ def query_fsscreener(
     handful of names from `screen_stocks` and average them yourself — that sample is partial, unweighted, and dirty.
     Compose
     `conditions` from find_fsconcept (metric) + find_fspattern (shape); the server resolves Field Polarity and
-    INTERSECTs them. Returns {count, conditions:[resolution trace + `eligible` coverage], stocks:[{ticker, name}]}.
+    INTERSECTs them. Returns {count, conditions:[resolution trace incl `cohort_benchmark` (the actual peer-average value
+    for below_average/above_average — quote it, don't recompute) + `eligible` coverage], stocks:[{ticker, name, metrics}]}.
+    🚩 A VALUATION screen adds `metrics.earnings_quality_ocf_ni` per stock = operating-cash ÷ net-income: if it's ≪1 or
+    NEGATIVE, a low P/E is likely ONE-OFF / non-cash earnings (holding-co mark-to-market, crypto revaluation) — REAL data
+    but not recurring, so it's "cheap for the wrong reason", NOT genuinely undervalued → say so, don't headline it as cheap.
     count=0 → read conditions[].eligible: 0 = metric not populated (data-depth), >0 = data exists but nothing matched
     (loosen the threshold / cohort)."""
     # fold the top-level scope args into `filters` (screen_stocks-style convenience — the LLM naturally reaches for a
