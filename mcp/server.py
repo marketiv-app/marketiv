@@ -1865,20 +1865,26 @@ class ScreenCondition(BaseModel):
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric.")
     relation: Optional[str] = Field(None, description="RELATION form only: how metricA compares to metricB.")
     metricB: Optional[str] = Field(None, description="RELATION form only: the second metric.")
+    params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/n/percentile above. If you nest the value here ({threshold:…}) it's still read.")
 
 
 def _cond_to_api(c: ScreenCondition) -> dict:
     """Typed condition → the news-api's shape (metric/pattern + nested params). Keeps the client's schema flat."""
     if c.metricA and c.metricB and c.relation:
         return {"metricA": c.metricA, "relation": c.relation, "metricB": c.metricB}
+    # read each value from the top-level field OR a nested params{} — find_fspattern's output says "params: threshold",
+    # so an LLM often nests the value there instead of at the condition top-level; accept either so it never needs a retry.
+    np = c.params or {}
+    pick = lambda name, *alts: next((v for v in ([getattr(c, name)] + [np.get(k) for k in (name, *alts)]) if v is not None), None)
+    threshold, mn, mx, n, pct = pick("threshold"), pick("min"), pick("max"), pick("n", "N"), pick("percentile")
     p: dict = {}
-    if c.threshold is not None: p["threshold"] = c.threshold
-    if c.min is not None: p["min"] = c.min
-    if c.max is not None: p["max"] = c.max
-    if c.n is not None: p["N"] = c.n
-    if c.percentile is not None:
+    if threshold is not None: p["threshold"] = threshold
+    if mn is not None: p["min"] = mn
+    if mx is not None: p["max"] = mx
+    if n is not None: p["N"] = n
+    if pct is not None:
         # low = cheap tail (max_percentile) · high = expensive tail (min_percentile)
-        p["min_percentile" if (c.pattern or "") in ("high", "expensive", "priciest") else "max_percentile"] = c.percentile
+        p["min_percentile" if (c.pattern or "") in ("high", "expensive", "priciest") else "max_percentile"] = pct
     d: dict = {"concept": c.concept, "pattern": c.pattern, "params": p}
     if c.vs_cohort: d["vs_cohort"] = c.vs_cohort
     return d
@@ -1896,16 +1902,22 @@ def query_fsscreener(
             "to that sector. (Same as putting it in `filters.gics`; either works.)")] = None,
         country: Annotated[Optional[str], _d("OPTIONAL ISO-2 issuer-domicile scope ('US','CN','TH') — restrict to that country.")] = None,
         size: Annotated[Optional[str], _d("OPTIONAL size tier ('large'|'mid'|'small'|'micro') — e.g. exclude micro-caps.")] = None,
-        market_cap_min: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn) — cut small-cap noise.")] = None,
+        min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn) — cut small-cap noise.")] = None,
+        max_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL max market cap in USD — e.g. cap the screen at mid-caps.")] = None,
         filters: Annotated[Optional[dict], _d(
-            "OPTIONAL extra PRE-filters as a dict: {'market_cap_max':…, 'region':'EU', 'theme':'<megatrend id>'}. "
-            "(gics/country/size/market_cap_min are also top-level args above — use whichever is convenient.)")] = None,
+            "OPTIONAL extra PRE-filters as a dict: {'region':'EU', 'theme':'<megatrend id>'}. "
+            "(gics/country/size/min_market_cap_usd are also top-level args above — use whichever is convenient.)")] = None,
         sort_by: Annotated[Optional[str], _d(
             "OPTIONAL metric to RANK results by (direction auto from the ratio's better-is-high/low). Default = market cap.")] = None,
         limit: Annotated[Optional[int], _d("Max stocks (default 50).")] = None) -> dict:
     """EXECUTE a multi-condition FUNDAMENTALS screen — the answer to 'find stocks where <metric> is <shape> AND …'.
     🔴 This is the ONLY tool that filters by MARGINS, RETURNS (ROE/ROIC), VALUATION-vs-PEERS, GROWTH SHAPES, or a
-    metric RELATION — `screen_stocks` does valuation LEVELS only, `screen_growth` is a single growth pattern. Compose
+    metric RELATION — `screen_stocks` does valuation LEVELS only, `screen_growth` is a single growth pattern.
+    ⭐ "below / above / cheaper-than / richer-than the SECTOR or PEER AVERAGE" (undervalued-vs-peers, "P/E below its
+    group", "margin above the industry") → THIS tool, pattern `below_average`/`above_average` — the benchmark is a
+    proper cap-weighted, FULL-universe, outlier-cleaned cohort average computed server-side. Do NOT instead pull a
+    handful of names from `screen_stocks` and average them yourself — that sample is partial, unweighted, and dirty.
+    Compose
     `conditions` from find_fsconcept (metric) + find_fspattern (shape); the server resolves Field Polarity and
     INTERSECTs them. Returns {count, conditions:[resolution trace + `eligible` coverage], stocks:[{ticker, name}]}.
     count=0 → read conditions[].eligible: 0 = metric not populated (data-depth), >0 = data exists but nothing matched
@@ -1913,9 +1925,23 @@ def query_fsscreener(
     # fold the top-level scope args into `filters` (screen_stocks-style convenience — the LLM naturally reaches for a
     # bare `gics=`; put it wherever, it lands in the same pre-filter).
     f = dict(filters or {})
-    for k, v in (("gics", gics), ("country", country), ("size", size), ("market_cap_min", market_cap_min)):
+    # top-level scope args fold into `filters`. min/max_market_cap_usd map to the news-api filter keys market_cap_min/max
+    # (prefix naming here matches every other tool — screen_dividends' min_market_cap_usd, positioning, etc.).
+    for k, v in (("gics", gics), ("country", country), ("size", size),
+                 ("market_cap_min", min_market_cap_usd), ("market_cap_max", max_market_cap_usd)):
         if v is not None:
             f[k] = v
+    # a cohort pattern (below_average/above_average/…) with NO explicit vs_cohort → default the BENCHMARK peer group to
+    # the same scope you're screening, so "banks above average" means above the BANK average, not the whole-market
+    # average (the scope only filtered WHICH rows come back, it didn't set the benchmark). Explicit vs_cohort still wins.
+    scope_cohort = {}
+    if gics and str(gics).isdigit(): scope_cohort["gics"] = gics
+    if country and len(str(country)) == 2 and str(country).isalpha(): scope_cohort["country"] = str(country).upper()
+    if size: scope_cohort["size"] = [size]
+    if scope_cohort:
+        for c in conditions:
+            if c.pattern and "average" in c.pattern and not c.vs_cohort:
+                c.vs_cohort = dict(scope_cohort)
     params = {"conditions": json.dumps([_cond_to_api(c) for c in conditions]), "limit": _lim(limit, default=50, ceiling=5000)}
     if f:
         params["filters"] = json.dumps(f)
@@ -2132,6 +2158,11 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     P/E–P/B / is <cohort> worth investing". 💰 A valuation / "worth investing" / cheap-vs-expensive question
     on a GROUP → screen here and READ the fundamentals; theme_pulse/brief are NEWS pulse only (no valuation),
     so never say "I don't have P/E" — pull it from here (P/B is best-covered; for banks/insurers P/B leads).
+    ⚠️ these rows are a NEWS-RANKED, CAPPED SUBSET of the group — NOT the full cohort. Do NOT compute a
+    "sector/peer AVERAGE" (P/E, margin, ROE…) from them to judge cheap-vs-peers: that average is a tiny biased
+    sample, unweighted, and includes bad-data outliers → wrong. For "cheaper/richer than the sector/peer AVERAGE",
+    "below/above the group average", or "undervalued vs peers" → use **query_fsscreener** pattern
+    `below_average`/`above_average` (a proper cap-weighted, full-universe, outlier-cleaned benchmark).
       • Scope (≥1 REQUIRED — it never scans the whole universe): `megatrend` (one OR SEVERAL trend
         names/ids as csv — resolved for you in one pass, same as theme_pulse: 'foundry', 'foundry,hbm',
         '56020000'), `gics` (csv GICS CODE prefixes — resolve a sector NAME to its code via find_gics first:
