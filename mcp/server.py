@@ -1955,6 +1955,94 @@ def query_fsscreener(
         params["sort_by"] = sort_by
     return mdx()._get("/v1/financials/screen", params).data
 
+
+# ── TECHNICAL leg of screen_unified: resolver (find_tasignal) + the step/signal grammar ─────────────────
+# The precision lives in find_tasignal (pattern family) + these field descriptions (operands/timeframe),
+# ported from docs/pipeline/ta-screener-mcp-guide.md (blind-client-validated). Same two-part design as the
+# fundamental leg: a resolver gives the SHAPE, you fill the operands.
+
+@mcp.tool(name="find_tasignal", title="Find Technical Signal", annotations=_RO)
+def find_tasignal(q: Annotated[str, _dq(
+        "An ENGLISH technical-analysis phrase to resolve to a signal PATTERN for the `ta` leg of screen_unified — "
+        "'golden cross', 'macd about to cross up through zero', 'bullish divergence', 'price holding above the "
+        "200-day', 'RSI turning up', 'overbought', 'bollinger squeeze'. 🔴 ENGLISH ONLY (translate first — "
+        "cross-lingual matching drifts). Resolves the PATTERN family only; you fill the operands (which lines/levels).")],
+        limit: Annotated[Optional[int], _d("Candidates (default 5, max 10).")] = None) -> dict:
+    """FREE resolver — a technical phrase → candidate interim signal `pattern`s. Returns {results:[{query,
+    candidates:[{pattern, direction, description, similarity}]}], note, supported}. READ each `description` and
+    PICK the fit — the top similarity is NOT always right (the embedding blurs direction/tense; the description
+    disambiguates). Then put the chosen `pattern` into a TA signal for screen_unified and fill operands a/b."""
+    resp = mdx()._http._client.post("/v1/ta/find-signal",
+                                    json={"queries": [q], "limit": _lim(limit, default=5, ceiling=10, floor=1)})
+    resp.raise_for_status()
+    return resp.json()
+
+
+class TaSignal(BaseModel):
+    """ONE technical signal. Resolve `pattern` via find_tasignal; then fill its operands."""
+    pattern: str = Field(..., description="The pattern — find_tasignal's `pattern` VERBATIM (crossover_up, crossover_down, touch_up, touch_down, above, below, overbought, oversold, rising, falling, squeeze, divergence_bull, divergence_bear, volume_spike, volume_dryup).")
+    a: Optional[str] = Field(None, description="Operand A — the ACTIVE line that moves/crosses/touches. Two moving averages → the FASTER (shorter-period). Price-vs-MA → 'close'. Oscillator-vs-level → the oscillator (rsi, stoch_k, macd_line). Pass the EXACT indicator+period the user asked even if non-standard (ema45, sma150, rsi7) — the server snaps to the nearest supported line and returns a note; do NOT pre-round. Omit for operand-free patterns (volume_spike, divergence_bull/bear, overbought, oversold). Tokens: close, ema<n>, sma<n>, rsi, macd_line, macd_signal, stoch_k, adx, bb_upper, bb_lower.")
+    b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line or numeric level being crossed/referenced. Two moving averages → the SLOWER (longer). Oscillator-vs-level → the level as a string ('0','30','70'). MACD-vs-signal → 'macd_signal'. Omit if the pattern has no reference.")
+    for_bars: Optional[int] = Field(None, description="Require a state/level to have HELD for at least this many BARS OF THE TIMEFRAME (e.g. 'above the 200-day for a month' on a daily chart ≈ 20 bars). Also the lookback for rising/falling. Convert any time span to a bar count for the chosen timeframe first.")
+
+
+class TaQual(BaseModel):
+    """An AND qualifier at a moment — a group of signals combined with OR (≥1 must hold)."""
+    any: List[TaSignal] = Field(..., description="Signals combined with OR; at least one must hold. Max 3.")
+    within: Optional[int] = Field(None, description="± tolerance in trading bars around the anchor (default 5; use 0 for a persistent state like 'is above').")
+
+
+class TaStep(BaseModel):
+    """ONE moment. Multiple steps = a THEN chain (step 0 happens, THEN step 1 …). Same-moment conditions go in ONE step."""
+    anchor: List[TaSignal] = Field(..., description="Primary signal(s) for this moment; multiple = OR; also the sort key. Max 3.")
+    quals: Optional[List[TaQual]] = Field(None, description="Extra conditions that must ALL hold at this moment (AND). Max 4.")
+
+
+@mcp.tool(name="screen_unified", title="Unified Screener (Universe × Fundamental × Technical)", annotations=_RO)
+def screen_unified(
+        fundamental: Annotated[Optional[List[ScreenCondition]], _d(
+            "The FUNDAMENTAL leg — AND-ed financial conditions (INTERSECT), each built from find_fsconcept (→ `concept`) "
+            "+ find_fspattern (→ `pattern`) then its value, EXACTLY as for query_fsscreener. e.g. roe>20% & 3y revenue "
+            "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',n:3}]. "
+            "Omit for a TA-only screen.")] = None,
+        ta: Annotated[Optional[List[TaStep]], _d(
+            "The TECHNICAL leg — a THEN chain of steps (usually ONE step). Each anchor/qualifier signal's `pattern` comes "
+            "from find_tasignal; fill operands a/b. e.g. a golden cross with a volume spike → "
+            "[{anchor:[{pattern:'crossover_up',a:'ema50',b:'ema200'}],quals:[{any:[{pattern:'volume_spike'}]}]}]. "
+            "Omit for a fundamentals-only screen.")] = None,
+        gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a GICS code prefix from find_gics ('45'=IT, '3520'=biotech).")] = None,
+        country: Annotated[Optional[str], _d("OPTIONAL ISO-2 country scope ('US','CN','TH').")] = None,
+        size: Annotated[Optional[str], _d("OPTIONAL size tier ('large'|'mid'|'small'|'micro').")] = None,
+        min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn).")] = None,
+        timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
+        sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'mcap' · or any fundamental metric key present in the results.")] = None,
+        limit: Annotated[Optional[int], _d("Max stocks (default 50, max 500).")] = None) -> dict:
+    """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical — the INTERSECTION of a fundamentals screen
+    and a technical screen within a scope. Supersedes query_fsscreener for any screen that also has a TECHNICAL
+    condition (EMA/MACD cross, RSI/overbought, divergence, squeeze, a-THEN-b); either leg is optional (fund-only =
+    same as query_fsscreener, ta-only = a pure technical scan). The two grammars stay SEPARATE — compose
+    `fundamental` from find_fsconcept+find_fspattern and `ta` from find_tasignal; the server resolves each leg,
+    scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
+    results:[{head_listing_id, score, ta:{…signals}, fundamental:{ticker,name,metrics}}]}.
+    🔴 `ta_coverage`:{covered,universe} — technicals are computed for a SUBSET of markets (US first). When
+    covered<universe (especially 0 on a non-US universe) a small/empty result is a COVERAGE gap, NOT a genuine
+    no-match — read the accompanying `notes`, and don't tell the user 'no stocks match' when TA simply isn't computed there."""
+    include: dict = {}
+    if gics: include["gics"] = gics
+    if country: include["country"] = [str(country).upper()]
+    if size: include["size"] = [size]
+    if min_market_cap_usd is not None: include["mcap_min"] = min_market_cap_usd
+    body: dict = {"limit": _lim(limit, default=50, ceiling=500)}
+    if include: body["universe"] = {"include": [include]}
+    if fundamental: body["fundamental"] = [_cond_to_api(c) for c in fundamental]
+    if ta: body["ta"] = [s.model_dump(exclude_none=True) for s in ta]
+    if timeframe: body["timeframe"] = timeframe
+    if sort: body["sort"] = sort
+    resp = mdx()._http._client.post("/v1/screen", json=body)
+    resp.raise_for_status()
+    return resp.json()
+
+
 _CURVE_TENORS = ("3M", "2Y", "5Y", "10Y", "30Y")
 # country/bond words → ISO2, for pinning a yield-curve country from a free-text query (single tokens; matched
 # against the query's word set). Only unambiguous forms — bare 2-letter ISOs (it/de/…) omitted to avoid English
