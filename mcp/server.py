@@ -1819,11 +1819,11 @@ class ScreenCondition(BaseModel):
     needs. RELATION form (rare) = compare two metrics: set metricA + relation + metricB instead."""
     concept: Optional[str] = Field(None, description="The METRIC — find_fsconcept's `concept` verbatim (pe, roe, net_margin, revenue, debt_to_equity, …).")
     pattern: Optional[str] = Field(None, description="The SHAPE — find_fspattern's `pattern` verbatim (above, below, between, low, high, accelerating, below_average, compound_growth, …).")
-    threshold: Optional[float] = Field(None, description="Value for `above`/`below`. Ratios are FRACTIONS (roe 0.20 = 20%); a whole-number percent (20) is auto-rescaled.")
+    threshold: Optional[float] = Field(None, description="Value for `above`/`below` — supply ONLY when the USER stated the number ('P/E above 15'). If the user named no number, OMIT it: the server applies the pattern's default; never invent one (an invented threshold overrides a good default and makes results non-deterministic). Ratios are FRACTIONS (roe 0.20 = 20%); a whole-number percent (20) is auto-rescaled.")
     min: Optional[float] = Field(None, description="Lower bound for `between`.")
     max: Optional[float] = Field(None, description="Upper bound for `between`.")
-    n: Optional[int] = Field(None, description="Window in YEARS for growth/consecutive patterns (e.g. compound_growth over n=3).")
-    percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` (0.1 = cheapest/priciest 10%).")
+    n: Optional[int] = Field(None, description="Window in YEARS for growth/consecutive patterns — supply ONLY when the user stated the span ('over the last 3 years' → 3). Omit otherwise; the server uses the pattern's default window.")
+    percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
     vs_cohort: Optional[dict] = Field(None, description="Only for cohort patterns (below_average/above_average): the BENCHMARK peer group {country?, gics?, size?, stat?} — SEPARATE from the top-level selection scope. Omit = whole market.")
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric.")
     relation: Optional[str] = Field(None, description="RELATION form only: how metricA compares to metricB.")
@@ -1859,18 +1859,21 @@ def _cond_to_api(c: ScreenCondition) -> dict:
 # fundamental leg: a resolver gives the SHAPE, you fill the operands.
 
 @mcp.tool(name="find_tasignal", title="Find Technical Signal", annotations=_RO)
-def find_tasignal(q: Annotated[str, _dq(
-        "An ENGLISH technical-analysis phrase to resolve to a signal PATTERN for the `ta` leg of screen_unified — "
-        "'golden cross', 'macd about to cross up through zero', 'bullish divergence', 'price holding above the "
-        "200-day', 'RSI turning up', 'overbought', 'bollinger squeeze'. 🔴 ENGLISH ONLY (translate first — "
-        "cross-lingual matching drifts). Resolves the PATTERN family only; you fill the operands (which lines/levels).")],
-        limit: Annotated[Optional[int], _d("Candidates (default 5, max 10).")] = None) -> dict:
-    """FREE resolver — a technical phrase → candidate interim signal `pattern`s. Returns {results:[{query,
-    candidates:[{pattern, direction, description, similarity}]}], note, supported}. READ each `description` and
-    PICK the fit — the top similarity is NOT always right (the embedding blurs direction/tense; the description
-    disambiguates). Then put the chosen `pattern` into a TA signal for screen_unified and fill operands a/b."""
+def find_tasignal(queries: Annotated[List[str], _dq(
+        "A BATCH of ENGLISH technical-analysis phrases for the `ta` leg of screen_unified — one phrase per "
+        "condition you need, resolved in ONE call. e.g. ['price volatility low','rsi crossing above 80','macd "
+        "falling toward zero','price up over two years','the 50-day above the 200-day']. 🔴 ENGLISH ONLY "
+        "(translate first — cross-lingual matching drifts).")],
+        limit: Annotated[Optional[int], _d("Candidates per axis per query (default 5, max 10).")] = None) -> dict:
+    """FREE resolver — each phrase → BOTH axes at once: `signals` (the SHAPE patterns — crossover/above/rising/
+    squeeze…) AND `indicators` (the operand LINES — close/ema/rsi/atr/adx…), from two separate embeddings. Returns
+    {results:[{query, signals:[{pattern,direction,description,similarity}], indicators:[{indicator,family,
+    definition,description,similarity}]}], note, supported}. You do NOT split the phrase yourself — assemble a
+    TaSignal from the result: pick ONE `pattern` + the operand line(s) it needs into a/b (append the period the
+    user asked — ema→ema30, the server snaps), and fill any numeric level yourself (rsi crossing 80 → a='rsi',
+    b='80'). READ the descriptions to pick; the top similarity is NOT always right."""
     resp = mdx()._http._client.post("/v1/ta/find-signal",
-                                    json={"queries": [q], "limit": _lim(limit, default=5, ceiling=10, floor=1)})
+                                    json={"queries": queries, "limit": _lim(limit, default=5, ceiling=10, floor=1)})
     resp.raise_for_status()
     return resp.json()
 
@@ -1878,9 +1881,9 @@ def find_tasignal(q: Annotated[str, _dq(
 class TaSignal(BaseModel):
     """ONE technical signal. Resolve `pattern` via find_tasignal; then fill its operands."""
     pattern: str = Field(..., description="The pattern — find_tasignal's `pattern` VERBATIM (crossover_up, crossover_down, touch_up, touch_down, above, below, overbought, oversold, rising, falling, squeeze, divergence_bull, divergence_bear, volume_spike, volume_dryup).")
-    a: Optional[str] = Field(None, description="Operand A — the SUBJECT. For a cross/touch: the ACTIVE line that moves (two MAs → the FASTER/shorter; price-vs-MA → 'close'). For an above/below STATE: read it literally as 'a is above/below b' — 'price above the 200-day' → a='close', b='ema200'; 'the 50-day above the 200-day' → a='ema50', b='ema200'. Oscillator-vs-level → the oscillator (rsi, stoch_k, macd_line). Pass the EXACT indicator+period the user asked even if non-standard (ema45, sma150, rsi7) — the server snaps to the nearest supported line and returns a note; do NOT pre-round. Omit for operand-free patterns (volume_spike, divergence_bull/bear, overbought, oversold). Tokens: close, ema<n>, sma<n>, rsi, macd_line, macd_signal, stoch_k, adx, bb_upper, bb_lower.")
+    a: Optional[str] = Field(None, description="Operand A — the SUBJECT. For a cross/touch: the ACTIVE line that moves (two MAs → the FASTER/shorter; price-vs-MA → 'close'). For an above/below STATE: read it literally as 'a is above/below b' — 'price above the 200-day' → a='close', b='ema200'; 'the 50-day above the 200-day' → a='ema50', b='ema200'. Oscillator-vs-level → the oscillator (rsi, stoch_k, macd_line). Pass the EXACT indicator+period the user asked even if non-standard (ema45, sma150, rsi7) — the server snaps to the nearest supported line and returns a note; do NOT pre-round. Omit for operand-free patterns (volume_spike, divergence_bull/bear, overbought, oversold). Tokens: close, ema<n>, sma<n>, rsi, macd_line, macd_signal, stoch_k, adx, bb_upper, bb_lower. If unsure which line a phrase means (e.g. 'volatility' → atr, 'trend strength' → adx, 'the 30-day average' → ema30), read the `indicators` axis that find_tasignal already returns for the phrase — do not guess.")
     b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line or numeric level being crossed/referenced. Two moving averages → the SLOWER (longer). Oscillator-vs-level → the level as a string ('0','30','70'). MACD-vs-signal → 'macd_signal'. Omit if the pattern has no reference.")
-    for_bars: Optional[int] = Field(None, description="Require a state/level to have HELD for at least this many BARS OF THE TIMEFRAME (e.g. 'above the 200-day for a month' on a daily chart ≈ 20 bars). Also the lookback for rising/falling. Convert any time span to a bar count for the chosen timeframe first.")
+    for_bars: Optional[int] = Field(None, description="Require a state/level to have HELD for at least this many CONSECUTIVE bars of the timeframe (e.g. 'above the 200-day for a month' on a daily chart ≈ 20 bars). ⚠️ For rising/falling this is a RUN-LENGTH, not a lookback window: `for_bars=24` on monthly = the line rose 24 months IN A ROW (very strict, usually empty). For a NET move over a span ('price up over the last 2 years'), do NOT use rising+for_bars — omit it (bare rising = 'currently trending up'), or use a price-return pattern if find_tasignal offers one. Convert any time span to a bar count for the chosen timeframe first.")
 
 
 class TaQual(BaseModel):
