@@ -1930,11 +1930,15 @@ def screen_unified(
     same as query_fsscreener, ta-only = a pure technical scan). The two grammars stay SEPARATE — compose
     `fundamental` from find_fsconcept+find_fspattern and `ta` from find_tasignal; the server resolves each leg,
     scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
-    results:[{head_listing_id, score, ta:{…signals}, fundamental:{ticker,name,metrics}}], notes}.
+    results:[{head_listing_id, score, matched_legs:[…], ta:{…signals}, fundamental:{ticker,name,metrics}}], notes}.
     🔴 TIME WINDOWS are per-LEG and SEPARATE: the TA leg's "within the last N days" = top-level `window_bars`;
     a FUNDAMENTAL trend's span (e.g. "over 2 years") = that condition's `n`. Never conflate the two.
-    `notes` carries operand snaps + an intersect-cap note when the 3-round paginated intersect couldn't fill `limit`.
-    An empty result is a genuine no-match (there is no coverage-gap disclaimer — technicals are computed market-wide)."""
+    🔴 PARTIAL results: when NO stock matches BOTH legs (intersection < 3), the response adds `partial:true`,
+    `intersection_count`, `legs:{ta,fundamental}`, and APPENDS each leg's top near-misses. Every row's `matched_legs`
+    lists which leg(s) it actually passed — a row with only ['ta'] or ['fundamental'] did NOT satisfy the full query.
+    NEVER present a one-leg/partial row as a full match; read `notes` (it names the tighter leg + how to broaden).
+    `count` is the FULL-query match total (the intersection), not the near-misses. An empty/thin result is a genuine
+    no-match (technicals are computed market-wide — no coverage-gap disclaimer)."""
     include: dict = {}
     if gics: include["gics"] = gics
     if country: include["country"] = [str(country).upper()]
