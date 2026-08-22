@@ -1942,7 +1942,10 @@ def screen_unified(
             "'bearish divergence within 50 days' on daily → window_bars=50. Applies to the WHOLE `ta` leg. Omit → "
             "default 30×(#steps). 🔴 SEPARATE from a fundamental trend's span (that goes in the fund condition's `N`).")] = None,
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'mcap' · or any fundamental metric key present in the results.")] = None,
-        limit: Annotated[Optional[int], _d("Max stocks (default 50, max 500).")] = None) -> dict:
+        limit: Annotated[Optional[int], _d("How many stocks you intend to SHOW the user (default 10). The tool "
+            "over-fetches a look-ahead BUFFER of ~4× this (capped 100) and returns it all, so 'show me a few more' "
+            "is served from THIS result — do NOT re-screen for a few more, just surface the next rows already here. "
+            "Wanting more than the 100-row buffer needs a fresh screen with a larger intent.")] = None) -> dict:
     """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical — the INTERSECTION of a fundamentals screen
     and a technical screen within a scope. Supersedes query_fsscreener for any screen that also has a TECHNICAL
     condition (EMA/MACD cross, RSI/overbought, divergence, squeeze, a-THEN-b); either leg is optional (fund-only =
@@ -1956,7 +1959,10 @@ def screen_unified(
     `intersection_count`, `legs:{ta,fundamental}`, and APPENDS each leg's top near-misses. Every row's `matched_legs`
     lists which leg(s) it actually passed — a row with only ['ta'] or ['fundamental'] did NOT satisfy the full query.
     NEVER present a one-leg/partial row as a full match; read `notes` (it names the tighter leg + how to broaden).
-    `count` is the FULL-query match total (the intersection), not the near-misses. An empty/thin result is a genuine
+    🔴 PAGINATION / "show me more": this returns an OVER-FETCHED buffer = min(limit×4, 100) rows in ONE call, so a
+    follow-up "give me a few more" is answered from the rows ALREADY in this result — do NOT call again for a few more,
+    just surface the next ones you already have. `count` = rows returned in THIS response (= the buffer size, capped
+    100), NOT a market-wide match total; to see more than the buffer, re-screen. An empty/thin result is a genuine
     no-match (technicals are computed market-wide — no coverage-gap disclaimer)."""
     _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
     include: dict = {}
@@ -1966,7 +1972,12 @@ def screen_unified(
     if asset_type: include["asset_type"] = _lst(asset_type)
     if theme: include["theme"] = _lst(theme)
     if min_market_cap_usd is not None: include["mcap_min"] = min_market_cap_usd
-    body: dict = {"limit": _lim(limit, default=50, ceiling=500)}
+    # OVER-FETCH: `limit` = how many the client means to SHOW; fetch a ~4× look-ahead buffer (cap 100) so a
+    # follow-up "a few more" is served from THIS payload (in the LLM's context) with no re-screen. Beyond 100 → fresh
+    # screen (a cursor-based deep-page is designed but not built — see docs/pipeline/screener-pagination-design.md).
+    show = _lim(limit, default=10, ceiling=100)
+    fetch = min(show * 4, 100)
+    body: dict = {"limit": fetch}
     if include: body["universe"] = {"include": [include]}
     if fundamental: body["fundamental"] = [_cond_to_api(c) for c in fundamental]
     if ta: body["ta"] = [s.model_dump(exclude_none=True) for s in ta]
@@ -1975,7 +1986,19 @@ def screen_unified(
     if sort: body["sort"] = sort
     resp = mdx()._http._client.post("/v1/screen", json=body)
     resp.raise_for_status()
-    return resp.json()
+    data = resp.json()
+    got = len(data.get("results", [])) if isinstance(data, dict) else 0
+    if isinstance(data, dict):
+        data["_pagination"] = {
+            "intended_show": show,
+            "returned": got,
+            "buffer_maxed": got >= 100,
+            "note": (f"Over-fetched ~4× your intended show ({show}) as a look-ahead buffer so 'a few more' is served "
+                     f"from these {got} rows — do NOT re-screen for a few more. "
+                     + ("This hit the 100-row cap; to go beyond, re-screen with a larger intent." if got >= 100
+                        else "Wanting beyond these needs a fresh screen.")),
+        }
+    return data
 
 
 _CURVE_TENORS = ("3M", "2Y", "5Y", "10Y", "30Y")
