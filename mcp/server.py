@@ -1912,9 +1912,19 @@ def screen_unified(
             "from find_tasignal; fill operands a/b. e.g. a golden cross with a volume spike → "
             "[{anchor:[{pattern:'crossover_up',a:'ema50',b:'ema200'}],quals:[{any:[{pattern:'volume_spike'}]}]}]. "
             "🔴 'within the last N days/bars' is NOT per-step — put it in the top-level `window_bars`. Omit for a fundamentals-only screen.")] = None,
-        gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a GICS code prefix from find_gics ('45'=IT, '3520'=biotech).")] = None,
-        country: Annotated[Optional[str], _d("OPTIONAL ISO-2 country scope ('US','CN','TH').")] = None,
-        size: Annotated[Optional[str], _d("OPTIONAL size tier ('large'|'mid'|'small'|'micro').")] = None,
+        gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a SINGLE GICS code PREFIX from find_gics ('45'=IT sector, "
+            "'3520'=biotech group, '352010'=biotech industry; shorter prefix = broader). One cohort carries ONE gics prefix — "
+            "for two UNRELATED sectors (biotech OR software) run separate screens. Omit = all sectors.")] = None,
+        country: Annotated[Optional[List[str]], _d("OPTIONAL operating-country scope — one or MORE ISO-2 codes, OR'd (a stock "
+            "matches if in ANY of them). e.g. ['US'] · ['CN','US'] for China+US · ['TH','SG','MY']. Omit = all countries.")] = None,
+        size: Annotated[Optional[List[str]], _d("OPTIONAL market-cap size tier(s), OR'd — any of 'mega'|'large'|'mid'|'small'|"
+            "'micro' (per-market MSCI cumulative-cap tiers). e.g. ['large'] · ['mid','small']. Omit = all sizes.")] = None,
+        asset_type: Annotated[Optional[List[str]], _d("OPTIONAL asset type(s), OR'd — from the asset_universe catalog: "
+            "'Common Stock','ETF','Currency','Bond','Commodity','Index','Fund','ADR','REIT'. e.g. ['Common Stock'] · ['ETF','Fund']. "
+            "Omit = all types (a typical company screen wants 'Common Stock'). Scopes the TECHNICAL universe.")] = None,
+        theme: Annotated[Optional[List[int]], _d("OPTIONAL megatrend THEME node_id(s) from find_megatrend, OR'd — a stock matches "
+            "if it is a CORE member of ANY. e.g. [18000000] (a biotech megatrend) · [18000000,18120000]. 🔴 DISTINCT from `gics`: "
+            "gics = official sector code; theme = curated megatrend membership. Resolve a theme phrase → node_id(s) via find_megatrend.")] = None,
         min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn).")] = None,
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
         window_bars: Annotated[Optional[int], _d(
@@ -1939,10 +1949,13 @@ def screen_unified(
     NEVER present a one-leg/partial row as a full match; read `notes` (it names the tighter leg + how to broaden).
     `count` is the FULL-query match total (the intersection), not the near-misses. An empty/thin result is a genuine
     no-match (technicals are computed market-wide — no coverage-gap disclaimer)."""
+    _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
     include: dict = {}
     if gics: include["gics"] = gics
-    if country: include["country"] = [str(country).upper()]
-    if size: include["size"] = [size]
+    if country: include["country"] = [str(c).upper() for c in _lst(country)]
+    if size: include["size"] = _lst(size)
+    if asset_type: include["asset_type"] = _lst(asset_type)
+    if theme: include["theme"] = _lst(theme)
     if min_market_cap_usd is not None: include["mcap_min"] = min_market_cap_usd
     body: dict = {"limit": _lim(limit, default=50, ceiling=500)}
     if include: body["universe"] = {"include": [include]}
