@@ -15,7 +15,7 @@ from __future__ import annotations
 import os, json, pathlib, contextvars
 from dataclasses import asdict, is_dataclass
 from typing import Annotated, Any, Optional, List, Literal, Union
-from pydantic import Field, AliasChoices, BaseModel
+from pydantic import Field, AliasChoices, BaseModel, ConfigDict
 
 from mcp.server.fastmcp import FastMCP, Context
 from mcp.server.transport_security import TransportSecuritySettings
@@ -1817,18 +1817,21 @@ class ScreenCondition(BaseModel):
     """ONE AND-ed screen condition. COMMON form = a metric + a shape + its value: copy find_fsconcept's `concept`
     into `concept`, find_fspattern's `pattern` into `pattern` (both VERBATIM), then set the ONE value the pattern
     needs. RELATION form (rare) = compare two metrics: set metricA + relation + metricB instead."""
+    # extra='forbid': the TOOL owns the param set — an unknown/typo'd field is rejected HERE with a clear error
+    # (naming the bad field), never silently dropped and run with a default. See mcp-tool-guidance-audit.
+    model_config = ConfigDict(extra="forbid")
     concept: Optional[str] = Field(None, description="The METRIC — find_fsconcept's `concept` verbatim (pe, roe, net_margin, revenue, debt_to_equity, …).")
     pattern: Optional[str] = Field(None, description="The SHAPE — find_fspattern's `pattern` verbatim (above, below, between, low, high, accelerating, below_average, compound_growth, …).")
     threshold: Optional[float] = Field(None, description="Value for `above`/`below` — supply ONLY when the USER stated the number ('P/E above 15'). If the user named no number, OMIT it: the server applies the pattern's default; never invent one (an invented threshold overrides a good default and makes results non-deterministic). Ratios are FRACTIONS (roe 0.20 = 20%); a whole-number percent (20) is auto-rescaled.")
     min: Optional[float] = Field(None, description="Lower bound for `between`.")
     max: Optional[float] = Field(None, description="Upper bound for `between`.")
-    n: Optional[int] = Field(None, description="Window in YEARS for growth/consecutive patterns — supply ONLY when the user stated the span ('over the last 3 years' → 3). Omit otherwise; the server uses the pattern's default window.")
+    N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window in YEARS for growth/consecutive patterns (this is find_fspattern's `N` param verbatim) — supply ONLY when the user stated the span ('over the last 3 years' → 3). Omit otherwise; the server uses the pattern's default window.")
     percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
     vs_cohort: Optional[dict] = Field(None, description="Only for cohort patterns (below_average/above_average): the BENCHMARK peer group {country?, gics?, size?, stat?} — SEPARATE from the top-level selection scope. Omit = whole market.")
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric.")
     relation: Optional[str] = Field(None, description="RELATION form only: how metricA compares to metricB.")
     metricB: Optional[str] = Field(None, description="RELATION form only: the second metric.")
-    params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/n/percentile above. If you nest the value here ({threshold:…}) it's still read.")
+    params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/N/percentile above. If you nest the value here ({threshold:…}) it's still read.")
 
 
 def _cond_to_api(c: ScreenCondition) -> dict:
@@ -1839,7 +1842,7 @@ def _cond_to_api(c: ScreenCondition) -> dict:
     # so an LLM often nests the value there instead of at the condition top-level; accept either so it never needs a retry.
     np = c.params or {}
     pick = lambda name, *alts: next((v for v in ([getattr(c, name)] + [np.get(k) for k in (name, *alts)]) if v is not None), None)
-    threshold, mn, mx, n, pct = pick("threshold"), pick("min"), pick("max"), pick("n", "N"), pick("percentile")
+    threshold, mn, mx, n, pct = pick("threshold"), pick("min"), pick("max"), pick("N", "n"), pick("percentile")
     p: dict = {}
     if threshold is not None: p["threshold"] = threshold
     if mn is not None: p["min"] = mn
@@ -1880,6 +1883,7 @@ def find_tasignal(queries: Annotated[List[str], _dq(
 
 class TaSignal(BaseModel):
     """ONE technical signal. Resolve `pattern` via find_tasignal; then fill its operands."""
+    model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
     pattern: str = Field(..., description="The pattern — find_tasignal's `pattern` VERBATIM (crossover_up, crossover_down, touch_up, touch_down, above, below, overbought, oversold, rising, falling, squeeze, divergence_bull, divergence_bear, volume_spike, volume_dryup).")
     a: Optional[str] = Field(None, description="Operand A — the SUBJECT. For a cross/touch: the ACTIVE line that moves (two MAs → the FASTER/shorter; price-vs-MA → 'close'). For an above/below STATE: read it literally as 'a is above/below b' — 'price above the 200-day' → a='close', b='ema200'; 'the 50-day above the 200-day' → a='ema50', b='ema200'. Oscillator-vs-level → the oscillator (rsi, stoch_k, macd_line). Pass the EXACT indicator+period the user asked even if non-standard (ema45, sma150, rsi7) — the server snaps to the nearest supported line and returns a note; do NOT pre-round. Omit for operand-free patterns (volume_spike, divergence_bull/bear, overbought, oversold). Tokens: close, ema<n>, sma<n>, rsi, macd_line, macd_signal, stoch_k, adx, bb_upper, bb_lower. If unsure which line a phrase means (e.g. 'volatility' → atr, 'trend strength' → adx, 'the 30-day average' → ema30), read the `indicators` axis that find_tasignal already returns for the phrase — do not guess.")
     b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line or numeric level being crossed/referenced. Two moving averages → the SLOWER (longer). Oscillator-vs-level → the level as a string ('0','30','70'). MACD-vs-signal → 'macd_signal'. 🔴 For a NET-RETURN pattern (net_change_up/net_change_down / price_up_over / price_down_over), `b` = the move MAGNITUDE as a FRACTION: 30% → '0.30' (NOT '30'). Omit if the pattern has no reference.")
@@ -1889,12 +1893,14 @@ class TaSignal(BaseModel):
 
 class TaQual(BaseModel):
     """An AND qualifier at a moment — a group of signals combined with OR (≥1 must hold)."""
+    model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
     any: List[TaSignal] = Field(..., description="Signals combined with OR; at least one must hold. Max 3.")
     within: Optional[int] = Field(None, description="± tolerance in trading bars around the anchor (default 5; use 0 for a persistent state like 'is above').")
 
 
 class TaStep(BaseModel):
     """ONE moment. Multiple steps = a THEN chain (step 0 happens, THEN step 1 …). Same-moment conditions go in ONE step."""
+    model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
     anchor: List[TaSignal] = Field(..., description="Primary signal(s) for this moment; multiple = OR; also the sort key. Max 3.")
     quals: Optional[List[TaQual]] = Field(None, description="Extra conditions that must ALL hold at this moment (AND). Max 4.")
 
@@ -1904,9 +1910,9 @@ def screen_unified(
         fundamental: Annotated[Optional[List[ScreenCondition]], _d(
             "The FUNDAMENTAL leg — AND-ed financial conditions (INTERSECT), each built from find_fsconcept (→ `concept`) "
             "+ find_fspattern (→ `pattern`) then its value, EXACTLY as for query_fsscreener. e.g. roe>20% & 3y revenue "
-            "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',n:3}]. "
-            "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `n` (in YEARS): 'PE declining over 2 years' → "
-            "{concept:'pe',pattern:'consecutive_decline',n:2}. This is SEPARATE from the TA leg's window_bars. "
+            "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',N:3}]. "
+            "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `N` (in YEARS): 'PE declining over 2 years' → "
+            "{concept:'pe',pattern:'consecutive_decline',N:2}. This is SEPARATE from the TA leg's window_bars. "
             "Omit for a TA-only screen.")] = None,
         ta: Annotated[Optional[List[TaStep]], _d(
             "The TECHNICAL leg — a THEN chain of steps (usually ONE step). Each anchor/qualifier signal's `pattern` comes "
@@ -1934,7 +1940,7 @@ def screen_unified(
             "TA-leg LOOKBACK in BARS of `timeframe` (daily ≈ trading days) — how far back a technical signal may have "
             "fired, and the total span a THEN-chain must complete within. This is the '…within the last N days' knob: "
             "'bearish divergence within 50 days' on daily → window_bars=50. Applies to the WHOLE `ta` leg. Omit → "
-            "default 30×(#steps). 🔴 SEPARATE from a fundamental trend's span (that goes in the fund condition's `n`).")] = None,
+            "default 30×(#steps). 🔴 SEPARATE from a fundamental trend's span (that goes in the fund condition's `N`).")] = None,
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'mcap' · or any fundamental metric key present in the results.")] = None,
         limit: Annotated[Optional[int], _d("Max stocks (default 50, max 500).")] = None) -> dict:
     """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical — the INTERSECTION of a fundamentals screen
@@ -1945,7 +1951,7 @@ def screen_unified(
     scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
     results:[{head_listing_id, score, matched_legs:[…], ta:{…signals}, fundamental:{ticker,name,metrics}}], notes}.
     🔴 TIME WINDOWS are per-LEG and SEPARATE: the TA leg's "within the last N days" = top-level `window_bars`;
-    a FUNDAMENTAL trend's span (e.g. "over 2 years") = that condition's `n`. Never conflate the two.
+    a FUNDAMENTAL trend's span (e.g. "over 2 years") = that condition's `N`. Never conflate the two.
     🔴 PARTIAL results: when NO stock matches BOTH legs (intersection < 3), the response adds `partial:true`,
     `intersection_count`, `legs:{ta,fundamental}`, and APPENDS each leg's top near-misses. Every row's `matched_legs`
     lists which leg(s) it actually passed — a row with only ['ta'] or ['fundamental'] did NOT satisfy the full query.
