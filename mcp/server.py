@@ -1904,17 +1904,24 @@ def screen_unified(
             "The FUNDAMENTAL leg — AND-ed financial conditions (INTERSECT), each built from find_fsconcept (→ `concept`) "
             "+ find_fspattern (→ `pattern`) then its value, EXACTLY as for query_fsscreener. e.g. roe>20% & 3y revenue "
             "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',n:3}]. "
+            "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `n` (in YEARS): 'PE declining over 2 years' → "
+            "{concept:'pe',pattern:'consecutive_decline',n:2}. This is SEPARATE from the TA leg's window_bars. "
             "Omit for a TA-only screen.")] = None,
         ta: Annotated[Optional[List[TaStep]], _d(
             "The TECHNICAL leg — a THEN chain of steps (usually ONE step). Each anchor/qualifier signal's `pattern` comes "
             "from find_tasignal; fill operands a/b. e.g. a golden cross with a volume spike → "
             "[{anchor:[{pattern:'crossover_up',a:'ema50',b:'ema200'}],quals:[{any:[{pattern:'volume_spike'}]}]}]. "
-            "Omit for a fundamentals-only screen.")] = None,
+            "🔴 'within the last N days/bars' is NOT per-step — put it in the top-level `window_bars`. Omit for a fundamentals-only screen.")] = None,
         gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a GICS code prefix from find_gics ('45'=IT, '3520'=biotech).")] = None,
         country: Annotated[Optional[str], _d("OPTIONAL ISO-2 country scope ('US','CN','TH').")] = None,
         size: Annotated[Optional[str], _d("OPTIONAL size tier ('large'|'mid'|'small'|'micro').")] = None,
         min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn).")] = None,
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
+        window_bars: Annotated[Optional[int], _d(
+            "TA-leg LOOKBACK in BARS of `timeframe` (daily ≈ trading days) — how far back a technical signal may have "
+            "fired, and the total span a THEN-chain must complete within. This is the '…within the last N days' knob: "
+            "'bearish divergence within 50 days' on daily → window_bars=50. Applies to the WHOLE `ta` leg. Omit → "
+            "default 30×(#steps). 🔴 SEPARATE from a fundamental trend's span (that goes in the fund condition's `n`).")] = None,
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'mcap' · or any fundamental metric key present in the results.")] = None,
         limit: Annotated[Optional[int], _d("Max stocks (default 50, max 500).")] = None) -> dict:
     """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical — the INTERSECTION of a fundamentals screen
@@ -1923,10 +1930,11 @@ def screen_unified(
     same as query_fsscreener, ta-only = a pure technical scan). The two grammars stay SEPARATE — compose
     `fundamental` from find_fsconcept+find_fspattern and `ta` from find_tasignal; the server resolves each leg,
     scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
-    results:[{head_listing_id, score, ta:{…signals}, fundamental:{ticker,name,metrics}}]}.
-    🔴 `ta_coverage`:{covered,universe} — technicals are computed for a SUBSET of markets (US first). When
-    covered<universe (especially 0 on a non-US universe) a small/empty result is a COVERAGE gap, NOT a genuine
-    no-match — read the accompanying `notes`, and don't tell the user 'no stocks match' when TA simply isn't computed there."""
+    results:[{head_listing_id, score, ta:{…signals}, fundamental:{ticker,name,metrics}}], notes}.
+    🔴 TIME WINDOWS are per-LEG and SEPARATE: the TA leg's "within the last N days" = top-level `window_bars`;
+    a FUNDAMENTAL trend's span (e.g. "over 2 years") = that condition's `n`. Never conflate the two.
+    `notes` carries operand snaps + an intersect-cap note when the 3-round paginated intersect couldn't fill `limit`.
+    An empty result is a genuine no-match (there is no coverage-gap disclaimer — technicals are computed market-wide)."""
     include: dict = {}
     if gics: include["gics"] = gics
     if country: include["country"] = [str(country).upper()]
@@ -1937,6 +1945,7 @@ def screen_unified(
     if fundamental: body["fundamental"] = [_cond_to_api(c) for c in fundamental]
     if ta: body["ta"] = [s.model_dump(exclude_none=True) for s in ta]
     if timeframe: body["timeframe"] = timeframe
+    if window_bars is not None: body["window_bars"] = window_bars
     if sort: body["sort"] = sort
     resp = mdx()._http._client.post("/v1/screen", json=body)
     resp.raise_for_status()
