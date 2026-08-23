@@ -1903,6 +1903,7 @@ class TaSignal(BaseModel):
     b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line or numeric level being crossed/referenced. Two moving averages → the SLOWER (longer). Oscillator-vs-level → the level as a string ('0','30','70'). MACD-vs-signal → 'macd_signal'. 🔴 For a NET-RETURN pattern (net_change_up/net_change_down / price_up_over / price_down_over), `b` = the move MAGNITUDE as a FRACTION: 30% → '0.30' (NOT '30'). Omit if the pattern has no reference.")
     for_bars: Optional[int] = Field(None, description="Require a state/level to have HELD for at least this many CONSECUTIVE bars of the timeframe (e.g. 'above the 200-day for a month' on a daily chart ≈ 20 bars). ⚠️ For rising/falling this is a RUN-LENGTH, not a lookback window. NOT valid on net_change / crossover / divergence (the server ERRORS) — for 'within the last N bars' use `window_bars`, not for_bars.")
     window_bars: Optional[int] = Field(None, description="PER-SIGNAL lookback window in BARS of the timeframe — 'this condition holds WITHIN the last N bars' (recency); for a net-return pattern it is the PERIOD the return is measured over ('dropped 30% over 100 days' → window_bars=100). USE THIS to give conditions DIFFERENT windows in one screen: 'RSI crossed 80 within 20 days AND price dropped 30% over 100 days' → {crossover_up, window_bars:20} + {net_change_down b:'0.30', window_bars:100}. Omit → the screen-level window_bars default. DISTINCT from for_bars (how long a state has HELD; recency vs duration).")
+    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart timeframe — 1=daily, 2=weekly, 3=monthly. Use to MIX timeframes in ONE screen (multi-timeframe): put it on a QUALIFIER so that condition is checked on its OWN chart while the anchor stays on the screen-level `timeframe`. e.g. 'weekly holds above the 50-week AND daily just crossed up' → screen timeframe=1 (daily), anchor={crossover_up, a:'ema50', b:'ema200'}, qualifier={above, a:'close', b:'ema50', timeframe:2}. Operand periods are BARS of THIS timeframe (a '50-week MA' on weekly = a 50-bar MA → ema50). Omit → the screen-level `timeframe`. ⚠️ On an ANCHOR it must equal the screen-level `timeframe` (the anchor defines the driver chart) — a mismatch 400s; put the cross-timeframe test in a qualifier.")
 
 
 class TaQual(BaseModel):
@@ -1934,7 +1935,10 @@ def screen_unified(
             "[{anchor:[{pattern:'crossover_up',a:'ema50',b:'ema200'}],quals:[{any:[{pattern:'volume_spike'}]}]}]. "
             "🔴 'within the last N bars' can be set PER SIGNAL via each signal's own `window_bars` (so conditions may have "
             "DIFFERENT windows — e.g. crossover within 20 + drop over 100); a signal without one falls back to the "
-            "screen-level `window_bars`. Omit for a fundamentals-only screen.")] = None,
+            "screen-level `window_bars`. 🔴 MULTI-TIMEFRAME: mix daily/weekly/monthly in ONE screen by setting a "
+            "qualifier's own `timeframe` (1/2/3) — 'weekly holds above the 50-week AND daily just crossed up' → screen "
+            "timeframe=1, anchor crossover_up, qualifier {above, a:'close', b:'ema50', timeframe:2}. Omit for a "
+            "fundamentals-only screen.")] = None,
         gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a SINGLE GICS code PREFIX from find_gics ('45'=IT sector, "
             "'3520'=biotech group, '352010'=biotech industry; shorter prefix = broader). One cohort carries ONE gics prefix — "
             "for two UNRELATED sectors (biotech OR software) run separate screens. Omit = all sectors.")] = None,
