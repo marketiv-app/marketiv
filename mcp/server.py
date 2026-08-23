@@ -1818,11 +1818,11 @@ def find_fspattern(q: Annotated[str, _dq(
         "equity'. 🔴 ENGLISH ONLY (translate first). Resolves the SHAPE only; resolve the underlying METRIC "
         "separately via find_fsconcept.")],
         limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
-    """FREE resolver — a temporal PATTERN → a `pattern` + the `params` to feed `query_fsscreener`. The screener
+    """FREE resolver — a temporal PATTERN → a `pattern` + the `params` to feed `screen_unified`. The screener
     grammar is TWO-PART: find_fspattern gives the SHAPE (accelerating, below_average, consecutive_growth, a
     relation…), find_fsconcept gives the METRIC (net_margin, pe, revenue…). Returns ranked `patterns` {pattern,
     kind (level/cohort/quadrant/relation), label, definition, params-to-fill}. Pick one, fill its params (EXCEPT the
-    `metric`/`metricA`/`metricB` — those come from find_fsconcept), then pass it as a condition to query_fsscreener.
+    `metric`/`metricA`/`metricB` — those come from find_fsconcept), then pass it as a `fundamental` condition to screen_unified.
     Say the pattern in the NATURAL direction the user asked; the server applies sign/polarity for you."""
     return mdx()._get("/v1/financials/find-pattern", {"q": q, "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data
 
@@ -1836,7 +1836,7 @@ class ScreenCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
     concept: Optional[str] = Field(None, description="The METRIC — find_fsconcept's `concept` verbatim (pe, roe, net_margin, revenue, debt_to_equity, …).")
     pattern: Optional[str] = Field(None, description="The SHAPE — find_fspattern's `pattern` verbatim (above, below, between, low, high, accelerating, below_average, compound_growth, …).")
-    threshold: Optional[float] = Field(None, description="Value for `above`/`below` — supply ONLY when the USER stated the number ('P/E above 15'). If the user named no number, OMIT it: the server applies the pattern's default; never invent one (an invented threshold overrides a good default and makes results non-deterministic). Ratios are FRACTIONS (roe 0.20 = 20%); a whole-number percent (20) is auto-rescaled.")
+    threshold: Optional[float] = Field(None, description="Value for `above`/`below` — supply ONLY when the USER stated the number ('P/E above 15'). If the user named no number, OMIT it: the server applies the pattern's default; never invent one (an invented threshold overrides a good default and makes results non-deterministic). SCALE: a ratio/percent metric is a FRACTION — send 0.20 for 20% (roe, margins, growth, yields). Always send the fraction, not the whole number. (P/E, P/B, EV/EBITDA and coverage multiples are NOT fractions — send 15 for a P/E of 15.)")
     min: Optional[float] = Field(None, description="Lower bound for `between`.")
     max: Optional[float] = Field(None, description="Upper bound for `between`.")
     N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window in YEARS for growth/consecutive patterns (this is find_fspattern's `N` param verbatim) — supply ONLY when the user stated the span ('over the last 3 years' → 3). Omit otherwise; the server uses the pattern's default window.")
@@ -1923,7 +1923,7 @@ class TaStep(BaseModel):
 def screen_unified(
         fundamental: Annotated[Optional[List[ScreenCondition]], _d(
             "The FUNDAMENTAL leg — AND-ed financial conditions (INTERSECT), each built from find_fsconcept (→ `concept`) "
-            "+ find_fspattern (→ `pattern`) then its value, EXACTLY as for query_fsscreener. e.g. roe>20% & 3y revenue "
+            "+ find_fspattern (→ `pattern`) then its value. e.g. roe>20% & 3y revenue "
             "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',N:3}]. "
             "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `N` (in YEARS): 'PE declining over 2 years' → "
             "{concept:'pe',pattern:'consecutive_decline',N:2}. This is SEPARATE from the TA leg's window_bars. "
@@ -1965,9 +1965,9 @@ def screen_unified(
             "is served from THIS result — do NOT re-screen for a few more, just surface the next rows already here. "
             "Wanting more than the 100-row buffer needs a fresh screen with a larger intent.")] = None) -> dict:
     """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical — the INTERSECTION of a fundamentals screen
-    and a technical screen within a scope. Supersedes query_fsscreener for any screen that also has a TECHNICAL
-    condition (EMA/MACD cross, RSI/overbought, divergence, squeeze, a-THEN-b); either leg is optional (fund-only =
-    same as query_fsscreener, ta-only = a pure technical scan). The two grammars stay SEPARATE — compose
+    and a technical screen within a scope. This is the ONE screen tool: either leg is optional (fundamental-only = a
+    pure fundamentals screen; ta-only = a pure technical scan of EMA/MACD cross, RSI/overbought, divergence, squeeze,
+    a-THEN-b; both = the intersection). The two grammars stay SEPARATE — compose
     `fundamental` from find_fsconcept+find_fspattern and `ta` from find_tasignal; the server resolves each leg,
     scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
     results:[{head_listing_id, score, matched_legs:[…], ta:{…signals}, fundamental:{ticker,name,metrics}}], notes}.
@@ -2232,7 +2232,7 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     ⚠️ these rows are a NEWS-RANKED, CAPPED SUBSET of the group — NOT the full cohort. Do NOT compute a
     "sector/peer AVERAGE" (P/E, margin, ROE…) from them to judge cheap-vs-peers: that average is a tiny biased
     sample, unweighted, and includes bad-data outliers → wrong. For "cheaper/richer than the sector/peer AVERAGE",
-    "below/above the group average", or "undervalued vs peers" → use **query_fsscreener** pattern
+    "below/above the group average", or "undervalued vs peers" → use **screen_unified** with a `fundamental` pattern
     `below_average`/`above_average` (a proper cap-weighted, full-universe, outlier-cleaned benchmark).
       • Scope (≥1 REQUIRED — it never scans the whole universe): `megatrend` (one OR SEVERAL trend
         names/ids as csv — resolved for you in one pass, same as theme_pulse: 'foundry', 'foundry,hbm',
