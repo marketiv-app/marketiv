@@ -1985,8 +1985,14 @@ def screen_unified(
     🔴 PAGINATION / "show me more": this returns an OVER-FETCHED buffer = min(limit×4, 100) rows in ONE call, so a
     follow-up "give me a few more" is answered from the rows ALREADY in this result — do NOT call again for a few more,
     just surface the next ones you already have. `count` = rows returned in THIS response (= the buffer size, capped
-    100), NOT a market-wide match total; to see more than the buffer, re-screen. An empty/thin result is a genuine
-    no-match (technicals are computed market-wide — no coverage-gap disclaimer)."""
+    100), NOT a market-wide match total; to see more than the buffer, re-screen.
+    🔴 EMPTY RESULT ≠ MISSING FEATURE. This tool FAILS LOUD: an unsupported pattern / operand / timeframe / concept
+    returns a 400 ERROR. So if you got NO error and `count:0`, the query was VALID and the pattern/timeframe IS
+    supported — it simply matched zero stocks right now. NEVER tell the user "the tool can't do X / X only works on
+    the daily chart / that timeframe isn't supported" off a `count:0` — that conclusion requires a 400. A zero just
+    means: loosen the filter, widen `window_bars` (e.g. a rare MONTHLY crossover may not have fired in the last few
+    bars — widen the window), or report honestly "no stock matches that right now." (Technicals are computed
+    market-wide across all timeframes — no coverage-gap disclaimer.)"""
     _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
     include: dict = {}
     if gics: include["gics"] = gics
