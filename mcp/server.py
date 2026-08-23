@@ -290,6 +290,20 @@ def mdx() -> MarketDX:
         cli = _clients[key] = MarketDX(api_key=key, base_url=base) if base else MarketDX(api_key=key)
     return cli
 
+def _check(resp):
+    """Raise with the server's JSON error BODY, not a bare status. `_check(resp)` throws
+    "Client error '400 Bad Request'" and DROPS the body — but the body is where the actionable message lives
+    ("unknown param 'zzz' — declared params: […]", "pattern 'squeeze' needs operand a"). Surfacing it turns
+    blind trial-and-error into a self-correcting client."""
+    if resp.status_code >= 400:
+        try:
+            j = resp.json()
+            msg = j.get("error") or j.get("detail") or resp.text
+        except Exception:
+            msg = resp.text or f"HTTP {resp.status_code}"
+        raise ValueError(str(msg))
+    return resp
+
 def _ext(path: str, params: dict) -> dict:
     """Call a `/v1/ext/*` (HS/Comtrade) endpoint and RELAY a user-actionable failure as a friendly dict
     (with the server's plain-language `note` + any BYOK CTA fields) instead of raising — so the client LLM
@@ -671,7 +685,7 @@ def options_sentiment(
             return {"error": "batch mode needs `tickers=[...]` (and optionally `dates=[...]`)"}
         body = {"tickers": syms, "as_of": [c for c in cols if c], "style": style}
         resp = mdx()._http._client.post("/v1/options/sentiment", json=body)
-        resp.raise_for_status()
+        _check(resp)
         return resp.json()
     if not ticker:
         return {"error": "pass `ticker=<symbol>` for a single read, or `tickers=[...]` for a batch compare"}
@@ -750,8 +764,8 @@ def find_stock(q: Annotated[Optional[str], _dq("Free-text to resolve to ONE exac
     if queries:
         resp = mdx()._http._client.post(
             "/v1/stocks/resolve",
-            json={"queries": queries, "country": country, "limit": _lim(limit, default=5, ceiling=25, floor=5)})
-        resp.raise_for_status()
+            json={"queries": queries, "country": country, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
+        _check(resp)
         data = resp.json()
         for r in data.get("results", []):
             r["matches"] = [{k: m[k] for k in _FIND_KEEP if k in m} for m in r.get("matches", [])]
@@ -1877,7 +1891,7 @@ def find_tasignal(queries: Annotated[List[str], _dq(
     b='80'). READ the descriptions to pick; the top similarity is NOT always right."""
     resp = mdx()._http._client.post("/v1/ta/find-signal",
                                     json={"queries": queries, "limit": _lim(limit, default=5, ceiling=10, floor=1)})
-    resp.raise_for_status()
+    _check(resp)
     return resp.json()
 
 
@@ -1934,7 +1948,8 @@ def screen_unified(
         theme: Annotated[Optional[List[int]], _d("OPTIONAL megatrend THEME node_id(s) from find_megatrend, OR'd — a stock matches "
             "if it is a CORE member of ANY. e.g. [18000000] (a biotech megatrend) · [18000000,18120000]. 🔴 DISTINCT from `gics`: "
             "gics = official sector code; theme = curated megatrend membership. Resolve a theme phrase → node_id(s) via find_megatrend.")] = None,
-        min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL min market cap in USD (e.g. 50000000000 = $50bn).")] = None,
+        min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE min market cap in USD (e.g. 50000000000 = $50bn). This is an ABSOLUTE floor — distinct from `size` (which is a RELATIVE per-market tier: 'small' means small FOR ITS market, not small in USD). For 'companies under $X' / a USD band use min/max_market_cap_usd, NOT size.")] = None,
+        max_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE max market cap in USD (e.g. 2000000000 = under $2bn). Pair with min for a band. ABSOLUTE ceiling — use this for 'small caps under $X', not the relative `size` tier.")] = None,
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
         window_bars: Annotated[Optional[int], _d(
             "TA-leg LOOKBACK in BARS of `timeframe` (daily ≈ trading days) — how far back a technical signal may have "
@@ -1972,6 +1987,7 @@ def screen_unified(
     if asset_type: include["asset_type"] = _lst(asset_type)
     if theme: include["theme"] = _lst(theme)
     if min_market_cap_usd is not None: include["mcap_min"] = min_market_cap_usd
+    if max_market_cap_usd is not None: include["mcap_max"] = max_market_cap_usd
     # OVER-FETCH: `limit` = how many the client means to SHOW; fetch a ~4× look-ahead buffer (cap 100) so a
     # follow-up "a few more" is served from THIS payload (in the LLM's context) with no re-screen. Beyond 100 → fresh
     # screen (a cursor-based deep-page is designed but not built — see docs/pipeline/screener-pagination-design.md).
@@ -1985,7 +2001,7 @@ def screen_unified(
     if window_bars is not None: body["window_bars"] = window_bars
     if sort: body["sort"] = sort
     resp = mdx()._http._client.post("/v1/screen", json=body)
-    resp.raise_for_status()
+    _check(resp)
     data = resp.json()
     got = len(data.get("results", [])) if isinstance(data, dict) else 0
     if isinstance(data, dict):
