@@ -2348,9 +2348,8 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
     because the PRICE fell?) + `pe_ratio`/`pb_ratio`/`eps` + a `news` block. 🔴 NEVER rank on yield alone: high yield +
     recent `last_cut_year` + negative `ttm_div_yoy_pct` + high payout + bad `news` = TRAP; high yield from a
     price drop + intact/growing dividend + long streak = possible VALUE. Read the payload's `_guide`.
-    `limit` default 15 (max 50)."""
-    if not (country or gics):
-        return {"error": "screen_dividends needs a scope: country and/or gics (gics is a GICS CODE like 4010 — resolve a sector NAME via find_gics first)."}
+    `limit` default 15 (max 50). SCOPE (country/gics) is OPTIONAL — omit both to rank dividend payers
+    WHOLE-MARKET (the candidate scan is bounded + fast); add a scope to narrow to one market/sector."""
     params = {"country": country, "gics": gics,
               "min_yield": min_yield, "max_yield": max_yield,
               "min_streak_years": min_streak_years, "min_cagr": min_cagr,
