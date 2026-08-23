@@ -2126,12 +2126,19 @@ def bond_pulse(q: Annotated[str, _dq("A COUNTRY ('US rates', 'US yield curve'), 
         try:
             res = cli._get("/v1/stocks/prices", {"tickers": ",".join(tickers)}).data.get("results", [])
             out = []
-            for tn, r in zip(_CURVE_TENORS, res):
+            for r in res:
                 if not isinstance(r, dict) or r.get("last_close") is None:
                     continue
-                out.append({"tenor": tn, "ticker": r.get("ticker"), "yield": r.get("last_close"),
+                # 🔴 derive the tenor from the ticker ITSELF (TH-5Y.GB → '5Y'); do NOT zip a fixed tenor list
+                # positionally with res — a country with sparse coverage (TH has only 5Y/10Y) would otherwise get
+                # every label shifted onto the wrong maturity (TH-5Y mislabeled '3M', TH-10Y mislabeled '2Y').
+                tk = r.get("ticker", "") or ""
+                tn = tk[len(iso) + 1:].split(".")[0] if tk.startswith(f"{iso}-") else tk
+                out.append({"tenor": tn, "ticker": tk, "yield": r.get("last_close"),
                             "change_bps": {k: (v or {}).get("change_bps") for k, v in (r.get("windows") or {}).items()
                                            if k in ("1w", "1mo", "ytd", "1y")}})
+            order = {tn: i for i, tn in enumerate(_CURVE_TENORS)}  # keep the curve in maturity order
+            out.sort(key=lambda x: order.get(x["tenor"], 99))
             return out
         except Exception:
             return []
