@@ -1946,8 +1946,9 @@ def screen_unified(
             "'large'; there is no separate 'mega'). For an ABSOLUTE USD size / 'under $X' use min/max_market_cap_usd, "
             "not this. e.g. ['large'] · ['mid','small']. Omit = all sizes.")] = None,
         asset_type: Annotated[Optional[List[str]], _d("OPTIONAL asset type(s), OR'd — from the asset_universe catalog: "
-            "'Common Stock','ETF','Currency','Bond','Commodity','Index','Fund','ADR','REIT'. e.g. ['Common Stock'] · ['ETF','Fund']. "
-            "Omit = all types (a typical company screen wants 'Common Stock'). Scopes the TECHNICAL universe.")] = None,
+            "'Common Stock','ETF','Crypto','Currency','Commodity','Bond','Index','Fund','ADR','REIT'. e.g. ['Common Stock'] · ['ETF','Fund'] · ['Crypto']. "
+            "NOTE: 'Crypto' = digital assets (BTC/ETH, exchange .CC) — SEPARATE from 'Currency' which is forex pairs (.FOREX); "
+            "gold/silver spot are 'Commodity'. Omit = all types (a typical company screen wants 'Common Stock'). Scopes the TECHNICAL universe.")] = None,
         theme: Annotated[Optional[List[int]], _d("OPTIONAL megatrend THEME node_id(s) from find_megatrend, OR'd — a stock matches "
             "if it is a CORE member of ANY. e.g. [18000000] (a biotech megatrend) · [18000000,18120000]. 🔴 DISTINCT from `gics`: "
             "gics = official sector code; theme = curated megatrend membership. Resolve a theme phrase → node_id(s) via find_megatrend.")] = None,
