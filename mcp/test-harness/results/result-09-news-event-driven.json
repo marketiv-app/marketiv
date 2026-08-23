@@ -1,0 +1,139 @@
+{
+  "set": "news-event-driven",
+  "cases": [
+    {
+      "id": "ne-01",
+      "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "semiconductors"}},
+        {"tool": "screen_stocks", "args": {"gics": "453010", "direction": "pos", "window": "7d", "order_by": "news_count", "limit": 8}},
+        {"tool": "screen_stocks", "args": {"gics": "453010", "direction": "neg", "window": "7d", "order_by": "news_count", "limit": 8}}
+      ],
+      "result_summary": "7d semis. Winners (net-pos, by news_count): NVDA (100 pos, $105B OpenAI datacenter commit), MRVL (38, Google custom-AI-chip deal), plus more. Losers (net-neg): NVDA (20 neg, AI-capex-gap demand risk), AVGO (18, Marvell/Google threatens exclusivity), INTC (8, $20B dilutive share sale -6.58%), AMD (8, $4.75B debt sale), WOLF, AMAT. Both sides dated + reasoned.",
+      "verdict": "PASS",
+      "reason": "Restricted to 7d, ranked into grounded winners vs losers with per-name news reasons, not a flat dump.",
+      "defects": []
+    },
+    {
+      "id": "ne-02",
+      "question": "Why is Nvidia down today? What's the news catalyst?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "NVDA", "direction": "neg", "window": "7d", "limit": 8}}
+      ],
+      "result_summary": "Concrete dated NVDA negatives: Aug22 Amazon custom-chip $25B run-rate (competition), Aug21 Rubin Ultra HBM cut amid memory shortage (supply), Aug21 Goldman AI-capex-gap could trap Nvidia (demand). Each carries aspect + reason + impact_score. Clear news catalysts present, not fabricated.",
+      "verdict": "PASS",
+      "reason": "Ties the move to specific dated, negative-sentiment news items with impact rationale.",
+      "defects": []
+    },
+    {
+      "id": "ne-03",
+      "question": "Give me a quick pulse on the AI theme over the last 30 days — what are the big storylines and which names are most talked about?",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["AI", "artificial intelligence"]}},
+        {"tool": "theme_summary", "args": {"theme": "10000000", "window": "30d"}}
+      ],
+      "result_summary": "AI (node 10000000) 30d: weekly pulse series (net-pos, ~0.53 pos_share), most-talked-about by hit_count: NVDA(459), GOOG(329), MSFT(281), META(255), AMZN(241). aspect_heatmap (demand net-pos 1286, capital 1239, competition net-neg), top_stories, winners/losers all present.",
+      "verdict": "PASS",
+      "reason": "Honors 30d, surfaces most-talked names by attention with theme-level pulse + storylines, not an arbitrary list.",
+      "defects": []
+    },
+    {
+      "id": "ne-04",
+      "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "energy"}},
+        {"tool": "screen_stocks", "args": {"gics": "10", "country": "TH", "window": "7d", "order_by": "news_count", "limit": 15}}
+      ],
+      "result_summary": "TH energy 7d, 13 names, split 10 pos / 2 neg / 1 mixed. บวก: PTT(26, งบดีเกินคาด top pick), OR(12, Q3 ฟื้น), PTTEP(12, ราคาน้ำมันหนุน upstream), SPRC(11, พลิกกำไร 6.98bn), TOP, BCP. ลบ: IRPC, BANPU. Answer delivered in Thai, grounded in news impact.",
+      "verdict": "PASS",
+      "reason": "Scoped to TH energy + 7d, split positive/negative grounded in news, answered in Thai.",
+      "defects": []
+    },
+    {
+      "id": "ne-05",
+      "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "TSLA", "window": "30d", "limit": 12}}
+      ],
+      "result_summary": "TSLA 30d: 7 pos / 5 neg — mixed, tilting bullish. Bull: Aug20-21 Einride 500-Semi order, Cybercab/robotaxi Austin+Vegas launches, +4% on Europe Semi. Bear: Aug22 China recall ~3M vehicles, $243M Autopilot payout. Sentiment read backed by specific dated items, mixed acknowledged.",
+      "verdict": "PASS",
+      "reason": "News-grounded sentiment verdict over a stated window; acknowledges mixed signal with supporting items.",
+      "defects": []
+    },
+    {
+      "id": "ne-06",
+      "question": "Where is options positioning most extreme right now — any names with unusually stretched put/call or crowded positioning I should know about?",
+      "tool_calls": [
+        {"tool": "positioning_extremes", "args": {"limit": 15}}
+      ],
+      "result_summary": "COT/futures extremes vs 3y percentile: EURUSD 2nd pct (crowded short, squeeze risk), KC-Wheat 99th, US-2Y 100th (positioned for lower yields), Copper 99th, Cotton 96th, AUDUSD 93rd, SOFR 5th, IWM/Russell 5th. Each framed vs 3y range with plain-language read. Covers futures/FX/rates/index — NOT per-equity-name put/call.",
+      "verdict": "PARTIAL",
+      "reason": "Delivers real crowded-positioning extremes framed vs a 3y norm, but the equity-name put/call market-wide scan the user hinted at isn't offered (options_sentiment is single-ticker only, no cross-name extreme scan).",
+      "defects": [
+        {"desc": "No market-wide scan for equity options positioning extremes (stretched put/call across names). positioning_extremes only covers CFTC futures/FX/rates/index; options_sentiment requires a specific ticker, so 'which names have crowded put/call right now' cannot be answered directly.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "ne-07",
+      "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["electric vehicles", "EV"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "16000000", "window": "14d", "order_by": "news_count", "limit": 12}}
+      ],
+      "result_summary": "EV theme (Electrification & Mobility, 16000000) 14d, ranked by attention: TSLA(50, net-pos 40/9), GM(15, mixed 7/7 battery-JV exit -$6B), BYD 002594(14, mixed), EA-TH(13, pos), Ford(8, pos), Toyota 7203(7, net-neg margin-cut). Each pairs attention with pos/neg split — high attention not conflated with positive (GM/Toyota flagged neg).",
+      "verdict": "PASS",
+      "reason": "Honors 14d, ranks by mention volume, pairs each name's attention with grounded sentiment without conflating the two.",
+      "defects": []
+    },
+    {
+      "id": "ne-08",
+      "question": "Brief me on what happened in Japanese markets around the week of the last BOJ meeting — which sectors and names reacted the most?",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "Bank of Japan BOJ policy meeting rate decision", "window": "90d", "limit": 10}},
+        {"tool": "brief", "args": {"country": "JP", "from_": "2026-07-27", "to": "2026-08-03"}}
+      ],
+      "result_summary": "Anchored last BOJ meeting to Jul-31 (found via search_news: 'BOJ to hold rate steady on the 31st'), then JP brief for that week (Jul27-Aug3). Biggest reactors: winners SoftBank 9984(21), Sony 6758, Advantest 6857, Renesas; losers Kioxia 285A(15 neg), Toyota/Honda/Nissan (autos net-neg) — sectors: semis-cap-equip up, autos down (aspect_heatmap capital/demand pos, supply/competition neg). No fabricated BOJ outcome.",
+      "verdict": "PASS",
+      "reason": "Anchored to the actual BOJ-meeting week via news, identified biggest-reacting names/sectors, did not invent a BOJ outcome.",
+      "defects": []
+    },
+    {
+      "id": "ne-09",
+      "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "AMD", "window": "7d", "limit": 25}},
+        {"tool": "stock_impact", "args": {"ticker": "INTC", "window": "7d", "limit": 25}},
+        {"tool": "stock_impact", "args": {"ticker": "MU", "window": "7d", "limit": 25}}
+      ],
+      "result_summary": "7d head-to-head. MU: 22 pos / 1 neg (memory-shortage tailwind, $10B Boise R&D) = best week. AMD: 13 pos / 6 neg (record sales but lost SpaceX deal to Nvidia, Musk Nvidia pledge sank stock). INTC: 8 pos / 5 neg ($20B dilutive share sale -6.58%, AMD-Google spillover). Ranking MU > AMD > INTC, each justified by dated news.",
+      "verdict": "PASS",
+      "reason": "Covers all three over 7d and produces a justified relative ranking from concrete recent news, not three blurbs.",
+      "defects": []
+    },
+    {
+      "id": "ne-10",
+      "question": "Find me any news suggesting a company might be an acquisition target or facing a regulatory investigation recently — the kind of catalyst-driven stuff worth watching.",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "company acquisition takeover buyout target merger deal", "window": "30d", "limit": 6}},
+        {"tool": "search_news", "args": {"q": "acquisition target takeover buyout rumor", "window": "30d", "limit": 10}},
+        {"tool": "search_news", "args": {"q": "regulatory investigation antitrust probe", "window": "30d", "limit": 10}}
+      ],
+      "result_summary": "First M&A query 500'd (Server error); retried with rephrase -> strong. M&A hits (dated): Workday/Silver Lake buyout talks, ACV Auctions takeover interest, Virtu takeover speculation, Integer/KKR, ICE/MarketAxess. Regulatory: Amazon FTC $2.5B + Senate probe, Microsoft 365 UK/AU/IT antitrust, Trip.com ¥5.2B fine, JD.com/Ceconomy EU probe. Semantically on-intent, recent, grounded.",
+      "verdict": "PASS",
+      "reason": "Returns genuinely catalyst-shaped (M&A / regulatory) dated hits semantically, not keyword noise (after one retry).",
+      "defects": [
+        {"desc": "search_news returned a 500 'Server error' on q='company acquisition takeover buyout target merger deal' (window 30d); an identical-intent rephrase succeeded. Intermittent 5xx on semantic search.", "side": "fund-backend"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 9,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "No market-wide equity-options positioning extreme scan (ne-06): positioning_extremes is CFTC-futures/FX/rates/index only; options_sentiment is single-ticker, so 'which names have stretched put/call right now' isn't answerable (data-coverage).",
+      "search_news intermittent 500 'Server error' on a normal M&A query; succeeded on retry with rephrasing (fund-backend).",
+      "Minor MCP-guidance: find_gics uses arg `q` (string) while find_megatrend uses `terms` (array) — inconsistent resolver arg naming forced a corrected retry."
+    ]
+  }
+}

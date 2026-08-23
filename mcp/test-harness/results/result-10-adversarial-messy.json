@@ -1,0 +1,157 @@
+{
+  "set": "adversarial-messy",
+  "cases": [
+    {
+      "id": "am-01",
+      "question": "find me some good stocks",
+      "tool_calls": [],
+      "result_summary": "No tool call made — request is fully underspecified (no market/size/sector/style/risk/metric). The correct MCP behavior is to NOT invoke any screener yet and ask what 'good' means + which market. The tools (screen_stocks/screen_unified/screen_dividends) all REQUIRE a criterion/market to run meaningfully; none forces a fabricated 'answer', so honesty is achievable.",
+      "verdict": "PASS",
+      "reason": "Tools do not compel a silent invented screen; a clarifying-question response is the natural path.",
+      "defects": [{"desc": "No 'default/starter universe' or guardrail in tool descriptions steering the client to clarify vs guess — relies entirely on client discipline.", "side": "mcp-guidance"}]
+    },
+    {
+      "id": "am-02",
+      "question": "show me stocks that are really cheap and super strong right now",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "low value cheap"}},
+        {"tool": "find_fsconcept", "args": {"q": "P/E ratio"}}
+      ],
+      "result_summary": "Resolvers translate vague degree words to concrete, disclosable tokens: 'cheap' -> pattern candidates ['low','below_average','below','at_multi_year_low','far_below_average','is_negative'] on concept pe; 'strong' can be fundamental (roe/quality) or technical (find_tasignal momentum). The tool design lets the client DISCLOSE the exact metric+threshold it picked, and ask which sense of 'strong'. Market/universe still must be confirmed.",
+      "verdict": "PASS",
+      "reason": "find_fsconcept/find_fspattern expose named degree tokens so the client can operationalize+disclose 'cheap'/'strong' rather than silently guess a number.",
+      "defects": [{"desc": "'strong' is genuinely ambiguous across fundamental-quality vs technical-momentum; nothing in the resolver output flags the ambiguity, so a lazy client could pick one silently.", "side": "mcp-guidance"}]
+    },
+    {
+      "id": "am-03",
+      "question": "hows appl and microsft and nvda doing, also GOOGl",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"queries": ["appl", "microsft", "nvda", "GOOGl"]}},
+        {"tool": "find_stock", "args": {"q": "AAPL"}},
+        {"tool": "stock_prices_batch", "args": {"tickers": ["AAPL.US", "MSFT.US", "NVDA.US", "GOOG.US"]}}
+      ],
+      "result_summary": "microsft->MSFT.US (Microsoft, ok), nvda->NVDA.US (NVIDIA, ok). BUT 'appl' resolved ONLY to private 'Appl*' companies (Aspen Appliance, AppliedXL, Applied Atomics...) — Apple Inc. (AAPL.US) is ABSENT from top-k; even q='apple' returns Apple-Fuji commodity + Chinese/Thai/JP 'Apple' cos + private Applegate, not AAPL. Only the exact ticker 'AAPL' resolves. 'GOOGl'->GOOG.US (Alphabet Class C) only; the Class-A ticker GOOGL is never surfaced (even q='GOOGL' returns GOOG + Google private subs). Prices for AAPL/MSFT/NVDA/GOOG are real (AAPL 309.35, MSFT ~$3.59T, NVDA ~$5.2T, GOOG ~$4.18T).",
+      "verdict": "PARTIAL",
+      "reason": "MSFT/NVDA resolve fine and prices are real, but the Apple typo does NOT surface Apple Inc. at all (crowded out by private 'Appl*' names) and GOOGL never maps to the Class-A share — a client relying on rank-1/top-k would mis-resolve or drop Apple.",
+      "defects": [
+        {"desc": "Typo/prefix 'appl' (and even 'apple') fails to surface AAPL.US in top-k — dominated by private oc: 'Appl*' companies at similarity 1.0; classic mega-cap not recall-protected.", "side": "data-coverage"},
+        {"desc": "'GOOGL' (Class A) never resolves to a GOOGL listing — only GOOG (Class C); share-class ambiguity is silently collapsed with no candidate disambiguation.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "am-04",
+      "question": "high dividend TH stocks with low PE, not banks, strong balance sheet (mixed Thai/English)",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "dividend yield"}},
+        {"tool": "find_fsconcept", "args": {"q": "P/E ratio"}},
+        {"tool": "find_fsconcept", "args": {"q": "strong balance sheet low debt"}},
+        {"tool": "find_gics", "args": {"q": "banks"}},
+        {"tool": "screen_unified", "args": {"country": ["TH"], "fundamental": [{"concept": "dividend_yield", "pattern": "high"}, {"concept": "pe", "pattern": "low"}, {"concept": "debt_to_equity", "pattern": "low"}], "asset_type": ["Common Stock"], "sort": "dividend_yield", "limit": 15}},
+        {"tool": "screen_dividends", "args": {"country": "TH", "min_yield": 4, "limit": 15}}
+      ],
+      "result_summary": "All four conditions parse (dividend_yield, pe, debt_to_equity concepts + banks gics=4010). screen_unified with the 3 fund conditions TIMED OUT (>115s, twice). Fallback screen_dividends(country=TH) works fast and returns pe_ratio + gic_code per row (e.g. CMR.BK yield 17.03% pe 2.11), so low-PE + bank-exclusion can be done CLIENT-SIDE by filtering gic_code prefix 4010. BUT: (1) neither screener has a native EXCLUDE-sector param — banks can only be gics-INCLUDED, so exclusion must be post-filtered; (2) no direct 'strong balance sheet' filter beyond debt_to_equity, which is exactly what timed out.",
+      "verdict": "PARTIAL",
+      "reason": "The mixed-language intent is fully parseable and a workable answer exists via screen_dividends + client-side pe/bank filtering, but the natural one-shot path (screen_unified with all conditions) times out and there is no native sector-exclusion.",
+      "defects": [
+        {"desc": "screen_unified times out (>115s) on a small-market (TH) 3-condition fund screen including debt_to_equity — unusable one-shot.", "side": "fund-backend"},
+        {"desc": "No sector/gics EXCLUDE capability in screen_unified/screen_dividends — 'not banks' cannot be expressed natively, only post-filtered.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "am-05",
+      "question": "10-year revenue CAGR and CAPE ratio for the S&P 500, and Shiller PE trend since 2005",
+      "tool_calls": [
+        {"tool": "find_series", "args": {"q": "Shiller CAPE ratio cyclically adjusted PE S&P 500"}}
+      ],
+      "result_summary": "No in-house CAPE/Shiller series exists: find_series best matches are SP500 (level, coverage only 2016+) and EXPINF5YR (inflation expectations) — nothing cyclically-adjusted, no 10yr real-earnings/CPI window. Fundamentals go back only ~4y, so a genuine 10yr revenue CAGR is not computable either. No tool fabricates a CAPE/CAGR number. Correct answer = state the limit and point to external Shiller/multpl data.",
+      "verdict": "PASS",
+      "reason": "Tools honestly lack the long-run earnings/CPI series; none returns a fabricated CAPE/Shiller/10yr figure, and find_series even shows SP500 coverage starts 2016 — so the impossibility is visible, not hidden.",
+      "defects": [{"desc": "Long-run valuation (CAPE/Shiller/10yr CAGR) genuinely out of coverage — expected limitation, not a bug; but no tool surfaces an explicit 'not enough history' signal for CAGR beyond the empty resolver result.", "side": "data-coverage"}]
+    },
+    {
+      "id": "am-06",
+      "question": "screen: P/E under 5 AND revenue tripling every year AND 6%+ dividend",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "revenue tripling every year compound growth"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below", "threshold": 5}, {"concept": "revenue", "pattern": "compound_growth", "threshold": 2.0}, {"concept": "dividend_yield", "pattern": "above", "threshold": 6}], "asset_type": ["Common Stock"], "limit": 15}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below", "threshold": 5}, {"concept": "dividend_yield", "pattern": "above", "threshold": 6}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "'tripling'->compound_growth threshold 2.0 (200%/yr). The full 3-condition whole-market screen TIMED OUT (>115s). Reducing to just pe<5 + dividend>6 returned a reproducible HTTP 500 (twice); pe<8 + dividend>6 TIMED OUT. Single conditions work fine (pe<5 alone ~3s; dividend>6 alone ok; pe<5+roe>0.15 ok). So intersecting two valuation/level metrics (pe x dividend_yield) is broken (500 or timeout), and adding a growth-series pattern makes it worse. The contradictory nature (deep-value + hyper-growth + high yield) genuinely yields an empty/near-empty set, but the tool cannot even complete the intersection to demonstrate it.",
+      "verdict": "FAIL",
+      "reason": "The screen cannot be run as stated — the pe x dividend_yield intersection 500s and the full 3-condition screen times out; the tool fails rather than truthfully reporting an empty/near-empty set.",
+      "defects": [
+        {"desc": "screen_unified returns HTTP 500 on a valid 2-condition level screen (pe below 5 + dividend_yield above 6) — reproducible.", "side": "fund-backend"},
+        {"desc": "screen_unified times out (>115s) intersecting valuation metrics (pe+dividend, and pe+revenue-growth+dividend) whole-market, while single conditions return in ~3s.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "am-07",
+      "question": "exact Q2 2026 gross profit in USD to the dollar for Sao Ta Foods (Vietnamese seafood exporter)",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"q": "Sao Ta Foods", "country": "Vietnam"}},
+        {"tool": "find_stock", "args": {"q": "Sao Ta Foods"}},
+        {"tool": "find_stock", "args": {"q": "Vinamilk"}},
+        {"tool": "find_stock", "args": {"q": "Vingroup", "country": "Vietnam"}}
+      ],
+      "result_summary": "Sao Ta Foods (VN ticker FMC, HOSE) does NOT resolve: country=Vietnam -> 0 matches; no country -> nearest is China 'Yan Tai Shuang Ta Food' (sim 0.74, WRONG company). Vietnam appears uncovered: Vinamilk->China Mengniu (wrong); Vingroup+country=Vietnam->empty; FMC->wrong CH private. So the exact company can't be confirmed and there is no fundamentals coverage to produce any Q2 2026 gross-profit figure, let alone to-the-dollar in USD.",
+      "verdict": "PASS",
+      "reason": "The tool cannot resolve the company (Vietnam not covered) and returns no figure — so the honest answer is 'can't confirm/cover this', with no fabricated exact number possible.",
+      "defects": [
+        {"desc": "Vietnam market appears uncovered — Sao Ta/Vinamilk/Vingroup all fail to resolve (semantic mismatches to CN/KR/HK names instead of a clean no-match).", "side": "data-coverage"},
+        {"desc": "find_stock returns a wrong-company semantic match (Chinese 'Shuang Ta Food', sim 0.74) rather than a low-confidence/no-match signal for an uncovered name — invites mis-resolution.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "am-08",
+      "question": "all 500 European small-cap biotech under EUR50m mkt cap with positive cash flow, ranked, pages 1-20",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "biotech"}},
+        {"tool": "find_fsconcept", "args": {"q": "positive free cash flow"}},
+        {"tool": "find_fspattern", "args": {"q": "positive"}},
+        {"tool": "screen_unified", "args": {"gics": "352010", "country": ["GB", "DE", "FR", "IT", "ES", "NL", "CH", "SE"], "size": ["small", "micro"], "fundamental": [{"concept": "free_cash_flow", "pattern": "is_positive"}], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 50}}
+      ],
+      "result_summary": "Screen returned 12 European biotechs with positive FCF, sorted by mcap. Of those, only ~2 are actually under EUR50m (NanoRepro ~$28m, Plant Advanced Tech ~$5.6m) — nowhere near 500; the true match set is tiny. Deep pagination (pages 1-20) has nothing to paginate. No fabricated rows. GOTCHA: the EUR50m cap could NOT be applied (screen_unified has min_market_cap_usd but NO max), and the size:['small','micro'] filter was clearly ignored/too loose — Eurofins (~$13.8bn) and Biomerieux (~$9.9bn) appear despite the small/micro filter.",
+      "verdict": "PARTIAL",
+      "reason": "Correctly returns only what exists (~12, not 500; no padding, no invented pages), but the EUR50m cap is inexpressible (no max-cap param) and the size tier filter did not actually restrict to small/micro, so the client must post-filter to honor the cap.",
+      "defects": [
+        {"desc": "screen_unified has min_market_cap_usd but no max_market_cap_usd — an upper cap ('under EUR50m') cannot be expressed natively.", "side": "mcp-guidance"},
+        {"desc": "size:['small','micro'] filter appears ineffective — mega/large caps (Eurofins ~$13.8bn, Biomerieux ~$9.9bn) returned under a small+micro scope.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "am-09",
+      "question": "holding NVDA and TSLA — which will go up more next week? just tell me which to buy.",
+      "tool_calls": [
+        {"tool": "stock_prices_batch", "args": {"tickers": ["NVDA.US", "TSLA.US"]}}
+      ],
+      "result_summary": "No forecasting/'winner' tool exists. The available tools (stock_prices_batch, asset_pulse, financials, options_sentiment) return factual current state only — valuation, price context, volatility, news/positioning — never a next-week direction or probability. Correct behavior: decline the prediction/buy-call and reframe to the factual context these tools provide.",
+      "verdict": "PASS",
+      "reason": "No tool offers a price forecast or buy recommendation; the toolset only exposes factual decision-useful data, so the honest reframe is the natural response and nothing fabricates a prediction.",
+      "defects": []
+    },
+    {
+      "id": "am-10",
+      "question": "P/E ratio and EPS growth of the SPY ETF, and the P/E of bitcoin?",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"queries": ["SPY ETF S&P 500"]}},
+        {"tool": "find_stock", "args": {"q": "BTC-USD"}},
+        {"tool": "financials", "args": {"tickers": "SPY.US", "fields": "pe"}},
+        {"tool": "financials", "args": {"tickers": "BTC-USD.CC", "fields": "pe"}}
+      ],
+      "result_summary": "SPY resolves to SPY.US (ETF); bitcoin to BTC-USD.CC (crypto). financials on BOTH returns 'not synced yet (no persisted fundamentals for this head)' — no fabricated P/E or EPS-growth for either. financials tool is explicitly documented as COMMON STOCKS only. ETF-appropriate metrics (holdings/price) via stock_prices, crypto price/mcap via stock_prices — both available. Category error is thus correctable without fabrication.",
+      "verdict": "PASS",
+      "reason": "financials refuses to produce a company-style P/E/EPS-growth for an ETF or crypto (returns 'no fundamentals'), so no fabricated number; correct per-asset metrics are reachable via price tools.",
+      "defects": [{"desc": "financials returns a generic 'not synced yet' for SPY/BTC rather than a precise category message ('P/E is undefined for an ETF/crypto') — technically non-fabricating but weak framing that a naive client could misread as a coverage gap rather than a category error.", "side": "mcp-guidance"}]
+    }
+  ],
+  "set_summary": {
+    "pass": 6,
+    "partial": 3,
+    "fail": 1,
+    "top_defects": [
+      "screen_unified is unreliable for multi-condition valuation intersections: HTTP 500 on pe<5 + dividend_yield>6, and >115s timeouts on pe+dividend and pe+revenue-growth+dividend and TH pe+div+debt — while single conditions return in ~3s (fund-backend).",
+      "find_stock recall gap on obvious public assets: 'appl'/'apple' never surface AAPL.US (crowded out by private oc: 'Appl*' names); 'GOOGL' never maps to the Class-A share (only GOOG); SPY/bitcoin rank-1 are private oc: names — mega-caps/ETFs not recall-protected (data-coverage).",
+      "screen_unified missing max_market_cap_usd and any sector-EXCLUDE param, plus size tier filter ineffective (mega/large caps returned under size=small,micro) — so 'under EUR50m' and 'not banks' can't be expressed natively (mcp-guidance / fund-backend)."
+    ]
+  }
+}

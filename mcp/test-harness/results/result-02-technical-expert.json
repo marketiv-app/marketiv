@@ -1,0 +1,160 @@
+{
+  "set": "technical-expert",
+  "cases": [
+    {
+      "id": "te-01",
+      "question": "Screen the whole US market for stocks where the 50-day SMA just crossed above the 200-day SMA (a golden cross) in the last 5 trading days, and the crossover is confirmed by price closing above both averages. I only want names above $2B market cap.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["the 50-day SMA crossing above the 200-day SMA", "price closing above both moving averages"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "sma50", "b": "sma200", "window_bars": 5}], "quals": [{"any": [{"pattern": "above", "a": "close", "b": "sma200"}], "within": 0}, {"any": [{"pattern": "above", "a": "close", "b": "sma50"}], "within": 0}]}], "country": ["US"], "asset_type": ["Common Stock"], "min_market_cap_usd": 2000000000, "timeframe": 1, "window_bars": 5, "limit": 10}}
+      ],
+      "result_summary": "count=33; US names with fresh 50/200 golden cross within 5 sessions, confirmed close>both MAs. Top: PYPL, MMSI, TOST, ELF, DASH, TMO.",
+      "verdict": "PASS",
+      "reason": "Golden-cross direction, 5-day recency, close-above-both confirmation, US-only and >$2B all correctly applied.",
+      "defects": []
+    },
+    {
+      "id": "te-02",
+      "question": "หาหุ้นในตลาดไทยที่มี bullish divergence: ราคาทำ lower low แต่ RSI ทำ higher low บนกราฟรายวัน ช่วง 1-2 เดือนที่ผ่านมา เอาเฉพาะที่ volume วันล่าสุดสูงกว่าค่าเฉลี่ย 20 วันอย่างน้อย 1.5 เท่า",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["bullish divergence price lower low RSI higher low", "volume spike above 20-day average"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "divergence_bull", "a": "rsi", "window_bars": 42}], "quals": [{"any": [{"pattern": "volume_spike"}], "within": 0}]}], "country": ["TH"], "asset_type": ["Common Stock"], "timeframe": 1, "window_bars": 42, "limit": 10}}
+      ],
+      "result_summary": "Combined divergence+volume-spike = count=0 (legitimate empty intersection). Legs verified separately: TH bullish divergence = 4 names (WARRIX, DHOUSE, CPANEL, COMAN); TH volume_spike = 40 names; none of the 4 divergence names had a spike on the latest bar.",
+      "verdict": "PARTIAL",
+      "reason": "Correct scope/direction/timeframe and both legs work, but the exact 1.5x-20d-avg volume multiple is not expressible (volume_spike uses a fixed default multiplier), and the AND-intersection is empty.",
+      "defects": [
+        {"desc": "volume_spike takes no custom multiplier operand — user's '>=1.5x 20-day avg' cannot be specified; client must accept the tool's default spike definition.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "te-03",
+      "question": "Give me global names in a tight Bollinger Band squeeze — bands inside the Keltner Channels — that are ALSO showing rising volume over the last 10 sessions, suggesting the squeeze is about to resolve. Prefer tech/semiconductor sector.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["bollinger bands squeeze inside keltner channels", "rising volume over last 10 sessions"]}},
+        {"tool": "find_gics", "args": {"q": "semiconductors"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "ttm_squeeze"}], "quals": [{"any": [{"pattern": "volume_spike"}], "within": 0}]}], "gics": "45", "asset_type": ["Common Stock"], "timeframe": 1, "window_bars": 10, "limit": 10}}
+      ],
+      "result_summary": "count=40; global IT-sector names in TTM squeeze (BB inside Keltner) + volume spike. Top: 1362, 6682 (4Paradigm), 1304 (Fortior), BKTI. matched shows 'TTM squeeze (BB inside Keltner)' + 'vol_spike'.",
+      "verdict": "PASS",
+      "reason": "ttm_squeeze correctly encodes BB-inside-Keltner (not a plain low-ATR list); global, IT/semis scoped, direction-agnostic. Volume filter applied as spike proxy.",
+      "defects": [
+        {"desc": "No 'rising volume over N sessions' primitive — the closest is volume_spike (latest bar > avg); a true 10-session rising-volume slope isn't expressible. First attempt using pattern 'rising' with a='volume' returned 400 (volume is not a valid operand token; error body not surfaced).", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "te-04",
+      "question": "I want a two-step setup on European large caps: first the stock dropped at least 15% over the past 20 trading days, THEN the daily MACD line crossed back above its signal line within the last 3 days.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["price dropped 15% over 20 days", "MACD line crossed above signal line"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.15", "window_bars": 20}]}, {"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal", "window_bars": 3}]}], "country": ["GB","FR","DE","IT","ES","NL","CH","SE","BE","DK","FI","NO","IE","AT","PT"], "asset_type": ["Common Stock"], "size": ["large","mega"], "timeframe": 1, "window_bars": 30, "limit": 10}}
+      ],
+      "result_summary": "count=0 (legitimate). Legs verified: MACD-cross-up leg = 15 EU large caps (Novartis, BP, AZN, Linde, Lonza); drop-15%/20d leg = 0 for large/mega but 40 for EU any-size (EVTL, KLAR, ONON) — no EU large-cap has dropped 15% in 20 days recently.",
+      "verdict": "PASS",
+      "reason": "THEN-chain ordering, 15%/20d drop, recent (3d) bullish MACD cross, Europe large-cap all correctly encoded as a 2-step sequence; empty result is a real market fact (no large-cap satisfies both), not a tool failure.",
+      "defects": []
+    },
+    {
+      "id": "te-05",
+      "question": "Screen for extreme overbought exhaustion: stocks where the WEEKLY RSI(14) is above 80 right now, across any global market. Rank them by how far above 80 they are.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["weekly RSI above 80 overbought"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "above", "a": "rsi", "b": "80"}]}], "asset_type": ["Common Stock"], "timeframe": 2, "limit": 15}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "above", "a": "rsi", "b": "70"}]}], "asset_type": ["Common Stock"], "timeframe": 2, "limit": 15}}
+      ],
+      "result_summary": "'above rsi 80' on weekly = 400 error (RSI level 80 not supported; the level ladder only accepts ~30/50/70). Fallback 'above rsi 70' weekly = 60 names but returned alphabetically, not ranked by RSI, and RSI value is not in the result rows.",
+      "verdict": "FAIL",
+      "reason": "Cannot express RSI>80 (only ~30/50/70 levels accepted) and cannot rank by RSI level (RSI value absent from output). The requested threshold and the ranking are both unfulfillable.",
+      "defects": [
+        {"desc": "RSI-vs-level via above/below only supports a fixed ladder (30/50/70 work; 40 and 80 return 400). User's 80 threshold is impossible; overbought pattern is hard-wired to ~70 with no threshold operand.", "side": "ta-backend"},
+        {"desc": "Overbought/RSI results do not include the RSI value, so 'rank by how far above the threshold' cannot be done; sort key options don't cover oscillator level.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "te-06",
+      "question": "Find me quality growth names in a healthy pullback: 20% EPS growth and gross margin over 50%, but the stock has pulled back to near its 200-day EMA (within 3%) on the daily chart while daily RSI is between 40 and 50. US and China.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "EPS growth percent"}},
+        {"tool": "find_fsconcept", "args": {"q": "gross profit margin"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "latest_yoy", "threshold": 0.20}, {"concept": "gross_margin", "pattern": "above", "threshold": 0.50}], "ta": [{"anchor": [{"pattern": "above", "a": "close", "b": "ema200"}], "quals": [{"any": [{"pattern": "below", "a": "rsi", "b": "50"}], "within": 0}]}], "country": ["US","CN"], "asset_type": ["Common Stock"], "timeframe": 1, "limit": 10}}
+      ],
+      "result_summary": "count=40; US+CN names combining fundamentals (net-income YoY>=20% + gross margin>50%) with technicals (close>200-EMA + RSI<50). Top: 603379.CG, 688008.CG (Montage), 688256.CG (Cambricon).",
+      "verdict": "PARTIAL",
+      "reason": "Both fundamental and technical halves are combined (not dropped) and US+CN scoped, but two conditions had to be substituted: EPS growth (unsupported) -> net_income YoY, and RSI 40-50 band -> RSI<50 only (the 40 floor and 'within 3% of 200-EMA' proximity are not expressible).",
+      "defects": [
+        {"desc": "EPS growth is not screenable: eps_basic/eps_diluted/net_income with any growth pattern (latest_yoy/consecutive_growth/compound_growth) return 400 for EPS concepts; only net_income/revenue support growth patterns. Had to proxy EPS growth with net_income growth.", "side": "fund-backend"},
+        {"desc": "RSI level 40 unsupported (only 30/50/70 accepted) so the 40-50 band collapses to RSI<50. No 'RSI between X and Y' TA primitive.", "side": "ta-backend"},
+        {"desc": "touch_up/touch_down (the 'near/within 3% of the MA' converge patterns advertised by find_tasignal) return 400 with any operands in screen_unified — proximity-to-200-EMA cannot be screened; had to substitute the 'above ema200' state.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "te-07",
+      "question": "Show global small caps (under $1B) that are up more than 30% over the last month on above-average volume, but where the daily RSI is now flashing bearish divergence against the recent price high.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["price up more than 30% over last month", "bearish divergence price higher high RSI lower high", "volume spike above 20-day average"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "divergence_bear", "a": "rsi", "window_bars": 30}], "quals": [{"any": [{"pattern": "net_change_up", "a": "close", "b": "0.30", "window_bars": 30}], "within": 0}, {"any": [{"pattern": "volume_spike", "window_bars": 30}], "within": 30}]}], "size": ["small","micro"], "asset_type": ["Common Stock"], "timeframe": 1, "window_bars": 30, "limit": 10}}
+      ],
+      "result_summary": "count=19; global small/micro caps with +30% run, bearish RSI divergence, and a volume spike. Top: Wooree E&L, Unifi (UFI), ORIC, APPS (Digital Turbine). matched shows all three signals.",
+      "verdict": "PASS",
+      "reason": "Small-cap floor, >30%/1mo return, bearish-divergence direction (price HH vs RSI LH), volume, and global universe all applied. (Latest-bar volume_spike intersected to 0; widening the volume window to 30 bars gave the correct co-occurring set.)",
+      "defects": [
+        {"desc": "volume_spike within:0 (latest bar) is very strict — intersecting three conditions on the same bar gave 0; needed within=30 to capture 'above-average volume during the move'. Behavior is fine but the tolerance knob is easy to get wrong with no guidance.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "te-08",
+      "question": "Multi-timeframe trend alignment: price above the 50-week SMA on the weekly AND above the 20-day EMA on the daily, with the daily MACD histogram positive. Japan and Korea, any cap.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["price above 50-week SMA", "price above 20-day EMA", "MACD histogram positive"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "above", "a": "close", "b": "ema20"}], "quals": [{"any": [{"pattern": "above", "a": "macd_line", "b": "macd_signal"}], "within": 0}]}], "country": ["JP","KR"], "asset_type": ["Common Stock"], "timeframe": 1, "limit": 10}}
+      ],
+      "result_summary": "Daily leg only: count=40 JP+KR names above 20-day EMA with MACD histogram positive (encoded as macd_line above macd_signal, which is the histogram>0 equivalence). Weekly >50-week-SMA leg could NOT be ANDed in the same call — timeframe is a single top-level knob.",
+      "verdict": "PARTIAL",
+      "reason": "Daily conditions (>20-EMA + MACD histogram positive) correct and correctly noted histogram==line>signal; JP+KR scoped. But the weekly >50-SMA condition cannot run simultaneously with the daily conditions — screen_unified applies ONE timeframe to the whole TA leg, so true multi-timeframe alignment is impossible in one screen.",
+      "defects": [
+        {"desc": "No per-signal timeframe: 'timeframe' is a single top-level parameter for the whole TA leg. Genuine multi-timeframe screens (weekly condition AND daily condition together) cannot be expressed.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "te-09",
+      "question": "Which global stocks had their daily RSI(14) cross UP through 30 in the last two days? Prefer energy sector.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["RSI crossing up through 30"]}},
+        {"tool": "find_gics", "args": {"q": "energy"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "rsi", "b": "30", "window_bars": 2}]}], "gics": "10", "asset_type": ["Common Stock"], "timeframe": 1, "window_bars": 2, "limit": 10}}
+      ],
+      "result_summary": "count=1; global energy name with a fresh RSI(14) upward cross through 30 in the last 2 sessions (2904 Prime Oil Chemical). matched='rsi_x_30_up' (a cross EVENT, not a static oversold list).",
+      "verdict": "PASS",
+      "reason": "Cross-UP-through-30 event (RSI was <30, now >30), period 14, level 30, daily, 2-day recency, energy sector all correctly applied; result is the event not a static RSI<30 list.",
+      "defects": []
+    },
+    {
+      "id": "te-10",
+      "question": "หาหุ้นทั่วโลกในกลุ่ม healthcare ที่ราคายืนเหนือ 200-day SMA มาตลอด และล่าสุดเพิ่งเกิด monthly MACD bullish crossover — คัดเฉพาะ market cap เกิน $5B",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["monthly MACD bullish crossover", "price above 200-day SMA"]}},
+        {"tool": "find_gics", "args": {"q": "healthcare"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal", "window_bars": 3}], "quals": [{"any": [{"pattern": "above", "a": "close", "b": "sma200", "for_bars": 6}], "within": 0}]}], "gics": "35", "asset_type": ["Common Stock"], "min_market_cap_usd": 5000000000, "timeframe": 3, "window_bars": 6, "limit": 10}}
+      ],
+      "result_summary": "count=0. Diagnosed: monthly MACD crossover_up returns 0 globally (any cap); weekly MACD crossover_up also 0; monthly MA crossover also 0 — crossover EVENTS are only computed on the DAILY timeframe. Monthly STATE patterns (e.g. close>ema on tf=3) do work (20 names), so the monthly frame exists but has no crossover series.",
+      "verdict": "FAIL",
+      "reason": "The core request — a MONTHLY MACD bullish crossover — cannot be fulfilled: crossover_up on macd_line/signal yields nothing on weekly or monthly timeframes (daily-only), so the healthcare/>$5B/above-200-SMA screen returns empty for the wrong reason (missing monthly cross data, not a real absence).",
+      "defects": [
+        {"desc": "crossover_up (MACD and MA) is computed ONLY on the daily timeframe — weekly (tf=2) and monthly (tf=3) crossover screens return 0 market-wide, while non-crossover state patterns work on those frames. Monthly/weekly MACD cross setups are unavailable.", "side": "ta-backend"},
+        {"desc": "'Price above 200-day SMA' is a DAILY concept but the request mixes it with a MONTHLY MACD cross — screen_unified's single timeframe forces sma200 to be evaluated on the monthly frame (200 months), which is meaningless. Same MTF limitation as te-08.", "side": "ta-backend"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 5,
+    "partial": 3,
+    "fail": 2,
+    "top_defects": [
+      "crossover events are daily-only: weekly/monthly MACD (and MA) crossovers return 0 market-wide (breaks te-10; blocks the weekly leg of te-08) — a ta-backend coverage gap",
+      "single top-level timeframe means genuine multi-timeframe screens (weekly condition AND daily condition together) are impossible in one call (te-08, te-10)",
+      "RSI-vs-level only accepts a fixed ladder (30/50/70): RSI>80 and RSI-band 40-50 cannot be expressed, and RSI value is absent from results so 'rank by RSI' is impossible (te-05, te-06)",
+      "touch_up/touch_down (advertised by find_tasignal for 'near/approaching a MA') return 400 in screen_unified — proximity-to-MA (within 3%) not screenable (te-06)",
+      "EPS growth not screenable — eps_basic/eps_diluted reject all growth patterns (only net_income/revenue support growth); volume_spike has no custom multiplier; 400 error bodies are not surfaced to the client (forces blind trial-and-error)"
+    ]
+  }
+}

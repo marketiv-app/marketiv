@@ -1,0 +1,134 @@
+{
+  "set": "fundamental-expert",
+  "persona": "Fundamental equity analyst who screens with precise financials — revenue/EPS growth (YoY, multi-year CAGR, consecutive years), margin levels & trends, ROE/ROIC, FCF & FCF yield, leverage (net debt/EBITDA, debt/equity), absolute-dollar line items, cross-market USD comparisons, and sector-relative 'below/above average' benchmarks. Thinks in specific numbers and multi-condition intersections.",
+  "cases": [
+    {
+      "id": "fe-01",
+      "question": "Find companies globally with revenue above $5B, gross margin over 60%, operating margin over 25%, and net debt/EBITDA under 1.0x. I want large, high-margin, lightly-levered businesses.",
+      "goal": "Multi-metric intersection screen: absolute-$ revenue floor + two margin thresholds + leverage ceiling, applied globally.",
+      "acceptance": [
+        "Screen intersects ALL four conditions (revenue $5B AND gross margin >60% AND op margin >25% AND net debt/EBITDA <1.0x) — not a subset",
+        "Revenue $5B is treated as an absolute-dollar line item normalized to USD (not local currency, not a ratio)",
+        "Net debt/EBITDA uses net debt (debt minus cash), not gross debt/EBITDA",
+        "Results are global (no implicit single-country restriction)",
+        "Red flag if it returns a raw list and asserts all four filters passed without evidence per metric, or if it silently drops any of the four conditions"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fe-02",
+      "question": "หาหุ้นที่มีรายได้เติบโต YoY ติดต่อกันอย่างน้อย 5 ปี และกำไรต่อหุ้น (EPS) ก็โตทุกปีในช่วงเดียวกันด้วย ขอเฉพาะบริษัทที่มีรายได้เกิน 1 พันล้านดอลลาร์",
+      "goal": "Consecutive-years growth screen: revenue up YoY AND EPS up YoY for 5+ consecutive years, with an absolute-$ revenue floor.",
+      "acceptance": [
+        "Interprets 'ติดต่อกันอย่างน้อย 5 ปี' as CONSECUTIVE positive YoY growth for each of 5 years, not merely 5-year CAGR positive",
+        "Applies the consecutive-growth condition to BOTH revenue and EPS jointly",
+        "Revenue > $1B applied as absolute USD line item",
+        "Answers in Thai",
+        "Red flag if it substitutes a single 5-year CAGR>0 for the stricter consecutive-year test, or checks only revenue and ignores EPS"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "fe-03",
+      "question": "Compare Toyota, Volkswagen, and General Motors on revenue, net income, operating margin, ROE, and net debt — all in USD so it's apples-to-apples. Which has the strongest balance sheet?",
+      "goal": "Cross-market head-to-head with explicit currency normalization (JPY/EUR/USD reporting currencies) into USD.",
+      "acceptance": [
+        "Absolute-dollar figures (revenue, net income, net debt) are converted from each company's reporting currency (JPY, EUR, USD) to a common USD basis",
+        "Does NOT mix currencies when ranking or comparing absolute magnitudes",
+        "Ratios (op margin, ROE) are currency-neutral and can be compared directly without conversion",
+        "Provides a reasoned 'strongest balance sheet' judgment grounded in the net debt / leverage figures shown",
+        "Red flag if it compares ¥ revenue vs € revenue vs $ revenue as if the numbers were comparable"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fe-04",
+      "question": "Screen for stocks trading below their sector's average P/E but with ROE above the sector average — cheap relative to peers yet more profitable. Restrict to US large caps.",
+      "goal": "Sector-relative (cohort) screen combining a below-average valuation condition with an above-average profitability condition, scoped to US large cap.",
+      "acceptance": [
+        "'Below sector average P/E' and 'above sector average ROE' are evaluated against a cohort/sector benchmark, not against fixed absolute thresholds",
+        "The sector benchmark cohort matches each company's own sector (peer-relative), not a single market-wide average blindly applied",
+        "Scope restricted to US + large-cap size tier",
+        "Both conditions intersected (cheap AND more profitable), not either/or",
+        "Red flag if it uses an arbitrary fixed P/E number instead of the sector average, or compares each stock to the wrong cohort"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "fe-05",
+      "question": "I want accelerating growth: companies whose revenue growth rate this year is higher than last year's, and last year's was higher than the year before. So growth is speeding up, not just positive.",
+      "goal": "Growth-acceleration screen — second-derivative condition on revenue growth over three consecutive periods.",
+      "acceptance": [
+        "Interprets 'accelerating' as growth RATE increasing across periods (g_t > g_{t-1} > g_{t-2}), i.e. rising YoY growth, not just positive growth",
+        "Uses at least three growth data points (needs ~4 years of revenue) to establish the acceleration",
+        "Does not conflate 'high growth' with 'accelerating growth'",
+        "Red flag if it returns companies with high but decelerating or flat growth, or checks only a single growth number"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "fe-06",
+      "question": "Find profitable software companies with free cash flow above $500M, FCF yield above 4%, and net cash on the balance sheet (more cash than total debt). Any market.",
+      "goal": "FCF-quality + balance-sheet-strength intersection: absolute FCF floor, FCF-yield ratio, and a net-cash structural condition.",
+      "acceptance": [
+        "FCF > $500M is an absolute USD line item; FCF yield > 4% is a ratio (FCF / market cap) — treated as two distinct conditions",
+        "'Net cash' correctly means cash & equivalents exceed total debt (negative net debt), not just 'has cash'",
+        "Restricts to software/relevant sector and to profitable companies",
+        "All conditions intersected globally",
+        "Red flag if FCF yield is computed against enterprise value without saying so and then labeled inconsistently, or if 'net cash' is treated as merely having a positive cash balance"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fe-07",
+      "question": "Show me companies with expanding margins: gross margin, operating margin, and net margin all higher today than they were three years ago. I care about the trend, not the absolute level.",
+      "goal": "Margin-trend screen — three margin lines each trending UP over a 3-year lookback, level-agnostic.",
+      "acceptance": [
+        "Evaluates the CHANGE (Δ) in each of the three margins over ~3 years, requiring all three to be higher now than 3 years ago",
+        "Does not impose an absolute margin threshold (user explicitly wants trend, not level)",
+        "Requires all three margins expanding jointly (intersection), not any single one",
+        "Red flag if it screens on current margin level instead of the 3-year change, or checks only one margin line"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fe-08",
+      "question": "ขอบริษัทในเอเชียที่มี ROIC เกิน 15% ต่อเนื่อง, อัตราส่วนหนี้สินต่อทุน (D/E) ต่ำกว่า 0.5 เท่า, และงบดุลแข็งแรง current ratio มากกว่า 2 — เน้นคุณภาพงบดุลและผลตอบแทนจากเงินทุน",
+      "goal": "Quality + balance-sheet-strength screen scoped to Asia: sustained ROIC, low D/E, strong current ratio.",
+      "acceptance": [
+        "Intersects ROIC > 15% (ideally sustained/multi-year) AND D/E < 0.5 AND current ratio > 2",
+        "Scope restricted to Asia (region filter), answered in Thai",
+        "ROIC (return on invested capital) is used, not conflated with ROE",
+        "D/E and current ratio are treated as currency-neutral ratios (no FX needed)",
+        "Red flag if it swaps ROIC for ROE without noting it, or drops the balance-sheet (current ratio) condition"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "fe-09",
+      "question": "Screen for companies with revenue over $10B that spend more than $2B a year on R&D and whose R&D as a percent of revenue is above 15% — heavy, committed innovators at scale.",
+      "goal": "Absolute-$ line-item screen combining a revenue floor, an absolute R&D-spend floor, and an R&D-intensity ratio.",
+      "acceptance": [
+        "R&D > $2B is an absolute USD line item, distinct from R&D/revenue > 15% which is a ratio — both applied",
+        "Revenue > $10B applied as absolute USD",
+        "All three conditions intersected; a $2B R&D spender at $60B revenue (3.3% intensity) should be excluded by the 15% intensity gate",
+        "Absolute-$ figures normalized to USD across markets",
+        "Red flag if it uses only R&D intensity and ignores the $2B absolute floor (or vice versa), or mixes currencies on the dollar line items"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fe-10",
+      "question": "I'm hunting compounders: 3-year revenue CAGR above 20%, EPS CAGR above 25% (so earnings growing faster than sales — margin leverage), ROE consistently over 20%, and net debt/EBITDA under 2x. Global, any sector.",
+      "goal": "Full multi-condition compounder screen: CAGR thresholds with a relational EPS>revenue-growth quality condition, sustained ROE, and leverage ceiling.",
+      "acceptance": [
+        "Revenue CAGR > 20% and EPS CAGR > 25% both computed over the same ~3-year window",
+        "Captures the relational insight that EPS is growing faster than revenue (margin/operating leverage), not just two independent thresholds — or at least does not contradict it",
+        "ROE > 20% treated as sustained/consistent, and net debt/EBITDA < 2x uses net debt",
+        "All conditions intersected globally with no implicit sector/country restriction",
+        "Red flag if it reports CAGRs over mismatched windows, uses gross debt for the leverage gate, or claims all filters satisfied without per-metric evidence"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

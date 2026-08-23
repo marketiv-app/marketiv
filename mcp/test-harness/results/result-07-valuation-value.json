@@ -1,0 +1,160 @@
+{
+  "set": "valuation-value",
+  "cases": [
+    {
+      "id": "vv-01",
+      "question": "Show me US large-cap stocks trading under 12x earnings right now. Just the outright cheap ones on a P/E basis.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "price to earnings P/E ratio"}},
+        {"tool": "find_fspattern", "args": {"q": "below a fixed number / less than a threshold"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below", "threshold": 12}], "country": ["US"], "size": ["large", "mega"], "asset_type": ["Common Stock"], "sort": "pe", "limit": 15}}
+      ],
+      "result_summary": "US large/mega universe=130; 5 matched pe<12, sorted asc: PBR 4.59, T, PGR, EQNR, COF. Absolute ceiling honored; pe served as trailing multiple.",
+      "verdict": "PASS",
+      "reason": "Absolute P/E<12 ceiling, scoped US large-cap, market-wide (not hand-picked), trailing pe basis.",
+      "defects": []
+    },
+    {
+      "id": "vv-02",
+      "question": "I want European industrials that look cheap on EV/EBITDA compared with the rest of the industrials sector — below the sector average, not just below some fixed number.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "EV/EBITDA enterprise value to EBITDA"}},
+        {"tool": "find_fspattern", "args": {"q": "below the sector average / cheaper than sector peers"}},
+        {"tool": "find_gics", "args": {"q": "industrials sector"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "ev_ebitda", "pattern": "below_average", "vs_cohort": {"gics": "20"}}], "gics": "20", "country": ["DE", "FR", "GB", "IT", "ES", "NL", "SE", "CH", "BE", "FI", "DK", "NO", "AT", "IE"], "asset_type": ["Common Stock"], "sort": "ev_ebitda", "limit": 15}}
+      ],
+      "result_summary": "EU industrials universe=448; 60 below sector-avg EV/EBITDA, ranked asc: CPPGroup, Mare Nostrum, Aumann, Norma, Fraport…",
+      "verdict": "PASS",
+      "reason": "Cohort-relative (below_average vs gics:20 cohort), capital-structure-neutral EV/EBITDA, broad 448-name benchmark, Europe+industrials scope.",
+      "defects": []
+    },
+    {
+      "id": "vv-03",
+      "question": "Give me the cheapest decile of global tech stocks by price-to-free-cash-flow. I only care about the bottom 10% tail.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "price to free cash flow"}},
+        {"tool": "find_fspattern", "args": {"q": "in the top decile highest 10 percent of the distribution"}},
+        {"tool": "find_gics", "args": {"q": "technology information technology sector"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "fcf_yield", "pattern": "high", "percentile": 0.1}], "gics": "45", "asset_type": ["Common Stock"], "sort": "fcf_yield", "limit": 15}}
+      ],
+      "result_summary": "Global tech universe=4276; top-decile fcf_yield (=cheapest-decile P/FCF)=60 rows, ranked desc yield: Republic Power 14.4, Core AI 4.7, Truly Intl 2.2…",
+      "verdict": "PASS",
+      "reason": "Cheapest decile served via the INVERSE (fcf_yield top-10% = P/FCF bottom-10%) over a broad 4276 global-tech universe; percentile framing honored.",
+      "defects": [
+        {"desc": "No direct P/FCF valuation multiple exists in find_fsconcept (only fcf_yield, its reciprocal). Client must reason about the inversion and flip 'cheapest' to the top-yield tail — a stated P/FCF ask isn't directly executable.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "vv-04",
+      "question": "หาหุ้นถูกแต่คุณภาพดีให้หน่อย — P/E ต่ำ แต่ ROE สูงและหนี้ไม่เยอะ ไม่เอา value trap",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "return on equity ROE"}},
+        {"tool": "find_fsconcept", "args": {"q": "debt to equity leverage low debt"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "low"}, {"concept": "roe", "pattern": "high"}, {"concept": "debt_to_equity", "pattern": "low"}], "asset_type": ["Common Stock"], "sort": "pe", "limit": 15}}
+      ],
+      "result_summary": "Whole-market universe=24712; 60 matched low-PE + high-ROE + low-D/E. Quality gates present. (Extreme-tail sort surfaces micro-cap near-zero-PE distress names — screen logic sound, but a human would still eyeball those.)",
+      "verdict": "PASS",
+      "reason": "Combines cheap multiple (low PE) WITH quality gates (high ROE, low leverage) in one screen — directly the anti-value-trap ask; Thai request addressed.",
+      "defects": []
+    },
+    {
+      "id": "vv-05",
+      "question": "Screen banks for me — P/B not P/E. US and European banks below 1x book, flag which have decent ROE so I'm not buying a broken bank.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "price to book P/B"}},
+        {"tool": "find_gics", "args": {"q": "banks banking industry"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pb", "pattern": "below", "threshold": 1}, {"concept": "roe", "pattern": "is_positive"}], "gics": "4010", "country": ["US", "DE", "FR", "GB", "IT", "ES", "NL", "SE", "CH", "BE", "FI", "DK", "NO", "AT", "IE", "PT", "GR", "PL"], "asset_type": ["Common Stock"], "sort": "pb", "limit": 20}}
+      ],
+      "result_summary": "US+EU banks universe=369; 74 below 1x book, ROE surfaced: e.g. NLB 0.23x/12.3% ROE (sound) vs many Crédit-Agricole regionals ~0.25x/2-3% ROE (cheap-for-a-reason).",
+      "verdict": "PASS",
+      "reason": "P/B (not P/E) as primary bank multiple, sub-1x threshold, ROE paired for read-together sound-vs-impaired, US+Europe banks scope.",
+      "defects": []
+    },
+    {
+      "id": "vv-06",
+      "question": "Toyota vs the German automakers — is Toyota actually cheaper, or does it just look cheap because it reports in yen? Apples-to-apples multiple comparison.",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"q": "Toyota Motor"}},
+        {"tool": "find_stock", "args": {"q": "Volkswagen AG"}},
+        {"tool": "find_stock", "args": {"q": "Mercedes-Benz Group AG"}},
+        {"tool": "find_stock", "args": {"q": "Bayerische Motoren Werke BMW"}},
+        {"tool": "find_stock", "args": {"q": "Porsche AG"}},
+        {"tool": "financials", "args": {"tickers": "7203.JP,MBG.XETRA,BMW.XETRA,VOW3.XETRA,P911.XETRA", "fields": "pe,ev_ebitda,pb,roe", "currency": "USD"}}
+      ],
+      "result_summary": "USD-normalized multiples — Toyota pe 8.6 / EV/EBITDA 8.0 / pb 0.96 vs BMW 5.6/5.6/0.36, VW 7.0/3.7/0.19, Merc 8.5/8.3/0.47, Porsche 48/6.6/1.75. Toyota is NOT cheaper; the Germans are cheaper on every multiple. Tool's own guidance warns on same-basis/currency.",
+      "verdict": "PASS",
+      "reason": "Ratio multiples are currency-neutral (and financials converts absolutes to USD); compares Toyota vs a set of 4 German automakers, refutes the yen-face-value illusion.",
+      "defects": []
+    },
+    {
+      "id": "vv-07",
+      "question": "Is Nestlé cheap versus its own history? Current P/E vs where it's typically traded over the past several years.",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"q": "Nestle SA"}},
+        {"tool": "financials", "args": {"tickers": "NESN.SW", "fields": "pe,ev_ebitda,pb", "period": "8y", "currency": "USD"}},
+        {"tool": "asset_pulse", "args": {"ticker": "NESN.SW"}}
+      ],
+      "result_summary": "Current only: NESN pe≈27, ev_ebitda≈16, pb≈6.97. financials returns valuation multiples as latest-ONLY even with period=8y; asset_pulse's percentile_1y is a PRICE percentile, not a P/E-history percentile. No surface exposes the company's own multi-year P/E range/median.",
+      "verdict": "PARTIAL",
+      "reason": "Can state current P/E but the MCP exposes NO historical P/E series, so the own-history comparison the user asked for is not executable — correct behavior is to flag the limitation (not fabricate).",
+      "defects": [
+        {"desc": "Valuation multiples (pe/ev_ebitda/pb) return only 'latest' — financials period param does not produce a per-year valuation-multiple history, and no other tool exposes a company's own multi-year P/E range/median/percentile. Own-history cheapness is unanswerable.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "vv-08",
+      "question": "Consumer staples in Asia cheaper than sector peers on P/E but still growing earnings — not cheap because shrinking.",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "consumer staples sector"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below_average", "vs_cohort": {"gics": "30"}}, {"concept": "net_income", "pattern": "compound_growth"}], "gics": "30", "country": ["CN", "JP", "KR", "TW", "HK", "IN", "ID", "TH", "MY", "SG", "PH", "VN"], "asset_type": ["Common Stock"], "sort": "pe", "limit": 15}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below_average", "vs_cohort": {"gics": "30"}}, {"concept": "net_income", "pattern": "is_positive"}], "gics": "30", "country": ["CN", "JP", "KR", "TW", "HK", "IN", "ID", "TH", "MY", "SG", "PH", "VN"], "asset_type": ["Common Stock"], "sort": "pe", "limit": 12}}
+      ],
+      "result_summary": "Cheapness leg alone works (Asian staples universe=986, 40 below sector-avg PE). But adding the earnings-growth guard (net_income compound_growth) TIMES OUT twice (growth-series scan). Fallback net_income is_positive runs (48 matches) but only checks profitability, NOT growth — so the anti-shrinking condition (the point of the case) is unmet.",
+      "verdict": "PARTIAL",
+      "reason": "Sector-relative cheapness (vs gics:30 cohort, Asia) is correct, but the earnings-growth anti-value-trap leg times out; the only leg that completes doesn't distinguish growing from shrinking.",
+      "defects": [
+        {"desc": "screen_unified times out (client read timeout, retried once) when a growth-series fundamental leg (net_income compound_growth) is combined with a cohort below_average leg over a broad universe. The known-slow growth-series scan makes the growth-guard un-runnable interactively.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "vv-09",
+      "question": "ช่วยหาหุ้นที่ PEG ต่ำกว่า 1 ในตลาดหุ้นสหรัฐ — ถูกเมื่อเทียบกับการเติบโต ไม่ใช่แค่ P/E ต่ำเฉยๆ",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "PEG ratio P/E to growth"}},
+        {"tool": "find_fspattern", "args": {"q": "cheap relative to growth PEG ratio below 1"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "low"}, {"concept": "net_income", "pattern": "compound_growth"}], "country": ["US"], "asset_type": ["Common Stock"], "sort": "pe", "limit": 10}}
+      ],
+      "result_summary": "No 'peg' concept exists (find_fsconcept returns pe/normalized_pe/pb only) and no PEG pattern. A low-PE + earnings-CAGR surrogate is not a true PEG and cannot apply a PEG<1 threshold — and it also TIMES OUT (growth-series leg). PEG<1 is not expressible.",
+      "verdict": "FAIL",
+      "reason": "PEG is not a resolvable metric (no peg concept, no P/E-÷-growth relation), so PEG<1 cannot be applied; the growth-based surrogate also times out. US scope OK; core ask unmet.",
+      "defects": [
+        {"desc": "No PEG metric or PEG-shaped relation is exposed (no 'peg' concept; relation form can't divide pe by an earnings-growth RATE). A first-class value-investor ratio (PEG) is missing from the fundamentals vocabulary.", "side": "data-coverage"},
+        {"desc": "The only PEG surrogate (pe + net_income compound_growth) also times out — same growth-series performance issue as vv-08.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "vv-10",
+      "question": "Shortlist of five oil majors comparing P/E — is five names enough to trust a 'peer average', or benchmark against the whole energy sector?",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "energy oil gas sector"}},
+        {"tool": "financials", "args": {"tickers": "XOM.US,CVX.US,SHEL.US,BP.US,TTE.US", "fields": "pe,ev_ebitda", "currency": "USD"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below_average", "vs_cohort": {"gics": "10"}}], "gics": "10", "asset_type": ["Common Stock"], "sort": "pe", "limit": 10}}
+      ],
+      "result_summary": "5 majors ranked (USD): SHEL 10x (cheapest), TTE 11x, CVX 20x, XOM 21x, BP 21x. Robust benchmark available: whole energy-sector cohort=879 names, below-sector-avg PE screen returns 40 — so a 5-name avg is a thin/biased sample; the sector cohort is the proper reference.",
+      "verdict": "PASS",
+      "reason": "Supports ranking the five AND benchmarking each vs the broad 879-name energy cohort (below_average vs gics:10); currency-consistent, sector-appropriate P/E + EV/EBITDA — enables the small-sample red-flag answer.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 7,
+    "partial": 2,
+    "fail": 1,
+    "top_defects": [
+      "No PEG metric/pattern exists (vv-09 FAIL) — a core value ratio (P/E ÷ growth) is unresolvable in find_fsconcept/find_fspattern.",
+      "No historical valuation-multiple series exposed (vv-07 PARTIAL) — financials returns pe/ev_ebitda/pb latest-only; 'cheap vs own history' is unanswerable.",
+      "screen_unified times out when a growth-series fundamental leg (net_income compound_growth) meets a cohort below_average leg (vv-08 PARTIAL, vv-09 surrogate) — the anti-value-trap growth guard is un-runnable interactively.",
+      "P/FCF only served via its inverse fcf_yield (vv-03) — no direct P/FCF multiple; client must flip the tail."
+    ]
+  }
+}

@@ -1843,15 +1843,21 @@ class ScreenCondition(BaseModel):
     percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
     vs_cohort: Optional[dict] = Field(None, description="RARELY needed — usually OMIT. For a cohort pattern (below_average/above_average) the benchmark DEFAULTS to your screening scope (the `universe`): 'retail stocks with P/E below average' = scope `universe` to retail (find_gics) and OMIT this — 'below average' then means below the RETAIL average automatically. Set this ONLY to benchmark against a DIFFERENT group than you're screening (e.g. US retail vs the GLOBAL retail average). Shape: {gics?: a GICS code PREFIX string like '45' — NOT a boolean/flag; country?: ISO-2; size?: ['large'|'mid'|'small'|'micro']; stat?: 'pooled'(default)|'median'}. There is NO 'each stock vs its own sector' flag — to compare within a sector, scope the `universe` to that sector.")
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric.")
-    relation: Optional[str] = Field(None, description="RELATION form only: how metricA compares to metricB.")
+    relation: Optional[str] = Field(None, description="RELATION form only — how metricA relates to metricB. One of: 'higher_than' (metricA ≥ multiple×metricB), 'lower_than' (metricA ≤ multiple×metricB), 'growth_faster_than' / 'growth_slower_than' (metricA's multi-year CAGR vs metricB's). higher/lower_than use `multiple` to scale; the growth ones don't.")
     metricB: Optional[str] = Field(None, description="RELATION form only: the second metric.")
-    params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/N/percentile above. If you nest the value here ({threshold:…}) it's still read.")
+    multiple: Optional[float] = Field(None, description="RELATION scale factor k for higher_than/lower_than — compares metricA to k×metricB (default 1 = plain metricA vs metricB). 'R&D ≥ 15% of revenue' → metricA=rnd, higher_than, metricB=revenue, multiple=0.15; 'debt ≤ half of equity' → metricA=debt, lower_than, metricB=equity, multiple=0.5; 'cash ≥ 2× debt' → multiple=2. A percent-of is a FRACTION (30% → 0.30). Ignored by growth_faster/slower_than.")
+    params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/N/percentile/multiple above. If you nest the value here ({threshold:…}) it's still read.")
 
 
 def _cond_to_api(c: ScreenCondition) -> dict:
     """Typed condition → the news-api's shape (metric/pattern + nested params). Keeps the client's schema flat."""
     if c.metricA and c.metricB and c.relation:
-        return {"metricA": c.metricA, "relation": c.relation, "metricB": c.metricB}
+        out = {"metricA": c.metricA, "relation": c.relation, "metricB": c.metricB}
+        # forward `multiple` (top-level OR nested params) — without it the news-api defaults k=1 and the relation
+        # silently mis-screens ("R&D ≥ 15% of revenue" becomes "R&D ≥ revenue"). Server accepts flat, so pass it flat.
+        mult = c.multiple if c.multiple is not None else (c.params or {}).get("multiple")
+        if mult is not None: out["multiple"] = mult
+        return out
     # read each value from the top-level field OR a nested params{} — find_fspattern's output says "params: threshold",
     # so an LLM often nests the value there instead of at the condition top-level; accept either so it never needs a retry.
     np = c.params or {}

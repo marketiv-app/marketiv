@@ -37,7 +37,8 @@ async def _run(cmd, args):
             elif cmd == "call":
                 tool = args[0]
                 payload = json.loads(args[1]) if len(args) > 1 else {}
-                res = await s.call_tool(tool, payload)
+                import datetime
+                res = await s.call_tool(tool, payload, read_timeout_seconds=datetime.timedelta(seconds=115))
                 out = []
                 for c in res.content:
                     out.append(getattr(c, "text", str(c)))

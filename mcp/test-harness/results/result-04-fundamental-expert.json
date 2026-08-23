@@ -1,0 +1,168 @@
+{
+  "set": "fundamental-expert",
+  "cases": [
+    {
+      "id": "fe-01",
+      "question": "Find companies globally with revenue above $5B, gross margin over 60%, operating margin over 25%, and net debt/EBITDA under 1.0x.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "revenue"}},
+        {"tool": "find_fsconcept", "args": {"q": "gross margin"}},
+        {"tool": "find_fsconcept", "args": {"q": "operating margin"}},
+        {"tool": "find_fsconcept", "args": {"q": "net debt to EBITDA"}},
+        {"tool": "find_fspattern", "args": {"q": "above a threshold"}},
+        {"tool": "find_fspattern", "args": {"q": "below a threshold"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "above", "threshold": 5000000000}, {"concept": "gross_margin", "pattern": "above", "threshold": 0.60}, {"concept": "operating_margin", "pattern": "above", "threshold": 0.25}, {"concept": "net_debt_ebitda", "pattern": "below", "threshold": 1.0}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "count=40 global. Top: NVDA, GOOG, MSFT, 2330.TW, META, MU, 000660.KO, V. Per-metric evidence in matched.financial for all 4 (revenue unit=usd e.g. NVDA 253.5B; gross_margin 0.7415; operating_margin 0.6402; net_debt_ebitda -0.0046 w/ net_debt_usd=-889M confirming NET debt not gross).",
+      "verdict": "PASS",
+      "reason": "All four conditions intersected, revenue as absolute USD line item, net_debt_ebitda uses net debt, global scope, per-metric evidence returned.",
+      "defects": []
+    },
+    {
+      "id": "fe-02",
+      "question": "หาหุ้นที่มีรายได้เติบโต YoY ติดต่อกันอย่างน้อย 5 ปี และ EPS ก็โตทุกปี รายได้เกิน 1 พันล้านดอลลาร์ (consecutive 5yr revenue AND EPS growth, revenue>$1B).",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "consecutive years of growth"}},
+        {"tool": "find_fsconcept", "args": {"q": "earnings per share EPS"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "consecutive_growth", "N": 5}, {"concept": "eps_diluted", "pattern": "consecutive_growth", "N": 5}, {"concept": "revenue", "pattern": "above", "threshold": 1000000000}], "asset_type": ["Common Stock"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "above", "threshold": 1000000000}, {"concept": "eps_diluted", "pattern": "consecutive_growth", "N": 4}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "Correct query built: consecutive_growth (min_yoy = each year positive, NOT CAGR — verified via matched window 'min_yoy_4y') on BOTH revenue AND eps_diluted, N=5, revenue>$1B. Result count=0. Diagnosis: (a) revenue consecutive_growth N=5 alone = 0 while N=4=5 hits, N=3=12 — data history only supports ~4 consecutive YoY years; (b) ANY eps consecutive_growth leg TIMES OUT (read timeout, backend). Best achievable substitute (rev consec N=4 + rev>1B) = 5 hits.",
+      "verdict": "FAIL",
+      "reason": "Correct construction & pattern semantics, but unanswerable: 5-consecutive-years exceeds ~4yr data coverage AND the EPS-consecutive backend path times out — the joint screen returns 0.",
+      "defects": [
+        {"desc": "eps_diluted (and eps_basic) with pattern consecutive_growth times out (server read timeout) for any N; revenue consecutive_growth is fast — EPS consecutive-growth path is a perf defect", "side": "fund-backend"},
+        {"desc": "consecutive_growth N>=5 always returns 0 (fundamentals history ~4-5yr) — a 5-consecutive-YoY-growth screen is silently unsatisfiable; no message telling the caller the window exceeds coverage", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "fe-03",
+      "question": "Compare Toyota, Volkswagen, GM on revenue, net income, operating margin, ROE, net debt — all in USD. Strongest balance sheet?",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"q": "Toyota Motor"}},
+        {"tool": "find_stock", "args": {"q": "Volkswagen AG"}},
+        {"tool": "find_stock", "args": {"q": "General Motors"}},
+        {"tool": "financials", "args": {"tickers": "7203.JP,VOW.XETRA,GM.US", "period": "1"}}
+      ],
+      "result_summary": "financials returned all 3 with explicit [USD] normalization tag. Toyota(7203.JP) rev 336.9B USD, net_debt_ebitda 3.87, D/E 1.18, ROE 12%, op margin 7%; VW(VOW.XETRA) rev 364.1B USD, D/E 1.1, FCF -10.6B; GM(GM.US) USD. Ratios (op margin/ROE) currency-neutral. Enough to judge strongest balance sheet on net debt/leverage.",
+      "verdict": "PASS",
+      "reason": "Absolute figures converted to common USD basis (tagged [USD]) from JPY/EUR/USD reporting currencies; ratios comparable directly; leverage figures support a balance-sheet judgment.",
+      "defects": []
+    },
+    {
+      "id": "fe-04",
+      "question": "Below sector-average P/E but above sector-average ROE — US large caps.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "price to earnings PE ratio"}},
+        {"tool": "find_fspattern", "args": {"q": "below the sector average"}},
+        {"tool": "find_fspattern", "args": {"q": "above the sector average"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below_average"}, {"concept": "roe", "pattern": "above_average"}], "country": ["US"], "size": ["large"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "count=28, universe=130 (US large cap). Both legs matched with kind='cohort' (e.g. GOOG pe cohort 17.12, roe cohort 0.3813) — evaluated against a peer benchmark, not fixed thresholds. Results: GOOG, META, MU, ORCL, HD, PG, NFLX, SNDK.",
+      "verdict": "PASS",
+      "reason": "Cohort-relative (kind=cohort) below-avg P/E AND above-avg ROE intersected, scoped to US large-cap.",
+      "defects": []
+    },
+    {
+      "id": "fe-05",
+      "question": "Accelerating revenue growth — growth rate rising over three periods (g_t > g_{t-1} > g_{t-2}).",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "growth accelerating"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "accelerating"}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "count=40. Pattern 'accelerating' (resolver: 'min consecutive periods speeding up / accel_streak', default N=2) — distinct from consecutive_growth/high-growth. Top: AAPL, GOOG, META, LLY, AMD, ABBV, PLTR, ORCL.",
+      "verdict": "PASS",
+      "reason": "Dedicated 'accelerating' pattern captures rising YoY growth rate (2nd derivative), not merely positive/high growth; correctly resolved and applied.",
+      "defects": []
+    },
+    {
+      "id": "fe-06",
+      "question": "Profitable software companies: FCF > $500M, FCF yield > 4%, net cash (cash > total debt). Any market.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "free cash flow"}},
+        {"tool": "find_fsconcept", "args": {"q": "FCF yield"}},
+        {"tool": "find_gics", "args": {"q": "software"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "free_cash_flow", "pattern": "above", "threshold": 500000000}, {"concept": "fcf_yield", "pattern": "above", "threshold": 0.04}, {"concept": "net_income", "pattern": "is_positive"}, {"metricA": "cash", "relation": "higher_than", "metricB": "total_debt"}], "gics": "4510", "asset_type": ["Common Stock"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "free_cash_flow", "pattern": "above", "threshold": 500000000}, {"concept": "fcf_yield", "pattern": "above", "threshold": 0.04}, {"concept": "net_income", "pattern": "is_positive"}, {"concept": "net_debt", "pattern": "is_negative"}], "gics": "4510", "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "First attempt used cash higher_than total_debt (relation form) -> TIMED OUT. Retried with net_debt is_negative (== cash>total_debt, the standard net-cash def): count=17, universe=1563 (software gics 4510). FCF unit=usd (>500M), fcf_yield ratio distinct (e.g. ACN 12.1%), net_debt<0 confirms net cash, net_income is_positive = profitable. Results: SAP, ACN, 9999.HK NetEase, INFY, 6701.JP NEC, DSY.PA, ZM, DT.",
+      "verdict": "PASS",
+      "reason": "FCF absolute-$ and FCF-yield ratio treated as distinct conditions; 'net cash' = negative net debt (cash>debt) not merely positive cash; software + profitable, global. (Relation form timed out but net_debt is_negative is the correct equivalent.)",
+      "defects": [
+        {"desc": "RELATION form (metricA cash / higher_than / metricB total_debt) times out in screen_unified", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "fe-07",
+      "question": "Expanding margins: gross, operating AND net margin all higher today than 3 years ago (trend, not level).",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "higher now than three years ago (net increase over period)"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "gross_margin", "pattern": "compound_growth", "N": 3, "threshold": 0}, {"concept": "operating_margin", "pattern": "compound_growth", "N": 3, "threshold": 0}, {"concept": "net_margin", "pattern": "compound_growth", "N": 3, "threshold": 0}], "asset_type": ["Common Stock"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "gross_margin", "pattern": "compound_growth", "N": 3, "threshold": 0}, {"concept": "operating_margin", "pattern": "compound_growth", "N": 3, "threshold": 0}, {"concept": "net_margin", "pattern": "compound_growth", "N": 3, "threshold": 0}], "size": ["large", "mega"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "Correct construction: change over 3y (compound_growth N=3, threshold 0 = net higher than 3y ago, level-agnostic) on all 3 margins jointly. 3-leg intersection TIMES OUT (whole-market AND scoped to large/mega). Single-leg gross_margin compound_growth works (count=20: NVDA/AAPL/GOOG/AMZN/2330). improved_every_year also times out.",
+      "verdict": "PARTIAL",
+      "reason": "Query is correct (Δ over 3y, no absolute threshold, all 3 margins intersected) but the 3-way margin growth-series intersection times out in the backend even when scoped — cannot return the answer.",
+      "defects": [
+        {"desc": "Multi-leg growth-series intersection (compound_growth / improved_every_year on ratios) times out even scoped to large/mega caps; single-leg is fast — growth-series scan doesn't scale to intersections", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "fe-08",
+      "question": "ขอบริษัทในเอเชีย ROIC เกิน 15% ต่อเนื่อง, D/E ต่ำกว่า 0.5, current ratio มากกว่า 2 (Asia, quality + balance sheet).",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "ROIC return on invested capital"}},
+        {"tool": "find_fsconcept", "args": {"q": "debt to equity"}},
+        {"tool": "find_fsconcept", "args": {"q": "current ratio"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roic", "pattern": "above", "threshold": 0.15}, {"concept": "debt_to_equity", "pattern": "below", "threshold": 0.5}, {"concept": "current_ratio", "pattern": "above", "threshold": 2}], "country": ["CN", "JP", "KR", "TW", "HK", "IN", "SG", "TH", "MY", "ID", "PH", "VN"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "count=40, universe=16989 (Asia). All 3 intersected w/ per-metric evidence: 2330.TW roic 0.50/DE 0.15/CR 2.46; Samsung roic 0.20/DE 0.06/CR 2.54; Kweichow Moutai roic 0.42/DE 0.0009/CR 7.06; SK Hynix, Advantest, Fast Retailing. ROIC used (not ROE); D/E & current ratio currency-neutral.",
+      "verdict": "PASS",
+      "reason": "ROIC>15% AND D/E<0.5 AND current ratio>2 intersected, scoped to Asia; ROIC correctly used, balance-sheet condition kept.",
+      "defects": [
+        {"desc": "'ต่อเนื่อง/sustained' ROIC applied as latest-level above 0.15 rather than multi-year (a consecutive ROIC leg would hit the same growth-series timeout); acceptable interpretation but not literally multi-year", "side": "none"}
+      ]
+    },
+    {
+      "id": "fe-09",
+      "question": "Revenue > $10B, R&D > $2B/yr, and R&D as % of revenue > 15%.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "R&D as percent of revenue R&D intensity"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "above", "threshold": 10000000000}, {"concept": "rnd", "pattern": "above", "threshold": 2000000000}], "asset_type": ["Common Stock"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "above", "threshold": 10000000000}, {"concept": "rnd", "pattern": "above", "threshold": 2000000000}, {"metricA": "rnd", "relation": "higher_than", "metricB": "revenue", "params": {"multiple": 0.15}}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "Two absolute-$ legs work (revenue>$10B AND rnd>$2B, both unit=usd): count=40 (NVDA rnd 20.8B/rev 253B, META 71.6B/228B, TSLA 7.7B/103B, etc). The 15% INTENSITY gate cannot be applied: no rnd_to_revenue ratio concept exists, and the RELATION form (rnd higher_than revenue*0.15) returns count=0 — verified BROKEN (even gross_profit higher_than revenue*0.5 returns 0, which should match many). Without the gate, sub-15% names (NVDA 8.2%, TSLA 7.5%) wrongly pass.",
+      "verdict": "PARTIAL",
+      "reason": "Absolute-$ revenue and R&D floors correct & USD-normalized, but the essential R&D-intensity>15% condition is unenforceable — no ratio concept and the relation form silently returns 0.",
+      "defects": [
+        {"desc": "RELATION form 'metricA higher_than metricB' with a multiple silently returns count=0 for cases that clearly should match (rnd>=0.15*rev, even gross_profit>=0.5*rev) — the ratio-of-two-line-items comparison is broken in screen_unified", "side": "fund-backend"},
+        {"desc": "No R&D-intensity (rnd/revenue) ratio concept in find_fsconcept, so an R&D% gate has no direct metric path", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "fe-10",
+      "question": "Compounders: 3y revenue CAGR>20%, EPS CAGR>25%, ROE consistently >20%, net debt/EBITDA<2x. Global.",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "3 year CAGR"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "compound_growth", "N": 3, "threshold": 0.20}, {"concept": "eps_diluted", "pattern": "compound_growth", "N": 3, "threshold": 0.25}, {"concept": "roe", "pattern": "above", "threshold": 0.20}, {"concept": "net_debt_ebitda", "pattern": "below", "threshold": 2}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "count=40. All 4 intersected w/ per-metric evidence over SAME window: revenue 3y_cagr & eps_diluted 3y_cagr (NVDA rev 1.00/eps 2.04; SK Hynix rev 0.30/eps 1.65; ANET rev 0.27/eps 0.37), roe level>0.20, net_debt_ebitda level<2 using net debt (NVDA -0.005, ANET -0.49). EPS CAGR>rev CAGR holds (margin leverage). Global.",
+      "verdict": "PASS",
+      "reason": "Revenue & EPS CAGR over the same 3y window, ROE>20% level, net_debt_ebitda (net debt) <2x, all intersected globally with evidence; EPS-faster-than-revenue relation holds in results.",
+      "defects": [
+        {"desc": "EPS compound_growth (CAGR) is fast and works, in contrast to EPS consecutive_growth which times out (fe-02) — the timeout is specific to the consecutive/every-year path, not all EPS growth", "side": "none"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 7,
+    "partial": 2,
+    "fail": 1,
+    "top_defects": [
+      "screen_unified RELATION form (metricA higher_than metricB, incl. with a multiple) silently returns count=0 even for cases that clearly match — breaks 'net cash' (fe-06) and R&D-intensity/EPS>rev-growth style comparisons (fe-09)",
+      "Multi-leg growth-series intersections (compound_growth / consecutive_growth / improved_every_year across 2-3 fund legs, and any EPS consecutive_growth) time out even when scoped — fe-02, fe-07",
+      "consecutive_growth N>=5 silently returns 0 (fundamentals history ~4-5yr) with no message that the window exceeds data coverage — fe-02"
+    ],
+    "note": "PASS=fe-01,03,04,05,06,08,10 (7); PARTIAL=fe-07,09 (2); FAIL=fe-02 (1)."
+  }
+}

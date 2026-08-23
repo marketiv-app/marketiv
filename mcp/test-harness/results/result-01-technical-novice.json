@@ -1,0 +1,152 @@
+{
+  "set": "technical-novice",
+  "cases": [
+    {
+      "id": "tn-01",
+      "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["RSI above 70 overbought"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "overbought", "a": "rsi"}]}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "limit": 10}}
+      ],
+      "result_summary": "40 mega/large-caps currently RSI-overbought (signal 'rsi14 overbought' as of 2026-08-21): AEM, ABT, ABNB, KO, AMGN, MRK, PFE, SCHW, TMO, MPC, PSX, VLO, plus many HK/Gold names. Threshold is the standard RSI>70 overbought state.",
+      "verdict": "PASS",
+      "reason": "Returns a concrete list of stocks genuinely in the RSI-overbought state with a stated basis.",
+      "defects": []
+    },
+    {
+      "id": "tn-02",
+      "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["price at a new 52-week high"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_up", "a": "close", "b": "0.20", "window_bars": 252}]}], "country": ["TH"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "40 SET (Thai) stocks up >=20% over the trailing year used as a 52w-high proxy: ADB (+66% vs 200d, rsi74), AIE (+51%, rsi83), AJ, AGE, AF, AH, etc. Correct market, but no true 'at-the-high' primitive exists; a few (ADVANC rsi38) are up-on-the-year yet not near their high.",
+      "verdict": "PARTIAL",
+      "reason": "Right market (Thai/SET) and momentum-y names, but the tool has no genuine 52-week-high pattern so net_change_up is only an approximation — some names aren't actually at their high, and results are unranked/alphabetical.",
+      "defects": [
+        {"desc": "No dedicated '52-week high / new high' TA pattern; find_tasignal maps 'new 52-week high' to net_change_up (a net return, not proximity-to-high). Screens can't truly find stocks AT their 52w high.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "tn-03",
+      "question": "I keep hearing about the golden cross thing. Can you find me stocks where the 50 day moving average just crossed above the 200 day?",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "window_bars": 30, "limit": 10}}
+      ],
+      "result_summary": "36 stocks with a recent 50/200 golden cross (cross_ema50_ema200_up): MSFT (2026-08-14), PFE, Palantir, Mastercard, Booking, McKesson, Thermo Fisher, Celltrion, Tingyi, cross dates late-Jul to mid-Aug 2026.",
+      "verdict": "PASS",
+      "reason": "Correct bullish 50>200 crossover with recent cross dates — not a death cross, not generic uptrends.",
+      "defects": []
+    },
+    {
+      "id": "tn-04",
+      "question": "Is Tesla overbought or oversold right now? Just tell me if it's a good time to buy or if I should wait.",
+      "tool_calls": [
+        {"tool": "asset_pulse", "args": {"ticker": "TSLA", "window": "30d"}}
+      ],
+      "result_summary": "TSLA $362.86: trend_read='downtrend — below both the 50-day and 200-day average' (-0.8% vs 50d, -10.0% vs 200d), range_position 32.5% of 52w range (lower half), -27% from 52w high, but +15.9% over the last month bouncing off the 29-Jul low. realized-vol in 92nd pctile. Not overbought; technically weak but recovering — timing lean: wait to reclaim the 200-day / don't chase.",
+      "verdict": "PASS",
+      "reason": "Gives a concrete current technical condition (MA position, range, drawdown, 1mo move) and a directional timing sense.",
+      "defects": [
+        {"desc": "asset_pulse exposes MA/range reads but NO RSI value, so a literal 'overbought/oversold' single-ticker question can't be answered with an RSI number — had to substitute close-vs-MA / range-position reads.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "tn-05",
+      "question": "Show me stocks that dropped a lot lately but the company is actually fine — like still growing revenue and not overpriced. Kinda looking for a dip to buy.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "revenue"}},
+        {"tool": "find_fsconcept", "args": {"q": "price to earnings ratio valuation"}},
+        {"tool": "find_fspattern", "args": {"q": "revenue growing consecutively over the years"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.15", "window_bars": 60}]}], "fundamental": [{"concept": "revenue", "pattern": "consecutive_growth"}, {"concept": "pe", "pattern": "below_average"}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "country": ["US"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.15", "window_bars": 60}]}], "fundamental": [{"concept": "revenue", "pattern": "consecutive_growth"}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "country": ["US"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.15", "window_bars": 60}]}], "fundamental": [{"concept": "pe", "pattern": "below", "threshold": 30}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "country": ["US"], "limit": 10}}
+      ],
+      "result_summary": "The 3-condition combined screen (drop + revenue-growth + pe) TIMED OUT repeatedly. Split into two working legs: fell >=15%/60d AND 3yr revenue growth = {AMAT, CRWD, SNDK, VRT, WDC}; fell >=15%/60d AND pe<30 = {APP, QCOM, SNDK, WDC}. Intersection (drop + growth + not-expensive) = SNDK (Sandisk), WDC (Western Digital).",
+      "verdict": "PARTIAL",
+      "reason": "Both halves (price drop + fundamentals) are reflected and a valid answer (SNDK, WDC) is derivable, but the single combined query never returned — had to hand-intersect two calls.",
+      "defects": [
+        {"desc": "screen_unified TIMES OUT when the fundamental leg has TWO conditions (revenue consecutive_growth AND pe below/below_average) intersected with a net_change TA leg, even scoped to US mega+large (universe ~130). Each fund leg alone + the TA leg returns in ~6s; only the 2-fund-leg intersect hangs — likely driver-selection picking the wrong/loose driver.", "side": "fund-backend"},
+        {"desc": "pe pattern 'below_average' (cohort benchmark) is markedly slower than 'below <threshold>' and contributed to the timeouts.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "tn-06",
+      "question": "Which stocks are like coiling up / getting really quiet before a big move? I think it's called a squeeze?",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "squeeze"}]}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "ttm_squeeze"}]}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "limit": 10}}
+      ],
+      "result_summary": "Plain 'squeeze' returned 400 Bad Request; retried with 'ttm_squeeze' (Bollinger Bands inside Keltner = volatility squeeze) -> 40 low-vol consolidating names: PG (held 36 bars), PEP (14), AMD (14), ADI (24), AMAT (11), ADBE, AXP, BMY.",
+      "verdict": "PASS",
+      "reason": "Correctly interprets 'squeeze' as low-volatility coiling (not a short squeeze) and returns stocks currently in that state with duration.",
+      "defects": [
+        {"desc": "Pattern token 'squeeze' (returned by find_tasignal as a valid signal, sim 0.71) errors 400 in screen_unified with no operands; only 'ttm_squeeze' works. find_tasignal advertises a pattern the executor rejects — resolver/executor vocabulary mismatch.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "tn-07",
+      "question": "any crypto near its 52 week low right now?",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"q": "Bitcoin USD crypto price"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "oversold", "a": "rsi"}]}], "asset_type": ["Crypto"], "limit": 8}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.40", "window_bars": 252}], "quals": [{"any": [{"pattern": "oversold", "a": "rsi"}], "within": 0}]}], "asset_type": ["Currency"], "limit": 10}}
+      ],
+      "result_summary": "asset_type 'Crypto' returns 0 (crypto is filed under 'Currency'). With asset_type 'Currency' + down >=40%/year + oversold -> 40 crypto (-USD) assets near yearly lows: ACT (-84%), AVT (-78%), BLY (-97%), Bitcoin Diamond (-64%), BF, BIFI, BCD. All genuine cryptos, not stocks.",
+      "verdict": "PASS",
+      "reason": "Returns crypto specifically, genuinely near/at 52w lows (large negative annual returns + oversold).",
+      "defects": [
+        {"desc": "Crypto assets live under asset_type 'Currency' — the intuitive value 'Crypto' silently 0-matches. The asset_type enum lists 'Currency' but its description doesn't say it includes cryptocurrencies, forcing a guess.", "side": "mcp-guidance"},
+        {"desc": "find_stock 'bitcoin' resolves to private companies (Onramp Bitcoin, etc.) over the actual BTC-USD crypto asset; had to search 'Bitcoin USD crypto price' to surface crypto tickers.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "tn-08",
+      "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "technology"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_up", "a": "close", "b": "0.15", "window_bars": 21}], "quals": [{"any": [{"pattern": "volume_spike"}], "within": 21}]}], "gics": "45", "asset_type": ["Common Stock"], "size": ["mega", "large"], "limit": 10}}
+      ],
+      "result_summary": "GICS 45 (Information Technology) stocks up >=15% over the last ~month WITH a volume spike: MRVL (+26%), SHOP (+27%), NBIS (+15%), Lenovo (+25%), Kingboard (+27%), SICC (+29%), Legend Holdings (+35%), CIG Shanghai (+44%), Silan Micro (+27%). 35 matches.",
+      "verdict": "PASS",
+      "reason": "Tech-sector filtered, strong one-month gains, and the rising-volume condition is addressed (volume_spike qualifier).",
+      "defects": []
+    },
+    {
+      "id": "tn-09",
+      "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "window_bars": 15, "limit": 8}}
+      ],
+      "result_summary": "Bullish MACD crosses (macd_x_signal_up, MACD line above signal line) dated Aug 18-19 2026: AMAT, Fanuc, Toyota, Takeda, AEON, Kirin, Osaka Gas, Tokyo Gas, SMTG. 32 matches. Pairs with the correct plain-English explanation (MACD line crossing above signal line = bullish momentum shift).",
+      "verdict": "PASS",
+      "reason": "Correct bullish-cross definition supportable plus concrete recent-cross stocks.",
+      "defects": []
+    },
+    {
+      "id": "tn-10",
+      "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+      "tool_calls": [
+        {"tool": "macro_pulse", "args": {"scope": "economy"}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_down", "a": "close", "b": "ema200"}]}], "asset_type": ["Common Stock"], "size": ["mega"], "window_bars": 30, "limit": 10}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_down", "a": "close", "b": "ema200"}]}], "asset_type": ["Common Stock"], "size": ["mega", "large"], "window_bars": 40, "sort": "mcap", "limit": 12}}
+      ],
+      "result_summary": "Macro read (US economy): GDP +1.5% & slowing (23rd pctile), payrolls -23k contracting, unemployment 4.1% ticking up, CPI/core-PCE ~3.3% sticky, Fed funds 3.63% cutting = late-cycle/softening, cautious. Big names that just broke below their 200-day MA (avoid): IBM (Jul 14), American Express (Aug 20), Altria, NetEase, Broadcom, Enbridge, E.ON, ZTO. (size 'mega' alone returned universe 0; broadened to mega+large.)",
+      "verdict": "PASS",
+      "reason": "Delivers both a real market-condition read and specific large-caps with a broke-below-200-day basis.",
+      "defects": [
+        {"desc": "size:['mega'] alone with crossover_down close/ema200 returned universe 0 / count 0 (mega tier too sparse for this signal); had to broaden to mega+large to get large-cap names.", "side": "ta-backend"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 8,
+    "partial": 2,
+    "fail": 0,
+    "top_defects": [
+      "screen_unified TIMES OUT on a 2-condition fundamental leg (revenue consecutive_growth AND pe) intersected with a TA net_change leg, even scoped to ~130 stocks; each leg alone is ~6s (fund-backend, tn-05).",
+      "No true '52-week high/low' TA pattern — find_tasignal maps it to net_change_up/down (a net return, not proximity to the actual high/low), so 'at a new 52w high' screens are only approximate (ta-backend, tn-02).",
+      "Resolver/executor vocabulary mismatches: pattern 'squeeze' from find_tasignal 400s in screen_unified (use 'ttm_squeeze'); crypto lives under asset_type 'Currency' not 'Crypto' (ta-backend / mcp-guidance, tn-06/tn-07)."
+    ]
+  }
+}

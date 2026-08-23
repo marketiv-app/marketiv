@@ -1,0 +1,146 @@
+{
+  "set": "fundamental-novice",
+  "cases": [
+    {
+      "id": "fn-01",
+      "question": "I'm just starting out. Can you find me some big, well-known companies that aren't too expensive right now?",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "price to earnings ratio"}},
+        {"tool": "find_fspattern", "args": {"q": "cheaper than average valuation, low price relative to earnings"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below_average"}], "size": ["mega", "large"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 12}}
+      ],
+      "result_summary": "48 matches; top by mcap: GOOG (pe 17.1), AMZN (21.0), META (20.5), Samsung, BRK-B (12.5), MU, JPM (15.6), SK Hynix, XOM, Tencent, BAC. All below-cohort-average PE with real figures.",
+      "verdict": "PASS",
+      "reason": "Recognizable mega/large-caps with below-average P/E; 'not too expensive' explainable as lower price-vs-earnings; informational, real numbers.",
+      "defects": []
+    },
+    {
+      "id": "fn-02",
+      "question": "Which companies pay a good dividend but are also safe and stable? I don't want anything risky.",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"min_yield": 3, "max_yield": 8, "min_streak_years": 5, "min_market_cap_usd": 20000000000, "order_by": "streak", "limit": 15}},
+        {"tool": "screen_dividends", "args": {"country": "US", "min_yield": 3, "max_yield": 8, "min_streak_years": 5, "min_market_cap_usd": 20000000000, "order_by": "streak", "limit": 15}}
+      ],
+      "result_summary": "First call errored (needs country/gics scope); retried with country=US. 15 of 49: PFE 6.2%, VZ 5.75%, PEP 4.2%, NKE 4.1%, MO 6.3%, GIS, KMB, UPS 6.4% — all 10y no-cut streak, payout_ratio shown to flag sustainability.",
+      "verdict": "PASS",
+      "reason": "Established names, meaningful non-absurd yields with max_yield trap guard + streak + payout data; not just top-yield dump.",
+      "defects": [
+        {"desc": "screen_dividends HARD-requires country or gics scope but the tool description/schema does not state this is mandatory; a scopeless call errors instead of defaulting or documenting the requirement.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "fn-03",
+      "question": "Is Apple expensive right now?",
+      "tool_calls": [
+        {"tool": "financials", "args": {"tickers": "AAPL.US"}}
+      ],
+      "result_summary": "AAPL digest: pe 35.08, pb 41.79, ev_ebitda 27.02, net margin 28%, ROE 120%. vs its mega-cap peers (from fn-01: GOOG 17, META 20) Apple's ~35x is on the high/expensive side though justified by quality. Real figures.",
+      "verdict": "PASS",
+      "reason": "Clear valuation read (P/E ~35 = relatively expensive vs peers) with a simple reference; no buy/sell call; real data.",
+      "defects": []
+    },
+    {
+      "id": "fn-04",
+      "question": "Show me companies that make more money every year — like their profits keep going up.",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "profits rising every year, grew consistently for multiple years"}},
+        {"tool": "find_fsconcept", "args": {"q": "net income profit"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "consecutive_growth", "N": 3}, {"concept": "revenue", "pattern": "consecutive_growth", "N": 3}], "size": ["mega", "large"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 12}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "consecutive_growth", "N": 3}], "size": ["mega", "large"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 12}}
+      ],
+      "result_summary": "2-condition (net_income + revenue consecutive growth) TIMED OUT; retried with net_income only -> 48 matches: NVDA, GOOG, MSFT, WMT, V, MA, COST, ORCL, ICBC/CCB, PG. consecutive_growth (vs a spike pattern) gives steady multi-year risers.",
+      "verdict": "PASS",
+      "reason": "Recognizable names with genuine 3-yr consecutive profit growth; pattern distinguishes steady from one-off; real, no advice.",
+      "defects": [
+        {"desc": "screen_unified TIMES OUT when two consecutive_growth (series-scan) conditions are AND-ed even on a mega/large-only universe; had to drop to one growth leg. Growth-series legs are the slow path.", "side": "fund-backend"},
+        {"desc": "In screen_unified results the matched growth condition returns net_income_usd=0 in context.financial even though the growth pattern matched — the level value is not surfaced alongside the growth match.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "fn-05",
+      "question": "หุ้นไทยตัวไหนที่มั่นคง ปันผลดี น่าถือยาว บ้าง",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"country": "TH", "min_yield": 3, "max_yield": 10, "min_streak_years": 5, "order_by": "streak", "limit": 15}},
+        {"tool": "screen_dividends", "args": {"country": "TH", "min_yield": 3, "max_yield": 10, "min_streak_years": 5, "min_market_cap_usd": 2000000000, "order_by": "streak", "limit": 15}}
+      ],
+      "result_summary": "First call returned mid/small names; added mcap floor -> 6 blue-chips: ADVANC (AIS) 4.45%, HMPRO (HomePro) 5.8%, BAY (Krungsri) 3.35%, TCAP (Thanachart), WHA, KTC 5.45% — all 5-10y no-cut streak.",
+      "verdict": "PASS",
+      "reason": "Established recognizable Thai names, both stability (streak) and reasonable yield; answerable in Thai; real figures, no advice.",
+      "defects": []
+    },
+    {
+      "id": "fn-06",
+      "question": "I keep hearing 'don't buy companies with too much debt.' Can you find me some solid companies that don't have much debt?",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "debt to equity ratio, low leverage"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "debt_to_equity", "pattern": "low"}], "size": ["mega", "large"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 12}}
+      ],
+      "result_summary": "48 matches; top by mcap: NVDA (d/e 0.06), Samsung (0.06), MU, AMD, ASML (0.09), PLTR (0.02), China Mobile (0.07), PANW, ARM, Kweichow Moutai (0.001), ANET. All very low leverage.",
+      "verdict": "PASS",
+      "reason": "Large recognizable companies with genuinely low debt/equity; low-debt-matters explanation is straightforward; real figures, no advice.",
+      "defects": []
+    },
+    {
+      "id": "fn-07",
+      "question": "Is Tesla a good company to invest in?",
+      "tool_calls": [
+        {"tool": "financials", "args": {"tickers": "TSLA.US"}}
+      ],
+      "result_summary": "TSLA: revenue 94.8B, net margin 3.7%, ROE 4.4%, debt/equity 0.19 (low), FCF +74% (accelerating); BUT pe ~312 (very expensive), EPS/net income -47% (declining), revenue flat. Balanced strengths + risks, real data.",
+      "verdict": "PASS",
+      "reason": "Both strengths (low debt, strong FCF) and risks (very high valuation, thin margin, falling profit) in plain-readable form; no buy/sell call; real fundamentals.",
+      "defects": []
+    },
+    {
+      "id": "fn-08",
+      "question": "I want quality — companies that are really good at making profit from what they own, cheap-ish, growing, and not drowning in debt. Give me a few.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "return on equity, good at making profit from what they own"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roe", "pattern": "high"}, {"concept": "pe", "pattern": "below_average"}, {"concept": "debt_to_equity", "pattern": "low"}, {"concept": "net_income", "pattern": "consecutive_growth", "N": 3}], "size": ["mega", "large"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 10}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roe", "pattern": "high"}, {"concept": "pe", "pattern": "below_average"}, {"concept": "debt_to_equity", "pattern": "low"}], "size": ["mega", "large"], "country": ["US"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 10}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roe", "pattern": "high"}, {"concept": "pe", "pattern": "below_average"}, {"concept": "debt_to_equity", "pattern": "low"}], "size": ["mega", "large"], "asset_type": ["Common Stock"], "sort": "mcap", "limit": 10}}
+      ],
+      "result_summary": "4-condition screen (incl. consecutive_growth) TIMED OUT; dropped growth leg. US-only=2 names (MU, WDC). Global 3-condition (high ROE + below-avg PE + low debt) -> 23 names: MU (ROE 50%,pe 21), Kweichow Moutai (33%,20), Sandisk, PDD (23%,9), Fujitsu, Pop Mart. Real figures.",
+      "verdict": "PASS",
+      "reason": "Multiple quality/value/safety criteria intersected (growth leg had to be dropped for perf); sensible shortlist with real ROE/PE/debt; no advice.",
+      "defects": [
+        {"desc": "screen_unified TIMES OUT once the growth (consecutive_growth series) leg is combined with 3 other conditions, so the full quality+value+growth+low-debt intent cannot be run in one call; the growth criterion had to be omitted.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "fn-09",
+      "question": "ถ้าอยากลงทุนแบบปลอดภัยไม่อยากขาดทุน มีทางเลือกอะไรบ้างนอกจากหุ้น เช่นพวกที่เสี่ยงน้อยๆ",
+      "tool_calls": [
+        {"tool": "bond_pulse", "args": {"q": "Thailand government bond yields"}}
+      ],
+      "result_summary": "Thai govt-bond curve grounded: yields ~1.56% (short) to ~2.1%, rising YTD. Supports explaining bonds as a lower-risk-than-stocks option; combined with fn-05 dividend blue-chips + diversified/index funds for a Thai risk-averse trade-off answer.",
+      "verdict": "PASS",
+      "reason": "Real lower-risk alternative (govt bonds) grounded with data; can explain safety-vs-return trade-off and 'no loss not guaranteed' in Thai; no product fabrication or buy call.",
+      "defects": [
+        {"desc": "bond_pulse TH curve labels look mismatched — tenor '3M' maps to ticker TH-5Y.GB and tenor '2Y' maps to TH-10Y.GB; the tenor label vs ticker tenor disagree.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "fn-10",
+      "question": "My friend said gold is a safe place to put money when things get scary. Is that true, and how would I even invest in it?",
+      "tool_calls": [
+        {"tool": "commodity_pulse", "args": {"q": "gold"}},
+        {"tool": "find_stock", "args": {"q": "gold ETF"}}
+      ],
+      "result_summary": "Gold (GOLD.COMM): self-described core safe-haven/monetary-hedge, last 4661.6, +38% 1y BUT -16.5% off its 52w high (can still drop, pays no income). find_stock 'gold ETF' -> real ETFs: GLD.BK (KTAM Gold), iShares Gold (CH), Franklin Gold ETF, physical-gold ETFs.",
+      "verdict": "PASS",
+      "reason": "Explains gold safe-haven status AND downside (no income, still falls) with data; real ETF routes for 'how to invest'; corrects 'always safe'; no allocation/buy call.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 10,
+    "partial": 0,
+    "fail": 0,
+    "top_defects": [
+      "screen_unified TIMES OUT when a growth (consecutive_growth) series-scan leg is AND-ed with other conditions (hit on fn-04 and fn-08) — the multi-year-growth intent often can't be combined in one screen.",
+      "screen_dividends silently HARD-requires a country/gics scope not documented as mandatory in its schema (errors on fn-02 first call).",
+      "bond_pulse TH curve mislabels tenors (tenor '3M'/'2Y' point to TH-5Y.GB / TH-10Y.GB tickers)."
+    ]
+  }
+}

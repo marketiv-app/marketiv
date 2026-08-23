@@ -1,0 +1,162 @@
+{
+  "set": "thematic-macro",
+  "cases": [
+    {
+      "id": "tm-01",
+      "question": "Who are the main players in the HBM memory boom right now? I want the actual companies riding the AI-memory wave, not the whole semi index.",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["HBM", "high-bandwidth memory", "AI memory"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "10010400", "order_by": "market_cap", "limit": 25}}
+      ],
+      "result_summary": "Resolved 'HBM & AI Memory' (id 10010400). 6 members: Samsung (005930.KO), Micron (MU), SK Hynix (000660.KO) + supply-chain Montage Technology (688008.CG), SK Holdings, Penguin Solutions. Real HBM leaders, not generic semis.",
+      "verdict": "PASS",
+      "reason": "Resolved the specific HBM theme and returned the three HBM leaders plus supply-chain names.",
+      "defects": []
+    },
+    {
+      "id": "tm-02",
+      "question": "Show me cheap semiconductor names in Asia — low P/E chip makers in places like Taiwan, Korea and Japan.",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "semiconductors"}},
+        {"tool": "find_fsconcept", "args": {"q": "price to earnings ratio"}},
+        {"tool": "find_fspattern", "args": {"q": "low valuation, cheapest"}},
+        {"tool": "screen_unified", "args": {"gics": "4530", "country": ["TW", "KR", "JP"], "asset_type": ["Common Stock"], "fundamental": [{"concept": "pe", "pattern": "low"}], "sort": "pe", "limit": 15}}
+      ],
+      "result_summary": "60 hits, GICS 4530 (Semis & Equipment) scoped to TW/KR/JP, sorted by P/E asc. Real Asian names: NEXTCHIP, Apacer, Taiwan Oasis, DMS, Innox, Kodi-M, HB Technology, etc. No US/EU names. Top few sub-1 P/E are micro-cap data artifacts.",
+      "verdict": "PASS",
+      "reason": "Correctly scoped semiconductor sector + Asia region + low-P/E valuation; returned real Asian chip/equipment names.",
+      "defects": [
+        {"desc": "Cheapest rows have sub-1.0 P/E on tiny Korean KOSDAQ micro-caps (likely stale/bad fundamentals) — low-P/E screens on the long tail surface data-quality noise at the top.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "tm-03",
+      "question": "How's the US yield curve looking — is the 2s10s still inverted, and where are short-term money-market rates sitting?",
+      "tool_calls": [
+        {"tool": "bond_pulse", "args": {"q": "US yield curve"}}
+      ],
+      "result_summary": "Full US Treasury curve: 3M 3.796%, 2Y 4.196%, 5Y 4.389%, 10Y 4.702%, 30Y 5.258%. 2s10s = +50.6bps, inverted:false ('mid-range'); 10Y3M +90.6bps near 52w highs. Curve has dis-inverted / re-steepened. Stays in rates domain.",
+      "verdict": "PASS",
+      "reason": "Returned the whole curve, the 2s10s spread with correct inversion state (positive/not inverted), and the 3M short rate.",
+      "defects": [
+        {"desc": "Top news item attached to the rates pulse is an XRP/crypto headline (macro-linked via yields but off-topic for a curve question).", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "tm-04",
+      "question": "หุ้นกลุ่ม defense ในยุโรปมีตัวไหนน่าสนใจบ้าง อยากได้ชื่อบริษัทอาวุธ/กาโลโหงยุโรป ไม่เอาของอเมริกา",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["defense", "aerospace and defense", "weapons"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "22000000", "country": "GB,DE,FR,IT,ES,NL,CH,SE", "order_by": "market_cap", "limit": 20}}
+      ],
+      "result_summary": "20 European defense names: Rheinmetall, BAE, Thales, Leonardo, Dassault, Rolls-Royce, Airbus, Safran, Hensoldt, Renk, Babcock, QinetiQ, Indra, Chemring, etc. Zero US primes.",
+      "verdict": "PASS",
+      "reason": "Understood the Thai request, returned real European defense names, excluded US primes per the constraint.",
+      "defects": []
+    },
+    {
+      "id": "tm-05",
+      "question": "Gold has been ripping — how are the gold miners doing versus the metal itself? Give me a read on gold and the main mining names.",
+      "tool_calls": [
+        {"tool": "commodity_pulse", "args": {"q": "gold"}},
+        {"tool": "find_megatrend", "args": {"terms": ["gold mining", "gold miners", "precious metals mining"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "30060200", "order_by": "market_cap", "limit": 15}},
+        {"tool": "theme_players", "args": {"theme": "30060200", "country": "US", "limit": 15}}
+      ],
+      "result_summary": "Gold GOLD.COMM $4661.6, +38% 1y, uptrend, accumulation. Gold miners (via theme_players): Newmont, Agnico Eagle, Barrick, Wheaton, Franco-Nevada, Kinross, Royal Gold, Alamos. Metal vs miners distinguished.",
+      "verdict": "PASS",
+      "reason": "Delivered gold commodity data plus real gold-miner equities, clearly separating the metal from the stocks.",
+      "defects": [
+        {"desc": "screen_stocks on the resolved 'Gold' node (30060200, a 300xxxxx commodity-family node) returned 0 members, while theme_players on the SAME node returned the real miners. find_megatrend hands screen_stocks a node it cannot populate — resolver/executor membership mismatch.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "tm-06",
+      "question": "I'm hunting small-cap biotech in China — early-stage names, not the big pharma. What's out there?",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "biotechnology"}},
+        {"tool": "screen_unified", "args": {"gics": "352010", "country": ["CN"], "size": ["small"], "asset_type": ["Common Stock"], "fundamental": [{"concept": "revenue", "pattern": "low"}], "sort": "mcap", "limit": 15}}
+      ],
+      "result_summary": "19 China small-cap biotech: InventisBio, Genrix, Ascletis, CARsgen, Shouyao, Xuanzhu, Novoprotein, Hinova, TransThera, Jacobio, Recbio, Laekna, etc. (A-shares + HK). Biotech + China + small tier all applied.",
+      "verdict": "PASS",
+      "reason": "Scoped biotech + China + small-cap simultaneously and returned real early-stage Chinese biotech names.",
+      "defects": [
+        {"desc": "screen_unified rejects a PURE universe-scope screen (gics+country+size, no fundamental/TA leg) with an opaque HTTP 400 whose body is not surfaced. Had to bolt on a dummy fundamental leg (revenue/low) to enumerate the size-tier universe. Schema does not state that ≥1 leg is required.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "tm-07",
+      "question": "Who are the uranium and nuclear-fuel players? I'm betting on the nuclear revival — miners and enrichment, wherever they trade.",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["uranium", "nuclear fuel", "nuclear power"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "14030000", "order_by": "market_cap", "limit": 15}}
+      ],
+      "result_summary": "Resolved 'Nuclear Fuel Cycle (Uranium & Enrichment)' (14030000). Members: Cameco, NexGen, Energy Fuels, Centrus (enrichment), BWXT, Oklo, X-Energy, Nano Nuclear — cross-market (CA + US).",
+      "verdict": "PASS",
+      "reason": "Resolved a real uranium/nuclear-fuel theme and returned real miners + enrichment names across markets.",
+      "defects": [
+        {"desc": "find_megatrend returns FOUR near-duplicate uranium nodes across two families (14030000/14030100 energy-transition vs 30050000/30050100 commodity) — the 300xxxxx variants are not screen_stocks-populatable, so picking the wrong one silently yields 0. Ambiguity the client must resolve by trial.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "tm-08",
+      "question": "What's driving the dollar lately — how's USD doing against the euro, yen and yuan? And what does that mean for oil?",
+      "tool_calls": [
+        {"tool": "find_stock", "args": {"queries": ["EUR/USD", "USD/JPY", "USD/CNY"]}},
+        {"tool": "find_stock", "args": {"q": "USDCNY"}},
+        {"tool": "stock_prices_batch", "args": {"tickers": ["EURUSD.FOREX", "USDJPY.FOREX", "USDCNY.FOREX"]}},
+        {"tool": "commodity_pulse", "args": {"q": "crude oil"}}
+      ],
+      "result_summary": "EURUSD 1.1679 (EUR uptrend = USD soft), USDJPY 158.91 (mixed), USDCNY 6.721 (downtrend = USD weaker vs yuan). Oil WTI.COMM $86.64, uptrend +36% 3mo. FX + commodity only, no equities.",
+      "verdict": "PASS",
+      "reason": "Returned USD vs EUR/JPY/CNY FX trend plus an oil pulse, staying in FX + commodities domains.",
+      "defects": [
+        {"desc": "Batch find_stock rated USD/JPY and USD/CNY as 'weak' match_quality even though the exact FOREX tickers exist (USDCNY resolved cleanly on the single-q call). FX-pair phrasing ('USD/CNY') resolves worse in batch than singly.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "tm-09",
+      "question": "อยากเล่นธีม GLP-1 (ยาลดความอ้วน/เบาหวาน) ใครคือตัวจริงบ้าง ทั้งคนทำยาและซัพพลายเชน",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["GLP-1", "obesity drugs", "weight loss drugs"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "18010000", "order_by": "market_cap", "limit": 18}}
+      ],
+      "result_summary": "Resolved 'Metabolic, Diabetes & Obesity' (18010000). Eli Lilly + Novo Nordisk both present, plus Amgen, Pfizer, Regeneron, Innovent, Hengrui, Hansoh, CSPC, Corcept, Structure/Protagonist, Neurocrine, Abbott (devices).",
+      "verdict": "PASS",
+      "reason": "Understood the Thai GLP-1 request and returned the two makers plus a broad real player set in the right theme.",
+      "defects": [
+        {"desc": "List skews to drug-makers; dedicated CDMO / pen-injector-device supply-chain names are thin (Abbott is the closest device proxy). Supply-chain half of the ask is only partially met.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "tm-10",
+      "question": "Compare copper as a play on electrification: give me the commodity backdrop and the biggest copper miners, then tell me which of those miners look cheapest on fundamentals.",
+      "tool_calls": [
+        {"tool": "commodity_pulse", "args": {"q": "copper"}},
+        {"tool": "find_megatrend", "args": {"terms": ["copper", "copper mining"]}},
+        {"tool": "screen_unified", "args": {"theme": [30020100], "asset_type": ["Common Stock"], "fundamental": [{"concept": "pe", "pattern": "low"}], "sort": "pe", "limit": 15}},
+        {"tool": "theme_players", "args": {"theme": "30020100", "country": "US", "limit": 15}},
+        {"tool": "theme_players", "args": {"theme": "30020100", "country": "GB", "limit": 10}},
+        {"tool": "find_gics", "args": {"q": "copper"}},
+        {"tool": "screen_unified", "args": {"gics": "15104025", "asset_type": ["Common Stock"], "fundamental": [{"concept": "pe", "pattern": "low"}], "sort": "pe", "limit": 15}}
+      ],
+      "result_summary": "Copper COPPER.COMM $6.58, +48% 1y, uptrend. Miners (theme_players): Freeport, Southern Copper, Hudbay, Ero, Taseko, Anglo American, Antofagasta. Valuation rank via GICS 15104025: Ero 11.8x < Atalaya 15.4x < Jiangxi Copper 20.1x < Ningbo Jintian 24.9x < Southern Copper 27.8x P/E.",
+      "verdict": "PASS",
+      "reason": "Delivered copper commodity backdrop + real copper miners + a P/E valuation ranking, spanning commodity/equity/fundamentals.",
+      "defects": [
+        {"desc": "screen_unified with theme:[30020100] (Copper Mining, a 300xxxxx commodity node) SILENTLY IGNORED the theme filter and returned whole-market low-P/E junk (TCTM Kids, La Rosa, Micromobility). No error, no 0-count — a false-positive scope. Had to route the valuation rank through GICS instead.", "side": "fund-backend"},
+        {"desc": "GICS copper sub-industry 15104025 is very narrow (5 pure-plays) — Freeport/BHP/Antofagasta live under Diversified Metals & Mining, so the cleanest single-scope for 'copper miners ranked by value' undercounts the majors the user named.", "side": "data-coverage"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 10,
+    "partial": 0,
+    "fail": 0,
+    "top_defects": [
+      "300xxxxx commodity-family megatrend nodes (Gold 30060200, Uranium 30050x, Copper 30020100) are NOT populatable by screen_stocks/screen_unified: screen_stocks returns 0 and screen_unified's theme filter SILENTLY falls back to whole-market (false positives). Only theme_players resolves them. find_megatrend hands executors nodes they can't screen.",
+      "screen_unified rejects a pure universe-scope screen (gics+country+size, no fundamental/TA leg) with an opaque HTTP 400 whose body isn't surfaced by the MCP wrapper; the schema never states ≥1 leg is required. Forces a dummy fundamental leg to enumerate a universe.",
+      "Low-P/E valuation screens surface micro-cap data-quality noise at the very top (sub-1.0 P/E KOSDAQ names in tm-02); no apparent sanity floor on fundamentals."
+    ]
+  }
+}

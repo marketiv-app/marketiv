@@ -1,0 +1,163 @@
+{
+  "set": "combined-ta-fundamental",
+  "cases": [
+    {
+      "id": "cf-01",
+      "question": "Find me profitable companies with revenue growing over 20% a year that just broke out above their 50-day moving average.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "net income profitability"}},
+        {"tool": "find_fsconcept", "args": {"q": "revenue"}},
+        {"tool": "find_fspattern", "args": {"q": "currently profitable positive"}},
+        {"tool": "find_fspattern", "args": {"q": "growing more than 20 percent year over year"}},
+        {"tool": "find_tasignal", "args": {"q": ["price broke out above the 50-day moving average"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "is_positive"}, {"concept": "revenue", "pattern": "compound_growth", "threshold": 0.20}], "ta": [{"anchor": [{"pattern": "crossover_up", "a": "close", "b": "ema50"}]}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=40. Intersect of profitable (net_income>0) AND revenue CAGR>20% AND recent close×ema50 bullish cross. Top: 2152.HK, RCL.US, 1788.HK, BWMN.US, 3822.HK.",
+      "verdict": "PASS",
+      "reason": "Both fundamental legs (profitable + growth>20%) and a fresh 50-day breakout event all applied and intersected.",
+      "defects": []
+    },
+    {
+      "id": "cf-02",
+      "question": "I want cheap stocks — low P/E, under 15 — that are still trading above their 200-day moving average. US large caps only.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "price to earnings ratio"}},
+        {"tool": "find_fspattern", "args": {"q": "below a threshold value"}},
+        {"tool": "find_tasignal", "args": {"q": ["price above the 200-day moving average"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "pe", "pattern": "below", "threshold": 15}], "ta": [{"anchor": [{"pattern": "above", "a": "close", "b": "ema200"}]}], "country": ["US"], "size": ["large"], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=16 (universe 130). US large caps with P/E<15 currently above 200-day. Top: MPC, ADBE, BAC, BMY, BRK-B, C, COF, NEM.",
+      "verdict": "PASS",
+      "reason": "P/E<15 value leg intersected with above-200-day trend leg, scoped to US large cap. Retried once after removing an invalid 'within' key on the anchor signal.",
+      "defects": [
+        {"desc": "Per-row fundamental values (pe) are not echoed in screen_unified results (shown as null), so a caller cannot display/verify the P/E it screened on without a second financials call.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "cf-03",
+      "question": "Show me high-margin, low-debt companies that have sold off hard recently and are now oversold — RSI below 30.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "gross margin high margin"}},
+        {"tool": "find_fsconcept", "args": {"q": "return on equity (debt_to_equity)"}},
+        {"tool": "find_fspattern", "args": {"q": "above a threshold value"}},
+        {"tool": "find_tasignal", "args": {"q": ["RSI below 30 oversold"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_margin", "pattern": "above", "threshold": 0.20}, {"concept": "debt_to_equity", "pattern": "below", "threshold": 0.5}], "ta": [{"anchor": [{"pattern": "below", "a": "rsi", "b": "30"}]}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=34 (universe 24712). High net_margin (>20%) + low D/E (<0.5) + RSI<30. Top: MVI.LSE, SURE.LSE, TRT.LSE, 067160.KQ, 214150.KQ.",
+      "verdict": "PASS",
+      "reason": "Both quality legs (margin AND debt) plus the oversold RSI<30 leg intersected; RSI level 30 is a supported canonical oversold level.",
+      "defects": []
+    },
+    {
+      "id": "cf-04",
+      "question": "หาหุ้นปันผลดี ยิลด์เกิน 4% ที่ราคายังอยู่ในเทรนด์ขาขึ้น อยู่เหนือเส้นค่าเฉลี่ย 200 วัน",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "dividend yield"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "dividend_yield", "pattern": "above", "threshold": 0.04}], "ta": [{"anchor": [{"pattern": "above", "a": "close", "b": "ema200"}]}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=40. Dividend yield>4% AND above 200-day MA. Top: OKE, WASH, LPG, KHC, OHI, PAA, TROW — recognizable high-yield names in uptrends.",
+      "verdict": "PASS",
+      "reason": "Yield>4% floor intersected with above-200-day uptrend; Thai request correctly translated to English concepts and both legs honored.",
+      "defects": []
+    },
+    {
+      "id": "cf-05",
+      "question": "Give me quality tech companies in Asia — return on equity above 15% — where the stock dropped more than 25% from its 52-week high but the business is still growing revenue.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "return on equity"}},
+        {"tool": "find_gics", "args": {"q": "technology"}},
+        {"tool": "find_tasignal", "args": {"q": ["dropped more than 25 percent from 52-week high"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roe", "pattern": "above", "threshold": 0.15}, {"concept": "revenue", "pattern": "compound_growth"}], "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.25"}]}], "gics": "45", "country": ["CN", "JP", "KR", "TW", "HK", "IN", "SG"], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=7 (universe 3246). Asia IT with ROE>15% + growing revenue + ~25%+ drawdown. Top: 6787.JP Meiko, 6590.JP Shibaura, 3595.TWO, 031330.KQ, 2493.TW, 092600.KQ NextChip, 183300.KQ KoMiCo.",
+      "verdict": "PASS",
+      "reason": "All three legs (ROE>15%, revenue growth, >25% drawdown) jointly satisfied, scoped to Asia + GICS 45 (IT). net_change_down b='0.25' expresses the drawdown as a fraction per schema.",
+      "defects": [
+        {"desc": "No dedicated 'distance from 52-week high' TA pattern; the drawdown had to be approximated with net_change_down (a net-return-from-N-bars-ago move), which is close but not literally 'off the 52wk high'.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "cf-06",
+      "question": "I'm looking for large-cap value stocks — high free cash flow yield — that are coming out of a long volatility squeeze and starting to move up.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "free cash flow yield"}},
+        {"tool": "find_tasignal", "args": {"q": ["volatility squeeze breaking out upward"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "fcf_yield", "pattern": "high"}], "ta": [{"anchor": [{"pattern": "ttm_squeeze"}], "quals": [{"any": [{"pattern": "rising", "a": "close"}]}]}], "size": ["large", "mega"], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=40 (universe 1139). Large/mega caps, high FCF yield, in a squeeze with price rising (resolving up). Top: ADBE, BMY, CM, CME, IBKR, RY, TMUS, USB.",
+      "verdict": "PASS",
+      "reason": "High-FCF-yield value leg intersected with a real volatility-compression (ttm_squeeze) + upward-resolution qualifier, large-cap scoped. Required retry: the schema-listed pattern 'squeeze' 400s; find_tasignal's #1 'ttm_squeeze' is the accepted token.",
+      "defects": [
+        {"desc": "Executor rejects the pattern token 'squeeze' with HTTP 400 even though the TaSignal schema enum explicitly lists 'squeeze'. Only 'ttm_squeeze' (find_tasignal's rank-1) is accepted — a resolver/schema-vs-executor vocabulary mismatch.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "cf-07",
+      "question": "Find healthcare companies with over $1 billion in revenue and expanding margins that just made a bullish MACD crossover.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "operating margin"}},
+        {"tool": "find_fspattern", "args": {"q": "margin expanding improving over time"}},
+        {"tool": "find_gics", "args": {"q": "healthcare"}},
+        {"tool": "find_tasignal", "args": {"q": ["bullish MACD crossover"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "above", "threshold": 1000000000}, {"concept": "operating_margin", "pattern": "improved_every_year"}], "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}], "gics": "35", "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=33 (universe 2620). Healthcare, revenue>$1B, margin improving every year, recent MACD-line×signal bullish cross. Top: 4502.JP Takeda, INSM, RMD, CTEC.LSE, 4901.JP Fujifilm, GEHC, AVAH.",
+      "verdict": "PASS",
+      "reason": "Absolute revenue>$1B + margin-expansion trend + bullish MACD crossover all applied, scoped to GICS 35 (Health Care).",
+      "defects": []
+    },
+    {
+      "id": "cf-08",
+      "question": "หุ้นจีนตัวเล็กที่กำไรโต แต่ราคาลงมา 30% แล้ว และตอนนี้ RSI รีเซ็ตต่ำกว่า 40 มีตัวไหนบ้าง",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["price dropped 30 percent", "RSI reset below 40"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "compound_growth"}], "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.40"}], "quals": [{"any": [{"pattern": "below", "a": "rsi", "b": "40"}]}]}], "country": ["CN"], "size": ["small"], "asset_type": ["Common Stock"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "compound_growth"}], "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.30"}], "quals": [{"any": [{"pattern": "oversold", "a": "rsi"}]}]}], "country": ["CN"], "size": ["small"], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=2. China small caps with earnings growth (net_income CAGR) + ~30% drop + oversold RSI: 600363.CG Jiangxi Lianchuang, 603093.CG Nanhua Futures. (The literal RSI<40 leg 400s; fell back to oversold, which is RSI~30.)",
+      "verdict": "PARTIAL",
+      "reason": "Scope (China small cap) + earnings-growth + 30% drop honored, but 'RSI below 40' could not be expressed — executor 400s on any non-canonical RSI level; substituted the stricter 'oversold' (~30), so the RSI-reset threshold is off (30 not 40) and the result set is likely under-inclusive.",
+      "defects": [
+        {"desc": "'below'/'above' on an RSI operand 400s for non-standard levels: b='30' works (canonical oversold) but b='40' returns HTTP 400 instead of snapping to the nearest supported level + note (the schema promises snapping behavior for indicator operands). Forces a fallback to fixed-level oversold.", "side": "ta-backend"}
+      ]
+    },
+    {
+      "id": "cf-09",
+      "question": "Which dividend growers in Europe — raising their payout and yielding over 3% — recently reclaimed their 50-day moving average after a dip?",
+      "tool_calls": [
+        {"tool": "find_fspattern", "args": {"q": "raising dividend growing payout every year"}},
+        {"tool": "find_tasignal", "args": {"q": ["reclaimed the 50-day moving average after a dip"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "dps", "pattern": "consecutive_growth"}, {"concept": "dividend_yield", "pattern": "above", "threshold": 0.03}], "ta": [{"anchor": [{"pattern": "crossover_up", "a": "close", "b": "ema50"}]}], "country": ["GB", "DE", "FR", "CH", "NL", "IT", "ES", "SE", "BE", "DK", "FI", "NO", "IE", "AT", "PT"], "asset_type": ["Common Stock"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "dps", "pattern": "not_declining"}, {"concept": "dividend_yield", "pattern": "above", "threshold": 0.03}], "country": ["GB", "DE", "FR", "CH", "NL", "IT", "ES", "SE", "BE", "DK", "FI", "NO", "IE", "AT", "PT"], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=0. Fundamental leg (dps growth + yield>3%) yields only 1 European name (FirstGroup) even with the looser 'not_declining' pattern; it did not reclaim its 50-day, so the intersect is empty. TA leg alone in Europe = 40 names.",
+      "verdict": "PARTIAL",
+      "reason": "Query correctly built and both legs applied, but the dividend-growth (dps) fundamental leg has near-zero European coverage (1 name), so the intersect is legitimately empty — no dividend-grower + 50-day-reclaim names surface.",
+      "defects": [
+        {"desc": "dps (dividend-per-share) history coverage for European listings appears extremely thin: dps consecutive_growth + yield>3% across 15 EU countries returns only 1 name (FirstGroup). Dividend-growth screens on Europe effectively cannot be satisfied.", "side": "data-coverage"},
+        {"desc": "When count=0 the tool still echoes a non-empty 'results' buffer (unrelated tickers), which can mislead a caller into thinking there were matches. Empty intersect should return an empty results array.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "cf-10",
+      "question": "I want financially strong companies — growing earnings, low debt-to-equity — that are showing bullish divergence on the daily chart. Any sector, global.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["bullish divergence"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "compound_growth"}, {"concept": "debt_to_equity", "pattern": "below", "threshold": 0.5}], "ta": [{"anchor": [{"pattern": "divergence_bull"}]}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count=40 (universe 24712, global). Earnings growth (net_income CAGR) + low D/E (<0.5) + bullish divergence on daily. Top: 122870.KQ YG Ent, 2566.HK, 484870.KO, 003310.KQ, 024940.KQ.",
+      "verdict": "PASS",
+      "reason": "Both fundamental legs (earnings growth + low leverage) intersected with an operand-free bullish-divergence signal; global scope preserved (no country/size restriction), daily timeframe is the default.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 8,
+    "partial": 2,
+    "top_defects": [
+      "TA executor rejects valid schema-listed / non-canonical tokens with HTTP 400 instead of snapping: pattern 'squeeze' 400s (only 'ttm_squeeze' works); 'below'/'above' on rsi 400s for non-standard levels (b='40' fails, b='30' ok) — breaks cf-06 (needed retry) and cf-08 (no RSI<40 possible, fell back to oversold~30).",
+      "dps (dividend-per-share) fundamental coverage for Europe is extremely thin (1 name across 15 countries) — dividend-grower screens on Europe return empty (cf-09).",
+      "screen_unified does not echo per-row fundamental values it screened on (pe/roe null in rows), and on an empty intersect (count=0) it still returns a non-empty candidate buffer that can mislead the caller (cf-02, cf-09)."
+    ]
+  }
+}

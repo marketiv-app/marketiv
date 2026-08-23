@@ -1,0 +1,126 @@
+{
+  "set": "valuation-value",
+  "persona": "Value/valuation investor — hunts cheapness with rigor (P/E, P/B, EV/EBITDA, P/FCF, PEG), cheap relative to sector/peers/own history, cross-market value, value+quality, sector-appropriate multiples, currency-correct, avoids value traps.",
+  "cases": [
+    {
+      "id": "vv-01",
+      "question": "Show me US large-cap stocks trading under 12x earnings right now. Just the outright cheap ones on a P/E basis.",
+      "goal": "Absolute-cheap screen: P/E < 12, US, large-cap. Straightforward level filter.",
+      "acceptance": [
+        "Applies an absolute P/E ceiling (~12x), not a relative/percentile filter",
+        "Scopes to US and large-cap as asked",
+        "Uses trailing (or clearly-stated) earnings, not a mixed/garbage EPS basis",
+        "Returns a market-wide list, not a hand-picked few names"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "vv-02",
+      "question": "I want European industrials that look cheap on EV/EBITDA compared with the rest of the industrials sector — below the sector average, not just below some fixed number.",
+      "goal": "Sector-relative cheap: EV/EBITDA vs industrials cohort average, Europe.",
+      "acceptance": [
+        "Treats 'cheap' as relative to the industrials sector cohort, not an absolute EV/EBITDA cutoff",
+        "Computes the sector benchmark from a broad cohort, not a tiny biased sample of a few peers",
+        "Uses EV/EBITDA (capital-structure-neutral) appropriately for industrials",
+        "Scopes to Europe + industrials"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "vv-03",
+      "question": "Give me the cheapest decile of global tech stocks by price-to-free-cash-flow. I only care about the bottom 10% tail.",
+      "goal": "Cheapest-decile / percentile tail: P/FCF bottom 10%, global tech.",
+      "acceptance": [
+        "Interprets 'cheapest decile' as the bottom 10th percentile of the P/FCF distribution within global tech",
+        "Ranks across a broad global-tech universe so the percentile is meaningful",
+        "Uses P/FCF (or clearly explains a proxy), not substituting P/E silently",
+        "Does not just return an arbitrary N cheapest without percentile framing"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "vv-04",
+      "question": "หาหุ้นถูกแต่คุณภาพดีให้หน่อย — P/E ต่ำ แต่ ROE สูงและหนี้ไม่เยอะ ไม่เอา value trap",
+      "goal": "Value + quality (Thai): low P/E AND high ROE AND low leverage, screen out value traps.",
+      "acceptance": [
+        "Combines a cheap multiple (low P/E) WITH quality gates (high ROE, low debt) in one screen",
+        "Explicitly addresses value-trap risk (quality/profitability, not cheap-and-deteriorating)",
+        "Does not return purely cheap names while ignoring the quality half of the ask",
+        "Answers in Thai or clearly addresses the Thai request"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "vv-05",
+      "question": "Screen banks for me — I know you value banks on price-to-book, not P/E. Show US and European banks trading below 1x book, and flag which ones have decent return on equity so I'm not buying a broken bank.",
+      "goal": "Bank/insurer on P/B: P/B < 1x for banks, cross-region, plus ROE quality gate to avoid the cheap-for-a-reason trap.",
+      "acceptance": [
+        "Uses P/B (not P/E or EV/EBITDA) as the primary multiple for banks",
+        "Applies the sub-1x book threshold",
+        "Pairs P/B with ROE to distinguish cheap-and-sound from cheap-and-impaired (P/B and ROE must be read together)",
+        "Scopes to banks in US + Europe"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "vv-06",
+      "question": "Toyota vs the German automakers — is Toyota actually cheaper on the numbers, or does it just look cheap because it reports in yen? I want an apples-to-apples multiple comparison.",
+      "goal": "Cross-market cheap with currency sanity: compare valuation multiples across JP vs DE autos, currency-correct.",
+      "acceptance": [
+        "Compares valuation multiples across markets on a currency-consistent basis (price currency vs reporting currency reconciled)",
+        "Explicitly avoids a naive yen-vs-euro face-value comparison",
+        "Uses ratio multiples (P/E, EV/EBITDA, P/B) which are currency-neutral, or converts consistently for any absolute figures",
+        "Actually compares Toyota against a set of German automakers, not a single arbitrary peer"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "vv-07",
+      "question": "Is Nestlé cheap versus its own history? Show me its current P/E against where it's typically traded over the past several years.",
+      "goal": "Cheap vs own history: current multiple vs the company's own historical multiple range/median.",
+      "acceptance": [
+        "Frames cheapness relative to Nestlé's OWN historical valuation, not the sector",
+        "Compares current P/E against a multi-year historical range/median for the same company",
+        "Notes any limitation if long-run history is unavailable rather than fabricating a decade of data",
+        "Uses a currency-consistent multiple"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "vv-08",
+      "question": "Find me consumer staples in Asia that are cheaper than their sector peers on P/E but still growing earnings — I don't want a cheap company that's cheap because it's shrinking.",
+      "goal": "Sector-relative cheap + growth guard: below-peer P/E within Asian staples, positive earnings growth (anti-value-trap).",
+      "acceptance": [
+        "Cheapness is relative to consumer-staples peers, computed from a broad cohort not a handful of names",
+        "Adds an earnings-growth condition to exclude shrinking businesses",
+        "Recognizes low-P/E-because-declining as the value trap being screened out",
+        "Scopes to Asia + consumer staples"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "vv-09",
+      "question": "ช่วยหาหุ้นที่ PEG ต่ำกว่า 1 ในตลาดหุ้นสหรัฐ — ถูกเมื่อเทียบกับการเติบโต ไม่ใช่แค่ P/E ต่ำเฉยๆ",
+      "goal": "Growth-adjusted value (Thai): PEG < 1, US — cheap relative to growth, not just low P/E.",
+      "acceptance": [
+        "Uses PEG (P/E relative to earnings growth), not P/E alone",
+        "Applies the PEG < 1 threshold",
+        "Handles the growth input sanely (positive, real growth; not a nonsensical PEG from negative/near-zero growth)",
+        "Scopes to US; addresses the Thai request"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "vv-10",
+      "question": "I've got a shortlist of five oil majors and I'm comparing their P/E to decide the cheapest. But is five names enough to trust a 'peer average', or should I benchmark them against the whole energy sector instead?",
+      "goal": "Peer-average methodology red flag: warns that a 5-name average is a biased/thin sample; recommend benchmarking against the broader sector cohort.",
+      "acceptance": [
+        "Flags that a 5-name peer average is a small, potentially biased sample and unreliable as a benchmark",
+        "Recommends benchmarking against the broader energy-sector cohort for a robust average/percentile",
+        "Still supports ranking the five by cheapness, but contextualizes each vs the sector",
+        "Uses a sector-appropriate, currency-consistent multiple for energy (P/E and/or EV/EBITDA)"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

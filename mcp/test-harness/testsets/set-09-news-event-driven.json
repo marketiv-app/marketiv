@@ -1,0 +1,126 @@
+{
+  "set": "news-event-driven",
+  "persona": "Event-driven / catalyst investor. Trades attention and news flow — what's moving today/this week, winners vs losers in a group by news impact, sentiment on a name, positioning extremes (options/COT), most-talked-about names in a theme, why a stock moved, upcoming-catalyst framing. Thinks in recency windows ('this week', 'last 30 days', 'as of a date').",
+  "cases": [
+    {
+      "id": "ne-01",
+      "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+      "goal": "Surface the most news-active semiconductor names over a ~7-day window and rank them into winners vs losers by news impact/attention.",
+      "acceptance": [
+        "Restricts to a recent ~1 week window, not all-time",
+        "Actually ranks/groups names into winners vs losers rather than a flat news dump",
+        "Basis for winner/loser (impact or sentiment) is grounded in real news, not asserted",
+        "If the window is genuinely thin, says so honestly instead of padding with stale items"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ne-02",
+      "question": "Why is Nvidia down today? What's the news catalyst?",
+      "goal": "Explain a single-name move by pointing to the actual recent news catalyst and its sentiment, or state clearly that no catalyst is found.",
+      "acceptance": [
+        "Ties the move to concrete recent news items (dated), not a fabricated narrative",
+        "If no relevant catalyst exists in the news, says 'no clear news catalyst' rather than inventing one",
+        "Does not present an empty news result as 'nothing happened' if there is coverage",
+        "Sentiment/impact framing is drawn from the news, not guessed"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ne-03",
+      "question": "Give me a quick pulse on the AI theme over the last 30 days — what are the big storylines and which names are most talked about?",
+      "goal": "Produce a theme-level news brief for AI over a 30-day window and identify the most-mentioned/most-talked-about names.",
+      "acceptance": [
+        "Honors the 30-day recency window",
+        "Surfaces the most-talked-about names by attention, not an arbitrary list",
+        "Storylines are summarized from actual news, no invented themes",
+        "Distinguishes theme-level narrative from individual stock noise"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ne-04",
+      "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+      "goal": "For Thai energy stocks over the past week, list what's happening and separate names into positive vs negative by news impact.",
+      "acceptance": [
+        "Scopes to Thai energy names and a ~1 week window",
+        "Splits names into positive vs negative grounded in news impact/sentiment",
+        "Replies in Thai",
+        "If coverage is sparse for Thai energy this week, states it plainly instead of fabricating"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "ne-05",
+      "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+      "goal": "Give a news-grounded sentiment read on a single name over a recent window, with supporting items.",
+      "acceptance": [
+        "Sentiment verdict is backed by specific recent news items",
+        "Does not fabricate a sentiment score without underlying coverage",
+        "Notes the recency window the read is based on",
+        "Acknowledges mixed/conflicting sentiment if the news is mixed"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "ne-06",
+      "question": "Where is options positioning most extreme right now — any names with unusually stretched put/call or crowded positioning I should know about?",
+      "goal": "Surface names with positioning/options extremes (e.g. stretched put/call, crowded COT) as of now.",
+      "acceptance": [
+        "Reports positioning/options extremes from actual data, not made up",
+        "Frames 'extreme' relative to a norm or range, not in isolation",
+        "If positioning data is unavailable for the ask, says so rather than inventing figures",
+        "Stays current ('right now'), not stale snapshots presented as live"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "ne-07",
+      "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+      "goal": "Rank EV-theme names by news attention over a 14-day window and characterize the attention's sentiment per name.",
+      "acceptance": [
+        "Honors the ~14-day window",
+        "Ranks by attention/mention volume, surfacing most-talked-about names",
+        "Pairs each name's attention with sentiment grounded in news",
+        "Does not conflate high attention with positive news"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ne-08",
+      "question": "Brief me on what happened in Japanese markets around the week of the last BOJ meeting — which sectors and names reacted the most?",
+      "goal": "Produce a country/market news brief for Japan anchored to a specific past date/window and identify the biggest-reacting sectors and names.",
+      "acceptance": [
+        "Anchors to the specified past window (around the BOJ meeting week), not just 'latest'",
+        "Identifies which sectors/names reacted most from news impact",
+        "Does not invent a BOJ outcome or catalyst not present in the news",
+        "If the referenced window has thin coverage, is honest about it"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "ne-09",
+      "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+      "goal": "Compare a small explicit set of names over the past week and rank them head-to-head by news impact/sentiment.",
+      "acceptance": [
+        "Covers all three named tickers over a ~1 week window",
+        "Produces a relative ranking (winner to loser), not three separate blurbs",
+        "Ranking is justified by concrete recent news per name",
+        "Flags any name with no material news rather than padding it"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ne-10",
+      "question": "Find me any news suggesting a company might be an acquisition target or facing a regulatory investigation recently — the kind of catalyst-driven stuff worth watching.",
+      "goal": "Do a semantic news search for catalyst-shaped events (M&A target, regulatory probe) over a recent window and return grounded hits.",
+      "acceptance": [
+        "Returns news items that actually match the catalyst intent (M&A / regulatory), semantically not just keyword",
+        "Items are recent and dated",
+        "Does not invent M&A rumors or investigations absent from the news",
+        "If nothing matches, says so instead of forcing weak hits"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -14,6 +14,14 @@ PORT="${PORT:-8901}"
 BASE="${BASE:-https://news-api-sgrtkib7zq-ue.a.run.app}"   # deployed news-api (prod) by default
 LOG="/tmp/mcp_${PORT}.log"
 
+# DEEPSEEK_API_KEY: find_gics / find_megatrend run deepseek IN THIS process (server.py), so the key must be
+# present locally or those tools crash (KeyError). Fetch from Secret Manager if not already in the env.
+if [ -z "${DEEPSEEK_API_KEY:-}" ]; then
+  DEEPSEEK_API_KEY="$(gcloud secrets versions access latest --secret=DEEPSEEK_API_KEY --project=ava-advisor-26c7b 2>/dev/null || true)"
+  export DEEPSEEK_API_KEY
+fi
+[ -n "${DEEPSEEK_API_KEY:-}" ] && echo "serve-mcp: DEEPSEEK_API_KEY loaded (find_gics/find_megatrend enabled)" || echo "serve-mcp: WARN no DEEPSEEK_API_KEY — find_gics/find_megatrend will error"
+
 # free the port if a stale server is holding it
 lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | awk 'NR>1{print $2}' | xargs -r kill 2>/dev/null || true
 

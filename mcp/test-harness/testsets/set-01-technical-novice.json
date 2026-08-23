@@ -1,0 +1,116 @@
+{
+  "set": "technical-novice",
+  "persona": "Retail investor new to technical analysis; knows basic terms (RSI, moving averages, overbought, support, 52-week high, volume) but not deeply; asks casual, price-action- and timing-focused questions.",
+  "cases": [
+    {
+      "id": "tn-01",
+      "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+      "goal": "Find stocks with high RSI (overbought) as potential pullback / caution candidates.",
+      "acceptance": [
+        "Returns an actual list of specific stocks (tickers/names), not a generic explanation of RSI",
+        "The stocks named should genuinely have elevated RSI (roughly above 70) or clearly state the threshold used",
+        "Red flag: only explains what overbought means and returns no stocks, or invents tickers with no numbers"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "tn-02",
+      "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง",
+      "goal": "Find Thai stocks that just hit a new 52-week high.",
+      "acceptance": [
+        "Returns Thai-listed stocks (SET) specifically, not US or global names",
+        "The names returned are at or very near their 52-week high",
+        "Red flag: returns non-Thai stocks, or gives generic advice about 52-week highs without any names"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tn-03",
+      "question": "I keep hearing about the golden cross thing. Can you find me stocks where the 50 day moving average just crossed above the 200 day?",
+      "goal": "Screen for stocks with a recent 50-day/200-day MA bullish crossover (golden cross).",
+      "acceptance": [
+        "Returns specific stocks that recently had a 50/200 MA bullish crossover",
+        "Correctly treats 'golden cross' as 50-day crossing above 200-day (bullish), not the reverse",
+        "Red flag: confuses golden cross with death cross, or returns generic uptrend stocks with no crossover basis"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tn-04",
+      "question": "Is Tesla overbought or oversold right now? Just tell me if it's a good time to buy or if I should wait.",
+      "goal": "Get a single stock's current technical read (RSI / momentum) and a timing sense.",
+      "acceptance": [
+        "Gives Tesla's current technical condition with an actual indicator value or clear read (e.g. RSI level, relative to moving averages)",
+        "Addresses the timing question at least directionally rather than dodging entirely",
+        "Red flag: gives generic 'do your own research' with no data on Tesla, or states an RSI number that is obviously fabricated / inconsistent"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "tn-05",
+      "question": "Show me stocks that dropped a lot lately but the company is actually fine — like still growing revenue and not overpriced. Kinda looking for a dip to buy.",
+      "goal": "Combine a recent price drop (technical) with healthy fundamentals (revenue growth, reasonable valuation) to find dip-buy candidates.",
+      "acceptance": [
+        "Returns stocks that both fell meaningfully recently AND have decent fundamentals (growth and/or non-expensive valuation) mentioned",
+        "Doesn't ignore either half — must reflect both the price drop and the fundamental quality",
+        "Red flag: returns only fallen stocks with no fundamental check, or only good-fundamental stocks that haven't dropped"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "tn-06",
+      "question": "Which stocks are like coiling up / getting really quiet before a big move? I think it's called a squeeze?",
+      "goal": "Find stocks in low-volatility consolidation (Bollinger/volatility squeeze) that may be about to break out.",
+      "acceptance": [
+        "Interprets 'squeeze' as a low-volatility / tight-range consolidation setup and returns specific stocks",
+        "Describes them as currently low-volatility / tightly ranged, not just any breakout stock",
+        "Red flag: misreads 'squeeze' as a short squeeze story, or returns names with no volatility basis"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tn-07",
+      "question": "any crypto near its 52 week low right now?",
+      "goal": "Find cryptocurrencies trading near their 52-week low.",
+      "acceptance": [
+        "Returns crypto assets specifically (not stocks) that are near their yearly low",
+        "Names are genuinely close to the 52-week low",
+        "Red flag: returns stocks/ETFs instead of crypto, or claims 'can't do crypto' when the assistant supports crypto screening"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "tn-08",
+      "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+      "goal": "Find tech-sector stocks that rose strongly over the past month with rising volume (momentum + volume confirmation).",
+      "acceptance": [
+        "Returns tech-sector stocks that gained notably over roughly the last month",
+        "Addresses the volume aspect (rising/elevated volume), not just price",
+        "Red flag: ignores the sector filter, ignores the volume condition, or returns names with no recent gain"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "tn-09",
+      "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+      "goal": "Get a brief plain explanation of MACD crossover plus a few stocks with a recent bullish MACD cross.",
+      "acceptance": [
+        "Gives a short, correct beginner explanation of a bullish MACD crossover (MACD line crossing above signal line)",
+        "Then returns at least a couple of specific stocks with a recent bullish MACD cross",
+        "Red flag: explains the concept but provides no stocks, or the explanation is wrong (e.g. describes it as bearish)"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tn-10",
+      "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+      "goal": "Get a general market-timing read plus specific large-cap names showing technical weakness (broke below key MAs/support) to avoid.",
+      "acceptance": [
+        "Gives some read on overall market condition rather than dodging the 'toppy' question entirely",
+        "Returns specific well-known stocks that are trading below key moving averages / support (technical weakness)",
+        "Red flag: only gives a generic risk disclaimer with no names and no market read, or names random stocks with no evidence they broke support/MAs"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

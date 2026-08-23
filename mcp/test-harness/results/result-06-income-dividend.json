@@ -1,0 +1,143 @@
+{
+  "set": "income-dividend",
+  "cases": [
+    {
+      "id": "id-01",
+      "question": "I need income. Show me the highest-yielding stocks in the world right now.",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"order_by": "yield", "limit": 15}},
+        {"tool": "screen_dividends", "args": {"country": "US,GB,DE,FR,JP,HK,AU,CA", "order_by": "yield", "limit": 15}}
+      ],
+      "result_summary": "First call rejected: 'screen_dividends needs a scope: country and/or gics' (no true global mode). Re-ran with an 8-country proxy for 'the world'. Top yields: Brilliance China Auto (64.75%, payout 1.85, cut 2025), ManpowerGroup Greater China (33.48%, payout 2.3), Exmar (29.28%), Icahn Enterprises (26.6%, cut 2025, neg news). The tool's _guide explicitly instructs to DECOMPOSE yield (special-div trailing>forward, payout>1 = unsustainable, price-drop-driven, last_cut_year) and warns against stating yield alone. Every top name shows classic trap markers: payout>1, recent cut, negative CAGR, near 52w-low.",
+      "verdict": "PASS",
+      "reason": "Data + built-in _guide surface trap risk and payout caveats directly; pure yield ranking is self-flagged as unsafe.",
+      "defects": [
+        {"desc": "No global/whole-world scope: screen_dividends REQUIRES country and/or gics, so 'highest yielding in the world' must be faked with a hand-enumerated country CSV. total=3000 is also a hard ceiling, not the true global universe.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "id-02",
+      "question": "Find me high but SAFE dividend yields — around 5-7% — where the payout ratio isn't stretched.",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"country": "US,GB,DE,FR,JP,HK,AU,CA", "min_yield": 5, "max_yield": 7, "max_payout": 0.7, "order_by": "yield", "limit": 15}}
+      ],
+      "result_summary": "222 matches. All returned payout ratios <=0.70 within the 5-7% band. Genuinely safe-looking: VICI Properties (REIT 6.77%, payout 0.66, positive news), Ingenta (6.87%, 9yr no-cut streak, CAGR 23.7%), Saul Centers (6.94%, payout 0.02). One trap-flavored intruder shown (Volkswagen 6.87% but cut 2025, neg CAGR, 60 neg articles) which the payout filter alone doesn't catch.",
+      "verdict": "PASS",
+      "reason": "Applies both the yield band AND max_payout ceiling; distinguishes safe payers from a residual trap; REIT payout-norm caveat available via gic_code.",
+      "defects": []
+    },
+    {
+      "id": "id-03",
+      "question": "Which of these payers are actually growing their dividend, not just paying a fat static one? I want dividend growth.",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"country": "US", "min_cagr": 10, "min_yield": 2, "max_payout": 0.8, "order_by": "cagr", "limit": 12}}
+      ],
+      "result_summary": "165 matches, ranked by cagr_5y_pct. Strong compounders at moderate yields: Cigna (2.27% yield, CAGR 172.8%, 10yr streak), Lennar (2.34%, CAGR 84%, 10yr), Penske Auto (2.66%, CAGR 43.9%). Illustrates the grower trade-off (lower starting yield, compounding). _guide states cagr_5y is a 5-year window and no_cut_streak caps at 10 = the tracked window, not full history.",
+      "verdict": "PASS",
+      "reason": "Ranks on dividend growth not yield; window (5y CAGR / 10y streak cap) is explicit and honest.",
+      "defects": []
+    },
+    {
+      "id": "id-04",
+      "question": "Give me dividend aristocrats — companies that have raised their dividend every year for 25+ years.",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"country": "US", "min_streak_years": 10, "min_yield": 2, "order_by": "streak", "limit": 12}}
+      ],
+      "result_summary": "min_streak_years is bounded 0-10 in the schema; no_cut_streak_yrs is CAPPED at 10 (10 = clean through the tracked decade incl. 2020/2022 stress). Best-effort proxy returned: Conagra, Papa John's, Flowers Foods, Universal Corp etc. all at streak=10. The tool's _guide explicitly forbids claiming a multi-decade 'aristocrat/king' streak from prior knowledge and says to phrase it 'clean for 10y+ (the full tracked window)'. Cannot verify 25 years from the data.",
+      "verdict": "PASS",
+      "reason": "Tool + guidance make the honest limitation unavoidable: can't confirm 25y, states the 10y window, offers the closest honest proxy. Exactly what acceptance wants.",
+      "defects": [
+        {"desc": "no_cut_streak_yrs is capped at 10 years and cagr is 5y — genuine multi-decade aristocrat verification is impossible. This is a real data-coverage limit (correctly disclosed by _guide, not a silent bug).", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "id-05",
+      "question": "This telecom is yielding 9% but the stock is down 40% this year. Is this a real income opportunity or a yield trap?",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "telecom"}},
+        {"tool": "screen_dividends", "args": {"gics": "5010", "min_yield": 7, "order_by": "yield", "limit": 10}}
+      ],
+      "result_summary": "Resolved telecom->5010. High-yield telecoms show the exact trap taxonomy: CITIC Telecom (7.65%, payout 0.76, cut 2025, neg CAGR), PCCW (7.13%, payout 5.5x earnings!), freenet (8.52%, payout 1.01) vs safe SPOK (11.98% but payout 0.02, no recent cut, CAGR +20%). Each row exposes payout, last_cut_year, week52_low/high, news.net_direction — the tools needed to tell a price-collapse trap from real value.",
+      "verdict": "PASS",
+      "reason": "Recognizes price-driven yield as a trap signal; payout/coverage + cut history + news direction all available to run the trap-vs-safe check on the described name.",
+      "defects": []
+    },
+    {
+      "id": "id-06",
+      "question": "อยากได้หุ้นปันผลดีๆ ในกลุ่ม REIT กับสาธารณูปโภค แถวเอเชีย เอาที่ปันผลไม่มีความเสี่ยงจะโดนตัด",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "REITs"}},
+        {"tool": "find_gics", "args": {"q": "utilities"}},
+        {"tool": "screen_dividends", "args": {"country": "TH,SG,HK,JP,MY,ID,PH,IN,TW,KR", "gics": "6010,55", "min_yield": 4, "min_streak_years": 5, "order_by": "streak", "limit": 12}}
+      ],
+      "result_summary": "REITs->6010, Utilities->55. Asia enumerated to ISO-2 CSV. 30 matches, all streak=10 (max reliability), 4.7-6.8% yield: Japan J-REITs (Nippon Hotel, Samty Residential, Invincible, United Urban), Korea Incheon City Gas (payout 0.29), HK & China Gas. REIT rows show payout_ratio=None (EPS-payout not meaningful for REITs = the sector caveat is visible in data).",
+      "verdict": "PASS",
+      "reason": "Region+sector filter applied, streak reliability lens, REIT payout-norm difference surfaced; answerable in Thai. Enumerating 'Asia' manually is expected per schema.",
+      "defects": [
+        {"desc": "REIT rows return payout_ratio=null (EPS-basis) with no FFO/AFFO/DPU-payout alternative, so REIT payout sustainability can't be quantified from the screen — must lean on streak only or drop to financials.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "id-07",
+      "question": "Compare dividend income across banks vs utilities vs REITs by country — where do I get the most reliable yield?",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "banks"}},
+        {"tool": "screen_dividends", "args": {"country": "US,GB,JP,HK,AU", "gics": "4010", "min_yield": 3, "min_streak_years": 7, "order_by": "streak", "limit": 6}},
+        {"tool": "screen_dividends", "args": {"country": "US,GB,JP,HK,AU", "gics": "55", "min_yield": 3, "min_streak_years": 7, "order_by": "streak", "limit": 6}},
+        {"tool": "screen_dividends", "args": {"country": "US,GB,JP,HK,AU", "gics": "6010", "min_yield": 3, "min_streak_years": 7, "order_by": "streak", "limit": 6}}
+      ],
+      "result_summary": "banks->4010. Three per-sector screens over the same 5-country set, ordered by streak: Banks (59, payout ~0.5-0.9, e.g. TFSL 6.46% payout 0.03), Utilities (50, payout ~0.5-0.8, mixed US/UK), REITs (50, payout >1 or None — PHP 7.66%/1.21, OLP 7.37%/1.24, JP REITs None). Cross-sector payout norms are visibly different (REIT EPS-payout misleading), and country spread is present in each list.",
+      "verdict": "PASS",
+      "reason": "Three-way sector compare by country with a reliability (streak) lens; sector-specific payout norms are evident so yields aren't compared naively.",
+      "defects": [
+        {"desc": "No single-call cross-sector aggregate — must fire one screen per gics and compare by hand; and REIT payout again null so 'reliable yield' comparison across the three sectors isn't apples-to-apples on payout.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "id-08",
+      "question": "The 10-year US Treasury is around 4.3%. Which dividend stocks give me meaningfully more yield than that but are still safe?",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"country": "US", "min_yield": 6, "max_payout": 0.7, "min_streak_years": 7, "order_by": "streak", "limit": 12}}
+      ],
+      "result_summary": "min_yield=6 sets a meaningful spread above the 4.3% hurdle; max_payout 0.7 + 10yr streak enforce safety. 19 matches incl. recognizable names: Pfizer (6.19%, payout 0.56), General Mills (6.16%, 0.69), Campbell's (6.56%, 0.65), Western Union (12.89%, 0.64). All clean 10yr no-cut.",
+      "verdict": "PASS",
+      "reason": "Bond yield used as a hurdle with a real spread; payout+streak safety filter applied, not yield alone. Equity-vs-bond risk framing is a judgment layer on top.",
+      "defects": []
+    },
+    {
+      "id": "id-09",
+      "question": "Is XYZ's dividend safe? I hold it for income and I'm worried they might cut.",
+      "tool_calls": [
+        {"tool": "financials", "args": {"tickers": "PFE.US", "period": "5"}},
+        {"tool": "asset_pulse", "args": {"ticker": "PFE.US", "window": "90d", "limit": 8}}
+      ],
+      "result_summary": "XYZ is a placeholder; demonstrated the coverage method on a real income name (Pfizer). financials: dividend_payout 225.9% (paying >EPS = earnings-basis stretched), BUT FCF 9.1B vs dividends_paid 9.77B (near-covered on cash), fcf_yield 7.1%, EBITDA interest coverage 5x, EPS declining -4%. asset_pulse: price +11% above SMA200 (NOT a collapsing price), full news lens + FX exposure. All the coverage/news inputs to assess current safety are present; future cut is inherently unpredictable and 10y is the visible window.",
+      "verdict": "PASS",
+      "reason": "Payout/earnings + FCF coverage + news examined; honest that future cuts can't be predicted and the streak window is bounded. No buy/hold/sell advice.",
+      "defects": [
+        {"desc": "Minor: financials dividend_payout (225.9%, EPS-basis) can look alarming without the FCF cross-check on the same screen — a payout-on-FCF/coverage flag alongside it would prevent naive misreads.", "side": "fund-backend"}
+      ]
+    },
+    {
+      "id": "id-10",
+      "question": "หาหุ้นปันผลที่จ่ายมาตลอดไม่เคยตัดปันผลเลยหลายปี แล้วก็ค่อยๆ เพิ่มปันผลขึ้นทุกปีด้วย",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"country": "US", "min_streak_years": 10, "min_cagr": 5, "min_yield": 2, "order_by": "cagr", "limit": 12}}
+      ],
+      "result_summary": "Combines min_streak_years=10 (no-cut reliability) AND min_cagr=5 (rising dividend) together. 174 matches: Cigna (streak 10, CAGR 172.8%, yoy +5.5%), Virtus (5.71%, 10yr, CAGR 26.5%), Goldman Sachs (10yr, CAGR 22.9%, yoy +41.7%). Distinguishes reliable growers from static high-yielders. Streak is capped at 10 so 'ไม่เคยตัดเลย/ตลอด' must be phrased as '10 ปีเต็มที่ติดตามได้', not 'forever'.",
+      "verdict": "PASS",
+      "reason": "Screens no-cut record AND rising dividend jointly; 10y window must be stated honestly per _guide; answerable in Thai.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 10,
+    "partial": 0,
+    "fail": 0,
+    "top_defects": [
+      "screen_dividends has NO whole-world scope: it requires country and/or gics, so 'highest yielding in the world' / broad multi-region asks must be faked with a hand-enumerated country CSV (total also caps at 3000).",
+      "REIT rows return payout_ratio=null (EPS-basis) with no FFO/AFFO/DPU-payout alternative, so REIT dividend sustainability can't be quantified from the screen and cross-sector (banks/utilities/REIT) payout comparison isn't apples-to-apples.",
+      "Reliability window is capped: no_cut_streak_yrs max 10, cagr 5y — genuine 25-year 'aristocrat' verification is impossible (correctly disclosed by the tool's _guide, so it produces honest answers rather than fabricated streaks)."
+    ]
+  }
+}
