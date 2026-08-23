@@ -1940,8 +1940,11 @@ def screen_unified(
             "for two UNRELATED sectors (biotech OR software) run separate screens. Omit = all sectors.")] = None,
         country: Annotated[Optional[List[str]], _d("OPTIONAL operating-country scope — one or MORE ISO-2 codes, OR'd (a stock "
             "matches if in ANY of them). e.g. ['US'] · ['CN','US'] for China+US · ['TH','SG','MY']. Omit = all countries.")] = None,
-        size: Annotated[Optional[List[str]], _d("OPTIONAL market-cap size tier(s), OR'd — any of 'mega'|'large'|'mid'|'small'|"
-            "'micro' (per-market MSCI cumulative-cap tiers). e.g. ['large'] · ['mid','small']. Omit = all sizes.")] = None,
+        size: Annotated[Optional[List[str]], _d("OPTIONAL market-cap size tier(s), OR'd — any of 'large'|'mid'|'small'|'micro'. "
+            "🔴 RELATIVE per-market MSCI cumulative-cap tiers (top 70% of a market's cap = 'large', 70-85% = 'mid', "
+            "85-99% = 'small', tail = 'micro') — 'small' means small FOR ITS market, NOT small in USD (mega-caps are "
+            "'large'; there is no separate 'mega'). For an ABSOLUTE USD size / 'under $X' use min/max_market_cap_usd, "
+            "not this. e.g. ['large'] · ['mid','small']. Omit = all sizes.")] = None,
         asset_type: Annotated[Optional[List[str]], _d("OPTIONAL asset type(s), OR'd — from the asset_universe catalog: "
             "'Common Stock','ETF','Currency','Bond','Commodity','Index','Fund','ADR','REIT'. e.g. ['Common Stock'] · ['ETF','Fund']. "
             "Omit = all types (a typical company screen wants 'Common Stock'). Scopes the TECHNICAL universe.")] = None,
