@@ -2011,6 +2011,13 @@ def screen_unified(
     # OVER-FETCH: `limit` = how many the client means to SHOW; fetch a ~4× look-ahead buffer (cap 100) so a
     # follow-up "a few more" is served from THIS payload (in the LLM's context) with no re-screen. Beyond 100 → fresh
     # screen (a cursor-based deep-page is designed but not built — see docs/pipeline/screener-pagination-design.md).
+    # ≥1 executable leg required — the screen is an INTERSECTION of fundamental ∩ ta within a scope; a scope alone
+    # (gics/country/size, no leg) is a plain list, which screen_stocks serves. Guard here with a helpful redirect
+    # rather than letting the API 400 (F6b: the bare-universe 400 body wasn't reaching the client clearly).
+    if not fundamental and not ta:
+        return {"error": "screen_unified needs at least one of `fundamental` or `ta` — it returns the INTERSECTION of a "
+                         "financial screen and a technical screen within a scope. For a plain universe list (gics/country/"
+                         "size only, no financial or technical filter) use screen_stocks instead."}
     show = _lim(limit, default=10, ceiling=100)
     fetch = min(show * 4, 100)
     body: dict = {"limit": fetch}
@@ -2025,14 +2032,21 @@ def screen_unified(
     data = resp.json()
     got = len(data.get("results", [])) if isinstance(data, dict) else 0
     if isinstance(data, dict):
+        # `capped` (from the API) = the match set FILLED the fetch buffer, so `count` is a FLOOR not the true total —
+        # there are more matches than returned (F8: so a client can tell "≥N" from "exactly N"). buffer_maxed = we hit
+        # the hard 100 cap specifically.
+        capped = bool(data.get("capped")) or got >= fetch
         data["_pagination"] = {
             "intended_show": show,
             "returned": got,
             "buffer_maxed": got >= 100,
+            "capped": capped,
+            "count_is_floor": capped,
             "note": (f"Over-fetched ~4× your intended show ({show}) as a look-ahead buffer so 'a few more' is served "
                      f"from these {got} rows — do NOT re-screen for a few more. "
-                     + ("This hit the 100-row cap; to go beyond, re-screen with a larger intent." if got >= 100
-                        else "Wanting beyond these needs a fresh screen.")),
+                     + ("`count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact "
+                        "market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+                        if capped else "This is the COMPLETE match set — `count` is the exact total.")),
         }
     return data
 
