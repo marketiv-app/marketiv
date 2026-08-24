@@ -1868,9 +1868,10 @@ def _cond_to_api(c: ScreenCondition) -> dict:
     if mn is not None: p["min"] = mn
     if mx is not None: p["max"] = mx
     if n is not None: p["N"] = n
-    if pct is not None:
-        # low = cheap tail (max_percentile) · high = expensive tail (min_percentile)
-        p["min_percentile" if (c.pattern or "") in ("high", "expensive", "priciest") else "max_percentile"] = pct
+    # canonical: pass `percentile` through UNCHANGED — the fund executor interprets it per pattern (low = bottom tail,
+    # high = top tail). Do NOT rename to min/max_percentile here — the catalog + executor now declare `percentile`, and
+    # the old rename made a hinted `percentile` call 400 ("unknown param 'max_percentile'"). One name, all layers.
+    if pct is not None: p["percentile"] = pct
     d: dict = {"concept": c.concept, "pattern": c.pattern, "params": p}
     if c.vs_cohort: d["vs_cohort"] = c.vs_cohort
     return d
