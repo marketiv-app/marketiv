@@ -1788,13 +1788,16 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
     return mdx()._get("/v1/financials", params).data
 
 @mcp.tool(name="find_fsconcept", title="Find Financial-Statement Field", annotations=_RO)
-def find_fsconcept(q: Annotated[str, _dq(
+def find_fsconcept(q: Annotated[Optional[str], _dq(
         "An ENGLISH financial-statement LINE-ITEM or metric concept to resolve to the exact concept for "
         "`financials` — 'investment properties', 'held to maturity securities', 'construction in progress', "
         "'accrued interest receivable', 'deferred tax liabilities', 'accumulated OCI', 'minority interest'. "
         "🔴 ENGLISH ONLY: translate any language to its English accounting term FIRST (投資不動産→'investment "
         "properties', ดอกเบี้ยค้างรับ→'accrued interest receivable', 保有満期証券→'held to maturity securities') — "
-        "cross-lingual matching DRIFTS to the wrong field. May send a couple of candidate phrasings.")],
+        "cross-lingual matching DRIFTS to the wrong field. May send a couple of candidate phrasings.")] = None,
+        queries: Annotated[Optional[List[str]], _d("BATCH form — resolve SEVERAL concepts in ONE call (e.g. "
+        "building a multi-condition screen: ['revenue','free cash flow','total debt']). Use INSTEAD of `q`. "
+        "Returns `results:[{query, candidates}]`, one block per input query (input order). ENGLISH ONLY.")] = None,
         statement: Annotated[Optional[str], _d(
         "OPTIONAL — narrow to 'balance' | 'income' | 'cashflow' when you know which statement the line sits on.")] = None,
         limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
@@ -1807,23 +1810,46 @@ def find_fsconcept(q: Annotated[str, _dq(
     + a `definition` ONLY when the name isn't self-evident}. PICK by label/definition + statement (is_core=true
     = the headline line; curated:true = an exact name/alias hit, high confidence). Then pass the chosen
     concept(s) VERBATIM to `financials(fields=…)`. Empty candidates → refine with a sharper English term and
-    call again; never guess a concept."""
+    call again; never guess a concept.
+    🔴 BATCH — resolving vocabulary for a MULTI-CONDITION screen? Pass `queries=[…]` (NOT N separate calls) to
+    resolve them all in one round-trip; returns one `candidates` block per query."""
+    if queries:
+        resp = mdx()._http._client.post(
+            "/v1/financials/find",
+            json={"queries": queries, "statement": statement, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
+        _check(resp)
+        return resp.json()
+    if not q:
+        raise ValueError("pass q=<concept> (single) or queries=[…] (batch)")
     return mdx()._get("/v1/financials/find", {"q": q, "statement": statement, "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data
 
 
 @mcp.tool(name="find_fspattern", title="Find Financial Pattern", annotations=_RO)
-def find_fspattern(q: Annotated[str, _dq(
+def find_fspattern(q: Annotated[Optional[str], _dq(
         "An ENGLISH description of a temporal PATTERN / shape to screen on — 'below the sector average', 'growth "
         "accelerating', 'margin expanding', 'grew every year', 'net loss shrinking', 'debt rising faster than "
         "equity'. 🔴 ENGLISH ONLY (translate first). Resolves the SHAPE only; resolve the underlying METRIC "
-        "separately via find_fsconcept.")],
+        "separately via find_fsconcept.")] = None,
+        queries: Annotated[Optional[List[str]], _d("BATCH form — resolve SEVERAL patterns in ONE call (e.g. "
+        "['grew every year','below the sector average','debt falling']). Use INSTEAD of `q`. Returns "
+        "`results:[{query, patterns}]`, one block per input query (input order). ENGLISH ONLY.")] = None,
         limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
     """FREE resolver — a temporal PATTERN → a `pattern` + the `params` to feed `screen_unified`. The screener
     grammar is TWO-PART: find_fspattern gives the SHAPE (accelerating, below_average, consecutive_growth, a
     relation…), find_fsconcept gives the METRIC (net_margin, pe, revenue…). Returns ranked `patterns` {pattern,
     kind (level/cohort/quadrant/relation), label, definition, params-to-fill}. Pick one, fill its params (EXCEPT the
     `metric`/`metricA`/`metricB` — those come from find_fsconcept), then pass it as a `fundamental` condition to screen_unified.
-    Say the pattern in the NATURAL direction the user asked; the server applies sign/polarity for you."""
+    Say the pattern in the NATURAL direction the user asked; the server applies sign/polarity for you.
+    🔴 BATCH — building a MULTI-CONDITION screen? Pass `queries=[…]` (NOT N separate calls) to resolve every
+    pattern in one round-trip; returns one `patterns` block per query."""
+    if queries:
+        resp = mdx()._http._client.post(
+            "/v1/financials/find-pattern",
+            json={"queries": queries, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
+        _check(resp)
+        return resp.json()
+    if not q:
+        raise ValueError("pass q=<pattern> (single) or queries=[…] (batch)")
     return mdx()._get("/v1/financials/find-pattern", {"q": q, "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data
 
 
