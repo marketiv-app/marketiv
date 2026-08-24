@@ -1843,9 +1843,11 @@ class ScreenCondition(BaseModel):
     percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
     vs_cohort: Optional[dict] = Field(None, description="RARELY needed — usually OMIT. For a cohort pattern (below_average/above_average) the benchmark DEFAULTS to your screening scope (the `universe`): 'retail stocks with P/E below average' = scope `universe` to retail (find_gics) and OMIT this — 'below average' then means below the RETAIL average automatically. Set this ONLY to benchmark against a DIFFERENT group than you're screening (e.g. US retail vs the GLOBAL retail average). Shape: {gics?: a GICS code PREFIX string like '45' — NOT a boolean/flag; country?: ISO-2; size?: ['large'|'mid'|'small'|'micro']; stat?: 'pooled'(default)|'median'}. 🔴 EACH STOCK vs ITS OWN SECTOR (whole-market, mixed sectors, in ONE screen — a bank judged vs banks, a tech vs tech): set {own: true} (or {own:'gics_group'} / {own:'gics_industry'} for a finer grain than the default sector). Use `own` ONLY for that cross-sector 'each vs its own' case; to compare WITHIN a single sector, scope the `universe` to that sector and omit vs_cohort instead.")
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric.")
-    relation: Optional[str] = Field(None, description="RELATION form only — how metricA relates to metricB. One of: 'higher_than' (metricA ≥ multiple×metricB), 'lower_than' (metricA ≤ multiple×metricB), 'growth_faster_than' / 'growth_slower_than' (metricA's multi-year CAGR vs metricB's). higher/lower_than use `multiple` to scale; the growth ones don't.")
+    relation: Optional[str] = Field(None, description="RELATION form only — how metricA relates to metricB. One of: 'higher_than' (metricA ≥ multiple×metricB, i.e. the RATIO A/B ≥ multiple), 'lower_than' (metricA ≤ multiple×metricB), 'ratio_between' (min ≤ A/B ≤ max — A is between min and max as a fraction of B), 'ratio_near' (A/B ≈ target within ±band), 'growth_faster_than' / 'growth_slower_than' (metricA's multi-year CAGR vs metricB's). Param per relation: higher/lower_than→`multiple`; ratio_between→`min`+`max`; ratio_near→`target`(+`band`, default ±10%); the growth ones take none. All bounds are FRACTIONS (0.15 = 15% of metricB).")
     metricB: Optional[str] = Field(None, description="RELATION form only: the second metric.")
     multiple: Optional[float] = Field(None, description="RELATION scale factor k for higher_than/lower_than — compares metricA to k×metricB (default 1 = plain metricA vs metricB). 'R&D ≥ 15% of revenue' → metricA=rnd, higher_than, metricB=revenue, multiple=0.15; 'debt ≤ half of equity' → metricA=debt, lower_than, metricB=equity, multiple=0.5; 'cash ≥ 2× debt' → multiple=2. A percent-of is a FRACTION (30% → 0.30). Ignored by growth_faster/slower_than.")
+    target: Optional[float] = Field(None, description="RELATION `ratio_near` only: the ratio A/B to sit near, as a FRACTION (0.15 = ~15% of metricB). 'capex around 8% of revenue' → metricA=capex, ratio_near, metricB=revenue, target=0.08.")
+    band: Optional[float] = Field(None, description="RELATION `ratio_near` only: half-width tolerance as a FRACTION of target (default 0.10 = accept target ±10%). Omit unless the user named a tightness.")
     params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/N/percentile/multiple above. If you nest the value here ({threshold:…}) it's still read.")
 
 
@@ -1853,10 +1855,15 @@ def _cond_to_api(c: ScreenCondition) -> dict:
     """Typed condition → the news-api's shape (metric/pattern + nested params). Keeps the client's schema flat."""
     if c.metricA and c.metricB and c.relation:
         out = {"metricA": c.metricA, "relation": c.relation, "metricB": c.metricB}
-        # forward `multiple` (top-level OR nested params) — without it the news-api defaults k=1 and the relation
-        # silently mis-screens ("R&D ≥ 15% of revenue" becomes "R&D ≥ revenue"). Server accepts flat, so pass it flat.
-        mult = c.multiple if c.multiple is not None else (c.params or {}).get("multiple")
-        if mult is not None: out["multiple"] = mult
+        # forward EVERY ratio-bound operand the relation executors read (top-level OR nested params) — without them the
+        # news-api silently defaults and mis-screens. Each relation reads only its own: higher/lower_than→`multiple`;
+        # ratio_between→`min`+`max`; ratio_near→`target`(+`band`); growth_faster/slower_than→`N`. Server accepts flat,
+        # so pass flat. Names are IDENTICAL across catalog/field/relay/executor (no rename → no "unknown param" drift).
+        np = c.params or {}
+        for k in ("multiple", "min", "max", "target", "band", "N"):
+            v = getattr(c, k, None)
+            if v is None: v = np.get(k)
+            if v is not None: out[k] = v
         return out
     # read each value from the top-level field OR a nested params{} — find_fspattern's output says "params: threshold",
     # so an LLM often nests the value there instead of at the condition top-level; accept either so it never needs a retry.

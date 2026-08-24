@@ -1,0 +1,77 @@
+{
+  "set": "ratio-relation",
+  "cases": [
+    {
+      "id": "r1",
+      "question": "Find companies that spend between 10% and 20% of their revenue on R&D.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "research and development expense", "statement": "income"}},
+        {"tool": "find_fsconcept", "args": {"q": "total revenue", "statement": "income"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "rnd", "relation": "ratio_between", "metricB": "revenue", "min": 0.10, "max": 0.20}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count 40 (capped). Top: GOOG (rnd $68.97B on $445.9B rev = ~15.5%), MSFT ($35.6B on $331.8B = ~10.7%), AVGO. All within the 10-20% band. Two-sided ratio of two line items, as intended.",
+      "confusion_note": "OBVIOUS. The ScreenCondition RELATION form doc + `relation` enum explicitly lists 'ratio_between (min <= A/B <= max ... as a fraction of B)' and bounds are FRACTIONS. Resolving rnd/revenue via find_fsconcept was direct (both curated:true rank-1). No guessing, no trial-error.",
+      "verdict": "PASS",
+      "reason": "Non-empty, each result's R&D/revenue lands in 10-20%; a genuine two-line-item ratio band, not a single-metric threshold.",
+      "defects": [{"desc": "none", "side": "none"}]
+    },
+    {
+      "id": "r2",
+      "question": "Which companies have capital expenditure of around 8% of revenue?",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "capital expenditure", "statement": "cashflow"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "capex", "relation": "ratio_near", "metricB": "revenue", "target": 0.08}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count 40 (capped). Top: XOM (capex_to_revenue 0.0808 = ~8.1%), AMAT, etc. — capital-intensive energy/semis names. Response surfaced a _conventions note explaining capex is stored NEGATIVE (outflow); the server matched by magnitude (capex value -$29.17B) and reported capex_to_revenue positive ~0.08.",
+      "confusion_note": "OBVIOUS. The `relation` enum + `target`/`band` fields spell out ratio_near verbatim ('capex around 8% of revenue -> metricA=capex, ratio_near, metricB=revenue, target=0.08') — literally the example. find_fsconcept returned capex with is_inverted:true/sign metadata and the guide said the SERVER handles sign, so I did NOT reason about the minus. Server did the right thing (magnitude). Zero guessing.",
+      "verdict": "PASS",
+      "reason": "capex/revenue sits near 8% (XOM 0.0808), capital-intensive names, sign handled by magnitude not literal minus.",
+      "defects": [{"desc": "none", "side": "none"}]
+    },
+    {
+      "id": "r3",
+      "question": "Find companies whose R&D is at least 15% of their revenue.",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "rnd", "relation": "higher_than", "metricB": "revenue", "multiple": 0.15}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count 40 (capped). Top: GOOG (rnd $68.97B / rev $445.9B = 15.5%), plus a heavy-R&D name at rnd $8.64B on $18.67B rev (~46%, software/loss-maker). One-sided fraction-of relation R&D/revenue >= 0.15.",
+      "confusion_note": "OBVIOUS. `relation:'higher_than'` doc gives the exact example 'R&D >= 15% of revenue -> metricA=rnd, higher_than, metricB=revenue, multiple=0.15' and states multiple is a FRACTION. Concepts reused from r1. No trial-error.",
+      "verdict": "PASS",
+      "reason": "R&D-heavy names with R&D/revenue >= 0.15, non-empty and plausible (Alphabet + software/semis).",
+      "defects": [{"desc": "none", "side": "none"}]
+    },
+    {
+      "id": "r4",
+      "question": "Show me companies where free cash flow covers the dividend at least twice over.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "free cash flow", "statement": "cashflow"}},
+        {"tool": "find_fsconcept", "args": {"q": "dividends paid", "statement": "cashflow"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "free_cash_flow", "relation": "higher_than", "metricB": "dividends_paid", "multiple": 2}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count 40 (capped). Top: NVDA (FCF $119.08B), AAPL, etc. — large FCF-generative dividend payers. Coverage relation FCF >= 2x dividends. dividends_paid resolved as curated rank-1 (is_inverted:true; server handles the outflow sign).",
+      "confusion_note": "OBVIOUS. 'covers the dividend at least twice over' = A >= 2xB -> higher_than with multiple=2 ('cash >= 2x debt -> multiple=2' example in the doc). dividends_paid is stored-negative (is_inverted) but the guide is explicit the SERVER applies sign, so I passed the concept raw and got sensible payers. No guess. (Minor: results skew to mega-cap growth like NVDA whose dividend is tiny — a huge FCF/tiny-div ratio trivially clears 2x; that is correct per the literal request, just not a 'dividend aristocrat' cut. Not a defect.)",
+      "verdict": "PASS",
+      "reason": "Dividend payers with FCF >= 2x dividends paid, non-empty and plausible (coverage relation honored).",
+      "defects": [{"desc": "none", "side": "none"}]
+    },
+    {
+      "id": "r5",
+      "question": "Find companies with a net profit margin above 20%.",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"q": "net profit margin"}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_margin", "pattern": "above", "threshold": 0.20}], "asset_type": ["Common Stock"]}}
+      ],
+      "result_summary": "count 40 (capped). Top: NVDA (net_margin 0.6297), AAPL (net_income $128.9B on $466.8B rev). matched.kind='level', all above 0.20. Plain single-metric level screen.",
+      "confusion_note": "OBVIOUS. find_fsconcept returned the `net_margin` ratio (curated, unit:percent). The threshold doc is explicit: a ratio/percent metric is a FRACTION -> send 0.20 for 20%. Used the plain metric+pattern (concept/pattern/threshold) form, NOT the relation form. No guessing.",
+      "verdict": "PASS",
+      "reason": "Control works: single-metric net_margin > 0.20, non-empty, sensible high-margin names.",
+      "defects": [{"desc": "none", "side": "none"}]
+    }
+  ],
+  "set_summary": {
+    "pass": 5,
+    "partial": 0,
+    "fail": 0,
+    "top_defects": ["none — all 5 cases were unambiguous from the schema; the ScreenCondition RELATION-form docs give near-verbatim examples for ratio_between / ratio_near / higher_than (multiple as a FRACTION), and the sign/is_inverted metadata is explicitly server-applied so the client never had to reason about capex/dividends being stored negative"]
+  }
+}
