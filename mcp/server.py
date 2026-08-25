@@ -2433,15 +2433,17 @@ def resolve_themes(terms: Annotated[List[str], _d("One or more THEME/trend terms
     tier1 = [n for n in _taxonomy()["nodes"] if n["tier"] == 1]
     result: dict = {}
     for term in terms:
-        g = _gazetteer(term)
+        nterm = _normalize_gaz_query(term)  # verbose/punctuated → clean (SAME shared helper as GICS)
+        g = _gazetteer(term) or (_gazetteer(nterm) if nterm and nterm != str(term).strip().lower() else [])
         if g:
             result[term] = [_node_out(i) for i in g]
             continue
-        m1 = _match(term, tier1)
+        dterm = nterm or term  # the deepseek drill gets the cleaned query too
+        m1 = _match(dterm, tier1)
         c2 = [k for t in m1 for k in _children(t)]
-        m2 = set(_match(term, c2))
+        m2 = set(_match(dterm, c2))
         c3 = [k for t in m2 for k in _children(t)]
-        m3 = set(_match(term, c3)) if c3 else set()
+        m3 = set(_match(dterm, c3)) if c3 else set()
         nodes: list = []
         for t in m1:
             nodes += _solve(t, {2: m2, 3: m3})
@@ -2593,15 +2595,35 @@ def _gics_rollup(code: str) -> str:
 
 # The ONE shared concept→GICS resolver. find_gics AND theme_pulse both call this — no tool rolls its own
 # keyword→sector map (theme_pulse used to run a private deepseek classify that mis-mapped "homebuilders"→Banks).
+# Filler words a verbose sector query carries that GICS node names never do — dropped before gazetteer matching.
+_GAZ_FILLER = {"sector", "sectors", "industry", "industries", "subindustry", "sub", "group", "groups",
+               "companies", "company", "firms", "names", "stocks", "stock", "space", "the", "a", "an", "of",
+               "theme", "themes", "trend", "trends", "megatrend", "megatrends"}  # GICS + megatrend resolvers
+
+def _normalize_gaz_query(q: str) -> str:
+    """Clean a free-text industry/sector query for the DETERMINISTIC gazetteer (SHARED by any lexical resolver, not
+    just GICS): replace the separators/brackets the GICS tree never contains (/ ( ) [ ] { } | ; :) with spaces and
+    drop filler words (sector/industry/companies/the/…), then collapse whitespace. KEEPS `& , - .` — those ARE real
+    in node names ('Oil, Gas & Consumable Fuels', 'Health Care'). This is the generalized fix for 'a verbose/
+    punctuated query misses the gazetteer and falls through to the (occasionally-empty) LLM drill' — NOT a `/`-only
+    patch: it strips the whole separator class + fillers so 'information technology sector' or 'banks / diversified
+    banks' reduces to a clean node the gazetteer can hit."""
+    s = str(q).lower()
+    for ch in "/()[]{}|;:":
+        s = s.replace(ch, " ")
+    return " ".join(w for w in s.split() if w not in _GAZ_FILLER).strip()
+
 def _resolve_gics_codes(term: str) -> list:
-    """A sector/industry concept → GICS code(s). Alias-normalise vocabulary → gazetteer (deterministic
-    exact/tight-substring) + roll-up to the family group as an ADDED candidate → else a deepseek tier-drill
-    (sector→group→industry→sub). Returns codes broad-first (shorter code first), dedup'd — YOU pick."""
+    """A sector/industry concept → GICS code(s). Normalise (strip separators/fillers) → alias-normalise vocabulary →
+    gazetteer (deterministic exact/tight-substring) + roll-up to the family group as an ADDED candidate → else a
+    deepseek tier-drill (sector→group→industry→sub). Returns codes broad-first (shorter code first), dedup'd."""
     key = str(term).strip().lower()
-    if key in _GICS_MULTI:  # colloquial multi-home terms (internet/platform/e-commerce) — the word can't gazetteer-match
-        return _GICS_MULTI[key]
-    term = _GICS_ALIAS.get(key, term)
-    g = _gics_gaz(term)
+    nkey = _normalize_gaz_query(key)  # verbose/punctuated → clean, matchable
+    for k in (key, nkey):
+        if k in _GICS_MULTI:  # colloquial multi-home terms (internet/platform/e-commerce)
+            return _GICS_MULTI[k]
+    term = _GICS_ALIAS.get(key) or _GICS_ALIAS.get(nkey) or term
+    g = _gics_gaz(term) or (_gics_gaz(nkey) if nkey and nkey != str(term).strip().lower() else [])
     if g:
         out: list = []
         for c in g:  # add the rolled-up family group WITHOUT dropping the specific node — client picks
@@ -2610,14 +2632,15 @@ def _resolve_gics_codes(term: str) -> list:
                 out.append(r)
             out.append(c)
         return sorted(dict.fromkeys(out), key=lambda x: (len(x), x))
+    dterm = nkey or term  # the deepseek drill gets the CLEANED query (punctuation/fillers stripped) too
     sectors = [n for n in _gics_tax()["nodes"] if n["level"] == "sector"]
-    m1 = _gics_match(term, sectors)
+    m1 = _gics_match(dterm, sectors)
     c2 = [k for s in m1 for k in _gics_children(s)]
-    m2 = set(_gics_match(term, c2))
+    m2 = set(_gics_match(dterm, c2))
     c3 = [k for gr in m2 for k in _gics_children(gr)]
-    m3 = set(_gics_match(term, c3)) if c3 else set()
+    m3 = set(_gics_match(dterm, c3)) if c3 else set()
     c4 = [k for ind in m3 for k in _gics_children(ind)]
-    m4 = set(_gics_match(term, c4)) if c4 else set()
+    m4 = set(_gics_match(dterm, c4)) if c4 else set()
     nodes: list = []
     for s in m1:
         nodes += _gics_solve(s, {2: set(m2), 3: set(m3), 4: set(m4)})
