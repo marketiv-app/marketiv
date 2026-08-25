@@ -1811,8 +1811,13 @@ def find_fsconcept(q: Annotated[Optional[str], _dq(
     = the headline line; curated:true = an exact name/alias hit, high confidence). Then pass the chosen
     concept(s) VERBATIM to `financials(fields=…)`. Empty candidates → refine with a sharper English term and
     call again; never guess a concept.
+    🔴 `low_confidence: true` in the response (or per-query block) = NO exact/alias hit AND even the best semantic
+    match is weak → the term is probably UNSUPPORTED or mis-phrased. Do NOT blindly pass the top candidate (it will
+    400 as an unknown concept at screen time). Instead: RE-PHRASE to the standard English accounting term and retry,
+    or tell the user that concept isn't screenable and offer the nearest supported metric. Only trust the candidates
+    when `low_confidence: false`.
     🔴 BATCH — resolving vocabulary for a MULTI-CONDITION screen? Pass `queries=[…]` (NOT N separate calls) to
-    resolve them all in one round-trip; returns one `candidates` block per query."""
+    resolve them all in one round-trip; returns one block per query, EACH with its own `low_confidence`."""
     if queries:
         resp = mdx()._http._client.post(
             "/v1/financials/find",
@@ -2015,7 +2020,12 @@ def screen_unified(
     a-THEN-b; both = the intersection). The two grammars stay SEPARATE — compose
     `fundamental` from find_fsconcept+find_fspattern and `ta` from find_tasignal; the server resolves each leg,
     scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
-    results:[{head_listing_id, score, matched_legs:[…], ta:{…signals}, fundamental:{ticker,name,metrics}}], notes}.
+    results:[{head_listing_id, ticker, name, score, matched_legs:[…],
+              matched:{ta:{…what each signal filtered on}, fundamental:{…which value passed}},
+              context:{ta:{rsi14/adx/…latest indicators}, fundamental:{…}}}], notes}.
+    🔴 The per-leg subtree key == the leg NAME you sent == its `matched_legs` token: TA evidence is under
+    `matched.ta` / `context.ta`, fundamental evidence under `matched.fundamental` / `context.fundamental`
+    (NOT `technical` / `financial`). Read each leg's result back under the SAME name you screened on.
     🔴 TIME WINDOWS are per-LEG and SEPARATE: the TA leg's "within the last N days" = top-level `window_bars`;
     a FUNDAMENTAL trend's span (e.g. "over 2 years") = that condition's `N`. Never conflate the two.
     🔴 PARTIAL results: when NO stock matches BOTH legs (intersection < 3), the response adds `partial:true`,
