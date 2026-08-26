@@ -778,14 +778,17 @@ def find_stock(q: Annotated[Optional[str], _dq("Free-text to resolve to ONE exac
 
 @mcp.tool(title="Theme Players", annotations=_RO)
 def theme_players(theme: Annotated[str, _d("A megatrend theme — name/slug (resolved for you) or node id.")],
-                  country: Annotated[str, _d("Market ISO-2 (REQUIRED) — the theme's member companies in that country.")],
+                  country: Annotated[Optional[str], _d("`all` (DEFAULT) = the whole cross-market roster — use this for 'who are the players in <theme>'. Or an ISO-2 market to scope to ONE venue. ⚠️ keyed by LISTING VENUE, not domicile: a foreign name lists under the market it TRADES on (Leonardo/Saab under GB via their LSE line, Novo under US/DE, Cameco under US) — so a home-country query (IT/SE/DK/CA) can return 0 even though the company IS a member. When in doubt use `all`.")] = "all",
                   exposure: Annotated[Optional[str], _d("Filter by exposure tier (e.g. `core`). Omit → all members.")] = None,
                   limit: Annotated[Optional[int], _d(_LIMIT)] = None) -> dict:
-    """Investable MEMBER companies of a theme (curated membership) in a country. Different from
-    top_entities (which are news-derived). `limit` = how many (default 20, max 50; big themes have many).
-    Returns {stocks, count, total, note?} — if `total` > `count`, the list is a TOP SLICE: say so and
-    don't present it as the full roster (raise `limit` or narrow scope for the rest)."""
-    return _paged(mdx().theme(_to_node(theme)).stocks(country=country, exposure=exposure,
+    """THE roster tool: investable MEMBER companies of a theme (curated membership). Rolls up sub-themes
+    (a parent node returns its children's members too). Use this — not screen_stocks — for 'who are the
+    players / real names in <theme>' (screen_stocks is a NEWS-ranked subset gated to news-epicenter members).
+    `country='all'` (default) gives the complete cross-market list; an ISO-2 scopes to one trading venue.
+    Different from top_entities (news-derived). `limit` = how many (default 20, max 50; big themes have many).
+    Returns {stocks, count, total, note?} — if `total` > `count` it's a TOP SLICE: say so, don't present it
+    as the full roster (raise `limit`)."""
+    return _paged(mdx().theme(_to_node(theme)).stocks(country=(country or "all"), exposure=exposure,
                                                       max_items=_lim(limit)), key="stocks")
 
 @mcp.tool(title="Private Movers", annotations=_RO)
