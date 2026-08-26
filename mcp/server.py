@@ -700,6 +700,71 @@ def options_sentiment(
             "fabricate an options view; use news/impact for the read, and (if relevant) note options "
             "coverage isn't available for this name.")}
 
+# ── Option-behavior STOCK scanner (POC: resolver + scan stub) ─────────────────────────────────────
+# Inlined catalog for the INTERFACE test only — the real version reads op_pattern_catalog + embeddings.
+# (key, label, supported, aliases, description)
+@mcp.tool(title="Find Option Pattern", annotations=_RO)
+def find_oppattern(
+    queries: Annotated[List[str], _d("One or more SHORT plain-language phrases describing the options-market "
+        "behaviour / crowd emotion you want to FIND STOCKS by — ENGLISH, translate first. 🔴 KEEP THE TENSE the "
+        "user used — 'who is the crowd afraid of' (a state NOW) vs 'fear is building' (a trend) vs 'were afraid, "
+        "now getting brave' (a flip) resolve to DIFFERENT tokens; don't flatten them. Break a compound question "
+        "into its concepts (e.g. 'cheap vol AND smart money buying' → ['cheap implied vol','smart money buying']).")],
+) -> dict:
+    """Resolve plain-language OPTIONS-BEHAVIOUR phrases → the scan-pattern token(s) for `options_scan`.
+    Use this whenever the user wants to FIND STOCKS by what the OPTIONS MARKET is doing/feeling across the
+    whole US optionable universe — e.g. "which stocks is the crowd afraid of", "cheap implied vol", "smart
+    money piling in", "one-sided / crowded names", "distrust short-term but believe long-term". Both pro
+    jargon (IV rank, skew, gamma, put/call) AND newbie emotion words (fear, greed, confidence, betting)
+    resolve here.
+    🔴 TENSE / TIME is a real axis — each candidate carries a `temporal_mode`: `level` = the state RIGHT NOW,
+    `rising`/`falling` = a trend over the last ~2 weeks ("fear building" / "fear receding"), `flip` = a reversal
+    ("were afraid, now getting brave"). Two candidates that differ ONLY in tense (fear vs fear-building) will
+    both come back — READ the label and pick the one matching how the user phrased it.
+    Returns top-k `{pattern, label, temporal_mode, exec_path, description, supported}` per query.
+    🔴 ROUTE BY `exec_path`: `scan` → feed `pattern` to options_scan (single, or CSV to AND within options).
+    `compose` → do NOT scan it; the candidate carries a `compose_recipe` (an INTERSECT of legs). If
+    `compose_recipe.status='live'`, BUILD it — resolve each leg (e.g. a price-trend via find_tasignal) and call
+    `screen_unified` with the options pattern + the other leg (a divergence = price vs options positioning
+    OPPOSITE); if `status='pending'`, tell the user that composition isn't wired yet (see `.blocker`), don't
+    substitute. `unsupported` → no such data; say so. YOU pick the token(s) then route. Options history is ~1
+    month, so an older-period ask ("fearful in May vs brave in August") is NOT supported — say so. NOT for one
+    named stock's option detail (use `options_sentiment`); NOT for choosing an option contract/strike/expiry."""
+    results = []
+    guide = None
+    for q in queries:
+        resp = mdx()._http._client.post("/v1/options/find-pattern", json={"q": q, "limit": 8})
+        _check(resp)
+        d = resp.json()
+        guide = d.get("_guide", guide)
+        results.append({"query": q, "candidates": d.get("patterns", [])})
+    return {"results": results, "note": guide or
+            "Pick the best `pattern` token(s) → options_scan(pattern=…). Match the `temporal_mode` to the "
+            "user's tense. A `supported:'no'` candidate means opana can't scan for it yet — say so plainly."}
+
+@mcp.tool(title="Options Scan", annotations=_RO)
+def options_scan(
+    pattern: Annotated[str, _d("A resolved pattern_key from find_oppattern (VERBATIM). CSV = AND-combine "
+        "(intersect), e.g. 'iv_cheap,positioning_building_bull'; the FIRST token owns the ranking.")],
+    horizon: Annotated[str, _d("`short` | `long` — which options horizon to read (default long = the "
+        "positioning/conviction lens; short = the gamma/near-term lens).")] = "long",
+    min_strength: Annotated[Optional[float], _d("Optional cutoff on the ranked axis / Δ — omit to let the "
+        "scanner return the top-ranked names.")] = None,
+    limit: Annotated[Optional[int], _d(_LIMIT)] = None,
+) -> dict:
+    """Find STOCKS by an options-behaviour pattern (opana lens) across the ~557 US optionable names — returns
+    ranked UNDERLYINGS each with a plain-language `because` + `metrics` (value, and prev→delta for a trend/flip).
+    STOCK scanner only: it does NOT pick option contracts/strikes/expiries (for one named stock's detail use
+    `options_sentiment`). Feed it a `pattern` from find_oppattern — its `temporal_mode` decides the read (level =
+    now, rising/falling = ~2-week trend, flip = reversal). A `supported:'no'`/`'future'` pattern returns an empty
+    list + an honest note (say so, don't substitute). US-capped — state that in the answer."""
+    body = {"pattern": pattern, "horizon": horizon, "limit": _lim(limit, default=15, ceiling=50, floor=1)}
+    if min_strength is not None:
+        body["min_strength"] = min_strength
+    resp = mdx()._http._client.post("/v1/options/scan", json=body)
+    _check(resp)
+    return resp.json()
+
 _FIND_KEEP = ("ticker", "symbol", "name", "type", "country", "domicile", "region", "region_iso2",
               "exchange", "market_cap_usd", "similarity", "match_type", "mode")
 
@@ -1989,6 +2054,14 @@ def screen_unified(
             "qualifier's own `timeframe` (1/2/3) — 'weekly holds above the 50-week AND daily just crossed up' → screen "
             "timeframe=1, anchor crossover_up, qualifier {above, a:'close', b:'ema50', timeframe:2}. Omit for a "
             "fundamentals-only screen.")] = None,
+        options: Annotated[Optional[str], _d(
+            "The OPTIONS leg — a resolved op-pattern token from find_oppattern (VERBATIM), e.g. 'fear_building', "
+            "'fear_to_confidence', 'iv_cheap', 'positioning_building_bull'. Intersects the ~557 US-optionable names "
+            "whose options market shows that behaviour with the other legs — 'biotech stocks the options crowd is "
+            "getting brave on' → gics='352010' + options='fear_to_confidence'. 🔴 Resolve the token via find_oppattern "
+            "FIRST (it also tells you if the behaviour isn't scannable). US-optionable only. Omit for a non-options screen.")] = None,
+        options_horizon: Annotated[Optional[str], _d("Options horizon: 'long' (default, positioning/conviction) or "
+            "'short' (gamma/near-term). Only meaningful with `options`.")] = None,
         gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a SINGLE GICS code PREFIX from find_gics ('45'=IT sector, "
             "'3520'=biotech group, '352010'=biotech industry; shorter prefix = broader). One cohort carries ONE gics prefix — "
             "for two UNRELATED sectors (biotech OR software) run separate screens. Omit = all sectors.")] = None,
@@ -2019,12 +2092,14 @@ def screen_unified(
             "over-fetches a look-ahead BUFFER of ~4× this (capped 100) and returns it all, so 'show me a few more' "
             "is served from THIS result — do NOT re-screen for a few more, just surface the next rows already here. "
             "Wanting more than the 100-row buffer needs a fresh screen with a larger intent.")] = None) -> dict:
-    """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical — the INTERSECTION of a fundamentals screen
-    and a technical screen within a scope. This is the ONE screen tool: either leg is optional (fundamental-only = a
-    pure fundamentals screen; ta-only = a pure technical scan of EMA/MACD cross, RSI/overbought, divergence, squeeze,
-    a-THEN-b; both = the intersection). The two grammars stay SEPARATE — compose
-    `fundamental` from find_fsconcept+find_fspattern and `ta` from find_tasignal; the server resolves each leg,
-    scopes both to the universe, and intersects on head_listing_id. Returns {universe, count, sort,
+    """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical ∩ options — the INTERSECTION of a fundamentals
+    screen, a technical screen, and an options-behaviour screen within a scope. This is the ONE screen tool: EVERY leg
+    is optional (fundamental-only = a pure fundamentals screen; ta-only = a pure technical scan of EMA/MACD cross,
+    RSI/overbought, divergence, squeeze, a-THEN-b; options-only = stocks by options-market behaviour; any combination =
+    the intersection). The grammars stay SEPARATE — compose `fundamental` from find_fsconcept+find_fspattern, `ta` from
+    find_tasignal, and `options` from find_oppattern; the server resolves each leg, scopes all to the universe, and
+    intersects on head_listing_id. 🔴 The OPTIONS leg is US-optionable-only (~557 names), so any screen using it is
+    US-capped — say so. To rank by options signal strength pass sort='options'. Returns {universe, count, sort,
     results:[{head_listing_id, ticker, name, score, matched_legs:[…],
               matched:{ta:{…what each signal filtered on}, fundamental:{…which value passed}},
               context:{ta:{rsi14/adx/…latest indicators}, fundamental:{…}}}], notes}.
@@ -2063,16 +2138,20 @@ def screen_unified(
     # ≥1 executable leg required — the screen is an INTERSECTION of fundamental ∩ ta within a scope; a scope alone
     # (gics/country/size, no leg) is a plain list, which screen_stocks serves. Guard here with a helpful redirect
     # rather than letting the API 400 (F6b: the bare-universe 400 body wasn't reaching the client clearly).
-    if not fundamental and not ta:
-        return {"error": "screen_unified needs at least one of `fundamental` or `ta` — it returns the INTERSECTION of a "
-                         "financial screen and a technical screen within a scope. For a plain universe list (gics/country/"
-                         "size only, no financial or technical filter) use screen_stocks instead."}
+    if not fundamental and not ta and not options:
+        return {"error": "screen_unified needs at least one of `fundamental`, `ta`, or `options` — it returns the "
+                         "INTERSECTION of financial / technical / options-behaviour screens within a scope. For a plain "
+                         "universe list (gics/country/size only, no filter) use screen_stocks instead."}
     show = _lim(limit, default=10, ceiling=100)
     fetch = min(show * 4, 100)
     body: dict = {"limit": fetch}
     if include: body["universe"] = {"include": [include]}
     if fundamental: body["fundamental"] = [_cond_to_api(c) for c in fundamental]
     if ta: body["ta"] = [s.model_dump(exclude_none=True) for s in ta]
+    if options:
+        opt: dict = {"pattern": options}
+        if options_horizon: opt["horizon"] = options_horizon
+        body["options"] = opt
     if timeframe: body["timeframe"] = timeframe
     if window_bars is not None: body["window_bars"] = window_bars
     if sort: body["sort"] = sort
