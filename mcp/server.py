@@ -86,7 +86,7 @@ _INSTRUCTIONS = (
     "🎯 POSITIONING beyond equities: for a COMMODITY / FX / RATES / INDEX, futures positioning is `positioning"
     "(<asset>)` — the non-equity TWIN of options_sentiment (from CFTC Commitment of Traders): is the crowd "
     "at a 3-year extreme (crowded = contrarian RISK), is the smart money leaning against it, is the good news "
-    "already PRICED INTO positioning. `positioning_extremes` scans WHERE positioning is most stretched across "
+    "already PRICED INTO positioning. `cot_extremes` scans WHERE positioning is most stretched across "
     "all markets. Pair it with commodity_pulse / bond_pulse (news + positioning). A single STOCK has no futures "
     "positioning → its lens is OPTIONS (options_sentiment). Narrate the PLAIN reads for a beginner. "
     "💰 FUNDAMENTALS (company financial statements): `financials(tickers)` reads or COMPARES up to 8 companies' "
@@ -519,8 +519,8 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
           window: Annotated[str, _d(_WINDOW)] = "30d",
           from_: Annotated[Optional[str], _d(_FROM)] = None,
           to: Annotated[Optional[str], _d(_TO)] = None,
-          interval: Annotated[Optional[str], _d("Time-bucketing of the pulse series: `day`|`week`|`month`.")] = None,
-          lang: Annotated[Optional[str], _d("Translate title/brief_text: `en`|`th`|`ja`.")] = None) -> dict:
+          interval: Annotated[Optional[Literal["day","week","month"]], _d("Time-bucketing of the pulse series: `day`|`week`|`month`.")] = None,
+          lang: Annotated[Optional[Literal["en","th","ja"]], _d("Translate title/brief_text: `en`|`th`|`ja`.")] = None) -> dict:
     """The generalized ANALYST BRIEF — one composed "how is <scope> doing right now?" picture (pulse +
     net direction, top_stories, winners/losers, aspect_heatmap, top_entities, top_assets) for ANY
     AND-combination of scopes. ⭐ Use this to SUMMARIZE a SCOPE — a THEME, a news CATEGORY, a COUNTRY, a
@@ -568,7 +568,7 @@ _SIM_WEAK = 0.58     # below this = essentially no match
 @mcp.tool(title="Search News", annotations=_RO)
 def search_news(q: Annotated[str, _dq("Free-text SEMANTIC news query — a topic/event/asset in any language "
                                       "('copper', 'oil shock', 'Fed rate hike', 'ข่าวทองคำ').")],
-                entity_type: Annotated[Optional[str], _d("Keep only hits of one kind: `stock`|`forex`|`crypto`|`commodity`|`private`. Omit → all.")] = None,
+                entity_type: Annotated[Optional[Literal["stock","forex","crypto","commodity","private"]], _d("Keep only hits of one kind: `stock`|`forex`|`crypto`|`commodity`|`private`. Omit → all.")] = None,
                 collapse: Annotated[Optional[bool], _d(_COLLAPSE)] = None,
                 limit: Annotated[Optional[int], _d(_LIMIT)] = None,
                 from_: Annotated[Optional[str], _d(_FROM)] = None,
@@ -598,7 +598,7 @@ def search_news(q: Annotated[str, _dq("Free-text SEMANTIC news query — a topic
 def news_feed(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
               country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
               aspect: Annotated[Optional[str], _d(_ASPECT)] = None,
-              direction: Annotated[Optional[str], _d(_DIRECTION)] = None,
+              direction: Annotated[Optional[Literal["pos","neg","ambiguous"]], _d(_DIRECTION)] = None,
               news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
               only_scored: Annotated[Optional[bool], _d("Keep only articles carrying a judged per-entity impact. Omit → all gated articles.")] = None,
               min_relevance: Annotated[Optional[float], _d("Minimum impact relevance, 0–1.")] = None,
@@ -620,7 +620,7 @@ def news_feed(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
 
 @mcp.tool(title="Stock Impact", annotations=_RO)
 def stock_impact(ticker: Annotated[str, _dt(_TICKER)],
-                 direction: Annotated[Optional[str], _d(_DIRECTION)] = None,
+                 direction: Annotated[Optional[Literal["pos","neg","ambiguous"]], _d(_DIRECTION)] = None,
                  limit: Annotated[Optional[int], _d(_LIMIT)] = None,
                  collapse: Annotated[Optional[bool], _d(_COLLAPSE)] = None,
                  from_: Annotated[Optional[str], _d(_FROM)] = None,
@@ -746,7 +746,7 @@ def find_oppattern(
 def options_scan(
     pattern: Annotated[str, _d("A resolved pattern_key from find_oppattern (VERBATIM). CSV = AND-combine "
         "(intersect), e.g. 'iv_cheap,positioning_building_bull'; the FIRST token owns the ranking.")],
-    horizon: Annotated[str, _d("`short` | `long` — which options horizon to read (default long = the "
+    horizon: Annotated[Literal["short","long"], _d("`short` | `long` — which options horizon to read (default long = the "
         "positioning/conviction lens; short = the gamma/near-term lens).")] = "long",
     min_strength: Annotated[Optional[float], _d("Optional cutoff on the ranked axis / Δ — omit to let the "
         "scanner return the top-ranked names.")] = None,
@@ -900,7 +900,7 @@ def portfolio_context(portfolio_id: Annotated[int, _d(_PID)],
                       from_: Annotated[Optional[str], _d("Window start YYYY-MM-DD — re-scopes performance/attribution/composition together.")] = None,
                       to: Annotated[Optional[str], _d("Window end YYYY-MM-DD.")] = None,
                       window: Annotated[Optional[str], _d("Re-scope perf+attribution+composition to a period: `7d`/…/`ytd`. Omit → lifetime + recent(12mo).")] = None,
-                      snapshots: Annotated[Optional[str], _d("Point-in-time composition cadence: `year|quarter|month|week|day|off` (default quarter); auto-coarsens over long spans.")] = None) -> dict:
+                      snapshots: Annotated[Optional[Literal["year","quarter","month","week","day","off"]], _d("Point-in-time composition cadence: `year|quarter|month|week|day|off` (default quarter); auto-coarsens over long spans.")] = None) -> dict:
     """An LLM-ready snapshot of ONE of the user's OWN portfolios (owner-scoped) — analyze it directly.
     NO window → default: `meta` · `summary` · a `lifetime`(all-time) + `recent`(~12mo) block, EACH with
     `performance` (return/cagr/sharpe/sortino/calmar/drawdown/vol/win_rate) + `attribution` · `positions`
@@ -973,7 +973,7 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
                    "(pipe syntax `| col | col |`), NEVER flattened into a paragraph of numbers; use headings (##) for "
                    "sections and bullet lists for points. If you showed the user a table, the note keeps that table.")],
                summary: Annotated[Optional[str], _d("One-line summary (shown when the note is collapsed).")] = None,
-               note_type: Annotated[Optional[str], _d("`reference` (concept/understanding) | `tracking` (dated market read) | `thesis` | `decision`.")] = None,
+               note_type: Annotated[Optional[Literal["reference","tracking","thesis","decision"]], _d("`reference` (concept/understanding) | `tracking` (dated market read) | `thesis` | `decision`.")] = None,
                category: Annotated[Optional[str], _d("Optional free-text category.")] = None,
                tags: Annotated[Optional[List[str]], _d("Free-text tags for retrieval.")] = None,
                stocks: Annotated[Optional[List[str]], _d("PRIMARY tickers the note is ABOUT (MarketDX tickers you already resolved this turn). Server maps → canonical ids. ⚠️ A COMMODITY discussed via the trade tools has only an HS code (rice→1006), NOT a ticker — resolve it with find_stock first (rice→RICE.COMM) so the note links to the commodity.")] = None,
@@ -1063,7 +1063,7 @@ def query_notes(q: Annotated[Optional[str], _d("Semantic query text — recall n
                 theme: Annotated[Optional[str], _d("Filter to a theme (name → megatrend, incl. subtree rollup).")] = None,
                 gics: Annotated[Optional[str], _d("GICS code filter.")] = None,
                 tag: Annotated[Optional[str], _d("Tag filter.")] = None,
-                note_type: Annotated[Optional[str], _d("Filter by type (reference/tracking/thesis/decision).")] = None,
+                note_type: Annotated[Optional[Literal["reference","tracking","thesis","decision"]], _d("Filter by type (reference/tracking/thesis/decision).")] = None,
                 since: Annotated[Optional[str], _d("Only notes since this date/window (e.g. `30d` or YYYY-MM-DD).")] = None,
                 limit: Annotated[Optional[int], _d(_LIMIT)] = None,
                 relation: Annotated[Optional[str], _d("With `stock=`: `direct` (note ABOUT it) | `indirect` (merely referenced) | `any` (default).")] = None) -> dict:
@@ -1760,16 +1760,20 @@ def positioning(asset: Annotated[str, _dq(
         ticker = (ms[0].get("ticker") if ms else a) or a
     return cli._get("/v1/positioning", {"asset": ticker}).data
 
-@mcp.tool(title="Positioning Extremes (COT)", annotations=_RO)
-def positioning_extremes(
-    asset_class: Annotated[Optional[str], _d("Filter: `commodity` | `fx` | `rates` | `equity_index`. Omit = all.")] = None,
+@mcp.tool(title="CFTC / COT Futures Extremes", annotations=_RO)
+def cot_extremes(
+    asset_class: Annotated[Optional[Literal["commodity","fx","rates","equity_index"]], _d("Filter: `commodity` | `fx` | `rates` | `equity_index`. Omit = all.")] = None,
     limit: Annotated[Optional[int], _d("Max markets (default 15, max 50).")] = None,
 ) -> dict:
-    """⭐ WHICH futures markets have the speculative CROWD at a 3-year positioning EXTREME right now — the
-    discovery scan across every tracked commodity / FX / rate / index at once. Surfaces stretched positioning
-    (≥90th or ≤10th percentile of its own 3y history) that could unwind hard on a shock — a contrarian-RISK
-    map, NOT buy/sell calls (an extreme can persist). Use for 'where is positioning most crowded / stretched
-    right now?'. Narrate each market's `read` in plain language."""
+    """⭐ FUTURES / CFTC-COT speculative positioning extremes — which commodity / FX / rate / equity-INDEX
+    FUTURES have the CROWD at a 3-year extreme right now (NOT single-stock equity options → for 'stretched
+    put/call' or crowded STOCK names use find_oppattern → options_scan). The discovery scan across every tracked
+    futures market at once. COT / FUTURES lens ONLY. Surfaces stretched positioning (≥90th or ≤10th
+    percentile of its own 3y history) that could unwind hard on a shock — a contrarian-RISK map, NOT buy/sell
+    calls (an extreme can persist). Use for 'where is FUTURES positioning most crowded / stretched right now?'.
+    🔴 WRONG TOOL for single-STOCK options crowding — 'stretched put/call', 'one-sided / crowded equity names',
+    'most extreme options positioning across stocks': for those use find_oppattern ('crowded / one-sided') →
+    options_scan (the equity-options opana lens across ~557 US optionable names). Narrate each `read` plainly."""
     p = {}
     if asset_class:
         p["asset_class"] = asset_class
@@ -1940,6 +1944,8 @@ class ScreenCondition(BaseModel):
     max: Optional[float] = Field(None, description="Upper bound for `between`.")
     N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window in YEARS for growth/consecutive patterns (this is find_fspattern's `N` param verbatim) — supply ONLY when the user stated the span ('over the last 3 years' → 3). Omit otherwise; the server uses the pattern's default window.")
     percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
+    total_change: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the CUMULATIVE change over the WHOLE N-year window, as a fraction: 1.0 = doubled (2×) or halved, 0.5 = +50% (grew) / −50% (fell). Use for 'grew/fell X TIMES over the period' — 'market cap doubled in 2 years' → {pattern:'compound_growth', N:2, total_change:1.0}. 🔴 NOT per-year — that's `cagr`. (Response returns BOTH change_total and cagr so you never guess.)")
+    cagr: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the ANNUALIZED rate PER YEAR, as a fraction: 0.20 = 20%/yr. Use for 'grew/fell X% per year' — 'revenue compounding 15%/yr over 5y' → {pattern:'compound_growth', N:5, cagr:0.15}. 🔴 NOT the whole-window total — that's `total_change`.")
     vs_cohort: Optional[dict] = Field(None, description="RARELY needed — usually OMIT. For a cohort pattern (below_average/above_average) the benchmark DEFAULTS to your screening scope (the `universe`): 'retail stocks with P/E below average' = scope `universe` to retail (find_gics) and OMIT this — 'below average' then means below the RETAIL average automatically. Set this ONLY to benchmark against a DIFFERENT group than you're screening (e.g. US retail vs the GLOBAL retail average). Shape: {gics?: a GICS code PREFIX string like '45' — NOT a boolean/flag; country?: ISO-2; size?: ['large'|'mid'|'small'|'micro']; stat?: 'pooled'(default)|'median'}. 🔴 EACH STOCK vs ITS OWN SECTOR (whole-market, mixed sectors, in ONE screen — a bank judged vs banks, a tech vs tech): set {own: true} (or {own:'gics_group'} / {own:'gics_industry'} for a finer grain than the default sector). Use `own` ONLY for that cross-sector 'each vs its own' case; to compare WITHIN a single sector, scope the `universe` to that sector and omit vs_cohort instead.")
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric — find_fsconcept's `concept` verbatim (a statement line, ratio, or valuation multiple). To use its GROWTH RATE instead of its level, set metricA_stat='growth'.")
     relation: Optional[str] = Field(None, description="RELATION form only — how metricA relates to metricB. One of: 'higher_than' (metricA ≥ multiple×metricB, i.e. the RATIO A/B ≥ multiple), 'lower_than' (metricA ≤ multiple×metricB), 'ratio_between' (min ≤ A/B ≤ max — A is between min and max as a fraction of B), 'ratio_near' (A/B ≈ target within ±band), 'growth_faster_than' / 'growth_slower_than' (metricA's multi-year CAGR vs metricB's). Param per relation: higher/lower_than→`multiple`; ratio_between→`min`+`max`; ratio_near→`target`(+`band`, default ±10%); the growth ones take none. The bound `k` is just the number in `A vs k×B` — a FRACTION when you mean 'A is k% OF B' (0.15 = 15% of revenue), or a DIRECT ratio when the two operands are already comparable and you want A vs a multiple of B (k=1 for 'A ≤ B'; k=2 for 'A ≥ 2×B'). Operands are compared in their OWN units as find_fsconcept describes them (e.g. a growth-rate operand is a PERCENT: 25 for 25%), so a plain-number metric vs a percent metric needs NO rescaling of k.")
@@ -1971,11 +1977,14 @@ def _cond_to_api(c: ScreenCondition) -> dict:
     np = c.params or {}
     pick = lambda name, *alts: next((v for v in ([getattr(c, name)] + [np.get(k) for k in (name, *alts)]) if v is not None), None)
     threshold, mn, mx, n, pct = pick("threshold"), pick("min"), pick("max"), pick("N", "n"), pick("percentile")
+    tc, cg = pick("total_change"), pick("cagr")
     p: dict = {}
     if threshold is not None: p["threshold"] = threshold
     if mn is not None: p["min"] = mn
     if mx is not None: p["max"] = mx
     if n is not None: p["N"] = n
+    if tc is not None: p["total_change"] = tc
+    if cg is not None: p["cagr"] = cg
     # canonical: pass `percentile` through UNCHANGED — the fund executor interprets it per pattern (low = bottom tail,
     # high = top tail). Do NOT rename to min/max_percentile here — the catalog + executor now declare `percentile`, and
     # the old rename made a hinted `percentile` call 400 ("unknown param 'max_percentile'"). One name, all layers.
@@ -2060,7 +2069,7 @@ def screen_unified(
             "whose options market shows that behaviour with the other legs — 'biotech stocks the options crowd is "
             "getting brave on' → gics='352010' + options='fear_to_confidence'. 🔴 Resolve the token via find_oppattern "
             "FIRST (it also tells you if the behaviour isn't scannable). US-optionable only. Omit for a non-options screen.")] = None,
-        options_horizon: Annotated[Optional[str], _d("Options horizon: 'long' (default, positioning/conviction) or "
+        options_horizon: Annotated[Optional[Literal["long","short"]], _d("Options horizon: 'long' (default, positioning/conviction) or "
             "'short' (gamma/near-term). Only meaningful with `options`.")] = None,
         gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a SINGLE GICS code PREFIX from find_gics ('45'=IT sector, "
             "'3520'=biotech group, '352010'=biotech industry; shorter prefix = broader). One cohort carries ONE gics prefix — "
@@ -2377,9 +2386,9 @@ def bond_pulse(q: Annotated[str, _dq("A COUNTRY ('US rates', 'US yield curve'), 
 def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
                   gics: Annotated[Optional[str], _d(_GICS)] = None,
                   country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
-                  direction: Annotated[Optional[str], _d("`pos` → winners only · `neg` → losers/at-risk only · omit → all.")] = None,
+                  direction: Annotated[Optional[Literal["pos","neg"]], _d("`pos` → winners only · `neg` → losers/at-risk only · omit → all.")] = None,
                   aspect: Annotated[Optional[str], _d(_ASPECT)] = None,
-                  order_by: Annotated[Optional[str], _d("`news_count` (default, most attention) | `relevance` | `market_cap`.")] = None,
+                  order_by: Annotated[Optional[Literal["news_count","relevance","market_cap"]], _d("`news_count` (default, most attention) | `relevance` | `market_cap`.")] = None,
                   min_impact: Annotated[Optional[int], _d("Min article importance, 1–5.")] = None,
                   min_relevance: Annotated[Optional[float], _d("Min centrality to its news, 0–1.")] = None,
                   min_market_cap_usd: Annotated[Optional[float], _d("Min market cap, USD.")] = None,
@@ -2478,7 +2487,7 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
                      max_market_cap_usd: Annotated[Optional[float], _d("Max market cap, USD.")] = None,
                      max_payout: Annotated[Optional[float], _d("Max payout ratio — 'high yield but payout NOT stretched'. "
                                                                "Fraction (0.7) or percent (70).")] = None,
-                     order_by: Annotated[Optional[str], _d("`yield` (default) | `streak` | `cagr`.")] = None,
+                     order_by: Annotated[Optional[Literal["yield","streak","cagr"]], _d("`yield` (default) | `streak` | `cagr`.")] = None,
                      limit: Annotated[Optional[int], _d(_LIMIT)] = None) -> dict:
     """💰 THE income screener — "which stocks in <a group> pay a high / reliable / growing DIVIDEND?"
     ("retail names with high dividend", "dividend aristocrats in the US", "Thai high-yield stocks"). Ranks
@@ -2792,7 +2801,7 @@ def find_hs(q: Annotated[str, _dq(
 def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO / M49 (`Thailand`/`THA`/`764`); resolved server-side.")],
                  codes: Annotated[Union[List[str], str], _d("HS/EBOPS code(s) from find_hs (never guess). Several = merged; a 4-digit code aggregates the family.")],
                  partner: Annotated[Optional[str], _d("Partner country, or `World` (default) = all combined.")] = None,
-                 flow: Annotated[Optional[str], _d("`export` (default) | `import` | `both`.")] = None,
+                 flow: Annotated[Optional[Literal["export","import","both"]], _d("`export` (default) | `import` | `both`.")] = None,
                  period: Annotated[Optional[str], _d("`last10` annual / `last12` monthly (default) · a year `2023` · list `2020,2021` · range `2015:2024` · `latest`. DYNAMIC — never hardcode a year.")] = None,
                  type: Annotated[str, _d("`goods` (default, HS) | `services` (EBOPS — VALUE-ONLY: no volume/price axes, no mirror).")] = "goods",
                  freq: Annotated[Optional[str], _d("`annual` (default) | `monthly` (YYYYMM, fresher; goods only).")] = None,
@@ -2814,7 +2823,7 @@ def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO /
 @mcp.tool(name="top_partners", title="Top Trade Partners", annotations=_RO)
 def top_partners(reporter: Annotated[str, _d("Reporting country — name / ISO / M49.")],
                  codes: Annotated[Union[List[str], str], _d("HS/EBOPS code(s) from find_hs.")],
-                 flow: Annotated[Optional[str], _d("`export` (default) → biggest BUYERS · `import` → biggest SUPPLIERS · `both`.")] = None,
+                 flow: Annotated[Optional[Literal["export","import","both"]], _d("`export` (default) → biggest BUYERS · `import` → biggest SUPPLIERS · `both`.")] = None,
                  period: Annotated[Optional[str], _d("Default `latest`; a year / list / range / `lastN`. Dynamic.")] = None,
                  type: Annotated[str, _d("`goods` (default) | `services`.")] = "goods",
                  limit: Annotated[Optional[int], _d("Top-N partners (default 10, max 50).")] = None) -> dict:
@@ -2828,7 +2837,7 @@ def top_partners(reporter: Annotated[str, _d("Reporting country — name / ISO /
 
 @mcp.tool(name="top_traders", title="Rank Countries by Trade", annotations=_RO)
 def top_traders(codes: Annotated[Union[List[str], str], _d("HS code(s) from find_hs — SUMMED per country (0207,0203 = chicken+pork combined). GOODS only.")],
-                flow: Annotated[Optional[str], _d("`import` (default) | `export` | `both`.")] = None,
+                flow: Annotated[Optional[Literal["export","import","both"]], _d("`import` (default) | `export` | `both`.")] = None,
                 scope: Annotated[Optional[str], _d("`world` (default) · continent (`asia`/`europe`/`africa`/`americas`/`oceania`) · subregion · econ group (`asean`/`eu`/`g7`) · CSV of ISO-2. (Region is OUR layer.)")] = None,
                 rank_by: Annotated[Optional[str], _d("`value` (default, period sum) · `growth` (CAGR, ≥2 periods) · `streak` (consecutive-move run, ≥2).")] = None,
                 order: Annotated[Optional[str], _d("value/growth → `desc`(default)/`asc` · STREAK → run direction (`desc`=consecutive INCREASES, `asc`=DECREASES).")] = None,
