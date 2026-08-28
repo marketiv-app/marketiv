@@ -2095,6 +2095,14 @@ def screen_unified(
         theme: Annotated[Optional[List[int]], _d("OPTIONAL megatrend THEME node_id(s) from find_megatrend, OR'd — a stock matches "
             "if it is a CORE member of ANY. e.g. [18000000] (a biotech megatrend) · [18000000,18120000]. 🔴 DISTINCT from `gics`: "
             "gics = official sector code; theme = curated megatrend membership. Resolve a theme phrase → node_id(s) via find_megatrend.")] = None,
+        exclude_gics: Annotated[Optional[str], _d("OPTIONAL — EXCLUDE a GICS sector/industry from the whole screen "
+            "(NOT banks / everything-except-utilities). CSV of GICS code prefixes from find_gics ('4010'=banks). "
+            "Applies to EVERY leg (fund/ta/options/dividend) — it's a universe-level negation, so 'high-yield stocks "
+            "but NOT banks' = fundamental dividend_yield + exclude_gics='4010'. The `gics` param INCLUDES; this EXCLUDES.")] = None,
+        exclude_country: Annotated[Optional[List[str]], _d("OPTIONAL — EXCLUDE operating-country(ies), ISO-2. "
+            "'global ex-US' = exclude_country=['US']. Universe-level, applies to every leg.")] = None,
+        exclude_theme: Annotated[Optional[List[int]], _d("OPTIONAL — EXCLUDE megatrend THEME node_id(s) from find_megatrend. "
+            "Universe-level negation across every leg.")] = None,
         min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE min market cap in USD (e.g. 50000000000 = $50bn). This is an ABSOLUTE floor — distinct from `size` (which is a RELATIVE per-market tier: 'small' means small FOR ITS market, not small in USD). For 'companies under $X' / a USD band use min/max_market_cap_usd, NOT size.")] = None,
         max_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE max market cap in USD (e.g. 2000000000 = under $2bn). Pair with min for a band. ABSOLUTE ceiling — use this for 'small caps under $X', not the relative `size` tier.")] = None,
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
@@ -2156,6 +2164,10 @@ def screen_unified(
     if theme: include["theme"] = _lst(theme)
     if min_market_cap_usd is not None: include["mcap_min"] = min_market_cap_usd
     if max_market_cap_usd is not None: include["mcap_max"] = max_market_cap_usd
+    excl: dict = {}
+    if exclude_gics: excl["gics"] = exclude_gics
+    if exclude_country: excl["country"] = [str(c).upper() for c in _lst(exclude_country)]
+    if exclude_theme: excl["theme"] = _lst(exclude_theme)
     # OVER-FETCH: `limit` = how many the client means to SHOW; fetch a ~4× look-ahead buffer (cap 100) so a
     # follow-up "a few more" is served from THIS payload (in the LLM's context) with no re-screen. Beyond 100 → fresh
     # screen (a cursor-based deep-page is designed but not built — see docs/pipeline/screener-pagination-design.md).
@@ -2169,7 +2181,11 @@ def screen_unified(
     show = _lim(limit, default=10, ceiling=100)
     fetch = min(show * 4, 100)
     body: dict = {"limit": fetch}
-    if include: body["universe"] = {"include": [include]}
+    if include or excl:
+        u: dict = {}
+        if include: u["include"] = [include]
+        if excl: u["exclude"] = [excl]
+        body["universe"] = u
     if fundamental: body["fundamental"] = [_cond_to_api(c) for c in fundamental]
     if ta: body["ta"] = [s.model_dump(exclude_none=True) for s in ta]
     if options:
