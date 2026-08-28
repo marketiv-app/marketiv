@@ -2491,8 +2491,16 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
              "net_positive": sum(1 for r in stocks if _nd(r) == "pos"),
              "net_negative": sum(1 for r in stocks if _nd(r) == "neg"),
              "ambiguous": sum(1 for r in stocks if _nd(r) == "ambiguous")}
+    # echo the RESOLVED megatrend node name(s) — a bare `megatrend` NAME auto-resolves to node id(s) via
+    # _to_nodes (rank-1 each); surface WHICH node(s) so the client isn't guessing what a term collapsed to.
+    mt_named = None
+    if mt:
+        tax = _taxonomy()["by_id"]
+        mt_named = [{"id": int(i), "name": tax[int(i)]["name"]} for i in str(mt).split(",")
+                    if i.strip().isdigit() and int(i) in tax] or None
     return {
-        "scope": {k: v for k, v in {"megatrend": mt, "gics": gics, "country": country}.items() if v},
+        "scope": {k: v for k, v in {"megatrend": mt, "megatrend_resolved": mt_named,
+                                    "gics": gics, "country": country}.items() if v},
         "order_by": order_by or "news_count", "direction": direction,
         "direction_split": split, "stocks": stocks,
         "_guide": ("LEAD with the winners-vs-losers split (`direction_split` + each row's `impact."
