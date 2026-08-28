@@ -403,7 +403,14 @@ def _gazetteer(term: str) -> list:
         return [int(t)]
     if t in tax["by_name"]:                          # exact node name → that node
         return [tax["by_name"][t]["id"]]
-    if lc in _ALIAS:
+    # DATA-driven aliases (megatrend_node.aliases, exposed via /v1/megatrends → SDK .raw) — the SOURCE OF
+    # TRUTH, editable in the DB with no code deploy. Checked BEFORE the legacy hardcoded _ALIAS (which is
+    # being migrated INTO the data). Exact-match on a curated synonym → that node.
+    da = [n["id"] for n in tax["nodes"]
+          if lc in [a.lower() for a in ((n.get("raw") or {}).get("aliases") or n.get("aliases") or [])]]
+    if da:
+        return da
+    if lc in _ALIAS:                                 # legacy in-code fallback (migrate these into .aliases)
         n = tax["by_name"].get(_ALIAS[lc]); return [n["id"]] if n else []
     hits = [n["id"] for n in tax["nodes"] if lc in n["name"].lower()]  # name contains phrase (multi-node ok)
     return hits if 1 <= len(hits) <= 4 else []
