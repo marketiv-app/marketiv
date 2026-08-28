@@ -2103,6 +2103,14 @@ def screen_unified(
             "fired, and the total span a THEN-chain must complete within. This is the '…within the last N days' knob: "
             "'bearish divergence within 50 days' on daily → window_bars=50. Applies to the WHOLE `ta` leg. Omit → "
             "default 30×(#steps). 🔴 SEPARATE from a fundamental trend's span (that goes in the fund condition's `N`).")] = None,
+        dividend_min_streak_years: Annotated[Optional[int], _d("OPTIONAL dividend gate — keep only stocks with a "
+            "no-cut dividend STREAK of at least N years (a reliability streak within a 10-year window, CAPPED at 10; "
+            "10 = clean through the whole tracked decade incl. 2020/2022 stress — NOT the full multi-decade age). "
+            "This is the 'dividend aristocrat / kept paying' filter. A pure MEMBERSHIP gate — combine with a "
+            "`fundamental`/`ta`/`options` base leg (for a pure dividend/yield screen use screen_dividends instead).")] = None,
+        dividend_min_cagr: Annotated[Optional[float], _d("OPTIONAL dividend gate — keep only stocks whose 5-year "
+            "dividend CAGR is at least this % (e.g. 5 = grew dividends ≥5%/yr). Pairs with the base leg like "
+            "dividend_min_streak_years; needs a `fundamental`/`ta`/`options` condition too.")] = None,
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'options' (the options-leg signal strength — USE THIS when `options` is present so the tight options leg DRIVES the ranking/intersection) · 'mcap' · an OSCILLATOR present in the TA context — 'rsi' (or 'rsi14') / 'adx' — to rank by that indicator's value (e.g. 'most overbought' → sort='rsi'; default direction is highest-first) · or any fundamental metric key present in the results (pe/roe/…). NOTE: an oscillator sort ranks the returned candidate buffer, so pair it with a TA filter (e.g. rsi above 60) for a meaningful 'top by RSI'.")] = None,
         limit: Annotated[Optional[int], _d("How many stocks you intend to SHOW the user (default 10). The tool "
             "over-fetches a look-ahead BUFFER of ~4× this (capped 100) and returns it all, so 'show me a few more' "
@@ -2170,6 +2178,11 @@ def screen_unified(
         body["options"] = opt
     if timeframe: body["timeframe"] = timeframe
     if window_bars is not None: body["window_bars"] = window_bars
+    if dividend_min_streak_years is not None or dividend_min_cagr is not None:
+        dv: dict = {}
+        if dividend_min_streak_years is not None: dv["min_streak_years"] = dividend_min_streak_years
+        if dividend_min_cagr is not None: dv["min_cagr"] = dividend_min_cagr
+        body["dividend"] = dv
     if sort: body["sort"] = sort
     resp = mdx()._http._client.post("/v1/screen", json=body)
     _check(resp)
@@ -2500,6 +2513,10 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
     ("retail names with high dividend", "dividend aristocrats in the US", "Thai high-yield stocks"). Ranks
     the DIVIDEND-PAYING universe (all payers, NOT just news-covered) and — the whole point — hands you the
     RAW pieces to tell a real income name from a YIELD TRAP, so YOU judge (don't trust a headline yield).
+    🔴 MULTI-METRIC dividend asks (dividend AND low P/E AND exclude a sector AND healthy financials) belong in
+    screen_unified — a `fundamental` leg (pe / health / dividend_yield) + the `dividend_min_streak_years` /
+    `dividend_min_cagr` gate. THIS tool is the dividend SPECIALIST (yield ranking + no-cut streak + yield-trap
+    decomposition): it has NO P/E filter and `gics` only INCLUDES a sector (it can't EXCLUDE banks).
       • Scope (≥1 REQUIRED): `country` (csv ISO-2) and/or `gics` (csv GICS CODE prefixes, e.g. '2550' retail).
         For a sector by NAME, resolve first with `find_gics` ('banks'→4010) then pass the code. Combine freely.
       • `order_by` = `yield` (default) | `streak` (reliability — longest clean run in our window) | `cagr`
