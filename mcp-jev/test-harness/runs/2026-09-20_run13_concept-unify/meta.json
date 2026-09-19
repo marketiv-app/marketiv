@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-20",
+  "run": "run13_concept-unify",
+  "mdx_api_sha": "f1b28d61",
+  "mdx_api_base": "http://127.0.0.1:8090 (local DEBUG build — search_concepts text_source/swarm_lane_descr JOIN; judge CORRECTNESS not latency)",
+  "mcp_jev_sha": "c15d3cf (working tree — unified _resolve_concept + full consumer collapse + deepseek resolver deleted)",
+  "server": "PORT=8902 BASE=http://127.0.0.1:8090",
+  "change": "Collapsed find_gics + find_megatrend into unified vector+Jev _resolve_concept; rewired ALL 11 consumers; DELETED the deepseek/gazetteer resolver wholesale.",
+  "sets": [{"name": "concept-unify natural questions", "version": "v1"}],
+  "bearer_suffix": "…9ff",
+  "model": "claude-opus-4-8 (blind subagents)"
+}

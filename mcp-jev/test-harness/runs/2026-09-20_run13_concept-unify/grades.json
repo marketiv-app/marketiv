@@ -1,0 +1,18 @@
+{
+  "gate_A_process": "PASS",
+  "summary": "10/10 cases resolved server-side via the unified Jev resolver. 0 calls to find_gics/find_megatrend (both deleted → absent from tools/list, so a blind client cannot round-trip). 0 resolver round-trips: every concept resolved and the tool EXECUTED in one shot. The single reconfirm (A-q5) is the DESIGNED honest not_a_sector gate, not a find_* bounce.",
+  "cases": [
+    {"id":"A-q1","verdict":"PASS","process":"theme_pulse(q='semiconductors') — concept written as plain English, server chose the theme axis","output":"real 30d pulse returned; semis theme correct","defects":[]},
+    {"id":"A-q2","verdict":"PASS","process":"screen_stocks(gics='banks') plain English","output":"gics axis; banks group 4010 (+asset-mgmt 40203010 — the [4010,40203010] pair by design). Executed, real names","defects":[{"desc":"asset managers included — expected multi-home behavior, not a bug","side":"neither"}]},
+    {"id":"A-q3","verdict":"PASS","process":"screen_stocks(gics='artificial intelligence')","output":"AI → theme axis (megatrend 10000000); NVDA/Alphabet/MSFT ranked, executed","defects":[]},
+    {"id":"A-q4","verdict":"PASS","process":"screen_stocks(gics='retail')","output":"MULTI-HOME proven end-to-end: Walmart/Costco/Kroger (staples retail 301010) + Amazon/Target (discretionary 2550) both present","defects":[]},
+    {"id":"A-q5","verdict":"PASS","process":"screen_dividends(gics='semiconductors') → honest not_a_sector reconfirm → client re-called with a GICS code","output":"C11 single-axis honesty: gics-only tool refused a THEME concept with an actionable guide; NOT fabricated","defects":[{"desc":"minor UX asymmetry: screen_stocks accepts the theme word, screen_dividends (gics-only) refuses it — honest but slightly awkward","side":"ours-minor"}]},
+    {"id":"B-q1","verdict":"PASS","process":"screen_stocks(gics='banks,insurance') — client decomposed the compound into a CSV","output":"resolved 4010,40203010,4030,35102030 — banks∪insurance both present (compound + multi-home)","defects":[]},
+    {"id":"B-q2","verdict":"PASS","process":"theme_pulse(q='electric vehicles')","output":"EV → theme (Electrification & Mobility); executed with winners/losers","defects":[]},
+    {"id":"B-q3","verdict":"PASS","process":"theme_players(theme='cybersecurity')","output":"theme node resolved; 214 core members returned","defects":[]},
+    {"id":"B-q4","verdict":"PASS","process":"list_playlists — client correctly judged 'my favorite stocks' is NOT an industry/theme and did not try to screen/fabricate it","output":"no concept-resolver call; sound judgment (boundary respected)","defects":[]},
+    {"id":"B-q5","verdict":"PASS","process":"screen_dividends(gics='healthcare')","output":"healthcare → gics 35 (a sector, not a narrow theme — correct axis); 166 names executed","defects":[]}
+  ],
+  "deleted_tool_calls": 0,
+  "resolver_roundtrips": 0
+}

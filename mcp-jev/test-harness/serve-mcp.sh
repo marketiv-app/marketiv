@@ -14,18 +14,17 @@ PORT="${PORT:-8901}"
 BASE="${BASE:-https://news-api-sgrtkib7zq-ue.a.run.app}"   # deployed news-api (prod) by default
 LOG="/tmp/mcp_${PORT}.log"
 
-# DEEPSEEK_API_KEY: find_gics / find_megatrend run deepseek IN THIS process (server.py), so the key must be
-# present locally or those tools crash (KeyError). Fetch from Secret Manager if not already in the env.
-if [ -z "${DEEPSEEK_API_KEY:-}" ]; then
-  DEEPSEEK_API_KEY="$(gcloud secrets versions access latest --secret=DEEPSEEK_API_KEY --project=ava-advisor-26c7b 2>/dev/null || true)"
-  export DEEPSEEK_API_KEY
-fi
-[ -n "${DEEPSEEK_API_KEY:-}" ] && echo "serve-mcp: DEEPSEEK_API_KEY loaded (find_gics/find_megatrend enabled)" || echo "serve-mcp: WARN no DEEPSEEK_API_KEY — find_gics/find_megatrend will error"
+# Keys live in the local mcp-jev/.env (TYPESAFE_API_KEY for the unified Jev concept resolver; server.py reads them
+# from the process env and does NOT auto-load dotenv). Source it so a fresh shell has them. (NOT Secret Manager —
+# the Jev key is local-only; a sandbox gcloud call returns empty.)
+ENVF="$(cd "$HERE/.." && pwd)/.env"
+if [ -f "$ENVF" ]; then set -a; . "$ENVF"; set +a; fi
+[ -n "${TYPESAFE_API_KEY:-}" ] && echo "serve-mcp: TYPESAFE_API_KEY loaded (Jev concept resolver enabled)" || echo "serve-mcp: WARN no TYPESAFE_API_KEY — the concept resolver will error"
 
 # free the port if a stale server is holding it
 lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | awk 'NR>1{print $2}' | xargs -r kill 2>/dev/null || true
 
 echo "serve-mcp: port=$PORT backend=$BASE  (python 3.12, mcp<2)  log=$LOG"
-exec env MCP_TRANSPORT=http PORT="$PORT" MARKETDX_BASE_URL="$BASE" \
+exec env MCP_TRANSPORT=http PORT="$PORT" MARKETDX_BASE_URL="$BASE" TYPESAFE_API_KEY="${TYPESAFE_API_KEY:-}" DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY:-}" \
   uv run --no-project --python 3.12 --with 'mcp<2',marketdx,openai,uvicorn \
   python "$SRV"

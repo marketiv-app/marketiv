@@ -3,9 +3,12 @@
 Architecture (see docs/product/mcp-server-design.md in the Ava repo):
   • SIMPLE tools  → thin wrappers over the marketdx Python SDK (which calls the metered /v1 API).
                     The client's own LLM orchestrates these; correctness lives in the API/SDK.
-  • COMPOSITE tools (resolve_themes, suggest_cta) → multi-step pipelines that would be N client↔server
-                    roundtrips if offloaded, so they run WHOLLY server-side on our own cheap LLM
-                    (deepseek-v4-flash, reasoning off) and return a finished result in ONE call.
+  • COMPOSITE tools (theme_pulse, suggest_cta) → multi-step pipelines that would be N client↔server
+                    roundtrips if offloaded, so they run WHOLLY server-side (a mix of the unified Jev
+                    concept resolver + our own cheap LLM for the ETF/CTA-curation steps) in ONE call.
+  • RESOLUTION    → an English industry/theme concept → GICS code(s) / megatrend node(s) is done SERVER-side
+                    by the unified vector+Jev `_resolve_concept` (no client find_* round-trip; no gazetteer/
+                    deepseek). Consumers pass plain English in `gics`/`megatrend`/`theme`; the server routes it.
   • RESOURCES     → the gate policy (skill.md) + a live capabilities/coverage map.
 
 Run:  MARKETDX_API_KEY=avn_live_… DEEPSEEK_API_KEY=… uvx marketdx-mcp     (or `python server.py`)
@@ -197,10 +200,9 @@ _COUNTRY_CSV = ("Market filter — CSV of ISO-2 codes (e.g. `US` or `CN,TW,HK`).
                 "ASEAN→TH,SG,MY,ID,PH,VN).")
 _ASPECT = "Impact CHANNEL filter (e.g. `demand`, `competition`, `tariff`, `monetary`). Omit → all channels."
 _MEGATREND = "A megatrend node — a name/slug (resolved for you, e.g. `foundry`) or an int node id. CSV for several."
-_GICS = ("GICS code prefix(es), CSV — sector `25` / industry-group `2550` / industry `255010` / sub-industry "
-         "`25501010`. A CODE (digits) ONLY — a sector/industry NAME is rejected. Resolve a NAME to its code with "
-         "`find_gics` FIRST (pass the ENGLISH industry word — translate the concept first: ธนาคาร→'banks'), then "
-         "pass the code here. So 'European banks' = find_gics('banks')→4010, then this=`4010` + country=EU codes.")
+_GICS = ("A GICS sector/industry — a CODE PREFIX (sector `25` / group `2550` / industry `255010` / sub `25501010`, "
+         "CSV for several) OR plain English ('banks', 'semiconductors', 'biotech'); the server resolves it. 🔴 ENGLISH "
+         "(translate the concept first: ธนาคาร→'banks'). So 'European banks' = gics='banks' + country=EU codes.")
 _NEWS_TYPE = "News CATEGORY (exact names only, e.g. `macro_economic`, `commodity_supply`, `earnings_results`)."
 _PID = "The portfolio's id (call list_portfolios first if the user says 'my portfolio' without a number)."
 
@@ -381,6 +383,216 @@ def _jev_gate(r: dict) -> str:
     if p2 >= 0.30 and gap < 0.30:
         return "reconfirm"
     return "soft"
+
+def _jev_nouls(query: str, questions: dict) -> dict:
+    """N independent yes/no COVERAGE decisions in ONE TypeSafe call (fan-out, cheap). `questions` = {id: instruction}.
+    Returns {id: prob 0..1}. Noul = a calibrated boolean; MULTI-LABEL (keep each ≥ threshold) — unlike Choice which
+    softmaxes onto one. Mirrors megatrend-mapper jev.rs `nouls`."""
+    import urllib.request
+    key = os.environ.get("TYPESAFE_API_KEY")
+    if not key:
+        raise RuntimeError("no TYPESAFE_API_KEY set (Jev resolver)")
+    qs = {qid: {"type": "noul", "instructions": instr} for qid, instr in questions.items()}
+    body = json.dumps({"model": _JEV_MODEL, "state": {"query": query}, "questions": qs},
+                      ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request(_JEV_ENDPOINT, data=body, method="POST",
+                                 headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        answers = json.loads(r.read().decode("utf-8")).get("answers", {})
+    out = {}
+    for qid in questions:
+        a = answers.get(qid) or {}
+        v = a.get("noul", a.get("probability", a.get("confidence")))
+        out[qid] = float(v) if v is not None else 0.0
+    return out
+
+def _jev_noul(query: str, instruction: str) -> float:
+    """ONE coverage Noul → prob 0..1."""
+    return _jev_nouls(query, {"q": instruction}).get("q", 0.0)
+
+# ── UNIFIED concept resolver (collapse find_gics + find_megatrend). English industry/theme concept → typed refs
+#    [{type:"theme"|"gics", id, name}] (multi-label). Vector (search_concepts: BOTH taxonomies, one shared query
+#    embed) → coverage Noul per candidate (ONE _jev_nouls call) → theme-priority-with-guard. No gazetteer/deepseek.
+_CONCEPT_NOUL_KEEP = 0.5   # coverage threshold (calibrate from probes)
+_CONCEPT_DIRECT_BAR = 0.65  # top coverage below this = an INDIRECT (last-resort / closest-home) match → flag it
+_CONCEPT_THEME_WIN = 0.75   # theme beats gics only if its top coverage ≥ this AND ≥ the top gics
+
+_concept_cache: dict = {}   # normalized-English concept → resolved envelope (in-process; the query EMBED is already
+                            # persistently cached backend-side in query_embedding_cache, so this only spares the Jev
+                            # Noul round-trip on a repeated term within a server lifetime — and pins a stable answer
+                            # despite Jev's run-to-run ±0.05 jitter). Cleared on restart; a persistent table is a
+                            # future add if cross-restart repeat proves worth a migration.
+
+def _resolve_concept(concept: str) -> dict:
+    """One English INDUSTRY/THEME concept → typed refs (result-cached by normalized concept). Returns
+    {status:'resolved', query, axis:'theme'|'gics', refs:[{type,id,name,prob}]} | {status:'no_match', …}."""
+    ck = " ".join(str(concept).strip().lower().split())
+    if ck and ck in _concept_cache:
+        return dict(_concept_cache[ck])
+    res = _resolve_concept_uncached(concept)
+    if ck and res.get("status") in ("resolved", "no_match"):
+        _concept_cache[ck] = res
+    return dict(res)
+
+def _resolve_concept_uncached(concept: str) -> dict:
+    q = str(concept).strip()
+    data = mdx()._get("/v1/search/concepts", {"q": q, "limit": 12}).data
+    themes = (data.get("themes") or []) if isinstance(data, dict) else []
+    sectors = (data.get("sectors") or []) if isinstance(data, dict) else []
+    if not themes and not sectors:
+        return {"status": "no_match", "query": q, "reason": "no theme/sector candidate (vector)", "candidates": []}
+    def _ctx(name, text):  # context parity: the candidate's name + the exact text that was embedded (its description)
+        t = (text or "").strip()
+        return f"«{name}»" + (f" — {t}" if t and t.lower() != str(name).strip().lower() else "")
+    # Framing = TIGHT (rejects a too-broad parent + a related sibling → strong precision), paired with a LOW keep
+    # threshold so a correct-but-slightly-wider home that only scores modestly (luxury→"Apparel/Accessories/Luxury"
+    # ~0.34; cloud sub-themes ~0.33) still survives (recall). The ancestor-rollup then cleans granularity.
+    qmap, meta = {}, {}
+    for i, t in enumerate(themes):
+        qid, nm = f"t{i}", t.get("name", "")
+        qmap[qid] = (f"An investor wants to screen the '{q}' group. Candidate megatrend/theme: {_ctx(nm, t.get('text'))}. "
+                     f"Is «{nm}» a place where '{q}' companies squarely live — is it '{q}', or a node whose members are "
+                     f"MOSTLY '{q}'? Answer NO if «{nm}» is MUCH broader than '{q}' (a parent mostly holding non-'{q}' "
+                     f"names) or merely RELATED/adjacent (not itself '{q}').")
+        meta[qid] = {"type": "theme", "id": t.get("node_id"), "name": nm, "axis": "theme", "score": t.get("score")}
+    for i, s in enumerate(sectors):
+        qid, nm, lv = f"g{i}", s.get("name", ""), s.get("level", "")
+        qmap[qid] = (f"An investor wants to screen the '{q}' group. Candidate GICS {lv}: {_ctx(nm, s.get('text'))}. "
+                     f"Is «{nm}» a place where '{q}' companies squarely live — is it '{q}', or a classification whose "
+                     f"constituents are MOSTLY '{q}'? Answer NO if «{nm}» is MUCH broader (a parent sector mostly "
+                     f"holding non-'{q}' industries) or a merely-related SIBLING that is not itself '{q}'.")
+        meta[qid] = {"type": "gics", "id": s.get("code"), "name": nm, "axis": "gics", "score": s.get("score")}
+    probs = _jev_nouls(q, qmap)
+    kept = [(qid, probs.get(qid, 0.0)) for qid in qmap if probs.get(qid, 0.0) >= _CONCEPT_NOUL_KEEP]
+    themes_k = sorted([(meta[k].copy(), p) for k, p in kept if meta[k]["axis"] == "theme"], key=lambda x: -x[1])
+    gics_k = sorted([(meta[k].copy(), p) for k, p in kept if meta[k]["axis"] == "gics"], key=lambda x: -x[1])
+    # theme-priority WITH BREADTH GUARD. A curated theme is the higher-value grouping (client can't know it), so it
+    # WINS when it's a strong fit (≥_CONCEPT_THEME_WIN). BUT when a strong GICS also exists, only let the theme win if
+    # it covers ROUGHLY THE WHOLE concept — not a narrow slice: 'semiconductors'→"Semiconductors" theme = whole → win;
+    # 'healthcare'→"Home Healthcare & Hospice" = a slice → fall to the GICS Health Care sector. (One extra Noul, only
+    # in the both-strong case.)
+    theme_top = themes_k[0][1] if themes_k else 0.0
+    gics_top = gics_k[0][1] if gics_k else 0.0
+    prefer_theme = bool(themes_k) and (not gics_k or theme_top >= _CONCEPT_THEME_WIN)
+    if prefer_theme and gics_k and gics_top >= 0.75:
+        tn = themes_k[0][0]["name"]
+        breadth = _jev_noul(q, f"An investor asks for the '{q}' group. Does the theme «{tn}» cover ROUGHLY THE WHOLE "
+                               f"'{q}' universe — most of what an investor means by '{q}'? Answer near 1 if it spans "
+                               f"most of '{q}'; near 0 if «{tn}» is only a NARROW SLICE/subset of '{q}'.")
+        if breadth < 0.5:
+            prefer_theme = False
+    chosen = themes_k if prefer_theme else (gics_k or themes_k)
+    if not chosen:
+        return {"status": "no_match", "query": q, "reason": "no covering theme/sector (all Nouls below threshold)", "candidates": []}
+    if chosen[0][0]["axis"] == "gics":
+        # ROLLUP: the Noul keeps a group + its industry + sub-industries (all individually cover X). (1) cluster kept
+        # codes by their 4-digit GROUP, LCP within each → the group-covering code; (2) ancestor-dedup: drop a code
+        # another kept code is a prefix of (a kept SECTOR absorbs its groups). 'banks' → [4010]; 'healthcare' → [35];
+        # 'retail' → [2550, 3010] (multi-home). Clustering by GROUP (not sector) stops a stray 'Asset-Mgmt & Custody
+        # Banks' (grp 4020) from dragging Banks (grp 4010) up to the Financials sector.
+        by_grp: dict = {}
+        for m, p in chosen:
+            by_grp.setdefault(str(m["id"])[:4], []).append((str(m["id"]), m["name"], p))
+        cov = []
+        for grp, items in by_grp.items():
+            codes = [c for c, _, _ in items]
+            s1, s2 = min(codes), max(codes)
+            i = 0
+            while i < len(s1) and i < len(s2) and s1[i] == s2[i]:
+                i += 1
+            anc = s1[: i - (i % 2)] or grp
+            cov.append((anc, next((n for c, n, _ in items if c == anc), items[0][1]), max(p for _, _, p in items)))
+        final = []
+        for code, name, pp in sorted(cov, key=lambda x: len(x[0])):   # shortest (broadest) first
+            if not any(code != o[0] and code.startswith(o[0]) for o in final):
+                final.append((code, name, pp))
+        refs = [{"type": "gics", "id": c, "name": n, "prob": round(p, 3)} for c, n, p in sorted(final, key=lambda x: -x[2])]
+        return {"status": "resolved", "query": q, "axis": "gics", "refs": refs,
+                "indirect": bool(refs) and max(r["prob"] for r in refs) < _CONCEPT_DIRECT_BAR}
+    # THEME axis rollup, mirror of gics but on the megatrend id scheme (TTSSLLDD, ancestor = zero the rightmost
+    # pairs). Cluster kept themes by TIER-1 (TT000000); drop a stray tier-1 cluster far below the top; within each
+    # kept cluster take the BROADEST kept node (most trailing zeros = highest tier). Downstream expands the subtree,
+    # so the tier-1 covers its children. 'semiconductors' → [56000000]; 'cloud computing' → [28000000] (+ any other
+    # genuinely-strong tier-1). A single narrow leaf (robotaxi) stays itself — it's the only kept node in its cluster.
+    by_t1: dict = {}
+    for m, p in chosen:
+        by_t1.setdefault((int(m["id"]) // 1000000) * 1000000, []).append((m["id"], m["name"], p))
+    cov = []
+    for _t1, items in by_t1.items():
+        best = max(items, key=lambda it: (len(str(it[0])) - len(str(it[0]).rstrip("0")), it[2]))
+        cov.append(best)
+    refs = [{"type": "theme", "id": c, "name": n, "prob": round(p, 3)} for c, n, p in sorted(cov, key=lambda x: -x[2])]
+    return {"status": "resolved", "query": q, "axis": "theme", "refs": refs,
+            "indirect": bool(refs) and max(r["prob"] for r in refs) < _CONCEPT_DIRECT_BAR}
+
+def _scope_resolve(val):
+    """Resolve a universe-SCOPE argument (a sector/theme CONCEPT, a raw code/id, or a CSV/list of them) via the
+    unified `_resolve_concept`, and SPLIT the result by type so the caller can route it. Returns
+    (gics_codes:list[str], theme_ids:list[int], confirm|None, resolved_map). A pure-digit token is passed straight
+    through as a GICS code (the raw-id path); an English concept is resolved and may yield gics AND/OR theme refs
+    (e.g. 'AI' → a theme id, 'biotech' → a gics code). Any unresolved token → ONE batched reconfirm envelope."""
+    if not val:
+        return [], [], None, {}
+    toks = [str(t).strip() for t in (val if isinstance(val, list) else str(val).split(",")) if str(t).strip()]
+    gcodes, tids, pend, rmap = [], [], {}, {}
+    for t in toks:
+        if t.isdigit():                       # raw GICS code already in hand → passthrough
+            gcodes.append(t); continue
+        r = _resolve_concept(t)
+        if r["status"] != "resolved":
+            pend[t] = {"kind": "scope", "status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])}
+            continue
+        for ref in r["refs"]:
+            (gcodes if ref["type"] == "gics" else tids).append(ref["id"] if ref["type"] == "gics" else int(ref["id"]))
+        rmap[t] = {"axis": r["axis"], "ids": [ref["id"] for ref in r["refs"]], "indirect": r.get("indirect", False)}
+    if pend:
+        return [], [], {"needs_confirmation": True, "resolved": rmap, "confirm": pend,
+                        "_guide": "A universe-scope term isn't a recognized sector/theme — pick one from its candidates "
+                                  "(or drop it), then RE-CALL with the chosen code/id (a bare GICS code / theme id passes "
+                                  "straight through)."}, rmap
+    return gcodes, tids, None, rmap
+
+def _theme_node(concept):
+    """A THEME-only tool's subject → ONE megatrend node id (the top theme ref), via the unified resolver.
+    Returns (node_id:int, None) on success; (None, error_dict) when the concept is NOT a curated theme — either a
+    pure GICS sector (honest 'that's a sector, use a screen') or no_match. A bare numeric id passes through."""
+    if concept is None:
+        return None, None
+    s = str(concept).strip()
+    if s.isdigit():
+        return int(s), None
+    r = _resolve_concept(s)
+    themes = [x for x in r.get("refs", []) if x["type"] == "theme"]
+    if themes:
+        return int(themes[0]["id"]), None
+    if r.get("status") != "resolved":
+        return None, {"needs_confirmation": True, "query": s,
+                      "confirm": {s: {"status": r.get("status"), "reason": r.get("reason"), "candidates": r.get("candidates", [])}},
+                      "_guide": "That isn't a recognizable megatrend/theme — pick from candidates, or use a sector screen."}
+    return None, {"not_a_theme": True, "query": s, "resolved_axis": "gics", "gics": [x["id"] for x in r["refs"]],
+                  "_guide": f"'{s}' is a GICS sector/industry ({r['refs'][0]['name']}), not a curated megatrend theme — "
+                            f"use a sector screen (screen_unified/screen_stocks with gics='{s}')."}
+
+def _theme_nodes(spec):
+    """CSV/list of theme TERMS and/or ids → csv of megatrend node ids (multi; numeric passes through), via the
+    unified resolver. Returns (csv_or_None, error_dict_or_None) — error only when NOTHING resolves to a theme."""
+    if not spec:
+        return None, None
+    toks = [t.strip() for t in (spec if isinstance(spec, list) else str(spec).split(",")) if str(t).strip()]
+    ids, pend = [], {}
+    for t in toks:
+        nid, err = _theme_node(t)
+        if nid is not None:
+            if nid not in ids:
+                ids.append(nid)
+        elif err:
+            pend[t] = err
+    if ids:
+        return ",".join(str(i) for i in ids), None
+    if pend:
+        return None, {"needs_confirmation": True, "confirm": pend,
+                      "_guide": "None of these are recognizable megatrend themes — pick from candidates or use a sector screen."}
+    return None, None
 
 _FS_RESOLVE_INSTR = (
     "The state has `query`: a natural-language financial concept (any language, often loose/colloquial/slangy) a "
@@ -798,50 +1010,6 @@ def _resolve_oppattern(q: str) -> dict:
     reason = "two close options patterns — confirm which" if gate == "reconfirm" else "no confident options pattern match"
     return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
 
-# ── theme resolution (server-side): gazetteer FIRST, then deepseek 3-tier match + deterministic solve.
-#    Ported from the validated prototype /tmp/mcp-gate/resolve_themes.js + mstep2.js. ────────────────
-_ALIAS = {  # curated: colloquial/abbrev term → EXACT node name. Grows from LLM-fallback logs.
-    # families (tier-1)
-    "ai": "Artificial Intelligence", "a.i.": "Artificial Intelligence", "เอไอ": "Artificial Intelligence",
-    "semicon": "Semiconductors", "semiconductor": "Semiconductors", "semiconductors": "Semiconductors",
-    "ชิป": "Semiconductors", "หุ้นชิป": "Semiconductors", "ev": "Electrification & Mobility",
-    # semiconductors sub-nodes
-    "cowos": "Advanced Packaging & Test (OSAT)", "advanced packaging": "Advanced Packaging & Test (OSAT)",
-    "osat": "Advanced Packaging & Test (OSAT)", "eda": "EDA & Semiconductor IP",
-    "wfe": "Wafer-Fab Equipment & Lithography", "wafer fab equipment": "Wafer-Fab Equipment & Lithography",
-    "semiconductor equipment": "Wafer-Fab Equipment & Lithography", "chip equipment": "Wafer-Fab Equipment & Lithography",
-    "lithography": "Lithography Systems", "euv": "Lithography Systems", "duv": "Lithography Systems",
-    "dram": "Memory — DRAM, NAND & HBM", "nand": "Memory — DRAM, NAND & HBM",
-    "asic": "Custom Silicon / ASIC", "custom silicon": "Custom Silicon / ASIC",
-    "mlcc": "Passive Components (MLCC, Capacitors, Inductors)", "pcb": "Printed Circuit Boards (PCB & HDI)",
-    "analog": "Analog, Power & Discrete", "logic chip": "Logic, Compute & Connectivity Processors",
-    # AI sub-nodes
-    "llm": "Foundation Models & Research Labs", "foundation model": "Foundation Models & Research Labs",
-    "foundation models": "Foundation Models & Research Labs", "frontier model": "Foundation Models & Research Labs",
-    "agentic ai": "Agentic AI & Autonomous Workflows", "ai agent": "Agentic AI & Autonomous Workflows",
-    "copilot": "AI Applications & Copilots", "gpu": "GPU & Merchant Accelerators",
-    "neocloud": "AI Compute Cloud & Neoclouds", "mlops": "AI Tooling, Data & MLOps",
-    "inference chip": "Inference-Optimized Silicon", "optical interconnect": "Optical Interconnect & DCI",
-    "cpo": "Optical Interconnect & DCI",
-    # digital finance sub-nodes
-    "stablecoin": "Stablecoin Issuers & Distribution", "stablecoins": "Stablecoin Issuers & Distribution",
-    "neobank": "Digital Banking & Neobanks", "digital bank": "Digital Banking & Neobanks",
-    "payments": "Payments Modernization & Rails", "payment rails": "Payments Modernization & Rails",
-    "rwa": "Real-World Asset Tokenization", "tokenization": "Real-World Asset Tokenization",
-    "crypto exchange": "Crypto Exchanges, Custody & Digital-Asset Infrastructure",
-    "bitcoin treasury": "Bitcoin / Crypto Treasury & Store-of-Value Proxies",
-    "robo advisor": "Digital Wealth & Robo-Advisory",
-    # biotech sub-nodes
-    "cancer drug": "Oncology Therapeutics", "cancer": "Oncology Therapeutics", "มะเร็ง": "Oncology Therapeutics",
-    "oncology": "Oncology Therapeutics", "car-t": "Cell Therapy (CAR-T & beyond)", "cart": "Cell Therapy (CAR-T & beyond)",
-    "cell therapy": "Cell Therapy (CAR-T & beyond)", "adc": "Antibody-Drug Conjugates (ADC)",
-    "mrna": "mRNA Platforms", "rnai": "RNAi / Antisense Oligonucleotides", "sirna": "RNAi / Antisense Oligonucleotides",
-    "glp-1": "Metabolic, Diabetes & Obesity", "glp1": "Metabolic, Diabetes & Obesity",
-    "obesity drug": "Metabolic, Diabetes & Obesity", "gene editing": "Gene & Cell Editing", "crispr": "Gene & Cell Editing",
-    "cgm": "Diabetes Devices (CGM & Insulin Delivery)", "cdmo": "CDMO / Contract Manufacturing",
-    "immuno-oncology": "Immuno-Oncology / Checkpoint", "vaccine": "Vaccines (Recombinant & Traditional)",
-    "rare disease": "Rare Disease", "ai drug discovery": "AI Drug Discovery",
-}
 _TAX: Optional[dict] = None
 def _taxonomy() -> dict:
     global _TAX
@@ -854,86 +1022,10 @@ def _taxonomy() -> dict:
                 "by_name": {n["name"]: n for n in nodes}, "children": children}
     return _TAX
 
-def _children(nid: int) -> list:
-    return _taxonomy()["children"].get(nid, [])
-
-def _gazetteer(term: str) -> list:
-    tax = _taxonomy(); t = str(term).strip(); lc = t.lower()
-    if t.isdigit() and int(t) in tax["by_id"]:       # already a node id → pass through, no LLM
-        return [int(t)]
-    if t in tax["by_name"]:                          # exact node name → that node
-        return [tax["by_name"][t]["id"]]
-    # DATA-driven aliases (megatrend_node.aliases, exposed via /v1/megatrends → SDK .raw) — the SOURCE OF
-    # TRUTH, editable in the DB with no code deploy. Checked BEFORE the legacy hardcoded _ALIAS (which is
-    # being migrated INTO the data). Exact-match on a curated synonym → that node.
-    da = [n["id"] for n in tax["nodes"]
-          if lc in [a.lower() for a in ((n.get("raw") or {}).get("aliases") or n.get("aliases") or [])]]
-    if da:
-        return da
-    if lc in _ALIAS:                                 # legacy in-code fallback (migrate these into .aliases)
-        n = tax["by_name"].get(_ALIAS[lc]); return [n["id"]] if n else []
-    hits = [n["id"] for n in tax["nodes"] if lc in n["name"].lower()]  # name contains phrase (multi-node ok)
-    return hits if 1 <= len(hits) <= 4 else []
-
-def _match(term: str, cands: list) -> list:
-    """deepseek: which candidate nodes does the concept belong under? (binary classification)."""
-    if not cands:
-        return []
-    lines = "\n".join(f"{n['id']} | {n['name']}" for n in cands)
-    out = _deepseek(
-        "Which taxonomy nodes does the CONCEPT belong under? Match a node if the concept clearly falls "
-        f'within it. Return matching ids only.\nCONCEPT: "{term}"\nNODES:\n{lines}\n'
-        'Return JSON: {"match":[<id>,...]}', term, 0.1)
-    s = {int(x) for x in (out.get("match") or [])}
-    return [n["id"] for n in cands if n["id"] in s]
-
-def _solve(nid: int, matched: dict) -> list:
-    """all-or-none → this node; tier-1 with no matched child → drop (loose wave); subset → drill."""
-    tax = _taxonomy(); kids = _children(nid)
-    if not kids:
-        return [nid]
-    ns = matched.get(tax["by_id"][nid]["tier"] + 1, set())
-    mk = [k for k in kids if k["id"] in ns]
-    if not mk:
-        return [] if tax["by_id"][nid]["tier"] == 1 else [nid]
-    if len(mk) == len(kids):
-        return [nid]
-    res: list = []
-    for k in mk:
-        res += _solve(k["id"], matched)
-    return res
-
 def _node_out(nid: int) -> dict:
     n = _taxonomy()["by_id"][nid]
     return {"id": nid, "name": n["name"], "tier": n["tier"]}
 
-def _to_node(theme: str):
-    """Resolve a human theme term → node id (our resolver); fall back to the raw string (SDK slug)."""
-    try:
-        r = resolve_themes([theme]).get(theme) or []
-        return r[0]["id"] if r else theme
-    except Exception:
-        return theme
-
-def _to_nodes(spec: str) -> Optional[str]:
-    """Resolve a csv of trend TERMS and/or node IDs → csv of node ids, in ONE resolve pass (so
-    'foundry,hbm' becomes '56020000,56030000' without two round-trips). Numeric parts pass through as
-    ids; term parts are batch-resolved via resolve_themes and take the top candidate each. Order-preserved,
-    de-duped. Returns None if nothing resolves."""
-    parts = [p.strip() for p in str(spec).split(",") if p.strip()]
-    ids, terms = [], []
-    for p in parts:
-        (ids if p.isdigit() else terms).append(p)
-    if terms:
-        try:
-            res = resolve_themes(terms)
-            for t in terms:
-                cand = res.get(t) or []
-                if cand:
-                    ids.append(str(cand[0]["id"]))
-        except Exception:
-            pass
-    return ",".join(dict.fromkeys(ids)) or None
 
 # ── SIMPLE tools (thin SDK wrappers — client LLM orchestrates) ────────────────
 # The valid news_type names (GET /v1/news/types) — used to sanitize a hallucinated value before it
@@ -975,7 +1067,9 @@ def theme_summary(theme: Annotated[str, _d("A megatrend theme — name/slug (res
                   country: Annotated[Optional[str], _d("Optional market ISO-2 filter.")] = None) -> dict:
     """Pre-composed analyst brief for a megatrend theme: pulse, winners/losers, top entities, aspect
     heatmap, ripple. `theme` = a theme name or id/slug; `window` = 7d/30d/90d/1y/mtd/qtd/ytd."""
-    return mdx().theme(_to_node(theme)).summary(window=window, country=country)
+    node, err = _theme_node(theme)
+    if err: return err
+    return mdx().theme(node).summary(window=window, country=country)
 
 @mcp.tool(title="Brief", annotations=_RO)
 def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
@@ -996,8 +1090,8 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
     (+ `stock_impact`/`news_feed`), because an index maps to an ETF asset (S&P→SPY), not a brief scope.
     For a SECTOR × REGION ("how are European banks doing?") the quickest path is `theme_pulse(q='banks',
     country=…)` (fans out, resolves the code for you). Use THIS (brief) when you want the ONE precise GICS
-    cohort with no fan-out, or an AND-combo: resolve the sector to a code with `find_gics` ('banks'→4010),
-    then `brief(gics=4010, country="GB,DE,FR,IT,ES,NL,CH,SE")` (enumerate the region's ISO-2s).
+    cohort with no fan-out, or an AND-combo: pass the sector as a code OR plain English —
+    `brief(gics='banks', country="GB,DE,FR,IT,ES,NL,CH,SE")` (enumerate the region's ISO-2s; server resolves the sector).
     Scope by ≥1 of (each takes a CSV for multiple values):
       • `news_type` — a news CATEGORY. Use ONLY these EXACT names (never invent one): product_tech,
         ma_partnership, industry_thematic, earnings_results, corporate_action, management_governance,
@@ -1007,8 +1101,8 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
         macro_economic — there is NO 'monetary_policy').
       • `country` — an ISO-2 market. country='JP' → "how is Japan doing right now?".
       • `aspect` — an impact CHANNEL. aspect='tariff' → "everything moving via tariffs".
-      • `gics` — a GICS CODE prefix (sector 25 / industry-group 2550 / industry 255010), often × country.
-        For a sector by NAME (e.g. "European banks") resolve first: `find_gics('banks')`→4010, then gics=4010.
+      • `gics` — a GICS sector/industry: a CODE prefix (sector 25 / group 2550 / industry 255010) OR plain English
+        ('banks'), often × country. 'European banks' = gics='banks' + country=EU codes (server resolves the sector).
       • `megatrend` — a theme node id/slug. For a NAMED theme use `theme_summary` (it resolves free text);
         use `megatrend` here only when you already have the id or want to AND it with another scope.
     Combine (AND): news_type='commodity_supply'+country='JP' = commodity news in Japan; gics='2550'+
@@ -1022,6 +1116,19 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
         req = [t.strip() for t in str(news_type).split(",") if t.strip()]
         news_type = ",".join(t for t in req if t in _NEWS_TYPES) or None
         dropped = [t for t in req if t not in _NEWS_TYPES]
+    # UNIFIED concept resolution: `gics` and `megatrend` may be plain English or a code/id — the server resolves
+    # and routes (a theme concept in `gics` flows into the megatrend leg; a sector concept in `megatrend` would too).
+    _mts = []
+    if megatrend:
+        megatrend, _me = _theme_nodes(megatrend)
+        if _me: return _me
+    if gics:
+        _g, _t, _cf, _ = _scope_resolve(gics)
+        if _cf: return _cf
+        gics = ",".join(_g) if _g else None
+        _mts = [str(x) for x in _t]
+    if _mts:
+        megatrend = ",".join(_mts + ([megatrend] if megatrend else []))
     res = mdx().brief(megatrend=megatrend, news_type=news_type, country=country, aspect=aspect,
                       gics=gics, window=window, from_=from_, to=to, interval=interval, lang=lang)
     if dropped and isinstance(res, dict):
@@ -1301,8 +1408,10 @@ def theme_players(theme: Annotated[str, _d("A megatrend theme — name/slug (res
     Different from top_entities (news-derived). `limit` = how many (default 20, max 50; big themes have many).
     Returns {stocks, count, total, note?} — if `total` > `count` it's a TOP SLICE: say so, don't present it
     as the full roster (raise `limit`)."""
-    return _paged(mdx().theme(_to_node(theme)).stocks(country=(country or "all"), exposure=exposure,
-                                                      max_items=_lim(limit)), key="stocks")
+    node, err = _theme_node(theme)
+    if err: return err
+    return _paged(mdx().theme(node).stocks(country=(country or "all"), exposure=exposure,
+                                           max_items=_lim(limit)), key="stocks")
 
 @mcp.tool(title="Private Movers", annotations=_RO)
 def private_movers(theme: Annotated[str, _d("A megatrend theme — name/slug (resolved for you) or node id.")],
@@ -1311,7 +1420,9 @@ def private_movers(theme: Annotated[str, _d("A megatrend theme — name/slug (re
     """Off-coverage / private companies the news moved within a theme — the 'beyond tickers' surface.
     `limit` = how many (default 20, max 50). Returns {companies, count, total, note?} — honor `note` when
     `total` > `count` (it's a top slice, not the whole set)."""
-    return _paged(mdx().theme(_to_node(theme)).off_coverage(country=country, max_items=_lim(limit)),
+    node, err = _theme_node(theme)
+    if err: return err
+    return _paged(mdx().theme(node).off_coverage(country=country, max_items=_lim(limit)),
                   key="companies")
 
 @mcp.tool(title="Company Relationships", annotations=_RO)
@@ -1461,16 +1572,16 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
       • `megatrend_ids` — the megatrend node id(s) this note sits under, from `find_megatrend` (returns
         {id,name,tier} candidates — YOU pick) or a theme tool's output (`theme_pulse` → `megatrend.id`).
         Reuse an id you already have — never guess a number.
-      • `gics` — GICS code(s) for an established INDUSTRY/SECTOR the note is about, from `find_gics`
-        (returns {code,name,level} candidates — YOU pick) or a theme tool's output (`theme_pulse` → `gics_code`).
+      • `gics` — the note's established INDUSTRY/SECTOR — codes OR plain English ('banks', 'semiconductors'); the
+        server resolves each (or reuse a theme tool's `gics_code` output).
       • `portfolio_id` — if the note is about one of the user's portfolios (from `list_portfolios`).
 
     🧭 RESOLVE THE NOTE'S HOME BEFORE SAVING — link the theme/sector, not just the stocks. Classify what the
     note is about and resolve it FIRST (write_note is the last step): an emerging TREND/tech/mechanism ("what
     is HBM", "how a foundry works", "solid-state batteries") → `find_megatrend([terms])` → pick → `megatrend_ids`;
     an established INDUSTRY/SECTOR ("retail", "airlines", "banking", "pharma" — these have NO megatrend node) →
-    `find_gics([terms])` → pick → `gics`; both may apply. Each resolver returns CANDIDATES — YOU pick (send the
-    words straight from your answer; you don't need the taxonomy). A note whose subject is a trend or a sector,
+    put the sector word(s) straight in `gics` (plain English is fine, the server resolves each); both may apply.
+    A note whose subject is a trend or a sector,
     saved with EMPTY `megatrend_ids`/`gics`, means you SKIPPED this step. The only correct empties: a single-
     stock note (stocks only) or a general concept with no home (P/E, EBITDA — `find_*` returns `[]`, don't
     force it; tags/body still make it findable by semantic search).
@@ -1490,6 +1601,12 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
 
     Owner-scoped. Returns `{id, created_at, linked}` where `linked` confirms what was tied to the graph
     (resolved ids + any `unresolved` names)."""
+    if gics:  # UNIFIED: gics tags may be codes OR plain English → resolve; a THEME concept becomes a megatrend link
+        _g, _t, _cf, _ = _scope_resolve(gics)
+        if _cf: return _cf
+        gics = _g or None
+        if _t:
+            megatrend_ids = (megatrend_ids or []) + [x for x in _t if x not in (megatrend_ids or [])]
     payload = {k: v for k, v in {"subject": subject, "body": body, "summary": summary,
                                  "type": note_type, "category": category, "tags": tags,
                                  "stocks": stocks, "mentioned_stocks": mentioned_stocks,
@@ -1540,15 +1657,14 @@ def query_notes(q: Annotated[Optional[str], _d("Semantic query text — recall n
         params["stock"] = stock
     if relation:
         params["relation"] = relation
-    if theme:
-        try:
-            hits = resolve_themes([theme]).get(theme) or []
-            if hits:
-                params["megatrend"] = hits[0]["id"]
-        except Exception:
-            pass
-    if gics:
-        params["gics"] = gics
+    if theme:  # UNIFIED: a theme name → megatrend node (best-effort filter; skip if not a theme)
+        _n, _ = _theme_node(theme)
+        if _n: params["megatrend"] = _n
+    if gics:  # UNIFIED: gics code OR plain English; a theme concept narrows by megatrend
+        _g, _t, _cf, _ = _scope_resolve(gics)
+        if _cf: return _cf
+        if _g: params["gics"] = ",".join(_g)
+        if _t and "megatrend" not in params: params["megatrend"] = _t[0]
     if tag:
         params["tag"] = tag
     if note_type:
@@ -1959,7 +2075,7 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     just pass `country` (CSV of ISO-2; enumerate the region yourself). It scopes the news angles (theme+gics)
     to companies listed there; the ETF-options + commodity angles stay global. So 'European banks' =
     theme_pulse(q='banks', country='GB,DE,FR,IT,ES,NL,CH,SE') — ONE call, no need to pre-resolve the code.
-    (For a single PRECISE cohort with no fan-out, `brief(gics=<find_gics code>, country=…)` is the alternative.)
+    (For a single PRECISE cohort with no fan-out, `brief(gics=<sector code or name>, country=…)` is the alternative.)
     🧩 MULTIPLE sectors at once — "how are SEMICONDUCTORS and CLOUD in China doing?" — comma-separate them in
     `q` ('semiconductors,cloud'); theme+gics merge into one union pulse, asset+commodity list per concept. So
     "Chinese + American banks" = q='banks', country='CN,US'; "semis + cloud in China" = q='semiconductors,cloud', country='CN'.
@@ -1971,12 +2087,12 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     ctry = [c.strip().upper() for c in country.split(",") if c.strip()] if country else None
 
     def _resolve(concept):
-        # concept → {megatrend?, gics?, etf?}. GICS comes from the SHARED find_gics resolver (NOT a private
-        # keyword map — that mis-mapped "homebuilders"→Banks); the deepseek call is now ETF-only.
-        mt = _to_node(concept)
-        megatrend = mt if isinstance(mt, int) else None
-        codes = _resolve_gics_codes(concept)
-        gics = codes[0] if codes else None
+        # concept → {megatrend?, gics?, etf?}. ONE unified Jev resolve decides both axes (theme + gics) from the
+        # shared vector space — no gazetteer/keyword map (that mis-mapped "homebuilders"→Banks). The deepseek call
+        # below is ETF-only (a tradable-fund pick, a separate concern from taxonomy resolution).
+        _cr = _resolve_concept(concept)
+        megatrend = next((int(x["id"]) for x in _cr.get("refs", []) if x["type"] == "theme"), None)
+        gics = next((x["id"] for x in _cr.get("refs", []) if x["type"] == "gics"), None)
         etf = None
         try:
             r = _deepseek(
@@ -1994,8 +2110,8 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
             pass
         return {"concept": concept, "megatrend": megatrend, "gics": gics, "etf": etf}
 
-    # Resolve concepts SEQUENTIALLY in THIS thread — _resolve → _resolve_gics_codes → _gics_tax() does an
-    # mdx() API call, and a ThreadPoolExecutor worker does NOT inherit the request's auth contextvar (the
+    # Resolve concepts SEQUENTIALLY in THIS thread — _resolve → _resolve_concept does an mdx() search_concepts
+    # API call, and a ThreadPoolExecutor worker does NOT inherit the request's auth contextvar (the
     # "no MarketDX API key" bug). The expensive angle fan-out below is still parallel (it reuses the already-
     # authed `cli`). Concept count is tiny (usually 1), so sequential costs nothing.
     resolved = [_resolve(c) for c in concepts]
@@ -2389,7 +2505,7 @@ class ScreenCondition(BaseModel):
     percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
     total_change: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the CUMULATIVE change over the WHOLE N-year window, as a fraction: 1.0 = doubled (2×) or halved, 0.5 = +50% (grew) / −50% (fell). Use for 'grew/fell X TIMES over the period' — 'market cap doubled in 2 years' → {pattern:'compound_growth', N:2, total_change:1.0}. 🔴 NOT per-year — that's `cagr`. (Response returns BOTH change_total and cagr so you never guess.)")
     cagr: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the ANNUALIZED rate PER YEAR, as a fraction: 0.20 = 20%/yr. Use for 'grew/fell X% per year' — 'revenue compounding 15%/yr over 5y' → {pattern:'compound_growth', N:5, cagr:0.15}. 🔴 NOT the whole-window total — that's `total_change`.")
-    vs_cohort: Optional[dict] = Field(None, description="RARELY needed — usually OMIT. For a cohort pattern (below_average/above_average) the benchmark DEFAULTS to your screening scope (the `universe`): 'retail stocks with P/E below average' = scope `universe` to retail (find_gics) and OMIT this — 'below average' then means below the RETAIL average automatically. Set this ONLY to benchmark against a DIFFERENT group than you're screening (e.g. US retail vs the GLOBAL retail average). Shape: {gics?: a GICS code PREFIX string like '45' — NOT a boolean/flag; country?: ISO-2; size?: ['large'|'mid'|'small'|'micro']; stat?: 'pooled'(default)|'median'}. 🔴 EACH STOCK vs ITS OWN SECTOR (whole-market, mixed sectors, in ONE screen — a bank judged vs banks, a tech vs tech): set {own: true} (or {own:'gics_group'} / {own:'gics_industry'} for a finer grain than the default sector). Use `own` ONLY for that cross-sector 'each vs its own' case; to compare WITHIN a single sector, scope the `universe` to that sector and omit vs_cohort instead.")
+    vs_cohort: Optional[dict] = Field(None, description="RARELY needed — usually OMIT. For a cohort pattern (below_average/above_average) the benchmark DEFAULTS to your screening scope (the `universe`): 'retail stocks with P/E below average' = scope `universe` to retail (the `gics` param, code-or-plain-English) and OMIT this — 'below average' then means below the RETAIL average automatically. Set this ONLY to benchmark against a DIFFERENT group than you're screening (e.g. US retail vs the GLOBAL retail average). Shape: {gics?: a GICS code PREFIX string like '45' — NOT a boolean/flag; country?: ISO-2; size?: ['large'|'mid'|'small'|'micro']; stat?: 'pooled'(default)|'median'}. 🔴 EACH STOCK vs ITS OWN SECTOR (whole-market, mixed sectors, in ONE screen — a bank judged vs banks, a tech vs tech): set {own: true} (or {own:'gics_group'} / {own:'gics_industry'} for a finer grain than the default sector). Use `own` ONLY for that cross-sector 'each vs its own' case; to compare WITHIN a single sector, scope the `universe` to that sector and omit vs_cohort instead.")
     metricA: Optional[str] = Field(None, description="RELATION form only: the first metric — an exact key OR plain English (a statement line, ratio, or valuation multiple); the server resolves it. To use its GROWTH RATE instead of its level, set metricA_stat='growth'.")
     relation: Optional[str] = Field(None, description="RELATION form only — how metricA relates to metricB. One of: 'higher_than' (metricA ≥ multiple×metricB, i.e. the RATIO A/B ≥ multiple), 'lower_than' (metricA ≤ multiple×metricB), 'ratio_between' (min ≤ A/B ≤ max — A is between min and max as a fraction of B), 'ratio_near' (A/B ≈ target within ±band), 'growth_faster_than' / 'growth_slower_than' (metricA's multi-year CAGR vs metricB's). Param per relation: higher/lower_than→`multiple`; ratio_between→`min`+`max`; ratio_near→`target`(+`band`, default ±10%); the growth ones take none. The bound `k` is just the number in `A vs k×B` — a FRACTION when you mean 'A is k% OF B' (0.15 = 15% of revenue), or a DIRECT ratio when the two operands are already comparable and you want A vs a multiple of B (k=1 for 'A ≤ B'; k=2 for 'A ≥ 2×B'). Operands are compared in their OWN units (e.g. a growth-rate operand is a PERCENT: 25 for 25%), so a plain-number metric vs a percent metric needs NO rescaling of k.")
     metricB: Optional[str] = Field(None, description="RELATION form only: the second metric — an exact key OR plain English (same vocabulary as metricA); the server resolves it. Set metricB_stat='growth' to compare against its GROWTH RATE instead of its level.")
@@ -2502,9 +2618,14 @@ def screen_unified(
             "🔴 ENGLISH. US-optionable only. Omit for a non-options screen.")] = None,
         options_horizon: Annotated[Optional[Literal["long","short"]], _d("Options horizon: 'long' (default, positioning/conviction) or "
             "'short' (gamma/near-term). Only meaningful with `options`.")] = None,
-        gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a SINGLE GICS code PREFIX from find_gics ('45'=IT sector, "
-            "'3520'=biotech group, '352010'=biotech industry; shorter prefix = broader). One cohort carries ONE gics prefix — "
-            "for two UNRELATED sectors (biotech OR software) run separate screens. Omit = all sectors.")] = None,
+        gics: Annotated[Optional[str], _d("OPTIONAL universe SCOPE — the industry/theme CONCEPT(s) to screen within. "
+            "Pass one or MORE ATOMIC concepts, comma-separated (decompose a compound like 'banks and insurance' → "
+            "'banks,insurance'). Each may be plain English ('banks', 'semiconductors', 'AI', 'EV cars', 'cloud') OR a "
+            "raw GICS code prefix ('45'=IT sector, '3520'=biotech group, '352010'=biotech industry; shorter = broader). "
+            "🔴 The SERVER resolves each concept and DECIDES the axis for you — an established industry maps to a GICS "
+            "sector/industry, a curated megatrend maps to a THEME (you do NOT need to know our theme catalog or pick "
+            "gics-vs-theme). A single concept may resolve to MULTIPLE homes (retail → discretionary + staples retail). "
+            "If a concept isn't a recognizable industry/theme you get an honest reconfirm. 🔴 ENGLISH. Omit = all sectors.")] = None,
         country: Annotated[Optional[List[str]], _d("OPTIONAL operating-country scope — one or MORE ISO-2 codes, OR'd (a stock "
             "matches if in ANY of them). e.g. ['US'] · ['CN','US'] for China+US · ['TH','SG','MY']. Omit = all countries.")] = None,
         size: Annotated[Optional[List[str]], _d("OPTIONAL market-cap size tier(s), OR'd — any of 'large'|'mid'|'small'|'micro'. "
@@ -2516,17 +2637,20 @@ def screen_unified(
             "'Common Stock','ETF','Crypto','Currency','Commodity','Bond','Index','Fund','ADR','REIT'. e.g. ['Common Stock'] · ['ETF','Fund'] · ['Crypto']. "
             "NOTE: 'Crypto' = digital assets (BTC/ETH, exchange .CC) — SEPARATE from 'Currency' which is forex pairs (.FOREX); "
             "gold/silver spot are 'Commodity'. Omit = all types (a typical company screen wants 'Common Stock'). Scopes the TECHNICAL universe.")] = None,
-        theme: Annotated[Optional[List[int]], _d("OPTIONAL megatrend THEME node_id(s) from find_megatrend, OR'd — a stock matches "
-            "if it is a CORE member of ANY. e.g. [18000000] (a biotech megatrend) · [18000000,18120000]. 🔴 DISTINCT from `gics`: "
-            "gics = official sector code; theme = curated megatrend membership. Resolve a theme phrase → node_id(s) via find_megatrend.")] = None,
-        exclude_gics: Annotated[Optional[str], _d("OPTIONAL — EXCLUDE a GICS sector/industry from the whole screen "
-            "(NOT banks / everything-except-utilities). CSV of GICS code prefixes from find_gics ('4010'=banks). "
-            "Applies to EVERY leg (fund/ta/options/dividend) — it's a universe-level negation, so 'high-yield stocks "
-            "but NOT banks' = fundamental dividend_yield + exclude_gics='4010'. The `gics` param INCLUDES; this EXCLUDES.")] = None,
+        theme: Annotated[Optional[List[int]], _d("ADVANCED raw-passthrough — megatrend THEME node_id(s), OR'd; a stock matches "
+            "if it is a CORE member of ANY. e.g. [18000000] · [18000000,18120000]. 🔴 Normally you do NOT set this: just name "
+            "the theme concept in `gics` ('AI', 'semiconductors') and the server routes it to the theme axis automatically. "
+            "Use this only when you already hold a numeric node_id and want to skip resolution.")] = None,
+        exclude_gics: Annotated[Optional[str], _d("OPTIONAL — EXCLUDE industry/theme CONCEPT(s) from the whole screen "
+            "(NOT banks / everything-except-utilities). CSV of concepts — codes OR plain English ('banks', 'AI'); the "
+            "server resolves EACH and routes it (a GICS concept excludes the sector, a theme concept excludes the theme "
+            "members), same unified resolution as `gics`. Applies to EVERY leg (fund/ta/options/dividend) — a "
+            "universe-level negation, so 'high-yield stocks but NOT banks' = fundamental dividend_yield + exclude_gics='banks'. "
+            "The `gics` param INCLUDES; this EXCLUDES.")] = None,
         exclude_country: Annotated[Optional[List[str]], _d("OPTIONAL — EXCLUDE operating-country(ies), ISO-2. "
             "'global ex-US' = exclude_country=['US']. Universe-level, applies to every leg.")] = None,
-        exclude_theme: Annotated[Optional[List[int]], _d("OPTIONAL — EXCLUDE megatrend THEME node_id(s) from find_megatrend. "
-            "Universe-level negation across every leg.")] = None,
+        exclude_theme: Annotated[Optional[List[int]], _d("ADVANCED raw-passthrough — EXCLUDE megatrend THEME node_id(s). "
+            "Normally just name the theme to exclude in `exclude_gics` ('not AI'); the server routes it. Universe-level negation across every leg.")] = None,
         min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE min market cap in USD (e.g. 50000000000 = $50bn). This is an ABSOLUTE floor — distinct from `size` (which is a RELATIVE per-market tier: 'small' means small FOR ITS market, not small in USD). For 'companies under $X' / a USD band use min/max_market_cap_usd, NOT size.")] = None,
         max_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE max market cap in USD (e.g. 2000000000 = under $2bn). Pair with min for a band. ABSOLUTE ceiling — use this for 'small caps under $X', not the relative `size` tier.")] = None,
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
@@ -2584,18 +2708,45 @@ def screen_unified(
     bars — widen the window), or report honestly "no stock matches that right now." (Technicals are computed
     market-wide across all timeframes — no coverage-gap disclaimer.)"""
     _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
+    # 🆕 SERVER-SIDE UNIFIED concept resolution (collapse find_gics + find_megatrend): `gics` / `exclude_gics` (and
+    # each fundamental condition's `vs_cohort.gics`) may be a bare CODE **or** plain English ('biotech', 'AI',
+    # 'not banks') → `_scope_resolve` sends it through the vector+Jev `_resolve_concept`, which decides the axis and
+    # returns typed refs; we ROUTE each ref by type — gics code → the gics leg, theme node_id → merged into `theme`.
+    # A pure-digit token / raw `theme` id passes straight through. Unresolved → ONE honest reconfirm. See design §15.
+    scope_resolved: dict = {}
+    g_codes, g_themes = [], []
+    if gics:
+        g_codes, g_themes, _cf, _rm = _scope_resolve(gics)
+        if _cf: return _cf
+        scope_resolved.update(_rm)
+    xg_codes, xg_themes = [], []
+    if exclude_gics:
+        xg_codes, xg_themes, _cf, _rm = _scope_resolve(exclude_gics)
+        if _cf: return _cf
+        scope_resolved.update(_rm)
+    for _c in (fundamental or []):
+        if _c.vs_cohort and _c.vs_cohort.get("gics"):
+            _cg, _ct, _cf, _rm = _scope_resolve(_c.vs_cohort["gics"])
+            if _cf: return _cf
+            _c.vs_cohort["gics"] = ",".join(_cg) if _cg else _c.vs_cohort["gics"]; scope_resolved.update(_rm)
     include: dict = {}
-    if gics: include["gics"] = gics
+    if g_codes: include["gics"] = ",".join(g_codes)
     if country: include["country"] = [str(c).upper() for c in _lst(country)]
     if size: include["size"] = _lst(size)
     if asset_type: include["asset_type"] = _lst(asset_type)
-    if theme: include["theme"] = _lst(theme)
+    _themes = list(_lst(theme)) if theme else []
+    for _t in g_themes:
+        if _t not in _themes: _themes.append(_t)
+    if _themes: include["theme"] = _themes
     if min_market_cap_usd is not None: include["mcap_min"] = min_market_cap_usd
     if max_market_cap_usd is not None: include["mcap_max"] = max_market_cap_usd
     excl: dict = {}
-    if exclude_gics: excl["gics"] = exclude_gics
+    if xg_codes: excl["gics"] = ",".join(xg_codes)
     if exclude_country: excl["country"] = [str(c).upper() for c in _lst(exclude_country)]
-    if exclude_theme: excl["theme"] = _lst(exclude_theme)
+    _xthemes = list(_lst(exclude_theme)) if exclude_theme else []
+    for _t in xg_themes:
+        if _t not in _xthemes: _xthemes.append(_t)
+    if _xthemes: excl["theme"] = _xthemes
     # OVER-FETCH: `limit` = how many the client means to SHOW; fetch a ~4× look-ahead buffer (cap 100) so a
     # follow-up "a few more" is served from THIS payload (in the LLM's context) with no re-screen. Beyond 100 → fresh
     # screen (a cursor-based deep-page is designed but not built — see docs/pipeline/screener-pagination-design.md).
@@ -2772,6 +2923,7 @@ def screen_unified(
         if fresolved: data["_resolved_fundamental"] = fresolved  # how each NL metric/shape was interpreted (transparency)
         if ta_resolved: data["_resolved_ta"] = ta_resolved
         if opt_resolved: data["_resolved_options"] = opt_resolved
+        if scope_resolved: data["_resolved_scope"] = scope_resolved
     return data
 
 
@@ -2998,8 +3150,8 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     `below_average`/`above_average` (a proper cap-weighted, full-universe, outlier-cleaned benchmark).
       • Scope (≥1 REQUIRED — it never scans the whole universe): `megatrend` (one OR SEVERAL trend
         names/ids as csv — resolved for you in one pass, same as theme_pulse: 'foundry', 'foundry,hbm',
-        '56020000'), `gics` (csv GICS CODE prefixes — resolve a sector NAME to its code via find_gics first:
-        '453010' semis, '2550' retail, '201010' aerospace/defense, '352010' biotech), `country` (csv ISO-2; for a REGION pass every
+        '56020000'), `gics` (a GICS sector/industry — codes OR plain English, CSV; server resolves each:
+        'semis'/'453010', 'retail'/'2550', 'aerospace defense', 'biotech'), `country` (csv ISO-2; for a REGION pass every
         country — Asia='CN,JP,KR,TW,HK,IN,SG'). Combine freely — "China+Taiwan foundry & HBM names" = ONE
         call: country='CN,TW', megatrend='foundry,hbm'.
       • `order_by` = `news_count` (default — most attention) | `relevance` (most central to its news) |
@@ -3025,7 +3177,16 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     engineering'), map it to the nearest `gics`/`country` you CAN pass and lean on your world knowledge for
     the rest. For ONE ticker use `asset_pulse`; for a sector's overall pulse use `theme_pulse`; use THIS to
     rank the NAMES inside a group. `limit` default 10 (max 50)."""
-    mt = _to_nodes(megatrend) if megatrend else None
+    mt = None
+    if megatrend:  # UNIFIED: theme term(s) → megatrend node ids
+        mt, _me = _theme_nodes(megatrend)
+        if _me: return _me
+    if gics:  # UNIFIED: gics code(s) OR plain English; a theme concept flows into the megatrend leg
+        _g, _t, _cf, _ = _scope_resolve(gics)
+        if _cf: return _cf
+        gics = ",".join(_g) if _g else None
+        if _t:
+            mt = ",".join([str(x) for x in _t] + ([mt] if mt else []))
     if not (mt or gics or country):
         return {"error": "screen_stocks needs at least one scope: megatrend (node id from find_megatrend), gics, or country."}
     params = {"megatrend": mt, "gics": gics, "country": country, "direction": direction,
@@ -3043,7 +3204,7 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
              "net_negative": sum(1 for r in stocks if _nd(r) == "neg"),
              "ambiguous": sum(1 for r in stocks if _nd(r) == "ambiguous")}
     # echo the RESOLVED megatrend node name(s) — a bare `megatrend` NAME auto-resolves to node id(s) via
-    # _to_nodes (rank-1 each); surface WHICH node(s) so the client isn't guessing what a term collapsed to.
+    # _theme_nodes (the unified Jev resolver); surface WHICH node(s) so the client isn't guessing.
     mt_named = None
     if mt:
         tax = _taxonomy()["by_id"]
@@ -3093,7 +3254,7 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
     `dividend_min_cagr` gate. THIS tool is the dividend SPECIALIST (yield ranking + no-cut streak + yield-trap
     decomposition): it has NO P/E filter and `gics` only INCLUDES a sector (it can't EXCLUDE banks).
       • Scope (≥1 REQUIRED): `country` (csv ISO-2) and/or `gics` (csv GICS CODE prefixes, e.g. '2550' retail).
-        For a sector by NAME, resolve first with `find_gics` ('banks'→4010) then pass the code. Combine freely.
+        Pass a sector as a CODE or plain English ('banks'); the server resolves it. Combine freely.
       • `order_by` = `yield` (default) | `streak` (reliability — longest clean run in our window) | `cagr`
         (fastest dividend growth). Filters: `min_yield`/`max_yield` (PERCENT, e.g. 3 = 3%; max guards against
         traps), `min_streak_years` (≤10, see below), `min_cagr` (%), `min/max_market_cap_usd`, `max_payout`
@@ -3111,6 +3272,14 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
     price drop + intact/growing dividend + long streak = possible VALUE. Read the payload's `_guide`.
     `limit` default 15 (max 50). SCOPE (country/gics) is OPTIONAL — omit both to rank dividend payers
     WHOLE-MARKET (the candidate scan is bounded + fast); add a scope to narrow to one market/sector."""
+    if gics:  # UNIFIED: gics code(s) OR plain English. gics-ONLY tool — a theme concept can't be screened here (honest)
+        _g, _t, _cf, _ = _scope_resolve(gics)
+        if _cf: return _cf
+        if _t and not _g:
+            return {"needs_confirmation": True, "not_a_sector": True, "query": gics,
+                    "_guide": f"'{gics}' resolved to a curated THEME, not a GICS sector — screen_dividends screens by "
+                              f"sector only. Use screen_unified(gics='{gics}') with a dividend gate for a theme scope."}
+        gics = ",".join(_g) if _g else None
     params = {"country": country, "gics": gics,
               "min_yield": min_yield, "max_yield": max_yield,
               "min_streak_years": min_streak_years, "min_cagr": min_cagr,
@@ -3119,243 +3288,6 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
               "order_by": order_by, "limit": _lim(limit, default=15, ceiling=50)}
     return mdx()._get("/v1/stocks/dividends", params).data
 
-@mcp.tool(name="find_megatrend", title="Find Megatrend", annotations=_RO)
-def resolve_themes(terms: Annotated[List[str], _d("One or more THEME/trend terms to map to megatrend node candidates — YOU pick from the returned `{id,name,tier}` candidates, then reuse the id.")]) -> dict:
-    """🔴 The MEGATREND counterpart of `find_stock`: map trend-language ('HBM', 'foundry', 'robotaxi',
-    'robotics') to the specific taxonomy node(s) — returns CANDIDATES for YOU to pick from (exactly like
-    `find_stock` returns candidate tickers). May be tier-1/-2/-3; may be several for a polysemous term.
-    Gazetteer first (deterministic, free), deepseek 3-tier match for the rest. Returns
-    {term: [{id,name,tier},...]}. Call this to get a megatrend `id`, then REUSE the id you pick downstream
-    (theme queries, `write_note`) — don't flatten or guess the number yourself."""
-    tier1 = [n for n in _taxonomy()["nodes"] if n["tier"] == 1]
-    result: dict = {}
-    for term in terms:
-        nterm = _normalize_gaz_query(term)  # verbose/punctuated → clean (SAME shared helper as GICS)
-        g = _gazetteer(term) or (_gazetteer(nterm) if nterm and nterm != str(term).strip().lower() else [])
-        if g:
-            result[term] = [_node_out(i) for i in g]
-            continue
-        dterm = nterm or term  # the deepseek drill gets the cleaned query too
-        m1 = _match(dterm, tier1)
-        c2 = [k for t in m1 for k in _children(t)]
-        m2 = set(_match(dterm, c2))
-        c3 = [k for t in m2 for k in _children(t)]
-        m3 = set(_match(dterm, c3)) if c3 else set()
-        nodes: list = []
-        for t in m1:
-            nodes += _solve(t, {2: m2, 3: m3})
-        result[term] = [_node_out(i) for i in dict.fromkeys(nodes)]
-    return result
-
-# ── GICS resolver — the SECTOR counterpart of find_megatrend (established industries, not trends) ──────
-# Same 3-tier-deepseek shape as resolve_themes, but over the GICS hierarchy (sector→group→industry→sub,
-# 4 levels) loaded from /v1/gics. deepseek `_match` handles plurals (bank→"Banks"), cross-sector terms
-# (retail spans Consumer Disc + Staples), and ambiguity (retail-bank vs investment-bank) that a naive
-# name lookup gets wrong. A non-industry concept (a metric like 'P/E', a pure trend) → [] (correct).
-_GTAX = None
-_GLVL = {"sector": 1, "group": 2, "industry": 3, "sub_industry": 4}
-
-def _gics_tax() -> dict:
-    global _GTAX
-    if _GTAX is None:
-        # STATIC reference data (273 GICS nodes) → load the BUNDLED file, so no mdx() API call (hence no auth
-        # contextvar) is ever needed and a worker thread can safely resolve GICS. Fallback to the API only if
-        # the bundle is somehow missing. Refresh the file: curl /v1/gics → gics_taxonomy.json.
-        try:
-            import os, json
-            with open(os.path.join(os.path.dirname(__file__), "gics_taxonomy.json"), encoding="utf-8") as f:
-                nodes = json.load(f)
-        except Exception:
-            nodes = mdx()._get("/v1/gics", {}).data.get("gics", [])
-        children: dict = {}
-        for n in nodes:
-            children.setdefault(n.get("parent_code"), []).append(n)
-        _GTAX = {"nodes": nodes, "by_code": {n["code"]: n for n in nodes}, "children": children}
-    return _GTAX
-
-def _gics_children(code: str) -> list:
-    return _gics_tax()["children"].get(code, [])
-
-def _gics_match(term: str, cands: list) -> list:
-    """deepseek: which GICS nodes does the concept belong under? (same classifier as _match, string codes)."""
-    if not cands:
-        return []
-    lines = "\n".join(f"{n['code']} | {n['name']}" for n in cands)
-    out = _deepseek(
-        "Which GICS classification nodes does the CONCEPT belong under? Match a node only if the concept "
-        f'clearly falls within it (an industry/sector concept, NOT a metric or a single company).\nCONCEPT: "{term}"\n'
-        f'NODES:\n{lines}\nReturn JSON: {{"match":[<code>,...]}} (codes as strings; empty if none fit).',
-        term, 0.1)
-    s = {str(x) for x in (out.get("match") or [])}
-    return [n["code"] for n in cands if n["code"] in s]
-
-def _gics_solve(code: str, matched: dict) -> list:
-    """all-or-none → this node; sector with no matched child → drop; subset → drill (mirror _solve)."""
-    node = _gics_tax()["by_code"][code]
-    kids = _gics_children(code)
-    if not kids:
-        return [code]
-    ns = matched.get(_GLVL[node["level"]] + 1, set())
-    mk = [k for k in kids if k["code"] in ns]
-    if not mk:
-        return [] if node["level"] == "sector" else [code]
-    if len(mk) == len(kids):
-        return [code]
-    res: list = []
-    for k in mk:
-        res += _gics_solve(k["code"], matched)
-    return res
-
-def _gics_gaz(term: str) -> list:
-    """Fast deterministic path: exact node-name hit → that node; else a TIGHT substring (1-4 hits that
-    all share a parent → unambiguous). Broad/cross-parent substrings fall through to the deepseek drill."""
-    tax = _gics_tax(); lc = str(term).strip().lower()
-    if not lc:
-        return []
-    exact = [n["code"] for n in tax["nodes"] if n["name"].lower() == lc]
-    if exact:
-        return exact
-    hits = [n for n in tax["nodes"] if lc in n["name"].lower()]
-    if 1 <= len(hits) <= 4 and len({n.get("parent_code") for n in hits}) == 1:
-        return [n["code"] for n in hits]
-    return []
-
-def _gics_out(code: str) -> dict:
-    n = _gics_tax()["by_code"][code]
-    return {"code": n["code"], "name": n["name"], "level": n["level"]}
-
-# Common occupation / plural / colloquial nouns → the canonical GICS concept WORD (a real node name the
-# gazetteer then resolves + rolls up). These aren't node names themselves, so without this they'd skip the
-# deterministic path and burn the deepseek drill. Keep tight — high-frequency only; the long tail stays with
-# deepseek. Values MUST be an exact node name (verified) so the gazetteer hits.
-_GICS_ALIAS = {
-    "chipmaker": "semiconductors", "chipmakers": "semiconductors", "chip stocks": "semiconductors",
-    "chips": "semiconductors", "semis": "semiconductors", "semiconductor stocks": "semiconductors",
-    "homebuilder": "homebuilding", "homebuilders": "homebuilding", "housebuilder": "homebuilding",
-    "housebuilders": "homebuilding", "home builders": "homebuilding",
-    "automaker": "automobiles", "automakers": "automobiles", "carmaker": "automobiles",
-    "carmakers": "automobiles", "car makers": "automobiles", "auto manufacturers": "automobiles",
-    "drugmaker": "pharmaceuticals", "drugmakers": "pharmaceuticals", "pharma": "pharmaceuticals",
-    "big pharma": "pharmaceuticals", "biotech": "biotechnology",
-    "lender": "banks", "lenders": "banks", "insurer": "insurance", "insurers": "insurance",
-    "miner": "metals & mining", "miners": "metals & mining", "mining": "metals & mining",
-    "steelmaker": "steel", "steelmakers": "steel", "steel producers": "steel",
-    "airline": "passenger airlines", "airlines": "passenger airlines", "carriers": "passenger airlines",
-    "telco": "telecommunication services", "telcos": "telecommunication services",
-    "telecom": "telecommunication services", "telecoms": "telecommunication services",
-    "defense": "aerospace & defense", "defence": "aerospace & defense",
-    "utility": "utilities",
-}
-
-# Colloquial terms that span MULTIPLE GICS homes where the WORD doesn't match the right node names — the
-# gazetteer alone mis-lands. The 2018 GICS reshuffle left "internet" ONLY in 45102030 (IT · Internet
-# Services & Infrastructure = web-infra like VeriSign/GoDaddy), while the internet PLATFORM giants sit in
-# Broadline Retail (255030: Alibaba/Amazon/JD) and Interactive Media & Services (502030: Tencent/Meta/
-# Alphabet) — neither name contains "internet". So bare find_gics('internet') returned pure-IT and the
-# platform cohort vanished. These map straight to code lists (multi-candidate; the client picks).
-_GICS_MULTI = {
-    "internet": ["255030", "502030", "45102030"],
-    "internet company": ["255030", "502030"], "internet companies": ["255030", "502030"],
-    "internet platform": ["255030", "502030"], "internet platforms": ["255030", "502030"],
-    "internet giant": ["255030", "502030"], "internet giants": ["255030", "502030"],
-    "online platform": ["255030", "502030"], "online platforms": ["255030", "502030"],
-    "platform companies": ["255030", "502030"], "tech platforms": ["255030", "502030"],
-    "e-commerce": ["255030"], "ecommerce": ["255030"], "online retail": ["255030"],
-    "social media": ["502030"],
-}
-
-def _gics_rollup(code: str) -> str:
-    """Broaden a specifically-named node to the highest ancestor that is the SAME concept as a family. Roll
-    child→parent only when (a) no comma in the parent name (a comma = a list of DISTINCT sibling industries,
-    e.g. 'Pharmaceuticals, Biotechnology & Life Sciences'), AND (b) the parent's name CONTAINS the child's
-    name, AND (c) the EXTRA part of the parent name (beyond the child) is empty (a pure level-promotion, e.g.
-    industry 'Banks'→group 'Banks') OR is QUALIFIED by the child's own root word — so 'Semiconductors' rolls
-    into 'Semiconductors & Semiconductor Equipment' (extra 'Semiconductor Equipment' repeats the root), but
-    'Automobiles' does NOT roll into 'Automobiles & Components' and 'Software' not into 'Software & Services'
-    (the extra segment is a distinct business, unqualified by the concept)."""
-    tax = _gics_tax()
-    cur = code
-    while cur in tax["by_code"]:
-        node = tax["by_code"][cur]
-        p = node.get("parent_code")
-        if not p or p not in tax["by_code"]:
-            break
-        cname, pname = node["name"].lower(), tax["by_code"][p]["name"].lower()
-        if "," in pname or cname not in pname:
-            break
-        extra = pname.replace(cname, "", 1).strip(" &")   # the parent's name beyond the child concept
-        root = cname.split(" ")[0].rstrip("s")            # child's leading root word (rough singular)
-        if extra and root not in extra:                    # a distinct business, not a concept-qualified extension
-            break
-        cur = p
-    return cur
-
-# The ONE shared concept→GICS resolver. find_gics AND theme_pulse both call this — no tool rolls its own
-# keyword→sector map (theme_pulse used to run a private deepseek classify that mis-mapped "homebuilders"→Banks).
-# Filler words a verbose sector query carries that GICS node names never do — dropped before gazetteer matching.
-_GAZ_FILLER = {"sector", "sectors", "industry", "industries", "subindustry", "sub", "group", "groups",
-               "companies", "company", "firms", "names", "stocks", "stock", "space", "the", "a", "an", "of",
-               "theme", "themes", "trend", "trends", "megatrend", "megatrends"}  # GICS + megatrend resolvers
-
-def _normalize_gaz_query(q: str) -> str:
-    """Clean a free-text industry/sector query for the DETERMINISTIC gazetteer (SHARED by any lexical resolver, not
-    just GICS): replace the separators/brackets the GICS tree never contains (/ ( ) [ ] { } | ; :) with spaces and
-    drop filler words (sector/industry/companies/the/…), then collapse whitespace. KEEPS `& , - .` — those ARE real
-    in node names ('Oil, Gas & Consumable Fuels', 'Health Care'). This is the generalized fix for 'a verbose/
-    punctuated query misses the gazetteer and falls through to the (occasionally-empty) LLM drill' — NOT a `/`-only
-    patch: it strips the whole separator class + fillers so 'information technology sector' or 'banks / diversified
-    banks' reduces to a clean node the gazetteer can hit."""
-    s = str(q).lower()
-    for ch in "/()[]{}|;:":
-        s = s.replace(ch, " ")
-    return " ".join(w for w in s.split() if w not in _GAZ_FILLER).strip()
-
-def _resolve_gics_codes(term: str) -> list:
-    """A sector/industry concept → GICS code(s). Normalise (strip separators/fillers) → alias-normalise vocabulary →
-    gazetteer (deterministic exact/tight-substring) + roll-up to the family group as an ADDED candidate → else a
-    deepseek tier-drill (sector→group→industry→sub). Returns codes broad-first (shorter code first), dedup'd."""
-    key = str(term).strip().lower()
-    nkey = _normalize_gaz_query(key)  # verbose/punctuated → clean, matchable
-    for k in (key, nkey):
-        if k in _GICS_MULTI:  # colloquial multi-home terms (internet/platform/e-commerce)
-            return _GICS_MULTI[k]
-    term = _GICS_ALIAS.get(key) or _GICS_ALIAS.get(nkey) or term
-    g = _gics_gaz(term) or (_gics_gaz(nkey) if nkey and nkey != str(term).strip().lower() else [])
-    if g:
-        out: list = []
-        for c in g:  # add the rolled-up family group WITHOUT dropping the specific node — client picks
-            r = _gics_rollup(c)
-            if r != c:
-                out.append(r)
-            out.append(c)
-        return sorted(dict.fromkeys(out), key=lambda x: (len(x), x))
-    dterm = nkey or term  # the deepseek drill gets the CLEANED query (punctuation/fillers stripped) too
-    sectors = [n for n in _gics_tax()["nodes"] if n["level"] == "sector"]
-    m1 = _gics_match(dterm, sectors)
-    c2 = [k for s in m1 for k in _gics_children(s)]
-    m2 = set(_gics_match(dterm, c2))
-    c3 = [k for gr in m2 for k in _gics_children(gr)]
-    m3 = set(_gics_match(dterm, c3)) if c3 else set()
-    c4 = [k for ind in m3 for k in _gics_children(ind)]
-    m4 = set(_gics_match(dterm, c4)) if c4 else set()
-    nodes: list = []
-    for s in m1:
-        nodes += _gics_solve(s, {2: set(m2), 3: set(m3), 4: set(m4)})
-    return list(dict.fromkeys(nodes))
-
-@mcp.tool(name="find_gics", title="Find GICS Sector", annotations=_RO)
-def find_gics(q: Annotated[str, _dq("An INDUSTRY/SECTOR term IN ENGLISH (retail, airlines, banks, semiconductors, pharma) to map to GICS code candidates — YOU pick from the returned `{code,name,level}`. The GICS tree is English-named, so TRANSLATE the concept to its English industry word FIRST (銀行→banks, ธนาคาร→banks, 半導体→semiconductors); a raw non-English term still resolves but takes the slow path.")]) -> dict:
-    """🔴 The SECTOR/INDUSTRY counterpart of `find_megatrend` — map an established-industry concept
-    ('retail', 'airlines', 'banks', 'semiconductors', 'utilities', 'pharma') to its GICS node(s). Use this
-    when a note is about an INDUSTRY (not an emerging trend → that's `find_megatrend`, not a single company
-    → that's `find_stock`). Returns `candidates` `[{code,name,level},…]` for YOU to pick (may be several:
-    'retail' legitimately spans Consumer-Discretionary + Staples; 'bank' spans commercial vs investment).
-    Reuse the picked `code`(s) as `gics` in `write_note` / as a `gics` filter — don't guess a number. 🔑 The
-    `gics` arg of `brief` / `screen_stocks` / `screen_dividends` is a CODE and REJECTS a name — so when a
-    request scopes by a sector NAME ("European banks", "Thai high-yield tech"), call find_gics FIRST to get the
-    code, THEN pass it. A concept that is NOT an industry (a metric, a company, a pure trend) → empty — correct,
-    don't force it. Gazetteer-first (deterministic), deepseek tier-drill (sector→sub)."""
-    return {"query": q, "candidates": [_gics_out(c) for c in _resolve_gics_codes(q)]}
 
 # ── Trade & Customs (UN Comtrade) — international merchandise + services trade flows ─────────────────
 # find_hs is FREE (our HS/EBOPS reference); the query tools are BYOK (the user's own Comtrade key, metered
@@ -3638,7 +3570,9 @@ def suggest_cta(theme: Annotated[str, _d("A theme/scope to suggest a next-step c
     graph's moat (ripple/relations/commodity/off-coverage). Server-side: theme_summary(has ripple/
     entities/aspects) + a semantic news search, then deepseek curates ONLY data-backed hooks.
     Validated in /tmp/mcp-gate/cta_tool.js (there via direct probes; here via the summary composite)."""
-    brief = mdx().theme(_to_node(theme)).summary(window=window)  # already carries winners/losers/top_entities/aspect_heatmap/ripple
+    node, err = _theme_node(theme)
+    if err: return err
+    brief = mdx().theme(node).summary(window=window)  # already carries winners/losers/top_entities/aspect_heatmap/ripple
     signals = {k: brief.get(k) for k in ("winners", "losers", "top_entities", "top_assets",
                                          "aspect_heatmap", "ripple", "pulse")}
     curate = ("Given a theme brief's REAL signals, write 1-2 CTAs inviting deeper exploration. "
