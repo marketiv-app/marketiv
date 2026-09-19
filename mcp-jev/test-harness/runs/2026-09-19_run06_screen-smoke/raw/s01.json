@@ -1,0 +1,27 @@
+{
+  "id": "s01",
+  "question": "หาหุ้นที่ ROE เกิน 20% แล้วรายได้โตทุกปีติดกัน 3 ปี",
+  "tool_calls": [
+    {
+      "tool": "find_fsconcept",
+      "args": { "queries": ["return on equity", "revenue", "P/E ratio", "gross margin"] }
+    },
+    {
+      "tool": "find_fspattern",
+      "args": { "queries": ["above a threshold", "grew every year for several consecutive years", "below a threshold", "gross margin expanding"] }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          { "concept": "roe", "pattern": "above", "threshold": 0.20 },
+          { "concept": "revenue", "pattern": "consecutive_growth", "N": 3 }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 10
+      }
+    }
+  ],
+  "answer": "เจอหุ้นที่เข้าเงื่อนไข ROE > 20% และรายได้เติบโตทุกปีติดกัน 3 ปี ทั้งหมด 40 ตัว (ผลถูก cap ที่ buffer 40) เรียงตาม market cap 10 อันดับแรก: 1) NVIDIA (NVDA.US) — ROE 81.65%, รายได้โต 3 ปีต่ำสุด +65.5%/ปี 2) Alphabet Class C (GOOG.US) 3) Microsoft (MSFT.US) 4) Amazon (AMZN.US) 5) Broadcom (AVGO.US) 6) Meta (META.US) 7) Eli Lilly (LLY.US) 8) Walmart (WMT.US) 9) Visa (V.US) 10) ASML (ASML.AS). ทุกตัวมี ROE เกิน 20% (เช่น NVDA 81.65%) พร้อมรายได้ที่โตขึ้นทุกปีต่อเนื่องอย่างน้อย 3 ปี (series yoy ของ NVDA = +65.5%, +114.2%, +125.9%). ส่วนใหญ่เป็นหุ้นเทคโนโลยี/เมกะแคปคุณภาพสูงของสหรัฐ พร้อมด้วยชื่อนอกสหรัฐอย่าง ASML, Tencent, Novartis, AstraZeneca",
+  "friction": "ไม่มี _resolved_fundamental block คืนกลับมา — เครื่องมือสะท้อนการตีความผ่าน matched.fundamental ต่อรายตัวแทน (roe kind=level, revenue kind=growth requested_n=3, window=min_yoy). resolver ให้ concept/pattern ตรง (roe/above, revenue/consecutive_growth) ไม่ต้อง retry"
+}

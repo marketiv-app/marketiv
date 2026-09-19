@@ -1,0 +1,27 @@
+{
+  "id": "ta07",
+  "question": "find me stocks that just feel really bullish and give off good momentum vibes",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}],
+            "quals": [
+              {"any": [{"pattern": "above", "a": "close", "b": "ema200"}]},
+              {"any": [{"pattern": "rising", "a": "rsi"}]}
+            ]
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 20,
+        "sort": "rsi",
+        "limit": 10
+      }
+    }
+  ],
+  "answer": "Here are stocks that check every bullish momentum box — golden cross (EMA50 crossed above EMA200), price holding above the 200-day, and RSI trending up — sorted by highest RSI first:\n1. Yue Kan Holdings (2110.HK) — RSI 96.6, ADX 56 (strong trend), price 487% above EMA200 — very bullish\n2. Eleco PLC (ELCO.LSE) — RSI 96.5, ADX 33, price 74.7% above EMA200\n3. B90 Holdings (B90.LSE) — RSI 95.4, price 28.2% above EMA200\nAll three had their golden cross within the past 20 days with rising RSI confirmed. At least 40 matches returned across global markets (HK, LSE, and others). The top picks are the strongest momentum signals right now.",
+  "friction": "none"
+}

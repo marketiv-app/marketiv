@@ -1,0 +1,9 @@
+{
+  "id": "f06",
+  "question": "diluted EPS กับ basic EPS ของ Tesla ต่างกันแค่ไหน",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "TSLA.US", "period": "1", "fields": ["eps_diluted", "eps_basic"]}}
+  ],
+  "answer": "Tesla (TSLA.US, USD) งวดปีการเงินล่าสุด 2025-12:\n- EPS พื้นฐาน (basic EPS): 1.18\n- EPS ปรับลด (diluted EPS): 1.08\nต่างกัน 0.10 ดอลลาร์ต่อหุ้น (diluted ต่ำกว่า basic ~8.5%) ซึ่งเป็นผลจากผลกระทบการเจือจาง (dilution) ของหลักทรัพย์ที่แปลงเป็นหุ้นได้ เช่น สิทธิซื้อหุ้น/RSU. ตามหลักบัญชี diluted EPS จะน้อยกว่าหรือเท่ากับ basic EPS เสมอ — กรณีนี้น้อยกว่าเล็กน้อย บ่งชี้ว่าการเจือจางไม่มากนัก.",
+  "friction": "เหมือนเคสอื่น ใช้ port 8901 แทน 8902 ที่ upstream ล่ม. ส่ง exact ticker TSLA.US + ฟิลด์ eps_diluted/eps_basic ได้ผลในครั้งเดียว ไม่มี needs_confirmation."
+}

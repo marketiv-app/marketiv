@@ -1,0 +1,9 @@
+{
+  "id": "f10",
+  "question": "gross loss ไตรมาสล่าสุดของ Tesla",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Tesla", "fields": ["gross profit"], "period": "quarterly"}}
+  ],
+  "answer": "ไม่สามารถให้ตัวเลข gross profit/gross loss ไตรมาสล่าสุดของ Tesla ได้ในขณะนี้ เพราะ MCP server ตอบกลับ HTTP 404 ทุกครั้งที่เรียกใช้เครื่องมือ (tools/call) ผมไม่ขอเดาตัวเลขงบการเงินเอง โปรดลองอีกครั้งเมื่อ server กลับมาปกติ",
+  "friction": "BLOCKER (server-side): tools/call คืน HTML 404 ทุกตัว เหมือน f07. 'gross loss' = gross profit ที่ติดลบ จึงขอ field 'gross profit' รายไตรมาส (period='quarterly') แล้วดูเครื่องหมาย — แต่เรียก financials ไม่ผ่านเพราะ 404."
+}

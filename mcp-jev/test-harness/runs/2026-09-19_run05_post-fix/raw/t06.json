@@ -1,0 +1,9 @@
+{
+  "id": "t06",
+  "question": "ขอรายได้ 5 ปีของ 貴州茅台",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "貴州茅台", "period": "5y", "fields": "revenue"}}
+  ],
+  "answer": "รายได้ของ Kweichow Moutai / 貴州茅台 (600519.CG, สกุล CNY หยวน) — แม้ขอ 5 ปี แต่ระบบมีข้อมูลรายได้ย้อนหลังถึง 4 ปีล่าสุด (รอบบัญชีสิ้นสุด ธ.ค.):\n• ปี 2025: 172.05 พันล้านหยวน\n• ปี 2024: 174.14 พันล้านหยวน\n• ปี 2023: 150.56 พันล้านหยวน\n• ปี 2022: 127.55 พันล้านหยวน\nแนวโน้ม: รายได้เติบโตต่อเนื่องจาก 127.6 พันล้าน (2022) เป็น 174.1 พันล้าน (2024) แล้วทรงตัว/ลดเล็กน้อยเป็น 172.0 พันล้านในปี 2025. หมายเหตุ: ข้อมูลย้อนได้ ~4 ปี ไม่มีปีที่ 5 (ก่อน 2022) ให้แสดง",
+  "friction": "none — resolved '貴州茅台'→600519.CG (conf 0.99) and field revenue (exact). Requested 5y but history reaches only ~4 fiscal years (2022–2025); no 5th/older year returned — stated plainly rather than fabricated."
+}

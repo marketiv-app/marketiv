@@ -1,0 +1,10 @@
+{
+  "id": "f04",
+  "question": "ค่าความนิยมกับสินทรัพย์ไม่มีตัวตนของ Microsoft ล่าสุด",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Microsoft", "period": "1", "fields": ["goodwill", "intangible assets"]}},
+    {"tool": "financials", "args": {"tickers": "Microsoft", "period": "1", "fields": ["goodwill", "intangibles"]}}
+  ],
+  "answer": "Microsoft (MSFT.US) งบดุลล่าสุด (as-of 2026-06, สกุล USD):\n- ค่าความนิยม (Goodwill): 119.65B\n- สินทรัพย์ไม่มีตัวตนอื่น (Other Intangible Assets): 18.61B\nรวมค่าความนิยม + สินทรัพย์ไม่มีตัวตน ≈ 138.3B. ค่าความนิยมก้อนใหญ่มากสะท้อนดีลควบรวมขนาดใหญ่ที่ผ่านมา (เช่น Activision Blizzard, LinkedIn ฯลฯ).",
+  "friction": "First call returned needs_confirmation on 'intangible assets' — two close candidates: 'intangibles' (Other Intangible Assets, prob 0.51) vs 'goodwill_and_intangibles' (combined, prob 0.49). User asked for goodwill and intangibles as SEPARATE items, and goodwill was already requested separately, so I picked 'intangibles' (the standalone Other Intangible Assets line) and re-called once — succeeded."
+}

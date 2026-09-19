@@ -1,0 +1,11 @@
+{
+  "id": "sc02",
+  "question": "บริษัทที่หนี้สินเพิ่มเร็วกว่าส่วนของผู้ถือหุ้น",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["gross margin", "total debt", "total shareholders equity", "return on equity", "market capitalization"]}},
+    {"tool": "find_fspattern", "args": {"queries": ["margin contracting for several consecutive years", "debt rising faster than equity", "above the industry group average", "market cap doubled over two years"]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "total_debt", "relation": "growth_faster_than", "metricB": "total_equity"}]}}
+  ],
+  "answer": "พบหุ้น 40 ตัว (ผลถูก cap) ที่อัตราการเติบโตของหนี้สินรวม (total_debt) เร็วกว่าส่วนของผู้ถือหุ้น (total_equity) วัดจาก CAGR 3 ปี เรียงตามมูลค่าตลาด ตัวใหญ่สุดได้แก่ Alphabet (GOOG.US, หนี้โต 25.94%/ปี vs equity 17.48%/ปี), Meta (META.US), Tesla (TSLA.US), Samsung (005930.KO), Micron (MU.US), Eli Lilly (LLY.US)",
+  "friction": "ใช้ RELATION form (metricA/relation/metricB) แทน pattern เดี่ยว เพราะเป็นการเปรียบเทียบสองเมตริก — find_fspattern คืน growth_faster_than เป็น relation kind. ไม่มี needs_confirmation"
+}

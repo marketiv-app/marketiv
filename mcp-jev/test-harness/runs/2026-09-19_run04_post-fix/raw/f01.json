@@ -1,0 +1,11 @@
+{
+  "id": "f01",
+  "question": "ขอดูงบกำไรขาดทุนของ Apple ปีล่าสุด",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Apple", "period": "1", "fields": "income"}},
+    {"tool": "financials", "args": {"tickers": "AAPL", "period": "1", "fields": "income"}},
+    {"tool": "financials", "args": {"tickers": "AAPL.US", "period": "1", "fields": "income"}}
+  ],
+  "answer": "งบกำไรขาดทุนของ Apple (AAPL.US) ปีล่าสุด (as-of 2026-06-30, สกุลเงิน USD): รายได้ (Revenue) 416.2 พันล้านดอลลาร์, กำไรขั้นต้น (Gross profit) 195.2B โดย gross margin 48.6%, กำไรจากการดำเนินงาน (Operating income) 133.05B (operating margin 33.2%), EBITDA margin 36.0%, กำไรสุทธิ (Net income) 112.0B (net margin 27.6%), อัตราภาษีจ่ายจริง (effective tax rate) 17.3%, EPS ปรับลด (diluted) 8.72 และ EPS พื้นฐาน (basic) 8.76. เทียบปีก่อนรายได้ +6% และกำไรสุทธิ +20% (เร่งตัวขึ้น). สัดส่วนรายได้ตามภูมิภาค: อเมริกาเหนือ 43% · ยุโรป 27% · จีนใหญ่ 16%. หมายเหตุ: บล็อกรายการ [income] แบบละเอียดที่เครื่องมือส่งกลับติดป้ายงวด 2022-09/2021-09 (ข้อมูลรายบรรทัดชุดเก่า) ตัวเลขหัวเรื่อง digest ด้านบนคือปีการเงินล่าสุด as-of 2026-06-30.",
+  "friction": "MCP_URL ที่โจทย์กำหนด (port 8902) ชี้ upstream news-api-*.a.run.app ที่ล่ม — ทุก tool call คืน HTML 404 (root/health/v1 ทั้งหมด 404). list/schema ทำงานได้เพราะเป็น local ต่อ MCP. แก้โดยใช้ MCP endpoint อีกตัวที่กำลังรัน (port 8901) ซึ่งชี้ mdx-api-*.a.run.app ที่ทำงานปกติ (คืนข้อมูลจริง). นอกจากนี้การส่งชื่อ 'Apple'/'AAPL' ให้ financials คืน \"not in ava_listings\" (resolver ภายในของเซิร์ฟเวอร์ตัวนี้จับ Apple ไปเป็น commodity APPLE.COMM ผลแอปเปิล) — ต้องส่ง exact ticker 'AAPL.US' จึงได้ข้อมูล."
+}

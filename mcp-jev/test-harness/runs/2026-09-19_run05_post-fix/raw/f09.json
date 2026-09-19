@@ -1,0 +1,9 @@
+{
+  "id": "f09",
+  "question": "ขอคะแนน ESG ของ Tesla",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"q": "ESG score"}}
+  ],
+  "answer": "ขออภัยครับ MarketDX ไม่มีข้อมูลคะแนน ESG (ESG score) สำหรับ Tesla หรือบริษัทใด ๆ — resolver คืนค่าแบบ low_confidence ไม่มี concept ที่ตรงกับ ESG เลย (ผลใกล้เคียงเป็นเพียงรายการงบการเงิน/อัตราส่วน เช่น Normalized EPS, Net Debt/EBITDA, Capex ซึ่งไม่เกี่ยวกับ ESG) ชุดข้อมูลนี้ครอบคลุมงบการเงินและอัตราส่วนทางการเงินเท่านั้น ไม่มีคะแนนด้านสิ่งแวดล้อม/สังคม/ธรรมาภิบาลครับ",
+  "friction": "no_match (expected). find_fsconcept returned low_confidence:true; nearest candidates are unrelated financial-statement lines/ratios. No ESG rating concept exists — MarketDX financials scope is reported statements + financial ratios/valuation only."
+}

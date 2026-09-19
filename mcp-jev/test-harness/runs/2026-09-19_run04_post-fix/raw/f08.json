@@ -1,0 +1,9 @@
+{
+  "id": "f08",
+  "question": "ราคาเป้าหมายของนักวิเคราะห์สำหรับ Apple",
+  "tool_calls": [
+    {"tool": "asset_pulse", "args": {"ticker": "AAPL"}}
+  ],
+  "answer": "MarketDX ไม่มีเครื่องมือที่ให้ 'ราคาเป้าหมายของนักวิเคราะห์' (analyst price target) โดยตรง เครื่องมือครอบคลุมข่าว→ผลกระทบ, ราคา/ความผันผวน, งบการเงิน, ออปชั่น, มหภาค และการค้าเท่านั้น ไม่มี lens ของ analyst consensus/price target นอกจากนี้ขณะนี้ MCP server ยังตอบ HTTP 404 ทุกครั้งที่เรียกใช้เครื่องมือ จึงตอบจากข้อมูลจริงไม่ได้ทั้งสองเหตุผล",
+  "friction": "OUT-OF-COVERAGE + BLOCKER: (1) ไล่ tool list ทั้งหมดแล้ว ไม่มี tool ใดให้ analyst price target/consensus (asset_pulse = news+price+options lens เท่านั้น ไม่มี target). (2) แม้จะมี ก็ยังติด server 404 บน tools/call ทุกตัว เหมือน f07."
+}

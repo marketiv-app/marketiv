@@ -1,0 +1,22 @@
+{
+  "id": "sc02",
+  "question": "บริษัทที่หนี้สินเพิ่มเร็วกว่าส่วนของผู้ถือหุ้น",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "metricA": "total debt",
+            "relation": "growth_faster_than",
+            "metricB": "total equity"
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "พบหุ้น 60 ตัว (capped) ที่หนี้สินรวมเติบโต (CAGR 3 ปี) เร็วกว่าส่วนของผู้ถือหุ้น เรียงตาม market cap ได้แก่: GOOG.US (Alphabet, debt CAGR 25.9% vs equity 17.5%), META.US (Meta, debt 46.7% vs equity 20%), TSLA.US (Tesla, debt 36.8% vs equity 22.5%), 005930.KO (Samsung, debt 34.7% vs equity 7.1%), MU.US (Micron, debt 26.7% vs equity 2.8%), LLY.US (Eli Lilly, debt 37.8% vs equity 35.6%), JPM.US (JPMorgan, debt 13.7% vs equity 7.4%), AMD.US (AMD, debt 10.4% vs equity 4.8%), V.US (Visa, debt 3.9% vs equity 2.1%), JNJ.US (J&J, debt 6.5% vs equity 2.0%), MA.US (Mastercard, debt 10.7% vs equity 7.1%), CSCO.US (Cisco, debt 52.1% vs equity 4.3%), BAC.US (BofA, debt 6.5% vs equity 3.5%), 601398.CG (ICBC, debt 24.4% vs equity 6.7%), 601939.CG (China Construction Bank, debt 15.4% vs equity 8.7%). สังเกตว่า Cisco มี debt CAGR สูงมาก (52.1%) อาจมาจากการซื้อกิจการ Splunk",
+  "friction": "none — RELATION form with growth_faster_than worked cleanly; matched.fundamental shows cagr_a (debt) vs cagr_b (equity) clearly"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "ta04",
+  "question": "หุ้นที่ราคาย่อลงมาทดสอบเส้นค่าเฉลี่ย 200 วันพอดี",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [{"pattern": "near_ma", "b": "sma200"}]
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 10,
+        "limit": 10
+      }
+    }
+  ],
+  "answer": "พบหุ้นอย่างน้อย 40 ตัวที่ราคากำลังทดสอบเส้น SMA200 ภายใน 10 วันที่ผ่านมา (near_ma fired ทั้ง touch จากด้านบนและด้านล่าง) ตัวอย่าง:\n1. Nongshim (004370.KO) — ราคาแตะ SMA200 ล่าสุด 17 ก.ย., close_vs_ema200=+0.2%, RSI=41\n2. Accton Technology (2345.TW) — แตะ SMA200 ทั้งด้านบน (16 ก.ย.) และด้านล่าง (15 ก.ย.), RSI=35\n3. Yokohama Rubber (5101.JP) — ราคาทดสอบ SMA200 รอบนี้ ADX=31 (เทรนด์แข็ง), RSI=45\n4. Advanced Info Service (ADVANC.BK) — ADX=33 บนตลาด SET\n5. Colgate-Palmolive (CL.US), Jabil Circuit (JBL.US), Vail Resorts (MTN.US) และอีกหลายตัวจาก US\nผลรวมมีหุ้นจากตลาด JP, CN (A-share), KO, TW, BK, US หลายสิบตัว",
+  "friction": "none"
+}

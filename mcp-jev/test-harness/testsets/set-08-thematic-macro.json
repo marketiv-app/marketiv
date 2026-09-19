@@ -1,0 +1,126 @@
+{
+  "set": "thematic-macro",
+  "persona": "A top-down thematic/macro investor who trades big trends (AI, robotics, HBM, foundry, GLP-1, defense, nuclear, robotaxi, EVs), rotates across sectors, countries and regions, watches commodities (gold, oil, copper, uranium), tracks rates/yield-curve/bonds and FX, and screens for the players inside a theme or the cheap names in a sector/region.",
+  "cases": [
+    {
+      "id": "tm-01",
+      "question": "Who are the main players in the HBM memory boom right now? I want the actual companies riding the AI-memory wave, not the whole semi index.",
+      "goal": "Resolve the HBM / AI-memory megatrend and surface its real member companies (e.g. SK Hynix, Samsung, Micron and key HBM supply-chain names).",
+      "acceptance": [
+        "Resolves to an HBM / high-bandwidth-memory theme, not generic 'semiconductors'",
+        "Returns plausible real HBM leaders (SK Hynix, Samsung, Micron) plus supply-chain names",
+        "Answer is stock/company discovery, not a rates or commodity answer",
+        "Red flag: fabricating theme members or listing unrelated chip names with no HBM exposure"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "tm-02",
+      "question": "Show me cheap semiconductor names in Asia — low P/E chip makers in places like Taiwan, Korea and Japan.",
+      "goal": "Screen the semiconductor GICS sector restricted to an Asian country/region set, ranked by a valuation multiple (low P/E).",
+      "acceptance": [
+        "Correctly scopes to semiconductor sector AND an Asia region (TW/KR/JP)",
+        "Applies a valuation screen (low P/E) and returns real Asian chip names",
+        "Does not return US or European names as the primary list",
+        "Red flag: ignoring either the sector or the region, or inventing tickers"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-03",
+      "question": "How's the US yield curve looking — is the 2s10s still inverted, and where are short-term money-market rates sitting?",
+      "goal": "Return US Treasury yields across the curve, the 2s10s spread / inversion state, and short-term money-market rates.",
+      "acceptance": [
+        "Answers with bond/rate data (Treasury yields, 2y vs 10y spread, MM rates)",
+        "Correctly addresses the inversion (sign of 2s10s)",
+        "Stays in the rates/bonds domain — does NOT return equities",
+        "Red flag: treating this as a stock screen or confusing yields with prices"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-04",
+      "question": "หุ้นกลุ่ม defense ในยุโรปมีตัวไหนน่าสนใจบ้าง อยากได้ชื่อบริษัทอาวุธ/กาโลโหงยุโรป ไม่เอาของอเมริกา",
+      "goal": "Resolve the defense / aerospace-defense theme scoped to Europe and return real European defense names (e.g. Rheinmetall, BAE, Leonardo, Thales, Saab), excluding US primes.",
+      "acceptance": [
+        "Understands Thai request for European defense/arms stocks",
+        "Returns real European defense names (Rheinmetall, BAE, Leonardo, Thales, Saab, etc.)",
+        "Excludes US names (Lockheed, RTX) per the explicit constraint",
+        "Red flag: returning US primes or fabricating European members"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-05",
+      "question": "Gold has been ripping — how are the gold miners doing versus the metal itself? Give me a read on gold and the main mining names.",
+      "goal": "Provide a commodities pulse on gold plus the gold-miner equities cohort (e.g. Newmont, Barrick, Agnico), contrasting metal vs miners.",
+      "acceptance": [
+        "Returns gold commodity data (price/trend) AND gold-miner equities",
+        "Names real gold miners (Newmont, Barrick, Agnico Eagle, etc.)",
+        "Distinguishes the commodity from the mining stocks",
+        "Red flag: confusing the metal with an ETF, or listing non-gold miners"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-06",
+      "question": "I'm hunting small-cap biotech in China — early-stage names, not the big pharma. What's out there?",
+      "goal": "Screen biotech/health-care sector, country = China, size = small-cap, returning real small-cap Chinese biotech names.",
+      "acceptance": [
+        "Scopes to biotech sector + China + small-cap size tier simultaneously",
+        "Returns plausible real small-cap Chinese biotech names",
+        "Excludes mega-cap pharma per the constraint",
+        "Red flag: wrong country, wrong sector, or ignoring the size filter"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "tm-07",
+      "question": "Who are the uranium and nuclear-fuel players? I'm betting on the nuclear revival — miners and enrichment, wherever they trade.",
+      "goal": "Resolve the uranium / nuclear-fuel theme cross-market and return real players (e.g. Cameco, Kazatomprom, NexGen, Centrus, Denison).",
+      "acceptance": [
+        "Resolves a uranium / nuclear-fuel theme (not generic 'utilities' or reactor operators only)",
+        "Returns real uranium miners / enrichment names across markets",
+        "Company-discovery answer, not a commodity-only or rates answer",
+        "Red flag: fabricating members or returning unrelated power utilities as the core list"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-08",
+      "question": "What's driving the dollar lately — how's USD doing against the euro, yen and yuan? And what does that mean for oil?",
+      "goal": "Return FX data on USD vs EUR/JPY/CNY plus an oil commodity read, correctly staying in the FX + commodities domains.",
+      "acceptance": [
+        "Returns FX quotes/trend for USD vs EUR, JPY, CNY",
+        "Includes an oil commodity pulse",
+        "Answer is FX + commodity data, not an equity screen",
+        "Red flag: returning stock lists, or inventing FX levels/wrong pairs"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-09",
+      "question": "อยากเล่นธีม GLP-1 (ยาลดความอ้วน/เบาหวาน) ใครคือตัวจริงบ้าง ทั้งคนทำยาและซัพพลายเชน",
+      "goal": "Resolve the GLP-1 / obesity-drug megatrend (Thai) and return real makers plus supply-chain players (Novo Nordisk, Eli Lilly, and CDMO / device suppliers).",
+      "acceptance": [
+        "Understands the Thai GLP-1/obesity theme request",
+        "Returns real drug makers (Novo Nordisk, Eli Lilly) plus supply-chain names",
+        "Company-discovery answer within the correct health-care theme",
+        "Red flag: fabricating members or drifting to unrelated pharma"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "tm-10",
+      "question": "Compare copper as a play on electrification: give me the commodity backdrop and the biggest copper miners, then tell me which of those miners look cheapest on fundamentals.",
+      "goal": "Combine a copper commodity pulse with the copper-miner cohort (Freeport, Southern Copper, BHP, Antofagasta) and rank them by a valuation/fundamental screen.",
+      "acceptance": [
+        "Returns copper commodity data AND real copper-miner equities",
+        "Applies a valuation/fundamental ranking across the named miners",
+        "Correctly spans commodity + equity + fundamentals domains without conflating them",
+        "Red flag: listing non-copper miners, skipping the valuation step, or fabricating fundamentals"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

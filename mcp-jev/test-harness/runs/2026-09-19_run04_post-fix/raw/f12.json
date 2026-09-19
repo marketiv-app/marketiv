@@ -1,0 +1,9 @@
+{
+  "id": "f12",
+  "question": "เทียบงบดุลของ Coca-Cola กับ Pepsi เน้นหนี้สินรวมกับส่วนของผู้ถือหุ้น",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Coca-Cola", "PepsiCo"], "fields": ["total_liabilities", "total_equity"], "period": "quarterly", "currency": "USD"}}
+  ],
+  "answer": "ไม่สามารถเทียบงบดุล (หนี้สินรวม vs ส่วนของผู้ถือหุ้น) ของ Coca-Cola กับ Pepsi ได้ในขณะนี้ เพราะ MCP server ตอบกลับ HTTP 404 ทุกครั้งที่เรียกใช้เครื่องมือ (tools/call) ผมไม่ขอเดาตัวเลขงบการเงินเอง โปรดลองอีกครั้งเมื่อ server กลับมาปกติ",
+  "friction": "BLOCKER (server-side): tools/call คืน HTML 404 ทุกตัว เหมือน f07. ตั้ง compare 2 บริษัทในคำเรียกเดียว: fields=['total_liabilities','total_equity'], currency='USD' ให้เทียบสกุลเดียวกัน — แต่ call ไม่ผ่านเพราะ 404."
+}

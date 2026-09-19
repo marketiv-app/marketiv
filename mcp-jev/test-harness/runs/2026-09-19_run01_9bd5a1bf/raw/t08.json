@@ -1,0 +1,9 @@
+{
+  "id": "t08",
+  "question": "หนี้สินระยะยาวของ Toyota เทียบ Volkswagen ตัวไหนเยอะกว่า",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Toyota", "Volkswagen"], "fields": ["long_term_debt"]}}
+  ],
+  "answer": "หนี้สินระยะยาว (long-term debt, แปลงเป็น USD):\n\nToyota (7203.JP) — ปีการเงินสิ้นสุด มี.ค.\n- 2026-03: 157.98B\n- 2025-03: 150.90B\n- 2024-03: 137.06B\n- 2023-03: 125.14B\n\nVolkswagen (VOW.XETRA) — ปีการเงินสิ้นสุด ธ.ค.\n- 2025-12: 148.18B\n- 2024-12: 132.37B\n- 2023-12: 125.51B\n- 2022-12: 121.79B\n\nสรุป: งวดล่าสุด Toyota มีหนี้สินระยะยาวเยอะกว่า (~158B vs ~148B USD). แนวโน้มทั้งคู่เพิ่มขึ้นทุกปีและใกล้เคียงกันมากในปีก่อนๆ. หมายเหตุ: รอบปีการเงินไม่ตรงกัน (Toyota จบ มี.ค. / VW จบ ธ.ค.) และตัวเลขแปลงจาก JPY/EUR เป็น USD ตามอัตราแลกเปลี่ยน ณ วันสิ้นงวด จึงเทียบได้ในเชิงทิศทาง/ขนาดคร่าวๆ.",
+  "friction": "none — Toyota→7203.JP (conf 1.0), Volkswagen→VOW.XETRA (conf 0.93). field long_term_debt matched as exact_key. Fiscal-year ends differ (Mar vs Dec) — noted in answer per tool's basis-caveat guidance."
+}

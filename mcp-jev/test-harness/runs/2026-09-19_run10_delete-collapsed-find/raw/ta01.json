@@ -1,0 +1,37 @@
+{
+  "id": "ta01",
+  "question": "หาหุ้นที่เพิ่งเกิดสัญญาณเส้นค่าเฉลี่ยระยะสั้นตัดขึ้นเหนือเส้นระยะยาว แล้วมีปริมาณการซื้อขายพุ่งเข้ามาด้วย",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "ema50",
+                "b": "ema200"
+              }
+            ],
+            "quals": [
+              {
+                "any": [
+                  {
+                    "pattern": "volume_spike"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 10,
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "พบ 59 หุ้นที่มีสัญญาณเส้นค่าเฉลี่ย 50 วันตัดขึ้นเหนือ 200 วัน พร้อมปริมาณการซื้อขายพุ่งสูง (ภายใน 10 วันล่าสุด) อันดับต้นๆ ได้แก่:\n1. 0730.HK (Capital Industrial Financial Services Group) — cross เมื่อ 11 ก.ย. / vol spike 9 ก.ย. | strength 0.89 | RSI 99.8\n2. 7475.JP (ALBIS Co., Ltd.) — cross เมื่อ 11 ก.ย. / vol spike 14 ก.ย. | strength 0.84 | ADX 33.2 (trending)\n3. ELCO.LSE (Eleco PLC) — cross เมื่อ 10 ก.ย. / vol spike 18 ก.ย. | strength 0.81 | ADX 52.2 (strong trend)\n4. อันดับต่อมา strength 0.80 (ไม่แสดง ticker ในข้อมูลที่ตัด) ทั้งหมดมี close_vs_ema200 เป็นบวก แปลว่าราคาขึ้นไปหนุนเหนือเส้น 200 วันแล้ว",
+  "friction": "none"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "t09",
+  "question": "BRK.B มีเงินสดเท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["BRK.B"], "fields": ["cash"]}}
+  ],
+  "answer": "Berkshire Hathaway Class B (BRK-B.US) — เงินสดและรายการเทียบเท่าเงินสด (cash & cash equivalents):\n- 2025-12: 51.88B USD\n- 2024-12: 47.73B\n- 2023-12: 38.02B\n- 2022-12: 35.81B\n\nงวดล่าสุด (สิ้นปี 2025) มีเงินสด ~51.9B USD เพิ่มขึ้นต่อเนื่องทุกปี.\n\n⚠️ ข้อควรรู้: ตัวเลขนี้คือ 'cash & cash equivalents' (สินทรัพย์สภาพคล่องอายุ ≤3 เดือน ตาม IAS 7/ASC 305) เท่านั้น ไม่รวมเงินลงทุนระยะสั้น/หลักทรัพย์ที่ซื้อขายได้ (short-term investments / marketable securities) ซึ่งของ Berkshire มักมีมูลค่ามหาศาล (พันธบัตร T-bill). ดังนั้น 'กองเงินสด' ที่มักพูดกันในสื่อ (หลายแสนล้าน) จะรวม short-term investments ด้วย ซึ่งไม่ใช่ตัวเลขนี้. หากต้องการยอดรวมสามารถขอ field cash_and_st_investments เพิ่ม.",
+  "friction": "none — BRK.B resolve เป็น BRK-B.US (1.0). tool แนบ note ชัดว่า cash ตัวนี้ EXCLUDES short-term/marketable investments"
+}

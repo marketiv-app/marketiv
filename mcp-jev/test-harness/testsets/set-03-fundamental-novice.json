@@ -1,0 +1,126 @@
+{
+  "set": "fundamental-novice",
+  "persona": "A beginner long-term investor who thinks in plain terms — 'good company', 'cheap stock', 'safe', 'makes a lot of profit', 'not too much debt', 'growing', 'big well-known names'. Doesn't know precise ratio names and describes wants in everyday words. Cares about not losing money and owning quality.",
+  "cases": [
+    {
+      "id": "fn-01",
+      "question": "I'm just starting out. Can you find me some big, well-known companies that aren't too expensive right now?",
+      "goal": "Screen for large-cap companies with reasonable/below-average valuation and return a shortlist of recognizable names with a plain explanation of why they count as 'not too expensive'.",
+      "acceptance": [
+        "Returns a handful of genuinely large, recognizable companies (not tiny or obscure tickers)",
+        "Explains 'not too expensive' in simple terms (e.g. lower price relative to earnings), without demanding the user know ratio jargon",
+        "Does NOT tell the user to buy or that these are guaranteed safe — informational framing only",
+        "Names and numbers appear plausible and are not obviously fabricated"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "fn-02",
+      "question": "Which companies pay a good dividend but are also safe and stable? I don't want anything risky.",
+      "goal": "Screen for stable, established dividend payers with sustainable payouts and lower risk profile; explain the dividend simply and flag that 'safe' is relative.",
+      "acceptance": [
+        "Returns established companies with a meaningful, not-absurd dividend yield",
+        "Avoids yield-trap red flags (does not just list the highest yields with no context)",
+        "Explains what a dividend is in plain language and notes that no stock is fully 'safe'",
+        "No direct buy advice; no invented dividend figures"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "fn-03",
+      "question": "Is Apple expensive right now?",
+      "goal": "Assess Apple's current valuation in beginner terms (relative to its history and/or peers) and answer the plain question with a clear, caveated verdict.",
+      "acceptance": [
+        "Gives a clear, understandable read on whether Apple looks cheap/fair/expensive with a reason",
+        "Uses at least one simple valuation reference (e.g. price vs earnings, vs its own past, or vs similar companies)",
+        "Explains terms plainly rather than dumping ratios",
+        "Does not give a buy/sell recommendation; numbers are real, not fabricated"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "fn-04",
+      "question": "Show me companies that make more money every year — like their profits keep going up.",
+      "goal": "Screen for companies with consistent multi-year revenue/earnings growth and present them with a simple explanation of the growth trend.",
+      "acceptance": [
+        "Returns companies with a real record of rising profits/revenue over multiple years",
+        "Explains 'making more money every year' as growth in earnings or revenue, in plain words",
+        "Distinguishes steady growth from one-off spikes if relevant",
+        "No fabricated growth numbers; no advice to buy"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fn-05",
+      "question": "หุ้นไทยตัวไหนที่มั่นคง ปันผลดี น่าถือยาว บ้าง",
+      "goal": "Screen Thai-market stocks for stable, established companies with solid dividends suitable for long-term holding; answer in Thai with plain explanations.",
+      "acceptance": [
+        "Returns recognizable, established Thai-listed companies (not random small tickers)",
+        "Considers both stability and a reasonable dividend, not just one",
+        "Answers in Thai and explains simply",
+        "No direct buy advice; realistic names and figures"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fn-06",
+      "question": "I keep hearing 'don't buy companies with too much debt.' Can you find me some solid companies that don't have much debt?",
+      "goal": "Screen for financially healthy companies with low leverage and explain in plain terms why low debt matters for safety.",
+      "acceptance": [
+        "Returns companies that genuinely carry low debt relative to their size/earnings",
+        "Explains why too much debt is risky, in beginner-friendly language",
+        "Does not overclaim that low debt = guaranteed safe",
+        "Real names/figures; no purchase recommendation"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fn-07",
+      "question": "Is Tesla a good company to invest in?",
+      "goal": "Give a balanced, beginner-level overview of Tesla's fundamentals (growth, profitability, valuation, risks) without making a buy/sell call.",
+      "acceptance": [
+        "Presents both strengths and risks/weaknesses in plain terms",
+        "Touches on real fundamentals (growth, profitability, how expensive it is) rather than hype",
+        "Explicitly avoids telling the user whether to buy — frames it as their decision",
+        "Does not fabricate facts or figures"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "fn-08",
+      "question": "I want quality — companies that are really good at making profit from what they own, cheap-ish, growing, and not drowning in debt. Give me a few.",
+      "goal": "Combine several beginner-expressed quality/value/growth/safety criteria into one screen and return a small vetted list with a simple rationale for each.",
+      "acceptance": [
+        "Applies multiple criteria together (high profitability, reasonable valuation, growth, low debt) rather than just one",
+        "Returns a small, sensible shortlist that plausibly meets most criteria",
+        "Explains each pick simply (why it qualifies as 'quality')",
+        "Acknowledges trade-offs if few names meet everything; no buy advice; no fabrication"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "fn-09",
+      "question": "ถ้าอยากลงทุนแบบปลอดภัยไม่อยากขาดทุน มีทางเลือกอะไรบ้างนอกจากหุ้น เช่นพวกที่เสี่ยงน้อยๆ",
+      "goal": "Explain lower-risk options beyond stocks (e.g. bonds, dividend/blue-chip stocks, diversified funds) in Thai for a risk-averse beginner, with plain trade-off explanations.",
+      "acceptance": [
+        "Mentions genuinely lower-risk alternatives such as bonds and/or broad diversified funds, not just risky picks",
+        "Explains the safety-vs-return trade-off simply, in Thai",
+        "Makes clear that 'no loss' is not guaranteed anywhere",
+        "No specific buy recommendation; no fabricated products or yields"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "fn-10",
+      "question": "My friend said gold is a safe place to put money when things get scary. Is that true, and how would I even invest in it?",
+      "goal": "Explain gold as a defensive/store-of-value asset in beginner terms, its pros and cons, and the plain ways to get exposure — without recommending an allocation.",
+      "acceptance": [
+        "Explains why gold is seen as a safe-haven and also its downsides (no income, can still drop) in simple terms",
+        "Describes realistic ways to invest in gold (e.g. gold ETFs/funds, physical gold) at a beginner level",
+        "Corrects the oversimplified 'always safe' notion gently rather than just agreeing",
+        "Does not tell the user how much to buy or that it's guaranteed; no fabricated facts"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

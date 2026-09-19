@@ -1,0 +1,9 @@
+{
+  "id": "f03",
+  "question": "เทียบ R&D กับ capex ของ Nvidia, AMD, Intel",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Nvidia", "AMD", "Intel"], "period": "1", "fields": ["research and development expense", "capital expenditures"]}}
+  ],
+  "answer": "เทียบ R&D (rnd) กับ CapEx ปีล่าสุด (สกุล USD; CapEx แสดงเป็นเงินสดจ่ายจึงติดลบ):\n- NVDA.US (ปีบัญชีสิ้นสุด 2026-01): R&D 18.50B vs CapEx 6.04B → R&D สูงกว่า CapEx ~3 เท่า (เป็นบริษัท asset-light เน้นออกแบบชิป, ใช้ TSMC ผลิต)\n- AMD.US (2025-12): R&D 8.09B vs CapEx 0.97B → R&D สูงกว่า CapEx ~8 เท่า (asset-light เช่นกัน, fabless)\n- INTC.US (2025-12): R&D 13.77B vs CapEx 14.65B → CapEx สูงกว่า R&D เล็กน้อย (Intel เป็น IDM มีโรงงานผลิตเอง จึงลงทุนสินทรัพย์หนักที่สุดในสามราย)\nสรุปเชิงทิศทาง: NVDA และ AMD (fabless) ทุ่มงบไปที่ R&D มากกว่าการลงทุนโรงงานหลายเท่า ส่วน Intel (IDM) มี CapEx ระดับใกล้เคียงหรือมากกว่า R&D สะท้อนภาระโรงงานผลิตชิปของตัวเอง. (หมายเหตุ: ปีบัญชีของ NVDA สิ้นสุด ม.ค. ต่างจาก AMD/INTC ที่สิ้นสุด ธ.ค. เล็กน้อย)",
+  "friction": "none — all three resolved cleanly; AMD via gate exact_symbol → AMD.US"
+}

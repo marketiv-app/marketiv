@@ -1,0 +1,11 @@
+{
+  "id": "sc04",
+  "question": "หุ้นที่มูลค่าตลาดโตเป็นสองเท่าภายใน 2 ปี",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["gross margin", "total debt", "total shareholders equity", "return on equity", "market capitalization"]}},
+    {"tool": "find_fspattern", "args": {"queries": ["margin contracting for several consecutive years", "debt rising faster than equity", "above the industry group average", "market cap doubled over two years"]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "market_cap", "pattern": "compound_growth", "N": 2, "total_change": 1.0}]}}
+  ],
+  "answer": "พบหุ้น 40 ตัว (ผลถูก cap) ที่มูลค่าตลาด (market_cap) โตสะสม >=100% (สองเท่า) ภายในหน้าต่าง 2 ปี เรียงตามมูลค่าตลาด ตัวใหญ่สุดได้แก่ Alphabet (GOOG.US, change_total +114.95%, CAGR 46.6%), TSMC (2330.TW, +167%), Broadcom (AVGO.US), Samsung (005930.KO), Micron (MU.US), SK Hynix (000660.KO)",
+  "friction": "แปลง 'โตเป็นสองเท่าภายใน 2 ปี' -> compound_growth N=2 total_change=1.0 (1.0 = doubled/2x เป็น cumulative fraction ไม่ใช่ cagr). response ยืนยัน change_total ~1.15 สำหรับ GOOG (โตเกิน 2x). ไม่มี needs_confirmation"
+}

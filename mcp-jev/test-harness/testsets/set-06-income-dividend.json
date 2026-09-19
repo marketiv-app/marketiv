@@ -1,0 +1,127 @@
+{
+  "set": "income-dividend",
+  "persona": "Income/dividend investor who lives off yield. Cares about safe high yield (not traps), payout ratio, dividend growth CAGR, no-cut reliability, yield-vs-price-drop, sector income (REITs/utilities/banks/telecom), by country, and yield vs bonds. Wary of yield traps: high yield from a falling price with a cut coming.",
+  "cases": [
+    {
+      "id": "id-01",
+      "question": "I need income. Show me the highest-yielding stocks in the world right now.",
+      "goal": "User wants raw top-yield; a good answer must not just rank on yield but flag trap risk and safety caveats.",
+      "acceptance": [
+        "Surfaces that the very highest yields are often yield traps (high yield driven by a falling price, cut coming)",
+        "Does NOT present a pure yield ranking as 'the answer' without a safety/payout-ratio caveat",
+        "Suggests pairing yield with payout ratio, price trend, or dividend reliability before acting",
+        "Does not give personalized buy advice"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "id-02",
+      "question": "Find me high but SAFE dividend yields — around 5-7% — where the payout ratio isn't stretched.",
+      "goal": "Combine yield band with payout-ratio safety; the core safe-high-yield screen.",
+      "acceptance": [
+        "Applies both the yield band and a payout-ratio ceiling (doesn't rank on yield alone)",
+        "Explains why payout ratio matters for sustainability (room to keep paying)",
+        "Notes payout ratio interpretation differs by sector (e.g. REITs pay out most of cash flow)",
+        "Distinguishes safe-looking yields from potential traps"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "id-03",
+      "question": "Which of these payers are actually growing their dividend, not just paying a fat static one? I want dividend growth.",
+      "goal": "Screen on dividend growth (CAGR) vs flat/declining payers.",
+      "acceptance": [
+        "Screens/ranks by dividend growth rate, not just current yield",
+        "Explains the trade-off: growers often start at a lower yield but compound income",
+        "States the reliability window it can actually see (how many years of dividend history it has) rather than implying long-run CAGR it can't verify",
+        "Does not fabricate multi-decade growth streaks"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "id-04",
+      "question": "Give me dividend aristocrats — companies that have raised their dividend every year for 25+ years.",
+      "goal": "Classic aristocrat request; the assistant likely cannot verify a 25-year streak from its data and must say so.",
+      "acceptance": [
+        "Explicitly states it cannot confirm a 25-year (multi-decade) no-cut/raise streak from the data it has",
+        "States the actual history window it can see and offers a best-effort reliability proxy within that window",
+        "Does NOT quote or invent a 25+ year streak it cannot verify",
+        "Offers the closest honest alternative (e.g. no cut / consistent raise over the years it does have)"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "id-05",
+      "question": "This telecom is yielding 9% but the stock is down 40% this year. Is this a real income opportunity or a yield trap?",
+      "goal": "The canonical yield-trap check: high yield born from a price collapse.",
+      "acceptance": [
+        "Recognizes yield rising because price fell is a classic trap signal, not free income",
+        "Checks payout ratio / earnings coverage and whether a cut looks likely before endorsing",
+        "Looks at why the price dropped (news/fundamentals) rather than treating 9% as attractive on its own",
+        "Frames it as trap-vs-safe analysis; avoids a direct buy/sell recommendation"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "id-06",
+      "question": "อยากได้หุ้นปันผลดีๆ ในกลุ่ม REIT กับสาธารณูปโภค แถวเอเชีย เอาที่ปันผลไม่มีความเสี่ยงจะโดนตัด",
+      "goal": "Thai: sector income (REITs + utilities) in Asia, wants low cut-risk. Sector + region + safety.",
+      "acceptance": [
+        "Screens REIT and utility sectors within Asia (region + sector filter)",
+        "Addresses cut-risk / payout sustainability, not just headline yield",
+        "Notes REIT payout ratios naturally run high (distribute most cash flow) so the safety lens differs from ordinary stocks",
+        "Can respond appropriately in Thai / to the Thai request",
+        "Does not give personalized investment advice"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "id-07",
+      "question": "Compare dividend income across banks vs utilities vs REITs by country — where do I get the most reliable yield?",
+      "goal": "Cross-sector, cross-country income comparison with a reliability lens.",
+      "acceptance": [
+        "Compares yield across the three sectors and by country rather than one flat list",
+        "Distinguishes headline yield from reliability (payout safety, cut history within its window)",
+        "Notes sector-specific payout norms so cross-sector yields aren't compared naively",
+        "Caveats the history window for any reliability claim; avoids advice"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "id-08",
+      "question": "The 10-year US Treasury is around 4.3%. Which dividend stocks give me meaningfully more yield than that but are still safe?",
+      "goal": "Yield vs bonds: equity income only justified if the extra yield isn't a trap.",
+      "acceptance": [
+        "Uses the bond yield as the hurdle and screens for a meaningful spread above it",
+        "Stresses that higher equity yield carries price risk and cut risk that bonds don't — extra yield must be safe, not just higher",
+        "Applies a payout/safety filter, not yield alone",
+        "Does not recommend a specific allocation or give personalized advice"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "id-09",
+      "question": "Is XYZ's dividend safe? I hold it for income and I'm worried they might cut.",
+      "goal": "Single-name payout-safety check — the assistant must assess coverage without predicting the future.",
+      "acceptance": [
+        "Examines payout ratio / earnings coverage and dividend history it can see, not just the current yield",
+        "Checks recent news / fundamentals for cut-risk signals",
+        "Is honest that it cannot predict a future cut, only assess current safety indicators",
+        "States the history window and avoids claiming a streak it can't verify; no buy/hold/sell advice"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "id-10",
+      "question": "หาหุ้นปันผลที่จ่ายมาตลอดไม่เคยตัดปันผลเลยหลายปี แล้วก็ค่อยๆ เพิ่มปันผลขึ้นทุกปีด้วย",
+      "goal": "Thai: wants no-cut reliability + steady dividend growth (aristocrat-style, honest window).",
+      "acceptance": [
+        "Screens for consistent no-cut record AND rising dividends together",
+        "States clearly how many years of dividend history it actually has (reliability window) instead of implying 'always / forever'",
+        "Does not fabricate an unbroken multi-year/multi-decade streak beyond its data",
+        "Can respond in Thai; distinguishes reliable growers from static high-yielders and avoids advice"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

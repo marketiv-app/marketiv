@@ -1,0 +1,9 @@
+{
+  "id": "f07",
+  "question": "หุ้นทุนซื้อคืนของ Apple มีเท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Apple", "fields": ["treasury stock"], "period": "quarterly"}}
+  ],
+  "answer": "ไม่สามารถให้ตัวเลขหุ้นทุนซื้อคืน (treasury stock) ของ Apple ได้ในขณะนี้ เพราะ MCP server ตอบกลับ HTTP 404 ทุกครั้งที่เรียกใช้เครื่องมือ (tools/call) ผมไม่ขอเดาตัวเลขทางการเงินเอง โปรดลองอีกครั้งเมื่อ server กลับมาทำงานปกติ",
+  "friction": "BLOCKER (server-side): tools/list และ schema ทำงานได้ (POST /mcp tools/list -> 200) แต่ tools/call ทุกตัว (financials, find_stock, find_fsconcept) คืน HTML 404 'Page not found' แบบ Google-style ที่ไม่ใช่ JSON-RPC ของ MCP -> เป็น 404 จาก proxy/gateway upstream บน route ของ tool-execution ไม่ใช่ผลลัพธ์ของ tool. initialize สำเร็จ + auth ผ่าน. ไม่มี case ใดตอบจากข้อมูลจริงได้. หมายเหตุ: find_fsconcept ก็ 404 เช่นกัน แต่ financials resolve field เป็นภาษาอังกฤษ server-side ได้อยู่แล้ว จึงไม่ต้องพึ่ง find_fsconcept."
+}

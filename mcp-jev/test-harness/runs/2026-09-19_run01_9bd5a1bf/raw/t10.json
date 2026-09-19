@@ -1,0 +1,9 @@
+{
+  "id": "t10",
+  "question": "งบของ KBANK เป็นยังไง",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["KBANK"]}}
+  ],
+  "answer": "Kasikornbank / ธนาคารกสิกรไทย (KBANK.BK) — งบล่าสุด as-of 2026-06-30 (สกุล THB, 5 ปีย้อนหลัง):\n\nขนาด & ผลกำไร\n- รายได้ 207.4B, net income 49.6B, net margin 24.3%\n- สินทรัพย์รวม 4.56 ล้านล้านบาท, ส่วนของผู้ถือหุ้น 581.1B, BVPS 243.23\n- EPS 21.56, ROE 8.9%, ROA 1.1%\n\nมิติแบงก์\n- NIM ~3%, efficiency ratio 0.47 (คุมต้นทุนดี), loan/deposit 0.65, cost of risk -0.02\n- เงินสด 386.8B, operating cash flow 217.7B\n\nValuation & ปันผล\n- PE 11.65, PB 1.00 (เทรดที่ ~book value), dividend yield 1.6%, dividend 5y CAGR +22.7% (ปันผลโตดี, ไม่ตัดปันผลมา 4 ปี)\n\nการเติบโต: ค่อนข้างนิ่ง — revenue -1% (flat), net income ~0% (flat), EPS +0% (flat)\n\nสัญญาณ: FCF เคยติดลบปี 2022 แล้วกลับมาเป็นบวก (TTM +271.9B)\n\nสรุป: KBANK เป็นแบงก์ใหญ่งบแข็ง คุมต้นทุนดี PB ~1.0 ปันผลเติบโต แต่การเติบโตของรายได้/กำไรค่อนข้างทรงตัว และ ROE ~9% ถือว่ากลางๆ สำหรับกลุ่มธนาคาร.",
+  "friction": "KBANK could be ambiguous (Thai vs other 'KBANK'), but financials resolved it directly to KBANK.BK via exact_symbol gate (conf 1.0) with no needs_confirmation — Thai Kasikornbank. No country hint needed. Bank-specific metrics (NIM, loan/deposit, cost of risk) returned correctly."
+}

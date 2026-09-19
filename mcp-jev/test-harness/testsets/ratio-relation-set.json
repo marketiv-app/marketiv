@@ -1,0 +1,31 @@
+{
+  "set": "ratio-relation",
+  "note": "Blind test of on-the-fly ratio screening. NO hints about tool/param names — discover from schema. Judge whether the RESULT actually matches the user's intent.",
+  "cases": [
+    {
+      "id": "r1",
+      "question": "Find companies that spend between 10% and 20% of their revenue on R&D.",
+      "acceptance": "Returns a non-empty list where each result's R&D is roughly 10-20% of revenue (a two-sided ratio band of two line items). NOT a single-metric threshold."
+    },
+    {
+      "id": "r2",
+      "question": "Which companies have capital expenditure of around 8% of revenue?",
+      "acceptance": "Returns companies whose capex/revenue sits near 8% (capital-intensive names like energy/utilities/telecom are plausible). Capex is an outflow — magnitude, not sign, is what matters."
+    },
+    {
+      "id": "r3",
+      "question": "Find companies whose R&D is at least 15% of their revenue.",
+      "acceptance": "Returns R&D-heavy companies where R&D/revenue >= 0.15 (a one-sided fraction-of relation). Non-empty, plausible (software/biotech/semis)."
+    },
+    {
+      "id": "r4",
+      "question": "Show me companies where free cash flow covers the dividend at least twice over.",
+      "acceptance": "Returns dividend payers whose FCF >= 2x dividends paid (a coverage relation). Non-empty and plausible."
+    },
+    {
+      "id": "r5",
+      "question": "Find companies with a net profit margin above 20%.",
+      "acceptance": "A plain single-metric level screen (net_margin > 0.20). Non-empty. This is a CONTROL — it must still work normally."
+    }
+  ]
+}

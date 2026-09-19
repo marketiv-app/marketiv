@@ -1,0 +1,11 @@
+{
+  "id": "sc08",
+  "question": "หุ้นเทคโนโลยีสหรัฐที่ลงทุน R&D สูงเกิน 15% ของรายได้",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["net income", "revenue", "ESG score", "research and development expense"]}},
+    {"tool": "find_gics", "args": {"q": "technology"}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "rnd_to_revenue", "pattern": "above", "threshold": 0.15}], "gics": "45", "country": ["US"], "asset_type": ["Common Stock"]}}
+  ],
+  "answer": "เจอหุ้นกลุ่มเทคโนโลยีสหรัฐ (GICS Information Technology, sector 45, operating country = US) ที่ลงทุน R&D เกิน 15% ของรายได้ (R&D intensity > 0.15) ทั้งหมด 40 ตัว (ผลถูก cap ที่ 40) ตัวใหญ่ที่สุดเรียงตาม market cap ได้แก่ Broadcom (AVGO.US), AMD (AMD.US), Intel (INTC.US), Cisco (CSCO.US), Oracle (ORCL.US), Palo Alto Networks (PANW.US), Marvell (MRVL.US) และ CrowdStrike (CRWD.US) ทั้งหมดเป็นบริษัทเทคโนโลยีสหรัฐที่ทุ่มงบวิจัยและพัฒนาสูงกว่า 15% ของยอดขาย",
+  "friction": "find_gics('technology') ล้มเหลว: ตัวรีโซลเวอร์คืน tool error 'Missing credentials... OPENAI_API_KEY' (เซิร์ฟเวอร์ยังเชื่อมต่อได้—fsconcept/fspattern/screen_unified ทำงานปกติ เป็นบั๊กเฉพาะ resolver ตัวนี้ที่ขาด OpenAI key). ใช้ prefix GICS '45' (Information Technology) ตามที่ schema ของ screen_unified ระบุไว้เป็นตัวอย่างตรง ๆ ('45'=IT sector) แทน. ใช้ rnd_to_revenue (ratio, R&D intensity) + above 0.15 (15% = 0.15 fraction) ตามที่ผู้ใช้ระบุตัวเลขชัดเจน"
+}

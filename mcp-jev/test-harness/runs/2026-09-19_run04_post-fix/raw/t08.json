@@ -1,0 +1,10 @@
+{
+  "id": "t08",
+  "question": "หนี้สินระยะยาวของ Toyota เทียบ Volkswagen ตัวไหนเยอะกว่า",
+  "tool_calls": [
+    {"tool": "find_stock", "args": {"queries": ["Toyota", "Volkswagen"]}},
+    {"tool": "financials", "args": {"tickers": "7203.JP,VOW.XETRA", "fields": "long_term_debt", "currency": "USD"}}
+  ],
+  "answer": "หนี้สินระยะยาว (long-term debt) แปลงเป็น USD:\n\nToyota (7203.JP):\n- 2026-03: 157.98B\n- 2025-03: 150.90B\n- 2024-03: 137.06B\n- 2023-03: 125.14B\n\nVolkswagen (VOW.XETRA, หุ้นสามัญ):\n- 2025-12: 148.18B\n- 2024-12: 132.37B\n- 2023-12: 125.51B\n- 2022-12: 121.79B\n\nตอบ: Toyota มีหนี้สินระยะยาวเยอะกว่า — งวดล่าสุด Toyota ~158.0B USD (สิ้น มี.ค. 2026) เทียบ VW ~148.2B USD (สิ้น ธ.ค. 2025) มากกว่าราว ~10B USD และ Toyota นำหน้าในทุกงวดที่เทียบได้\n\nคำเตือน basis: (1) รอบปีบัญชีต่างกัน — Toyota ปิดงบ มี.ค. VW ปิดงบ ธ.ค. งวด 'ล่าสุด' จึงไม่ตรงเดือนกัน (2) แปลง USD ที่วันสิ้นงวดแต่ละบริษัท มีผล FX (3) VW ใช้หุ้นสามัญ VOW.XETRA (ตัวเลขงบเป็นระดับบริษัทเดียวกันกับ VZO) การเปรียบเทียบจึงเป็นเชิงทิศทาง แต่ช่องว่างชัดพอจะสรุปว่า Toyota เยอะกว่า",
+  "friction": "server อยู่ port 8901 ไม่ใช่ 8902 (แก้ URL). Volkswagen มีสองคลาส VOW3 (VZO=บุริมสิทธิ, market_cap สูงกว่า) กับ VOW (สามัญ) — เลือก VOW.XETRA (หุ้นสามัญตรงชื่อ 'Volkswagen AG'); งบดุลระดับบริษัทเหมือนกันทั้งสองคลาส ไม่กระทบตัวเลข long_term_debt. Toyota มี Tsusho/Boshoku ปน แต่ 7203 = Toyota Motor ชัด."
+}

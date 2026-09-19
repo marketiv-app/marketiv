@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sc01", "verdict": "PASS",
+    "process": "Direct to screen_unified, no dead-tool call. NL concept 'gross margin' resolved server-side; pattern consecutive_decline N=3. Exercises the NL fundamental resolver (plain English, not a key).",
+    "output_verified_from": "matched.fundamental (re-called with the agent's OWN args, inspected the returned rows — NOT the agent's summary)",
+    "output": "VERIFIED correct: every returned stock's gross_margin.series = 3 YoY changes ALL NEGATIVE (XOM [-0.028,-0.100,-0.028], ORCL [-0.067,-0.013,-0.020], UNH [-0.170,-0.088,-0.003], TXN [-0.019,-0.076,-0.085]) → genuine 3-consecutive-year decline. Criterion holds.",
+    "defects": [{"desc": "First call timed out at 120s (heavy scan), retry at 180s OK.", "side": "server-perf"}]
+  },
+  {
+    "id": "sc02", "verdict": "PASS",
+    "process": "Direct to screen_unified, no dead-tool call. RELATION form, NL metrics 'total debt' / 'total equity' both resolved server-side; relation growth_faster_than.",
+    "output_verified_from": "matched.fundamental (re-called with agent's args, inspected cagr_a vs cagr_b)",
+    "output": "VERIFIED correct: every row cagr_a(debt) > cagr_b(equity) — GOOG 0.259>0.175, META 0.467>0.20, TSLA 0.368>0.225, Samsung 0.347>0.071, MU 0.267>0.028. Criterion holds.",
+    "defects": []
+  },
+  {
+    "id": "sc06", "verdict": "PASS",
+    "process": "Direct to screen_unified, no dead-tool call. Client sent THREE NL shape variants ('accelerating'→'accelerating growth'→'growth accelerating') — the NL pattern resolver handled each.",
+    "output_verified_from": "re-called agent's final args (revenue / growth accelerating / N=3) — confirmed count myself",
+    "output": "VERIFIED: strict 3-year acceleration → count=0 (genuinely empty). The client did NOT fabricate — it disclosed the recent-YoY fallback WITH a note it isn't true acceleration. Honest at the boundary.",
+    "defects": [{"desc": "Bare 'accelerating' (no N) = latest-YoY, not strict multi-year; only N=3 enforces strict. Client surfaced this honestly; confirm the intended default someday.", "side": "backend-semantic"}]
+  },
+  {
+    "id": "ta01", "verdict": "PASS",
+    "process": "Direct to screen_unified, no dead-tool call. Keyed crossover_up + ema50/ema200 + volume_spike qual → passthrough (expert keyed from memory).",
+    "output_verified_from": "matched.ta (re-called agent's args, inspected the signal detail + dates)",
+    "output": "VERIFIED correct: every row has cross_ema50_ema200_up with a>b (ema50 above ema200 = a real golden cross: 0730.HK 0.340>0.178, 7475.JP 2634.7>2620.1, ELCO 132.3>131.1) dated 09-10/11/18 (within the 10-bar window) AND a vol_spike with its own date. Both conditions genuinely hold.",
+    "defects": []
+  },
+  {
+    "id": "ta03", "verdict": "PASS",
+    "process": "Direct to screen_unified, no dead-tool call. Keyed squeeze_fired_up (server → ttm_sqz_fired_up), operand-free.",
+    "output_verified_from": "matched.ta (re-called agent's args, inspected signal + date)",
+    "output": "VERIFIED correct: every row has ttm_sqz_fired_up with a fire date 09-14/15 (within the 5-bar window) and a strength. Genuinely fired an upside squeeze recently.",
+    "defects": []
+  },
+  {
+    "id": "ta04", "verdict": "PASS",
+    "process": "Direct to screen_unified, no dead-tool call. Keyed near_ma + b=sma200 (period-suffixed token passthrough).",
+    "output_verified_from": "matched.ta (re-called agent's args, inspected signal + strength + date)",
+    "output": "VERIFIED correct: every row has near_close_sma200 (up and/or dn) at strength 0.97–1.0 dated 09-14/17 → price genuinely at the 200-day SMA. Minor: near_ma is bidirectional (near-from-either-side), slightly looser than 'pulled DOWN to test', but the right pattern and the stocks are truly at the line.",
+    "defects": []
+  }
+]

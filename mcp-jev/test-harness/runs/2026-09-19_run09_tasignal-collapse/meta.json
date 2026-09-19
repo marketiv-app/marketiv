@@ -1,0 +1,13 @@
+{
+  "run": "2026-09-19_run09",
+  "date": "2026-09-19",
+  "purpose": "Collapse find_tasignal into screen_unified's ta leg — server-side Jev resolves NL pattern (signals axis) + NL operand LINE (indicators axis) + CHANGE#6 period-append (the 50-day → ema50). Verify blind client goes STRAIGHT to screen_unified (no find_tasignal round-trip) and NL operands periodize correctly.",
+  "server": { "mcp_jev_port": 8902, "mdx_api_base": "http://127.0.0.1:8090", "health_checked": true },
+  "mdx_api_sha": "b5de0eda",
+  "mcp_jev_sha": "3717851",
+  "jev_key_suffix": "f2f2ec",
+  "bearer_suffix": "c449ff",
+  "sets": [{ "name": "resolver-ta-v1", "version": 1 }],
+  "diff_baseline": "run08 (fsconcept/fspattern collapse, no ta leg)",
+  "model": "claude-opus-4-8"
+}

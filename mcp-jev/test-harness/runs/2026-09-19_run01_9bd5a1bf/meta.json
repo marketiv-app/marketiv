@@ -1,0 +1,19 @@
+{
+  "run": "2026-09-19_run01",
+  "date": "2026-09-19",
+  "purpose": "First versioned blind-client round for the built resolvers (fsconcept + ticker) after the anchored /v1/stocks redesign.",
+  "server": { "mcp_jev_port": 8902, "mdx_api_base": "http://127.0.0.1:8090 (debug)" },
+  "code_under_test": {
+    "mdx_api_sha": "9bd5a1bf",
+    "mdx_api_state": "dirty (uncommitted: search_stocks anchored tier-1 + field-registry unify — running debug binary, built Sep 19 03:14:03 2026)",
+    "mcp_jev_sha": "3717851",
+    "mcp_jev_state": "dirty (uncommitted: _resolve_ticker + financials one-param wire)"
+  },
+  "jev_key_suffix": "f2f2ec",
+  "bearer_suffix": "49ff (NEWS_API_DEMO_KEY)",
+  "sets": [
+    { "name": "resolver-ticker", "version": "v1", "cases": 12 },
+    { "name": "resolver-fsconcept", "version": "v1", "cases": 12 }
+  ],
+  "method": "blind subagent = MCP client; tools/list+schema first; natural question only; verbatim args in raw/<id>.json; grader reads raw + acceptance (never shown to client)."
+}

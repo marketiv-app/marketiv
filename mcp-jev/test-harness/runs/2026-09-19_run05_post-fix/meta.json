@@ -1,0 +1,33 @@
+{
+  "run": "2026-09-19_run05",
+  "date": "2026-09-19",
+  "purpose": "Re-run run01's 24 cases on POST-FIX code (run04 invalid — :8902 was down). Server pre-verified healthy (:8902->:8090, NVDA->NVDA.US, DPS stripped). Diff vs run01.",
+  "server": {
+    "mcp_jev_port": 8902,
+    "mdx_api_base": "http://127.0.0.1:8090 (debug)"
+  },
+  "code_under_test": {
+    "mdx_api_state": "9bd5a1bf+dirty +run03 (financials_db strip_non_statement_lines DPS fix), debug binary built Sep 19 13:44:43 2026",
+    "mcp_jev_state": "3717851+dirty +run02 (_resolve_ticker returns row ticker not matched_via)"
+  },
+  "fixes_since_run01": [
+    "run02: _resolve_ticker wrong-listing (NVDA->NVDA.SW, AMD->AMD.XETRA) -> now returns .US",
+    "run03: dividend_per_share phantom statement columns stripped from whole-statement view"
+  ],
+  "jev_key_suffix": "f2f2ec",
+  "bearer_suffix": "49ff",
+  "sets": [
+    {
+      "name": "resolver-ticker",
+      "version": "v1",
+      "cases": 12
+    },
+    {
+      "name": "resolver-fsconcept",
+      "version": "v1",
+      "cases": 12
+    }
+  ],
+  "diff_baseline": "runs/2026-09-19_run01_9bd5a1bf",
+  "note": "run04 INVALID (server down, agents hit prod)."
+}

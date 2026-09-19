@@ -1,0 +1,9 @@
+{
+  "id": "t04",
+  "question": "เทียบงบ Alphabet กับ Meta ให้หน่อย เน้นกำไร",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Alphabet", "Meta"]}}
+  ],
+  "answer": "เทียบงบ Alphabet (GOOG.US) กับ Meta (META.US) เน้นกำไร — ทั้งคู่สกุล USD, ปีการเงินล่าสุด as-of 2026-06-30:\n\nAlphabet (GOOG):\n- รายได้ 402.8B (โต +15% เร่งตัว)\n- กำไรสุทธิ 132.2B, อัตรากำไรสุทธิ 54.8% (สูงมาก, net_margin ไต่จาก 21% ขึ้นมา)\n- กำไรจากการดำเนินงาน 129.0B, operating margin 33.1%; gross margin 60.9%\n- EPS diluted 19.93 (โต +32%)\n- ROE 38.1%, ROIC 35.3%; PE 17.1\n\nMeta (META):\n- รายได้ 201.0B (โต +22% เร่งตัว) — ขนาดราวครึ่งของ Alphabet\n- กำไรสุทธิ 60.5B, อัตรากำไรสุทธิ 29.8% (net margin ~ครึ่งของ Alphabet)\n- กำไรจากการดำเนินงาน 83.3B, operating margin 38.1% (สูงกว่า Alphabet เล็กน้อย, ไต่จาก 24.8%); gross margin 81.8% (สูงกว่า)\n- EPS diluted 26.55 (แต่ทรงตัว ~-2%, กำไรสุทธิ -3% ชะลอ)\n- ROE 26.1%, ROIC 19.5%; PE 20.5\n\nสรุปด้านกำไร: Alphabet ทำกำไรสุทธิเป็นเงินมากกว่า (132B vs 60B) และ net margin สูงกว่า (55% vs 30%) โดยกำไรยังโตต่อเนื่อง; Meta มี gross/operating margin ระดับสูงกว่าเล็กน้อยและรายได้โตเร็วกว่า แต่กำไรสุทธิปีล่าสุดทรงตัว/ชะลอ. ทั้งคู่เป็นสกุล USD ปีการเงินตรงกัน จึงเทียบตรงได้ (ตัวเลขปีการเงิน as-of 2026-06-30)",
+  "friction": "resolve Alphabet->GOOG.US (conf 0.86; หมายเหตุมี GOOGL อีก class แต่ตัวเลขงบเหมือนกัน) และ Meta->META.US (exact_symbol conf 1.0). Digest มี net income/margins/operating income ครบสำหรับ 'เน้นกำไร' โดยไม่ต้องขอ fields เพิ่ม. Cross-currency ไม่มี (USD ทั้งคู่). ไม่มี friction."
+}

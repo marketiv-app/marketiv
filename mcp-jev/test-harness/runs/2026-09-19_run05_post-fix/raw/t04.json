@@ -1,0 +1,9 @@
+{
+  "id": "t04",
+  "question": "เทียบงบ Alphabet กับ Meta ให้หน่อย เน้นกำไร",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Alphabet", "Meta"], "fields": ["revenue", "operating_income", "net_income", "gross_profit"]}}
+  ],
+  "answer": "เปรียบเทียบงบ Alphabet (GOOG.US) กับ Meta (META.US) เน้นกำไร — ทั้งคู่สกุล USD, ข้อมูลรอบบัญชีล่าสุด 2025-12 (ตัวเลขครบถึงปี 2022):\n\nAlphabet (GOOG) — ปี 2025:\n• รายได้ 402.84 พันล้าน\n• กำไรขั้นต้น 240.30 พันล้าน (gross margin ~59.7%)\n• กำไรจากการดำเนินงาน 129.04 พันล้าน (op margin ~32.0%)\n• กำไรสุทธิ 132.17 พันล้าน (net margin ~32.8%)\n\nMeta (META) — ปี 2025:\n• รายได้ 200.97 พันล้าน\n• กำไรขั้นต้น 164.79 พันล้าน (gross margin ~82.0%)\n• กำไรจากการดำเนินงาน 83.28 พันล้าน (op margin ~41.4%)\n• กำไรสุทธิ 60.46 พันล้าน (net margin ~30.1%)\n\nสรุปด้านกำไร:\n• ขนาดกำไร (absolute): Alphabet ใหญ่กว่าทุกบรรทัด — รายได้ ~2 เท่า, กำไรจากดำเนินงาน 129 vs 83 พันล้าน, กำไรสุทธิ 132 vs 60 พันล้าน\n• คุณภาพอัตรากำไร: Meta มี gross margin สูงกว่ามาก (~82% vs ~60%) และ op margin สูงกว่า (~41% vs ~32%) เพราะโครงสร้างต้นทุนเบากว่า แต่ net margin ใกล้เคียงกัน (~30–33%)\n• การเติบโต: กำไรสุทธิ Alphabet โตแรงจาก 60→132 พันล้าน (2022→2025); Meta โตจาก 23→60 พันล้าน (ปี 2024 Meta 62.4 สูงกว่า 2025 เล็กน้อย)\nโดยรวม Alphabet เหนือกว่าด้านขนาดและกำไรสัมบูรณ์ ส่วน Meta เด่นกว่าด้านอัตรากำไรจากการดำเนินงาน. หมายเหตุ: ทั้งคู่รอบบัญชีสิ้นสุด ธ.ค. เหมือนกันและสกุลเดียวกัน จึงเทียบตรงได้",
+  "friction": "none — resolved Alphabet→GOOG.US (conf 0.85), Meta→META.US (exact). Requested only the profit-relevant line items; both companies same FY-end/currency so directly comparable."
+}

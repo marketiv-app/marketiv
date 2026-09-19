@@ -1,0 +1,126 @@
+{
+  "set": "combined-ta-fundamental",
+  "persona": "A hands-on investor who blends fundamentals and technicals — wants companies that are financially sound AND technically set up (e.g. profitable growers that just broke out, cheap names holding their 200-day, quality stocks with an RSI reset). Naturally states one fundamental filter plus one technical condition in a single ask, often scoped by sector, country, or size.",
+  "cases": [
+    {
+      "id": "cf-01",
+      "question": "Find me profitable companies with revenue growing over 20% a year that just broke out above their 50-day moving average.",
+      "goal": "Intersect a fundamental screen (positive earnings AND revenue growth >20% YoY) with a technical event (recent bullish 50-day MA breakout).",
+      "acceptance": [
+        "Every result must satisfy BOTH the fundamental leg (profitable AND revenue growth >20%) and the technical leg (recently crossed above the 50-day MA).",
+        "Growth threshold (~20%) and profitability are both applied — not just one.",
+        "The MA breakout is recent/fresh, not simply 'price is above the 50-day' at any point.",
+        "RED FLAG: returning fast growers without checking the MA breakout, or breakout names without checking growth/profitability."
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "cf-02",
+      "question": "I want cheap stocks — low P/E, under 15 — that are still trading above their 200-day moving average. US large caps only.",
+      "goal": "Value screen (P/E < 15) intersected with a trend-confirmation technical (price above 200-day MA), scoped to US large caps.",
+      "acceptance": [
+        "Every name must have P/E below ~15 AND currently sit above its 200-day MA.",
+        "Scope is honored: US listings, large-cap size band.",
+        "Both legs verified per stock, not a value list that happens to include some uptrends.",
+        "RED FLAG: presenting cheap stocks without confirming the 200-day condition, or above-200-day names that are not actually cheap."
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "cf-03",
+      "question": "Show me high-margin, low-debt companies that have sold off hard recently and are now oversold — RSI below 30.",
+      "goal": "Quality screen (high margins AND low leverage) intersected with an oversold technical (RSI < 30 after a recent decline).",
+      "acceptance": [
+        "Each result has both high margins and low debt (quality) AND an RSI reading below ~30.",
+        "The oversold condition reflects a recent pullback, not a chronically weak stock only.",
+        "Both quality metrics (margin AND debt) are considered together with the RSI leg.",
+        "RED FLAG: listing oversold stocks regardless of quality, or quality names that are not oversold."
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "cf-04",
+      "question": "หาหุ้นปันผลดี ยิลด์เกิน 4% ที่ราคายังอยู่ในเทรนด์ขาขึ้น อยู่เหนือเส้นค่าเฉลี่ย 200 วัน",
+      "goal": "Dividend screen (yield > 4%) intersected with an uptrend technical (price above the 200-day MA).",
+      "acceptance": [
+        "Every stock pays a dividend yield above ~4% AND trades above its 200-day MA.",
+        "Answer is in Thai or clearly addresses the Thai request.",
+        "Both the yield floor and the uptrend condition are checked per name.",
+        "RED FLAG: a high-yield list with no trend check, or an uptrend list with weak/no dividends."
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "cf-05",
+      "question": "Give me quality tech companies in Asia — return on equity above 15% — where the stock dropped more than 25% from its 52-week high but the business is still growing revenue.",
+      "goal": "Multi-fundamental screen (ROE > 15% AND positive revenue growth) intersected with a technical drawdown (>25% off 52-week high), scoped to Asia tech.",
+      "acceptance": [
+        "Each result has ROE >15%, still-growing revenue, AND sits >25% below its 52-week high.",
+        "Scope honored: Asia region, technology sector.",
+        "All three conditions (ROE, revenue growth, drawdown) are jointly satisfied.",
+        "RED FLAG: showing beaten-down Asian tech without confirming ROE/growth, or presenting the drawdown without verifying the business is still growing."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "cf-06",
+      "question": "I'm looking for large-cap value stocks — high free cash flow yield — that are coming out of a long volatility squeeze and starting to move up.",
+      "goal": "Value/cash-flow screen (high FCF yield, large cap) intersected with a technical setup (Bollinger/volatility squeeze resolving upward).",
+      "acceptance": [
+        "Every name is a large cap with a high FCF yield AND shows a squeeze that is breaking out / resolving to the upside.",
+        "The squeeze leg is a real volatility-compression signal, not just any recent price move.",
+        "Both the cash-flow value leg and the squeeze leg are applied together.",
+        "RED FLAG: returning squeeze breakouts irrespective of valuation/cash flow, or cheap large caps with no squeeze."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "cf-07",
+      "question": "Find healthcare companies with over $1 billion in revenue and expanding margins that just made a bullish MACD crossover.",
+      "goal": "Absolute-$ and trend fundamental screen (revenue > $1B AND improving margins) intersected with a technical momentum signal (bullish MACD crossover), scoped to healthcare.",
+      "acceptance": [
+        "Each result has revenue above $1B, expanding margins, AND a recent bullish MACD crossover.",
+        "Scope honored: healthcare sector.",
+        "Absolute revenue threshold and margin trend are both checked alongside the MACD event.",
+        "RED FLAG: MACD-crossover names without the revenue/margin checks, or big healthcare names without the crossover."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "cf-08",
+      "question": "หุ้นจีนตัวเล็กที่กำไรโต แต่ราคาลงมา 30% แล้ว และตอนนี้ RSI รีเซ็ตต่ำกว่า 40 มีตัวไหนบ้าง",
+      "goal": "Growth screen (rising earnings, small cap, China) intersected with a technical pullback (down ~30% AND RSI reset below 40).",
+      "acceptance": [
+        "Each name is a China small cap with growing earnings AND is down ~30% AND has RSI below ~40.",
+        "Answer is in Thai or clearly addresses the Thai request.",
+        "Scope (China, small cap) and both technical conditions plus the earnings-growth leg are all honored.",
+        "RED FLAG: showing beaten-down Chinese small caps with no earnings-growth check, or growth names that aren't down / aren't RSI-reset."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "cf-09",
+      "question": "Which dividend growers in Europe — raising their payout and yielding over 3% — recently reclaimed their 50-day moving average after a dip?",
+      "goal": "Dividend-quality screen (dividend growth AND yield > 3%) intersected with a technical reclaim (price crossing back above the 50-day MA after a pullback), scoped to Europe.",
+      "acceptance": [
+        "Each result is a European name with a growing dividend, yield >3%, that has recently crossed back above its 50-day MA.",
+        "Scope honored: Europe.",
+        "Both dividend conditions (growth AND yield) plus the 50-day reclaim are verified per stock.",
+        "RED FLAG: high-yield European stocks with no MA reclaim, or MA-reclaim names with flat/no dividend growth."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "cf-10",
+      "question": "I want financially strong companies — growing earnings, low debt-to-equity — that are showing bullish divergence on the daily chart. Any sector, global.",
+      "goal": "Financial-strength screen (earnings growth AND low debt-to-equity) intersected with a technical reversal signal (bullish RSI/price divergence), global.",
+      "acceptance": [
+        "Each result has growing earnings, low debt-to-equity, AND a recent bullish divergence signal.",
+        "Both fundamental conditions (earnings growth AND leverage) are applied with the divergence leg.",
+        "Global scope is respected (not narrowed to one market without saying so).",
+        "RED FLAG: presenting divergence setups without the earnings/debt checks, or strong-balance-sheet names with no divergence."
+      ],
+      "difficulty": "medium"
+    }
+  ]
+}

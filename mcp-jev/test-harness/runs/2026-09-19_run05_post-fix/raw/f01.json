@@ -1,0 +1,9 @@
+{
+  "id": "f01",
+  "question": "ขอดูงบกำไรขาดทุนของ Apple ปีล่าสุด",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Apple", "period": "1", "fields": "income"}}
+  ],
+  "answer": "งบกำไรขาดทุน Apple (AAPL.US) ปีล่าสุด (ปีบัญชีสิ้นสุด as-of 2026-06-30, สกุล USD):\n- รายได้ (Revenue): 416.2B\n- กำไรขั้นต้น (Gross profit): 195.2B → gross margin 48.6%\n- กำไรจากการดำเนินงาน (Operating income): 133.05B → operating margin 33.2%\n- EBITDA margin 36.0%\n- กำไรสุทธิ (Net income): 112.01B → net margin 27.6%\n- EPS: basic 8.76 / diluted 8.72\n- อัตราภาษีที่แท้จริง (effective tax rate) 17.3%\nการเติบโต YoY: รายได้ +6%, กำไรขั้นต้น +8%, กำไรสุทธิ +20%, EPS diluted +23% (ทุกตัวเร่งตัวขึ้น). สัดส่วนรายได้ตามภูมิภาค: อเมริกาเหนือ 43% · ยุโรป 27% · จีนแผ่นดินใหญ่ 16%.",
+  "friction": "The digest header carried the latest-year (as-of 2026-06-30) income figures, but the appended [income] line-item block returned OLDER fiscal periods (2022-09 / 2021-09) rather than the latest year — I answered from the digest header, which is the correct latest-year data."
+}

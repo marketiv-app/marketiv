@@ -1,0 +1,9 @@
+{
+  "id": "t01",
+  "question": "ขอดูงบการเงินของ Reddit ปีล่าสุดหน่อย",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Reddit", "period": "1"}}
+  ],
+  "answer": "งบการเงินของ Reddit (RDDT.US) ปีล่าสุด ณ 2026-06-30 (สกุล USD): รายได้ 2.20 พันล้านดอลลาร์ (โต +69% เร่งตัว), กำไรสุทธิ 529.7 ล้านดอลลาร์ (net margin 31.4%, โต +209%), กระแสเงินสดจากการดำเนินงาน 690.9 ล้าน, free cash flow 684.2 ล้าน (FCF margin 36.7%). งบดุลแข็งแรงมาก—แทบไม่มีหนี้ (debt/equity 0.01x, เงินสด 953.6 ล้าน, current ratio 10.5x). อัตราส่วนผลตอบแทน: ROE 26.5%, ROA 23.9%, ROIC 42.8%, gross margin 91.4%. Valuation: P/E 36.8, P/B 9.26, EV/EBITDA 36.1. จุดพลิก: บริษัทเพิ่งพลิกจากขาดทุนมาเป็นกำไร—pretax เคยติดลบปี 2024, net margin เคยติดลบ -37% ปี 2024 ตอนนี้ฟื้นเป็นบวกแล้ว.",
+  "friction": "คำถามระบุ 'ปีล่าสุด' จึงส่ง period='1' (1 ปีล่าสุด) ตาม schema. ผลลัพธ์เป็น DIGEST เต็ม (headline+ratios+signals) ไม่ต้อง fields. resolve Reddit→RDDT.US confidence 0.97 gate=resolve ไม่มี needs_confirmation. ราบรื่น."
+}

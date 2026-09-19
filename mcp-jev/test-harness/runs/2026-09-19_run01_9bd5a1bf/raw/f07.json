@@ -1,0 +1,10 @@
+{
+  "id": "f07",
+  "question": "หุ้นทุนซื้อคืนของ Apple มีเท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Apple", "fields": "treasury stock"}},
+    {"tool": "financials", "args": {"tickers": "Apple", "fields": ["treasury stock"], "period": "5y"}}
+  ],
+  "answer": "Apple (AAPL.US) ไม่มีรายการ \"หุ้นทุนซื้อคืน\" (treasury stock) แสดงในงบดุลครับ ระบบแปลงคำถามเป็นฟิลด์ treasury_stock ได้ถูกต้อง (confidence 1.0) แต่ไม่มีค่ารายงานย้อนหลัง 5 ปี เหตุผลทางบัญชีคือ Apple ใช้วิธี \"ยกเลิก/ตัดจำหน่าย\" (retire) หุ้นที่ซื้อคืนทันที แทนการถือไว้เป็น treasury stock ดังนั้นยอดหุ้นทุนซื้อคืนในงบดุลจึงเป็นศูนย์/ไม่มีรายงาน (ไม่ใช่ข้อมูลขาดหาย แต่เป็นเพราะบริษัทไม่ถือ treasury stock)",
+  "friction": "financials resolved treasury_stock at confidence 1.0 but the 'requested:' data section came back EMPTY (no year values). Re-called with explicit period=5y and list form to confirm it wasn't a formatting glitch — still empty. This is a legitimate unreported/absent line (Apple retires repurchased shares), so I stated the absence plainly rather than fabricating a number."
+}

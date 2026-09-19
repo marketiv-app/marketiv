@@ -1,0 +1,9 @@
+{
+  "id": "f09",
+  "question": "ขอคะแนน ESG ของ Tesla",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Tesla", "fields": "ESG score"}}
+  ],
+  "answer": "ขออภัยครับ คะแนน ESG ของ Tesla ไม่มีให้บริการใน MarketDX ครับ ระบบระบุบริษัทเป็น Tesla (TSLA.US) ได้ถูกต้อง แต่คะแนน ESG ไม่ใช่รายการในงบการเงิน และไม่มีเครื่องมือใดในชุดนี้ที่ให้คะแนน ESG (ชุดเครื่องมือครอบคลุม ข่าว/ผลกระทบ ราคา งบการเงิน ออปชัน และการวางสถานะ futures) จึงไม่สามารถให้คะแนน ESG ได้",
+  "friction": "financials returned needs_confirmation with status=no_match for 'ESG score' ('not a financial-statement concept', empty candidates). Per _guide, no_match → tell the user it's unavailable. No ESG-rating tool exists in the tool list. Reported unavailable rather than fabricating."
+}

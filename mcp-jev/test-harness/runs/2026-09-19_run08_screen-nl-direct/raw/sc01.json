@@ -1,0 +1,11 @@
+{
+  "id": "sc01",
+  "question": "หาหุ้นที่อัตรากำไรขั้นต้นหดตัวต่อเนื่องหลายปี",
+  "tool_calls": [
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "gross margin", "pattern": "contracting for multiple years"}]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "gross_margin", "pattern": "consecutive_decline"}]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "gross_margin", "pattern": "declining for several consecutive years"}]}}
+  ],
+  "answer": "เจอ 40 บริษัทที่อัตรากำไรขั้นต้น (gross margin) หดตัวต่อเนื่องหลายปี (server ตรวจการลดลง YoY ต่อเนื่อง 3 ปี). รายชื่อเด่น (เรียงตาม market cap): XOM.US (Exxon Mobil) — gross margin ลดลงต่อเนื่อง series -2.8%/-10.0%/-2.8%, ORCL.US (Oracle) -6.7%/-1.3%/-2.0%, QH.US (Quhuo), UNH.US (UnitedHealth), 600941.CG (China Mobile), TXN.US (Texas Instruments), COP.US (ConocoPhillips), CFR.SW (Richemont). ผลถูก cap ที่ 40 รายการ.",
+  "friction": "call แรก pattern 'contracting for multiple years' ได้ needs_confirmation → no_match ไม่มี candidate. call ที่สอง pattern เป็น exact key 'consecutive_decline' → Server error (JSON-RPC error, transport ปกติ ไม่ใช่ 404/timeout). call ที่สาม rephrase เป็น NL 'declining for several consecutive years' → resolved สำเร็จ 40 ผลลัพธ์."
+}

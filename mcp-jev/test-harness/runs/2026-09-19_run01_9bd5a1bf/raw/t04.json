@@ -1,0 +1,9 @@
+{
+  "id": "t04",
+  "question": "เทียบงบ Alphabet กับ Meta ให้หน่อย เน้นกำไร",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Alphabet", "Meta"], "fields": ["net_income", "operating_income", "gross_profit"]}}
+  ],
+  "answer": "เทียบความสามารถทำกำไร Alphabet (GOOG.US) vs Meta (META.US), สกุล USD, ปีการเงิน สิ้นสุด ธ.ค. (FY2022-2025):\n\nกำไรสุทธิ (Net income) FY2025: Alphabet 132.2 พันล้าน vs Meta 60.5 พันล้าน — Alphabet มากกว่าราว 2 เท่า\n  • Alphabet: 60.0 (2022) → 73.8 → 100.1 → 132.2 พันล้าน (โตต่อเนื่อง)\n  • Meta: 23.2 (2022) → 39.1 → 62.4 → 60.5 พันล้าน (พุ่งแรงปี 2023-2024 แล้วทรงตัว/ลดเล็กน้อยปี 2025)\n\nกำไรจากการดำเนินงาน (Operating income) FY2025: Alphabet 129.0 พันล้าน vs Meta 83.3 พันล้าน\n  • Alphabet: 74.8 → 84.3 → 112.4 → 129.0 พันล้าน\n  • Meta: 28.9 → 46.8 → 69.4 → 83.3 พันล้าน\n\nกำไรขั้นต้น (Gross profit) FY2025: Alphabet 240.3 พันล้าน vs Meta 164.8 พันล้าน\n\nสรุป: Alphabet ทำกำไรได้มากกว่า Meta ในทุกระดับ (ขั้นต้น/ดำเนินงาน/สุทธิ) และเติบโตต่อเนื่องทุกปี ส่วน Meta โตเร็วมากในปี 2023-2024 แต่กำไรสุทธิปี 2025 แผ่วลงเล็กน้อยแม้ operating income ยังโต (สะท้อนรายการต่ำกว่าระดับดำเนินงาน เช่น ภาษี/รายการครั้งเดียว). ทั้งคู่เป็นสกุล USD ปีการเงินสิ้น ธ.ค. เหมือนกัน จึงเทียบตรงได้.",
+  "friction": "'เน้นกำไร' → เลือก fields = net_income, operating_income, gross_profit (แปลเป็นคีย์ภาษาอังกฤษตาม schema). Alphabet resolve→GOOG.US แต่ gate=soft confidence 0.8 (มี GOOGL คลาส A อีกตัว) — tool ยังคืนข้อมูลมาให้พร้อม note ไม่ได้เป็น needs_confirmation จึงใช้ต่อได้ (GOOG=คลาส C, เป็นตัวแทน Alphabet ได้ปกติ). Meta gate=exact_symbol 1.0. ไม่ต้อง retry."
+}

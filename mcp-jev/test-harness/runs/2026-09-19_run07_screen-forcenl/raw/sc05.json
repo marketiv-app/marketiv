@@ -1,0 +1,11 @@
+{
+  "id": "sc05",
+  "question": "หาหุ้นที่เพิ่งพลิกจากขาดทุนมาเป็นกำไร",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["net income", "revenue", "ESG score", "research and development expense"]}},
+    {"tool": "find_fspattern", "args": {"queries": ["turned from a loss to a profit", "sales growth accelerating"]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "turned_positive"}], "asset_type": ["Common Stock"]}}
+  ],
+  "answer": "เจอหุ้นที่เพิ่งพลิกจากขาดทุนมาเป็นกำไร (net income เพิ่งข้ามศูนย์จากติดลบมาเป็นบวก) ทั้งหมด 40 ตัว (ผลถูก cap ที่ 40) ตัวใหญ่ที่สุดเรียงตาม market cap ได้แก่ Marvell Technology (MRVL.US, net income พลิกมาที่ ~2.53 พันล้าน USD, net margin 29%), Sandisk (SNDK.US, net income ~4.51 พันล้าน, net margin 34%), Boeing (BA.US, net income ~2.27 พันล้าน), และอีกหลายตัว ทั้งหมดเป็นหุ้นสามัญที่รอบล่าสุดกลับมามีกำไรหลังเคยขาดทุน",
+  "friction": "ราบรื่น เงื่อนไข = net_income + turned_positive (พลิกจากลบเป็นบวก) ตรงคำถามพอดี ไม่มี needs_confirmation"
+}

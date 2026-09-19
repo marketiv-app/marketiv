@@ -1,0 +1,11 @@
+{
+  "id": "f05",
+  "question": "ดอกเบี้ยค้างรับของ JPMorgan เท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "JPM.US", "period": "1", "fields": "accrued interest receivable"}},
+    {"tool": "financials", "args": {"tickers": "JPM.US", "period": "1", "fields": "accrued interest and fees receivable"}},
+    {"tool": "financials", "args": {"tickers": "JPM.US", "period": "1", "fields": "accrued_interest_receivable"}}
+  ],
+  "answer": "ไม่พบค่า 'ดอกเบี้ยค้างรับ' (accrued interest receivable) ที่รายงานแยกเป็นบรรทัดสำหรับ JPMorgan (JPM.US) ในชุดข้อมูลนี้ — เครื่องมือคืนบล็อก requested ว่าง (ไม่มีค่า) แม้ว่า 'accrued_interest_receivable' จะเป็นคอนเซ็ปต์/ฟิลด์ที่ถูกต้อง (ตัว field resolver ยืนยันมี concept นี้อยู่). แปลว่า JPMorgan ไม่ได้รายงานรายการนี้แยกเป็นบรรทัดเดี่ยวในงบที่นำเข้ามา (อาจถูกรวมอยู่ใน 'other assets' หรือรายการรวมอื่น). จึงตอบตัวเลขไม่ได้อย่างซื่อตรง ไม่ขอกุตัวเลข.",
+  "friction": "เหมือนเคสอื่น ใช้ port 8901 แทน 8902 ที่ล่ม. ลอง 3 รูปแบบ (คำบรรยาย EN, คำบรรยายทางเลือก, exact key) — ทุกครั้งคืน requested ว่างเปล่า ไม่มี needs_confirmation และไม่มี unavailable_fields flag แจ้งตรง ๆ (จุดสะดุด: ควรบอกชัดว่าเป็น field-ที่-ถูกต้อง-แต่-ไม่มีรายงาน แต่กลับเงียบ). ยืนยันด้วย /v1/financials/find ว่า accrued_interest_receivable เป็น concept ที่ถูกต้อง = เป็นกรณี 'valid line, unreported by issuer'."
+}

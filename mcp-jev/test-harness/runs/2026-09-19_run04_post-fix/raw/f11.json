@@ -1,0 +1,9 @@
+{
+  "id": "f11",
+  "question": "งานระหว่างก่อสร้างของ Toyota อยู่ที่เท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Toyota", "fields": ["construction in progress"], "period": "quarterly"}}
+  ],
+  "answer": "ไม่สามารถให้ตัวเลข 'งานระหว่างก่อสร้าง' (construction in progress) ของ Toyota ได้ในขณะนี้ เพราะ MCP server ตอบกลับ HTTP 404 ทุกครั้งที่เรียกใช้เครื่องมือ (tools/call) ผมไม่ขอเดาตัวเลขงบดุลเอง โปรดลองอีกครั้งเมื่อ server กลับมาปกติ",
+  "friction": "BLOCKER (server-side): tools/call คืน HTML 404 ทุกตัว เหมือน f07. แปล 'งานระหว่างก่อสร้าง' -> 'construction in progress' (balance-sheet line, PP&E) ตามกฎ English-only แล้วส่งเป็น field ให้ financials โดยตรง (financials resolve field server-side ได้ ไม่ต้องพึ่ง find_fsconcept ที่ก็ 404) — แต่ call ไม่ผ่านเพราะ 404."
+}

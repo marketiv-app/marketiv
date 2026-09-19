@@ -1,0 +1,9 @@
+{
+  "id": "f11",
+  "question": "งานระหว่างก่อสร้างของ Toyota อยู่ที่เท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Toyota", "fields": "construction in progress"}}
+  ],
+  "answer": "งานระหว่างก่อสร้าง (construction in progress) ของ Toyota (7203.JP, สกุลเงิน JPY) ปีการเงินล่าสุดสิ้นสุด มี.ค. 2026 อยู่ที่ประมาณ 1.72 ล้านล้านเยน (¥1.72T) แนวโน้มย้อนหลัง: มี.ค.2026 = ¥1.72T, มี.ค.2025 = ¥1.60T, มี.ค.2024 = ¥1.04T, มี.ค.2023 = ¥846.87B — เพิ่มขึ้นต่อเนื่อง สะท้อนการลงทุนก่อสร้างสินทรัพย์ถาวรที่กำลังดำเนินการเพิ่มขึ้น",
+  "friction": "None. Translated 'งานระหว่างก่อสร้าง' to English 'construction in progress'; financials resolved Toyota→7203.JP (conf 1.0) and the field→construction_in_progress (conf 1.0) and returned clean values in JPY (native currency, appropriate for a single-company balance line)."
+}

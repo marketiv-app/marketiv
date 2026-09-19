@@ -1,0 +1,13 @@
+{
+  "set": "new-ta-signals-2026-08-24",
+  "cases": [
+    {"id":"ns-01","question":"Find US stocks where the Bollinger bands are squeezing tightly together right now — the bands compressing before a possible breakout.","acceptance":["Resolves to a Bollinger BAND-WIDTH squeeze (bb_squeeze), NOT the ttm/Keltner variant unless it also mentions Keltner","Returns real US tickers","Not confused with a moving-average squeeze"]},
+    {"id":"ns-02","question":"Which stocks are coming out of a volatility squeeze — the coil just released and price is breaking out?","acceptance":["Resolves to a squeeze-fired / coming-out-of-squeeze transition","Returns dated breakout names"]},
+    {"id":"ns-03","question":"Show me stocks where the Ichimoku cloud is getting very thin — kumo compressing, often before a trend change.","acceptance":["Resolves to ichimoku kumo squeeze (senkou_a vs senkou_b converging)","Returns real names, not a generic squeeze"]},
+    {"id":"ns-04","question":"Find large-cap stocks that have pulled back to their 200-day moving average — price sitting right near the ema200.","acceptance":["Resolves to a near-MA / price-vs-ema200 converge (pullback)","Returns names trading near their 200-day","Not just 'below the 200-day'"]},
+    {"id":"ns-05","question":"Which quality stocks are down at least 30% from their 52-week high right now?","acceptance":["Resolves to off_high_by drawdown (peak->now), b=0.30","NOT net_change (start->now)","Returns names in a real drawdown"]},
+    {"id":"ns-06","question":"Find stocks making a new 52-week high this week.","acceptance":["Resolves to at_new_high (52-week range)","Returns names at fresh yearly highs"]},
+    {"id":"ns-07","question":"Show me stocks where trading volume has been rising for several days in a row (building volume / accumulation).","acceptance":["Resolves to rising_volume (N consecutive bars), NOT a one-bar volume_spike","Returns names with climbing volume"]},
+    {"id":"ns-08","question":"Find stocks that were in a Bollinger squeeze and then broke out to the upside — coiled, then released up.","acceptance":["Uses a THEN chain: bb_squeeze / squeeze THEN a bullish release (squeeze_fired_up / breakout)","Returns names that coiled then broke out"]}
+  ]
+}

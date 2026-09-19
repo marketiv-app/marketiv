@@ -1,0 +1,9 @@
+{
+  "id": "t01",
+  "question": "ขอดูงบการเงินของ Reddit ปีล่าสุดหน่อย",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Reddit", "period": "1"}}
+  ],
+  "answer": "งบการเงินของ Reddit (RDDT.US, สกุล USD, ปีการเงินล่าสุด as-of 2026-06-30):\n- รายได้ (Revenue) 2.20 พันล้านดอลลาร์ โต +69% (เร่งตัว)\n- กำไรขั้นต้น (Gross profit) 2.01 พันล้าน อัตรากำไรขั้นต้น 91.4%\n- กำไรจากการดำเนินงาน (Operating income) 442 ล้าน อัตรากำไรจากการดำเนินงาน 28.2%\n- กำไรสุทธิ (Net income) 530 ล้าน อัตรากำไรสุทธิ 31.4% (พลิกจากขาดทุน -37.2% เมื่อปี 2024)\n- EPS diluted 4.30\n- กระแสเงินสดจากการดำเนินงาน 691 ล้าน, Free cash flow 684 ล้าน (FCF margin 36.7%)\n- ฐานะการเงินแข็งแรงมาก: เงินสด 954 ล้าน, current ratio 10.49, debt/equity ~0.0x, ROE 26.5% / ROA 23.9% / ROIC 42.8%\n- Valuation: PE 36.8, PB 9.26, EV/EBITDA 36.1, FCF yield 3.3%\nสรุป: ปีล่าสุด Reddit พลิกมาทำกำไรได้เต็มปีเป็นครั้งแรก รายได้โตแรง มาร์จิ้นและกระแสเงินสดเป็นบวกชัดเจน งบดุลแทบไม่มีหนี้ (เป็นตัวเลขปีการเงินสิ้นสุด as-of 2026-06-30)",
+  "friction": "Backend/harness setup: serve-mcp.sh default BASE=news-api ทำ /v1/financials คืน 404 — ต้องชี้ BASE=https://api.marketdx.lab.ai (SDK default gateway). และ mcp-jev variant ต้องมี TYPESAFE_API_KEY (Jev resolver) — ดึงจาก /Users/ran/Documents/marketdx/mcp-jev/.env. หลังแก้ทั้งสองแล้วทำงานปกติ. ตัว tool เองไม่มี friction: resolve Reddit->RDDT.US conf 0.98, ตอบครบ."
+}

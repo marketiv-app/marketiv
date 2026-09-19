@@ -1,0 +1,11 @@
+{
+  "id": "sc01",
+  "question": "หาหุ้นที่อัตรากำไรขั้นต้นหดตัวต่อเนื่องหลายปี",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["gross margin", "total debt", "total shareholders equity", "return on equity", "market capitalization"]}},
+    {"tool": "find_fspattern", "args": {"queries": ["margin contracting for several consecutive years", "debt rising faster than equity", "above the industry group average", "market cap doubled over two years"]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "gross_margin", "pattern": "consecutive_decline"}]}}
+  ],
+  "answer": "พบหุ้น 40 ตัว (ผลถูก cap) ที่อัตรากำไรขั้นต้น (gross margin) หดตัวต่อเนื่องทุกปีในช่วง 3 ปีล่าสุด เรียงตามมูลค่าตลาด ตัวใหญ่ที่สุดได้แก่ Exxon Mobil (XOM.US, series yoy -2.79%/-10.02%/-2.75%), Oracle (ORCL.US, -6.65%/-1.26%/-1.98%), QH.US, UnitedHealth (UNH.US), 600941.CG, Texas Instruments (TXN.US), ConocoPhillips (COP.US), CFR.SW",
+  "friction": "ไม่ระบุ threshold เพราะผู้ใช้บอกแค่ 'หดตัวต่อเนื่อง' ไม่ได้ระบุ % — ใช้ consecutive_decline (fell every year) ตาม default N=3. ไม่มี needs_confirmation. concept resolver คืน gross_margin (ratio) ตรงตัว ไม่ใช่ gross_profit (field)"
+}

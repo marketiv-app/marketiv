@@ -1,0 +1,9 @@
+{
+  "id": "sc07",
+  "question": "คัดหุ้นที่มีคะแนน ESG สูงๆ",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["net income", "revenue", "ESG score", "research and development expense"]}}
+  ],
+  "answer": "ขออภัยครับ ตัวคัดกรองนี้ไม่มีข้อมูลคะแนน ESG ให้ใช้คัดหุ้น เมื่อลองแปลง 'ESG score' เป็นฟิลด์ที่คัดกรองได้ ตัวรีโซลเวอร์ตอบกลับแบบ low_confidence และผลลัพธ์ที่ใกล้เคียงที่สุดกลับเป็นตัวเลขทางการเงินที่ไม่เกี่ยวข้องเลย (เช่น normalized diluted EPS, net debt/EBITDA, market cap, dividend payout) ซึ่งไม่ใช่คะแนน ESG จึงไม่สามารถคัดหุ้นตามคะแนน ESG ได้จากเครื่องมือชุดนี้ครับ ระบบนี้คัดกรองบนงบการเงิน/เทคนิคอล/ออปชัน เป็นหลัก ไม่มีมิติ ESG หากสนใจ อาจคัดด้วยเกณฑ์ทางการเงินอื่นแทนได้",
+  "friction": "no_match: find_fsconcept('ESG score') คืน low_confidence=true, candidate ทั้งหมดเป็น field การเงินที่ไม่เกี่ยว (EPS/leverage/market cap) — ไม่มี concept ESG ในระบบ จึงไม่รัน screen_unified และแจ้งผู้ใช้ตรง ๆ ว่าคัดไม่ได้"
+}

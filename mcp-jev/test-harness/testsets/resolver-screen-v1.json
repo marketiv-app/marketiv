@@ -1,0 +1,13 @@
+{
+  "set": "resolver-screen",
+  "version": "v1",
+  "note": "SMOKE (2 cases) for screen_unified fundamental-leg self-resolution (fsconcept concept + fspattern pattern, NL). Natural Thai screen requests; client fills numeric params. lens/acceptance = GRADER ONLY. Expand after these pass.",
+  "cases": [
+    { "id": "s01", "question": "หาหุ้นที่ ROE เกิน 20% แล้วรายได้โตทุกปีติดกัน 3 ปี",
+      "lens": "2 conditions: concept ROE→roe + pattern เกิน→above (0.20); concept รายได้→revenue + pattern โตทุกปี→consecutive_growth (N=3)",
+      "acceptance": "Resolves roe+above(0.20) AND revenue+consecutive_growth(N=3); one screen_unified call, non-empty plausible list (high-ROE consistent growers). Client fills threshold 0.20 + N 3. No fabrication." },
+    { "id": "s02", "question": "หุ้นถูกๆ P/E ต่ำกว่า 15 ที่กำไรขั้นต้นกำลังขยายตัว",
+      "lens": "concept P/E→pe + pattern ต่ำกว่า→below (15, NOT a fraction); concept กำไรขั้นต้น→gross_margin + pattern ขยายตัว→expanding/accelerating",
+      "acceptance": "Resolves pe+below(15) AND gross_margin (or gross_profit)+an expanding/accelerating shape; one call, plausible list. P/E threshold sent as 15 (not 0.15). No fabrication." }
+  ]
+}

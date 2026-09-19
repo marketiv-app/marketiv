@@ -1,0 +1,11 @@
+{
+  "id": "f07",
+  "question": "หุ้นทุนซื้อคืนของ Apple มีเท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Apple", "fields": "treasury stock"}},
+    {"tool": "financials", "args": {"tickers": "Apple", "fields": "treasury stock", "period": "5"}},
+    {"tool": "find_fsconcept", "args": {"q": "treasury stock"}}
+  ],
+  "answer": "Apple (AAPL.US) ไม่ได้รายงานรายการ \"หุ้นทุนซื้อคืน\" (treasury stock) แยกไว้ในงบดุลครับ ระบบ resolve คำนี้เป็น concept `treasury_stock` ได้ถูกต้อง (confidence 1.0) แต่ค่าที่ดึงกลับมาว่างเปล่าทุกปี — เป็นเพราะ Apple ใช้วิธีทางบัญชี US GAAP ที่หักหุ้นซื้อคืน (retire) เข้ากับกำไรสะสม/ส่วนของผู้ถือหุ้นโดยตรง จึงไม่มีบรรทัด treasury stock คงเหลือแยกในงบ ผมจึงไม่มีตัวเลขจะรายงาน (ไม่ใช่ 0 แต่คือ \"ไม่ได้รายงานแยก\") หากต้องการดูเม็ดเงินที่ Apple ใช้ซื้อหุ้นคืนในแต่ละปี สามารถดูได้จากบรรทัด buybacks (Repurchase of Capital Stock) ในงบกระแสเงินสดแทน",
+  "friction": "financials resolved treasury_stock at confidence 1.0 but returned an empty value block for AAPL across all years (Apple retires repurchased shares against retained earnings, so no standing treasury_stock line). Not a resolver failure — a genuine unreported field. Retry with period='5' gave the same empty result. Noted buybacks as the reportable alternative."
+}

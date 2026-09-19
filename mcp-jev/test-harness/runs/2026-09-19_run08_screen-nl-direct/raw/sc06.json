@@ -1,0 +1,9 @@
+{
+  "id": "sc06",
+  "question": "หาหุ้นที่ยอดขายกำลังเร่งตัวขึ้น (โตเร็วขึ้นเรื่อยๆ)",
+  "tool_calls": [
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "growth accelerating"}]}}
+  ],
+  "answer": "เจอ 40 บริษัทที่ยอดขาย (revenue) กำลังเร่งตัวขึ้น — อัตราการเติบโตเร่งเร็วขึ้น. รายชื่อเด่น (เรียงตาม market cap): AAPL.US (Apple) revenue YoY +16.4%, GOOG.US (Alphabet) +24.2%, META.US (Meta), LLY.US (Eli Lilly), AMD.US, ABBV.US (AbbVie), CSCO.US (Cisco), ORCL.US (Oracle). ผลถูก cap ที่ 40 รายการ.",
+  "friction": "ไม่มี — concept 'revenue' + pattern 'growth accelerating' resolved สำเร็จในครั้งแรก ไม่ต้อง confirm."
+}

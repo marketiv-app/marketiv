@@ -1,0 +1,28 @@
+{
+  "id": "ta02",
+  "question": "Show me stocks where the RSI has been stuck between 40 and 50 for a while",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "in_range",
+                "a": "rsi",
+                "b": "40-50",
+                "for_bars": 10
+              }
+            ]
+          }
+        ],
+        "timeframe": 1,
+        "sort": "rsi",
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "Found 60 names (capped) with RSI stuck in the 40–50 band for at least 10 consecutive daily bars. Top results sorted by RSI value (nearest 50): AFOZX.US (Alger Mid Cap Focus, RSI 50.0, ADX 17.3), FGSPX.US (Fa529 GB St Cl P, RSI 50.0, ADX 16.0), FGEHX.US (Fidelity Advisor Global Equity Inc C, RSI 50.0, ADX 12.1), RMFCX.US (American Mutual Fund Class R-3, RSI 50.0, ADX 25.0), VMMSX.US (Vanguard Emerging Markets Select Stock, RSI 49.9, ADX 10.4), CIESX.US (Calvert International Equity R6, RSI 49.9, ADX 22.4), CRE.US (Cre8 Enterprise, RSI 49.99, ADX 28.2 — note high atr_pct 0.149), PYSVX.US (Putnam Small Cap Value Y, RSI 49.98, ADX 26.3), PEMZX.US (Putnam Emerging Markets Equity C, RSI 49.97), MBCLX.US (MassMutual Blue Chip Growth Admin, RSI 49.98, ADX 15.3). Most have low ADX (<25) confirming directionless/ranging condition, consistent with RSI being stuck in neutral territory. All 60 hits fired the `rsi14_in_range` signal with strength 1.0 on dates 2026-09-14 to 2026-09-18.",
+  "friction": "First call timed out at 120s; succeeded on second attempt with the same args (same timeout). The `for_bars` parameter enforces 'for a while' but there is no signal-level minimum-hold detail returned — only the fire date is shown, so actual duration cannot be read from the output. Result set is dominated by mutual funds/ETFs rather than individual equities; an `asset_type: ['Common Stock']` filter would narrow to pure equities."
+}

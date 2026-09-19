@@ -1,0 +1,34 @@
+{
+  "run": "run08",
+  "goal": "eliminate find_* round-trip in screen fundamental leg",
+  "result": "ACHIEVED — all 3 cases screen_unified-only (run07 round-tripped via find_*)",
+  "cases": [
+    {
+      "id": "sc01",
+      "process": "screen_unified only (NL)",
+      "output": "gross_margin declining, correct",
+      "note": "NL contracting→false no_match (rephrase worked); exact-key 500 transient"
+    },
+    {
+      "id": "sc02",
+      "process": "screen_unified only (relation, NL)",
+      "output": "total_liabilities growth_faster_than equity, correct"
+    },
+    {
+      "id": "sc06",
+      "process": "screen_unified only (NL)",
+      "output": "revenue accelerating, correct"
+    }
+  ],
+  "findings": [
+    {
+      "desc": "contracting for multiple years → false no_match (consecutive_decline in shortlist rank6 but Jev picked NONE; direction-confused recall)",
+      "severity": "minor",
+      "side": "resolver-gate"
+    },
+    {
+      "desc": "exact-key consecutive_decline Server error = transient, not reproducible",
+      "severity": "none"
+    }
+  ]
+}

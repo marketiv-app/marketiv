@@ -1,0 +1,27 @@
+{
+  "id": "ta04",
+  "question": "หุ้นที่ราคาย่อลงมาทดสอบเส้นค่าเฉลี่ย 200 วันพอดี",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "near_ma",
+                "b": "sma200"
+              }
+            ]
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 5,
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "พบ 60 หุ้นที่ราคาย่อลงมาใกล้/ทดสอบเส้นค่าเฉลี่ย 200 วัน (capped ที่ 60) อันดับต้นๆ ที่ close_vs_ema200 อยู่ใกล้ 0 มากที่สุด:\n1. 004370.KO (Nongshim, เกาหลี) — score 1.0 | close_vs_ema200 +0.002 (แทบจะอยู่บนเส้นพอดี) | RSI 41.2 | ทดสอบทั้งจากบนและล่างในช่วง 16–17 ก.ย.\n2. 2345.TW (Accton Technology Corp, ไต้หวัน) — score 1.0 | close_vs_ema200 –0.024 (ย่อลงมาต่ำกว่าเส้นเล็กน้อย) | RSI 35.1\n3. 6101.JP (Tsugami Corp., ญี่ปุ่น) — score 1.0 | close_vs_ema200 –0.037 | ADX 32.6 (trending down)\n4. 300990.CS (Sanhe Tongfei Refrigeration, จีน) — score 1.0 | close_vs_ema200 +0.032 | RSI 48.3\n5. 2780.JP (Komehyo Holdings, ญี่ปุ่น) — score 1.0 | close_vs_ema200 –0.019 | RSI 37.9\n6. 002734.CS (Limin Chemical, จีน) — score 1.0 | close_vs_ema200 +0.030 | RSI 59.6\n7. 024720.KO (Kolmar Holding, เกาหลี) — score 1.0 | close_vs_ema200 –0.021 | RSI 43.2\nหุ้นที่มี RSI ต่ำ (35–43) และ close_vs_ema200 เป็นลบเล็กน้อยคือกำลังทดสอบเส้นจากด้านล่าง — น่าสนใจสำหรับ pullback play หากเส้น 200 วันเป็น support",
+  "friction": "none — near_ma with b='sma200' worked cleanly; server returned both near_close_sma200_up and near_close_sma200_dn signals showing price bouncing around the 200-day line, which perfectly captures the 'testing' behaviour."
+}

@@ -1,0 +1,37 @@
+{
+  "run": "2026-09-19_run01",
+  "grader": "opus (main loop) reading raw/ vs testset acceptance (never shown to client)",
+  "tally": { "pass": 22, "partial": 2, "fail": 0 },
+  "cases": [
+    { "id": "t01", "verdict": "PASS", "process": "financials(Reddit) — server self-resolved, no find_stock", "output": "RDDT.US conf0.97, digest latest-yr, as-of stated", "defects": [] },
+    { "id": "t02", "verdict": "PASS", "process": "financials(ปตท., cashflow, 3y) — Thai name resolved", "output": "PTT.BK conf0.99, THB, 3y OCF correct", "defects": [{ "desc": "whole-statement table carries stray empty legacy-year columns (2004/2003/2002)", "side": "fund-backend" }] },
+    { "id": "t03", "verdict": "PASS", "process": "financials(TSMC, balance)", "output": "2330.TW conf0.98 (correct head, NOT the TSM US ADR), balance 5y", "defects": [] },
+    { "id": "t04", "verdict": "PASS", "process": "financials([Alphabet,Meta], profit fields) — compare, one call", "output": "Alphabet→GOOG.US (soft 0.8, note surfaced), Meta→META.US; profit lines. No false reconfirm (the old GOOGL reconfirm is gone)", "defects": [] },
+    { "id": "t05", "verdict": "PASS", "process": "financials(Berkshire Hathaway, cashflow fields)", "output": "BRK-B.US conf0.99, OCF/FCF/capex", "defects": [] },
+    { "id": "t06", "verdict": "PASS", "process": "financials(貴州茅台, revenue, 5y) — Chinese name resolved", "output": "600519.CG conf0.99, 4y (history cap, honest)", "defects": [] },
+    { "id": "t07", "verdict": "PASS", "process": "financials([Samsung Electronics, SK Hynix])", "output": "005930.KO + 000660.KO (correct .KO not .KS), USD compare", "defects": [] },
+    { "id": "t08", "verdict": "PASS", "process": "financials([Toyota,Volkswagen], long_term_debt)", "output": "7203.JP + VOW.XETRA, LT-debt compared, FY-misalignment noted", "defects": [] },
+    { "id": "t09", "verdict": "PASS", "process": "financials(BRK.B, cash) — THE fixed dot-notation case", "output": "BRK.B→BRK-B.US conf1.0 (not a coincidental ETF, not no_match) ✅", "defects": [] },
+    { "id": "t10", "verdict": "PASS", "process": "financials(KBANK)", "output": "KBANK.BK exact_symbol 1.0 (Thai Kasikornbank) — resolved-to-prominent (acceptance allowed this OR reconfirm)", "defects": [] },
+    { "id": "t11", "verdict": "PASS", "process": "financials(Bitcoin)", "output": "no_match → clean rejection ('not a company'), offered price/news alt, NO fabrication ✅", "defects": [] },
+    { "id": "t12", "verdict": "PARTIAL", "process": "financials([NVDA,2330.TW,ASML.AS]) compare", "output": "figures correct (USD) BUT bare NVDA → NVDA.SW (Swiss) instead of NVDA.US — financials masked by head-collapse, but wrong LISTING surfaced", "defects": [{ "desc": "bare US-megacap symbol resolves to a foreign cross-listing (NVDA→NVDA.SW) via _resolve_ticker fast-path/ranking, not .US — masked for financials (same head) but WRONG for price/pulse reuse", "side": "mcp-guidance/resolver" }] },
+    { "id": "f01", "verdict": "PASS", "process": "financials(Apple, income, 1y)", "output": "AAPL.US 1.0, digest P&L correct", "defects": [{ "desc": "whole-statement [income] line-item block shows STALE periods (2022-09/2021-09) while digest header is as-of 2026-06 — inconsistent; agent used digest", "side": "fund-backend" }] },
+    { "id": "f02", "verdict": "PASS", "process": "financials(Microsoft, cashflow, 3y)", "output": "MSFT.US, 3 FY (Jun) correct", "defects": [{ "desc": "stray empty legacy-year columns (2005/2004/2003)", "side": "fund-backend" }] },
+    { "id": "f03", "verdict": "PARTIAL", "process": "financials([Nvidia,AMD,Intel], [R&D, capex]) — NL fields translated", "output": "R&D+capex correct; rnd/capex resolved. BUT AMD → AMD.XETRA (cross-listing) not AMD.US", "defects": [{ "desc": "same wrong-listing defect as t12 (AMD→AMD.XETRA) — bare US symbol → foreign line", "side": "mcp-guidance/resolver" }] },
+    { "id": "f04", "verdict": "PASS", "process": "financials(Microsoft, [goodwill, intangibles]) — Thai→English", "output": "goodwill + intangibles DISTINCT (not merged), 1.0 both, real values", "defects": [] },
+    { "id": "f05", "verdict": "PASS", "process": "financials(JPMorgan, accrued interest receivable) + find_fsconcept verify", "output": "resolved concept accrued_interest_receivable (1.0), data empty → honest unavailable, NOT the old wrong 'receivables' ✅ (allowance-class bug gone)", "defects": [] },
+    { "id": "f06", "verdict": "PASS", "process": "financials(Tesla, [eps_diluted, eps_basic]) — near-dup", "output": "BOTH distinct (basic 1.18 / diluted 1.08), not collapsed ✅", "defects": [] },
+    { "id": "f07", "verdict": "PASS", "process": "financials(Apple, treasury stock) — near-dup trap", "output": "treasury_stock (1.0) NOT buybacks ✅; data empty (Apple retires shares) → honest absence", "defects": [] },
+    { "id": "f08", "verdict": "PASS", "process": "financials(Apple, analyst price target)", "output": "no_match — honest 'not a statement line', no forcing ✅", "defects": [] },
+    { "id": "f09", "verdict": "PASS", "process": "financials(Tesla, ESG score)", "output": "no_match — honest, no fabrication ✅", "defects": [] },
+    { "id": "f10", "verdict": "PASS", "process": "financials(Tesla, gross profit, quarterly) — gross loss fold", "output": "gross_profit positive latest Q → 'no gross loss', correct fold behavior ✅", "defects": [] },
+    { "id": "f11", "verdict": "PASS", "process": "financials(Toyota, construction in progress) — granular uncommon line", "output": "construction_in_progress 1.0, ¥1.72T, JPY ✅", "defects": [] },
+    { "id": "f12", "verdict": "PASS", "process": "financials([Coca-Cola,Pepsi], [total liabilities, total equity], USD)", "output": "KO.US + PEP.US, both lines, compare, D/E computed", "defects": [] }
+  ],
+  "top_defects": [
+    "🔴 wrong-listing: bare US-megacap symbol → foreign cross-listing (NVDA→NVDA.SW, AMD→AMD.XETRA) via _resolve_ticker. Financials masked by head-collapse but WRONG for price/pulse reuse. INVESTIGATE ranking/fast-path — should prefer the primary/.US listing.",
+    "stale [income] line-item periods vs digest as-of (f01) — fund-backend",
+    "stray empty legacy-year columns in whole-statement tables (t02/t03/f02) — fund-backend cosmetic"
+  ],
+  "headline": "Resolver axis EXCELLENT: 22/24 PASS, 0 FAIL. near-dup (EPS/goodwill/treasury), no-match (analyst target/ESG/Bitcoin), gross-loss fold, granular (accrued interest/CIP), non-English (茅台) all correct. allowance-class bug GONE (f05 honest). BRK.B dot-notation FIXED (t09). No false reconfirm. 2 PARTIAL = wrong-listing surfaced (NVDA.SW/AMD.XETRA) — identity defect masked for financials, must fix before reusing _resolve_ticker for price tools."
+}

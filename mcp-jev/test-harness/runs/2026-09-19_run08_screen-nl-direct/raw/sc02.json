@@ -1,0 +1,9 @@
+{
+  "id": "sc02",
+  "question": "บริษัทที่หนี้สินเพิ่มเร็วกว่าส่วนของผู้ถือหุ้น",
+  "tool_calls": [
+    {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "total liabilities", "relation": "growth_faster_than", "metricB": "shareholders equity"}]}}
+  ],
+  "answer": "เจอ 40 บริษัทที่หนี้สินรวม (total liabilities) เติบโตเร็วกว่าส่วนของผู้ถือหุ้น (equity) — server เทียบ CAGR 3 ปีของทั้งสองรายการ. รายชื่อเด่น (เรียงตาม market cap): META.US (Meta) — หนี้สิน CAGR 35.3% vs equity 20.0%, 005930.KO (Samsung), MU.US (Micron), V.US (Visa), JNJ.US (Johnson & Johnson), MA.US (Mastercard), CSCO.US (Cisco), BAC.US (Bank of America). ผลถูก cap ที่ 40 รายการ.",
+  "friction": "ไม่มี — ใช้ relation form (metricA=total liabilities, growth_faster_than, metricB=shareholders equity) resolved สำเร็จในครั้งแรก ไม่ต้อง confirm."
+}

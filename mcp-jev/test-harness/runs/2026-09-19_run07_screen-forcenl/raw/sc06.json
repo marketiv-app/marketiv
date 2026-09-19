@@ -1,0 +1,10 @@
+{
+  "id": "sc06",
+  "question": "หาหุ้นที่ยอดขายกำลังเร่งตัวขึ้น (โตเร็วขึ้นเรื่อยๆ)",
+  "tool_calls": [
+    {"tool": "find_fspattern", "args": {"q": "sales growth accelerating", "limit": 6}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "accelerating"}], "asset_type": ["Common Stock"]}}
+  ],
+  "answer": "เจอหุ้นที่ยอดขาย (revenue) กำลังเร่งตัวขึ้น คือ ยังโตอยู่และอัตราการเติบโตเพิ่มขึ้นต่อเนื่อง (โมเมนตัมเร่งตัว) ทั้งหมด 40 ตัว (ผลถูก cap ที่ 40) ตัวเด่น ๆ เรียงตามอันดับได้แก่ Apple (AAPL.US), Alphabet Class C (GOOG.US), Meta Platforms (META.US), Eli Lilly (LLY.US), AMD (AMD.US) และ AbbVie (ABBV.US) ทั้งหมดเป็นหุ้นสามัญที่รายได้กำลังโตเร็วขึ้นเรื่อย ๆ",
+  "friction": "ราบรื่น pattern 'accelerating' (growth accelerating, 2nd derivative บวก) ตรงกับคำว่า 'โตเร็วขึ้นเรื่อยๆ' พอดี ใช้ default N=2 ตามที่ผู้ใช้ไม่ได้ระบุจำนวนปี ไม่มี needs_confirmation"
+}

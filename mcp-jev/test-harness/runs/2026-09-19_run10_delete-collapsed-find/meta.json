@@ -1,0 +1,13 @@
+{
+  "run": "2026-09-19_run10",
+  "date": "2026-09-19",
+  "purpose": "After DELETING find_fsconcept/find_fspattern/find_tasignal from tools/list (+scrubbing refs). Prove the client can NO LONGER round-trip (tools physically gone) → must go straight to screen_unified/financials. Covers both collapsed legs (fundamental + technical).",
+  "server": { "mcp_jev_port": 8902, "mdx_api_base": "http://127.0.0.1:8090", "health_checked": true, "mechanical_toollist_asserted": "find_fsconcept/find_fspattern/find_tasignal ABSENT; screen_unified/financials/find_oppattern/find_stock present" },
+  "mdx_api_sha": "b5de0eda",
+  "mcp_jev_sha": "3717851 (untracked working copy)",
+  "jev_key_suffix": "f2f2ec",
+  "bearer_suffix": "c449ff",
+  "sets": [{ "name": "resolver-screen-v2", "cases": ["sc01","sc02","sc06"] }, { "name": "resolver-ta-v1", "cases": ["ta01","ta03","ta04"] }],
+  "diff_baseline": "run09 (tasignal collapse, find_* still registered → ta06 round-tripped)",
+  "model": "claude-opus-4-8"
+}

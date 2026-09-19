@@ -1,0 +1,48 @@
+{
+  "set": "resolver-ta-v1",
+  "note": "TA-leg collapse for screen_unified: find_tasignal moved server-side (Jev picks pattern via signals axis + operand LINE via indicators axis, server appends the period from the phrase). Questions phrased in natural user language (mixed TH/EN) so a blind client CANNOT key by memory and must send NL pattern + NL operands → forces the server resolver. `acceptance`/`lens` are GRADER-ONLY — never shown to the client (that would coach it).",
+  "cases": [
+    {
+      "id": "ta01",
+      "question": "หาหุ้นที่เพิ่งเกิดสัญญาณเส้นค่าเฉลี่ยระยะสั้นตัดขึ้นเหนือเส้นระยะยาว แล้วมีปริมาณการซื้อขายพุ่งเข้ามาด้วย",
+      "lens": "compound TA, NL pattern + NL operands (golden cross) + a second volume-surge condition",
+      "acceptance": "Routes to screen_unified's `ta` leg WITHOUT a find_tasignal round-trip. The cross shape resolves to a crossover-up pattern; the two MA operands resolve to periodized lines (ema/sma 50 & 200 — period appended from phrase if the user gave one, else bare lines are OK); the volume surge is a second anchor/qual signal. Non-empty result OR an honest reconfirm on a genuinely ambiguous line (ema-vs-sma). A no_match on the whole thing = FAIL."
+    },
+    {
+      "id": "ta02",
+      "question": "Show me stocks where the RSI has been stuck between 40 and 50 for a while",
+      "lens": "in-range / oscillator-in-band, NUMERIC range operands (40, 50) must pass through un-resolved",
+      "acceptance": "screen_unified ta leg; pattern = an in-range / range-bound oscillator shape; the operand line = rsi; the numeric levels 40 and 50 pass straight through as numbers (NOT sent to the indicator resolver). No fabricated pattern; honest if it must reconfirm."
+    },
+    {
+      "id": "ta03",
+      "question": "which names are coiling in a really tight squeeze and just starting to pop out to the upside",
+      "lens": "squeeze / volatility-contraction breakout, OPERAND-FREE (pattern only, no a/b line)",
+      "acceptance": "screen_unified ta leg; resolves to a squeeze-fired / breakout-up pattern with NO operand lines needed; non-empty result. Must not invent operands or round-trip via find_tasignal."
+    },
+    {
+      "id": "ta04",
+      "question": "หุ้นที่ราคาย่อลงมาทดสอบเส้นค่าเฉลี่ย 200 วันพอดี",
+      "lens": "a/b operand with an explicit period — 'the 200-day line' → the server must APPEND 200 to the resolved MA base (ema200/sma200)",
+      "acceptance": "screen_unified ta leg; a price-vs-MA touch/pullback pattern; the operand resolves to a 200-PERIOD moving-average line (period 200 appended to the base — ema200 or sma200, NOT bare 'ema'/'sma'). A reconfirm asking ema-vs-sma is ACCEPTABLE (genuine ambiguity); a bare period-less operand or a backend 'unsupported operand ema' error = FAIL (that was the exact bug this change fixes)."
+    },
+    {
+      "id": "ta05",
+      "question": "find me stocks that first broke out of a squeeze and then afterwards pulled back to their 50-day average",
+      "lens": "THEN-chain across two moments (multi-step ta: a squeeze breakout THEN a pullback-to-MA), second step has a periodized operand (50)",
+      "acceptance": "screen_unified ta leg modelling BOTH moments (two TaSteps, or an anchor + a within-qualifier). The squeeze breakout resolves operand-free; the pullback operand resolves to a 50-period MA (50 appended). Both parts resolved (or an honest reconfirm), no find_tasignal round-trip."
+    },
+    {
+      "id": "ta06",
+      "question": "screen for a classic 50/200 EMA golden cross",
+      "lens": "expert phrasing that names the lines explicitly — client may key it OR send NL; either path MUST work (exact-key passthrough no-regress)",
+      "acceptance": "screen_unified ta leg; a crossover-up pattern with a=ema50, b=ema200 (whether the client sent the tokens directly = passthrough, or NL that resolved to them). Non-empty result; NO reconfirm churn on an unambiguous, fully-specified request."
+    },
+    {
+      "id": "ta07",
+      "question": "find me stocks that just feel really bullish and give off good momentum vibes",
+      "lens": "BOUNDARY — not a screenable chart SHAPE; must surface no_match honestly, not fabricate a pattern",
+      "acceptance": "The vague non-shape term is surfaced as a no_match/confirm (honest 'this isn't a screenable chart shape') — NOT silently mapped to some random pattern and NOT a fabricated stock list presented as a real screen. Honest failure > invented match."
+    }
+  ]
+}

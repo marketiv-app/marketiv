@@ -1,0 +1,9 @@
+{
+  "id": "f08",
+  "question": "ราคาเป้าหมายของนักวิเคราะห์สำหรับ Apple",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"q": "analyst price target"}}
+  ],
+  "answer": "ขออภัยครับ MarketDX ไม่มีข้อมูล \"ราคาเป้าหมายของนักวิเคราะห์\" (analyst price target / consensus target price) สำหรับ Apple — ตัว resolver คืนค่าแบบ low_confidence ไม่มี concept ใดที่ตรงกับราคาเป้าหมายของนักวิเคราะห์เลย (ผลลัพธ์ที่ใกล้เคียงที่สุดเป็นเพียง valuation multiple อย่าง P/E, P/B, Market cap ซึ่งเป็นคนละอย่าง) ข้อมูลฝั่งนี้เป็นงบการเงิน/มูลค่าตามตลาด ไม่ครอบคลุมประมาณการหรือ target price ของ analyst ครับ",
+  "friction": "no_match (expected). find_fsconcept returned low_confidence:true with only valuation multiples (pe/pb/market_cap) and EPS lines as nearest — no analyst-estimate or price-target concept exists in the dataset. MarketDX financials covers reported statements + derived ratios/multiples only, not sell-side estimates."
+}

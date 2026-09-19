@@ -1,0 +1,9 @@
+{
+  "id": "f08",
+  "question": "ราคาเป้าหมายของนักวิเคราะห์สำหรับ Apple",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Apple", "fields": "analyst price target"}}
+  ],
+  "answer": "ขออภัยครับ ข้อมูล \"ราคาเป้าหมายของนักวิเคราะห์\" (analyst price target / analyst consensus) ไม่มีให้บริการใน MarketDX ครับ ระบบระบุบริษัทเป็น Apple (AAPL.US) ได้ถูกต้อง แต่ราคาเป้าหมายจากนักวิเคราะห์ไม่ใช่ข้อมูลงบการเงิน และไม่มีเครื่องมือใดในชุดนี้ (ครอบคลุมข่าว/ผลกระทบ ราคา ออปชัน และการวางสถานะ futures) ที่ให้ค่าประมาณการราคาเป้าหมายของนักวิเคราะห์ จึงไม่สามารถตอบตัวเลขนี้ได้",
+  "friction": "financials returned needs_confirmation with status=no_match for 'analyst price target' ('not a financial-statement concept', empty candidates). The _guide explicitly says no_match → tell the user it's unavailable, don't force it. No other tool in the list covers analyst consensus/price targets (they cover news-impact, price, options, futures positioning). Honored the guide and reported unavailable rather than retrying a wrong tool."
+}

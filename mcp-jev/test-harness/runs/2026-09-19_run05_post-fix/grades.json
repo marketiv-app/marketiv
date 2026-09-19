@@ -1,0 +1,138 @@
+{
+  "run": "2026-09-19_run05",
+  "diff_baseline": "run01",
+  "tally": {
+    "pass": 24,
+    "partial": 0,
+    "fail": 0
+  },
+  "changes_vs_run01": {
+    "t12": "PARTIAL→PASS (NVDA.SW→NVDA.US)",
+    "f03": "PARTIAL→PASS (AMD.XETRA→AMD.US)",
+    "phantom_columns": "gone (t02/t03/f02) via DPS strip"
+  },
+  "cases": [
+    {
+      "id": "t01",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t02",
+      "verdict": "PASS",
+      "note": "PTT.BK cashflow — no pre-2010 phantom columns (FIXED run03)"
+    },
+    {
+      "id": "t03",
+      "verdict": "PASS",
+      "note": "TSMC balance — clean (FIXED run03)"
+    },
+    {
+      "id": "t04",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t05",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t06",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t07",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t08",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t09",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t10",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t11",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "t12",
+      "verdict": "PASS",
+      "note": "NVDA→NVDA.US (was NVDA.SW) — FIXED run02"
+    },
+    {
+      "id": "f01",
+      "verdict": "PASS",
+      "note": "AAPL income — 'stale 2022/2021' is annual-vs-quarterly artifact, NOT a bug"
+    },
+    {
+      "id": "f02",
+      "verdict": "PASS",
+      "note": "MSFT cashflow — clean (FIXED run03)"
+    },
+    {
+      "id": "f03",
+      "verdict": "PASS",
+      "note": "AMD→AMD.US (was AMD.XETRA) — FIXED run02"
+    },
+    {
+      "id": "f04",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f05",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f06",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f07",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f08",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f09",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f10",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f11",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    },
+    {
+      "id": "f12",
+      "verdict": "PASS",
+      "note": "resolved correctly"
+    }
+  ],
+  "open_resolver_defects": [],
+  "headline": "24/24 PASS. Both run01 PARTIALs (wrong-listing) fixed via run02; phantom statement columns fixed via run03. No regressions, no open resolver defects. fsconcept + ticker resolvers validated clean through the real MCP."
+}

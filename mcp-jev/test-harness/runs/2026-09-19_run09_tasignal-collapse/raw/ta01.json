@@ -1,0 +1,23 @@
+{
+  "id": "ta01",
+  "question": "หาหุ้นที่เพิ่งเกิดสัญญาณเส้นค่าเฉลี่ยระยะสั้นตัดขึ้นเหนือเส้นระยะยาว แล้วมีปริมาณการซื้อขายพุ่งเข้ามาด้วย",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}],
+            "quals": [{"any": [{"pattern": "volume_spike"}]}]
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 10,
+        "limit": 10
+      }
+    }
+  ],
+  "answer": "พบหุ้นอย่างน้อย 40 ตัวที่เส้น EMA50 เพิ่งตัดขึ้นเหนือ EMA200 (golden cross) พร้อมกับ volume spike ภายใน 10 วันที่ผ่านมา ตัวอย่างที่โดดเด่น:\n1. Capital Industrial Financial Services (0730.HK) — cross เมื่อ 11 ก.ย., vol spike 9 ก.ย., RSI=99.8 (แรงมาก)\n2. ALBIS Co. (7475.JP) — cross 11 ก.ย., vol spike 14 ก.ย., RSI=92.9, ADX=33 (เทรนด์ชัด)\n3. รายการต่อไปมีอีกหลายสิบตัวจากตลาด JP, HK, CS, US ฯลฯ",
+  "friction": "none"
+}

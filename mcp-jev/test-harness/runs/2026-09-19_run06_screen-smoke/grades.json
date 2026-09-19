@@ -1,0 +1,21 @@
+{
+  "run": "run06",
+  "tally": {
+    "pass": 2,
+    "partial": 0,
+    "fail": 0
+  },
+  "cases": [
+    {
+      "id": "s01",
+      "verdict": "PASS",
+      "note": "roe+above(0.20) & revenue+consecutive_growth(N3); 40 rows; exact-key passthrough"
+    },
+    {
+      "id": "s02",
+      "verdict": "PASS",
+      "note": "pe+below(15) & gross_margin+consecutive_growth; threshold scale correct"
+    }
+  ],
+  "note": "blind client sent exact keys → fast-path passthrough; NL→Jev not exercised via blind (proven directly by grader). exact-key no-regress + screen e2e confirmed."
+}

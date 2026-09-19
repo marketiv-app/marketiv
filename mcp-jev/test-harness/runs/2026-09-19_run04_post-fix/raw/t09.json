@@ -1,0 +1,11 @@
+{
+  "id": "t09",
+  "question": "BRK.B มีเงินสดเท่าไหร่",
+  "tool_calls": [
+    {"tool": "find_stock", "args": {"q": "BRK.B"}},
+    {"tool": "find_stock", "args": {"q": "Berkshire Hathaway Class B"}},
+    {"tool": "financials", "args": {"tickers": "BRK-B.US", "fields": "cash"}}
+  ],
+  "answer": "Berkshire Hathaway Class B (BRK-B.US) — เงินสดและรายการเทียบเท่าเงินสด (Cash & cash equivalents, สกุล USD):\n- 2025-12: 51.88B\n- 2024-12: 47.73B\n- 2023-12: 38.02B\n- 2022-12: 35.81B\n\nงวดล่าสุด (สิ้นปี 2025): ~51.9 พันล้านดอลลาร์\n\nหมายเหตุสำคัญ: ตัวเลขนี้เป็น 'เงินสดและรายการเทียบเท่าเงินสด' (สภาพคล่องอายุ ≤3 เดือน) เท่านั้น — ไม่รวมเงินลงทุนระยะสั้น/หลักทรัพย์ในตลาด (เช่น พันธบัตรรัฐบาลสหรัฐฯ ระยะสั้นที่ Berkshire ถือจำนวนมหาศาล ซึ่งสื่อมักเรียกรวมเป็น 'กองเงินสด' ระดับหลายแสนล้าน). ถ้าต้องการยอด 'เงินสด + เงินลงทุนระยะสั้น' รวมกัน ต้องดูฟิลด์ cash_and_st_investments/short_term_investments เพิ่ม",
+  "friction": "find_stock('BRK.B') resolve ผิดเป็น 'YieldMax BRK.B Option Income Strategy ETF' (BRKC.US) ไม่ใช่ตัวหุ้นแม่ — เพราะจุด/รูปแบบ ticker. แก้โดย retry ด้วยชื่อเต็ม 'Berkshire Hathaway Class B' → ได้ BRK-B.US (type=stock, mcap ~1.09T) ถูกต้อง. ผู้ใช้ทั่วไปที่ปล่อยให้ rank-1 อาจได้ ETF ผิดตัว — นี่คือ footgun ของ resolver."
+}

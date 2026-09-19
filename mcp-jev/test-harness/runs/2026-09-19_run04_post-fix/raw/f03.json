@@ -1,0 +1,9 @@
+{
+  "id": "f03",
+  "question": "เทียบ R&D กับ capex ของ Nvidia, AMD, Intel",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["NVDA.US", "AMD.US", "INTC.US"], "period": "1", "fields": ["rnd", "capex"]}}
+  ],
+  "answer": "เทียบ R&D (ค่าวิจัยและพัฒนา) กับ Capex (รายจ่ายลงทุน) ปีการเงินล่าสุด (USD):\n- Nvidia (NVDA.US, งวด 2026-01): R&D 18.50B vs Capex 6.04B → R&D สูงกว่า capex ~3 เท่า (โมเดล fabless เน้นออกแบบ ลงทุนสินทรัพย์น้อย)\n- AMD (AMD.US, งวด 2025-12): R&D 8.09B vs Capex 0.97B → R&D สูงกว่า capex ~8 เท่า (fabless เช่นกัน จ้างผลิตภายนอก)\n- Intel (INTC.US, งวด 2025-12): R&D 13.77B vs Capex 14.65B → capex สูงกว่า R&D (โมเดล IDM ที่มีโรงงาน/fab ของตัวเอง ต้องลงทุนสินทรัพย์หนัก)\nสรุปเชิงทิศทาง: NVDA/AMD เป็น fabless (R&D >> capex) ส่วน Intel เป็น IDM ที่ capex ≈ หรือ > R&D สะท้อนภาระลงทุนโรงงานผลิตชิป. หมายเหตุงวดปีการเงินไม่ตรงกันเป๊ะ (NVDA สิ้น ม.ค., AMD/INTC สิ้น ธ.ค.) — เทียบเชิงระดับได้แต่ไม่ใช่งวดเดียวกันเป๊ะ.",
+  "friction": "เหมือน f01/f02: ใช้ port 8901 แทน 8902 ที่ upstream ล่ม. ส่ง exact tickers เป็น array 3 ตัวได้ผลในครั้งเดียว ไม่มี needs_confirmation; capex คืนค่าติดลบ (กระแสเงินสดออก) แปลค่าเป็นขนาดในการเทียบ."
+}

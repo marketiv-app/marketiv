@@ -1,0 +1,48 @@
+{
+  "id": "sc06",
+  "question": "หาหุ้นที่ยอดขายกำลังเร่งตัวขึ้น (โตเร็วขึ้นเรื่อยๆ)",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "accelerating"
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "accelerating growth"
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "growth accelerating",
+            "N": 3
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "เซิร์ฟเวอร์ resolve pattern 'accelerating' → key 'accelerating' (confidence 1.0) แต่เมื่อใช้ N=3 (กำหนดกรอบเวลา 3 ปีชัดเจน) ผลลัพธ์เป็น 0 ตัว บ่งชี้ว่า pattern นี้ไม่มีหุ้นผ่านเงื่อนไขการเร่งตัวต่อเนื่อง 3 ปีพร้อมกัน การเรียกแบบไม่กำหนด N คืน 60 ตัว แต่ matched window เป็น 'latest_yoy' (YoY growth ล่าสุด ไม่ใช่ acceleration) ซึ่งหมายความว่าเซิร์ฟเวอร์ fall back ให้เป็นหุ้นที่ revenue โตในปีล่าสุด ไม่ใช่หุ้นที่ growth rate เพิ่มขึ้นต่อเนื่อง รายชื่อ top 15 จากการ fall back (latest_yoy): AAPL.US (+16.4%), GOOG.US (+24.2%), META.US (+28.0%), LLY.US (+47.7%), AMD.US (+50.1%), ABBV.US (+10.2%), CSCO.US (+17.6%), ORCL.US (+20.6%), PLTR.US (+92.8%), LRCX.US (+30.0%), NFLX.US (+13.4%), MS.US (+27.4%), DELL.US (+87.5%), RY.US (+9.2%), TXN.US (+22.8%)",
+  "friction": "Pattern 'accelerating' resolved to key 'accelerating' but with N=3 returns 0 results — appears no stocks currently pass strict multi-year acceleration (each year's growth rate must exceed the prior year's). Without N the server falls back to latest_yoy growth which is NOT the same as acceleration (growth rate speeding up). The tool's 'accelerating' pattern may require a strict year-on-year delta that is rare in the current dataset. A true acceleration screen (revenue growth rate in year N > year N-1 > year N-2) appears to have no results at present, or the fallback behavior obscures it."
+}

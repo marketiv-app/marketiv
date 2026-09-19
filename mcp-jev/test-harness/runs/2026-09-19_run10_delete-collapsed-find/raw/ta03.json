@@ -1,0 +1,26 @@
+{
+  "id": "ta03",
+  "question": "which names are coiling in a really tight squeeze and just starting to pop out to the upside",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "squeeze_fired_up"
+              }
+            ]
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 5,
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "Found 60 names that coiled in a tight squeeze and just fired to the upside (capped at 60). Top results by signal strength:\n1. HUBC.US (Hub Cyber Security Ltd.) — fired 2026-09-14 | strength 0.915 | bb_width 5.89 | ADX 16.4\n2. CPOP.US (Pop Culture Group Co Ltd) — fired 2026-09-14 | strength 0.732 | ADX 45.9 (strong trend already developing)\n3. 040300.KQ (YTN Co. Ltd, Korea) — fired 2026-09-15 | strength 0.691 | bb_width 0.27 (very tight)\n4. 0022.HK (Mexan Ltd) — fired 2026-09-15 | strength 0.669 | bb_width 0.38\n5. 4436.JP (MINKABU THE INFONOID) — fired 2026-09-17 | strength 0.660 | bb_width 0.18 (extremely tight coil)\n6. NV.BK (Nova Organic PCL, Thailand) — fired 2026-09-16 | strength 0.650 | bb_width 0.29\n7. 7363.JP (baby calendar Inc.) — fired 2026-09-18 | strength 0.634 | ADX 53.6 (strong breakout momentum)\nThe server matched signal as ttm_sqz_fired_up (TTM/Keltner variant). Results are very fresh — most fired within the last 5 trading days.",
+  "friction": "The server resolved 'squeeze_fired_up' to 'ttm_sqz_fired_up' (TTM/Keltner variant). The schema notes that squeeze_fired_up is self-contained (includes the prior coil), which is exactly what was needed — no chaining required."
+}

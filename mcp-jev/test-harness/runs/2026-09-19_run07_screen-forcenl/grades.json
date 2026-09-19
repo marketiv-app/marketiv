@@ -1,0 +1,57 @@
+{
+  "run": "run07",
+  "tally": {
+    "pass": 8,
+    "partial": 0,
+    "fail": 0
+  },
+  "cases": [
+    {
+      "id": "sc01",
+      "verdict": "PASS",
+      "note": "gross_margin+consecutive_decline"
+    },
+    {
+      "id": "sc02",
+      "verdict": "PASS",
+      "note": "RELATION total_debt growth_faster_than total_equity"
+    },
+    {
+      "id": "sc03",
+      "verdict": "PASS",
+      "note": "roe+above_average cohort"
+    },
+    {
+      "id": "sc04",
+      "verdict": "PASS",
+      "note": "market_cap+compound_growth N2 total_change1.0"
+    },
+    {
+      "id": "sc05",
+      "verdict": "PASS",
+      "note": "net_income+turned_positive"
+    },
+    {
+      "id": "sc06",
+      "verdict": "PASS",
+      "note": "revenue+accelerating (near-dup)"
+    },
+    {
+      "id": "sc07",
+      "verdict": "PASS",
+      "note": "ESG no_match (honest)"
+    },
+    {
+      "id": "sc08",
+      "verdict": "PASS",
+      "note": "rnd_to_revenue above 0.15 +gics45+US"
+    }
+  ],
+  "defects": [
+    {
+      "desc": "find_gics broken on mcp-jev — Missing OPENAI_API_KEY (gics resolver openai-based, not migrated to Jev, key unset). workaround gics=45.",
+      "side": "gics-bucket/env"
+    }
+  ],
+  "headline": "8/8 PASS force-NL. relation/cohort/compound/turned/accelerating/no_match all resolve via blind client. fundamental leg validated. find_gics env defect (separate bucket)."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "sc03",
+  "question": "หุ้นที่ ROE สูงกว่าค่าเฉลี่ยของกลุ่มอุตสาหกรรม",
+  "tool_calls": [
+    {"tool": "find_fsconcept", "args": {"queries": ["gross margin", "total debt", "total shareholders equity", "return on equity", "market capitalization"]}},
+    {"tool": "find_fspattern", "args": {"queries": ["margin contracting for several consecutive years", "debt rising faster than equity", "above the industry group average", "market cap doubled over two years"]}},
+    {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roe", "pattern": "above_average", "vs_cohort": {"own": "gics_group"}}]}}
+  ],
+  "answer": "พบหุ้น 40 ตัว (ผลถูก cap) ที่ ROE สูงกว่าค่าเฉลี่ยของกลุ่มอุตสาหกรรมของตัวเอง (แต่ละตัวเทียบ sector ของมันเอง) เรียงตามมูลค่าตลาด ตัวใหญ่สุดได้แก่ NVIDIA (NVDA.US, ROE 81.65% vs cohort avg 44.39%), Apple (AAPL.US), Alphabet (GOOG.US), Microsoft (MSFT.US), TSMC (2330.TW), Tesla (TSLA.US)",
+  "friction": "ใช้ cohort pattern above_average + vs_cohort {own:'gics_group'} เพื่อเทียบแต่ละตัวกับกลุ่มอุตสาหกรรมของมันเอง (whole-market cross-sector) — response แสดง cohort_scope='own_sector' (server snap 'gics_group' -> own_sector benchmark). ไม่ต้องใส่ threshold. ไม่มี needs_confirmation"
+}

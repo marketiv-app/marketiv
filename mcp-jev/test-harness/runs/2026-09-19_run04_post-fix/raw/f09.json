@@ -1,0 +1,9 @@
+{
+  "id": "f09",
+  "question": "ขอคะแนน ESG ของ Tesla",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Tesla", "fields": ["ESG score"]}}
+  ],
+  "answer": "MarketDX ไม่มีคะแนน ESG (ESG score) ของ Tesla ให้ ไม่มีเครื่องมือใดในชุดนี้ที่ครอบคลุมข้อมูล ESG/sustainability rating เลย (ครอบคลุมเฉพาะข่าว→ผลกระทบ, ราคา, งบการเงิน, ออปชั่น, มหภาค, การค้า) และขณะนี้ MCP server ยังตอบ HTTP 404 ทุกครั้งที่เรียกใช้เครื่องมือด้วย จึงตอบจากข้อมูลจริงไม่ได้",
+  "friction": "OUT-OF-COVERAGE + BLOCKER: (1) ไม่มี tool ESG ในชุด; ESG ไม่ใช่ financial-statement line ด้วย จึงส่งให้ financials ก็จะได้ needs_confirmation/unavailable ตามปกติ. (2) ทุก tools/call ติด server 404 เหมือน f07 จึงยืนยันจริงไม่ได้ แต่การไม่มี tool ESG เห็นชัดจาก tool list."
+}

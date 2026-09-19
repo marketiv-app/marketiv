@@ -1,0 +1,9 @@
+{
+  "id": "f02",
+  "question": "งบกระแสเงินสดของ Microsoft 3 ปี",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "MSFT.US", "period": "3", "fields": "cashflow"}}
+  ],
+  "answer": "งบกระแสเงินสดของ Microsoft (MSFT.US, USD) งวดปีการเงินล่าสุด 3 ปี (สิ้นสุด มิ.ย.) — FY2025-06 / FY2024-06 / FY2023-06:\n- กระแสเงินสดจากการดำเนินงาน (Operating cash flow): 136.16B / 118.55B / 87.58B (เพิ่มต่อเนื่อง)\n- รายจ่ายลงทุน (Capex / purchase of PPE): -64.55B / -44.48B / -28.11B (เพิ่มแรงมาก — capex intensity ขึ้นจาก ~13% เป็น ~35% ของรายได้)\n- Free cash flow: 71.61B / 74.07B / 59.48B\n- กระแสเงินสดจากการลงทุน (Investing): -72.60B / -96.97B / -22.68B\n- กระแสเงินสดจากการจัดหาเงิน (Financing): -51.70B / -37.76B / -43.94B\n- เงินปันผลจ่าย (Dividends paid): -24.08B / -21.77B / -19.80B\n- ซื้อหุ้นคืน (Buybacks): -18.42B / -17.25B / -22.25B\n- ค่าเสื่อม/ตัดจำหน่าย (D&A): 29.43B / 20.96B / 13.86B · Stock comp: 11.97B / 10.73B / 9.61B\nเงินสดปลายงวด (end cash position): 30.24B / 18.32B / 34.70B. สัญญาณเด่น: fcf_conversion ลดจาก 0.82→0.50 และ capex เร่งตัวสูงจากการลงทุนโครงสร้าง AI/data center.",
+  "friction": "เหมือน f01: ต้องเลี่ยง upstream ที่ล่มบน port 8902 (404 ทุก call) มาใช้ MCP บน port 8901 (upstream mdx-api ทำงาน). ส่ง exact ticker MSFT.US ตรง ๆ ได้ผลทันที ไม่มี needs_confirmation. หมายเหตุ: บล็อก cashflow ส่งคอลัมน์งวดเก่าปน (2005/2004/2003) แต่ค่าทั้งหมดเป็น '-' จึงไม่กระทบ 3 ปีล่าสุด."
+}

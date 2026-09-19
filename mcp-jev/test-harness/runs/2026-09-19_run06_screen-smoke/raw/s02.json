@@ -1,0 +1,27 @@
+{
+  "id": "s02",
+  "question": "หุ้นถูกๆ P/E ต่ำกว่า 15 ที่กำไรขั้นต้นกำลังขยายตัว",
+  "tool_calls": [
+    {
+      "tool": "find_fsconcept",
+      "args": { "queries": ["return on equity", "revenue", "P/E ratio", "gross margin"] }
+    },
+    {
+      "tool": "find_fspattern",
+      "args": { "queries": ["above a threshold", "grew every year for several consecutive years", "below a threshold", "gross margin expanding"] }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          { "concept": "pe", "pattern": "below", "threshold": 15 },
+          { "concept": "gross_margin", "pattern": "consecutive_growth", "N": 3 }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 10
+      }
+    }
+  ],
+  "answer": "เจอหุ้นราคาถูก P/E < 15 ที่อัตรากำไรขั้นต้น (gross margin) ขยายตัวต่อเนื่องทุกปี ทั้งหมด 40 ตัว (ผลถูก cap ที่ buffer 40) เรียงตาม market cap 10 อันดับแรก: 1) Tencent (700.HK) 2) Unilever (ULVR.LSE) 3) Zijin Mining (601899.CG) 4) Altria (MO.US) 5) Adobe (ADBE.US) 6) Comcast (CMCSA.US) 7) HCA Healthcare (HCA.US) 8) Prosus (PRX.AS) 9) Vinci (DG.PA) 10) Sumitomo Corp (8053.JP). ทุกตัวมี P/E ต่ำกว่า 15 และ gross margin ที่ปรับตัวสูงขึ้นทุกปีติดกันอย่างน้อย 3 ปี (ตีความ 'กำลังขยายตัว' = margin โตต่อเนื่อง consecutive_growth N=3) กลุ่มหลากหลายทั้งจีน/ยุโรป/ญี่ปุ่น เช่น อุปโภคบริโภค เหมืองแร่ สื่อสาร และการแพทย์",
+  "friction": "ไม่มี _resolved_fundamental block คืนกลับมา — ตีความสะท้อนใน matched.fundamental รายตัว. หมายเหตุการตีความ: 'กำไรขั้นต้นกำลังขยายตัว' resolver แนะนำ candidate อันดับ 1 = 'accelerating' (อัตราการโตเร่งขึ้น) แต่ผมเลือก consecutive_growth บน gross_margin (margin สูงขึ้นทุกปี) ซึ่งเป็นสำนวน screener มาตรฐานของ 'margin expanding' ตรงเจตนากว่า. resolver ให้ concept pe/gross_margin และ pattern below ตรง ไม่ต้อง retry"
+}

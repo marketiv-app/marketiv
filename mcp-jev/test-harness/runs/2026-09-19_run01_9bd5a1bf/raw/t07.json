@@ -1,0 +1,9 @@
+{
+  "id": "t07",
+  "question": "งบของซัมซุง (Samsung Electronics) เทียบกับ SK Hynix",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Samsung Electronics", "SK Hynix"]}}
+  ],
+  "answer": "เทียบงบ 2 บริษัทเซมิคอนดักเตอร์เกาหลี (ตัวเลขแปลงเป็น USD, งวดล่าสุด as-of 2026-06-30, 5 ปีย้อนหลัง):\n\nSamsung Electronics (005930.KO)\n- รายได้ 233.5B USD (ใหญ่กว่ามาก ~3.4 เท่า), net margin 30.8%\n- FCF 23.2B, operating margin 36.9%, gross margin 57.5%\n- ROE 26.5%, ROA 19.7%, ROIC 30.6%\n- งบดุลแกร่ง: current ratio 2.83, debt/equity แทบ 0 (0.04x), เงินสด 40.5B\n- valuation: PE 22.0, PB 3.35, dividend yield 0.6%\n- โต revenue +11% (ชะลอ), net income +32%\n\nSK Hynix (000660.KO)\n- รายได้ 68.0B USD แต่ margin สูงกว่ามาก: net margin 85.6% (มี one-off/ฐานภาษีต่ำหนุน), operating margin 68.0%\n- FCF 17.4B, gross margin 76.3%\n- ROE 61.7%, ROA 46.4%, ROIC 63.4% — สูงกว่า Samsung ชัดเจน\n- current ratio 2.59, debt/equity 0.08x, เงินสด 10.4B\n- valuation: PE 15.6 (ถูกกว่า Samsung), PB 7.09 (แพงกว่าในเชิง book)\n- โตแรง: revenue +47%, net income +117% (ฟื้นจากขาดทุนปี 2023)\n\nสรุป: Samsung ใหญ่กว่าในเชิงยอดขาย/กระจายธุรกิจ งบดุลแทบไม่มีหนี้ ส่วน SK Hynix เล็กกว่าแต่ทำกำไร/ผลตอบแทนต่อทุนสูงกว่ามากและกำลังฟื้นตัวแรง (อานิสงส์ HBM/memory cycle) ทั้งคู่ฟื้นจากรอบปี 2023 ที่เคยขาดทุน. หมายเหตุ: net margin ของ SK Hynix สูงผิดปกติจากปัจจัยภาษี/นอกงบดำเนินงาน ควรดู operating margin (68%) เป็นตัวเทียบเนื้อธุรกิจจริง.",
+  "friction": "none — financials resolved both names itself (Samsung Electronics→005930.KO conf 0.99, SK Hynix→000660.KO conf 1.0). Both KRW companies auto-converted to USD for cross-currency compare. Digest default returned full ratios."
+}

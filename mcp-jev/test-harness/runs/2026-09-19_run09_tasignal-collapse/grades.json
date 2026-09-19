@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ta01",
+    "verdict": "PASS",
+    "process": "Went STRAIGHT to screen_unified (no find_tasignal round-trip). Sent exact keys/tokens crossover_up + ema50/ema200 + volume_spike qual → hit exact-key/token passthrough. Correct nested ta grammar (anchor + quals).",
+    "output": "40+ Common Stock hits with golden cross + volume spike within 10 bars; plausible (0730.HK, 7475.JP). As-a-real-screen honest.",
+    "exercised": ["direct-to-screen_unified", "exact-key pattern passthrough", "period-suffixed token passthrough (ema50/ema200)"],
+    "defects": []
+  },
+  {
+    "id": "ta02",
+    "verdict": "PASS",
+    "process": "Direct to screen_unified. pattern=in_range (key), a=rsi (bare line token), b='40-50' → NUMERIC-RANGE passthrough (_is_numeric_level) exercised and correct — the range was NOT sent to the indicator resolver.",
+    "output": "60 hits, RSI 49.97–50.0 in band. Correct. (Dominated by funds/ETFs only because the client did not set asset_type — client choice, not a resolver issue.)",
+    "exercised": ["direct-to-screen_unified", "numeric-range operand passthrough", "bare-line token passthrough (rsi)"],
+    "defects": [{"desc": "First call timed out at 120s (in_range + for_bars=10 is heavy); succeeded on identical retry. Performance, not correctness.", "side": "server-perf"}]
+  },
+  {
+    "id": "ta03",
+    "verdict": "PASS",
+    "process": "Direct to screen_unified. pattern=squeeze_fired_up (key), OPERAND-FREE — no invented a/b. Server mapped it to ttm_sqz_fired_up internally.",
+    "output": "60 hits that just fired an upside squeeze within 5 bars; plausible strengths. Correct.",
+    "exercised": ["direct-to-screen_unified", "operand-free pattern", "exact-key passthrough"],
+    "defects": []
+  },
+  {
+    "id": "ta04",
+    "verdict": "PASS",
+    "process": "Direct to screen_unified. pattern=near_ma, b='sma200' → the client KEYED the periodized token directly, hitting the period-SUFFIXED token passthrough (qn_base 'sma' matches the endpoint candidate, original 'sma200' returned). This verifies CHANGE #3, but NOT the NL period-APPEND (client never sent 'the 200-day' as NL).",
+    "output": "40+ Common Stock hits near SMA200 within 10 bars (close_vs_ema200 ~+0.2%). Correct.",
+    "exercised": ["direct-to-screen_unified", "period-suffixed token passthrough (sma200)"],
+    "defects": []
+  },
+  {
+    "id": "ta05",
+    "verdict": "PASS",
+    "process": "Direct to screen_unified. Modelled the THEN-chain as TWO TaSteps (squeeze_fired_up ; near_ma b=ema50) — correct multi-moment decomposition. All keyed tokens → passthrough.",
+    "output": "60 hits matching squeeze-then-pullback over 60 bars; server resolved near_ma→near_close_ema50_dn/up. Correct, though skewed to indices (client did not filter asset_type).",
+    "exercised": ["direct-to-screen_unified", "THEN-chain (multi-TaStep)", "period-suffixed token passthrough (ema50)"],
+    "defects": [{"desc": "First call timed out at 120s (two-step chain over 60 bars is heavy); succeeded at 300s. Performance, not correctness.", "side": "server-perf"}]
+  },
+  {
+    "id": "ta06",
+    "verdict": "PARTIAL",
+    "process": "ROUND-TRIPPED: call1 = find_tasignal(q=['50 EMA crossing above 200 EMA golden cross']) THEN call2 = screen_unified with the keyed result. Output is correct, but the collapse's GOAL — go straight to screen_unified — was not met for this explicit key-naming phrasing. find_tasignal is marked OPTIONAL yet this client still reached for it (same behaviour fsconcept/fspattern showed in run07 before the doc steering was tightened in run08).",
+    "output": "77 Common Stock golden-cross hits; correct.",
+    "exercised": ["find_tasignal still callable (back-compat)", "screen_unified passthrough after round-trip"],
+    "defects": [{"desc": "Client used the OPTIONAL find_tasignal round-trip instead of resolving in-screen. Not a resolver bug — a tool-description steering gap; consider strengthening find_tasignal's OPTIONAL framing the way fsconcept/fspattern were tightened (run08).", "side": "mcp-jev-doc"}]
+  },
+  {
+    "id": "ta07",
+    "verdict": "N/A-resolver",
+    "process": "The client EDITORIALIZED the vague 'bullish vibes' into concrete TA itself (crossover_up + close>ema200 + rising rsi) and screened — it never sent the vague term to the resolver, so the resolver's no_match boundary was NOT exercised here. The no_match path IS verified separately (plumbing smoke: 'the vibe is bullish' → confirm/no_match, honest).",
+    "output": "Presented invented criteria ('checks every bullish box') as if they were the user's ask — over-eager client framing, but not a resolver defect.",
+    "exercised": ["(resolver boundary NOT exercised — client bypassed by inventing concrete criteria)"],
+    "defects": [{"desc": "Client turned a vibe into a concrete screen and presented the invented criteria as the user's request. Client-side over-eagerness, not the resolver layer.", "side": "client-behaviour"}]
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "id": "ta03",
+  "question": "which names are coiling in a really tight squeeze and just starting to pop out to the upside",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "squeeze_fired_up",
+                "window_bars": 5
+              }
+            ]
+          }
+        ],
+        "timeframe": 1,
+        "sort": "ta",
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "Found 60 names (capped) that just fired a squeeze breakout to the upside within the last 5 bars. Top results by signal strength: FOR-USD.CC (The Force Protocol crypto, strength 0.973, fired 2026-09-16, ADX 30.4, atr_pct 13.3%), HUBC.US (Hub Cyber Security, strength 0.915, fired 2026-09-14, ADX 16.4), CPOP.US (Pop Culture Group, strength 0.732, fired 2026-09-14, ADX 45.9), 040300.KQ (YTN Co. Ltd Korea, strength 0.691, fired 2026-09-15), 0022.HK / 22.HK (Mexan Ltd HK, strength 0.669, fired 2026-09-15), 4436.JP (Minkabu The Infonoid Japan, strength 0.660, fired 2026-09-17, ADX 25.5), NV.BK (Nova Organic Thailand, strength 0.650, fired 2026-09-16), 7363.JP (baby calendar Inc Japan, strength 0.634, fired 2026-09-18, ADX 53.6), 1871.HK (China Oriented Intl Holdings, strength 0.629, fired 2026-09-17, ADX 47.6), 3232.TWO (Sentronic International Taiwan, strength 0.623, fired 2026-09-15), 8143.JP (Lapine Co Japan, strength 0.618, fired 2026-09-15), 478340.KQ (NARA Space Technology Korea, strength 0.612, fired 2026-09-17), 300836.CS (Kunshan Top A Intelligent Equipment China, strength 0.602, fired 2026-09-18), VGX-USD.CC (Voyager Token crypto, strength 0.600, fired 2026-09-16), 3823.JP (Why How Do Company Japan, strength 0.596, fired 2026-09-15). The matched signal resolved internally to `ttm_sqz_fired_up`. Top signals have strength 0.6–0.97 indicating clean squeeze-then-pop patterns.",
+  "friction": "none — `squeeze_fired_up` worked cleanly as a single self-contained anchor. The server resolved it internally to `ttm_sqz_fired_up`. A short `window_bars: 5` correctly captured 'just starting to pop' (very recent fires). The result set spans global equities + crypto, not US-only."
+}

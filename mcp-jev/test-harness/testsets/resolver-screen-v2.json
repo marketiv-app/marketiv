@@ -1,0 +1,30 @@
+{
+  "set": "resolver-screen", "version": "v2",
+  "note": "BIG force-NL set for screen_unified fundamental leg. Questions phrased so the client CANNOT key by memory → must resolve NL metric (fsconcept) + NL shape (fspattern) via Jev, incl relation form, cohort, compound params, near-dup, no_match. lens/acceptance = GRADER ONLY.",
+  "cases": [
+    { "id":"sc01","question":"หาหุ้นที่อัตรากำไรขั้นต้นหดตัวต่อเนื่องหลายปี",
+      "lens":"NL metric อัตรากำไรขั้นต้น→gross_margin + NL shape หดตัวต่อเนื่อง→consecutive_decline",
+      "acceptance":"gross_margin + a consecutive/multi-year DECLINE shape; one call, plausible list (or honest empty). shape direction = decline." },
+    { "id":"sc02","question":"บริษัทที่หนี้สินเพิ่มเร็วกว่าส่วนของผู้ถือหุ้น",
+      "lens":"RELATION form: metricA total_debt + relation growth_faster_than + metricB total_equity",
+      "acceptance":"relation form resolved (debt-ish metricA, equity metricB, a faster-growth relation); one call. NOT two separate above/below conditions." },
+    { "id":"sc03","question":"หุ้นที่ ROE สูงกว่าค่าเฉลี่ยของกลุ่มอุตสาหกรรม",
+      "lens":"cohort shape สูงกว่าค่าเฉลี่ยกลุ่ม→above_average (peer-relative, no threshold) + roe",
+      "acceptance":"roe + above_average (cohort, NOT absolute above-with-number). no invented threshold." },
+    { "id":"sc04","question":"หุ้นที่มูลค่าตลาดโตเป็นสองเท่าภายใน 2 ปี",
+      "lens":"compound params: market_cap + compound_growth, N=2, total_change=1.0 (doubled)",
+      "acceptance":"market_cap + a compound-growth shape with N=2 and total_change≈1.0 (doubled). client fills N+total_change from 'สองเท่า/2 ปี'." },
+    { "id":"sc05","question":"หาหุ้นที่เพิ่งพลิกจากขาดทุนมาเป็นกำไร",
+      "lens":"NL shape turned profitable→a sign-flip/turned_positive pattern on net_income",
+      "acceptance":"net_income (or earnings) + a turned-positive / sign-flip shape; not a plain 'above 0' unless that's the only fit. plausible." },
+    { "id":"sc06","question":"หาหุ้นที่ยอดขายกำลังเร่งตัวขึ้น (โตเร็วขึ้นเรื่อยๆ)",
+      "lens":"near-dup shape: accelerating (growth-rate speeding up) NOT plain consecutive_growth; concept revenue",
+      "acceptance":"revenue + accelerating (the rate-speeding-up shape), distinguished from consecutive_growth. plausible list." },
+    { "id":"sc07","question":"คัดหุ้นที่มีคะแนน ESG สูงๆ",
+      "lens":"NO-MATCH: ESG score not a screenable financial metric",
+      "acceptance":"concept ESG → no_match/reconfirm; tells user it's not screenable, does NOT force onto a wrong metric." },
+    { "id":"sc08","question":"หุ้นเทคโนโลยีสหรัฐที่ลงทุน R&D สูงเกิน 15% ของรายได้",
+      "lens":"gics/country scope + RELATION rnd vs revenue ratio (ratio_above ~0.15) — or the client may split; concept rnd+revenue",
+      "acceptance":"US + tech scope (gics 45 or country US) + an R&D-to-revenue relation ≥0.15 (relation form) OR a defensible rnd approach; resolves rnd + revenue. plausible." }
+  ]
+}

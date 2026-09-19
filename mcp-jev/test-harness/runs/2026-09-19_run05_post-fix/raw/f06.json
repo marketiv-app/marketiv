@@ -1,0 +1,9 @@
+{
+  "id": "f06",
+  "question": "diluted EPS กับ basic EPS ของ Tesla ต่างกันแค่ไหน",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Tesla", "period": "1", "fields": ["diluted EPS", "basic EPS"]}}
+  ],
+  "answer": "Tesla (TSLA.US) ปีบัญชีล่าสุด (สิ้นสุด 2025-12, สกุล USD):\n- Basic EPS: 1.18\n- Diluted EPS: 1.08\nต่างกัน 0.10 ดอลลาร์ต่อหุ้น (diluted ต่ำกว่า basic ~8.5%) — ผลจาก dilution ของหุ้นที่อาจเพิ่มขึ้น เช่น options/RSU ที่พนักงานถืออยู่.",
+  "friction": "First attempt was batched with f04/f05 in a background command that hung on this last call; re-ran f06 as a fresh standalone call — returned cleanly. (Server itself not at fault; the background shell wrapper stalled.)"
+}

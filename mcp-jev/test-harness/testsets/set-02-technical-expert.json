@@ -1,0 +1,145 @@
+{
+  "set": "technical-expert",
+  "persona": "Seasoned chartist / quant-leaning trader. Thinks in precise multi-condition setups: EMA/SMA crossovers with confirmation, MACD, RSI extremes & levels, bullish/bearish divergence, Bollinger/Keltner squeezes, multi-timeframe (daily/weekly/monthly), sequenced 'A then B' setups, price-return-over-window, volume spikes. Screens the whole market, combined and scoped by sector/country/market-cap size.",
+  "cases": [
+    {
+      "id": "te-01",
+      "question": "Screen the whole US market for stocks where the 50-day SMA just crossed above the 200-day SMA (a golden cross) in the last 5 trading days, and the crossover is confirmed by price closing above both averages. I only want names above $2B market cap.",
+      "goal": "Fresh 50/200 SMA golden cross, recency-bounded to ~last week, confirmed by close above both MAs, US-only, mid/large-cap floor.",
+      "acceptance": [
+        "Universe is US-listed equities only, market cap filtered to >$2B",
+        "Logic is 50-SMA crossing ABOVE 200-SMA (golden cross), not the inverse (death cross)",
+        "Recency window respected (~last 5 sessions), not any historical cross",
+        "Confirmation condition (close above both MAs) is applied, not ignored",
+        "Red flag if it returns oversold/RSI names or generic 'uptrend' stocks instead of the specific crossover",
+        "Red flag if it silently drops the market-cap or recency constraint"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "te-02",
+      "question": "หาหุ้นในตลาดไทยที่มี bullish divergence: ราคาทำ lower low แต่ RSI ทำ higher low บนกราฟรายวัน ช่วง 1-2 เดือนที่ผ่านมา เอาเฉพาะที่ volume วันล่าสุดสูงกว่าค่าเฉลี่ย 20 วันอย่างน้อย 1.5 เท่า",
+      "goal": "Daily bullish RSI divergence (price lower-low vs RSI higher-low) on Thai equities within recent ~1-2 months, plus a volume-spike confirmation (>1.5x 20d avg).",
+      "acceptance": [
+        "Universe scoped to Thailand (SET/mai)",
+        "Divergence direction correct: BULLISH = price lower-low + RSI higher-low (not bearish, not plain oversold RSI)",
+        "Daily timeframe respected",
+        "Volume confirmation applied (latest volume >= 1.5x 20-day average)",
+        "Answer in Thai or clearly bilingual, acknowledges the divergence concept precisely",
+        "Red flag if it just returns low-RSI Thai stocks with no divergence structure"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "te-03",
+      "question": "Give me global names in a tight Bollinger Band squeeze — bands inside the Keltner Channels — that are ALSO showing rising volume over the last 10 sessions, suggesting the squeeze is about to resolve. Prefer tech/semiconductor sector.",
+      "goal": "Volatility squeeze (BB inside KC) as a pre-breakout setup, filtered by rising volume, sector-scoped to technology/semis, global universe.",
+      "acceptance": [
+        "Correctly identifies the squeeze condition as Bollinger Bands contained within Keltner Channels (low volatility compression)",
+        "Applies a rising-volume filter over ~10 sessions",
+        "Scopes to tech / semiconductor sector",
+        "Global universe (not US-only) unless it explains a coverage limit",
+        "Red flag if it confuses squeeze with a simple low-ATR list and drops the BB-vs-KC relationship",
+        "Does not fabricate a directional call — squeeze is direction-agnostic until breakout"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "te-04",
+      "question": "I want a two-step setup on European large caps: first the stock dropped at least 15% over the past 20 trading days, THEN the daily MACD line crossed back above its signal line within the last 3 days. Basically capitulation followed by a momentum turn.",
+      "goal": "Sequenced 'A then B': a >=15% drawdown over ~20d FOLLOWED BY a fresh bullish MACD cross within last 3 sessions, Europe large-cap.",
+      "acceptance": [
+        "Enforces ordering: the price drop happens BEFORE the MACD cross (sequence, not just co-occurrence)",
+        "Drop threshold correct (>=15% over ~20 sessions)",
+        "MACD signal is a bullish cross (MACD above signal) that is RECENT (~last 3 days)",
+        "Universe scoped to Europe, large-cap",
+        "Red flag if it returns names that only satisfy one leg, or ignores the temporal order",
+        "Red flag if MACD histogram/zero-line cross is substituted without noting the difference"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "te-05",
+      "question": "Screen for extreme overbought exhaustion: stocks where the WEEKLY RSI(14) is above 80 right now, across any global market. Rank them by how far above 80 they are.",
+      "goal": "Weekly-timeframe RSI(14) > 80 (extreme overbought) global screen, ranked by RSI level.",
+      "acceptance": [
+        "Uses WEEKLY timeframe RSI, not daily",
+        "RSI period 14 and the 80 threshold both respected (not 70)",
+        "Global universe",
+        "Results ranked/sorted by RSI value (descending)",
+        "Red flag if it silently uses daily RSI or a 70 cutoff",
+        "Notes that overbought alone is not a short signal (context), without refusing the screen"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "te-06",
+      "question": "Find me quality growth names in a healthy pullback: 20% EPS growth and gross margin over 50%, but the stock has pulled back to near its 200-day EMA (within 3%) on the daily chart while daily RSI is between 40 and 50. US and China.",
+      "goal": "Fundamental quality (EPS growth 20%, GM>50%) combined with a technical buy-the-dip zone (price within 3% of 200-EMA, RSI 40-50 daily), US + China.",
+      "acceptance": [
+        "Combines BOTH fundamental filters (EPS growth >=20%, gross margin >50%) and technical filters",
+        "Technical: price within ~3% of the 200-day EMA (proximity, not a cross) AND daily RSI in the 40-50 band",
+        "Universe = US and China only",
+        "Does not drop either the fundamental or the technical half",
+        "Red flag if RSI band is treated as oversold (<30) or if 200-EMA is swapped for 200-SMA without noting",
+        "Red flag if it returns pure-growth or pure-technical lists"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "te-07",
+      "question": "Show global small caps (under $1B) that are up more than 30% over the last month on above-average volume, but where the daily RSI is now flashing bearish divergence against the recent price high — I'm hunting momentum names that may be topping.",
+      "goal": "Strong 1-month momentum (>30%) on volume, small-cap, PLUS bearish RSI divergence (price higher-high vs RSI lower-high) as a topping warning.",
+      "acceptance": [
+        "Market-cap filter: small-cap, under $1B",
+        "Return filter: >30% over ~1 month (~21 sessions)",
+        "Volume above average applied",
+        "Bearish divergence direction correct: price higher-high while RSI lower-high (not bullish, not plain overbought)",
+        "Global universe",
+        "Red flag if divergence is omitted and it just returns top monthly gainers"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "te-08",
+      "question": "Multi-timeframe trend alignment: I want stocks where price is above the 50-week SMA on the weekly AND above the 20-day EMA on the daily, with the daily MACD histogram positive. Japan and Korea, any cap. This is my trend-continuation long list.",
+      "goal": "MTF alignment — weekly above 50-SMA + daily above 20-EMA + daily MACD histogram positive, scoped to Japan + South Korea.",
+      "acceptance": [
+        "Handles two timeframes simultaneously: weekly (>50-week SMA) and daily (>20-day EMA)",
+        "MACD histogram positive on the daily is applied",
+        "All three conditions ANDed (trend alignment), not OR",
+        "Universe scoped to Japan and South Korea",
+        "Red flag if it collapses everything to a single timeframe",
+        "Red flag if MACD histogram is confused with MACD line > signal without noting equivalence"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "te-09",
+      "question": "Simple one: which global stocks had their daily RSI(14) cross UP through 30 in the last two days? Classic oversold-bounce trigger. Prefer energy sector.",
+      "goal": "Fresh RSI(14) upward cross through 30 (oversold exit) within last 2 sessions, energy sector, global.",
+      "acceptance": [
+        "Signal is a CROSS UP through 30 (RSI was <30, now >30), not merely RSI<30",
+        "RSI period 14, level 30, daily timeframe",
+        "Recency ~last 2 days respected",
+        "Energy sector scoping applied",
+        "Red flag if it returns a static oversold list (RSI still below 30) instead of the cross-up event"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "te-10",
+      "question": "หาหุ้นทั่วโลกในกลุ่ม healthcare ที่ราคายืนเหนือ 200-day SMA มาตลอด และล่าสุดเพิ่งเกิด monthly MACD bullish crossover — ผมอยากได้ setup แนวโน้มระยะยาวที่เพิ่งจะ turn บน timeframe รายเดือน คัดเฉพาะ market cap เกิน $5B",
+      "goal": "Long-term trend (price holding above 200-day SMA) with a fresh MONTHLY-timeframe MACD bullish cross, healthcare sector, global, large-cap (>$5B).",
+      "acceptance": [
+        "Uses MONTHLY timeframe for the MACD bullish cross (not daily/weekly)",
+        "Requires price sustained above the 200-day SMA (established uptrend), not just a recent touch",
+        "Sector scoped to healthcare, global universe",
+        "Market-cap floor >$5B applied",
+        "MACD cross is bullish (MACD above signal), recent on the monthly frame",
+        "Answer acknowledges the monthly-timeframe request explicitly; red flag if it defaults to daily MACD"
+      ],
+      "difficulty": "medium"
+    }
+  ]
+}

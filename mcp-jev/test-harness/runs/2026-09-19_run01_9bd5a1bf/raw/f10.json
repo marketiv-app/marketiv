@@ -1,0 +1,9 @@
+{
+  "id": "f10",
+  "question": "gross loss ไตรมาสล่าสุดของ Tesla",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Tesla", "period": "quarterly", "fields": "gross profit"}}
+  ],
+  "answer": "ไตรมาสล่าสุดของ Tesla (TSLA.US) ที่รายงานคือไตรมาสสิ้นสุด มิ.ย. 2026 บริษัท \"ไม่มี\" ขาดทุนขั้นต้น (gross loss) ครับ — กลับกันคือมี กำไรขั้นต้น (gross profit) เป็นบวก ประมาณ 4.75 พันล้านดอลลาร์ (USD) แนวโน้ม 5 ไตรมาสล่าสุด: มิ.ย.2026 = 4.75B, มี.ค.2026 = 4.72B, ธ.ค.2025 = 5.01B, ก.ย.2025 = 5.05B, มิ.ย.2025 = 3.88B — ทุกไตรมาสเป็นกำไรขั้นต้นบวก ไม่มีไตรมาสใดขาดทุนขั้นต้น",
+  "friction": "User asked for 'gross loss' but Tesla reports a positive gross PROFIT every recent quarter, so there is no gross loss. Queried gross_profit (the same line item — a loss would show as negative) to answer accurately. Latest quarter gross profit +4.75B → explicitly stated no gross loss rather than force a nonexistent negative figure."
+}

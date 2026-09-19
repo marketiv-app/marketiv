@@ -1,0 +1,9 @@
+{
+  "id": "f05",
+  "question": "ดอกเบี้ยค้างรับของ JPMorgan เท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "JPMorgan", "period": "1", "fields": ["accrued interest receivable"]}}
+  ],
+  "answer": "JPMorgan (JPM.US): ระบบ resolve คำว่า 'ดอกเบี้ยค้างรับ' เป็นฟิลด์ accrued_interest_receivable ได้ถูกต้อง แต่ในงบที่มีอยู่ JPMorgan ไม่ได้รายงานบรรทัดนี้แยกออกมา จึงไม่มีตัวเลขให้แสดง (requested ว่างเปล่า) ขออภัย ข้อมูลดอกเบี้ยค้างรับของ JPMorgan ไม่มีในชุดงบการเงินที่ครอบคลุม — ไม่สามารถให้ตัวเลขได้ (ไม่เดา/ไม่กุตัวเลข).",
+  "friction": "Field resolved fine (accrued_interest_receivable, confidence 1.0) but the value is unreported/unavailable for JPM — 'requested:' block came back empty. Stated the absence plainly rather than fabricating."
+}

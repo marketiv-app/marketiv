@@ -1,0 +1,33 @@
+{
+  "id": "ta06",
+  "question": "screen for a classic 50/200 EMA golden cross",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": ["50 EMA crossing above 200 EMA golden cross"]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "ema50",
+                "b": "ema200"
+              }
+            ]
+          }
+        ],
+        "timeframe": 1,
+        "asset_type": ["Common Stock"],
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "Found 77 stocks globally where the 50-day EMA has crossed above the 200-day EMA (golden cross) on the daily chart. Top hits by signal strength: 0730.HK (Capital Industrial Financial Services, cross 2026-09-11, strength 0.889), CINH.LSE (Cindrigo Holdings, cross 2026-09-04, strength 0.888), 134580.KQ (Digital Multimedia Technology, cross 2026-08-31, strength 0.885), LPSN.US (LivePerson, cross 2026-09-08, strength 0.884), 2110.HK (Yue Kan Holdings, cross 2026-09-03, strength 0.852), 3676.JP (Digital Hearts Holdings, cross 2026-08-21, strength 0.845), GAME.US (GameSquare Holdings, cross 2026-08-24, strength 0.844), 7475.JP (ALBIS, cross 2026-09-11, strength 0.839), INCR.US (InterCure, cross 2026-08-24, strength 0.838), 1788.HK (Guotai Junan International, cross 2026-09-10, strength 0.834). Most crosses occurred in August–September 2026. Several names show very high RSI (>90) indicating strong momentum post-cross. ADX ranges from weak (~16) to strong (~66), so trend conviction varies.",
+  "friction": "none"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "sc01",
+  "question": "หาหุ้นที่อัตรากำไรขั้นต้นหดตัวต่อเนื่องหลายปี",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "gross margin",
+            "pattern": "consecutive_decline",
+            "N": 3
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "พบหุ้น 60 ตัว (capped) ที่อัตรากำไรขั้นต้นหดตัวต่อเนื่อง 3 ปี (window: min_yoy, years_checked: 3) เรียงตาม market cap ใหญ่สุด ได้แก่: XOM.US (Exxon Mobil, series: -2.8%/-10%/-2.8%), ORCL.US (Oracle, -6.7%/-1.3%/-2.0%), UNH.US (UnitedHealth, -17%/-8.8%/-0.3%), 600941.CG (China Mobile, -0.4%/-1.3%/-1.0%), TXN.US (Texas Instruments, -1.9%/-7.6%/-8.5%), COP.US (ConocoPhillips, -16%/-7.7%/-15%), CFR.SW (Richemont, -3.8%/-1.7%/-1.0%), CVS.US (CVS Health, -0.2%/-9.3%/-10%), MDT.US (Medtronic, -0.5%/-0.03%/-0.5%), FCX.US (Freeport-McMoRan, -6.4%/-4.0%/-7.2%). หุ้นพลังงาน (XOM, COP) และหุ้นที่มีต้นทุนสินค้าเพิ่ม (UNH, CVS) ปรากฏโดดเด่นในรายการ",
+  "friction": "none — tool resolved 'consecutive_decline' pattern with N=3 cleanly; first attempt timed out at 120s default, succeeded on retry with 180s timeout"
+}

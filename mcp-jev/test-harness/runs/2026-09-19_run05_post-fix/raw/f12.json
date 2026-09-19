@@ -1,0 +1,9 @@
+{
+  "id": "f12",
+  "question": "เทียบงบดุลของ Coca-Cola กับ Pepsi เน้นหนี้สินรวมกับส่วนของผู้ถือหุ้น",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Coca-Cola", "Pepsi"], "fields": ["total liabilities", "total equity"]}}
+  ],
+  "answer": "เทียบงบดุล Coca-Cola (KO.US) กับ Pepsi (PEP.US) เน้นหนี้สินรวมและส่วนของผู้ถือหุ้น (USD, ปีล่าสุด 2025-12):\n\nCoca-Cola (KO):\n- หนี้สินรวม (total liabilities): 70.54B\n- ส่วนของผู้ถือหุ้น (total equity): 32.17B\n\nPepsi (PEP):\n- หนี้สินรวม: 86.85B\n- ส่วนของผู้ถือหุ้น: 20.41B\n\nสรุป: PepsiCo มีหนี้สินรวมสูงกว่า Coca-Cola (86.85B vs 70.54B) และมีส่วนของผู้ถือหุ้นน้อยกว่า (20.41B vs 32.17B) จึงมีโครงสร้าง leverage (หนี้ต่อทุน) สูงกว่าอย่างชัดเจน — Pepsi หนี้สิน/ทุน ~4.25 เท่า ขณะที่ Coca-Cola ~2.19 เท่า สะท้อนว่างบดุล Coca-Cola มีทุนหนุนหลังแข็งแรงกว่าเมื่อเทียบสัดส่วน\n\nแนวโน้ม 4 ปี (2022→2025): equity ของ KO เพิ่มจาก 24.11B เป็น 32.17B, ของ PEP เพิ่มจาก 17.15B เป็น 20.41B; หนี้สินรวมทั้งคู่ทยอยเพิ่มขึ้น (KO 66.94B→70.54B, PEP 74.91B→86.85B) ทั้งสองเป็นสกุลเดียวกัน (USD) เทียบกันได้ตรง",
+  "friction": "none — both resolved cleanly (KO.US conf 1.0, PEP.US conf 0.99), both fields resolved (total_liabilities 1.0, total_equity 0.94), same currency USD so directly comparable, 4 fiscal years returned for each."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "t05",
+  "question": "Berkshire Hathaway มีกระแสเงินสดเท่าไหร่",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "Berkshire Hathaway", "fields": ["operating_cash_flow", "free_cash_flow", "capex"]}}
+  ],
+  "answer": "กระแสเงินสดของ Berkshire Hathaway (BRK-B.US, สกุล USD), ปีการเงิน สิ้นสุด ธ.ค.:\n\n• กระแสเงินสดจากการดำเนินงาน (Operating cash flow): FY2025 = 45.97 พันล้าน (2022 = 37.4 → 2023 = 49.2 → 2024 = 30.6 → 2025 = 46.0 พันล้าน)\n• รายจ่ายลงทุน (Capex): FY2025 = -20.93 พันล้าน (เพิ่มขึ้นจากราว -15.5 พันล้านในปี 2022)\n• Free cash flow: FY2025 = 25.04 พันล้าน (2022 = 21.9 → 2023 = 29.8 → 2024 = 11.6 → 2025 = 25.0 พันล้าน)\n\nสรุป: ปีล่าสุด (FY2025) Berkshire สร้างกระแสเงินสดจากการดำเนินงาน ~46 พันล้านดอลลาร์ และหลังหักลงทุนเหลือ free cash flow ~25 พันล้านดอลลาร์ — ฟื้นกลับขึ้นหลังปี 2024 ที่ FCF ต่ำผิดปกติ (11.6 พันล้าน จาก capex สูงและ OCF ต่ำกว่าปกติ).",
+  "friction": "'มีกระแสเงินสดเท่าไหร่' → เลือก fields OCF/FCF/capex เป็นตัวเลขกระแสเงินสดหลัก. resolve 'Berkshire Hathaway'→BRK-B.US confidence 0.99 (คลาส B; มี BRK-A ที่ราคาแพงกว่าแต่ตัวเลขงบเท่ากันในระดับบริษัท). ราบรื่น ไม่มี needs_confirmation."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "f04",
+  "question": "ค่าความนิยมกับสินทรัพย์ไม่มีตัวตนของ Microsoft ล่าสุด",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": "MSFT.US", "period": "1", "fields": ["goodwill", "intangibles"]}}
+  ],
+  "answer": "Microsoft (MSFT.US, USD) งวดล่าสุด 2026-06:\n- ค่าความนิยม (Goodwill): 119.65 พันล้านดอลลาร์\n- สินทรัพย์ไม่มีตัวตน (Intangible assets, ไม่รวม goodwill): 18.61 พันล้านดอลลาร์\nรวมสินทรัพย์ไม่มีตัวตนทั้งสองรายการ ~138.3B. Goodwill ก้อนใหญ่สะท้อนการซื้อกิจการที่ผ่านมา (เช่น Activision Blizzard, LinkedIn).",
+  "friction": "เหมือนเคสอื่น: ใช้ port 8901 แทน 8902 (upstream 8902 ล่ม 404). แปลศัพท์ไทยเป็นคีย์อังกฤษตาม schema (ค่าความนิยม→goodwill, สินทรัพย์ไม่มีตัวตน→intangibles) ส่ง exact ticker MSFT.US ได้ผลทันที ไม่มี needs_confirmation."
+}

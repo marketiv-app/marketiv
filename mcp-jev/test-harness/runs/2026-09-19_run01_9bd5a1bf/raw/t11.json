@@ -1,0 +1,9 @@
+{
+  "id": "t11",
+  "question": "อยากดูงบการเงินของบิตคอยน์",
+  "tool_calls": [
+    {"tool": "financials", "args": {"tickers": ["Bitcoin"]}}
+  ],
+  "answer": "ขอโทษครับ — บิตคอยน์ (Bitcoin) ไม่มีงบการเงินให้ดู เพราะไม่ใช่บริษัท มันเป็นสกุลเงินคริปโต ไม่มีงบกำไรขาดทุน/งบดุล/งบกระแสเงินสด (ไม่มีรายได้ สินทรัพย์ หนี้สิน หรือส่วนของผู้ถือหุ้นแบบบริษัท). เครื่องมืองบการเงินจึงตอบว่า 'ไม่พบบริษัทที่ตรงกับคำค้นนี้'.\n\nถ้าสนใจ 'บิตคอยน์' ผมช่วยดูได้ในมุมอื่นแทน เช่น ราคา/ความเคลื่อนไหว หรือข่าวที่กระทบราคา BTC — บอกได้เลยครับว่าอยากดูด้านไหน. หรือถ้าจริงๆ อยากดูงบของ 'บริษัทที่เกี่ยวกับบิตคอยน์' (เช่นบริษัทที่ถือ BTC จำนวนมาก หรือธุรกิจเหมือง/เทรดคริปโต) บอกชื่อบริษัทมาได้ครับ.",
+  "friction": "financials returned needs_confirmation with status=no_match (Jev: 'not a listed company matching the query', candidates=[]). Per _guide, no_match = the term isn't a company → tell the user it's unavailable, don't force a re-call. Handled by explaining Bitcoin has no financial statements and offering price/news alternatives (which the server's other tools cover)."
+}

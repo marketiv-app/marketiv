@@ -1,0 +1,1 @@
+{ "run":"2026-09-19_run07","date":"2026-09-19","purpose":"BIG force-NL screen_unified fundamental leg — exercise NL metric+shape+relation+cohort+compound+no_match through blind client.","server":{"mcp_jev_port":8902,"mdx_api_base":"http://127.0.0.1:8090","health_checked":true},"sets":[{"name":"resolver-screen","version":"v2","cases":8}],"jev_key_suffix":"f2f2ec" }

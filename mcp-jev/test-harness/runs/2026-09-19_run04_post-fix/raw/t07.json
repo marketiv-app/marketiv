@@ -1,0 +1,10 @@
+{
+  "id": "t07",
+  "question": "งบของซัมซุง (Samsung Electronics) เทียบกับ SK Hynix",
+  "tool_calls": [
+    {"tool": "find_stock", "args": {"queries": ["Samsung Electronics", "SK Hynix"]}},
+    {"tool": "financials", "args": {"tickers": "005930.KO,000660.KO", "currency": "USD"}}
+  ],
+  "answer": "เทียบงบ Samsung Electronics (005930.KO) กับ SK Hynix (000660.KO) — สกุล USD, ข้อมูล TTM as-of 30 มิ.ย. 2026 (ย้อนหลัง 5 ปี):\n\nขนาดรายได้: Samsung ใหญ่กว่ามาก — รายได้ ~233.5B USD เทียบ SK Hynix ~68.0B USD (Samsung ~3.4 เท่า)\n\nความสามารถทำกำไร (SK Hynix เด่นกว่าชัดเจน — วัฏจักรความจำ/HBM กำลังบูม):\n- Net margin: Samsung 30.8% vs SK Hynix 85.6% (SK Hynix มีรายการพิเศษ/ฐานสูงผิดปกติ — ดู ebitda_margin 117.6% ที่บ่งบอกมี non-operating/สินทรัพย์ตีมูลค่าเข้ามา ควรระวังการอ่าน)\n- Gross margin: Samsung 57.5% vs SK Hynix 76.3%\n- Operating margin: Samsung 36.9% vs SK Hynix 68.0%\n- ROE: Samsung 26.5% vs SK Hynix 61.7% ; ROIC: 30.6% vs 63.4%\n\nฐานะการเงิน (แข็งทั้งคู่):\n- Debt/equity: Samsung 0.04x vs SK Hynix 0.08x (หนี้ต่ำมากทั้งคู่)\n- Net debt/EBITDA: Samsung -0.30 (เงินสดสุทธิ) vs SK Hynix -0.03\n- Current ratio: 2.83 vs 2.59\n- เงินสด: Samsung ~40.5B vs SK Hynix ~10.4B USD\n\nการเติบโต (ล่าสุด, YoY):\n- รายได้: Samsung +11% vs SK Hynix +47%\n- Net income: Samsung +32% vs SK Hynix +117%\n- FCF: Samsung +72% (23.2B) vs SK Hynix +89% (17.4B)\nทั้งคู่เพิ่งฟื้นจากขาดทุน/FCF ติดลบช่วงปี 2023 (วัฏจักรชิปตกต่ำ) และกลับมาทำกำไรแล้ว\n\nValuation: Samsung PE 22.0 / PB 3.35 ; SK Hynix PE 15.6 / PB 7.09\n\nสรุป: Samsung = ยักษ์ใหญ่กว่ามากและกระจายธุรกิจกว้าง margin ปานกลาง; SK Hynix = เล็กกว่าแต่ margin/ROE/การเติบโตร้อนแรงกว่ามากจากรอบ HBM/หน่วยความจำ ทั้งสองบริษัทงบดุลแข็งแรง หนี้ต่ำ มีเงินสดสุทธิ (คำเตือน: fiscal year Korea, ตัวเลข margin ของ SK Hynix อาจมี basis พิเศษ ควรอ่านเชิงทิศทาง)",
+  "friction": "MCP_URL ในโจทย์ (port 8902) ต่อไม่ติด — server จริงรันที่ port 8901 (เช็ค lsof) ต้องแก้ URL ก่อน. find_stock batch คืน ETF/leveraged product ปนหลายตัว แต่หุ้นแม่ (type=stock, market_cap ใหญ่) ชัดเจน pick ง่าย. financials รับ ticker ตรง ไม่ต้อง confirm."
+}
