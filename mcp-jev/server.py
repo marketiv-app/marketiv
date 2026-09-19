@@ -727,6 +727,77 @@ def _resolve_ta_indicator(q: str) -> dict:
             r["indicator"] = base + per
     return r
 
+# ── OPPATTERN resolution — the find_oppattern refactor (options-behaviour leg of screen_unified + options_scan).
+#    Same vector→Jev→gate pattern as _resolve_fspattern. Carries exec_path so the caller routes scan vs compose vs
+#    unsupported (compose_recipe = catalog DATA the caller expands by reusing the ta resolver). See design §15.
+_OPPATTERN_RESOLVE_INSTR = (
+    "The state has `query`: a natural-language phrase describing an OPTIONS-MARKET BEHAVIOUR / crowd emotion a user "
+    "wants to find stocks by ('who is the crowd afraid of', 'cheap implied vol', 'smart money piling in', 'one-sided "
+    "/ crowded names', 'options positioning fighting the price'). Pro jargon (IV rank, skew, gamma, put/call) AND "
+    "newbie emotion words (fear, greed, confidence, betting) both map here. Each option is one options pattern — its "
+    "dimension (fear_greed / implied_vol / positioning / …), temporal_mode (level=the state NOW · rising/falling=a "
+    "~2-week TREND · flip=a REVERSAL), label, and description. 🔴 KEEP THE TENSE the user used — a state NOW ('who is "
+    "the crowd afraid of') vs a trend ('fear is building') vs a flip ('were afraid, now getting brave') are DIFFERENT "
+    "options; match the temporal_mode to the query's tense. Select the SINGLE option whose behaviour + tense best "
+    "match the query's MEANING. One option is `__NONE__` — a LAST RESORT for a query that is NOT an options-market "
+    "behaviour at all.")
+
+_OPPATTERN_NONE_OPT = (
+    "None of the options patterns above. ⚠️ LAST RESORT ONLY — pick this when the query is NOT about options-market "
+    "behaviour (it's a plain price/fundamental screen, one named stock's option detail, a company, or off-domain). "
+    "Loose or emotional wording of a real options behaviour ('the crowd is nervous', 'everyone's betting one way') is "
+    "NORMAL and MUST still match the nearest pattern; choose NONE only when nothing here is remotely about options.")
+
+def _resolve_oppattern(q: str) -> dict:
+    """Resolve ONE natural-language OPTIONS-BEHAVIOUR phrase → the opana `pattern` token (for options_scan /
+    screen_unified.options). Mirrors _resolve_fspattern: exact-key passthrough → vector shortlist
+    (/v1/options/find-pattern, full context: dimension+temporal_mode+label+description) → Jev pick + `__NONE__` →
+    calibrated gate. Carries `temporal_mode`, `exec_path`, `supported`, and `compose_recipe` (when present) so the
+    caller can route scan vs compose vs unsupported."""
+    resp = mdx()._http._client.post("/v1/options/find-pattern", json={"q": q, "limit": 15})
+    _check(resp)
+    data = resp.json()
+    cands = data.get("patterns", []) if isinstance(data, dict) else []
+    if not cands:
+        return {"status": "no_match", "query": q, "reason": "no candidate options patterns", "candidates": []}
+    def _carry(c):  # the fields the caller needs to ROUTE (scan/compose/unsupported)
+        out = {"pattern": c.get("pattern"), "temporal_mode": c.get("temporal_mode"),
+               "exec_path": c.get("exec_path"), "supported": c.get("supported")}
+        if c.get("compose_recipe") is not None: out["compose_recipe"] = c.get("compose_recipe")
+        return out
+    # FAST-PATH: the client already sent an exact pattern token → use it, skip Jev (compare to ENDPOINT candidates).
+    qn = q.strip().lower()
+    exact = next((c for c in cands if str(c.get("pattern", "")).lower() == qn), None)
+    if exact:
+        return {"status": "resolved", "query": q, "confidence": 1.0, "gate": "exact_key", **_carry(exact)}
+    options, meta = {}, {}
+    for c in cands:
+        pat = c.get("pattern")
+        if not pat:
+            continue
+        # context parity: feed the union — dimension + temporal_mode (tense) + label + description.
+        tag = c.get("dimension") or ""
+        desc = (f"[{tag}] " if tag else "") + f"{c.get('label', '')}."
+        if c.get("temporal_mode"): desc += f" (tense: {c['temporal_mode']})"
+        if c.get("description"): desc += " " + c["description"]
+        options[pat] = desc
+        meta[pat] = c
+    options["__NONE__"] = _OPPATTERN_NONE_OPT
+    r = _jev_pick(q, _OPPATTERN_RESOLVE_INSTR, options)
+    if r.get("pick") == "__NONE__":
+        return {"status": "no_match", "query": q, "reason": "not an options-market behaviour (Jev: none fit)",
+                "confidence": r.get("confidence"), "candidates": []}
+    gate = _jev_gate(r)
+    pm = meta.get(r.get("pick"), {})
+    top_cands = [{"pattern": k, "label": meta[k].get("label"), "prob": round(v, 3)} for k, v in r["probs"].items() if k in meta]
+    if gate in ("resolve", "soft"):
+        out = {"status": "resolved", "query": q, "confidence": r.get("confidence"), "gate": gate, **_carry(pm)}
+        if gate == "soft":
+            out["note"] = f"resolved '{q}' → {pm.get('pattern')} at lower confidence"
+        return out
+    reason = "two close options patterns — confirm which" if gate == "reconfirm" else "no confident options pattern match"
+    return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
+
 # ── theme resolution (server-side): gazetteer FIRST, then deepseek 3-tier match + deterministic solve.
 #    Ported from the validated prototype /tmp/mcp-gate/resolve_themes.js + mstep2.js. ────────────────
 _ALIAS = {  # curated: colloquial/abbrev term → EXACT node name. Grows from LLM-fallback logs.
@@ -1096,53 +1167,14 @@ def options_sentiment(
             "fabricate an options view; use news/impact for the read, and (if relevant) note options "
             "coverage isn't available for this name.")}
 
-# ── Option-behavior STOCK scanner (POC: resolver + scan stub) ─────────────────────────────────────
-# Inlined catalog for the INTERFACE test only — the real version reads op_pattern_catalog + embeddings.
-# (key, label, supported, aliases, description)
-@mcp.tool(title="Find Option Pattern", annotations=_RO)
-def find_oppattern(
-    queries: Annotated[List[str], _d("One or more SHORT plain-language phrases describing the options-market "
-        "behaviour / crowd emotion you want to FIND STOCKS by — ENGLISH, translate first. 🔴 KEEP THE TENSE the "
-        "user used — 'who is the crowd afraid of' (a state NOW) vs 'fear is building' (a trend) vs 'were afraid, "
-        "now getting brave' (a flip) resolve to DIFFERENT tokens; don't flatten them. Break a compound question "
-        "into its concepts (e.g. 'cheap vol AND smart money buying' → ['cheap implied vol','smart money buying']).")],
-) -> dict:
-    """Resolve plain-language OPTIONS-BEHAVIOUR phrases → the scan-pattern token(s) for `options_scan`.
-    Use this whenever the user wants to FIND STOCKS by what the OPTIONS MARKET is doing/feeling across the
-    whole US optionable universe — e.g. "which stocks is the crowd afraid of", "cheap implied vol", "smart
-    money piling in", "one-sided / crowded names", "distrust short-term but believe long-term". Both pro
-    jargon (IV rank, skew, gamma, put/call) AND newbie emotion words (fear, greed, confidence, betting)
-    resolve here.
-    🔴 TENSE / TIME is a real axis — each candidate carries a `temporal_mode`: `level` = the state RIGHT NOW,
-    `rising`/`falling` = a trend over the last ~2 weeks ("fear building" / "fear receding"), `flip` = a reversal
-    ("were afraid, now getting brave"). Two candidates that differ ONLY in tense (fear vs fear-building) will
-    both come back — READ the label and pick the one matching how the user phrased it.
-    Returns top-k `{pattern, label, temporal_mode, exec_path, description, supported}` per query.
-    🔴 ROUTE BY `exec_path`: `scan` → feed `pattern` to options_scan (single, or CSV to AND within options).
-    `compose` → do NOT scan it; the candidate carries a `compose_recipe` (an INTERSECT of legs). If
-    `compose_recipe.status='live'`, BUILD it — send each other leg (e.g. a price-trend) as plain-English/key
-    straight into `screen_unified`'s `ta` leg (the server resolves it) and call
-    `screen_unified` with the options pattern + the other leg (a divergence = price vs options positioning
-    OPPOSITE); if `status='pending'`, tell the user that composition isn't wired yet (see `.blocker`), don't
-    substitute. `unsupported` → no such data; say so. YOU pick the token(s) then route. Options history is ~1
-    month, so an older-period ask ("fearful in May vs brave in August") is NOT supported — say so. NOT for one
-    named stock's option detail (use `options_sentiment`); NOT for choosing an option contract/strike/expiry."""
-    results = []
-    guide = None
-    for q in queries:
-        resp = mdx()._http._client.post("/v1/options/find-pattern", json={"q": q, "limit": 8})
-        _check(resp)
-        d = resp.json()
-        guide = d.get("_guide", guide)
-        results.append({"query": q, "candidates": d.get("patterns", [])})
-    return {"results": results, "note": guide or
-            "Pick the best `pattern` token(s) → options_scan(pattern=…). Match the `temporal_mode` to the "
-            "user's tense. A `supported:'no'` candidate means opana can't scan for it yet — say so plainly."}
+# ── Option-behavior STOCK scanner. There is NO find_oppattern tool — options_scan + screen_unified.options
+#    resolve the behaviour (an exact key OR plain English) server-side via _resolve_oppattern (vector→Jev→gate).
 
 @mcp.tool(title="Options Scan", annotations=_RO)
 def options_scan(
-    pattern: Annotated[str, _d("A resolved pattern_key from find_oppattern (VERBATIM). CSV = AND-combine "
-        "(intersect), e.g. 'iv_cheap,positioning_building_bull'; the FIRST token owns the ranking.")],
+    pattern: Annotated[str, _d("An options-behaviour pattern — an exact key OR plain English ('cheap implied vol', "
+        "'crowd getting fearful', 'smart money piling in'); the server resolves it. CSV = AND-combine (intersect), "
+        "e.g. 'iv_cheap,smart money buying'; the FIRST token owns the ranking. 🔴 ENGLISH.")],
     horizon: Annotated[Literal["short","long"], _d("`short` | `long` — which options horizon to read (default long = the "
         "positioning/conviction lens; short = the gamma/near-term lens).")] = "long",
     min_strength: Annotated[Optional[float], _d("Optional cutoff on the ranked axis / Δ — omit to let the "
@@ -1152,9 +1184,28 @@ def options_scan(
     """Find STOCKS by an options-behaviour pattern (opana lens) across the ~557 US optionable names — returns
     ranked UNDERLYINGS each with a plain-language `because` + `metrics` (value, and prev→delta for a trend/flip).
     STOCK scanner only: it does NOT pick option contracts/strikes/expiries (for one named stock's detail use
-    `options_sentiment`). Feed it a `pattern` from find_oppattern — its `temporal_mode` decides the read (level =
-    now, rising/falling = ~2-week trend, flip = reversal). A `supported:'no'`/`'future'` pattern returns an empty
+    `options_sentiment`). The `pattern` is a key OR plain English (the server resolves it) — its `temporal_mode`
+    decides the read (level = now, rising/falling = ~2-week trend, flip = reversal). A `supported:'no'`/`'future'` pattern returns an empty
     list + an honest note (say so, don't substitute). US-capped — state that in the answer."""
+    # 🆕 SERVER-SIDE resolution (collapse find_oppattern): each CSV token may be an exact key OR plain English —
+    # resolve here. options_scan runs ONE options leg, so a compose/unsupported behaviour → honest guide (not a scan).
+    toks = [t.strip() for t in str(pattern).split(",") if t.strip()]
+    resolved_toks = []
+    for t in toks:
+        r = _resolve_oppattern(t)
+        if r["status"] != "resolved":
+            return {"needs_confirmation": True,
+                    "confirm": {t: {"status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])}},
+                    "_guide": "The options-behaviour term needs attention — pick the right `pattern` from its candidates "
+                              "(or drop it if it isn't a scannable options behaviour), then RE-CALL options_scan with the chosen key."}
+        if (r.get("exec_path") or "scan") != "scan" or str(r.get("supported")) == "no":
+            return {"needs_confirmation": True,
+                    "confirm": {t: {"status": "not_scannable", "reason": "not a single-leg options scan — it's a composite "
+                                    "(needs another leg) or has no data", "exec_path": r.get("exec_path"), "supported": r.get("supported")}},
+                    "_guide": "options_scan runs ONE options leg. For a composite behaviour (e.g. options-vs-price divergence) "
+                              "use screen_unified's `options` leg; if it's unsupported, tell the user plainly — do not substitute."}
+        resolved_toks.append(r.get("pattern"))
+    pattern = ",".join(resolved_toks)
     body = {"pattern": pattern, "horizon": horizon, "limit": _lim(limit, default=15, ceiling=50, floor=1)}
     if min_strength is not None:
         body["min_strength"] = min_strength
@@ -2164,13 +2215,13 @@ def cot_extremes(
 ) -> dict:
     """⭐ FUTURES / CFTC-COT speculative positioning extremes — which commodity / FX / rate / equity-INDEX
     FUTURES have the CROWD at a 3-year extreme right now (NOT single-stock equity options → for 'stretched
-    put/call' or crowded STOCK names use find_oppattern → options_scan). The discovery scan across every tracked
+    put/call' or crowded STOCK names use options_scan). The discovery scan across every tracked
     futures market at once. COT / FUTURES lens ONLY. Surfaces stretched positioning (≥90th or ≤10th
     percentile of its own 3y history) that could unwind hard on a shock — a contrarian-RISK map, NOT buy/sell
     calls (an extreme can persist). Use for 'where is FUTURES positioning most crowded / stretched right now?'.
     🔴 WRONG TOOL for single-STOCK options crowding — 'stretched put/call', 'one-sided / crowded equity names',
-    'most extreme options positioning across stocks': for those use find_oppattern ('crowded / one-sided') →
-    options_scan (the equity-options opana lens across ~557 US optionable names). Narrate each `read` plainly."""
+    'most extreme options positioning across stocks': for those use options_scan (pattern='crowded / one-sided' —
+    the equity-options opana lens across ~557 US optionable names). Narrate each `read` plainly."""
     p = {}
     if asset_class:
         p["asset_class"] = asset_class
@@ -2442,11 +2493,13 @@ def screen_unified(
             "timeframe=1, anchor crossover_up, qualifier {above, a:'close', b:'ema50', timeframe:2}. Omit for a "
             "fundamentals-only screen.")] = None,
         options: Annotated[Optional[str], _d(
-            "The OPTIONS leg — a resolved op-pattern token from find_oppattern (VERBATIM), e.g. 'fear_building', "
-            "'fear_to_confidence', 'iv_cheap', 'positioning_building_bull'. Intersects the ~557 US-optionable names "
-            "whose options market shows that behaviour with the other legs — 'biotech stocks the options crowd is "
-            "getting brave on' → gics='352010' + options='fear_to_confidence'. 🔴 Resolve the token via find_oppattern "
-            "FIRST (it also tells you if the behaviour isn't scannable). US-optionable only. Omit for a non-options screen.")] = None,
+            "The OPTIONS leg — an options-behaviour term, an exact key OR plain English ('fear_building', 'iv_cheap', "
+            "'the options crowd getting brave', 'cheap implied vol'); the server resolves it (no separate resolver "
+            "step). Intersects the ~557 US-optionable names whose options market shows that behaviour with the other "
+            "legs — 'biotech stocks the options crowd is getting brave on' → gics='352010' + options='the crowd "
+            "getting brave'. 🔴 DIVERGENCE (options positioning FIGHTING the price trend) = send it here too ('options "
+            "positioning diverging from the price uptrend') — the server expands it into the multi-leg screen itself. "
+            "🔴 ENGLISH. US-optionable only. Omit for a non-options screen.")] = None,
         options_horizon: Annotated[Optional[Literal["long","short"]], _d("Options horizon: 'long' (default, positioning/conviction) or "
             "'short' (gamma/near-term). Only meaningful with `options`.")] = None,
         gics: Annotated[Optional[str], _d("OPTIONAL universe scope — a SINGLE GICS code PREFIX from find_gics ('45'=IT sector, "
@@ -2499,11 +2552,14 @@ def screen_unified(
     screen, a technical screen, and an options-behaviour screen within a scope. This is the ONE screen tool: EVERY leg
     is optional (fundamental-only = a pure fundamentals screen; ta-only = a pure technical scan of EMA/MACD cross,
     RSI/overbought, divergence, squeeze, a-THEN-b; options-only = stocks by options-market behaviour; any combination =
-    the intersection). The grammars stay SEPARATE — the `fundamental` leg's `concept`/`pattern` AND the `ta` leg's `pattern`/operands are resolved
-    server-side (send a key OR plain English — no separate resolver step); `options` patterns come from
-    find_oppattern; the server resolves each leg, scopes all to the universe, and
-    intersects on head_listing_id. 🔴 The OPTIONS leg is US-optionable-only (~557 names), so any screen using it is
-    US-capped — say so. To rank by options signal strength pass sort='options'. Returns {universe, count, sort,
+    the intersection). The grammars stay SEPARATE — the `fundamental` leg's `concept`/`pattern`, the `ta` leg's
+    `pattern`/operands, AND the `options` leg's behaviour term are ALL resolved server-side (send a key OR plain
+    English — no separate resolver step); the server resolves each leg, scopes all to the universe, and
+    intersects on head_listing_id. 🔴 An options-vs-price DIVERGENCE (options positioning fighting the price trend)
+    is just a multi-leg screen — send the divergence phrase in `options` and the server expands it (adds the price
+    leg + opposite-direction options leg + sort='options') itself; or build it yourself by pairing a `ta` price-trend
+    leg with the OPPOSITE-direction options behaviour. 🔴 The OPTIONS leg is US-optionable-only (~557 names), so any
+    screen using it is US-capped — say so. To rank by options signal strength pass sort='options'. Returns {universe, count, sort,
     results:[{head_listing_id, ticker, name, score, matched_legs:[…],
               matched:{ta:{…what each signal filtered on}, fundamental:{…which value passed}},
               context:{ta:{rsi14/adx/…latest indicators}, fundamental:{…}}}], notes}.
@@ -2564,6 +2620,48 @@ def screen_unified(
     # → ONE BATCHED reconfirm (params threshold/N/… are the CLIENT's, never touched). See design §15.
     fresolved: dict = {}
     ta_resolved: dict = {}
+    opt_resolved: dict = {}
+    options_extra: dict = {}
+    # 🆕 SERVER-SIDE resolution of the OPTIONS leg (collapse find_oppattern): the `options` term may be an exact key
+    # OR plain English → resolve here. `exec_path` routes: scan → use the key; compose(live) → EXPAND the recipe's
+    # legs server-side (inject its ta example + set the options pattern/sort — reuse the ta walk + assembly below, no
+    # new engine); compose(pending) / unsupported / supported=no → ONE honest reconfirm (no fabrication). Runs BEFORE
+    # the ta walk so an injected ta step flows through it. See design §15.
+    if options:
+        ro = _resolve_oppattern(options)
+        if ro["status"] != "resolved":
+            return {"needs_confirmation": True, "resolved": {},
+                    "confirm": {ro["query"]: {"kind": "options", "status": ro["status"], "reason": ro.get("reason"), "candidates": ro.get("candidates", [])}},
+                    "_guide": "The OPTIONS term needs attention: pick the right options-behaviour `pattern` from its "
+                              "candidates (or drop it if `status=no_match` — it isn't a scannable options behaviour), then "
+                              "RE-CALL screen_unified with the chosen key in `options` (an exact key passes straight through)."}
+        _ep = ro.get("exec_path") or "scan"
+        if _ep == "unsupported" or str(ro.get("supported")) == "no":
+            return {"needs_confirmation": True, "resolved": {},
+                    "confirm": {options: {"kind": "options", "status": "no_match", "reason": "opana can't scan this options behaviour (no such data)", "candidates": []}},
+                    "_guide": "The options behaviour isn't scannable (no data) — tell the user plainly; do not substitute another pattern."}
+        if _ep == "compose":
+            recipe = ro.get("compose_recipe") or {}
+            if str(recipe.get("status")) != "live":
+                return {"needs_confirmation": True, "resolved": {},
+                        "confirm": {options: {"kind": "options", "status": "pending", "reason": recipe.get("blocker") or "this composite options screen isn't wired yet", "candidates": []}},
+                        "_guide": "This composite options screen isn't wired yet — tell the user plainly (see reason); do not substitute."}
+            # EXPAND the live recipe: inject each non-options leg (reuse its ready `example` as a TaSignal) + set the
+            # options leg to the recipe's own pattern/min_strength + adopt its sort. The injected ta step is exact
+            # keys → passes through the ta walk below untouched.
+            options = None
+            for _leg in (recipe.get("legs") or []):
+                if _leg.get("leg") == "ta" and _leg.get("example"):
+                    ta = list(ta or []); ta.append(TaStep(anchor=[TaSignal(**_leg["example"])]))
+                elif _leg.get("leg") == "options":
+                    options = _leg.get("pattern")
+                    if _leg.get("min_strength") is not None: options_extra["min_strength"] = _leg["min_strength"]
+            if recipe.get("sort") and not sort: sort = recipe["sort"]
+            opt_resolved[ro["query"]] = {"kind": "options", "key": ro.get("pattern"), "exec_path": "compose", "expanded_to": {"options": options, "added_ta": True, "sort": sort}, "gate": ro.get("gate")}
+        else:  # scan
+            if str(options).strip().lower() != str(ro.get("pattern")).lower():
+                opt_resolved[ro["query"]] = {"kind": "options", "key": ro.get("pattern"), "confidence": ro.get("confidence"), "gate": ro.get("gate")}
+            options = ro.get("pattern")
     if fundamental:
         fpending: list = []
         def _rc(val, kind):  # resolve one operand → key; on non-resolve append to fpending + keep the original
@@ -2639,7 +2737,7 @@ def screen_unified(
             }
         body["ta"] = [s.model_dump(exclude_none=True) for s in ta]
     if options:
-        opt: dict = {"pattern": options}
+        opt: dict = {"pattern": options, **options_extra}
         if options_horizon: opt["horizon"] = options_horizon
         body["options"] = opt
     if timeframe: body["timeframe"] = timeframe
@@ -2673,6 +2771,7 @@ def screen_unified(
         }
         if fresolved: data["_resolved_fundamental"] = fresolved  # how each NL metric/shape was interpreted (transparency)
         if ta_resolved: data["_resolved_ta"] = ta_resolved
+        if opt_resolved: data["_resolved_options"] = opt_resolved
     return data
 
 

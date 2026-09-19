@@ -1,0 +1,9 @@
+{
+  "run": "2026-09-19_run11", "date": "2026-09-19",
+  "purpose": "Collapse find_oppattern into consumers (options_scan + screen_unified.options) via _resolve_oppattern + DELETE it. Prove no round-trip (tool gone); scan works; compose expands server-side; unsupported honest.",
+  "server": {"mcp_jev_port": 8902, "mdx_api_base": "http://127.0.0.1:8090", "health_checked": true, "mechanical": "find_oppattern ABSENT; options_scan+screen_unified present"},
+  "mdx_api_sha": "f5056c81", "mcp_jev_sha": "886de6e (untracked)",
+  "jev_key_suffix": "f2f2ec", "bearer_suffix": "c449ff",
+  "sets": [{"name": "resolver-oppattern-v1", "cases": ["op01","op02","op03","op04","op05","op06"]}],
+  "diff_baseline": "run10", "model": "claude-opus-4-8"
+}

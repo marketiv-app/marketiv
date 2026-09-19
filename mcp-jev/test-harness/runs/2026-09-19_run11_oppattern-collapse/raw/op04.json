@@ -1,0 +1,16 @@
+{
+  "id": "op04",
+  "question": "which stocks have the most one-sided / crowded options positioning?",
+  "tool_calls": [
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "crowded options positioning",
+        "horizon": "long",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "20 names with the most crowded/one-sided options positioning (long-term horizon), ranked by $-notional put/call ratio:\n\nMost put-crowded (bearish one-sided):\n- CCL (Carnival Corp) — put/call ratio 5.84 (score -1.0)\n- BN (Brookfield Corp) — put/call ratio 4.69 (score -1.0)\n- BCS (Barclays ADR) — put/call ratio 4.56 (score -1.0)\n- ARES (Ares Management) — put/call ratio 4.11 (score -1.0)\n- BX (Blackstone) — put/call ratio 3.52 (score -1.0)\n- ASHR (Xtrackers CSI 300 China A-Shares ETF) — put/call ratio 3.09 (score -1.0)\n- CMCSA (Comcast) — put/call ratio 2.80 (score -1.0)\n- APO (Apollo Global) — put/call ratio 2.37 (score -1.0) [wait: 1.82]\n- CMI (Cummins) — put/call ratio 2.40 (score -1.0)\n- AGG (iShares US Agg Bond ETF) — put/call ratio 2.83 (score -1.0)\n- CFG (Citizens Financial) — put/call ratio 2.52 (score -1.0)\n- CCI (Crown Castle) — put/call ratio 2.37 (score -1.0)\n- APO (Apollo Global) — put/call ratio 1.82 (score -1.0)\n- BIP (Brookfield Infra Partners) — put/call ratio 1.50 (score -1.0)\n- CM (CIBC) — put/call ratio 1.49 (score -1.0)\n- CBOE (Cboe Global Markets) — put/call ratio 1.47 (score -1.0)\n- APD (Air Products) — put/call ratio 1.47 (score -1.0)\n\nMost call-crowded (bullish one-sided):\n- BDX (Becton Dickinson) — put/call ratio 0.17 (calls 5.9× heavier, score +1.0)\n- APH (Amphenol) — put/call ratio 0.28 (calls 3.6× heavier, score +1.0)\n- BE (Bloom Energy) — put/call ratio 0.36 (calls 2.8× heavier, score +1.0)\n- ARM (Arm Holdings ADR) — put/call ratio 0.49 (calls 2× heavier, score +1.0)\n\nThe put-crowded crowd is significantly larger — 16 names vs 4 call-heavy names. Extreme put piles (ratio >4×): CCL (5.84), BN (4.69), BCS (4.56), ARES (4.11). The call-crowded outlier is BDX with puts outnumbered nearly 6:1 by calls.",
+  "friction": "none"
+}

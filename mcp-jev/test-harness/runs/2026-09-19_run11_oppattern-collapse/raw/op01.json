@@ -1,0 +1,16 @@
+{
+  "id": "op01",
+  "question": "which stocks is the options crowd most afraid of right now?",
+  "tool_calls": [
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "crowd getting fearful",
+        "horizon": "long",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "The options crowd is most afraid of these 20 stocks right now (ranked by put-skew percentile vs each stock's own 90-day history):\n\nAt the 100th percentile (max fear, unusually steep put skew): STLD (Steel Dynamics), V (Visa), SRE (Sempra Energy), NTRA (Natera), GD (General Dynamics), USO (US Oil Fund), BCS (Barclays ADR), LPLA (LPL Financial), STT (State Street), EME (EMCOR Group), SOXX (iShares Semiconductor ETF).\n\nAt the 98th percentile (near-peak fear): MCO (Moody's), INDA (iShares MSCI India ETF), TWLO (Twilio), EEM (iShares MSCI EM ETF), FIX (Comfort Systems), ADI (Analog Devices), SMH (VanEck Semiconductor ETF), TD (Toronto-Dominion Bank), SOXL (Direxion Semi 3× Bull).\n\nNotable clusters: semiconductor ETFs (SOXX, SMH, SOXL) all at the extreme, plus financials (V, BCS, LPLA, STT, TD, MCO) and EM exposures (INDA, EEM). The pattern resolved as 'fear_building' (normalized put-skew). Universe: ~557 US optionable names.",
+  "friction": "none"
+}

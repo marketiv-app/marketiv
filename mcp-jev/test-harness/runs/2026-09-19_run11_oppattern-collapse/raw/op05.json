@@ -1,0 +1,24 @@
+{
+  "id": "op05",
+  "question": "find stocks where the options positioning is fighting the price uptrend (options bearish while the stock trends up)",
+  "tool_calls": [
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "options bearish while stock trends up",
+        "horizon": "long",
+        "limit": 20
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "options": "options positioning diverging from the price uptrend",
+        "options_horizon": "long",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "30 stocks found where price is trending up (price above EMA-50) while options are positioned bearishly (puts heavier than calls). The server resolved 'options positioning diverging from the price uptrend' as a composite 'bearish_positioning + close_above_ema50' screen.\n\nMost extreme divergences (options most bearish, score = -1.0 i.e. max bearish positioning):\n- ITUB (Itau Unibanco) — P/C ratio 220.78 (!), above EMA-50 for 12 bars\n- WBD (Warner Bros. Discovery) — P/C ratio 3.25, above EMA-50 for 30 bars\n- EEM (iShares MSCI EM ETF) — P/C ratio 2.32, above EMA-50 for 2 bars\n- GFI (Gold Fields) — P/C ratio 2.95, above EMA-50 for 32 bars (strong uptrend)\n- SOXX (iShares Semiconductor ETF) — P/C ratio 1.35, above EMA-50 for 1 bar\n- EWJ (iShares MSCI Japan ETF) — P/C ratio 1.44, above EMA-50 for 36 bars\n- NWG (NatWest Group) — P/C ratio 1.66, above EMA-50 for 71 bars (longest uptrend in list)\n- SCCO (Southern Copper) — P/C ratio 1.66, above EMA-50 for 2 bars\n- FERG (Ferguson Plc) — P/C ratio 1.83, above EMA-50 for 1 bar\n- TS (Tenaris) — P/C ratio 2.22, above EMA-50 for 4 bars\n\nStrong divergences (score around -0.89 to -0.60):\n- RMD (ResMed) — P/C ratio 2.25, above EMA-50 for 5 bars\n- MCK (McKesson) — P/C ratio 1.32, above EMA-50 for 55 bars\n- AON (Aon PLC) — P/C ratio 14.56, above EMA-50 for 21 bars\n- SLF (Sun Life Financial) — P/C ratio 1.11, above EMA-50 for 7 bars\n- ECHO (EchoStar) — P/C ratio 1.52, above EMA-50 for 3 bars\n- P (Everpure) — P/C ratio 1.08, above EMA-50 for 36 bars\n- ORCL (Oracle) — P/C ratio 1.93, above EMA-50 for 1 bar\n\nModerate divergences (score -0.32 to -0.43):\n- QCOM (Qualcomm) — P/C ratio 1.22, above EMA-50 for 9 bars\n- ISRG (Intuitive Surgical) — P/C ratio 1.93, above EMA-50 for 3 bars\n- BBVA (Banco Bilbao Vizcaya) — P/C ratio 1.19, above EMA-50 for 69 bars\n- DIS (Walt Disney) — P/C ratio 0.98, above EMA-50 for 23 bars\n- AU (AngloGold Ashanti) — P/C ratio 0.93, above EMA-50 for 32 bars\n- ACN (Accenture) — P/C ratio 0.93, above EMA-50 for 39 bars\n- COHR (Coherent) — P/C ratio 1.21, above EMA-50 for 1 bar\n- BHP (BHP Group) — P/C ratio 0.90, above EMA-50 for 10 bars\n- EWY (iShares MSCI South Korea ETF) — P/C ratio 0.89, above EMA-50 for 2 bars\n- RBLX (Roblox) — P/C ratio 1.20, above EMA-50 for 10 bars\n- BBD (Banco Bradesco ADR) — P/C ratio 0.88, above EMA-50 for 12 bars\n\nTotal matched: 30 names. First call to options_scan returned 'not_scannable' (composite pattern requires multi-leg screen); escalated to screen_unified which handled it successfully. Universe: ~557 US optionable names.",
+  "friction": "options_scan returned needs_confirmation / not_scannable for this composite pattern. The server guide instructed to use screen_unified's `options` leg for divergence. screen_unified call timed out on the first attempt (120s), succeeded on retry. Total 3 calls for this question."
+}

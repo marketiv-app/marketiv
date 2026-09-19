@@ -1,0 +1,16 @@
+{
+  "id": "op03",
+  "question": "where is smart money quietly piling into calls / positioning bullishly through options?",
+  "tool_calls": [
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "smart money piling into calls",
+        "horizon": "long",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "The options market shows the heaviest bullish call positioning (by $-notional put/call ratio, calls dominant) in these 20 names:\n\nTop-score (1.0) with extremely low put/call ratios (calls overwhelmingly dominant):\n- RPRX (Royalty Pharma) — P/C ratio 0.01, near-pure call positioning\n- HLN (Haleon) — P/C ratio 0.01, near-pure calls\n- MRNA (Moderna) — P/C ratio 0.14\n- BDX (Becton Dickinson) — P/C ratio 0.17\n- FAST (Fastenal) — P/C ratio 0.27\n- APH (Amphenol) — P/C ratio 0.28\n- HEI-A (HEICO Corp-A) — P/C ratio 0.28\n- ONC (BeiGene) — P/C ratio 0.28\n- MNST (Monster Beverage) — P/C ratio 0.32\n- IR (Ingersoll Rand) — P/C ratio 0.33\n- FTS (Fortis) — P/C ratio 0.33\n- CRWD (CrowdStrike) — P/C ratio 0.07\n- BE (Bloom Energy) — P/C ratio 0.36\n- UNG (US Natural Gas Fund) — P/C ratio 0.37\n- XLE (Energy Select SPDR) — P/C ratio 0.37\n- SLV (iShares Silver Trust) — P/C ratio 0.43\n- WTW (Willis Towers Watson) — P/C ratio 0.52\n- ARM (Arm Holdings) — P/C ratio 0.49\n\nNear-top (0.99–0.95): ING (ING Group ADR, P/C 0.25), PCAR (PACCAR, P/C 0.64).\n\nStandout themes: energy (UNG, XLE), precious metals (SLV), healthcare devices (BDX), cybersecurity (CRWD), and several lower-profile names (RPRX, HLN, FAST) with almost zero put activity suggesting very directional call-only positioning. Pattern resolved as 'bullish_positioning'. Universe: ~557 US optionable names.",
+  "friction": "none"
+}

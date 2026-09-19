@@ -1,0 +1,16 @@
+{
+  "id": "op02",
+  "question": "show me names with cheap implied volatility right now",
+  "tool_calls": [
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "cheap implied vol",
+        "horizon": "long",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "20 names sitting at the 0th percentile of their own 90-day ATM IV history (all scores = 0.0, meaning IV is at a multi-month low vs itself):\n\nNDAQ (Nasdaq Inc) — ATM IV 27.9%\nNVDA (NVIDIA) — ATM IV 36.4%\nLPLA (LPL Financial) — ATM IV 33.7%\nMFG (Mizuho Financial) — ATM IV 39.1%\nED (Consolidated Edison) — ATM IV 17.8%\nNOW (ServiceNow) — ATM IV 55.7%\nEME (EMCOR Group) — ATM IV 41.2%\nKR (Kroger) — ATM IV 28.9%\nCHT (Chunghwa Telecom) — ATM IV 19.9%\nFIX (Comfort Systems) — ATM IV 59.3%\nCIEN (Ciena) — ATM IV 68.9%\nCAT (Caterpillar) — ATM IV 39.1%\nGFI (Gold Fields ADR) — ATM IV 50.0%\nGLW (Corning) — ATM IV 60.1%\nALL (Allstate) — ATM IV 25.1%\nADBE (Adobe) — ATM IV 44.3%\nASX (ASE Industrial ADR) — ATM IV 55.3%\nAMAT (Applied Materials) — ATM IV 53.3%\nBE (Bloom Energy) — ATM IV 84.8%\nORCL (Oracle) — ATM IV 55.6%\n\nAll are at the 0th percentile of their own 90-day history, meaning options are at their cheapest relative level in the past three months. Note: the absolute IV levels vary widely (17.8% for the utility ED up to 84.8% for BE) — 'cheap' here is relative to each name's own recent history, not absolute. The universe is ~557 US optionable names.",
+  "friction": "none"
+}
