@@ -1,0 +1,516 @@
+{
+  "id": "ne-04",
+  "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "energy"
+      },
+      "note": "resolve GICS code for energy sector"
+    },
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "gics": "10",
+        "country": "TH",
+        "window": "7d",
+        "order_by": "news_count",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "query": "energy",
+      "candidates": [
+        {
+          "code": "10",
+          "name": "Energy",
+          "level": "sector"
+        },
+        {
+          "code": "1010",
+          "name": "Energy",
+          "level": "group"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "gics": "10",
+        "country": "TH"
+      },
+      "order_by": "news_count",
+      "direction": null,
+      "direction_split": {
+        "total": 15,
+        "net_positive": 15,
+        "net_negative": 0,
+        "ambiguous": 0
+      },
+      "stocks": [
+        {
+          "stock_id": 49921,
+          "symbol": "PTT",
+          "ticker": "PTT.BK",
+          "name": "PTT Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102010",
+          "market_cap_usd": 30552044706.2016,
+          "impact": {
+            "ambiguous": 4,
+            "aspects": [
+              "capital",
+              "demand",
+              "geopolitics",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 09:05:34.814+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 36,
+            "pos": 31,
+            "top_reason": "PTT's integrated business benefits from tight supply and high utilization, with strong earnings growth.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 6.0,
+            "pb_ratio": 0.976861,
+            "pe_ratio": 12.461538,
+            "week52_high": 37.25,
+            "week52_low": 28.4292
+          }
+        },
+        {
+          "stock_id": 49448,
+          "symbol": "BCP",
+          "ticker": "BCP.BK",
+          "name": "Bangchak Corporation Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 1477309420.3392,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-08-26 13:20:27.563211+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 22,
+            "pos": 21,
+            "top_reason": "Brokers expect strong Q3 earnings and interim dividend of 3 baht per share supports share price.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.855639,
+            "pe_ratio": 3.269618,
+            "week52_high": 40.75,
+            "week52_low": 23.5269
+          }
+        },
+        {
+          "stock_id": 50152,
+          "symbol": "TOP",
+          "ticker": "TOP.BK",
+          "name": "Thai Oil Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 3281057611.776,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "geopolitics",
+              "regulation",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 09:05:34.814+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 14,
+            "pos": 11,
+            "top_reason": "Brokers see refining margins recovering strongly due to tight global oil product supply from reduced refinery runs.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 3.85,
+            "pb_ratio": 0.726616,
+            "pe_ratio": 4.623538,
+            "week52_high": 56.75,
+            "week52_low": 25.8829
+          }
+        },
+        {
+          "stock_id": 49849,
+          "symbol": "OR",
+          "ticker": "OR.BK",
+          "name": "PTT Oil and Retail Business Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 4589999780.6592,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 05:30:29.337571+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 13,
+            "pos": 11,
+            "top_reason": "Board approves interim dividend of 0.30 baht per share, returning cash to shareholders.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 4.88,
+            "pb_ratio": 1.352342,
+            "pe_ratio": 28.181818,
+            "week52_high": 15.2751,
+            "week52_low": 10.3417
+          }
+        },
+        {
+          "stock_id": 49440,
+          "symbol": "BANPU",
+          "ticker": "BANPU.BK",
+          "name": "Banpu Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102050",
+          "market_cap_usd": 1655523569.664,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "pricing",
+              "technology"
+            ],
+            "latest_at": "2026-08-25 15:35:52.46423+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 13,
+            "pos": 12,
+            "top_reason": "Announces strategic targets for BESS projects, gas production, carbon sequestration, and expansion into strategic minerals and AI.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.19,
+            "pb_ratio": 0.786324,
+            "pe_ratio": 5.305525,
+            "week52_high": 6.2948,
+            "week52_low": 3.8367
+          }
+        },
+        {
+          "stock_id": 49922,
+          "symbol": "PTTEP",
+          "ticker": "PTTEP.BK",
+          "name": "PTT Exploration and Production Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102020",
+          "market_cap_usd": 16035564198.2976,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 05:30:29.337571+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 12,
+            "pos": 10,
+            "top_reason": "PTTEP is spearhead for investment in petroleum exploration and production.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.21,
+            "pb_ratio": 1.042156,
+            "pe_ratio": 8.54848,
+            "week52_high": 164.0,
+            "week52_low": 98.508
+          }
+        },
+        {
+          "stock_id": 49683,
+          "symbol": "IRPC",
+          "ticker": "IRPC.BK",
+          "name": "IRPC Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 1155443591.5776,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "regulation",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 11:50:50.66798+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 11,
+            "pos": 10,
+            "top_reason": "IRPC declared a cash dividend of 0.04 baht per share, a positive capital return to shareholders.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.57,
+            "pb_ratio": 0.686118,
+            "pe_ratio": 8.857143,
+            "week52_high": 2.34,
+            "week52_low": 0.7447
+          }
+        },
+        {
+          "stock_id": 50044,
+          "symbol": "SPRC",
+          "ticker": "SPRC.BK",
+          "name": "Star Petroleum Refining Co Ltd",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 1008357411.2256,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "regulation",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 01:35:47.732463+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 6,
+            "top_reason": "First-half profit and dividend announced, with strong underlying performance despite Q2 oil stock losses.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 6.0,
+            "pb_ratio": 1.113959,
+            "pe_ratio": 3.076923,
+            "week52_high": 8.2,
+            "week52_low": 4.1004
+          }
+        },
+        {
+          "stock_id": 49374,
+          "symbol": "AGE",
+          "ticker": "AGE.BK",
+          "name": "Asia Green Energy Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102050",
+          "market_cap_usd": 48696109.5168,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 10:15:30.511141+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 5,
+            "pos": 5,
+            "top_reason": "Q2 profit up 27% and revenue up 23% YoY, beating targets.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.528401,
+            "pe_ratio": 4.833333,
+            "week52_high": 1.52,
+            "week52_low": 0.97
+          }
+        },
+        {
+          "stock_id": 49905,
+          "symbol": "PRM",
+          "ticker": "PRM.BK",
+          "name": "Prima Marine Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102040",
+          "market_cap_usd": 580301932.9536,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-26 01:50:45.649615+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 3,
+            "pos": 3,
+            "top_reason": "Q2 profit up 20.2% and special dividend approved",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 5.65,
+            "pb_ratio": 1.804751,
+            "pe_ratio": 10.408163,
+            "week52_high": 9.2,
+            "week52_low": 5.2449
+          }
+        },
+        {
+          "stock_id": 50246,
+          "symbol": "WP",
+          "ticker": "WP.BK",
+          "name": "Wp Energy Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102040",
+          "market_cap_usd": 58111783.3728,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-20 11:25:34.18263+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 3,
+            "pos": 3,
+            "top_reason": "Company announces new growth strategy and investment in AI data centers, aiming to diversify revenue and strengthen core LPG business.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 7.94,
+            "pb_ratio": 1.47442,
+            "pe_ratio": 12.451613,
+            "week52_high": 3.78,
+            "week52_low": 3.2052
+          }
+        },
+        {
+          "stock_id": 50075,
+          "symbol": "SUSCO",
+          "ticker": "SUSCO.BK",
+          "name": "Susco Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 62209798.0416,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 04:05:43.204116+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "Net profit surged 797.01% in Q2 2026.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 4.29,
+            "pb_ratio": 0.519138,
+            "pe_ratio": 17.285714,
+            "week52_high": 2.6216,
+            "week52_low": 1.9712
+          }
+        },
+        {
+          "stock_id": 49582,
+          "symbol": "EA",
+          "ticker": "EA.BK",
+          "name": "Energy Absolute Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 659054304.4608,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "demand"
+            ],
+            "latest_at": "2026-08-26 02:45:27.689958+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "AAB, a subsidiary of EA, will produce electric buses for the BMTA project, boosting demand for its manufacturing.",
+            "top_relevance": 0.8
+          },
+          "fundamentals": {
+            "dividend_yield_pct": null,
+            "pb_ratio": 0.652736,
+            "pe_ratio": null,
+            "week52_high": 3.88,
+            "week52_low": 2.04
+          }
+        },
+        {
+          "stock_id": 50086,
+          "symbol": "TAE",
+          "ticker": "TAE.BK",
+          "name": "Thai Agro Energy Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 44064000.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-26 05:25:26.841695+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Announces interim dividend of 0.05 baht per share, a positive capital return to shareholders.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": null,
+            "pb_ratio": 0.899884,
+            "pe_ratio": 13.529412,
+            "week52_high": 1.89,
+            "week52_low": 0.45
+          }
+        },
+        {
+          "stock_id": 49425,
+          "symbol": "ATLAS",
+          "ticker": "ATLAS.BK",
+          "name": "Atlas Energy Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 78994649.088,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-20 04:40:34.649629+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "KGI maintains buy rating and expects Q3 profit recovery, though target price cut.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 8.2,
+            "pb_ratio": 0.878062,
+            "pe_ratio": 7.977663,
+            "week52_high": 2.6726,
+            "week52_low": 1.5645
+          }
+        }
+      ],
+      "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+    }
+  ],
+  "answer_to_user": "สรุปข่าวหุ้นกลุ่มพลังงานไทย (GICS 10, ประเทศไทย) รอบ 7 วันที่ผ่านมา จัดอันดับตามปริมาณข่าว:\n\nข้อสังเกตสำคัญ: สัปดาห์นี้ข่าวกลุ่มพลังงานไทย 'บวกยกกลุ่ม' — ทั้ง 15 ชื่อที่ระบบจับได้เป็น net-positive ไม่มีตัวไหนที่ข่าวสุทธิเป็นลบ (แต่ละตัวมีข่าวลบปนบ้าง 1-2 ข่าว แต่ไม่ถึงกับพลิกเป็นลบ)\n\nฝั่งบวก (net-positive) เรียงตามความสนใจ:\n- PTT — ข่าวเยอะสุด 36 ข่าว (บวก 31): ธุรกิจครบวงจรได้ประโยชน์จากซัพพลายตึงตัวและกำไรเติบโต\n- BCP (บางจาก) — 22 ข่าว: โบรกฯ คาดกำไร Q3 แข็งแรง + ปันผลระหว่างกาล 3 บาท/หุ้น\n- TOP (ไทยออยล์) — 14 ข่าว: ค่าการกลั่นฟื้นตัวจากซัพพลายตึงตัว\n- OR — 13 ข่าว: อนุมัติปันผลระหว่างกาล 0.30 บาท/หุ้น\n- BANPU — 13 ข่าว: วางเป้ากลยุทธ์ BESS/ก๊าซ/คาร์บอน + ขยายสู่แร่และ AI\n- PTTEP — 12 ข่าว (ผู้นำลงทุนสำรวจ-ผลิตปิโตรเลียม); IRPC 11 ข่าว (ปันผล 0.04 บาท); SPRC 8 ข่าว (yield ~6%); และรายเล็ก AGE, PRM, WP, SUSCO, EA, TAE, ATLAS ที่ส่วนใหญ่เป็นข่าวกำไร Q2/ปันผล\n\nฝั่งลบ (net-negative): ไม่มี — สัปดาห์นี้ไม่พบหุ้นพลังงานไทยที่ข่าวสุทธิเป็นลบ ธีมหลักคือฤดูประกาศผลประกอบการ Q2 + ปันผลระหว่างกาล และค่าการกลั่น/ซัพพลายตึงตัวที่เป็นบวกต่อกลุ่มโรงกลั่น หากต้องการเจาะข่าวลบรายตัว (เช่น regulation ของ TOP/SPRC) สามารถดูราย ticker เพิ่มได้ครับ"
+}

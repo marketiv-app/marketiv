@@ -1,0 +1,28 @@
+{
+  "id": "tn-08",
+  "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+  "tool_calls": [
+    {
+      "tool": "find_gics",
+      "args": {"q": "information technology"}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.10", "window_bars": 22}], "quals": [{"any": [{"pattern": "rising_volume", "for_bars": 3}]}]}],
+        "gics": "45",
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "59 results. Includes ServiceNow (NOW.US, +15.88% over ~22 days, rising volume), PagerDuty (PD.US, +18.3%), Rimini Street (RMNI.US, +11.9%). All match both net_change_up (>=10% over 22 bars) and rising_volume. GICS=45 (IT sector) filter applied. Also includes Commerce.com (CMRC.US) which may not be IT sector if misclassified.",
+  "verdict": "PASS",
+  "reason": "Returns tech-sector stocks (GICS 45) with strong recent price gains (+10-18% over 1 month) AND confirmed rising volume signal. Both conditions matched. ServiceNow is a well-known tech name validating the filter.",
+  "defects": [
+    {
+      "desc": "GICS sector filter gics='45' is applied but the result may include non-IT names if misclassified in the universe. Screen does not expose gics_name in results for verification. Client cannot easily confirm each result is truly IT-sector from the response.",
+      "side": "server"
+    }
+  ]
+}

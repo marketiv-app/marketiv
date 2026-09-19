@@ -1,0 +1,174 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "question": "revenue grew every year for the last 3 years",
+      "tool_calls": [
+        "find_fspattern('grew every year') -> consecutive_growth",
+        "find_fsconcept('revenue') -> revenue",
+        "screen_unified({fundamental:[{concept:'revenue',pattern:'consecutive_growth',N:3}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20 (capped). Top NVDA.US.",
+      "evidence_check": "matched.fundamental.revenue = {kind:growth, value:0.6547, window:'min_yoy', years_checked:3, requested_n:3, series:[0.6547,1.142,1.2585]}. Has value+window+years_checked+per-year series. UNIFORM/complete.",
+      "confusion_note": "None. consecutive_growth was the curated top hit; N=3 mapped straight from 'last 3 years'.",
+      "verdict": "pass",
+      "reason": "Obvious tool+params; full window evidence with series.",
+      "defects": []
+    },
+    {
+      "id": 2,
+      "question": "revenue grew every year for the last 8 years (over-depth)",
+      "tool_calls": [
+        "screen_unified({fundamental:[{concept:'revenue',pattern:'consecutive_growth',N:8}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 0, with a notes[] insufficiency message.",
+      "evidence_check": "notes: \"`revenue`: the data exists, but NO company has 8 years of annual history (deepest available ≈ 5y) — a 0 count here is INSUFFICIENT HISTORY, not 'nobody qualified'. Re-ask with N≤5 for the best answer the data supports.\" Clear insufficiency note + deepest feasible N (≈5y) stated.",
+      "confusion_note": "None.",
+      "verdict": "pass",
+      "reason": "Over-depth handled: 0 count comes WITH an explicit insufficient-history note naming the deepest feasible N.",
+      "defects": []
+    },
+    {
+      "id": 3,
+      "question": "net income has been volatile",
+      "tool_calls": [
+        "find_fspattern('has been volatile') -> volatile",
+        "find_fsconcept('net income') -> net_income",
+        "screen_unified({fundamental:[{concept:'net_income',pattern:'volatile'}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20 (NOT empty). Top NVDA.US.",
+      "evidence_check": "matched.fundamental.net_income = {kind:growth, value:2.7801, window:'yoy_std', years_checked:3}. Dispersion value present (yoy_std); no per-year series (expected for a volatility stat). value+window+years_checked present.",
+      "confusion_note": "None. 'volatile' distinct from 'erratic_growth' (volatile = pure swing, no growth floor).",
+      "verdict": "pass",
+      "reason": "Returns real results with a volatility value; series correctly absent for a dispersion pattern.",
+      "defects": []
+    },
+    {
+      "id": 4,
+      "question": "revenue growth has been stable and steady",
+      "tool_calls": [
+        "find_fspattern('growth has been stable and steady') -> stable_growth",
+        "screen_unified({fundamental:[{concept:'revenue',pattern:'stable_growth'}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20 (NOT empty). Top AAPL.US.",
+      "evidence_check": "matched.fundamental.revenue = {kind:growth, value:0.0462, window:'yoy_std', years_checked:3}. Low-dispersion value present. value+window+years_checked present; no series (expected).",
+      "confusion_note": "None.",
+      "verdict": "pass",
+      "reason": "Real results; low yoy_std evidence for 'stable'.",
+      "defects": []
+    },
+    {
+      "id": 5,
+      "question": "net income growth has been erratic",
+      "tool_calls": [
+        "find_fspattern('growth has been erratic') -> erratic_growth",
+        "screen_unified({fundamental:[{concept:'net_income',pattern:'erratic_growth'}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20 (NOT empty). Top NVDA.US.",
+      "evidence_check": "matched.fundamental.net_income = {kind:growth, value:2.7801, window:'yoy_std', years_checked:3}. value+window+years_checked present; no series (expected for dispersion pattern).",
+      "confusion_note": "None. Note: erratic_growth output evidence surfaces yoy_std but not the cagr floor it also requires; both erratic(5) and volatile(3) show the same yoy_std value for NVDA (definitions differ only by the extra cagr gate).",
+      "verdict": "pass",
+      "reason": "Real results with a swing value.",
+      "defects": []
+    },
+    {
+      "id": 6,
+      "question": "earnings per share improved every year for 3 years",
+      "tool_calls": [
+        "find_fspattern('improved every year') -> improved_every_year",
+        "find_fsconcept('earnings per share') -> eps_diluted",
+        "screen_unified({fundamental:[{concept:'eps_diluted',pattern:'improved_every_year',N:3}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20. Top NVDA.US.",
+      "evidence_check": "matched.fundamental.eps_diluted = {kind:growth, value:4.9, window:'latest_value', years_checked:3, requested_n:3, series:[4.9,2.94,1.19]}. Full: value+window+years_checked+per-year series. UNIFORM.",
+      "confusion_note": "None. improved_every_year was curated top hit (raw-value up, cross-zero safe — correct for EPS which can be negative).",
+      "verdict": "pass",
+      "reason": "Complete window evidence with series for an 'improved' pattern.",
+      "defects": []
+    },
+    {
+      "id": 7,
+      "question": "net margin stayed above 20% every year for the last 3 years",
+      "tool_calls": [
+        "find_fspattern('stayed above a level every year') -> sustained_above",
+        "find_fsconcept('net margin') -> net_margin",
+        "screen_unified({fundamental:[{concept:'net_margin',pattern:'sustained_above',threshold:0.20,N:3}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20. Top NVDA.US.",
+      "evidence_check": "matched.fundamental.net_margin = {kind:growth, value:0.4885, window:'min_value', years_checked:3, requested_n:3, latest:0.556}. value(=worst-year min)+window+years_checked present; carries `latest` instead of a per-year series (acceptable — sustained_above is a min-over-window test, series not one of its documented obligations).",
+      "confusion_note": "None. 20% -> 0.20 fraction per schema SCALE guidance.",
+      "verdict": "pass",
+      "reason": "Correct pattern+threshold scaling; min_value evidence proves the floor was cleared every year.",
+      "defects": []
+    },
+    {
+      "id": 8,
+      "question": "operating cash flow stayed above zero every year for 4 years",
+      "tool_calls": [
+        "find_fsconcept('operating cash flow') -> operating_cash_flow",
+        "screen_unified({fundamental:[{concept:'operating_cash_flow',pattern:'sustained_above',threshold:0,N:4}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20. Top NVDA.US.",
+      "evidence_check": "matched.fundamental.operating_cash_flow = {kind:growth, value:5.641e9, window:'min_value', years_checked:4, requested_n:4, unit:'usd', latest:1.027e11}. value(worst-year min $5.6bn > 0)+window+years_checked present; unit tagged.",
+      "confusion_note": "None. threshold:0 accepted for 'above zero'.",
+      "verdict": "pass",
+      "reason": "min_value>0 correctly evidences the every-year floor over 4y.",
+      "defects": []
+    },
+    {
+      "id": 9,
+      "question": "revenue compounded at over 20% a year over 3 years (CAGR)",
+      "tool_calls": [
+        "find_fspattern('compounded at a rate per year') -> compound_growth",
+        "screen_unified({fundamental:[{concept:'revenue',pattern:'compound_growth',threshold:0.20,N:3}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20. Top NVDA.US.",
+      "evidence_check": "matched.fundamental.revenue = {kind:growth, value:1.0005, window:'3y_cagr'}. Has value+window BUT MISSING years_checked AND MISSING requested_n. No series (CAGR is a single stat, so series-absence is fine).",
+      "confusion_note": "None on selection (compound_growth is the CAGR hit; 20% -> 0.20). But the evidence block is thinner than every sibling window pattern.",
+      "verdict": "partial",
+      "reason": "Correct match/result, but the evidence shape is NON-UNIFORM: compound_growth omits years_checked (present on all 8 other window patterns) so the caller can't confirm the CAGR was measured over the requested N=3 from the evidence alone.",
+      "defects": [
+        {
+          "desc": "compound_growth (CAGR) matched.fundamental lacks `years_checked` and `requested_n` — only value + window:'3y_cagr'. Every other window pattern (consecutive_growth/decline, improved_every_year, sustained_above, volatile, stable_growth, erratic_growth) reports years_checked. The N is only inferable from the window string '3y_cagr'. Add years_checked (and requested_n) for uniformity/auditability.",
+          "side": "server"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "revenue compounded over 15% a year over the last 10 years (over-depth)",
+      "tool_calls": [
+        "screen_unified({fundamental:[{concept:'revenue',pattern:'compound_growth',threshold:0.15,N:10}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 0, with a notes[] insufficiency message.",
+      "evidence_check": "notes: \"`revenue`: the data exists, but NO company has 10 years of annual history (deepest available ≈ 5y) — a 0 count here is INSUFFICIENT HISTORY, not 'nobody qualified'. Re-ask with N≤5 for the best answer the data supports.\" Clear insufficiency note + deepest feasible N (≈5y).",
+      "confusion_note": "None.",
+      "verdict": "pass",
+      "reason": "Over-depth CAGR handled with the same explicit insufficient-history note + deepest feasible N.",
+      "defects": []
+    },
+    {
+      "id": 11,
+      "question": "free cash flow fell every year for the last 3 years",
+      "tool_calls": [
+        "find_fspattern('fell every year') -> consecutive_decline",
+        "find_fsconcept('free cash flow') -> free_cash_flow",
+        "screen_unified({fundamental:[{concept:'free_cash_flow',pattern:'consecutive_decline',N:3}],asset_type:['Common Stock']})"
+      ],
+      "result_summary": "count 20. Top JPM.US.",
+      "evidence_check": "matched.fundamental.free_cash_flow = {kind:growth, value:-4.2382, window:'min_yoy'(worst yoy), years_checked:3, requested_n:3, series:[-2.5176,-4.2382,-0.8789]}. Full: value+window+years_checked+per-year series (all negative -> confirms decline). UNIFORM.",
+      "confusion_note": "None. consecutive_decline was curated top hit; mirror of consecutive_growth.",
+      "verdict": "pass",
+      "reason": "Complete window evidence with a negative-throughout series for a 'declined' pattern.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 10,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "compound_growth (CAGR) evidence block omits `years_checked` (and `requested_n`) that ALL 8 other window patterns include — the only non-uniform window shape (case 9). N is only inferable from the window string '3y_cagr'. Server side."
+    ]
+  }
+}

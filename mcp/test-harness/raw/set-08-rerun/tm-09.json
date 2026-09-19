@@ -1,0 +1,1148 @@
+{
+ "id": "tm-09",
+ "question": "อยากเล่นธีม GLP-1 (ยาลดความอ้วน/เบาหวาน) ใครคือตัวจริงบ้าง ทั้งคนทำยาและซัพพลายเชน",
+ "tools_called": [
+  {
+   "tool": "find_megatrend",
+   "args": {
+    "terms": [
+     "GLP-1 obesity drugs",
+     "weight loss drugs",
+     "diabetes drugs"
+    ]
+   },
+   "note": ""
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "18010000",
+    "country": "DK",
+    "limit": 25
+   },
+   "note": "node 18010000 Metabolic, Diabetes & Obesity; DK returned 0 (Novo surfaces via US listing NVO)"
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "18010000",
+    "country": "US",
+    "limit": 25
+   },
+   "note": "US surface is cross-market (Novo NVO, AstraZeneca AZN appear here)"
+  }
+ ],
+ "raw_responses": [
+  {
+   "GLP-1 obesity drugs": [
+    {
+     "id": 18010000,
+     "name": "Metabolic, Diabetes & Obesity",
+     "tier": 2
+    }
+   ],
+   "weight loss drugs": [
+    {
+     "id": 18010000,
+     "name": "Metabolic, Diabetes & Obesity",
+     "tier": 2
+    }
+   ],
+   "diabetes drugs": [
+    {
+     "id": 18010000,
+     "name": "Metabolic, Diabetes & Obesity",
+     "tier": 2
+    }
+   ]
+  },
+  {
+   "stocks": [],
+   "count": 0,
+   "total": 0
+  },
+  {
+   "stocks": [
+    {
+     "stock_id": 26596,
+     "symbol": "LLY",
+     "ticker": "LLY.US",
+     "type": null,
+     "name": "Eli Lilly and Company",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 1111459889152.0,
+     "market_cap_local": 1111459889152.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 1111459889152.0,
+      "market_cap_usd": 1111459889152.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Eli Lilly and Company",
+      "stock_id": 26596,
+      "symbol": "LLY",
+      "ticker": "LLY.US"
+     }
+    },
+    {
+     "stock_id": 3528,
+     "symbol": "AZN",
+     "ticker": "AZN.US",
+     "type": null,
+     "name": "AstraZeneca PLC",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "GB",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 263123304448.0,
+     "market_cap_local": 263123304448.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "GB",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 263123304448.0,
+      "market_cap_usd": 263123304448.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "AstraZeneca PLC",
+      "stock_id": 3528,
+      "symbol": "AZN",
+      "ticker": "AZN.US"
+     }
+    },
+    {
+     "stock_id": 31842,
+     "symbol": "NVO",
+     "ticker": "NVO.US",
+     "type": null,
+     "name": "Novo Nordisk A/S",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "DK",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 215127310336.0,
+     "market_cap_local": 215127310336.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "DK",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 215127310336.0,
+      "market_cap_usd": 215127310336.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Novo Nordisk A/S",
+      "stock_id": 31842,
+      "symbol": "NVO",
+      "ticker": "NVO.US"
+     }
+    },
+    {
+     "stock_id": 38203,
+     "symbol": "RPRX",
+     "ticker": "RPRX.US",
+     "type": null,
+     "name": "Royalty Pharma Plc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "GB",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 35866247168.0,
+     "market_cap_local": 35866247168.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "GB",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 35866247168.0,
+      "market_cap_usd": 35866247168.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": null
+      },
+      "name": "Royalty Pharma Plc",
+      "stock_id": 38203,
+      "symbol": "RPRX",
+      "ticker": "RPRX.US"
+     }
+    },
+    {
+     "stock_id": 8311,
+     "symbol": "CORT",
+     "ticker": "CORT.US",
+     "type": null,
+     "name": "Corcept Therapeutics Incorporated",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 13357719552.0,
+     "market_cap_local": 13357719552.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 13357719552.0,
+      "market_cap_usd": 13357719552.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": null
+      },
+      "name": "Corcept Therapeutics Incorporated",
+      "stock_id": 8311,
+      "symbol": "CORT",
+      "ticker": "CORT.US"
+     }
+    },
+    {
+     "stock_id": 27994,
+     "symbol": "MDGL",
+     "ticker": "MDGL.US",
+     "type": null,
+     "name": "Madrigal Pharmaceuticals Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 11833008128.0,
+     "market_cap_local": 11833008128.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 11833008128.0,
+      "market_cap_usd": 11833008128.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Madrigal Pharmaceuticals Inc",
+      "stock_id": 27994,
+      "symbol": "MDGL",
+      "ticker": "MDGL.US"
+     }
+    },
+    {
+     "stock_id": 46201,
+     "symbol": "VKTX",
+     "ticker": "VKTX.US",
+     "type": null,
+     "name": "Viking Therapeutics Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 3986030592.0,
+     "market_cap_local": 3986030592.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 3986030592.0,
+      "market_cap_usd": 3986030592.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Viking Therapeutics Inc",
+      "stock_id": 46201,
+      "symbol": "VKTX",
+      "ticker": "VKTX.US"
+     }
+    },
+    {
+     "stock_id": 27747,
+     "symbol": "MBX",
+     "ticker": "MBX.US",
+     "type": null,
+     "name": "MBX Biosciences, Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 3304745984.0,
+     "market_cap_local": 3304745984.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 3304745984.0,
+      "market_cap_usd": 3304745984.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "MBX Biosciences, Inc. Common Stock",
+      "stock_id": 27747,
+      "symbol": "MBX",
+      "ticker": "MBX.US"
+     }
+    },
+    {
+     "stock_id": 272501,
+     "symbol": "KLRA",
+     "ticker": "KLRA.US",
+     "type": null,
+     "name": "Kailera Therapeutics, Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 2301175296.0,
+     "market_cap_local": 2301175296.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 2301175296.0,
+      "market_cap_usd": 2301175296.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Kailera Therapeutics, Inc. Common Stock",
+      "stock_id": 272501,
+      "symbol": "KLRA",
+      "ticker": "KLRA.US"
+     }
+    },
+    {
+     "stock_id": 39665,
+     "symbol": "SEPN",
+     "ticker": "SEPN.US",
+     "type": null,
+     "name": "Septerna, Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 1927757952.0,
+     "market_cap_local": 1927757952.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 1927757952.0,
+      "market_cap_usd": 1927757952.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Septerna, Inc. Common Stock",
+      "stock_id": 39665,
+      "symbol": "SEPN",
+      "ticker": "SEPN.US"
+     }
+    },
+    {
+     "stock_id": 48455,
+     "symbol": "XERS",
+     "ticker": "XERS.US",
+     "type": null,
+     "name": "Xeris Pharmaceuticals Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 1593479424.0,
+     "market_cap_local": 1593479424.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 1593479424.0,
+      "market_cap_usd": 1593479424.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Xeris Pharmaceuticals Inc",
+      "stock_id": 48455,
+      "symbol": "XERS",
+      "ticker": "XERS.US"
+     }
+    },
+    {
+     "stock_id": 29231,
+     "symbol": "MNKD",
+     "ticker": "MNKD.US",
+     "type": null,
+     "name": "MannKind Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 1308686080.0,
+     "market_cap_local": 1308686080.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 1308686080.0,
+      "market_cap_usd": 1308686080.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "MannKind Corp",
+      "stock_id": 29231,
+      "symbol": "MNKD",
+      "ticker": "MNKD.US"
+     }
+    },
+    {
+     "stock_id": 23184,
+     "symbol": "IVA",
+     "ticker": "IVA.US",
+     "type": null,
+     "name": "Inventiva Sa",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "FR",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 1107874944.0,
+     "market_cap_local": 1107874944.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "FR",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 1107874944.0,
+      "market_cap_usd": 1107874944.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Inventiva Sa",
+      "stock_id": 23184,
+      "symbol": "IVA",
+      "ticker": "IVA.US"
+     }
+    },
+    {
+     "stock_id": 27346,
+     "symbol": "LXRX",
+     "ticker": "LXRX.US",
+     "type": null,
+     "name": "Lexicon Pharmaceuticals Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 1041196864.0,
+     "market_cap_local": 1041196864.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 1041196864.0,
+      "market_cap_usd": 1041196864.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Lexicon Pharmaceuticals Inc",
+      "stock_id": 27346,
+      "symbol": "LXRX",
+      "ticker": "LXRX.US"
+     }
+    },
+    {
+     "stock_id": 45887,
+     "symbol": "VERB",
+     "ticker": "VERB.US",
+     "type": null,
+     "name": "Verb Technology Company Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "45103010",
+     "market_cap_usd": 877814080.0,
+     "market_cap_local": 877814080.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "45103010",
+      "market_cap_local": 877814080.0,
+      "market_cap_usd": 877814080.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": null
+      },
+      "name": "Verb Technology Company Inc",
+      "stock_id": 45887,
+      "symbol": "VERB",
+      "ticker": "VERB.US"
+     }
+    },
+    {
+     "stock_id": 39883,
+     "symbol": "SGMT",
+     "ticker": "SGMT.US",
+     "type": null,
+     "name": "Sagimet Biosciences Inc. Series A Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 639612544.0,
+     "market_cap_local": 639612544.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 639612544.0,
+      "market_cap_usd": 639612544.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": null
+      },
+      "name": "Sagimet Biosciences Inc. Series A Common Stock",
+      "stock_id": 39883,
+      "symbol": "SGMT",
+      "ticker": "SGMT.US"
+     }
+    },
+    {
+     "stock_id": 1788,
+     "symbol": "ALT",
+     "ticker": "ALT.US",
+     "type": null,
+     "name": "Altimmune Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 622456640.0,
+     "market_cap_local": 622456640.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 622456640.0,
+      "market_cap_usd": 622456640.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Altimmune Inc",
+      "stock_id": 1788,
+      "symbol": "ALT",
+      "ticker": "ALT.US"
+     }
+    },
+    {
+     "stock_id": 5399520,
+     "symbol": "SCTX",
+     "ticker": "SCTX.US",
+     "type": null,
+     "name": "Scribe Therapeutics Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 504959616.0,
+     "market_cap_local": 504959616.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "beneficiary"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 504959616.0,
+      "market_cap_usd": 504959616.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "beneficiary"
+      },
+      "name": "Scribe Therapeutics Inc. Common Stock",
+      "stock_id": 5399520,
+      "symbol": "SCTX",
+      "ticker": "SCTX.US"
+     }
+    },
+    {
+     "stock_id": 6886209,
+     "symbol": "VOGX",
+     "ticker": "VOGX.US",
+     "type": null,
+     "name": "Vogenx Inc Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": null,
+     "market_cap_usd": 468380896.0,
+     "market_cap_local": 468380896.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": null,
+      "market_cap_local": 468380896.0,
+      "market_cap_usd": 468380896.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Vogenx Inc Common Stock",
+      "stock_id": 6886209,
+      "symbol": "VOGX",
+      "ticker": "VOGX.US"
+     }
+    },
+    {
+     "stock_id": 38894,
+     "symbol": "SABS",
+     "ticker": "SABS.US",
+     "type": null,
+     "name": "SAB Biotherapeutics Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 346658048.0,
+     "market_cap_local": 346658048.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 346658048.0,
+      "market_cap_usd": 346658048.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "SAB Biotherapeutics Inc",
+      "stock_id": 38894,
+      "symbol": "SABS",
+      "ticker": "SABS.US"
+     }
+    },
+    {
+     "stock_id": 8558,
+     "symbol": "CRBP",
+     "ticker": "CRBP.US",
+     "type": null,
+     "name": "Corbus Pharmaceuticals Holding",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 218750016.0,
+     "market_cap_local": 218750016.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 218750016.0,
+      "market_cap_usd": 218750016.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": null
+      },
+      "name": "Corbus Pharmaceuticals Holding",
+      "stock_id": 8558,
+      "symbol": "CRBP",
+      "ticker": "CRBP.US"
+     }
+    },
+    {
+     "stock_id": 32766,
+     "symbol": "ORMP",
+     "ticker": "ORMP.US",
+     "type": null,
+     "name": "Oramed Pharmaceuticals Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 213224880.0,
+     "market_cap_local": 213224880.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 213224880.0,
+      "market_cap_usd": 213224880.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Oramed Pharmaceuticals Inc",
+      "stock_id": 32766,
+      "symbol": "ORMP",
+      "ticker": "ORMP.US"
+     }
+    },
+    {
+     "stock_id": 239,
+     "symbol": "AARD",
+     "ticker": "AARD.US",
+     "type": null,
+     "name": "Aardvark Therapeutics, Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35202010",
+     "market_cap_usd": 158665136.0,
+     "market_cap_local": 158665136.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35202010",
+      "market_cap_local": 158665136.0,
+      "market_cap_usd": 158665136.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Aardvark Therapeutics, Inc. Common Stock",
+      "stock_id": 239,
+      "symbol": "AARD",
+      "ticker": "AARD.US"
+     }
+    },
+    {
+     "stock_id": 46790,
+     "symbol": "VTVT",
+     "ticker": "VTVT.US",
+     "type": null,
+     "name": "vTv Therapeutics Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 134077696.0,
+     "market_cap_local": 134077696.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 134077696.0,
+      "market_cap_usd": 134077696.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "vTv Therapeutics Inc",
+      "stock_id": 46790,
+      "symbol": "VTVT",
+      "ticker": "VTVT.US"
+     }
+    },
+    {
+     "stock_id": 45681,
+     "symbol": "VANI",
+     "ticker": "VANI.US",
+     "type": null,
+     "name": "Vivani Medical Inc.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "35201010",
+     "market_cap_usd": 128088768.0,
+     "market_cap_local": 128088768.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 18010000,
+      "node_name": "Metabolic, Diabetes & Obesity",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "35201010",
+      "market_cap_local": 128088768.0,
+      "market_cap_usd": 128088768.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 18010000,
+       "node_name": "Metabolic, Diabetes & Obesity",
+       "role": "leader"
+      },
+      "name": "Vivani Medical Inc.",
+      "stock_id": 45681,
+      "symbol": "VANI",
+      "ticker": "VANI.US"
+     }
+    }
+   ],
+   "count": 25,
+   "total": 69,
+   "note": "showing 25 of 69 — this is a curated top slice, not the full list; tell the user more exist, and raise `limit` or narrow the scope to see them"
+  }
+ ],
+ "answer_to_user": "ธีม GLP-1 / ยาลดความอ้วน-เบาหวาน (megatrend node 'Metabolic, Diabetes & Obesity') ตัวจริงมีดังนี้:\n\nคนทำยาตัวหลัก (leaders, core): Eli Lilly (LLY.US) และ Novo Nordisk (NVO.US, สัญชาติเดนมาร์ก) — สองเจ้าตลาด GLP-1 ตัวจริง; และ AstraZeneca (AZN.US) เป็นรายใหญ่ที่กำลังรุกกลุ่มนี้.\n\nคู่ท้าชิง/biotech รุ่นใหม่ที่ทำยาลดน้ำหนัก-metabolic: Viking Therapeutics (VKTX.US), Madrigal Pharmaceuticals (MDGL.US, MASH/metabolic), Altimmune (ALT.US), Structure/Kailera Therapeutics (KLRA.US), Septerna (SEPN.US), Corcept (CORT.US), Lexicon (LXRX.US), Oramed (ORMP.US), vTv Therapeutics (VTVT.US), MBX Biosciences (MBX.US), Inventiva (IVA.US).\n\nฝั่ง delivery / device / ซัพพลายเชน (การให้ยา-injectable/oral): MannKind (MNKD.US, inhaled/formulation), Xeris Pharmaceuticals (XERS.US, injectable delivery), Vivani Medical (VANI.US, implant delivery), และ Royalty Pharma (RPRX.US) ที่ถือ royalty ยากลุ่มนี้.\n\nสรุป: ตัวจริง = Lilly + Novo (+ AstraZeneca) ส่วน upside เก็งกำไรอยู่ที่ biotech รุ่นสองอย่าง Viking/Madrigal/Altimmune และกลุ่ม delivery อย่าง MannKind/Xeris/Vivani. (หมายเหตุ: ในชุดข้อมูลนี้เน้นผู้พัฒนายา/ระบบนำส่ง มากกว่า CDMO ผู้รับจ้างผลิตโดยตรง)"
+}

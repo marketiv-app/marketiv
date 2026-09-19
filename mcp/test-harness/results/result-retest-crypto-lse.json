@@ -1,0 +1,57 @@
+[
+  {
+    "id": "crypto-near-low",
+    "question": "any crypto near its 52 week low right now?",
+    "tools_called": [
+      {
+        "tool": "find_tasignal",
+        "args": {"q": ["price near its 52 week low", "price broke below the 50-day moving average", "price broke below the 200-day moving average", "price below key support"]},
+        "ok": true,
+        "error": "",
+        "result_count": 4
+      },
+      {
+        "tool": "screen_unified",
+        "args": {"asset_type": ["Crypto"], "ta": [{"anchor": [{"pattern": "near_low"}]}], "limit": 15},
+        "ok": true,
+        "error": "",
+        "result_count": 60
+      }
+    ],
+    "tickers_returned": [
+      "AB-USD.CC", "ACE22307-USD.CC", "ACES-USD.CC", "ACOIN-USD.CC", "ACT-USD.CC",
+      "ADC-USD.CC", "ADOGE-USD.CC", "ADZ-USD.CC", "AIDOGE-USD.CC", "ANG-USD.CC",
+      "ARB-USD.CC", "ARG-USD.CC", "ARGUS-USD.CC", "ARX-USD.CC", "ASAFE-USD.CC",
+      "COOK33720-USD.CC", "COQ-USD.CC", "CORGIB-USD.CC", "2GIVE-USD.CC"
+    ],
+    "answer_to_user": "Yes — plenty. Scoped to the crypto universe (2,154 coins), at least 60 are trading within 3% of their 52-week low right now (as of 2026-08-24). They are almost all small/obscure altcoins rather than the majors — e.g. Coq Inu (COQ-USD.CC), Achain (ACT-USD.CC), Argentine Football Association fan token (ARG-USD.CC), ArbDoge AI (AIDOGE-USD.CC), ACEToken, Aces, Acoin, and many more. Most sit well below their 200-day average too (close_vs_ema200 deeply negative, e.g. ACT -0.69, ARG -0.83), confirming they are genuinely depressed, not just briefly dipping. So: near-52w-low crypto = yes, and it's a broad list, but skewed toward thinly-traded microcaps.",
+    "spot_check": "PASS. Verified from the tool's own returned data: (1) every returned ticker is a crypto symbol ending in -USD.CC (exchange .CC = digital asset), confirming the asset_type=['Crypto'] scope held — no stocks/ETFs leaked in. (2) Each row carries matched.technical 'within 3% of 52w low' with strength 1.0 dated 2026-08-24, and the context.technical close_vs_ema200 is negative for the large majority (e.g. ACT -0.6908, ARG -0.8308, ACES -0.3115, ASAFE -0.2056), corroborating 'near a low'. A few rows show odd oscillator artifacts (rsi14=100 or 0, adx=0 or ~100) typical of illiquid/flat microcap coins, but the 52w-low signal itself is consistent.",
+    "notes": "Returned crypto rows: YES — 60 rows (count is a floor; buffer of 60 over an intended show of 15). Universe reported as 2,154 crypto heads. All tickers are proper crypto (.CC). Caveat: results are dominated by obscure microcap altcoins and appear to come back in roughly alphabetical order rather than ranked by market cap / liquidity, so the majors (BTC/ETH) do not surface — not a correctness bug, but a relevance-ordering observation the client should be aware of."
+  },
+  {
+    "id": "us-largecap-below-ma",
+    "question": "Are the markets looking toppy? Show me some big US large-cap stocks that have broken below their key moving averages / support — names I might want to avoid.",
+    "tools_called": [
+      {
+        "tool": "find_tasignal",
+        "args": {"q": ["price broke below the 50-day moving average", "price broke below the 200-day moving average"]},
+        "ok": true,
+        "error": "",
+        "result_count": 2
+      },
+      {
+        "tool": "screen_unified",
+        "args": {"asset_type": ["Common Stock"], "country": ["US"], "size": ["large"], "ta": [{"anchor": [{"pattern": "crossover_down", "a": "close", "b": "ema50"}], "quals": [{"any": [{"pattern": "below", "a": "close", "b": "ema200"}]}]}], "window_bars": 30, "limit": 15},
+        "ok": true,
+        "error": "",
+        "result_count": 8
+      }
+    ],
+    "tickers_returned": [
+      "MO.US", "PG.US", "SYK.US", "BA.US", "SPGI.US", "HD.US", "SO.US", "META.US"
+    ],
+    "answer_to_user": "There are pockets of weakness among the mega-caps but it is not a broad top. Of the US large-cap common-stock universe (126 names in scope), 8 have BOTH just crossed down through their 50-day moving average within the last ~30 days AND are currently trading below their 200-day — a technically bearish 'losing key support' setup you might want to be cautious on: Altria (MO), Procter & Gamble (PG), Stryker (SYK), Boeing (BA), S&P Global (SPGI), Home Depot (HD), Southern Company (SO), and Meta Platforms (META). Notably these are mostly defensives/staples (MO, PG, SO), a healthcare name (SYK), and a couple of cyclicals/growth (BA, HD, META) — a rotation-out pattern more than a full-market breakdown. Southern (RSI 28) and Boeing/Meta (RSI ~40) look the most oversold.",
+    "spot_check": "PASS. Verified from returned data: (1) TICKERS — all 8 are home-US .US lines (MO.US, PG.US, SYK.US, BA.US, SPGI.US, HD.US, SO.US, META.US). No foreign cross-listing suffixes (.LSE / .XETRA / .F / .DE) appeared, and no company appears twice under two different exchange tickers. Boeing and Home Depot in particular came back correctly as BA.US and HD.US, not a London/German line. (2) SIGNAL — every row's matched.technical contains BOTH 'cross_close_ema50_dn' and 'close below ema200', and every row's context close_vs_ema200 is negative (MO -0.0125 … META -0.1158), confirming each really is below its 200-day. The screen did what was asked.",
+    "notes": "All tickers are HOME-US (.US) — zero foreign cross-listings (.LSE/.XETRA/.F etc.) surfaced, and NO duplicate company under two exchange tickers. This is a clean pass on the ticker-hygiene check that previously failed. Scope: asset_type=['Common Stock'] + country=['US'] + size=['large'] over 126 in-scope heads, 8 matched. count=8 (not a floor here)."
+  }
+]

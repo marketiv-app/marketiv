@@ -1,0 +1,22 @@
+{
+  "id": "ma-02",
+  "question": "Which cryptocurrencies just had a bullish MACD crossover?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["MACD bullish crossover"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "Returned 60 results (capped=true), all crypto (.CC tickers). Top result BNSD-USD.CC fired macd_x_signal_up on 2026-08-28 with RSI=95.0. Signal name in matched output is 'macd_x_signal_up' confirming MACD line crossed above signal line. Multiple hits within the last 30 bars (default window). All tickers use .CC suffix confirming crypto-only universe.",
+  "verdict": "PASS",
+  "reason": "Correct crypto-only universe, correct MACD bullish crossover signal (crossover_up on macd_line vs macd_signal), results confirmed as crypto by .CC suffix, signal fires are recent (within last week).",
+  "defects": []
+}

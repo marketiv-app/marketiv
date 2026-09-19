@@ -1,0 +1,22 @@
+{
+  "id": "tn-09",
+  "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["MACD bullish crossover", "MACD line crossing above signal line"]},
+      "duration_ms": 1516,
+      "result_summary": "Resolved: pattern='crossover_up', a='macd_line', b='macd_signal'. Both queries converged on crossover_up + macd_line/macd_signal. Description: MACD line (diff of two EMAs) crossing above the signal line (EMA of the MACD) = bullish momentum shift."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "duration_ms": 2500,
+      "result_summary": "Returned 59 stocks with recent bullish MACD crossover. Examples: 097950.KO (CJ Cheiljedang, cross 2026-08-28, macd_line -1441 crossed above signal -1568), MBG.SW / Mercedes-Benz (cross 2026-08-28, strength 1.0, RSI 58.6). Signal confirmed as macd_x_signal_up in results."
+    }
+  ]
+}

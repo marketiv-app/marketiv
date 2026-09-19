@@ -1,0 +1,820 @@
+{
+ "id": "tm-04",
+ "question": "หุ้นกลุ่ม defense ในยุโรปมีตัวไหนน่าสนใจบ้าง อยากได้ชื่อบริษัทอาวุธ/กาโลโหงยุโรป ไม่เอาของอเมริกา",
+ "tools_called": [
+  {
+   "tool": "find_megatrend",
+   "args": {
+    "terms": [
+     "defense aerospace",
+     "weapons armaments"
+    ]
+   },
+   "note": "resolved to tier-1 node 22000000 Defense & Geopolitical Fragmentation"
+  },
+  {
+   "tool": "screen_stocks",
+   "args": {
+    "megatrend": "22000000",
+    "country": "GB,DE,FR,IT,ES,NL,CH,SE,NO,FI",
+    "order_by": "market_cap",
+    "limit": 25
+   },
+   "note": "scoped to European markets to exclude US primes (theme roster alone was US-heavy)"
+  }
+ ],
+ "raw_responses": [
+  {
+   "defense aerospace": [
+    {
+     "id": 22000000,
+     "name": "Defense & Geopolitical Fragmentation",
+     "tier": 1
+    },
+    {
+     "id": 58000000,
+     "name": "Aerospace & Aviation",
+     "tier": 1
+    }
+   ],
+   "weapons armaments": [
+    {
+     "id": 22040000,
+     "name": "Missiles, Munitions & Energetics",
+     "tier": 2
+    },
+    {
+     "id": 22080000,
+     "name": "Defense Electronics, EW & Sensors",
+     "tier": 2
+    }
+   ]
+  },
+  {
+   "scope": {
+    "megatrend": "22000000",
+    "country": "GB,DE,FR,IT,ES,NL,CH,SE,NO,FI"
+   },
+   "order_by": "market_cap",
+   "direction": null,
+   "direction_split": {
+    "total": 25,
+    "net_positive": 23,
+    "net_negative": 1,
+    "ambiguous": 0
+   },
+   "stocks": [
+    {
+     "stock_id": 1752487,
+     "symbol": "AIR",
+     "ticker": "AIR.PA",
+     "name": "Airbus Group SE",
+     "country": "Netherlands",
+     "gic_code": "20101010",
+     "market_cap_usd": 189811667337.216,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "competition",
+       "demand",
+       "regulation",
+       "technology"
+      ],
+      "latest_at": "2026-08-09 01:45:16.488811+00",
+      "neg": 5,
+      "net_direction": "pos",
+      "news_count": 13,
+      "pos": 8,
+      "top_reason": "Airbus is the target of Boeing's complaint; US scrutiny of its EU financing could lead to restrictions or reputational harm.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.57,
+      "pb_ratio": 6.41774,
+      "pe_ratio": 27.936085,
+      "week52_high": 217.2851,
+      "week52_low": 154.564
+     }
+    },
+    {
+     "stock_id": 239301,
+     "symbol": "RR",
+     "ticker": "RR.LSE",
+     "name": "Rolls-Royce Holdings PLC",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 172062294351.872,
+     "impact": {
+      "ambiguous": 1,
+      "aspects": [
+       "capital",
+       "demand"
+      ],
+      "latest_at": "2026-07-30 17:05:17.088795+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 6,
+      "pos": 5,
+      "top_reason": "UK defense budget boost increases demand for Rolls-Royce's defense arm.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.8,
+      "pb_ratio": 44.656489,
+      "pe_ratio": 42.398677,
+      "week52_high": 1586.0,
+      "week52_low": 986.2175
+     }
+    },
+    {
+     "stock_id": 1753474,
+     "symbol": "SAF",
+     "ticker": "SAF.PA",
+     "name": "Safran SA",
+     "country": "France",
+     "gic_code": "20101010",
+     "market_cap_usd": 166253910589.44,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "competition",
+       "demand",
+       "technology"
+      ],
+      "latest_at": "2026-07-29 15:10:28.064572+00",
+      "neg": 1,
+      "net_direction": "pos",
+      "news_count": 4,
+      "pos": 3,
+      "top_reason": "Safran's previous bid of 128.5 euros per share was exceeded by Thales's offer of 134 euros, losing the acquisition target.",
+      "top_relevance": 0.8
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.99,
+      "pb_ratio": 10.087205,
+      "pe_ratio": 37.92696,
+      "week52_high": 366.5,
+      "week52_low": 259.6823
+     }
+    },
+    {
+     "stock_id": 236498,
+     "symbol": "BA",
+     "ticker": "BA.LSE",
+     "name": "BAE Systems plc",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 84132354790.1952,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand",
+       "geopolitics",
+       "regulation",
+       "technology"
+      ],
+      "latest_at": "2026-08-15 12:45:24.06314+00",
+      "neg": 2,
+      "net_direction": "pos",
+      "news_count": 26,
+      "pos": 24,
+      "top_reason": "upgraded full-year guidance after strong first-half results with record order backlog",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.78,
+      "pb_ratio": 5.298092,
+      "pe_ratio": 32.882353,
+      "week52_high": 2360.0,
+      "week52_low": 1587.8287
+     }
+    },
+    {
+     "stock_id": 243555,
+     "symbol": "RHM",
+     "ticker": "RHM.XETRA",
+     "name": "Rheinmetall AG",
+     "country": "Germany",
+     "gic_code": "20101010",
+     "market_cap_usd": 60898993889.28,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand",
+       "geopolitics"
+      ],
+      "latest_at": "2026-08-07 09:55:51.666895+00",
+      "neg": 7,
+      "net_direction": "pos",
+      "news_count": 23,
+      "pos": 16,
+      "top_reason": "Order intake surged 476% and backlog hit record 80.4B euros, indicating strong demand for defense products.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.02,
+      "pb_ratio": 11.392217,
+      "pe_ratio": 78.664938,
+      "week52_high": 1988.1274,
+      "week52_low": 900.2
+     }
+    },
+    {
+     "stock_id": 1753139,
+     "symbol": "HO",
+     "ticker": "HO.PA",
+     "name": "Thales S.A.",
+     "country": "France",
+     "gic_code": "20101010",
+     "market_cap_usd": 59943255171.072,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand",
+       "technology"
+      ],
+      "latest_at": "2026-08-06 06:10:43.528917+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 12,
+      "pos": 12,
+      "top_reason": "Adjusted EBIT and order intake rose, and 2026 outlook confirmed, driving shares up 3.26%.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.55,
+      "pb_ratio": 6.825692,
+      "pe_ratio": 36.639118,
+      "week52_high": 274.352,
+      "week52_low": 212.6
+     }
+    },
+    {
+     "stock_id": 1752743,
+     "symbol": "AM",
+     "ticker": "AM.PA",
+     "name": "Dassault Aviation SA",
+     "country": "France",
+     "gic_code": "20101010",
+     "market_cap_usd": 26434812598.272,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand",
+       "technology"
+      ],
+      "latest_at": "2026-07-25 20:38:22.435188+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 2,
+      "pos": 2,
+      "top_reason": "Successful flight test of NAMIB electronic warfare payload with Rafale demonstrates advanced collaborative combat capabilities.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.6,
+      "pb_ratio": 3.676602,
+      "pe_ratio": 24.22928,
+      "week52_high": 355.7148,
+      "week52_low": 256.4136
+     }
+    },
+    {
+     "stock_id": 242586,
+     "symbol": "HAG",
+     "ticker": "HAG.XETRA",
+     "name": "Hensoldt AG",
+     "country": "Germany",
+     "gic_code": "20101010",
+     "market_cap_usd": 11831734772.736,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-16 15:57:43.794639+00",
+      "neg": 1,
+      "net_direction": "neg",
+      "news_count": 1,
+      "pos": 0,
+      "top_reason": "Selloff spread to Hensoldt as part of broader European defense sector decline on F126 cancellation.",
+      "top_relevance": 0.3
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.62,
+      "pb_ratio": 11.232614,
+      "pe_ratio": 222.028302,
+      "week52_high": 116.973,
+      "week52_low": 63.18
+     }
+    },
+    {
+     "stock_id": 243893,
+     "symbol": "TKA",
+     "ticker": "TKA.XETRA",
+     "name": "thyssenkrupp AG",
+     "country": "Germany",
+     "gic_code": "20106020",
+     "market_cap_usd": 9956607089.664,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-07 17:54:34.907286+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Germany decided to order smaller Meko A-200 frigates from ThyssenKrupp instead of F126 program.",
+      "top_relevance": 0.4
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.1,
+      "pb_ratio": 0.900353,
+      "pe_ratio": 1324.5,
+      "week52_high": 14.06,
+      "week52_low": 6.58
+     }
+    },
+    {
+     "stock_id": 236502,
+     "symbol": "BAB",
+     "ticker": "BAB.LSE",
+     "name": "Babcock International Group PLC",
+     "country": "UK",
+     "gic_code": "20201070",
+     "market_cap_usd": 7332506094.8992,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand",
+       "geopolitics",
+       "regulation"
+      ],
+      "latest_at": "2026-08-26 00:02:06.07092+00",
+      "neg": 2,
+      "net_direction": "pos",
+      "news_count": 6,
+      "pos": 4,
+      "top_reason": "Government dropped plans for advanced warship Babcock was vying to develop",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.69,
+      "pb_ratio": 9.480235,
+      "pe_ratio": 28.498789,
+      "week52_high": 1520.6639,
+      "week52_low": 898.6556
+     }
+    },
+    {
+     "stock_id": 243894,
+     "symbol": "TKMS",
+     "ticker": "TKMS.XETRA",
+     "name": "TKMS AG & Co KGaA",
+     "country": "Germany",
+     "gic_code": "20101010",
+     "market_cap_usd": 6708954760.704,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-17 00:44:18.421781+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 2,
+      "pos": 2,
+      "top_reason": "Germany opts to purchase eight Meko A-200 frigates, of which TKMS is the existing supplier, securing new orders.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": null,
+      "pe_ratio": null,
+      "week52_high": 108.8,
+      "week52_low": 57.0
+     }
+    },
+    {
+     "stock_id": 41650,
+     "symbol": "ST",
+     "ticker": "ST.US",
+     "name": "Sensata Technologies Holding NV",
+     "country": "UK",
+     "gic_code": "20104010",
+     "market_cap_usd": 6137246720.0,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "technology"
+      ],
+      "latest_at": "2026-07-20 19:04:23.908632+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Sensata expands aerospace motor portfolio into flight controls and propulsion, unveiled at Farnborough Airshow.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.14,
+      "pb_ratio": 2.120546,
+      "pe_ratio": 69.532258,
+      "week52_high": 53.7501,
+      "week52_low": 27.9187
+     }
+    },
+    {
+     "stock_id": 243528,
+     "symbol": "R3NK",
+     "ticker": "R3NK.XETRA",
+     "name": "Renk Group AG",
+     "country": "Germany",
+     "gic_code": "20106020",
+     "market_cap_usd": 5449306387.968,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand"
+      ],
+      "latest_at": "2026-08-06 06:45:38.209248+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 2,
+      "pos": 2,
+      "top_reason": "Record order intake, including U.S. Army THOR-IV follow-on order, drives growth.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.25,
+      "pb_ratio": 10.675286,
+      "pe_ratio": 50.489899,
+      "week52_high": 89.3021,
+      "week52_low": 40.34
+     }
+    },
+    {
+     "stock_id": 233863,
+     "symbol": "0F08",
+     "ticker": "0F08.LSE",
+     "name": "Kongsberg Gruppen ASA",
+     "country": "Norway",
+     "gic_code": "20101010",
+     "market_cap_usd": 5118642416.0,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand",
+       "geopolitics"
+      ],
+      "latest_at": "2026-07-26 15:38:17.639321+00",
+      "neg": 1,
+      "net_direction": "pos",
+      "news_count": 3,
+      "pos": 2,
+      "top_reason": "Kongsberg is a defence major; the article states the aerospace and defence index fell 1.37% and Kongsberg dropped 6.8% due to US-Iran tensions.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.01,
+      "pb_ratio": null,
+      "pe_ratio": null,
+      "week52_high": 424.407,
+      "week52_low": 227.6699
+     }
+    },
+    {
+     "stock_id": 243339,
+     "symbol": "OHB",
+     "ticker": "OHB.XETRA",
+     "name": "OHB SE",
+     "country": "Germany",
+     "gic_code": "20101010",
+     "market_cap_usd": 4643614666.752,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand"
+      ],
+      "latest_at": "2026-08-11 01:20:23.339383+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 3,
+      "pos": 3,
+      "top_reason": "Record backlog, double-digit growth, and confirmed guidance indicate strong financial performance.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.29,
+      "pb_ratio": 11.116124,
+      "pe_ratio": 111.638304,
+      "week52_high": 684.0036,
+      "week52_low": 63.5075
+     }
+    },
+    {
+     "stock_id": 235197,
+     "symbol": "0ONG",
+     "ticker": "0ONG.LSE",
+     "name": "Leonardo SpA",
+     "country": "IT",
+     "gic_code": "20101010",
+     "market_cap_usd": 4103534937.0,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital",
+       "demand"
+      ],
+      "latest_at": "2026-07-23 13:02:44.717061+00",
+      "neg": 2,
+      "net_direction": "pos",
+      "news_count": 8,
+      "pos": 6,
+      "top_reason": "Leonardo wins a multi-million euro contract to build NATO's secure cloud platform with its proprietary cybersecurity technology.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.3,
+      "pb_ratio": null,
+      "pe_ratio": null,
+      "week52_high": 65.4695,
+      "week52_low": 42.3107
+     }
+    },
+    {
+     "stock_id": 239193,
+     "symbol": "QQ",
+     "ticker": "QQ.LSE",
+     "name": "Qinetiq Group PLC",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 3684450043.0336,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-05 19:51:29.703924+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "UK defence spending plans boost demand for QinetiQ's defence technology and services.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 2.04,
+      "pb_ratio": 5.176183,
+      "pe_ratio": 27.777778,
+      "week52_high": 576.5,
+      "week52_low": 389.4174
+     }
+    },
+    {
+     "stock_id": 1753049,
+     "symbol": "EXENS",
+     "ticker": "EXENS.PA",
+     "name": "EXOSENS PROM",
+     "country": "France",
+     "gic_code": "45203010",
+     "market_cap_usd": 3602918946.048,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-28 07:13:23.957387+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Strong first-half results driven by accelerating demand for defense imaging and night vision, with revenue up 15.3% and guidance raised to upper end.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.5,
+      "pb_ratio": 7.081273,
+      "pe_ratio": 102.782305,
+      "week52_high": 73.6606,
+      "week52_low": 36.0339
+     }
+    },
+    {
+     "stock_id": 1753047,
+     "symbol": "EXA",
+     "ticker": "EXA.PA",
+     "name": "Exail Technologies S.A.",
+     "country": "France",
+     "gic_code": "20101010",
+     "market_cap_usd": 2463864955.008,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital"
+      ],
+      "latest_at": "2026-07-06 11:24:23.95579+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Thales agreed to buy the Gorge family's 35.51% stake in Exail Technologies, implying a premium and validating the company's value.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 5.11657,
+      "pe_ratio": 707.386364,
+      "week52_high": 159.2,
+      "week52_low": 70.7
+     }
+    },
+    {
+     "stock_id": 236780,
+     "symbol": "CHG",
+     "ticker": "CHG.LSE",
+     "name": "Chemring Group PLC",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 2045338810.2656,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital"
+      ],
+      "latest_at": "2026-07-16 16:25:54.605821+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Record order book, revenue growth, and strong segment profit, though overall profit declined.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.45,
+      "pb_ratio": 4.465166,
+      "pe_ratio": 49.471545,
+      "week52_high": 647.8647,
+      "week52_low": 444.5412
+     }
+    },
+    {
+     "stock_id": 234037,
+     "symbol": "0HA9",
+     "ticker": "0HA9.LSE",
+     "name": "Indra A",
+     "country": "Spain",
+     "gic_code": "20101010",
+     "market_cap_usd": 1862617191.0,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-08-07 20:20:28.628997+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Cited as a potential driver of Bittium's revenue growth through ongoing negotiations.",
+      "top_relevance": 0.3
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.01,
+      "pb_ratio": null,
+      "pe_ratio": null,
+      "week52_high": 66.0912,
+      "week52_low": 32.2892
+     }
+    },
+    {
+     "stock_id": 234427,
+     "symbol": "0JG5",
+     "ticker": "0JG5.LSE",
+     "name": "Bittium Oyj",
+     "country": "Finland",
+     "gic_code": "45201020",
+     "market_cap_usd": 1360737833.856,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "capital"
+      ],
+      "latest_at": "2026-08-07 20:20:28.628997+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Half-year sales and net income rose sharply, driving a 35.64% share jump.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.01,
+      "pb_ratio": null,
+      "pe_ratio": null,
+      "week52_high": 43.0488,
+      "week52_low": 11.8632
+     }
+    },
+    {
+     "stock_id": 236794,
+     "symbol": "CHRT",
+     "ticker": "CHRT.LSE",
+     "name": "Cohort",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 763169820.3776,
+     "impact": {
+      "ambiguous": 1,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-12 09:51:50.744825+00",
+      "neg": 0,
+      "net_direction": "mixed",
+      "news_count": 1,
+      "pos": 0,
+      "top_reason": "Cohort's UK business share fell from 80% to under half, but total revenue expected to rise ~12%, and it expanded in Canada.",
+      "top_relevance": 0.8
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.45,
+      "pb_ratio": 3.73367,
+      "pe_ratio": 26.359914,
+      "week52_high": 1509.7599,
+      "week52_low": 860.0534
+     }
+    },
+    {
+     "stock_id": 236481,
+     "symbol": "AVON",
+     "ticker": "AVON.LSE",
+     "name": "Avon Protection PLC",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 725826329.6128,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-15 17:37:54.592126+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Secured $10.8 million NATO order for FM50 respirators, reinforcing 2027 expectations.",
+      "top_relevance": 1.0
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 1.04,
+      "pb_ratio": 4.316962,
+      "pe_ratio": 43.702397,
+      "week52_high": 2157.0348,
+      "week52_low": 1453.3696
+     }
+    },
+    {
+     "stock_id": 236354,
+     "symbol": "ALRT",
+     "ticker": "ALRT.LSE",
+     "name": "Defence Holdings Plc",
+     "country": "UK",
+     "gic_code": "20101010",
+     "market_cap_usd": 28690212.8272,
+     "impact": {
+      "ambiguous": 0,
+      "aspects": [
+       "demand"
+      ],
+      "latest_at": "2026-07-05 20:24:38.628329+00",
+      "neg": 0,
+      "net_direction": "pos",
+      "news_count": 1,
+      "pos": 1,
+      "top_reason": "Defence Holdings partners with Oracle to provide accelerated customer engagement paths, likely increasing demand for its services.",
+      "top_relevance": 0.7
+     },
+     "fundamentals": {
+      "dividend_yield_pct": 0.0,
+      "pb_ratio": 7.248311,
+      "pe_ratio": null,
+      "week52_high": 4.9,
+      "week52_low": 0.54
+     }
+    }
+   ],
+   "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+  }
+ ],
+ "answer_to_user": "หุ้น defense ยุโรป (คัด US ออกแล้ว ตามที่ขอ) เรียงตาม market cap: Airbus (AIR.PA, ~$190B), Rolls-Royce (RR.LSE, ~$172B), Safran (SAF.PA, ~$166B), BAE Systems (BA.LSE, ~$84B), Rheinmetall (RHM.XETRA, ~$61B, ผู้ผลิตอาวุธ/กระสุนเยอรมัน), Thales (HO.PA, ~$60B), Dassault Aviation (AM.PA, ~$26B). ตัวรองลงมาที่น่าสนใจ: Hensoldt (HAG.XETRA, เซนเซอร์/เรดาร์), Renk (R3NK.XETRA, ระบบส่งกำลังรถถัง), TKMS (เรือดำน้ำ), Kongsberg (นอร์เวย์), Leonardo (0ONG.LSE, อิตาลี), Saab ก็อยู่ในกลุ่มนี้ ส่วน Qinetiq, Chemring, Babcock (UK) และ Indra (สเปน) เป็นตัวเล็กลงมา ทั้งหมดเป็นบริษัทยุโรปล้วน ไม่มี Lockheed/RTX ตามเงื่อนไข"
+}

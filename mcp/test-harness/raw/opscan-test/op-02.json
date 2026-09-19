@@ -1,0 +1,74 @@
+{
+  "id": "op-02",
+  "question": "Where is the crowd getting really excited and piling in hard on a stock lately?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "crowd excited and piling in hard, bullish euphoria"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "bullish_positioning",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "crowd excited and piling in hard, bullish euphoria",
+          "candidates": [
+            {
+              "pattern": "bullish_positioning",
+              "label": "Bullish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bullish (positioning score high, calls heavier)."
+            },
+            {
+              "pattern": "greed_euphoria",
+              "label": "Greed / euphoria",
+              "supported": "yes",
+              "description": "Call-skew rich — traders paying up for upside."
+            },
+            {
+              "pattern": "bearish_positioning",
+              "label": "Bearish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bearish (positioning score low, puts heavier)."
+            },
+            {
+              "pattern": "crowded_one_sided",
+              "label": "Crowded / one-sided",
+              "supported": "yes",
+              "description": "Extreme one-sided positioning either way — unwind/squeeze risk."
+            },
+            {
+              "pattern": "unusual_activity",
+              "label": "Unusual options activity",
+              "supported": "yes",
+              "description": "Option/stock volume unusually high vs own history."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "bullish_positioning",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "'Excited and piling in hard' maps to bullish positioning / greed-euphoria in the options crowd — the MCP resolved it to `bullish_positioning` (and `greed_euphoria`, rich call-skew), which is correct. But the stock-scanning endpoint isn't built yet — it returns a POC stub, so I can't give you the actual ranked list of names people are piling into right now. The pattern selection is confirmed; the data isn't wired up yet."
+}

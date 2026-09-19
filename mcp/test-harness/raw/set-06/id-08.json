@@ -1,0 +1,672 @@
+{
+  "id": "id-08",
+  "question": "The 10-year US Treasury is around 4.3%. Which dividend stocks give me meaningfully more yield than that but are still safe?",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "min_yield": 6,
+        "max_payout": 80,
+        "min_streak_years": 8,
+        "order_by": "yield",
+        "limit": 20
+      },
+      "note": "hurdle 4.3% + meaningful spread -> min_yield 6; safety gates payout<=80% and 8-yr no-cut streak"
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 20,
+      "has_more": true,
+      "limit": 20,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 1.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.3293,
+            "payout_ratio_eff": 0.3293,
+            "ttm_div_yoy_pct": -4.7,
+            "yield_pct": 15.91,
+            "yield_trailing_pct": 16.43
+          },
+          "eps": 0.51,
+          "exchange": "US",
+          "gic_code": "40203010",
+          "market_cap_usd": 740165504.0,
+          "name": "PennantPark Floating Rate Capital Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 3,
+            "top_reason": "Declared monthly distribution of $0.0833 per share, indicating stable income for shareholders."
+          },
+          "pb_ratio": 0.699244,
+          "pe_ratio": 14.352941,
+          "stock_id": 34010,
+          "symbol": "PFLT",
+          "ticker": "PFLT.US",
+          "week52_high": 8.9872,
+          "week52_low": 6.7549
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 41.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 8,
+            "payout_ratio": 0.7966,
+            "payout_ratio_eff": 0.7966,
+            "ttm_div_yoy_pct": 5.0,
+            "yield_pct": 13.93,
+            "yield_trailing_pct": 13.93
+          },
+          "eps": 1.0,
+          "exchange": "US",
+          "gic_code": "40203010",
+          "market_cap_usd": 786206336.0,
+          "name": "Bain Capital Specialty Finance Inc",
+          "news": {
+            "neg": 2,
+            "net_direction": "neg",
+            "pos": 0,
+            "top_reason": "Analysts lowered price targets and fair value estimates, reflecting reduced revenue growth and margin expectations."
+          },
+          "pb_ratio": 0.715386,
+          "pe_ratio": 12.181818,
+          "stock_id": 3965,
+          "symbol": "BCSF",
+          "ticker": "BCSF.US",
+          "week52_high": 13.7764,
+          "week52_low": 11.4352
+        },
+        {
+          "country": "UK",
+          "dividend": {
+            "cagr_5y_pct": 1.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4735,
+            "payout_ratio_eff": 0.4735,
+            "ttm_div_yoy_pct": -19.6,
+            "yield_pct": 13.72,
+            "yield_trailing_pct": 0.14
+          },
+          "eps": -0.57,
+          "exchange": "LSE",
+          "gic_code": "50201040",
+          "market_cap_usd": null,
+          "name": "Reach PLC",
+          "news": {
+            "neg": 1,
+            "net_direction": "neg",
+            "pos": 0,
+            "top_reason": "Reach's digital revenues fell 16.2% due to a 40% plunge in page views from Google AI answers, directly reducing demand for its digital advertising space."
+          },
+          "pb_ratio": 0.256339,
+          "pe_ratio": null,
+          "stock_id": 239231,
+          "symbol": "RCH",
+          "ticker": "RCH.LSE",
+          "week52_high": 66.4106,
+          "week52_low": 38.8406
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 0.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6351,
+            "payout_ratio_eff": 0.6351,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 12.88,
+            "yield_trailing_pct": 12.88
+          },
+          "eps": 1.24,
+          "exchange": "US",
+          "gic_code": "40201060",
+          "market_cap_usd": 2282954240.0,
+          "name": "Western Union Co",
+          "news": {
+            "neg": 8,
+            "net_direction": "pos",
+            "pos": 19,
+            "top_reason": "Q2 earnings miss and lowered full-year guidance"
+          },
+          "pb_ratio": 2.457722,
+          "pe_ratio": 5.814516,
+          "stock_id": 48215,
+          "symbol": "WU",
+          "ticker": "WU.US",
+          "week52_high": 9.7777,
+          "week52_low": 6.27
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 20.2,
+            "ffo_payout": null,
+            "last_cut_year": 2017,
+            "no_cut_streak_yrs": 8,
+            "payout_ratio": 0.0216,
+            "payout_ratio_eff": 0.0216,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 12.12,
+            "yield_trailing_pct": 12.12
+          },
+          "eps": 0.59,
+          "exchange": "US",
+          "gic_code": "50102010",
+          "market_cap_usd": 222150608.0,
+          "name": "Spok Holdings Inc",
+          "news": {
+            "neg": 1,
+            "net_direction": "mixed",
+            "pos": 1,
+            "top_reason": "Declares quarterly dividend of $0.3125 per share, in line with previous payout."
+          },
+          "pb_ratio": 1.639687,
+          "pe_ratio": 19.245614,
+          "stock_id": 41167,
+          "symbol": "SPOK",
+          "ticker": "SPOK.US",
+          "week52_high": 16.3715,
+          "week52_low": 9.3842
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 16.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4813,
+            "payout_ratio_eff": 0.4813,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 11.16,
+            "yield_trailing_pct": 11.16
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "50201010",
+          "market_cap_usd": null,
+          "name": "GIIR Inc",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.570896,
+          "pe_ratio": 7.4197,
+          "stock_id": 1415070,
+          "symbol": "035000",
+          "ticker": "035000.KO",
+          "week52_high": 9060.0,
+          "week52_low": 5750.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 52.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.019,
+            "payout_ratio_eff": 0.019,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 10.55,
+            "yield_trailing_pct": 7.63
+          },
+          "eps": 1.79,
+          "exchange": "CS",
+          "gic_code": "35202010",
+          "market_cap_usd": null,
+          "name": "Shandong Shanda Wit Science and Technology Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.035381,
+          "pe_ratio": 13.101523,
+          "stock_id": 230988,
+          "symbol": "000915",
+          "ticker": "000915.CS",
+          "week52_high": 33.6054,
+          "week52_low": 23.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 10.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4688,
+            "payout_ratio_eff": 0.4688,
+            "ttm_div_yoy_pct": 0.8,
+            "yield_pct": 10.32,
+            "yield_trailing_pct": 5.19
+          },
+          "eps": 5.71,
+          "exchange": "CG",
+          "gic_code": "40101010",
+          "market_cap_usd": 145980542209.229,
+          "name": "China Merchants Bank Co Ltd",
+          "news": {
+            "neg": 3,
+            "net_direction": "pos",
+            "pos": 4,
+            "top_reason": "China Merchants Bank announced a cash dividend of 1.003 yuan per share, which is a direct financial return to shareholders."
+          },
+          "pb_ratio": 0.753043,
+          "pe_ratio": 6.705779,
+          "stock_id": 228347,
+          "symbol": "600036",
+          "ticker": "600036.CG",
+          "week52_high": 41.7622,
+          "week52_low": 34.3376
+        },
+        {
+          "country": "Netherlands",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 9,
+            "payout_ratio": 0.7009,
+            "payout_ratio_eff": 0.7009,
+            "ttm_div_yoy_pct": 0.6,
+            "yield_pct": 10.28,
+            "yield_trailing_pct": 10.36
+          },
+          "eps": 1.25,
+          "exchange": "AS",
+          "gic_code": "20104010",
+          "market_cap_usd": null,
+          "name": "Signify N.V.",
+          "news": {
+            "neg": 2,
+            "net_direction": "pos",
+            "pos": 4,
+            "top_reason": "Reported comparable sales decline of 3.6% and net income of only 17 million euros, with restructuring costs weighing on earnings."
+          },
+          "pb_ratio": 0.693461,
+          "pe_ratio": 12.192,
+          "stock_id": 1748487,
+          "symbol": "LIGHT",
+          "ticker": "LIGHT.AS",
+          "week52_high": 22.0526,
+          "week52_low": 13.8
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 25.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4649,
+            "payout_ratio_eff": 0.4649,
+            "ttm_div_yoy_pct": 36.4,
+            "yield_pct": 9.68,
+            "yield_trailing_pct": 9.68
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25503030",
+          "market_cap_usd": null,
+          "name": "Gwangjushinseg",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.341326,
+          "pe_ratio": 6.235828,
+          "stock_id": 1415084,
+          "symbol": "037710",
+          "ticker": "037710.KO",
+          "week52_high": 59600.0,
+          "week52_low": 27162.0158
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 40.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.635,
+            "payout_ratio_eff": 0.635,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 9.58,
+            "yield_trailing_pct": 9.57
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "25202010",
+          "market_cap_usd": 540663567.7696,
+          "name": "Dream International Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.983186,
+          "pe_ratio": 5.963661,
+          "stock_id": 51198,
+          "symbol": "1126",
+          "ticker": "1126.HK",
+          "week52_high": 14.6381,
+          "week52_low": 5.885
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 52.3,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6234,
+            "payout_ratio_eff": 0.6234,
+            "ttm_div_yoy_pct": 23.8,
+            "yield_pct": 9.54,
+            "yield_trailing_pct": 9.54
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20301010",
+          "market_cap_usd": null,
+          "name": "Hansol Csn",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.545478,
+          "pe_ratio": 5.232342,
+          "stock_id": 1414851,
+          "symbol": "009180",
+          "ticker": "009180.KO",
+          "week52_high": 3666.0448,
+          "week52_low": 2256.3604
+        },
+        {
+          "country": "Germany",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.5729,
+            "payout_ratio_eff": 0.5729,
+            "ttm_div_yoy_pct": 25.0,
+            "yield_pct": 9.11,
+            "yield_trailing_pct": 9.23
+          },
+          "eps": 0.93,
+          "exchange": "XETRA",
+          "gic_code": "40202010",
+          "market_cap_usd": null,
+          "name": "Multitude AG",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "Multitude AG's subsidiary issued EUR 70M capital notes, providing financing and the notes are guaranteed by Multitude AG."
+          },
+          "pb_ratio": 0.515777,
+          "pe_ratio": 6.451613,
+          "stock_id": 243230,
+          "symbol": "MULT",
+          "ticker": "MULT.XETRA",
+          "week52_high": 6.6354,
+          "week52_low": 4.87
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 4.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.0933,
+            "payout_ratio_eff": 0.0933,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 8.92,
+            "yield_trailing_pct": 8.92
+          },
+          "eps": 0.24,
+          "exchange": "US",
+          "gic_code": "25504050",
+          "market_cap_usd": 402055808.0,
+          "name": "Monro Muffler Brake Inc",
+          "news": {
+            "neg": 1,
+            "net_direction": "neg",
+            "pos": 0,
+            "top_reason": "Ongoing store closures and 31.9% annual EPS drop signal declining customer demand and operational distress."
+          },
+          "pb_ratio": 0.636013,
+          "pe_ratio": 51.521739,
+          "stock_id": 29265,
+          "symbol": "MNRO",
+          "ticker": "MNRO.US",
+          "week52_high": 22.6887,
+          "week52_low": 10.8191
+        },
+        {
+          "country": "France",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.5586,
+            "payout_ratio_eff": 0.5586,
+            "ttm_div_yoy_pct": 2.7,
+            "yield_pct": 8.91,
+            "yield_trailing_pct": 8.91
+          },
+          "eps": 2.02,
+          "exchange": "PA",
+          "gic_code": "40101015",
+          "market_cap_usd": null,
+          "name": "Credit Agricole SA",
+          "news": {
+            "neg": 3,
+            "net_direction": "pos",
+            "pos": 14,
+            "top_reason": "Record Q2 revenue and raised interim dividend reflect strong financial performance and capital generation."
+          },
+          "pb_ratio": 0.77638,
+          "pe_ratio": 9.92091,
+          "stock_id": 1752462,
+          "symbol": "ACA",
+          "ticker": "ACA.PA",
+          "week52_high": 20.4,
+          "week52_low": 14.2998
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 14.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6266,
+            "payout_ratio_eff": 0.6266,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 8.79,
+            "yield_trailing_pct": 8.79
+          },
+          "eps": null,
+          "exchange": "KQ",
+          "gic_code": "45203015",
+          "market_cap_usd": null,
+          "name": "WiSoL CO.LTD",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.555514,
+          "pe_ratio": null,
+          "stock_id": 1420187,
+          "symbol": "122990",
+          "ticker": "122990.KQ",
+          "week52_high": 9340.0,
+          "week52_low": 4997.0833
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 1.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.3324,
+            "payout_ratio_eff": 0.3324,
+            "ttm_div_yoy_pct": 3.0,
+            "yield_pct": 8.58,
+            "yield_trailing_pct": 8.58
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25203020",
+          "market_cap_usd": null,
+          "name": "Hwaseung Industries Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.358974,
+          "pe_ratio": 7.52994,
+          "stock_id": 1414779,
+          "symbol": "006060",
+          "ticker": "006060.KO",
+          "week52_high": 4352.9074,
+          "week52_low": 2300.0
+        },
+        {
+          "country": "France",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.025,
+            "payout_ratio_eff": 0.025,
+            "ttm_div_yoy_pct": 4.5,
+            "yield_pct": 8.55,
+            "yield_trailing_pct": 8.55
+          },
+          "eps": 1.85,
+          "exchange": "PA",
+          "gic_code": "20305020",
+          "market_cap_usd": null,
+          "name": "Societe Marseillaise du Tunnel Prado Carenage S.A.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.21199,
+          "pe_ratio": 14.888889,
+          "stock_id": 1752714,
+          "symbol": "ALTPC",
+          "ticker": "ALTPC.PA",
+          "week52_high": 27.6,
+          "week52_low": 24.9727
+        },
+        {
+          "country": "Ireland",
+          "dividend": {
+            "cagr_5y_pct": 5.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.464,
+            "payout_ratio_eff": 0.464,
+            "ttm_div_yoy_pct": 2.5,
+            "yield_pct": 8.14,
+            "yield_trailing_pct": 8.14
+          },
+          "eps": -12.31,
+          "exchange": "US",
+          "gic_code": "35202010",
+          "market_cap_usd": 1974508288.0,
+          "name": "Perrigo Company PLC",
+          "news": {
+            "neg": 1,
+            "net_direction": "pos",
+            "pos": 3,
+            "top_reason": "Q2 sales and EPS declined, with core adjusted EPS down 20.7%."
+          },
+          "pb_ratio": 0.715056,
+          "pe_ratio": null,
+          "stock_id": 35338,
+          "symbol": "PRGO",
+          "ticker": "PRGO.US",
+          "week52_high": 22.3374,
+          "week52_low": 8.996
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 0.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.5135,
+            "payout_ratio_eff": 0.5135,
+            "ttm_div_yoy_pct": 55.0,
+            "yield_pct": 8.02,
+            "yield_trailing_pct": 8.02
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25101010",
+          "market_cap_usd": null,
+          "name": "Halla Holdings Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.336229,
+          "pe_ratio": 8.670886,
+          "stock_id": 1415126,
+          "symbol": "060980",
+          "ticker": "060980.KO",
+          "week52_high": 50805.7979,
+          "week52_low": 34923.181
+        }
+      ],
+      "total": 77
+    }
+  ],
+  "answer_to_user": "Using the ~4.3% 10-year Treasury as your hurdle, I screened for a MEANINGFUL spread above it (yield >= 6%, i.e. at least ~1.7pts more than bonds) AND layered on safety gates — payout ratio <= 80% and an 8-10 year no-cut streak — because extra equity yield is only worth it if it isn't a trap. Results that clear both bars: PennantPark Floating Rate (PFLT.US) ~15.9% at ~33% payout, 10-yr streak; Bain Capital Specialty Finance (BCSF.US) ~13.9% at ~80% payout, 8-yr streak; Reach PLC (RCH.LSE) ~13.7% at ~47% payout, 10-yr streak; Western Union (WU.US) ~12.9% at ~64% payout, 10-yr streak; Spok Holdings (SPOK.US) ~12.1% at a very low ~2% payout, 8-yr streak; GIIR Inc (035000.KO) ~11.2% at ~48% payout, 10-yr streak. The critical framing: unlike the Treasury, none of this yield is contractual — a stock can cut its dividend AND the price can fall, so the 'spread' compensates you for price risk and cut risk that a bond doesn't carry. That's exactly why I gated on payout and streak instead of just picking the highest yields; several of these (PFLT, WU, RCH) are BDCs/high-payout structures where you'd still want to confirm cash-flow coverage. So: yes, there are names yielding meaningfully above 4.3% with reasonable payout and clean multi-year records — but 'higher than bonds' only counts if the extra yield is safe, and even these carry risks a Treasury doesn't. Not a specific allocation recommendation."
+}

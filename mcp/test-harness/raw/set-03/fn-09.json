@@ -1,0 +1,648 @@
+{
+  "id": "fn-09",
+  "question": "ถ้าอยากลงทุนแบบปลอดภัยไม่อยากขาดทุน มีทางเลือกอะไรบ้างนอกจากหุ้น เช่นพวกที่เสี่ยงน้อยๆ",
+  "tools_called": [
+    {
+      "tool": "find_stock",
+      "args": {
+        "q": "US 10 year treasury bond yield"
+      }
+    },
+    {
+      "tool": "bond_pulse",
+      "args": {
+        "q": "US yield curve"
+      }
+    },
+    {
+      "tool": "find_stock",
+      "args": {
+        "q": "US treasury bond ETF"
+      }
+    }
+  ],
+  "raw_responses": [
+    "{\n  \"ticker\": \"US-10Y.GB\",\n  \"symbol\": \"US-10Y\",\n  \"name\": \"United States Government Bond 10Y\",\n  \"type\": \"stock\",\n  \"country\": \"United States\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.968037895137756,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"US-30Y.GB\",\n  \"symbol\": \"US-30Y\",\n  \"name\": \"United States 30 Year Bond Yield\",\n  \"type\": \"stock\",\n  \"country\": \"United States\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.833801157068832,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"US-20Y.GB\",\n  \"symbol\": \"US-20Y\",\n  \"name\": \"US Government Bond 20 Year\",\n  \"type\": \"stock\",\n  \"country\": \"US\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.818998118443832,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"FR-10Y.GB\",\n  \"symbol\": \"FR-10Y\",\n  \"name\": \"France Government Bond 10Y\",\n  \"type\": \"stock\",\n  \"country\": \"France\",\n  \"domicile\": \"FR\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.81644214711388,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"US-2Y.GB\",\n  \"symbol\": \"US-2Y\",\n  \"name\": \"US Government Bond 2Y\",\n  \"type\": \"stock\",\n  \"country\": \"US\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.814178871099196,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"GB-10Y.GB\",\n  \"symbol\": \"GB-10Y\",\n  \"name\": \"UK Government Bond 10Y\",\n  \"type\": \"stock\",\n  \"country\": \"UK\",\n  \"domicile\": \"GB\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.812673621370909,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"US-5Y.GB\",\n  \"symbol\": \"US-5Y\",\n  \"name\": \"US Government Bond 5Y\",\n  \"type\": \"stock\",\n  \"country\": \"US\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.811304348008623,\n  \"match_type\": \"semantic\"\n}\n{\n  \"ticker\": \"US-7Y.GB\",\n  \"symbol\": \"US-7Y\",\n  \"name\": \"US Government Bond 7Y\",\n  \"type\": \"stock\",\n  \"country\": \"US\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"GB\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 0.810978937429929,\n  \"match_type\": \"semantic\"\n}",
+    {
+      "mode": "curve",
+      "country": "US",
+      "curve": [
+        {
+          "tenor": "3M",
+          "ticker": "US-3M.GB",
+          "yield": 3.798,
+          "change_bps": {
+            "1mo": -6.0,
+            "1w": -0.0,
+            "1y": -40.0,
+            "ytd": 16.0
+          }
+        },
+        {
+          "tenor": "2Y",
+          "ticker": "US-2Y.GB",
+          "yield": 4.253,
+          "change_bps": {
+            "1mo": -4.0,
+            "1w": 5.0,
+            "1y": 56.0,
+            "ytd": 77.0
+          }
+        },
+        {
+          "tenor": "5Y",
+          "ticker": "US-5Y.GB",
+          "yield": 4.419,
+          "change_bps": {
+            "1mo": 4.0,
+            "1w": 2.0,
+            "1y": 67.0,
+            "ytd": 69.0
+          }
+        },
+        {
+          "tenor": "10Y",
+          "ticker": "US-10Y.GB",
+          "yield": 4.712,
+          "change_bps": {
+            "1mo": 10.0,
+            "1w": -4.0,
+            "1y": 44.0,
+            "ytd": 54.0
+          }
+        },
+        {
+          "tenor": "30Y",
+          "ticker": "US-30Y.GB",
+          "yield": 5.239,
+          "change_bps": {
+            "1mo": 15.0,
+            "1w": -9.0,
+            "1y": 33.0,
+            "ytd": 39.0
+          }
+        }
+      ],
+      "slope": {
+        "2s10s": {
+          "value_bps": 45.9,
+          "inverted": false,
+          "read": "mid-range"
+        },
+        "10Y3M": {
+          "value_bps": 91.4,
+          "inverted": false,
+          "read": "near 52-week highs"
+        }
+      },
+      "news": [
+        {
+          "title": "Boston Fed President Collins says prompt tightening appropriate without further disinflation",
+          "brief_text": "Boston Fed President Collins said that prompt tightening would be appropriate unless there is further disinflation. The remarks signal a stance of maintaining the direction of monetary policy tightening. She did not mention specific timing or numerical targets.",
+          "url": "https://finance.yahoo.co.jp/news/detail/1b67276f976491b54cd1ea71c50521f9fb182190",
+          "publisher": "フィスコ",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Hawkish stance may push yields up, lowering bond prices.",
+                "relevance": 1
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 1
+          },
+          "news_types": [
+            "macro_economic"
+          ],
+          "impact_score": 3,
+          "dup_count": 3,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-25T15:45:09+00:00"
+        },
+        {
+          "title": "Fed Chair Warsh Warns No Soft Inflation Target",
+          "brief_text": "Federal Reserve Chair Kevin Warsh warned Wall Street that the central bank will adhere strictly to its 2% inflation target, abandoning the flexible average inflation targeting approach adopted in 2020. Speaking after the July FOMC meeting, Warsh said there is no soft inflation target on this Committee's watch, only a target of 2 percent. The latest Personal Consumption Expenditures Price Index reading for June showed inflation rose 3.7% over the past year, or 3.3% excluding food and energy. With the next PCE release due Wednesday, Aug. 26, and the next FOMC meeting on Sept. 15-16, the author believes the Fed will hike rates by a quarter percentage point in September if inflation data does not show meaningful progress toward 2%. Three Fed officials dissented at the July meeting, calling for a quarter-point hike.",
+          "url": "https://finance.yahoo.com/economy/policy/articles/feds-latest-warning-wall-street-140926916.html",
+          "publisher": "The Motley Fool",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "pos",
+                "reason": "Expected rate hike and hawkish stance push 10-year yields higher.",
+                "relevance": 1
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "pos",
+            "relevance": 1
+          },
+          "news_types": [
+            "macro_economic",
+            "forex_related"
+          ],
+          "impact_score": 4,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-25T14:09:26+00:00"
+        },
+        {
+          "title": "Wall Street Set to Open Higher as Crude Oil Extends Sharp Retreat",
+          "brief_text": "U.S. stock futures pointed to a stronger opening on Tuesday, suggesting equities could rebound after the major indices ended the previous session mostly lower. Sentiment improved as crude oil prices extended their sharp decline, with U.S. crude futures falling more than 3% ahead of the opening bell, easing concerns over energy costs and helping push U.S. Treasury yields lower. The sell-off accelerated after the U.S. Treasury Department formally unveiled \"Operation Economic Outcast,\" an unprecedented government-wide economic campaign targeting Iran and its enablers, imposing sanctions on nearly 60 entities, individuals and vessels, though investors appeared relieved that the Treasury did not immediately introduce secondary sanctions against other countries that continue to support trade with Iran. Falling oil prices have also contributed to a further decline in Treasury yields, providing another source of support for U.S. equities. Despite the positive indications from futures, trading activity could remain relatively subdued as investors prepare for several major events later in the week, including key U.S. inflation figures due alongside Nvidia's quarterly earnings and the Jackson Hole economic symposium, where Federal Reserve Chair Kevin Warsh is scheduled to deliver keynote remarks on Friday.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-set-open-higher-131414978.html",
+          "publisher": "Dow Jones",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Crude oil decline and Treasury yield drop reflect lower inflation expectations, but the article notes yields fell, which is negative for the yield itself.",
+                "relevance": 0.3
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.3
+          },
+          "news_types": [
+            "macro_economic",
+            "geopolitics",
+            "commodity_supply"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-25T13:14:14+00:00"
+        },
+        {
+          "title": "UBS says Fed unlikely to raise rates despite housing pressures and AI investment",
+          "brief_text": "UBS expects the Federal Reserve to leave interest rates unchanged despite competing pressures from a strained housing market and strong artificial intelligence investment. The Federal Open Market Committee voted 9-3 in July to hold the benchmark rate at 3.5% to 3.75%, with three regional presidents voting for an immediate increase. Thirty-year fixed mortgage rates have spiked to 6.66%, a one-year high, with a typical family now spending 34% of income on payments for a median-priced home, according to the National Association of Home Builders. Technology companies are expected to invest $820 billion in data centres this year, spending that UBS says is largely insulated from borrowing costs. Surging memory chip prices linked to AI demand have added 20 to 30 basis points to core inflation, UBS estimates, but the bank considers the effect a temporary bottleneck rather than broader overheating.",
+          "url": "https://finance.yahoo.com/economy/policy/articles/ubs-says-fed-unlikely-raise-113000678.html",
+          "publisher": "Proactive",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Fed hold and AI investment not overheating suggest stable yields, but mortgage rates spike may pressure yields up; overall ambiguous.",
+                "relevance": 0.8
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.8
+          },
+          "news_types": [
+            "macro_economic"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": "Artificial Intelligence",
+          "trend_id": 10000000,
+          "published_at": "2026-08-25T11:30:00+00:00"
+        },
+        {
+          "title": "The old equation is breaking down: high US yields no longer help the dollar, EM currencies strengthen",
+          "brief_text": "The relationship between US Treasuries and emerging-market currencies is diverging from its historical pattern by the most in more than four years, as rising US yields are no longer able to push the dollar higher and pressure emerging-market currencies the way they once did. The Bloomberg US Treasury index is on track for a quarterly loss after investors sold long-dated bonds on concerns about the trajectory of US government debt, while the MSCI emerging-market currency index is heading for its biggest quarterly gain in more than a year. As a result, the correlation between the two assets has fallen to its most negative level since the first quarter of 2022. This sell-off in US Treasuries is not driven solely by expectations that the Fed will tighten monetary policy, but also by concerns about US government debt and budget deficits. Investors are starting to anticipate that the US government may address its debt burden through easing policies and bond buybacks, which could reduce the real value of the dollar over the long term, leading to what the market calls the dollar debasement trade. Currencies of emerging-market commodity exporters are therefore getting a boost, especially South Africa, Colombia and Chile, which have seen the strongest currency gains this month. Nick Rees, head of macro research at Monex Europe, said the dollar debasement trend is making emerging markets look more attractive relative to developed markets, and commodities more attractive relative to equities or bonds.",
+          "url": "https://moneyandbanking.co.th/2026/265369/",
+          "publisher": "Money & Banking",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "US Treasury yields rise on debt concerns, pushing bond prices down.",
+                "relevance": 1
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 1
+          },
+          "news_types": [
+            "macro_economic",
+            "forex_related"
+          ],
+          "impact_score": 3,
+          "dup_count": 2,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-25T10:15:41+00:00"
+        },
+        {
+          "title": "Bessent confirms plan to proceed with bond auctions as scheduled",
+          "brief_text": "US Treasury Secretary Scott Bessent confirmed that the Treasury will proceed with bond auctions as originally planned, avoiding any additional signals about changes to debt management strategy, following reports that it may draw funds from the Treasury General Account, or TGA, to buy back older bonds with high yields. Bessent told reporters that the Treasury has not bought a single bond and that no changes will be made before the next quarterly debt management announcement in early November. Earlier, CNBC reported, citing senior Treasury sources, that the department may use funds from the TGA, which had a balance of 935 billion dollars as of August 20, to buy back bonds instead of issuing additional short-term Treasury bills. Last week, the Treasury announced an expansion of its buyback program for 10- to 20-year and 20- to 30-year bonds from 2 billion dollars to 4 billion dollars per operation between September 9 and November 4, after the 30-year bond yield surged to 5.34 percent, its highest level in nearly 20 years. Analysts at Morgan Stanley estimate that the Treasury may have surplus cash of around 80 billion to 200 billion dollars available to increase bond buybacks, while Goldman Sachs, Wells Fargo, and other financial institutions view the measure as likely to ease pressure on yields only modestly, with new macroeconomic factors needed to help push bond yields lower.",
+          "url": "https://efin.finance/th/stock/news/detail/mJl0AA",
+          "publisher": "Bloomberg",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Treasury confirms no change to bond auctions, avoiding additional signals, but the 30-year yield surge and potential buyback expansion may keep pressure on yields; the 10-year yield is likely to remain elevated.",
+                "relevance": 0.8
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.8
+          },
+          "news_types": [
+            "macro_economic",
+            "forex_related"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-25T05:29:00+00:00"
+        }
+      ],
+      "rate_positioning": {
+        "covered": true,
+        "note": "Bond-ETF price DOWN = long-end yields UP. So a NEGATIVE positioning_score = the options market leaning toward HIGHER yields (bond prices falling); positive = lower.",
+        "etfs": [
+          {
+            "etf": "TLT",
+            "tracks": "20y+ Treasuries (long end)",
+            "positioning_score": -0.4869,
+            "stale": false,
+            "audience": "Write for a GENERAL, non-expert reader. Explain in plain everyday language — do NOT use raw options jargon (gamma, skew, put/call ratio, max pain, O/S, IV, delta). If a concept is needed, say what it MEANS in one simple phrase (e.g. instead of 'dealers are short gamma' say 'the way market-makers hedge will tend to make today's price swings bigger'). Keep a number only when it helps a layperson.",
+            "flow": {
+              "os_ratio": 0.533328976008366,
+              "signals": [
+                {
+                  "because": "option/stock volume ratio in 29th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "options_activity",
+                  "driver": "os_ratio_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.5333
+                }
+              ]
+            },
+            "horizons": {
+              "long_term": {
+                "positioning_score": -1.0,
+                "metrics": {
+                  "atm_iv": 10.986642660899488,
+                  "gex_dealer_net": 21342809.28207605,
+                  "max_pain_distance_pct": 0.016764510076862617,
+                  "pcr_oi_notional": 1.4282374379656422,
+                  "skew_25d_rr": 6.556408774280403,
+                  "skew_norm": 0.5967618112869089
+                },
+                "signals": [
+                  {
+                    "read": "bearish_lean",
+                    "because": "$-notional put/call ratio 1.43 (puts heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 76th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 11.0% = 72th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within +1.7% of max-pain 84.0 (gravitational pull)"
+                  }
+                ]
+              },
+              "medium_term": {
+                "positioning_score": -1.0,
+                "metrics": {
+                  "atm_iv": 11.08200947906694,
+                  "gex_dealer_net": -49312797.4607918,
+                  "max_pain_distance_pct": 0.035668302258210216,
+                  "pcr_oi_notional": 7.635400313574029,
+                  "skew_25d_rr": 4.165401325036097,
+                  "skew_norm": 0.3758705795103513
+                },
+                "signals": [
+                  {
+                    "read": "bearish_lean",
+                    "because": "$-notional put/call ratio 7.64 (puts heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 76th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 11.1% = 68th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "unstable_amplifying",
+                    "because": "dealers net short gamma → amplify moves"
+                  }
+                ]
+              },
+              "short_term": {
+                "positioning_score": 0.4378,
+                "metrics": {
+                  "atm_iv": 9.963994712088894,
+                  "gex_dealer_net": 66105118.137936026,
+                  "max_pain_distance_pct": -0.007444168734491253,
+                  "pcr_oi_notional": 0.16316199233340917,
+                  "skew_25d_rr": 0.49743212673019954,
+                  "skew_norm": 0.04992296173408103
+                },
+                "signals": [
+                  {
+                    "read": "bullish_lean",
+                    "because": "$-notional put/call ratio 0.16 (calls heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 24th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 10.0% = 36th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within -0.7% of max-pain 82.0 (gravitational pull)"
+                  }
+                ]
+              }
+            },
+            "key_dates": [
+              {
+                "expiry": "2026-08-24",
+                "dte": 0,
+                "read": "routine_0dte_concentration",
+                "because": "59% of today's volume → standard 0DTE expiry flow (mechanical); no IV premium vs neighbours, so NOT evidence of a catalyst"
+              },
+              {
+                "expiry": "2026-11-20",
+                "dte": 88,
+                "read": "expiry_concentration",
+                "because": "53% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              },
+              {
+                "expiry": "2027-02-19",
+                "dte": 179,
+                "read": "expiry_concentration",
+                "because": "27% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              }
+            ]
+          },
+          {
+            "etf": "IEF",
+            "tracks": "7-10y Treasuries (belly)",
+            "positioning_score": -0.0538,
+            "stale": false,
+            "audience": "Write for a GENERAL, non-expert reader. Explain in plain everyday language — do NOT use raw options jargon (gamma, skew, put/call ratio, max pain, O/S, IV, delta). If a concept is needed, say what it MEANS in one simple phrase (e.g. instead of 'dealers are short gamma' say 'the way market-makers hedge will tend to make today's price swings bigger'). Keep a number only when it helps a layperson.",
+            "flow": {
+              "os_ratio": 0.06555852899955543,
+              "signals": [
+                {
+                  "because": "option/stock volume ratio in 0th percentile of this asset's own 90d (options unusually quiet vs the stock)",
+                  "dimension": "options_activity",
+                  "driver": "os_ratio_percentile_90d",
+                  "read": "unusually_quiet",
+                  "value": 0.0656
+                }
+              ]
+            },
+            "horizons": {
+              "long_term": {
+                "positioning_score": 0.0,
+                "metrics": {
+                  "atm_iv": 5.958681497113767,
+                  "gex_dealer_net": 558424.2903618363,
+                  "max_pain_distance_pct": -0.0566130097998087,
+                  "pcr_oi_notional": 0.1501256610751275,
+                  "skew_25d_rr": 4.93564049563808,
+                  "skew_norm": 0.8283108432677225
+                },
+                "signals": [
+                  {
+                    "read": "bullish_lean",
+                    "because": "$-notional put/call ratio 0.15 (calls heavier)"
+                  },
+                  {
+                    "read": "put_skew_elevated",
+                    "because": "normalized put-skew in 100th percentile of this asset's own 90d (unusually steep)"
+                  },
+                  {
+                    "read": "compressed",
+                    "because": "ATM IV 6.0% = 4th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  }
+                ]
+              },
+              "medium_term": {
+                "positioning_score": -0.7465,
+                "metrics": {
+                  "atm_iv": 5.443613622111303,
+                  "gex_dealer_net": -4792954.367212847,
+                  "max_pain_distance_pct": 0.00507988044117708,
+                  "pcr_oi_notional": 9.012760055478502,
+                  "skew_25d_rr": 1.9722153784002023,
+                  "skew_norm": 0.3622989277544058
+                },
+                "signals": [
+                  {
+                    "read": "bearish_lean",
+                    "because": "$-notional put/call ratio 9.01 (puts heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 32th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 5.4% = 32th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "unstable_amplifying",
+                    "because": "dealers net short gamma → amplify moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within +0.5% of max-pain 93.48750507923609 (gravitational pull)"
+                  }
+                ]
+              },
+              "short_term": {
+                "positioning_score": 0.4593,
+                "metrics": {
+                  "atm_iv": 5.640109354392929,
+                  "gex_dealer_net": 22361208.36185837,
+                  "max_pain_distance_pct": -0.0055367413857979955,
+                  "pcr_oi_notional": 0.14298772813784758,
+                  "skew_25d_rr": 0.3258581340375448,
+                  "skew_norm": 0.05777514469355859
+                },
+                "signals": [
+                  {
+                    "read": "bullish_lean",
+                    "because": "$-notional put/call ratio 0.14 (calls heavier)"
+                  },
+                  {
+                    "read": "balanced_skew",
+                    "because": "25Δ skew / ATM IV = +0.06 (self-scaled by IV; cross-asset — own-history accruing)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 5.6% = 36th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within -0.6% of max-pain 92.5 (gravitational pull)"
+                  }
+                ]
+              }
+            },
+            "key_dates": [
+              {
+                "expiry": "2026-08-28",
+                "dte": 4,
+                "read": "expiry_concentration",
+                "because": "58% of total open interest sits here; 21% of today's volume → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              },
+              {
+                "expiry": "2026-09-25",
+                "dte": 32,
+                "read": "expiry_concentration",
+                "because": "26% of total open interest sits here; 36% of today's volume → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              },
+              {
+                "expiry": "2027-03-19",
+                "dte": 207,
+                "read": "expiry_concentration",
+                "because": "24% of today's volume → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              }
+            ]
+          }
+        ]
+      },
+      "futures_positioning": {
+        "covered": true,
+        "tenors": [
+          {
+            "tenor": "2Y",
+            "score": 56,
+            "crowding": "crowded",
+            "read": "The hedge funds in US-2Y.GB are near the TOP of its 3-year range — about as positioned for LOWER yields as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns. asset managers (real money) are in their normal range — no strong smart-money tell either way. hedge funds TRIMMED the position this week (starting to unwind — the reversal often starts here). On fragility, concentration data unavailable. Seasonally, but FOR THIS TIME OF YEAR it's only around the 22th percentile — the crowding is partly SEASONAL (normal for the calendar), so read it as less of a warning."
+          },
+          {
+            "tenor": "10Y",
+            "score": 80,
+            "crowding": "leaning",
+            "read": "The hedge funds in US-10Y.GB are on the low side of its 3-year range (leaning toward higher yields). asset managers (real money) — the group that tends to know the fundamentals — are positioned for LOWER yields. hedge funds ADDED to the position this week (building conviction). On fragility, concentration data unavailable. Vs price: price is UP ~2% over the past month while the crowd is TRIMMING — a DISTRIBUTION setup (the rally is running while the big players step back). Seasonally, this is extreme even FOR THIS TIME OF YEAR (~6th seasonal percentile) — a genuine crowd, not just a seasonal pattern."
+          },
+          {
+            "tenor": "30Y",
+            "score": 69,
+            "crowding": "leaning",
+            "read": "The hedge funds in US-30Y.GB are on the low side of its 3-year range (leaning toward higher yields). asset managers (real money) — the group that tends to know the fundamentals — are positioned for LOWER yields. hedge funds ADDED to the position this week (building conviction). On fragility, concentration data unavailable. Vs price: price is UP ~3% and the crowd is ADDING — the trend is confirmed by positioning (just watch the crowding). Seasonally, this is extreme even FOR THIS TIME OF YEAR (~2th seasonal percentile) — a genuine crowd, not just a seasonal pattern."
+          }
+        ]
+      },
+      "macro_drivers": {
+        "covered": true,
+        "drivers": [
+          {
+            "indicator": "CPI inflation",
+            "series_id": "CPIAUCSL",
+            "transform": "pc1",
+            "title": "Consumer Price Index for All Urban Consumers: All Items in U.S. City Average",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 3.304
+            },
+            "trend": "rising",
+            "percentile": 71.0,
+            "z_score": 0.02,
+            "read": "3.304 as of 2026-07-01, rising over the window (peak 8.979 on 2022-06-01, trough 0.198 on 2020-05-01); latest sits in the 71th percentile of the window."
+          },
+          {
+            "indicator": "core PCE",
+            "series_id": "PCEPILFE",
+            "transform": "pc1",
+            "title": "Personal Consumption Expenditures Excluding Food and Energy (Chain-Type Price Index)",
+            "latest": {
+              "date": "2026-06-01",
+              "value": 3.287
+            },
+            "trend": "rising",
+            "percentile": 72.0,
+            "z_score": 0.38,
+            "read": "3.287 as of 2026-06-01, rising over the window (peak 5.606 on 2022-09-01, trough 0.97 on 2020-06-01); latest sits in the 72th percentile of the window."
+          },
+          {
+            "indicator": "nonfarm payrolls",
+            "series_id": "PAYEMS",
+            "transform": "chg",
+            "title": "All Employees, Total Nonfarm",
+            "latest": {
+              "date": "2026-07-01",
+              "value": -23.0
+            },
+            "trend": "falling",
+            "percentile": 7.0,
+            "z_score": -0.07,
+            "read": "-23.0 as of 2026-07-01, falling over the window (peak 4631.0 on 2020-06-01, trough -20469.0 on 2020-04-01); latest sits in the 7th percentile of the window."
+          },
+          {
+            "indicator": "unemployment",
+            "series_id": "UNRATE",
+            "transform": "lin",
+            "title": "Unemployment Rate",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 4.1
+            },
+            "trend": "falling",
+            "percentile": 55.0,
+            "z_score": -0.26,
+            "read": "4.1 as of 2026-07-01, falling over the window (peak 14.8 on 2020-04-01, trough 3.4 on 2023-04-01); latest sits in the 55th percentile of the window."
+          },
+          {
+            "indicator": "fed funds",
+            "series_id": "FEDFUNDS",
+            "transform": "lin",
+            "title": "Federal Funds Effective Rate",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 3.63
+            },
+            "trend": "falling",
+            "percentile": 65.0,
+            "z_score": 0.66,
+            "read": "3.63 as of 2026-07-01, falling over the window (peak 5.33 on 2023-08-01, trough 0.05 on 2020-04-01); latest sits in the 65th percentile of the window."
+          }
+        ]
+      },
+      "_guide": "Rates are a CURVE. LEAD with the curve's SHAPE: read `slope.2s10s` — negative = INVERTED (a classic recession signal); positive = normal. Then the level + recent MOVE of the key tenors in BASIS POINTS (`curve[].change_bps`, NOT %). Explain the DRIVER from `macro_drivers` (the FRED macro that moves rates: CPI/core-PCE hot or cooling, jobs strong/weak, fed funds stance — quote each `read`) + `news`. `yield↑ ⇒ bond price↓`. The yield itself has no options — but for a FORWARD 'will rates rise/fall?' read, use `rate_positioning`: it's the options market on the Treasury ETFs (TLT/IEF), where ETF price DOWN = yields UP, so a NEGATIVE `positioning_score` = the market positioned for HIGHER yields. 🎯 `futures_positioning` adds the CFTC COT view (leveraged funds vs asset managers in the bond FUTURES — the basis trade; its plain `read` is invert-aware: a long future = for LOWER yields); fuse it with rate_positioning. FUSE all — curve move + macro_drivers + positioning: agreement strengthens the read, divergence is the insight. Explain any options term in plain words. `covered=false` (non-US) on rate_positioning/macro_drivers → say the US-macro/ETF proxy isn't available there. `news` empty = say so; the curve still stands. For the FULL economy/recession read, hand off to macro_pulse."
+    },
+    "{\n  \"ticker\": \"00694B.TWO\",\n  \"symbol\": \"00694B\",\n  \"name\": \"Fubon 1-3 Years US Treasury Bond ETF\",\n  \"type\": \"etf\",\n  \"country\": \"Taiwan\",\n  \"domicile\": \"TW\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"TWO\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"00695B.TWO\",\n  \"symbol\": \"00695B\",\n  \"name\": \"Fubon 7-10 Years US Treasury Bond ETF\",\n  \"type\": \"etf\",\n  \"country\": \"Taiwan\",\n  \"domicile\": \"TW\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"TWO\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"00864B.TWO\",\n  \"symbol\": \"00864B\",\n  \"name\": \"CTBC 0-1 Year US Treasury Bond ETF\",\n  \"type\": \"etf\",\n  \"country\": \"Taiwan\",\n  \"domicile\": \"TW\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"TWO\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"00696B.TWO\",\n  \"symbol\": \"00696B\",\n  \"name\": \"Fubon 20 +Years US Treasury Bond ETF\",\n  \"type\": \"etf\",\n  \"country\": \"Taiwan\",\n  \"domicile\": \"TW\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"TWO\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"00779B.TWO\",\n  \"symbol\": \"00779B\",\n  \"name\": \"KGI 25+ Years US Treasury Bond ETF\",\n  \"type\": \"etf\",\n  \"country\": \"Taiwan\",\n  \"domicile\": \"TW\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"TWO\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}"
+  ],
+  "answer_to_user": "มีทางเลือกที่ความเสี่ยงต่ำกว่าหุ้นอยู่หลายแบบ ไอเดียหลักคือ ยิ่งเสี่ยงน้อย ผลตอบแทนที่คาดหวังก็มักจะน้อยตามไปด้วย (trade-off ระหว่างความปลอดภัยกับผลตอบแทน):\n• พันธบัตรรัฐบาล (Government bonds) — ให้รัฐยืมเงินแล้วได้ดอกเบี้ยคืน ถือว่าเสี่ยงต่ำที่สุดกลุ่มหนึ่ง ตอนนี้พันธบัตรสหรัฐจ่ายผลตอบแทนราว 3.8% (อายุ 3 เดือน) ถึงราว 4.7% (อายุ 10 ปี) และ 5.2% (30 ปี)\n• กองทุน/ETF พันธบัตร — เช่นกลุ่ม US Treasury Bond ETF (มีทั้งช่วงอายุสั้น 0-1 ปี, 1-3 ปี, 7-10 ปี ฯลฯ) ช่วยกระจายความเสี่ยงและซื้อง่ายเหมือนหุ้น\n• เงินฝากประจำ/ตราสารตลาดเงิน — ปลอดภัยสูง สภาพคล่องดี แต่ผลตอบแทนต่ำ\n• หุ้นปันผลบลูชิป/กองทุนดัชนีแบบกระจายความเสี่ยง — เสี่ยงกว่าพันธบัตร แต่กระจายตัวช่วยลดความผันผวนเทียบกับถือหุ้นรายตัว\nสิ่งสำคัญ: ไม่มีการลงทุนใด \"การันตีไม่ขาดทุน\" 100% — แม้แต่พันธบัตรก็มีความเสี่ยงเรื่องดอกเบี้ยและเงินเฟ้อ นี่เป็นข้อมูลเพื่อศึกษาต่อ ไม่ใช่คำแนะนำให้ซื้อผลิตภัณฑ์ใดโดยเฉพาะ"
+}

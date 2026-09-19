@@ -1,0 +1,16 @@
+{
+  "id": "gi04",
+  "question": "rank the biggest semiconductor stocks",
+  "tool_calls": [
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "gics": "semiconductors",
+        "order_by": "market_cap",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "20 semiconductor stocks ranked by market cap. All 20 net-positive on news direction. Top names: NVIDIA (NVDA.US, $5.37T), TSMC (2330.TW, $2.00T), Broadcom (AVGO.US, $1.71T), Micron (MU.US, $1.15T), SK Hynix (000660.KO, $923B), AMD (AMD.US, $914B), ASML (ASML.AS, $638B), Intel (INTC.US, $574B), Lam Research (LRCX.US, $361B), Applied Materials (AMAT.US, $353B), Texas Instruments (TXN.US, $244B), KLA Corp (KLAC.US, $231B), MediaTek (2454.TW, $230B), Marvell (MRVL.US, $220B), Kioxia (285A.JP, $192B), Qualcomm (QCOM.US, $190B), Analog Devices (ADI.US, $182B), SMIC (688981.CG, $156B), Advantest (6857.JP, $143B), Cambricon (688256.CG, $104B). GICS resolved to code 4530 (IT sector / semiconductor sub).",
+  "friction": "none"
+}

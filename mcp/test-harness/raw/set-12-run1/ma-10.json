@@ -1,0 +1,42 @@
+{
+  "id": "ma-10",
+  "question": "Give me a picture of momentum across all markets — what asset types are strongest right now based on technical signals?",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock"],
+        "ta": [{"anchor": [{"pattern": "overbought", "a": "rsi"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"anchor": [{"pattern": "overbought", "a": "rsi"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Currency"],
+        "ta": [{"anchor": [{"pattern": "overbought", "a": "rsi"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    }
+  ],
+  "result_summary": "Three separate RSI-overbought screens as momentum proxy: Stocks: >=40 hits from universe 24590 (>=0.16% breadth; top: CNR.US, CTSH.US, CME.US, CRM.US). Crypto: >=40 hits from universe 2154 (>=1.9% breadth; ETH-USD.CC RSI 70.7, BTC-USD.CC RSI 70.7, DMTR-USD.CC RSI 87.4). Forex: >=40 hits from universe 996 (>=4.0% breadth; USDBMD.FOREX, IDRUSD.FOREX, KRWIDR.FOREX). Relative overbought breadth: Forex >Crypto >Stocks on a universe-normalized basis. Notable: ETH and BTC both overbought, suggesting crypto bull momentum.",
+  "verdict": "PARTIAL",
+  "reason": "No dedicated cross-asset momentum summary tool exists. Agent ran 3 separate screens and synthesized a comparative answer covering all 3 asset types with real data. The answer covers multiple asset types and addresses relative strength — meets the acceptance criteria for data coverage. PARTIAL because the synthesis requires multiple calls with no native cross-asset momentum tool, and a blind client would need to know to run multiple screens.",
+  "defects": [
+    {
+      "desc": "No dedicated cross-asset momentum/relative-strength comparison tool exists. A question like 'which asset class is strongest' has no single-tool answer — the client must run 3 separate screens and self-normalize. The combined asset_type screen doesn't distribute results proportionally across classes, making it unusable for comparison.",
+      "side": "server"
+    }
+  ]
+}

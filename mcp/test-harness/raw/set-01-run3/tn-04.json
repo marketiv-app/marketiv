@@ -1,0 +1,18 @@
+{
+  "id": "tn-04",
+  "question": "Is Tesla overbought or oversold right now? Just tell me if it's a good time to buy or if I should wait.",
+  "tools_called": [
+    {
+      "tool": "find_stock",
+      "args": {"q": "Tesla"},
+      "duration_ms": 926,
+      "result_summary": "Resolved Tesla to TSLA.US (Tesla Inc, USA, market_cap ~$1.38T, match_type=name)."
+    },
+    {
+      "tool": "asset_pulse",
+      "args": {"ticker": "TSLA.US"},
+      "duration_ms": 2800,
+      "result_summary": "TSLA as of 2026-08-28: close $348.75, down 13.01% below 200-day SMA, down 3.25% below 50-day SMA. RSI and momentum context: 30.09% off 52-week high of $498.83 (Dec 2025), 52-week low $297.38 (Jul 2026). Range position 25.5% = lower half. Realized vol 30d annualized 58.35% (92nd percentile = very high volatility). NEITHER overbought nor oversold in classic RSI terms — it sits in the lower quarter of its range, well below key MAs, suggesting more weakness than strength. Not a clear oversold bounce yet either."
+    }
+  ]
+}

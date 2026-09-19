@@ -1,0 +1,351 @@
+{
+  "id": "id-05",
+  "question": "This telecom is yielding 9% but the stock is down 40% this year. Is this a real income opportunity or a yield trap?",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "gics": "5010",
+        "min_yield": 7,
+        "order_by": "yield",
+        "limit": 15
+      },
+      "note": "No specific ticker was named ('this telecom'), so I pulled the high-yield telecom cohort to show the exact trap-vs-safe decomposition on real comparable names."
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 10,
+      "has_more": false,
+      "limit": 15,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 20.2,
+            "ffo_payout": null,
+            "last_cut_year": 2017,
+            "no_cut_streak_yrs": 8,
+            "payout_ratio": 0.0216,
+            "payout_ratio_eff": 0.0216,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 12.12,
+            "yield_trailing_pct": 12.12
+          },
+          "eps": 0.59,
+          "exchange": "US",
+          "gic_code": "50102010",
+          "market_cap_usd": 222150608.0,
+          "name": "Spok Holdings Inc",
+          "news": {
+            "neg": 1,
+            "net_direction": "mixed",
+            "pos": 1,
+            "top_reason": "Lowered 2026 revenue midpoint due to longer deal cycles and customer shift to shorter-term contracts amid tight hospital budgets."
+          },
+          "pb_ratio": 1.639687,
+          "pe_ratio": 19.245614,
+          "stock_id": 41167,
+          "symbol": "SPOK",
+          "ticker": "SPOK.US",
+          "week52_high": 16.3715,
+          "week52_low": 9.3842
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 34.1,
+            "ffo_payout": null,
+            "last_cut_year": 2021,
+            "no_cut_streak_yrs": 4,
+            "payout_ratio": 0.6386,
+            "payout_ratio_eff": 0.6386,
+            "ttm_div_yoy_pct": -12.4,
+            "yield_pct": 8.96,
+            "yield_trailing_pct": 8.96
+          },
+          "eps": 1.77,
+          "exchange": "US",
+          "gic_code": "50102010",
+          "market_cap_usd": 8636465152.0,
+          "name": "TIM Participacoes SA",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 8.544964,
+          "pe_ratio": 9.943035,
+          "stock_id": 43375,
+          "symbol": "TIMB",
+          "ticker": "TIMB.US",
+          "week52_high": 28.0125,
+          "week52_low": 17.14
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": -11.4,
+            "ffo_payout": null,
+            "last_cut_year": 2024,
+            "no_cut_streak_yrs": 1,
+            "payout_ratio": 0.0659,
+            "payout_ratio_eff": 0.0659,
+            "ttm_div_yoy_pct": 56.0,
+            "yield_pct": 8.69,
+            "yield_trailing_pct": 8.69
+          },
+          "eps": 0.8,
+          "exchange": "US",
+          "gic_code": "50101020",
+          "market_cap_usd": 17943328768.0,
+          "name": "Telefonica Brasil SA ADR",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.855693,
+          "pe_ratio": 14.191047,
+          "stock_id": 46168,
+          "symbol": "VIV",
+          "ticker": "VIV.US",
+          "week52_high": 16.4764,
+          "week52_low": 10.9113
+        },
+        {
+          "country": "Germany",
+          "dividend": {
+            "cagr_5y_pct": 118.0,
+            "ffo_payout": null,
+            "last_cut_year": 2022,
+            "no_cut_streak_yrs": 3,
+            "payout_ratio": 1.0098,
+            "payout_ratio_eff": 1.0098,
+            "ttm_div_yoy_pct": 5.1,
+            "yield_pct": 8.5,
+            "yield_trailing_pct": 8.65
+          },
+          "eps": 2.04,
+          "exchange": "XETRA",
+          "gic_code": "50101020",
+          "market_cap_usd": null,
+          "name": "freenet AG",
+          "news": {
+            "neg": 1,
+            "net_direction": "mixed",
+            "pos": 1,
+            "top_reason": "Surpassed 10 million subscribers with strong net additions, driving revenue and EBITDA growth."
+          },
+          "pb_ratio": 1.795341,
+          "pe_ratio": 10.886878,
+          "stock_id": 242379,
+          "symbol": "FNTN",
+          "ticker": "FNTN.XETRA",
+          "week52_high": 31.3117,
+          "week52_low": 22.28
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 3.6,
+            "ffo_payout": null,
+            "last_cut_year": 2024,
+            "no_cut_streak_yrs": 1,
+            "payout_ratio": 1.4356,
+            "payout_ratio_eff": 1.4356,
+            "ttm_div_yoy_pct": -5.1,
+            "yield_pct": 8.15,
+            "yield_trailing_pct": 8.15
+          },
+          "eps": 1.0,
+          "exchange": "US",
+          "gic_code": "50101020",
+          "market_cap_usd": 14806857728.0,
+          "name": "Telkom Indonesia (Persero) Tbk PT ADR Rep 100 B",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 121.713093,
+          "pe_ratio": 8.194055,
+          "stock_id": 43557,
+          "symbol": "TLK",
+          "ticker": "TLK.US",
+          "week52_high": 21.7082,
+          "week52_low": 12.5985
+        },
+        {
+          "country": "Switzerland",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 1,
+            "payout_ratio": 0.0,
+            "payout_ratio_eff": 0.0,
+            "ttm_div_yoy_pct": 2.7,
+            "yield_pct": 8.14,
+            "yield_trailing_pct": 8.14
+          },
+          "eps": -1.7,
+          "exchange": "SW",
+          "gic_code": "50101020",
+          "market_cap_usd": null,
+          "name": "SUNRISE N",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.756023,
+          "pe_ratio": null,
+          "stock_id": 1754922,
+          "symbol": "SUNN",
+          "ticker": "SUNN.SW",
+          "week52_high": 47.4843,
+          "week52_low": 36.3954
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 1.5,
+            "ffo_payout": null,
+            "last_cut_year": 2025,
+            "no_cut_streak_yrs": 0,
+            "payout_ratio": 1.0648,
+            "payout_ratio_eff": 1.0648,
+            "ttm_div_yoy_pct": -4.4,
+            "yield_pct": 7.83,
+            "yield_trailing_pct": 7.83
+          },
+          "eps": 2.07,
+          "exchange": "US",
+          "gic_code": "50102010",
+          "market_cap_usd": 4187160832.0,
+          "name": "PLDT Inc ADR",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.986333,
+          "pe_ratio": 8.793534,
+          "stock_id": 34274,
+          "symbol": "PHI",
+          "ticker": "PHI.US",
+          "week52_high": 23.6099,
+          "week52_low": 17.05
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": -1.2,
+            "ffo_payout": null,
+            "last_cut_year": 2025,
+            "no_cut_streak_yrs": 0,
+            "payout_ratio": 0.7631,
+            "payout_ratio_eff": 0.7631,
+            "ttm_div_yoy_pct": 1.1,
+            "yield_pct": 7.69,
+            "yield_trailing_pct": 7.24
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "50101010",
+          "market_cap_usd": 1166417364.992,
+          "name": "CITIC Telecom International Holdings Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.842714,
+          "pe_ratio": 10.080321,
+          "stock_id": 51817,
+          "symbol": "1883",
+          "ticker": "1883.HK",
+          "week52_high": 2.82,
+          "week52_low": 2.2628
+        },
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": -4.4,
+            "ffo_payout": null,
+            "last_cut_year": 2025,
+            "no_cut_streak_yrs": 0,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -25.0,
+            "yield_pct": 7.43,
+            "yield_trailing_pct": 7.43
+          },
+          "eps": 0.2,
+          "exchange": "BK",
+          "gic_code": "50101020",
+          "market_cap_usd": 41543872.128,
+          "name": "Information and Communication Networks Public Company Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "First-half profit surges 113% with strong revenue growth and a large backlog, indicating robust demand for its services."
+          },
+          "pb_ratio": 1.588095,
+          "pe_ratio": 11.0,
+          "stock_id": 49662,
+          "symbol": "ICN",
+          "ticker": "ICN.BK",
+          "week52_high": 2.2,
+          "week52_low": 1.4155
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 4.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 5.497,
+            "payout_ratio_eff": 5.497,
+            "ttm_div_yoy_pct": -25.5,
+            "yield_pct": 7.1,
+            "yield_trailing_pct": 7.14
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "50101020",
+          "market_cap_usd": 5358290981.6832,
+          "name": "PCCW Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "PCCW's Viu expands content offering with Thai series, potentially increasing viewership and subscription growth in ASEAN."
+          },
+          "pb_ratio": 11.459163,
+          "pe_ratio": null,
+          "stock_id": 50268,
+          "symbol": "0008",
+          "ticker": "0008.HK",
+          "week52_high": 5.9435,
+          "week52_low": 4.8145
+        }
+      ],
+      "total": 10
+    }
+  ],
+  "answer_to_user": "A 9% yield on a stock that's down ~40% is the textbook yield-trap setup, so it's right to be suspicious rather than excited. Here's WHY: a dividend yield is dividend / price. When the price falls 40% but the last declared dividend hasn't reset yet, the yield mechanically balloons — that rising yield can be the market pricing in a coming cut, not free income. You can't decide from the 9% alone; you have to decompose it. The tells that separate trap from value (and I can show them on the real high-yield telecom cohort): TRAP signals — a recent dividend cut and a falling trailing dividend. Look at Telefonica Brasil ADR (VIV.US): ~8.7% yield but it CUT in 2024, only a 1-year streak, and dividend down ~11% (negative CAGR). Telkom Indonesia (TLK.US): ~8.2% but payout ratio ~1.44 (paying out far more than it earns) and a 2024 cut — that yield looks unsafe. freenet AG (FNTN.XETRA): ~8.5% but payout ~1.01 and a 2022 cut. VALUE-ish signals by contrast — Spok Holdings (SPOK.US): ~12% yield but a very LOW payout (~2%), an 8-year no-cut streak and positive dividend growth — high yield NOT driven by a stretched payout. So for your specific 9% telecom, the questions to answer before calling it income: (1) is the payout ratio / earnings coverage under 1 or blown out? (2) has the dividend already been cut or is it still rising? (3) WHY did the price drop 40% — a fundamental deterioration (earnings, debt, subscriber loss) usually precedes a cut. If payout is stretched, dividend already trimmed, and the drop is fundamental, it's a trap; if payout is comfortable, dividend intact/growing and the selloff is sentiment, it may be value. This is trap-vs-safe framing, not a buy/sell call."
+}

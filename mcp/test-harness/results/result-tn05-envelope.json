@@ -1,0 +1,55 @@
+{
+  "question": "Find me stocks that dropped a lot lately but the company is actually fine — still growing revenue, and not overpriced. Dip-buy candidates.",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["price dropped a lot recently", "big price drawdown from recent high", "price down sharply over the last few months"]},
+      "ok": true,
+      "error": "",
+      "result_count": 3
+    },
+    {
+      "tool": "find_fsconcept",
+      "args": {"queries": ["revenue", "price to earnings ratio"]},
+      "ok": true,
+      "error": "",
+      "result_count": 2
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {"queries": ["revenue growing over recent years", "valuation below the sector average / not expensive"]},
+      "ok": true,
+      "error": "",
+      "result_count": 2
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.20", "window_bars": 120}]}],
+        "fundamental": [
+          {"concept": "revenue", "pattern": "consecutive_growth", "N": 2},
+          {"concept": "pe", "pattern": "below_average", "vs_cohort": {"own": true}}
+        ],
+        "asset_type": ["Common Stock"],
+        "timeframe": 1,
+        "window_bars": 120,
+        "limit": 10
+      },
+      "ok": true,
+      "error": "",
+      "result_count": 40
+    }
+  ],
+  "matched_legs_example": ["fundamental", "ta"],
+  "technical_evidence_key": "matched.ta  (the price-drop signal is keyed by its human label, e.g. matched.ta[\"price net drop ≥20%\"], whose .detail.ret holds the drop fraction)",
+  "fundamental_evidence_key": "matched.fundamental  (with sub-keys matched.fundamental.revenue and matched.fundamental.pe)",
+  "matched_keys_present": ["fundamental", "ta"],
+  "context_keys_present": ["fundamental", "ta"],
+  "both_legs_populated": "YES — both legs carry real, non-empty evidence. Examples: ACIC.US: matched.ta['price net drop ≥20%'].detail.ret = -0.2294 (down ~22.9%); matched.fundamental.revenue.series=[0.1301,0.1242] (revenue grew +13.0% then +12.4% YoY, min_yoy value 0.1242); matched.fundamental.pe.value=4.68 vs cohort_benchmark=18.12 (own_sector) → cheap. ACM.US (Aecom): ret=-0.2038 (-20.4%), revenue growth series [0.0021,0.1201], pe.value=28.41 vs cohort 35.36. head 1752 (gross_margin 0.80 name hidden in preview): ret=-0.235 (-23.5%), revenue series [0.6519,0.2297], pe.value=39.13 vs cohort 61.92.",
+  "answer_to_user": "I found ~40 dip-buy candidates that satisfy ALL THREE conditions at once: (1) price is down ~20%+ recently, (2) revenue grew every year over the last 2 years, and (3) P/E sits below its own sector's average (i.e. not overpriced relative to peers). Top examples: American Coastal Insurance (ACIC.US) — down ~23%, revenue +12–13%/yr, P/E 4.7 vs a sector avg of 18.1 (very cheap, normalized_pe 4.5, net margin 30%); AECOM (ACM.US) — down ~20%, revenue still growing, P/E 28.4 vs sector 35.4; and a ~$31bn high-gross-margin (80%) name down ~23.5% with revenue up 23–65%/yr, P/E 39 vs a sector avg of 62. Each row carries the exact drop %, the revenue-growth series, and the P/E-vs-peer-average that qualified it, so you can vet them. Note: 'not overpriced' here means cheap RELATIVE TO its own sector (cohort), not an absolute low-P/E cutoff.",
+  "self_grade": {
+    "right_tool": "PASS — find_tasignal resolved the TA drop vocabulary (net_change_down / off_high_by), find_fsconcept resolved revenue + pe, find_fspattern resolved consecutive_growth + below_average, then screen_unified executed the intersection with BOTH a ta leg and a fundamental leg. Followed the schema hint to set asset_type=['Common Stock'].",
+    "result_correct": "PASS — spot-checking returned rows only: every row shows a real price drop (ret between -0.20 and -0.235), revenue growth (min_yoy > 0, series all positive), and pe.value strictly below its own_sector cohort_benchmark. All three legs are internally consistent with the request; matched_legs=['fundamental','ta'] on every row and score=1.0.",
+    "keys_consistent_with_input": "PASS — I sent the technical conditions under the input key `ta` and the response exposes the technical evidence under matched.ta / context.ta (SAME name). I sent the financial conditions under the input key `fundamental` and the response exposes them under matched.fundamental / context.fundamental (SAME name). No guessing needed: the evidence keys mirror the exact input leg names. Minor note: within matched.ta the signal is keyed by a human LABEL ('price net drop ≥20%') rather than the raw pattern token 'net_change_down', so a client must iterate the dict values rather than look up by pattern name — but the top-level leg key is stable and matches the input."
+  }
+}

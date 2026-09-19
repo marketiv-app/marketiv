@@ -1,0 +1,243 @@
+{
+  "id": "fn-10",
+  "question": "My friend said gold is a safe place to put money when things get scary. Is that true, and how would I even invest in it?",
+  "tools_called": [
+    {
+      "tool": "find_stock",
+      "args": {
+        "q": "gold"
+      }
+    },
+    {
+      "tool": "commodity_pulse",
+      "args": {
+        "q": "gold"
+      }
+    },
+    {
+      "tool": "find_stock",
+      "args": {
+        "q": "gold ETF"
+      }
+    }
+  ],
+  "raw_responses": [
+    "{\n  \"ticker\": \"GOLD.COMM\",\n  \"symbol\": \"GOLD\",\n  \"name\": \"Gold Futures\",\n  \"type\": \"commodity\",\n  \"country\": null,\n  \"domicile\": null,\n  \"region\": \"Global\",\n  \"region_iso2\": null,\n  \"exchange\": \"COMM\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"symbol\"\n}\n{\n  \"ticker\": \"GOLD.US\",\n  \"symbol\": \"GOLD\",\n  \"name\": \"Gold.com, Inc.\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 1328400256.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"symbol\"\n}\n{\n  \"ticker\": \"GOLD.AS\",\n  \"symbol\": \"GOLD\",\n  \"name\": \"Amundi Physical Gold ETC C\",\n  \"type\": \"stock\",\n  \"country\": \"Netherlands\",\n  \"domicile\": \"FR\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"AS\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"symbol\"\n}\n{\n  \"ticker\": \"GOLD.LSE\",\n  \"symbol\": \"GOLD\",\n  \"name\": \"Invesco Physical Markets plc - Invesco Physical Gold II ETC\",\n  \"type\": \"etf\",\n  \"country\": \"UK\",\n  \"domicile\": \"GB\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"LSE\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"symbol\"\n}\n{\n  \"ticker\": \"GOLD.PA\",\n  \"symbol\": \"GOLD\",\n  \"name\": \"Amundi Physical Gold ETC C EUR\",\n  \"type\": \"etf\",\n  \"country\": \"France\",\n  \"domicile\": \"FR\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"PA\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"symbol\"\n}\n{\n  \"ticker\": \"FCX.US\",\n  \"symbol\": \"FCX\",\n  \"name\": \"Freeport-McMoran Copper & Gold Inc\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 111722168320.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"B.US\",\n  \"symbol\": \"B\",\n  \"name\": \"Barrick Mining Corporation\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"CA\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 79265792000.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"2259.HK\",\n  \"symbol\": \"2259\",\n  \"name\": \"Zijin Gold Intl Co Ltd\",\n  \"type\": \"stock\",\n  \"country\": \"Hong Kong\",\n  \"domicile\": \"HK\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"HK\",\n  \"market_cap_usd\": 54742590881.792,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}",
+    {
+      "ticker": "GOLD.COMM",
+      "name": "Gold Futures",
+      "region": "Global",
+      "currency": "USD",
+      "description": "Gold futures (COMEX/CME, USD) — the primary global gold price benchmark and a core safe-haven and monetary-hedge asset.",
+      "price": {
+        "last_close": 4710.0,
+        "metric_kind": "return",
+        "windows": {
+          "1mo": {
+            "change_pct": 15.6
+          },
+          "1w": {
+            "change_pct": 6.61
+          },
+          "1y": {
+            "change_pct": 39.61
+          },
+          "3mo": {
+            "change_pct": 4.66
+          },
+          "ytd": {
+            "change_pct": 8.89
+          }
+        },
+        "range_read": "upper half of the 52-week range",
+        "trend_read": "uptrend — above both the 50-day and 200-day average",
+        "drawdown_from_52w_high_pct": -15.69,
+        "realized_vol_percentile_1y": 36.11,
+        "volume_conviction_read": "accumulation — heavier volume on up days"
+      },
+      "impact": {
+        "articles": [
+          {
+            "title": "Gold Fields H1 Earnings Call Highlights",
+            "brief_text": "Gold Fields reported a stronger first half for the six months ended June 30, 2026, with attributable production up 12% to 1.267 million ounces and adjusted free cash flow more than doubling to $2.225 billion. The company's average realized gold price rose 51% to $4,678 per ounce, and Salares Norte was the principal contributor, producing 337,000 ounces, up 173%, and generating just under $1.2 billion in free cash flow. Gold Fields raised its full-year production outlook for Salares Norte to 550,000–600,000 gold-equivalent ounces, above the prior 500,000-to-550,000-ounce range. Management announced an additional $500 million for its shareholder-return top-up program, bringing the total allocation since November 2025 to $1.25 billion, while delays to Windfall's environmental approval could push the project to late 2029 or later and the renewal of Tarkwa's mining leases remains uncertain.",
+            "url": "https://finance.yahoo.com/markets/commodities/articles/gold-fields-h1-earnings-call-160216169.html",
+            "publisher": "MarketBeat",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "supply",
+                  "direction": "pos",
+                  "reason": "Gold Fields' production up 12% and higher realized gold price indicate strong gold market conditions, supporting gold futures.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "earnings_results",
+              "corporate_action"
+            ],
+            "impact_score": 4,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-25T16:02:16+00:00"
+          },
+          {
+            "title": "Ray Dalio warns US debt crisis could hit in three years",
+            "brief_text": "Billionaire investor Ray Dalio warned that the United States is heading for a major debt crisis, likening the nation to a person on the verge of a heart attack. In an August 21 LinkedIn post, the Bridgewater Associates founder cited a $4 billion U.S. debt buyback, rising bond yields, a weak dollar, and a Japanese sell-off of U.S. bond holdings as signs of a potential government debt crisis. Dalio estimated the U.S. will see around a $2 trillion budget shortfall this year with $11 trillion in debt service payments, and noted that U.S. debt topped $40 trillion for the first time earlier this month. He proposed cutting the budget deficit to 3% of GDP through spending cuts, lower interest rates, and higher tax revenue, while cautioning against forced adjustments like artificially low rates. Dalio predicted the crisis could come 'in three years, give or take two,' and advised diversifying assets, underweighting bonds, and holding 10% to 15% in gold plus a bit of Bitcoin.",
+            "url": "https://finance.yahoo.com/economy/policy/articles/ray-dalio-says-us-faces-143000328.html",
+            "publisher": "Moneywise.com under the title",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "monetary",
+                  "direction": "pos",
+                  "reason": "Dalio recommends holding 10-15% in gold due to expected debt crisis and weak dollar.",
+                  "relevance": 0.8
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.8
+            },
+            "news_types": [
+              "macro_economic",
+              "forex_related"
+            ],
+            "impact_score": 4,
+            "dup_count": 3,
+            "trend": null,
+            "trend_id": null,
+            "published_at": "2026-08-25T14:30:00+00:00"
+          },
+          {
+            "title": "Bitcoin Jumps Above $80,000 as Debasement Trade Pressures Dollar",
+            "brief_text": "Bitcoin surged to its highest level in more than three months on Tuesday, climbing 4.7% to $80,760.8 and briefly touching $81,220.4. The rally was driven by concerns over U.S. public finances after the Treasury announced plans to roughly double the pace of its bond buybacks, fueling a so-called debasement trade that has weakened the dollar and boosted demand for cryptocurrencies and gold. More than $457 million of Bitcoin short positions were liquidated over the previous 24 hours, with an additional $112.3 million in Ether shorts wiped out. Ether rose 2.2% to $2,510.0, XRP gained 2.2%, and Solana jumped 7.6%.",
+            "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-jumps-above-80-000-092630769.html",
+            "publisher": "Investing.com",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "monetary",
+                  "direction": "pos",
+                  "reason": "Gold benefits from same debasement trade as dollar weakens, though article focuses on Bitcoin.",
+                  "relevance": 0.8
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.8
+            },
+            "news_types": [
+              "crypto_related",
+              "forex_related",
+              "macro_economic"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Digital Finance & Tokenization",
+            "trend_id": 24000000,
+            "published_at": "2026-08-25T09:26:30+00:00"
+          },
+          {
+            "title": "China cuts US bond holdings to 18-year low, turns to gold accumulation",
+            "brief_text": "China reduced its holdings of US government bonds to 633.4 billion dollars in June 2026, the lowest level since September 2008, a decline of more than 13 percent compared with the same period a year earlier. Meanwhile, the People's Bank of China continued to increase its gold holdings, with net purchases of around 20 tonnes in July 2026, the highest monthly buying pace since October 2023, lifting China's gold reserves to about 2,377.5 tonnes. Warawut Benjaputtarak, managing director of Hua Seng Heng Gold Futures Company Limited, said the shift reflects a restructuring of reserve management from a focus on returns toward stability, amid the United States' rising debt burden and widening budget deficit, as well as geopolitical risks. Gold demand from central banks worldwide also remains strong, with combined purchases of more than 289 tonnes in the second quarter, and a World Gold Council survey indicating that 45 percent of central banks plan to increase their gold holdings over the next 12 months. However, the decline in US bond holdings does not immediately boost gold prices, because if falling bond demand pushes real yields higher, it could pressure gold through rising opportunity costs. But over the medium to long term, diversification and concerns about US debt will provide important structural support for gold demand.",
+            "url": "https://kaohoon.com/news/857445",
+            "publisher": "Kaohoon",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "Central bank gold purchases, including China's, signal strong structural demand for gold.",
+                  "relevance": 0.8
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.8
+            },
+            "news_types": [
+              "macro_economic",
+              "commodity_supply",
+              "forex_related"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-25T09:25:54+00:00"
+          },
+          {
+            "title": "KTB advises disciplined investing, gradually accumulating tech, semiconductor, and gold stocks",
+            "brief_text": "The investment strategy team at Krungthai Bank recommends a Stay Invested strategy, or continuing to invest with discipline, using a Core Portfolio as the main anchor for allocating new investment funds. Meanwhile, the Satellite Portfolio suggests gradually accumulating Technology and Semiconductor stocks during price declines, given strong market demand and earnings growth trends in AI Infrastructure, Cloud, Software, and Platform segments. China A-shares remain a strategic investment opportunity, focusing on industries supported by government policy such as AI and Technology, while Healthcare helps diversify earnings risk through innovations that are not tied to the AI cycle. For Thai property funds and REITs, the team recommends adjusting the view to Neutral after the Dividend Yield Gap has returned close to its long-term average, making upside increasingly limited. For gold, the 6 to 12 month targets are maintained at 4,915 and 5,315 dollars per ounce.",
+            "url": "https://kaohoon.com/news/857339",
+            "publisher": "Kaohoon",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "Gold price targets maintained at 4,915 and 5,315 dollars per ounce, indicating positive outlook.",
+                  "relevance": 0.5
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.5
+            },
+            "news_types": [
+              "industry_thematic"
+            ],
+            "impact_score": 2,
+            "dup_count": 1,
+            "trend": "Artificial Intelligence",
+            "trend_id": 10000000,
+            "published_at": "2026-08-25T07:06:23+00:00"
+          },
+          {
+            "title": "Spot and futures gold hit highest in over 3 months",
+            "brief_text": "Spot gold and gold futures climbed to their highest levels in more than three months this morning, supported by a weaker US dollar and the US Treasury's bond buyback plan, which pushed bond yields lower. Spot gold rose 0.6% to 4,677.19 dollars per ounce, while gold futures gained 0.5% to 4,720.3 dollars per ounce. The US Treasury announced last week that it would increase the size of its long-term government bond buybacks from 2 billion dollars to at least 4 billion dollars to boost liquidity, and may use funds from the Treasury General Account, which currently holds about 950 billion dollars in cash, to repurchase bonds. Analysts at UOB expect gold prices to post their strongest monthly gain since September 1999, with gold already up more than 15% since the start of August.",
+            "url": "https://infoquest.co.th/2026/637003",
+            "publisher": "InfoQuest",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "monetary",
+                  "direction": "pos",
+                  "reason": "Weaker dollar and lower bond yields support gold prices, which hit highest in over 3 months.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "macro_economic",
+              "commodity_supply",
+              "forex_related"
+            ],
+            "impact_score": 3,
+            "dup_count": 2,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-25T03:17:26+00:00"
+          }
+        ]
+      },
+      "positioning": {
+        "score": 70,
+        "crowding": "neutral",
+        "read": "The speculators in GOLD.COMM are around the middle of its normal 3-year range — no crowd extreme. commercial hedgers are in their normal range — no strong smart-money tell either way. speculators ADDED to the position this week (building conviction). On fragility, concentration data unavailable. Vs price: price is UP ~16% and the crowd is ADDING — the trend is confirmed by positioning (just watch the crowding). On the news: the news (positive) and the crowd are aligned but not at an extreme — a trend still backed by positioning."
+      },
+      "variants": [],
+      "_guide": "Lead with the PRICE level + trend (quote the `*_read` labels). Explain the WHY from `impact` — supply/demand, geopolitics, inventories. 🎯 The embedded `positioning` block is the FUTURES crowd's stance (crowded = a contrarian RISK; whether the good news is already priced-in) — weave its plain `read` into the answer; for the full breakdown call the `positioning` tool. If `variants` exist (onshore vs offshore, e.g. LME vs Shanghai; USD vs CNY/MYR), COMPARE them — an onshore-offshore divergence is the insight (different currency → convert before comparing levels). A commodity has NO options / PE / competitors — do not mention or flag them as missing. `impact` empty = no news in coverage (2026-01-01+), say so plainly; price still stands. 🌐 TRADE LENS: a commodity IS a traded good → for the PHYSICAL supply/demand behind the price you MAY deepen with the trade tools: find_hs(this commodity) → `top_traders` (who produces/exports the most, or whose exports are growing/streaking), `top_partners` / `search_trade` on the swing buyer (China imports rising/falling), `trade_balance`. Adds the flow substrate news+price can't (e.g. 'global import demand +X%, China −2 quarters, Chile exports +5y CAGR 14%'). BYOK — relay the connect CTA if no key."
+    },
+    "{\n  \"ticker\": \"159812.CS\",\n  \"symbol\": \"159812\",\n  \"name\": \"GOLD ETF\",\n  \"type\": \"etf\",\n  \"country\": \"China\",\n  \"domicile\": \"CN\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"CS\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"GLD.BK\",\n  \"symbol\": \"GLD\",\n  \"name\": \"KTAM Gold ETF Tracker\",\n  \"type\": \"etf\",\n  \"country\": \"Thailand\",\n  \"domicile\": \"TH\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"BK\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"518600.CG\",\n  \"symbol\": \"518600\",\n  \"name\": \"Gf Fund Management Co Ltd - GF Shanghai Gold ETF\",\n  \"type\": \"etf\",\n  \"country\": \"China\",\n  \"domicile\": \"CN\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"CG\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"FGDL.US\",\n  \"symbol\": \"FGDL\",\n  \"name\": \"Franklin Responsibly Sourced Gold ETF\",\n  \"type\": \"etf\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"CSGOLD.SW\",\n  \"symbol\": \"CSGOLD\",\n  \"name\": \"iShares Gold ETF (CH) A\",\n  \"type\": \"etf\",\n  \"country\": \"Switzerland\",\n  \"domicile\": \"CH\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"SW\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"0137W0.KO\",\n  \"symbol\": \"0137W0\",\n  \"name\": \"Kiwoom Kiwoom Us S&P 500 & Gold ETF\",\n  \"type\": \"etf\",\n  \"country\": \"Korea\",\n  \"domicile\": \"KR\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"KO\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"YSAU.US\",\n  \"symbol\": \"YSAU\",\n  \"name\": \"Texas Precious Metals Trust Y'all Street Physical Gold ETF\",\n  \"type\": \"etf\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"FXGD.AS\",\n  \"symbol\": \"FXGD\",\n  \"name\": \"FinEx Physically Gold ETF (USD)\",\n  \"type\": \"etf\",\n  \"country\": \"Netherlands\",\n  \"domicile\": \"IE\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"AS\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}"
+  ],
+  "answer_to_user": "Partly true — gold is widely seen as a 'safe-haven' or store-of-value, but 'always safe' is an oversimplification.\nWhy people trust it in scary times: it isn't tied to any one company or government, it has held value over very long periods, and it often holds up (or rises) when stocks or currencies wobble. Over the past year gold is up roughly 40% and it's in an uptrend.\nThe catches: gold pays you NOTHING — no dividend or interest, so it just sits there — and its PRICE can absolutely still fall (it's currently ~16% below its recent 52-week high, showing it does swing). So it's a hedge/diversifier, not a guaranteed no-loss holding.\nHow a beginner can get exposure: the easiest way is a gold ETF or fund (e.g. gold-tracker ETFs like the KTAM Gold ETF in Thailand or similar gold ETFs elsewhere) which you buy like a stock and which tracks the gold price; or physical gold (coins/bars/jewellery), which carries storage and security considerations. Many people use gold only as a small diversifier rather than a core holding — but how much (if any) is a personal decision I won't prescribe. This is informational, not a recommendation, and the price figures are real."
+}

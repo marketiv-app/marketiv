@@ -1,0 +1,2393 @@
+{
+ "id": "vv-04",
+ "question": "หาหุ้นถูกแต่คุณภาพดีให้หน่อย — P/E ต่ำ แต่ ROE สูงและหนี้ไม่เยอะ ไม่เอา value trap",
+ "tools_called": [
+  {
+   "tool": "find_fsconcept",
+   "args": {
+    "queries": [
+     "P/E ratio trailing",
+     "return on equity",
+     "debt to equity"
+    ]
+   },
+   "note": "resolver — pe, roe, debt_to_equity"
+  },
+  {
+   "tool": "find_fspattern",
+   "args": {
+    "queries": [
+     "cheapest decile bottom 10 percent",
+     "high value",
+     "below a fixed number"
+    ]
+   },
+   "note": "user gave vague degrees (ต่ำ/สูง/ไม่เยอะ) with no numbers → used degree patterns low / high / low"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "pe",
+      "pattern": "low"
+     },
+     {
+      "concept": "roe",
+      "pattern": "high"
+     },
+     {
+      "concept": "debt_to_equity",
+      "pattern": "low"
+     }
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "sort": "roe",
+    "limit": 15
+   },
+   "note": "AND of cheap multiple + quality gate (high ROE) + low leverage — quality gates screen out the value trap"
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "eps_diluted": {
+      "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+     },
+     "total_debt": {
+      "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+     }
+    }
+   },
+   "capped": true,
+   "count": 60,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.3382,
+       "interest_coverage": 223.894568690096,
+       "market_cap_usd": 42577495.83360001,
+       "net_debt_ebitda": -0.226387362833374,
+       "net_income_usd": 17804283.2,
+       "net_margin": 3.7354964795331,
+       "revenue_usd": 4766242.8,
+       "roa": 0.602114902054704,
+       "total_debt_usd": 748501.6
+      }
+     },
+     "head_listing_id": 51284,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.02
+       },
+       "pe": {
+        "kind": "level",
+        "value": 2.409817
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.625275035513751
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "China Investment and Finance Group Ltd",
+     "score": 0.625275035513751,
+     "ticker": "1226.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.83,
+       "interest_coverage": 1869.8372,
+       "market_cap_usd": 957583552.0,
+       "net_debt_ebitda": -0.1435,
+       "net_income_usd": 160720000.0,
+       "net_margin": 0.8395,
+       "normalized_pe": 6.04076826568936,
+       "revenue_usd": 191445000.0,
+       "roa": 0.5799,
+       "total_debt_usd": 631000.0
+      }
+     },
+     "head_listing_id": 420,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0024
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.674699
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.6177
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Arbutus Biopharma Corp",
+     "score": 0.6177,
+     "ticker": "ABUS.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.63,
+       "interest_coverage": -9.9059,
+       "market_cap_usd": 286683008.0,
+       "net_income_usd": 57306122.0,
+       "revenue_usd": -50001.0,
+       "roa": 0.3393,
+       "total_debt_usd": 3727945.0
+      }
+     },
+     "head_listing_id": 2534,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0393
+       },
+       "pe": {
+        "kind": "level",
+        "value": 4.68254
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.6046
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "American Resources Corp Class A",
+     "score": 0.6046,
+     "ticker": "AREC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1300.49,
+       "interest_coverage": 811.5,
+       "market_cap_usd": 50625486.1854,
+       "net_debt_ebitda": -1.52972336668629,
+       "net_income_usd": 9849600.0,
+       "net_margin": 0.222302470027445,
+       "revenue_usd": 44307200.0,
+       "roa": 0.362458784738578,
+       "total_debt_usd": 1062400.0
+      }
+     },
+     "head_listing_id": 571971,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0415
+       },
+       "pe": {
+        "kind": "level",
+        "value": 3.913909
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.589768154818931
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "GMO TECH Holdings, Inc.",
+     "score": 0.589768154818931,
+     "ticker": "415A.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.44601,
+       "interest_coverage": 43.1052631578947,
+       "market_cap_usd": 16702702.5,
+       "net_debt_ebitda": -0.371986699916874,
+       "net_income_usd": 2527954.4,
+       "net_margin": 0.0996988649525133,
+       "revenue_usd": 25355899.5,
+       "roa": 0.25146062164057,
+       "total_debt_usd": 102198.9
+      }
+     },
+     "head_listing_id": 242972,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0179
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.726307
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.520309477756286
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Klassik Radio AG",
+     "score": 0.520309477756286,
+     "ticker": "KA8.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.318,
+       "interest_coverage": 2510.9639,
+       "market_cap_usd": 575961819.0784,
+       "net_debt_ebitda": -0.6233,
+       "net_income_usd": 208493000.0,
+       "net_margin": 0.621,
+       "normalized_pe": 2.76249955191973,
+       "revenue_usd": 335734000.0,
+       "roa": 0.4693,
+       "total_debt_usd": 1399000.0
+      }
+     },
+     "head_listing_id": 239790,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0034
+       },
+       "pe": {
+        "kind": "level",
+        "value": 2.611042
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.5023
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Thor Explorations Ltd.",
+     "score": 0.5023,
+     "ticker": "THX.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.7,
+       "interest_coverage": 51.9133841479665,
+       "market_cap_usd": 1448633282.9696002,
+       "net_debt_ebitda": -2.29235106200476,
+       "net_income_usd": 133638362.0,
+       "net_margin": 0.135656957881825,
+       "revenue_usd": 985119850.0,
+       "roa": 0.234302257217664,
+       "total_debt_usd": 12298572.0
+      }
+     },
+     "head_listing_id": 53941,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0353
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.106339
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.47014073524418
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Newborn Town Inc",
+     "score": 0.47014073524418,
+     "ticker": "9911.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.14,
+       "interest_coverage": 163.280088129992,
+       "market_cap_usd": 2600228864.0,
+       "net_income_usd": 555760000.0,
+       "net_margin": 0.4002,
+       "normalized_pe": 4.67869019720743,
+       "revenue_usd": 1388800000.0,
+       "roa": 0.1544,
+       "total_debt_usd": 38650000.0
+      }
+     },
+     "head_listing_id": 40377,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0389277793397836
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.376812
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4651
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Slide Insurance Holdings, Inc. Common Stock",
+     "score": 0.4651,
+     "ticker": "SLDE.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 57.508377,
+       "interest_coverage": 8211.455,
+       "market_cap_usd": 3780313399.2960005,
+       "net_debt_ebitda": -0.7441,
+       "net_income_usd": 379994440.8,
+       "net_margin": 0.4571,
+       "normalized_pe": 9.94784267281566,
+       "revenue_usd": 831337135.2,
+       "roa": 0.3274,
+       "total_debt_usd": 1608578.4
+      }
+     },
+     "head_listing_id": 1418463,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.002
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.042744
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4649
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Transcend Information Inc",
+     "score": 0.4649,
+     "ticker": "2451.TW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.25,
+       "interest_coverage": 32.2165,
+       "market_cap_usd": 1214302457.5488,
+       "net_debt_ebitda": -1.0889,
+       "net_income_usd": 428788882.89345,
+       "net_margin": 0.499,
+       "normalized_pe": 2.68346635912143,
+       "revenue_usd": 859292081.7948,
+       "roa": 0.265,
+       "total_debt_usd": 7180997.8872
+      }
+     },
+     "head_listing_id": 228963,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0077
+       },
+       "pe": {
+        "kind": "level",
+        "value": 2.622222
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4606
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shanghai Diesel Engine Co Ltd A",
+     "score": 0.4606,
+     "ticker": "600841.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.3609,
+       "interest_coverage": 62.4893790849673,
+       "market_cap_usd": 179823391.8208,
+       "net_debt_ebitda": -0.977796020483953,
+       "net_income_usd": 40204176.0,
+       "net_margin": 0.419022975313537,
+       "revenue_usd": 95947426.2,
+       "roa": 0.318344439805738,
+       "total_debt_usd": 226916.0
+      }
+     },
+     "head_listing_id": 51663,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0019
+       },
+       "pe": {
+        "kind": "level",
+        "value": 3.720067
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.45733894631354
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Dragon Mining Ltd",
+     "score": 0.45733894631354,
+     "ticker": "1712.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.0659,
+       "interest_coverage": 12.563117453348,
+       "market_cap_usd": 88759494.38720001,
+       "net_debt_ebitda": -0.649813892529489,
+       "net_income_usd": 8341449.0,
+       "net_margin": 0.00327176335767172,
+       "revenue_usd": 2549526994.5,
+       "roa": 0.0745461874231301,
+       "total_debt_usd": 342067.0
+      }
+     },
+     "head_listing_id": 53435,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0122
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.318665
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.450860548139299
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Loco Hong Kong Holdings Ltd",
+     "score": 0.450860548139299,
+     "ticker": "8162.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.055,
+       "interest_coverage": 64.7834691501746,
+       "market_cap_usd": 48415261.440000005,
+       "net_debt_ebitda": -0.702353616532721,
+       "net_income_usd": 6787113.0,
+       "net_margin": 0.681698502839442,
+       "revenue_usd": 9956180.0,
+       "roa": 0.310070329102629,
+       "total_debt_usd": 6425.0
+      }
+     },
+     "head_listing_id": 53596,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0004
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.545455
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.450106736091286
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Excalibur Global Financial Holdings",
+     "score": 0.450106736091286,
+     "ticker": "8350.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.07,
+       "market_cap_usd": 864078720.0,
+       "net_debt_ebitda": -2.2009,
+       "net_income_usd": 114479000.0,
+       "net_margin": 0.1516,
+       "normalized_pe": 7.54792337459272,
+       "revenue_usd": 755198000.0,
+       "roa": 0.3357,
+       "total_debt_usd": 1943000.0
+      }
+     },
+     "head_listing_id": 12546,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0076
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.703583
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4458
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "EverQuote Inc Class A",
+     "score": 0.4458,
+     "ticker": "EVER.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.47,
+       "interest_coverage": 524.3781,
+       "market_cap_usd": 2951559101.2352,
+       "net_debt_ebitda": -1.1806,
+       "net_income_usd": 616551811.300502,
+       "net_margin": 0.8899,
+       "normalized_pe": 5.0243447327732,
+       "revenue_usd": 692824304.339332,
+       "roa": 0.3545,
+       "total_debt_usd": 20525354.87541
+      }
+     },
+     "head_listing_id": 231730,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0147
+       },
+       "pe": {
+        "kind": "level",
+        "value": 4.51585
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4414
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Guangdong Dongfang Precision Science & Technology Co Ltd",
+     "score": 0.4414,
+     "ticker": "002611.CS"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 117649.0,
+       "interest_coverage": 1283.6019,
+       "market_cap_usd": 104721845479.01299,
+       "net_debt_ebitda": -0.0651,
+       "net_income_usd": 10912354600.0,
+       "net_margin": 1.0066,
+       "normalized_pe": 9.54071916251113,
+       "revenue_usd": 10841185600.0,
+       "roa": 0.3999,
+       "total_debt_usd": 82654600.0
+      }
+     },
+     "head_listing_id": 1416319,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0033
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.647341
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4326
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "SK Square Co Ltd",
+     "score": 0.4326,
+     "ticker": "402340.KO"
+    },
+    {
+     "also_known_as": [
+      "0IFM.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.35,
+       "market_cap_usd": 197366080.0,
+       "net_debt_ebitda": -9.1815,
+       "net_income_usd": 38437000.0,
+       "net_margin": 0.4168,
+       "normalized_pe": 5.13479407862216,
+       "revenue_usd": 92220000.0,
+       "roa": 0.2752,
+       "total_debt_usd": 3135000.0
+      }
+     },
+     "head_listing_id": 11476,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0342
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.355556
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.4198
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "eGain Corporation",
+     "score": 0.4198,
+     "ticker": "EGAN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 304.0,
+       "interest_coverage": 65.3566,
+       "market_cap_usd": 15950850.047999999,
+       "net_debt_ebitda": -0.5516,
+       "net_income_usd": 5278250.355,
+       "net_margin": 0.1978,
+       "normalized_pe": 2.99754017246331,
+       "revenue_usd": 26686177.35,
+       "roa": 0.2707,
+       "total_debt_usd": 171005.016
+      }
+     },
+     "head_listing_id": 1418753,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0121
+       },
+       "pe": {
+        "kind": "level",
+        "value": 3.289474
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3742
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "HANBIT SOFT Inc",
+     "score": 0.3742,
+     "ticker": "047080.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.15,
+       "interest_coverage": 7845.6320754717,
+       "market_cap_usd": 786686397.9520001,
+       "net_debt_ebitda": -1.0319804327113,
+       "net_income_usd": 85157644.0,
+       "net_margin": 0.145201478670055,
+       "revenue_usd": 586479179.0,
+       "roa": 0.129914047359415,
+       "total_debt_usd": 340054.0
+      }
+     },
+     "head_listing_id": 52632,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0014
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.126115
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.372033688119384
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Binjiang Service Group Co",
+     "score": 0.372033688119384,
+     "ticker": "3316.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.73,
+       "interest_coverage": 313.606936711447,
+       "market_cap_usd": 45223099.5436,
+       "net_debt_ebitda": -0.75020595248089,
+       "net_income_usd": 6432275.4225,
+       "net_margin": 0.226412203829389,
+       "revenue_usd": 28409579.138,
+       "roa": 0.210323142701564,
+       "total_debt_usd": 177407.8928
+      }
+     },
+     "head_listing_id": 1752546,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0088
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.307692
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.368953036653273
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "DNXcorp",
+     "score": 0.368953036653273,
+     "ticker": "ALDNX.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 292.27,
+       "market_cap_usd": 25444655.4915,
+       "net_debt_ebitda": -2.06816187918807,
+       "net_income_usd": 3786482.7,
+       "net_margin": 0.24250950119292,
+       "revenue_usd": 15613749.9,
+       "roa": 0.296340324277311,
+       "total_debt_usd": 0.0
+      }
+     },
+     "head_listing_id": 571806,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.743764
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.364853273535088
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Reskill Corp.",
+     "score": 0.364853273535088,
+     "ticker": "291A.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 30.31,
+       "interest_coverage": 433.845188284519,
+       "market_cap_usd": 15097505.2956,
+       "net_debt_ebitda": -4.59840836583906,
+       "net_income_usd": 1695371.4,
+       "net_margin": 0.173990074947741,
+       "revenue_usd": 9744069.6,
+       "roa": 0.146029659284335,
+       "total_debt_usd": 126310.4
+      }
+     },
+     "head_listing_id": 574620,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0162
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.227648
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.359711008469179
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "zig-zag,Inc.",
+     "score": 0.359711008469179,
+     "ticker": "340A.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.77,
+       "interest_coverage": 92.8913,
+       "market_cap_usd": 6121755648.0,
+       "net_debt_ebitda": -0.3806,
+       "net_income_usd": 892400000.0,
+       "net_margin": 0.3648,
+       "normalized_pe": 7.61455727613581,
+       "revenue_usd": 2446600000.0,
+       "roa": 0.2478,
+       "total_debt_usd": 50100000.0
+      }
+     },
+     "head_listing_id": 279591,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0198
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.299735
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3518
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "OceanaGold Corporation",
+     "score": 0.3518,
+     "ticker": "OGC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.488571,
+       "interest_coverage": 248.5057,
+       "market_cap_usd": 2407480085.5039997,
+       "net_debt_ebitda": -2.605,
+       "net_income_usd": 240161617.34246,
+       "net_margin": 0.2677,
+       "normalized_pe": 12.94311684969,
+       "revenue_usd": 897295374.988738,
+       "roa": 0.1579,
+       "total_debt_usd": 5173130.39782
+      }
+     },
+     "head_listing_id": 232842,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0076
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.419389
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3516
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Lakala Payment Co Ltd",
+     "score": 0.3516,
+     "ticker": "300773.CS"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.8732,
+       "interest_coverage": 163.5167,
+       "market_cap_usd": 309069341.9296,
+       "net_debt_ebitda": -0.6442,
+       "net_income_usd": 66131241.0,
+       "net_margin": 0.3698,
+       "normalized_pe": 4.69138524221142,
+       "revenue_usd": 178826637.0,
+       "roa": 0.2903,
+       "total_debt_usd": 2719000.0
+      }
+     },
+     "head_listing_id": 239621,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0137
+       },
+       "pe": {
+        "kind": "level",
+        "value": 4.653918
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3336
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Serabi Gold PLC",
+     "score": 0.3336,
+     "ticker": "SRB.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 20.74,
+       "interest_coverage": 7051.9091,
+       "market_cap_usd": 96247502.00320001,
+       "net_debt_ebitda": -0.8979,
+       "net_income_usd": 9718300.8,
+       "net_margin": 0.123,
+       "normalized_pe": 9.90373769900187,
+       "revenue_usd": 79030005.6,
+       "roa": 0.1396,
+       "total_debt_usd": 874192.8
+      }
+     },
+     "head_listing_id": 1420047,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0289
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.884282
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3212
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ruentex Interior Design Inc.",
+     "score": 0.3212,
+     "ticker": "6881.TWO"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.0698,
+       "interest_coverage": 35.9205607476636,
+       "market_cap_usd": 30241861.972000003,
+       "net_debt_ebitda": -1.0706154558075,
+       "net_income_usd": 10086792.6,
+       "net_margin": 1.81248457932396,
+       "revenue_usd": 5565174.3,
+       "roa": 0.245952958901816,
+       "total_debt_usd": 800474.4
+      }
+     },
+     "head_listing_id": 239103,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0228
+       },
+       "pe": {
+        "kind": "level",
+        "value": 2.936963
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.315049105802633
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Parkmead Group PLC",
+     "score": 0.315049105802633,
+     "ticker": "PMG.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 6.47,
+       "interest_coverage": 45.2027,
+       "market_cap_usd": 268274024.75520003,
+       "net_debt_ebitda": -0.7955,
+       "net_income_usd": 92802621.6,
+       "net_margin": 12.8697,
+       "normalized_pe": 2.88475825686491,
+       "revenue_usd": 7210944.0,
+       "roa": 0.2444,
+       "total_debt_usd": 913036.8
+      }
+     },
+     "head_listing_id": 1417818,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.003
+       },
+       "pe": {
+        "kind": "level",
+        "value": 2.897991
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3074
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Federal Corp",
+     "score": 0.3074,
+     "ticker": "2102.TW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 10.13,
+       "interest_coverage": 293.2502,
+       "market_cap_usd": 137320209.35680002,
+       "net_debt_ebitda": -0.7903,
+       "net_income_usd": 25299019.2,
+       "net_margin": 0.7799,
+       "normalized_pe": 5.42788668095086,
+       "revenue_usd": 32438234.4,
+       "roa": 0.2619,
+       "total_debt_usd": 3219871.2
+      }
+     },
+     "head_listing_id": 1418989,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0387
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.426456
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.3042
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "GeoVision Inc",
+     "score": 0.3042,
+     "ticker": "3356.TW"
+    },
+    {
+     "also_known_as": [
+      "0UP5.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.13,
+       "interest_coverage": 260.0215,
+       "market_cap_usd": 4162528512.0,
+       "net_debt_ebitda": -0.4034,
+       "net_income_usd": 636509000.0,
+       "net_margin": 0.3692,
+       "normalized_pe": 12.9623668198511,
+       "revenue_usd": 1724126000.0,
+       "roa": 0.2057,
+       "total_debt_usd": 45762000.0
+      }
+     },
+     "head_listing_id": 6975,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0211
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.003195
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2937
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Centerra Gold Inc",
+     "score": 0.2937,
+     "ticker": "CGAU.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 148.25,
+       "market_cap_usd": 82526695.9965,
+       "net_debt_ebitda": -1.15170929042366,
+       "net_income_usd": 9031862.0,
+       "net_margin": 0.191996571218764,
+       "revenue_usd": 47041788.0,
+       "roa": 0.218650340783335,
+       "total_debt_usd": 50715.0
+      }
+     },
+     "head_listing_id": 572888,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0014
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.713322
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.286311821783358
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Colan Totte.Co.,Ltd.",
+     "score": 0.286311821783358,
+     "ticker": "7792.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.47,
+       "interest_coverage": 277.944092939813,
+       "market_cap_usd": 25840849.0368,
+       "net_debt_ebitda": -2.4993487921028,
+       "net_income_usd": 3211920.9354,
+       "net_margin": 0.153595420576238,
+       "revenue_usd": 20911567.0464,
+       "roa": 0.240971929071457,
+       "total_debt_usd": 279308.6
+      }
+     },
+     "head_listing_id": 49356,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0179
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.744681
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.285424096636122
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "88(Thailand) Public Company Limited",
+     "score": 0.285424096636122,
+     "ticker": "88TH.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 124.53,
+       "interest_coverage": 826.023102310231,
+       "market_cap_usd": 90920017.1187,
+       "net_debt_ebitda": -1.5800808591657,
+       "net_income_usd": 13291708.4,
+       "net_margin": 0.147304525598404,
+       "revenue_usd": 90232858.4,
+       "roa": 0.186292973189964,
+       "total_debt_usd": 499443.2
+      }
+     },
+     "head_listing_id": 574066,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0103
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.564442
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.280862218933995
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Aidma Holdings Inc.",
+     "score": 0.280862218933995,
+     "ticker": "7373.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 779.11,
+       "market_cap_usd": 73887725.7279,
+       "net_debt_ebitda": -1.60094154337984,
+       "net_income_usd": 27872667.9,
+       "net_margin": 0.340546158315912,
+       "revenue_usd": 81846960.3,
+       "roa": 0.0214606139031983,
+       "total_debt_usd": 4511675.7
+      }
+     },
+     "head_listing_id": 572164,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0394
+       },
+       "pe": {
+        "kind": "level",
+        "value": 2.742873
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.276648114377216
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Yutaka Trusty Securities Co., Ltd.",
+     "score": 0.276648114377216,
+     "ticker": "8747.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.47,
+       "interest_coverage": 115.654446298738,
+       "market_cap_usd": 286337920.0,
+       "net_income_usd": 35294057.0,
+       "net_margin": 0.1485,
+       "normalized_pe": 8.11292167403708,
+       "revenue_usd": 237703029.0,
+       "roa": 0.0738,
+       "total_debt_usd": 3801148.0
+      }
+     },
+     "head_listing_id": 25271,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0361776404638398
+       },
+       "pe": {
+        "kind": "level",
+        "value": 8.008097
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2733
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kingstone Companies Inc",
+     "score": 0.2733,
+     "ticker": "KINS.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 58.82,
+       "interest_coverage": 307.527357392317,
+       "market_cap_usd": 56798535.339,
+       "net_debt_ebitda": -0.677205650895116,
+       "net_income_usd": 6208706.7,
+       "net_margin": 0.0411091073298308,
+       "revenue_usd": 151029956.7,
+       "roa": 0.0934498688229004,
+       "total_debt_usd": 0.0
+      }
+     },
+     "head_listing_id": 574758,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.146549
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.271426749736356
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Forval Telecom, Inc.",
+     "score": 0.271426749736356,
+     "ticker": "9445.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 62.72,
+       "interest_coverage": 132.86028708134,
+       "market_cap_usd": 32921593.8093,
+       "net_debt_ebitda": -0.911011310865079,
+       "net_income_usd": 3477635.6,
+       "net_margin": 0.0279935121143726,
+       "revenue_usd": 124230056.8,
+       "roa": 0.108722732128019,
+       "total_debt_usd": 314294.4
+      }
+     },
+     "head_listing_id": 575090,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0222
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.677934
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.270546057427496
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Tsunagu Group Holdings, Inc.",
+     "score": 0.270546057427496,
+     "ticker": "6551.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.56,
+       "interest_coverage": 68.598,
+       "market_cap_usd": 1832823308.6976,
+       "net_debt_ebitda": -1.3605,
+       "net_income_usd": 194787393.2908,
+       "net_margin": 0.0355,
+       "normalized_pe": 9.37100787845739,
+       "revenue_usd": 5490902005.36175,
+       "roa": 0.1324,
+       "total_debt_usd": 21887858.89355
+      }
+     },
+     "head_listing_id": 230022,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0298
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.185897
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2656
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Beijing Caishikou Department Store Co Ltd",
+     "score": 0.2656,
+     "ticker": "605599.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.14,
+       "interest_coverage": 398.9581,
+       "market_cap_usd": 241073773.8752,
+       "net_debt_ebitda": -1.1988,
+       "net_income_usd": 23853086.4,
+       "net_margin": 0.4256,
+       "normalized_pe": 10.0496325793902,
+       "revenue_usd": 56040472.8,
+       "roa": 0.1049,
+       "total_debt_usd": 802276.8
+      }
+     },
+     "head_listing_id": 1419826,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0089
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.108696
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2655
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Green World Fintech Service Co. Ltd.",
+     "score": 0.2655,
+     "ticker": "6763.TWO"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 5191.0,
+       "interest_coverage": 293.5572,
+       "market_cap_usd": 374868210.48319995,
+       "net_debt_ebitda": -0.4546,
+       "net_income_usd": 71811011.615,
+       "net_margin": 0.167,
+       "normalized_pe": 5.22429901455193,
+       "revenue_usd": 430101609.798,
+       "roa": 0.1714,
+       "total_debt_usd": 2138521.0
+      }
+     },
+     "head_listing_id": 1415256,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0079
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.48064
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2647
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "SNTEnergy Co Ltd",
+     "score": 0.2647,
+     "ticker": "100840.KO"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 467.0,
+       "interest_coverage": 1692.4484,
+       "market_cap_usd": 62126650.16319999,
+       "net_debt_ebitda": -0.3291,
+       "net_income_usd": 7756435.099,
+       "net_margin": 0.3652,
+       "normalized_pe": 8.00969122673504,
+       "revenue_usd": 21238858.536,
+       "roa": 0.2424,
+       "total_debt_usd": 116557.7
+      }
+     },
+     "head_listing_id": 3855033,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.004
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.595289
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2632
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Semi Total Solution Inc.",
+     "score": 0.2632,
+     "ticker": "0017J0.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.72,
+       "interest_coverage": 29958.875,
+       "market_cap_usd": 2039320769.7408001,
+       "net_debt_ebitda": -0.587809671598965,
+       "net_income_usd": 408428000.0,
+       "net_margin": 0.35770443763066,
+       "revenue_usd": 1141803000.0,
+       "roa": 0.205803886473983,
+       "total_debt_usd": 80000.0
+      }
+     },
+     "head_listing_id": 52358,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0
+       },
+       "pe": {
+        "kind": "level",
+        "value": 4.706722
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.261163010112978
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Nanshan Aluminium Intl Hldg",
+     "score": 0.261163010112978,
+     "ticker": "2610.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1191.0,
+       "interest_coverage": 745.248080751772,
+       "market_cap_usd": 38728761.344,
+       "net_debt_ebitda": -1.6093,
+       "net_income_usd": 6833795.451,
+       "net_margin": 0.3304,
+       "normalized_pe": 5.61701102409177,
+       "revenue_usd": 20682335.233,
+       "roa": 0.1739,
+       "total_debt_usd": 10300.57
+      }
+     },
+     "head_listing_id": 1418735,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0004
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.828221
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2603
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Total Soft Bank Ltd",
+     "score": 0.2603,
+     "ticker": "045340.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.376,
+       "interest_coverage": 194.2086,
+       "market_cap_usd": 35458874.9312,
+       "net_debt_ebitda": -0.513,
+       "net_income_usd": 4845725.73644,
+       "net_margin": 0.3201,
+       "normalized_pe": 7.31755713381552,
+       "revenue_usd": 15138244.417414,
+       "roa": 0.2243,
+       "total_debt_usd": 565595.416529
+      }
+     },
+     "head_listing_id": 49395,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0303
+       },
+       "pe": {
+        "kind": "level",
+        "value": 8.510638
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2595
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Asia Medical & Agricultural Laboratory & Research Center PCL",
+     "score": 0.2595,
+     "ticker": "AMARC.BK"
+    },
+    {
+     "also_known_as": [
+      "260970.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 7810.0,
+       "interest_coverage": 3215.3251,
+       "market_cap_usd": 103271314.22719999,
+       "net_debt_ebitda": -1.3564,
+       "net_income_usd": 15814622.152,
+       "net_margin": 0.1406,
+       "normalized_pe": 6.52670016505092,
+       "revenue_usd": 112486059.266,
+       "roa": 0.182,
+       "total_debt_usd": 150492.44
+      }
+     },
+     "head_listing_id": 1420887,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0025
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.234315
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2584
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "S&D Co. Ltd.",
+     "score": 0.2584,
+     "ticker": "260970.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.1199,
+       "interest_coverage": 620.666666666667,
+       "market_cap_usd": 12537737.402500002,
+       "net_debt_ebitda": -2.43212435233161,
+       "net_income_usd": 2344824.0,
+       "net_margin": 0.169425511197663,
+       "revenue_usd": 13839852.0,
+       "roa": 0.179372197309417,
+       "total_debt_usd": 0.0
+      }
+     },
+     "head_listing_id": 238212,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.337781
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.255544132765458
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ingenta plc",
+     "score": 0.255544132765458,
+     "ticker": "ING.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.104,
+       "interest_coverage": 1.50321853878339,
+       "market_cap_usd": 74571952.6392,
+       "net_debt_ebitda": -0.91489519294867,
+       "net_income_usd": 15686064.0,
+       "net_margin": 0.176583027397676,
+       "revenue_usd": 88831096.8,
+       "roa": 0.175363268626698,
+       "total_debt_usd": 4042.8
+      }
+     },
+     "head_listing_id": 239880,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0001
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.855769
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.253840869688478
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Trufin PLC",
+     "score": 0.253840869688478,
+     "ticker": "TRU.LSE"
+    },
+    {
+     "also_known_as": [
+      "0J74.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 22.04,
+       "interest_coverage": 30.7068235916424,
+       "market_cap_usd": 1398095518.336,
+       "net_debt_ebitda": -0.820685181512938,
+       "net_income_usd": 185584979.5,
+       "net_margin": 0.130123159261983,
+       "revenue_usd": 1426225589.3,
+       "roa": 0.0747397874113475,
+       "total_debt_usd": 8419074.9
+      }
+     },
+     "head_listing_id": 1752984,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0106
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.667877
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.25040556079925
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Électricite de Strasbourg Société Anonyme",
+     "score": 0.25040556079925,
+     "ticker": "ELEC.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.91,
+       "interest_coverage": 142.914454277286,
+       "market_cap_usd": 36245508.172800004,
+       "net_debt_ebitda": -1.06185673581992,
+       "net_income_usd": 3684928.0,
+       "net_margin": 0.111704129659593,
+       "revenue_usd": 32988288.0,
+       "roa": 0.141091309187525,
+       "total_debt_usd": 660832.0
+      }
+     },
+     "head_listing_id": 1419729,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0371
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.859335
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.249673690098825
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "JG Environmental Technology Co.,Ltd.",
+     "score": 0.249673690098825,
+     "ticker": "6723.TWO"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.3347,
+       "market_cap_usd": 298800459.72800004,
+       "net_income_usd": 85315999.5,
+       "net_margin": 0.985496669202938,
+       "revenue_usd": 86571575.7,
+       "roa": 0.242144561810485,
+       "total_debt_usd": 11636652.3
+      }
+     },
+     "head_listing_id": 238363,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0309061517417796
+       },
+       "pe": {
+        "kind": "level",
+        "value": 8.156558
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.249439434344546
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "JPMorgan China Growth & Income PLC",
+     "score": 0.249439434344546,
+     "ticker": "JCGI.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.4162,
+       "interest_coverage": 246.121094273837,
+       "market_cap_usd": 1389010246.0416002,
+       "net_debt_ebitda": 0.0229064509574117,
+       "net_income_usd": 195449397.0,
+       "net_margin": 0.0913630204431576,
+       "revenue_usd": 2139261553.0,
+       "roa": 0.109250706727367,
+       "total_debt_usd": 20868848.0
+      }
+     },
+     "head_listing_id": 52395,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0249
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.955944
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.249433846911913
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "China Overseas Property Holdings Ltd",
+     "score": 0.249433846911913,
+     "ticker": "2669.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1595.0,
+       "interest_coverage": 777.5384,
+       "market_cap_usd": 317759320.8832,
+       "net_debt_ebitda": -1.3548,
+       "net_income_usd": 30667384.965,
+       "net_margin": 0.1111,
+       "normalized_pe": 10.3562611305672,
+       "revenue_usd": 276023370.679,
+       "roa": 0.1108,
+       "total_debt_usd": 642639.431
+      }
+     },
+     "head_listing_id": 3980477,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0052
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.363636
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2461
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "MNC Solution",
+     "score": 0.2461,
+     "ticker": "484870.KO"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.31,
+       "interest_coverage": 1867.3715,
+       "market_cap_usd": 111972000.0,
+       "net_debt_ebitda": -3.1402,
+       "net_income_usd": 12046811.2425,
+       "net_margin": 0.1879,
+       "normalized_pe": 9.29474179897278,
+       "revenue_usd": 64127545.3682,
+       "roa": 0.1869,
+       "total_debt_usd": 298767.5187
+      }
+     },
+     "head_listing_id": 49776,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0061
+       },
+       "pe": {
+        "kind": "level",
+        "value": 9.160305
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2453
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "MEB Corp. PCL",
+     "score": 0.2453,
+     "ticker": "MEB.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.836361,
+       "market_cap_usd": 494929984.0,
+       "net_income_usd": 81435000.0,
+       "net_margin": 0.2756,
+       "normalized_pe": 6.07760771167189,
+       "revenue_usd": 295530000.0,
+       "roa": 0.0693,
+       "total_debt_usd": 33167000.0
+      }
+     },
+     "head_listing_id": 1446,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.00319266991472367
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.171243
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2427
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "American Integrity Insurance Group, Inc.",
+     "score": 0.2427,
+     "ticker": "AII.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2135.0,
+       "interest_coverage": 152.6394,
+       "market_cap_usd": 374325690.368,
+       "net_debt_ebitda": -0.7509,
+       "net_income_usd": 44786904.946,
+       "net_margin": 0.0866,
+       "normalized_pe": 8.29848203108641,
+       "revenue_usd": 517264430.697,
+       "roa": 0.1309,
+       "total_debt_usd": 7053483.29
+      }
+     },
+     "head_listing_id": 1418429,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0382
+       },
+       "pe": {
+        "kind": "level",
+        "value": 8.126464
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2423
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Dongsung FineTec Co. Ltd",
+     "score": 0.2423,
+     "ticker": "033500.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 536.18,
+       "interest_coverage": 860.564424173318,
+       "market_cap_usd": 31736258.964900002,
+       "net_debt_ebitda": -2.75008521765882,
+       "net_income_usd": 3303722.5,
+       "net_margin": 0.0714665157090928,
+       "revenue_usd": 46227558.0,
+       "roa": 0.112640232396591,
+       "total_debt_usd": 178425.6
+      }
+     },
+     "head_listing_id": 573527,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0107
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.751464
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.240899984311748
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "NOMURA CORPORATION",
+     "score": 0.240899984311748,
+     "ticker": "7131.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.69,
+       "interest_coverage": 163.261921503864,
+       "market_cap_usd": 31015040.0,
+       "net_debt_ebitda": -0.520760955819308,
+       "net_income_usd": 4305387.504288,
+       "net_margin": 0.285390879595142,
+       "revenue_usd": 15085932.354936,
+       "roa": 0.187010046566248,
+       "total_debt_usd": 142499.949312
+      }
+     },
+     "head_listing_id": 49682,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.007
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.072464
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.240148038505382
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "IROYAL_INTERROYAL ENGINEERING",
+     "score": 0.240148038505382,
+     "ticker": "IROYAL.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.08,
+       "interest_coverage": 8.7092,
+       "market_cap_usd": 169596736.0,
+       "net_debt_ebitda": -1.9249,
+       "net_income_usd": 37337606.0,
+       "net_margin": 0.7841,
+       "normalized_pe": 4.47099542297375,
+       "revenue_usd": 47616818.0,
+       "roa": 0.0589,
+       "total_debt_usd": 2968138.0
+      }
+     },
+     "head_listing_id": 9770,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.019
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.8125
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2391
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "DeFi Technologies Inc.",
+     "score": 0.2391,
+     "ticker": "DEFT.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.08,
+       "market_cap_usd": 1502675328.0,
+       "net_debt_ebitda": -6.4826,
+       "net_income_usd": 136575000.0,
+       "net_margin": 0.4256,
+       "normalized_pe": 11.3912318371275,
+       "revenue_usd": 320870000.0,
+       "roa": 0.1792,
+       "total_debt_usd": 3897000.0
+      }
+     },
+     "head_listing_id": 2008,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0068
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.431818
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2386
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "American Superconductor Corporation",
+     "score": 0.2386,
+     "ticker": "AMSC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 12.87,
+       "interest_coverage": 10659.4432989691,
+       "market_cap_usd": 2970608263.168,
+       "net_debt_ebitda": -1.49547190524117,
+       "net_income_usd": 392994030.0,
+       "net_margin": 0.354175875867491,
+       "revenue_usd": 1109601350.0,
+       "roa": 0.182947275069434,
+       "total_debt_usd": 886028.0
+      }
+     },
+     "head_listing_id": 53932,
+     "matched": {
+      "fundamental": {
+       "debt_to_equity": {
+        "kind": "level",
+        "value": 0.0005
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.602798
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.2384865591462
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "NETEASE CLOUD MUSIC INC",
+     "score": 0.2384865591462,
+     "ticker": "9899.HK"
+    }
+   ],
+   "sort": "roe",
+   "universe": 24045,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 60,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+   }
+  }
+ ],
+ "answer_to_user": "จัดให้ครับ — สกรีนทั้งตลาด (24,045 บริษัท) โดย AND 3 เงื่อนไขพร้อมกัน: P/E ต่ำ + ROE สูง + หนี้สินต่อทุน (D/E) ต่ำ ได้ผลลัพธ์ 60 ตัวที่ \"ถูกแต่ดี\" จริง ไม่ใช่ถูกเพราะกำลังทรุด. ตัวเด่นๆ เช่น China Investment and Finance (1226.HK) P/E 2.4 / ROE 62.5% / D/E 0.02, Arbutus Biopharma (ABUS.US) P/E 5.7 / ROE 62% / D/E เกือบ 0, GMO TECH Holdings (415A.JP) P/E 3.9 / ROE 59% / D/E 0.04, Klassik Radio (KA8.XETRA) P/E 6.7 / ROE 52%, Thor Explorations (THX.LSE) P/E 2.6 / ROE 50%, Newborn Town (9911.HK) P/E 10 / ROE 47%, และ Slide Insurance (SLDE.US) P/E 5.4 / ROE 46.5%. จุดสำคัญที่กัน value trap คือ ROE สูง (บริษัททำกำไรจากทุนได้ดี ไม่ใช่ธุรกิจกำลังเสื่อม) บวกหนี้ต่ำ (ไม่ถูกเพราะ balance sheet เสี่ยง). แนะนำเช็คต่อว่ากำไรยังโตหรือทรงตัว (ไม่หด) ก่อนซื้อจริง."
+}

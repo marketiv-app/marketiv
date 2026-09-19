@@ -1,0 +1,840 @@
+{
+  "id": "tn-10",
+  "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+  "tools_called": [
+    {
+      "tool": "macro_pulse",
+      "args": {
+        "scope": "recession-risk"
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_down",
+                "a": "close",
+                "b": "ema200",
+                "window_bars": 30
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "country": [
+          "US"
+        ],
+        "min_market_cap_usd": 50000000000,
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "scope": "recession-risk",
+      "window": "10y",
+      "country": "US",
+      "indicators": [
+        {
+          "indicator": "2s10s yield curve",
+          "series_id": "T10Y2Y",
+          "transform": "lin",
+          "title": "10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity",
+          "latest": {
+            "date": "2026-08-24",
+            "value": 0.46
+          },
+          "trend": "rising",
+          "percentile": 54.0,
+          "z_score": 0.19,
+          "read": "0.46 as of 2026-08-24, rising over the window (peak 1.59 on 2021-03-29, trough -1.08 on 2023-07-03); latest sits in the 54th percentile of the window."
+        },
+        {
+          "indicator": "Sahm-rule trigger",
+          "series_id": "SAHMREALTIME",
+          "transform": "lin",
+          "title": "Real-time Sahm Rule Recession Indicator",
+          "latest": {
+            "date": "2026-07-01",
+            "value": -0.03
+          },
+          "trend": "falling",
+          "percentile": 31.0,
+          "z_score": -0.36,
+          "read": "-0.03 as of 2026-07-01, falling over the window (peak 9.5 on 2020-06-01, trough -0.37 on 2021-09-01); latest sits in the 31th percentile of the window."
+        },
+        {
+          "indicator": "initial jobless claims",
+          "series_id": "ICSA",
+          "transform": "lin",
+          "title": "Initial Claims",
+          "latest": {
+            "date": "2026-08-15",
+            "value": 206000.0
+          },
+          "trend": "falling",
+          "percentile": 9.0,
+          "z_score": -0.28,
+          "read": "206000.0 as of 2026-08-15, falling over the window (peak 6137000.0 on 2020-04-04, trough 189000.0 on 2026-07-18); latest sits in the 9th percentile of the window."
+        },
+        {
+          "indicator": "Chicago Fed activity index",
+          "series_id": "CFNAI",
+          "transform": "lin",
+          "title": "Chicago Fed National Activity Index",
+          "latest": {
+            "date": "2026-07-01",
+            "value": -0.08
+          },
+          "trend": "rising",
+          "percentile": 44.0,
+          "z_score": -0.0,
+          "read": "-0.08 as of 2026-07-01, rising over the window (peak 6.33 on 2020-06-01, trough -18.34 on 2020-04-01); latest sits in the 44th percentile of the window."
+        },
+        {
+          "indicator": "recession probability",
+          "series_id": "RECPROUSM156N",
+          "transform": "lin",
+          "title": "Smoothed U.S. Recession Probabilities",
+          "latest": {
+            "date": "2026-06-01",
+            "value": 0.6
+          },
+          "trend": "falling",
+          "percentile": 76.0,
+          "z_score": -0.12,
+          "read": "0.6 as of 2026-06-01, falling over the window (peak 100.0 on 2020-03-01, trough 0.0 on 2020-08-01); latest sits in the 76th percentile of the window."
+        }
+      ],
+      "_guide": "SYNTHESIZE a regime read, don't list. For `economy`/`recession-risk`: place it on the growth×inflation quadrant (reflation/goldilocks/stagflation/slowdown), then modulate with labor tightness (low `unemployment` percentile + high openings) and policy stance (fed funds vs inflation). LEAD with each indicator's `percentile` — where it sits vs its OWN history is the answer to 'high or low' (a bare level isn't). Quote each `read` + its as-of date. Then the MECHANISM/implication (facts, not advice; hand judgment back; tie to the user's holdings if any). Route out where relevant: rates/curve → bond_pulse, commodity spot → commodity_pulse, trade/external → the Comtrade tools. Any indicator with `error` = unavailable, say so.",
+      "_license_note": "Macro data via FRED; US-government series are public domain."
+    },
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 21,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 22.8114,
+              "close_vs_ema200": -0.0598,
+              "rsi14": 33.4371
+            }
+          },
+          "head_listing_id": 6200,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 63.16,
+                  "b": 64.065
+                },
+                "kind": "signal",
+                "strength": 0.912,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Carrier Global Corp",
+          "score": 0.912,
+          "ticker": "CARR.US"
+        },
+        {
+          "also_known_as": [
+            "PHM7.XETRA",
+            "0R31.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 16.7643,
+              "close_vs_ema200": 0.0228,
+              "rsi14": 51.4481
+            }
+          },
+          "head_listing_id": 29307,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 65.54,
+                  "b": 67.0741
+                },
+                "kind": "signal",
+                "strength": 0.785,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Altria Group",
+          "score": 0.785,
+          "ticker": "MO.US"
+        },
+        {
+          "also_known_as": [
+            "1YD.XETRA",
+            "AVGO.SW",
+            "0YXG.LSE",
+            "AVGO23.BK",
+            "AVGO80.BK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 20.1686,
+              "close_vs_ema200": -0.0193,
+              "rsi14": 35.4124
+            }
+          },
+          "head_listing_id": 3311,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 311.05,
+                  "b": 316.8222
+                },
+                "kind": "signal",
+                "strength": 0.777,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Broadcom Inc",
+          "score": 0.777,
+          "ticker": "AVGO.US"
+        },
+        {
+          "also_known_as": [
+            "0IHP.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 19.4547,
+              "close_vs_ema200": 0.0063,
+              "rsi14": 39.6256
+            }
+          },
+          "head_listing_id": 12476,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 104.62,
+                  "b": 105.1166
+                },
+                "kind": "signal",
+                "strength": 0.75,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Entergy Corporation",
+          "score": 0.75,
+          "ticker": "ETR.US"
+        },
+        {
+          "also_known_as": [
+            "0A1W.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 27.0531,
+              "close_vs_ema200": 0.0705,
+              "rsi14": 57.3643
+            }
+          },
+          "head_listing_id": 9099,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 76.04,
+                  "b": 77.268
+                },
+                "kind": "signal",
+                "strength": 0.727,
+                "value": "2026-08-03"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Corteva Inc",
+          "score": 0.727,
+          "ticker": "CTVA.US"
+        },
+        {
+          "also_known_as": [
+            "0LBF.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 15.554,
+              "close_vs_ema200": 0.034,
+              "rsi14": 58.5593
+            }
+          },
+          "head_listing_id": 45669,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 14.4698,
+                  "b": 14.6227
+                },
+                "kind": "signal",
+                "strength": 0.725,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Vale SA ADR",
+          "score": 0.725,
+          "ticker": "VALE.US"
+        },
+        {
+          "also_known_as": [
+            "0LCE.LSE",
+            "TJX.XETRA"
+          ],
+          "context": {
+            "ta": {
+              "adx": 26.396,
+              "close_vs_ema200": -0.0753,
+              "rsi14": 25.9229
+            }
+          },
+          "head_listing_id": 43467,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 152.61,
+                  "b": 152.6341
+                },
+                "kind": "signal",
+                "strength": 0.702,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "The TJX Companies Inc",
+          "score": 0.702,
+          "ticker": "TJX.US"
+        },
+        {
+          "also_known_as": [
+            "0L8A.LSE",
+            "SOMN.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 13.2319,
+              "close_vs_ema200": -0.0325,
+              "rsi14": 36.1105
+            }
+          },
+          "head_listing_id": 40892,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 92.94,
+                  "b": 93.3166
+                },
+                "kind": "signal",
+                "strength": 0.689,
+                "value": "2026-08-03"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Southern Company",
+          "score": 0.689,
+          "ticker": "SO.US"
+        },
+        {
+          "also_known_as": [
+            "0BOE.LSE",
+            "BOEING80.BK",
+            "BCO.XETRA"
+          ],
+          "context": {
+            "ta": {
+              "adx": 19.7602,
+              "close_vs_ema200": -0.0389,
+              "rsi14": 37.1163
+            }
+          },
+          "head_listing_id": 3555,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 186.46,
+                  "b": 189.6683
+                },
+                "kind": "signal",
+                "strength": 0.685,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "The Boeing Company",
+          "score": 0.685,
+          "ticker": "BA.US"
+        },
+        {
+          "also_known_as": [
+            "0R1G.LSE",
+            "HDI.XETRA"
+          ],
+          "context": {
+            "ta": {
+              "adx": 12.0794,
+              "close_vs_ema200": -0.0255,
+              "rsi14": 47.5572
+            }
+          },
+          "head_listing_id": 20195,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 335.4,
+                  "b": 337.1295
+                },
+                "kind": "signal",
+                "strength": 0.669,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "The Home Depot Inc",
+          "score": 0.669,
+          "ticker": "HD.US"
+        },
+        {
+          "also_known_as": [
+            "NEE80.BK",
+            "0K80.LSE",
+            "NEE-P-T.US",
+            "NEE-P-U.US",
+            "NEE-PS.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 14.9644,
+              "close_vs_ema200": -0.0266,
+              "rsi14": 35.5078
+            }
+          },
+          "head_listing_id": 30785,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 85.91,
+                  "b": 86.5479
+                },
+                "kind": "signal",
+                "strength": 0.664,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Nextera Energy Inc",
+          "score": 0.664,
+          "ticker": "NEE.US"
+        },
+        {
+          "also_known_as": [
+            "NWT.XETRA",
+            "0R2F.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 12.6758,
+              "close_vs_ema200": 0.0168,
+              "rsi14": 43.5481
+            }
+          },
+          "head_listing_id": 47495,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 71.85,
+                  "b": 72.0802
+                },
+                "kind": "signal",
+                "strength": 0.651,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Wells Fargo & Company",
+          "score": 0.651,
+          "ticker": "WFC.US"
+        },
+        {
+          "also_known_as": [
+            "0I58.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 36.4134,
+              "close_vs_ema200": -0.0241,
+              "rsi14": 29.5259
+            }
+          },
+          "head_listing_id": 7824,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 570.1816,
+                  "b": 588.0159
+                },
+                "kind": "signal",
+                "strength": 0.646,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cummins Inc",
+          "score": 0.646,
+          "ticker": "CMI.US"
+        },
+        {
+          "also_known_as": [
+            "0ID1.LSE",
+            "DUKB.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 13.0083,
+              "close_vs_ema200": -0.0194,
+              "rsi14": 42.9429
+            }
+          },
+          "head_listing_id": 10868,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 124.28,
+                  "b": 124.5795
+                },
+                "kind": "signal",
+                "strength": 0.609,
+                "value": "2026-08-03"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Duke Energy Corporation",
+          "score": 0.609,
+          "ticker": "DUK.US"
+        },
+        {
+          "also_known_as": [
+            "VRT01.BK",
+            "VRT23.BK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 14.2759,
+              "close_vs_ema200": -0.0079,
+              "rsi14": 39.7147
+            }
+          },
+          "head_listing_id": 46545,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 254.97,
+                  "b": 256.9895
+                },
+                "kind": "signal",
+                "strength": 0.599,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Vertiv Holdings Co",
+          "score": 0.599,
+          "ticker": "VRT.US"
+        },
+        {
+          "also_known_as": [
+            "0HEC.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 21.4295,
+              "close_vs_ema200": -0.0311,
+              "rsi14": 34.0654
+            }
+          },
+          "head_listing_id": 945,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 125.26,
+                  "b": 126.0528
+                },
+                "kind": "signal",
+                "strength": 0.595,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "American Electric Power Co Inc",
+          "score": 0.595,
+          "ticker": "AEP.US"
+        },
+        {
+          "also_known_as": [
+            "0L5A.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 22.6434,
+              "close_vs_ema200": -0.059,
+              "rsi14": 41.0068
+            }
+          },
+          "head_listing_id": 41328,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 90.56,
+                  "b": 90.6654
+                },
+                "kind": "signal",
+                "strength": 0.584,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Sempra Energy",
+          "score": 0.584,
+          "ticker": "SRE.US"
+        },
+        {
+          "also_known_as": [
+            "ALD.XETRA"
+          ],
+          "context": {
+            "ta": {
+              "adx": 24.8343,
+              "close_vs_ema200": -0.0585,
+              "rsi14": 32.2299
+            }
+          },
+          "head_listing_id": 20932,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 227.71,
+                  "b": 228.5446
+                },
+                "kind": "signal",
+                "strength": 0.562,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Honeywell International Inc",
+          "score": 0.562,
+          "ticker": "HON.US"
+        },
+        {
+          "also_known_as": [
+            "0R08.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 26.0434,
+              "close_vs_ema200": -0.02,
+              "rsi14": 41.4837
+            }
+          },
+          "head_listing_id": 45294,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 103.72,
+                  "b": 105.0978
+                },
+                "kind": "signal",
+                "strength": 0.373,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "United Parcel Service Inc",
+          "score": 0.373,
+          "ticker": "UPS.US"
+        },
+        {
+          "also_known_as": [
+            "UWS.XETRA",
+            "0LTG.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 11.2321,
+              "close_vs_ema200": 0.0051,
+              "rsi14": 48.0716
+            }
+          },
+          "head_listing_id": 47842,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 193.25,
+                  "b": 195.1519
+                },
+                "kind": "signal",
+                "strength": 0.294,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Waste Management Inc",
+          "score": 0.294,
+          "ticker": "WM.US"
+        },
+        {
+          "also_known_as": [
+            "0HS2.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 18.3832,
+              "close_vs_ema200": -0.0545,
+              "rsi14": 35.3804
+            }
+          },
+          "head_listing_id": 6689,
+          "matched": {
+            "ta": {
+              "cross_close_ema200_dn": {
+                "detail": {
+                  "a": 326.98,
+                  "b": 335.8557
+                },
+                "kind": "signal",
+                "strength": 0.288,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cadence Design Systems Inc",
+          "score": 0.288,
+          "ticker": "CDNS.US"
+        }
+      ],
+      "sort": "ta",
+      "universe": 236,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 21,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 21 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Market read: the recession-risk dashboard shows the 2s10s yield curve back positive (+0.46) and rising — not screaming 'top', but valuations are stretched so caution is fair. Big-name US large-caps ($50bn+) that recently broke BELOW their 200-day moving average (technical weakness to be wary of): CARR.US (Carrier Global Cor, -6% vs 200d), AVGO.US (Broadcom Inc, -2% vs 200d), TJX.US (The TJX Companies , -8% vs 200d), SO.US (Southern Company, -3% vs 200d), BA.US (The Boeing Company, -4% vs 200d), HD.US (The Home Depot Inc, -3% vs 200d), NEE.US (Nextera Energy Inc, -3% vs 200d), CMI.US (Cummins Inc, -2% vs 200d), DUK.US (Duke Energy Corpor, -2% vs 200d), VRT.US (Vertiv Holdings Co, -1% vs 200d). These are trading under a key trend line — momentum is against them right now."
+}

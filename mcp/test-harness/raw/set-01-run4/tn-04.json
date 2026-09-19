@@ -1,0 +1,23 @@
+{
+  "id": "tn-04",
+  "question": "Is Tesla overbought or oversold right now? Just tell me if it's a good time to buy or if I should wait.",
+  "tool_calls": [
+    {
+      "tool": "find_stock",
+      "args": {"q": "Tesla"}
+    },
+    {
+      "tool": "asset_pulse",
+      "args": {"ticker": "TSLA.US"}
+    }
+  ],
+  "result_summary": "TSLA.US: RSI not directly shown in asset_pulse summary but price data clear: close_vs_sma200_pct=-13.01% (13% BELOW 200-day MA), close_vs_sma50_pct=-3.25% (below 50-day MA), drawdown_from_52w_high_pct=-30.09%, range_position_52w_pct=25.5% (lower quarter of 52w range), realized_vol_percentile_1y=92.86 (very high vol). Read: NOT overbought — actually showing weakness, trading well below MAs.",
+  "verdict": "PASS",
+  "reason": "Provides real Tesla technical data: -13% below 200-day MA, -30% off 52-week high, range position 25.5% (low in range). Clearly not overbought — directional read possible: wait / oversold territory.",
+  "defects": [
+    {
+      "desc": "asset_pulse does not expose RSI value directly in its summary block, making it hard for a blind client to quote 'RSI=X'. RSI only shows in screen_unified context. The pulse shows MA-relative position but not the oscillator value explicitly.",
+      "side": "server"
+    }
+  ]
+}

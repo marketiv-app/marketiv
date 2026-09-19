@@ -1,0 +1,1911 @@
+{
+  "id": "cf-04",
+  "question": "หาหุ้นปันผลดี ยิลด์เกิน 4% ที่ราคายังอยู่ในเทรนด์ขาขึ้น อยู่เหนือเส้นค่าเฉลี่ย 200 วัน",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "dividend_yield",
+            "pattern": "above",
+            "threshold": 0.04
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "above",
+                "a": "close",
+                "b": "ema200"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 0,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "dividends_paid": {
+            "sign": "stored NEGATIVE = cash OUTFLOW (capex/dividends/buybacks/debt-repayment spend cash); a BIGGER outflow is MORE negative — do not read the minus as 'less'."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.830067469534726,
+              "dividends_paid_usd": -534231269.0,
+              "free_cash_flow_usd": 727875863.0,
+              "market_cap_usd": 9672701521.100801,
+              "net_margin": 0.0569218488860136,
+              "pe": 14.36445,
+              "revenue_usd": 11306727146.0
+            },
+            "ta": {
+              "adx": 36.573,
+              "close_vs_ema200": 0.1023,
+              "rsi14": 59.9914
+            }
+          },
+          "head_listing_id": 50549,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.078998
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 10
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Tingyi",
+          "score": 1.0,
+          "ticker": "0322.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.340256025646498,
+              "dividends_paid_usd": -4862000.0,
+              "free_cash_flow_usd": -16532145.773,
+              "market_cap_usd": 89230960.00000001,
+              "net_margin": 0.544003895692631,
+              "pe": 5.898944,
+              "revenue_usd": 26266797.128
+            },
+            "ta": {
+              "adx": 45.8015,
+              "close_vs_ema200": 0.0178,
+              "rsi14": 46.1304
+            }
+          },
+          "head_listing_id": 51554,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.064949
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 29
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Quanzhou Huixin Micro credit Co Ltd",
+          "score": 1.0,
+          "ticker": "1577.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.2843,
+              "dividends_paid_usd": -4342101.2254,
+              "free_cash_flow_usd": 26562013.7111,
+              "market_cap_usd": 86988017.536,
+              "net_margin": 0.0731,
+              "pe": 5.964912,
+              "revenue_usd": 209015457.5551
+            },
+            "ta": {
+              "adx": 44.4705,
+              "close_vs_ema200": 0.1502,
+              "rsi14": 60.7824
+            }
+          },
+          "head_listing_id": 50154,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.042941
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 11
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Thai Plaspac Public Company Limited",
+          "score": 1.0,
+          "ticker": "TPAC.BK"
+        },
+        {
+          "also_known_as": [
+            "316.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.890107123766835,
+              "dividends_paid_usd": -1347162000.0,
+              "free_cash_flow_usd": -22628000.0,
+              "market_cap_usd": 13873293259.571201,
+              "net_margin": 0.155668185549922,
+              "pe": 8.840114,
+              "revenue_usd": 9722494000.0
+            },
+            "ta": {
+              "adx": 35.8965,
+              "close_vs_ema200": 0.2148,
+              "rsi14": 66.0555
+            }
+          },
+          "head_listing_id": 50544,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.439244
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 31
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Orient Overseas International Ltd",
+          "score": 1.0,
+          "ticker": "0316.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.789594676346038,
+              "dividends_paid_usd": -838591000.0,
+              "free_cash_flow_usd": 241194500.0,
+              "market_cap_usd": 20720449106.7392,
+              "net_margin": 1.87075599818923,
+              "pe": 19.603659,
+              "revenue_usd": 567713000.0
+            },
+            "ta": {
+              "adx": 27.786,
+              "close_vs_ema200": 0.0867,
+              "rsi14": 69.7043
+            }
+          },
+          "head_listing_id": 51120,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.040591
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 34
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CK Infrastructure Holdings Ltd",
+          "score": 1.0,
+          "ticker": "1038.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 15800785.0,
+              "market_cap_usd": 145878731.9808,
+              "net_margin": -0.0414529249421761,
+              "revenue_usd": 92800279.0
+            },
+            "ta": {
+              "adx": 18.7622,
+              "close_vs_ema200": 0.5811,
+              "rsi14": 70.4758
+            }
+          },
+          "head_listing_id": 52665,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.161764
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 184
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hengdeli Holdings Ltd",
+          "score": 1.0,
+          "ticker": "3389.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": -0.0,
+              "dividends_paid_usd": 0.0,
+              "free_cash_flow_usd": 2840881.1415,
+              "market_cap_usd": 9776480.0,
+              "net_margin": -0.0109,
+              "revenue_usd": 41281758.276
+            },
+            "ta": {
+              "adx": 21.0896,
+              "close_vs_ema200": 0.002,
+              "rsi14": 70.4844
+            }
+          },
+          "head_listing_id": 49598,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.040541
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Eastern Technical Engineering Public Company Limited",
+          "score": 1.0,
+          "ticker": "ETE.BK"
+        },
+        {
+          "also_known_as": [
+            "KGTFY.US"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.572573769138617,
+              "dividends_paid_usd": -878138969.4,
+              "free_cash_flow_usd": 5732380627.2,
+              "market_cap_usd": 15670309368.627201,
+              "net_margin": 0.315,
+              "pe": 12.428571,
+              "revenue_usd": 4771327688.0
+            },
+            "ta": {
+              "adx": 42.2133,
+              "close_vs_ema200": 0.2886,
+              "rsi14": 63.0633
+            }
+          },
+          "head_listing_id": 49728,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.047586
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 263
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Krung Thai Bank Public Company Limited",
+          "score": 1.0,
+          "ticker": "KTB.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 7.2553798890214,
+              "dividends_paid_usd": -87289964.4966,
+              "free_cash_flow_usd": 29836354.2926,
+              "market_cap_usd": 282835589.12,
+              "net_margin": 0.2191,
+              "pe": 27.647059,
+              "revenue_usd": 49458871.7576
+            },
+            "ta": {
+              "adx": 36.6353,
+              "close_vs_ema200": 0.1914,
+              "rsi14": 78.4204
+            }
+          },
+          "head_listing_id": 50041,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.229787
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 35
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "SPCG Public Company Limited",
+          "score": 1.0,
+          "ticker": "SPCG.BK"
+        },
+        {
+          "also_known_as": [
+            "311.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.613732004429679,
+              "dividends_paid_usd": -2771000.0,
+              "free_cash_flow_usd": 28155000.0,
+              "market_cap_usd": 41499973.132800005,
+              "net_margin": 0.00708805674213132,
+              "pe": 10.192,
+              "revenue_usd": 636987000.0
+            },
+            "ta": {
+              "adx": 47.9871,
+              "close_vs_ema200": 0.3306,
+              "rsi14": 75.4556
+            }
+          },
+          "head_listing_id": 50539,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.910692
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 17
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Luen Thai Holdings Ltd",
+          "score": 1.0,
+          "ticker": "0311.HK"
+        },
+        {
+          "also_known_as": [
+            "687.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": 2.47031002821404,
+              "dividends_paid_usd": -19464152.0,
+              "free_cash_flow_usd": 41254925.0,
+              "market_cap_usd": 135082378.9952,
+              "net_margin": 0.0296141424591083,
+              "pe": 17.307692,
+              "revenue_usd": 266063233.5
+            },
+            "ta": {
+              "adx": 23.5448,
+              "close_vs_ema200": 0.0676,
+              "rsi14": 58.0932
+            }
+          },
+          "head_listing_id": 50838,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.15873
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Tysan Holdings Ltd",
+          "score": 1.0,
+          "ticker": "0687.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3654308.7,
+              "market_cap_usd": 3467012476.9280005,
+              "net_margin": 0.101512515513343,
+              "pe": 592.378049,
+              "revenue_usd": 45209308.2
+            },
+            "ta": {
+              "adx": 31.193,
+              "close_vs_ema200": 1.932,
+              "rsi14": 80.6977
+            }
+          },
+          "head_listing_id": 52234,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.047123
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 107
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Easy Smart Group Holdings Ltd",
+          "score": 1.0,
+          "ticker": "2442.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": -0.0794905365611742,
+              "dividends_paid_usd": -54942965.0,
+              "free_cash_flow_usd": 218047973.0,
+              "market_cap_usd": 956433782.8864001,
+              "net_margin": -0.755936355576023,
+              "revenue_usd": 901736121.0
+            },
+            "ta": {
+              "adx": 11.2172,
+              "close_vs_ema200": 0.0516,
+              "rsi14": 53.0611
+            }
+          },
+          "head_listing_id": 52662,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.760513
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 61
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Logan Property Holdings Co Ltd",
+          "score": 1.0,
+          "ticker": "3380.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 1.1758,
+              "dividends_paid_usd": -423660.0,
+              "free_cash_flow_usd": 115647.233709,
+              "market_cap_usd": 10262290.1472,
+              "net_margin": 0.0085,
+              "pe": 22.0,
+              "revenue_usd": 42505691.336787
+            },
+            "ta": {
+              "adx": 30.0093,
+              "close_vs_ema200": 0.0605,
+              "rsi14": 45.2948
+            }
+          },
+          "head_listing_id": 49530,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.059055
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 63
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CMO Public Company Limited",
+          "score": 1.0,
+          "ticker": "CMO.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.0,
+              "dividends_paid_usd": 0.0,
+              "free_cash_flow_usd": 4053723.0472,
+              "market_cap_usd": 47871040.0,
+              "net_margin": 0.6842,
+              "pe": 3.109729,
+              "revenue_usd": 22630820.903
+            },
+            "ta": {
+              "adx": 16.9826,
+              "close_vs_ema200": 0.0045,
+              "rsi14": 62.7587
+            }
+          },
+          "head_listing_id": 49597,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.068571
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Earth Tech Environment Public Company Limited",
+          "score": 1.0,
+          "ticker": "ETC.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.492803010929205,
+              "dividends_paid_usd": -15006903.36,
+              "free_cash_flow_usd": 16166902.4707,
+              "market_cap_usd": 282368105.7792,
+              "net_margin": 0.0469,
+              "pe": 10.056818,
+              "revenue_usd": 681452334.4615
+            },
+            "ta": {
+              "adx": 16.0254,
+              "close_vs_ema200": 0.0905,
+              "rsi14": 48.7109
+            }
+          },
+          "head_listing_id": 49808,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.045763
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 53
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Muang Thai Insurance Public Company Limited",
+          "score": 1.0,
+          "ticker": "MTI.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.0,
+              "dividends_paid_usd": 0.0,
+              "free_cash_flow_usd": 49030847.8447,
+              "market_cap_usd": 29317821.8816,
+              "net_margin": 0.0268,
+              "pe": 7.25,
+              "revenue_usd": 180642253.7193
+            },
+            "ta": {
+              "adx": 36.8569,
+              "close_vs_ema200": 0.1584,
+              "rsi14": 61.064
+            }
+          },
+          "head_listing_id": 49909,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.077586
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 46
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Proud Real Estate Public Company Limited",
+          "score": 1.0,
+          "ticker": "PROUD.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.3393,
+              "dividends_paid_usd": -32677223.1848,
+              "free_cash_flow_usd": 110256013.3709,
+              "market_cap_usd": 846095161.1392,
+              "net_margin": 0.144,
+              "pe": 9.272727,
+              "revenue_usd": 668948039.4633
+            },
+            "ta": {
+              "adx": 31.4702,
+              "close_vs_ema200": 0.1003,
+              "rsi14": 49.0953
+            }
+          },
+          "head_listing_id": 50150,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.04902
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 45
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "TOA Paint (Thailand) Public Company Limited",
+          "score": 1.0,
+          "ticker": "TOA.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": -3.82250109050319,
+              "dividends_paid_usd": -11.9116,
+              "free_cash_flow_usd": 90838440.5713,
+              "market_cap_usd": 47765658.2144,
+              "net_margin": -0.0079,
+              "revenue_usd": 406468112.4848
+            },
+            "ta": {
+              "adx": 31.5165,
+              "close_vs_ema200": 0.1062,
+              "rsi14": 56.9716
+            }
+          },
+          "head_listing_id": 50215,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.103448
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 27
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Univentures Public Company Limited",
+          "score": 1.0,
+          "ticker": "UV.BK"
+        },
+        {
+          "also_known_as": [
+            "34.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": 2.19823090178059,
+              "dividends_paid_usd": -36883869.0,
+              "free_cash_flow_usd": 187082507.5,
+              "market_cap_usd": 793778790.6048001,
+              "net_margin": 0.0263610913320209,
+              "pe": 47.45,
+              "revenue_usd": 636502005.5
+            },
+            "ta": {
+              "adx": 28.6116,
+              "close_vs_ema200": 0.0345,
+              "rsi14": 46.6993
+            }
+          },
+          "head_listing_id": 50299,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.05058
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 236
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kowloon Development Co Ltd",
+          "score": 1.0,
+          "ticker": "0034.HK"
+        },
+        {
+          "also_known_as": [
+            "676.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": -0.21823651932423,
+              "dividends_paid_usd": -943000.0,
+              "free_cash_flow_usd": 123000.0,
+              "market_cap_usd": 94015655.55200002,
+              "net_margin": -1.64860740175506,
+              "revenue_usd": 2621000.0
+            },
+            "ta": {
+              "adx": 37.2103,
+              "close_vs_ema200": 0.012,
+              "rsi14": 52.7279
+            }
+          },
+          "head_listing_id": 50829,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.079286
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 39
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Pegasus International Holdings Ltd",
+          "score": 1.0,
+          "ticker": "0676.HK"
+        },
+        {
+          "also_known_as": [
+            "HTHT.US"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.769094488188976,
+              "dividends_paid_usd": -558701000.0,
+              "free_cash_flow_usd": 1051540000.0,
+              "market_cap_usd": 14221807085.158401,
+              "net_margin": 0.1931,
+              "pe": 17.768601,
+              "revenue_usd": 3756660000.0
+            },
+            "ta": {
+              "adx": 18.6945,
+              "close_vs_ema200": 0.0794,
+              "rsi14": 69.5312
+            }
+          },
+          "head_listing_id": 51242,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.058793
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Huazhu Group Ltd",
+          "score": 1.0,
+          "ticker": "1179.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.568597618957058,
+              "dividends_paid_usd": -4275414.0,
+              "free_cash_flow_usd": 38078183.0,
+              "market_cap_usd": 72232505.9456,
+              "net_margin": 0.0780693927061789,
+              "pe": 9.306586,
+              "revenue_usd": 96314647.0
+            },
+            "ta": {
+              "adx": 32.2781,
+              "close_vs_ema200": 0.0471,
+              "rsi14": 62.6724
+            }
+          },
+          "head_listing_id": 51342,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.067157
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "China Huirong Financials Hldgs",
+          "score": 1.0,
+          "ticker": "1290.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 1.3402237385527,
+              "dividends_paid_usd": -10425098.03335,
+              "free_cash_flow_usd": 35816009.60652,
+              "market_cap_usd": 75338301.8752,
+              "net_margin": 0.0335822344430429,
+              "pe": 9.381943,
+              "revenue_usd": 231629170.74154
+            },
+            "ta": {
+              "adx": 56.2161,
+              "close_vs_ema200": 0.0463,
+              "rsi14": 88.032
+            }
+          },
+          "head_listing_id": 51982,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.079256
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Wenzhou Kangning Hosp Co Ltd",
+          "score": 1.0,
+          "ticker": "2120.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.4579,
+              "dividends_paid_usd": -489864.8877,
+              "free_cash_flow_usd": 2674395.9011,
+              "market_cap_usd": 12822600.0,
+              "net_margin": 0.0266,
+              "pe": 13.073005,
+              "revenue_usd": 40253563.6079
+            },
+            "ta": {
+              "adx": 29.7651,
+              "close_vs_ema200": 0.1207,
+              "rsi14": 60.3404
+            }
+          },
+          "head_listing_id": 49365,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.051948
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 60
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Autocorp Holding Public Company Limited",
+          "score": 1.0,
+          "ticker": "ACG.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.511039678089693,
+              "dividends_paid_usd": -16485114.6576,
+              "free_cash_flow_usd": 16309975.492,
+              "market_cap_usd": 328980852.12160003,
+              "net_margin": 0.1551,
+              "pe": 10.084371,
+              "revenue_usd": 212869850.3222
+            },
+            "ta": {
+              "adx": 38.5968,
+              "close_vs_ema200": 0.1393,
+              "rsi14": 60.3701
+            }
+          },
+          "head_listing_id": 49392,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.063745
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 132
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Alucon Public Company Limited",
+          "score": 1.0,
+          "ticker": "ALUCON.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.0,
+              "dividends_paid_usd": 0.0,
+              "free_cash_flow_usd": -87400766.5956,
+              "market_cap_usd": 189576176.384,
+              "net_margin": 0.1144,
+              "pe": 6.371312,
+              "revenue_usd": 296732056.6635
+            },
+            "ta": {
+              "adx": 44.3394,
+              "close_vs_ema200": 0.1291,
+              "rsi14": 66.5877
+            }
+          },
+          "head_listing_id": 49424,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.063291
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 39
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Assetwise Public Company Limited",
+          "score": 1.0,
+          "ticker": "ASW.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": -0.284918474539321,
+              "dividends_paid_usd": -7727693.44086,
+              "free_cash_flow_usd": 620075.408121,
+              "market_cap_usd": 52016749.120000005,
+              "net_margin": -2.5766,
+              "revenue_usd": 7008119.491609
+            },
+            "ta": {
+              "adx": 36.2453,
+              "close_vs_ema200": 0.4102,
+              "rsi14": 85.819
+            }
+          },
+          "head_listing_id": 49489,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.066667
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "The Brooker Group Public Company Limited",
+          "score": 1.0,
+          "ticker": "BTC.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.2858,
+              "dividends_paid_usd": -3536640.0,
+              "free_cash_flow_usd": 14905708.0343,
+              "market_cap_usd": 80330880.0,
+              "net_margin": 0.1115,
+              "pe": 8.193042,
+              "revenue_usd": 110932091.7795
+            },
+            "ta": {
+              "adx": 23.7198,
+              "close_vs_ema200": 0.0622,
+              "rsi14": 40.0231
+            }
+          },
+          "head_listing_id": 49528,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.05137
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 147
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Chememan Public Company Limited",
+          "score": 1.0,
+          "ticker": "CMAN.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.3341,
+              "dividends_paid_usd": -945486.3814,
+              "free_cash_flow_usd": 3046017.2828,
+              "market_cap_usd": 29870253.6832,
+              "net_margin": 0.0846,
+              "pe": 11.581292,
+              "revenue_usd": 33458470.0615
+            },
+            "ta": {
+              "adx": 14.563,
+              "close_vs_ema200": 0.101,
+              "rsi14": 56.2261
+            }
+          },
+          "head_listing_id": 49560,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.048077
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 126
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Dental Corporation Public Company Limited",
+          "score": 1.0,
+          "ticker": "D.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.396262121859061,
+              "dividends_paid_usd": -1592805.1098,
+              "free_cash_flow_usd": 11562492.4019,
+              "market_cap_usd": 31745617.568,
+              "net_margin": 0.0764,
+              "pe": 7.523511,
+              "revenue_usd": 69176450.3297
+            },
+            "ta": {
+              "adx": 26.2017,
+              "close_vs_ema200": 0.0452,
+              "rsi14": 38.1293
+            }
+          },
+          "head_listing_id": 49596,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.083333
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 29
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Eastern Star Real Estate Public Company Limited",
+          "score": 1.0,
+          "ticker": "ESTAR.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.737263243088837,
+              "dividends_paid_usd": -24137999.9754,
+              "free_cash_flow_usd": 110144685.1627,
+              "market_cap_usd": 514076453.27360004,
+              "net_margin": 0.2046,
+              "pe": 17.846154,
+              "revenue_usd": 142799764.9901
+            },
+            "ta": {
+              "adx": 13.6578,
+              "close_vs_ema200": 0.0361,
+              "rsi14": 39.4016
+            }
+          },
+          "head_listing_id": 49700,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.057759
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 68
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "JMT Network Services Public Company Limited",
+          "score": 1.0,
+          "ticker": "JMT.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.877106190888169,
+              "dividends_paid_usd": -10144186.167,
+              "free_cash_flow_usd": 13507057.203,
+              "market_cap_usd": 173827501.9264,
+              "net_margin": 0.1045,
+              "pe": 16.022099,
+              "revenue_usd": 117543709.9994
+            },
+            "ta": {
+              "adx": 33.5849,
+              "close_vs_ema200": 0.1899,
+              "rsi14": 67.743
+            }
+          },
+          "head_listing_id": 49725,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.05
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 31
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "The Klinique Med Clinic PCL",
+          "score": 1.0,
+          "ticker": "KLINIQ.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.535,
+              "dividends_paid_usd": -33727142.8,
+              "free_cash_flow_usd": 37389591.4,
+              "market_cap_usd": 570819875.2256,
+              "net_margin": 0.2337,
+              "pe": 10.408163,
+              "revenue_usd": 269829668.0
+            },
+            "ta": {
+              "adx": 32.9666,
+              "close_vs_ema200": 0.169,
+              "rsi14": 48.1467
+            }
+          },
+          "head_listing_id": 49905,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.04902
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 160
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Prima Marine Public Company Limited",
+          "score": 1.0,
+          "ticker": "PRM.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 14847764555.3664
+            },
+            "ta": {
+              "adx": 14.8397,
+              "close_vs_ema200": 0.0874,
+              "rsi14": 55.5423
+            }
+          },
+          "head_listing_id": 49974,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.074455
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 63
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "SCB X Public Company Limited",
+          "score": 1.0,
+          "ticker": "SCB.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.3828,
+              "dividends_paid_usd": -2022281.747641,
+              "free_cash_flow_usd": 3935405.292022,
+              "market_cap_usd": 33712000.0,
+              "net_margin": 0.2217,
+              "pe": 7.192982,
+              "revenue_usd": 23828891.290335
+            },
+            "ta": {
+              "adx": 18.3162,
+              "close_vs_ema200": 0.0824,
+              "rsi14": 47.8343
+            }
+          },
+          "head_listing_id": 50068,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.054472
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 69
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Sahathai Printing & Packaging PCL",
+          "score": 1.0,
+          "ticker": "STP.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.4301,
+              "dividends_paid_usd": -107782450.3,
+              "free_cash_flow_usd": 385825934.0,
+              "market_cap_usd": 2091049808.6912,
+              "net_margin": 0.4915,
+              "pe": 10.234094,
+              "revenue_usd": 509878248.4
+            },
+            "ta": {
+              "adx": 49.4921,
+              "close_vs_ema200": 0.358,
+              "rsi14": 61.5695
+            }
+          },
+          "head_listing_id": 50093,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.041056
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 254
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Thanachart Capital Public Company Limited",
+          "score": 1.0,
+          "ticker": "TCAP.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 1.4237,
+              "dividends_paid_usd": -6446662.3,
+              "free_cash_flow_usd": -53111.0,
+              "market_cap_usd": 46956000.0,
+              "net_margin": 0.0796,
+              "pe": 12.1,
+              "revenue_usd": 56912366.1
+            },
+            "ta": {
+              "adx": 37.0733,
+              "close_vs_ema200": 0.0531,
+              "rsi14": 62.0895
+            }
+          },
+          "head_listing_id": 50149,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.066116
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 11
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Thai Nippon Rubber Industry Public Co. Ltd",
+          "score": 1.0,
+          "ticker": "TNR.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.4638,
+              "dividends_paid_usd": -12306831.8,
+              "free_cash_flow_usd": 140241284.0,
+              "market_cap_usd": 255451289.1392,
+              "net_margin": 0.0301,
+              "pe": 12.340426,
+              "revenue_usd": 881126164.6
+            },
+            "ta": {
+              "adx": 27.8731,
+              "close_vs_ema200": 0.1654,
+              "rsi14": 57.3536
+            }
+          },
+          "head_listing_id": 50182,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.043103
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 35
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Thoresen Thai Agencies Public Company Limited",
+          "score": 1.0,
+          "ticker": "TTA.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.762345311397201,
+              "dividends_paid_usd": -12402000.0,
+              "free_cash_flow_usd": 20789888.414759,
+              "market_cap_usd": 155541743.2576,
+              "net_margin": 0.1456,
+              "pe": 10.882353,
+              "revenue_usd": 115727754.640655
+            },
+            "ta": {
+              "adx": 53.3281,
+              "close_vs_ema200": 0.165,
+              "rsi14": 68.9335
+            }
+          },
+          "head_listing_id": 50214,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.064865
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 66
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "United Paper Public Company Limited",
+          "score": 1.0,
+          "ticker": "UTP.BK"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "เจอ 40 หุ้นที่จ่ายปันผลยิลด์เกิน 4% และราคายังยืนเหนือเส้นค่าเฉลี่ย 200 วัน (เทรนด์ขาขึ้น). ทุกตัวผ่านทั้งสองเงื่อนไข — dividend_yield>4% (matched.fundamental) และราคาอยู่เหนือ ema200 (matched.ta). ตัวอย่าง: 0322.HK, 1577.HK, TPAC.BK, 0316.HK."
+}

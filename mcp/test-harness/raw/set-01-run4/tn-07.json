@@ -1,0 +1,23 @@
+{
+  "id": "tn-07",
+  "question": "any crypto near its 52 week low right now?",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "at_new_low"}]}],
+        "asset_type": ["Crypto"],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "60 results (capped). Returns crypto assets with .CC suffix: ACES-USD.CC (Aces, RSI 0.0, close_vs_ema200=-29.88%), ADC-USD.CC (AudioCoin, RSI 0.0), ADOGE-USD.CC (Arbidoge). All confirmed at_new_low signal 2026-08-30. Results are genuinely crypto (not stocks/ETFs). However, top results are extremely obscure micro-cap tokens with zero liquidity, not mainstream coins like BTC/ETH/SOL.",
+  "verdict": "PASS",
+  "reason": "Returns crypto assets specifically (asset_type=Crypto, .CC tickers), all genuinely at 52-week lows. Asset class filtering works correctly.",
+  "defects": [
+    {
+      "desc": "Results are dominated by illiquid micro-cap/dead tokens (RSI=0.0, near-zero ATR) with no sort by market-cap or liquidity. A retail user asking about crypto at 52-week lows likely wants BTC/ETH/SOL-class assets, not obscure tokens. No default mcap floor applied for crypto screen. Client needs to add min_market_cap_usd to get useful results.",
+      "side": "client"
+    }
+  ]
+}

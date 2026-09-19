@@ -1,0 +1,21 @@
+{
+  "id": "tn-10",
+  "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+  "tools_called": [
+    {
+      "tool": "macro_pulse",
+      "args": {"scope": "economy"},
+      "result_summary": "US macro economy as of 2026-08: Real GDP growth 1.484% (falling, 23rd percentile — near the low end of 10yr history, slowdown signal). Industrial production 1.079% (rising, 62nd pct). CPI inflation 3.304% (rising, 71st pct — elevated). Core PCE 3.344% (rising, 74th pct — elevated). Unemployment 4.1% (falling, 55th pct — still healthy). Nonfarm payrolls -23k (falling, 7th pct — very weak, near 10yr lows). Fed funds 3.63% (falling, 65th pct — cutting cycle). Read: slowing growth + elevated inflation + weak payrolls = stagflationary pressure. Markets have macro reason for caution; toppy conditions supported by data."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "below", "a": "close", "b": "ema200"}], "quals": [{"any": [{"pattern": "below", "a": "close", "b": "ema50"}]}]}],
+        "asset_type": ["Common Stock"],
+        "size": ["large"],
+        "limit": 15
+      },
+      "result_summary": "60 large-cap stocks (capped) trading below BOTH their 50-day and 200-day moving averages (broken below key support). Notable big names: AZN.LSE AstraZeneca (-9.0% vs ema200), BA.US Boeing (-4.0%), BN.US Brookfield (-5.2%), COST.US Costco (-1.7%), ENB.US Enbridge (-3.7%), HD.US Home Depot (-4.5%), IBM.US IBM (-7.5%), ISRG.US Intuitive Surgical (-15.7%), LOW.US Lowe's (-9.5%), MCD.US McDonald's (-8.4%), META.US Meta Platforms (-6.7%), NEE.US NextEra Energy (-5.1%), PEP.US PepsiCo (-3.6%), PG.US Procter & Gamble (-3.3%), QCOM.US Qualcomm (-3.7%). All are below both MAs — technical weakness / broken support."
+    }
+  ]
+}

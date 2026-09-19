@@ -1,0 +1,23 @@
+{
+  "id": "ma-07",
+  "question": "Which forex pairs are showing a death cross — 50-day moving average crossing below the 200-day?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["50-day MA crosses below 200-day death cross bearish"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Currency"],
+        "ta": [{"anchor": [{"pattern": "crossover_down", "a": "ema50", "b": "ema200"}]}],
+        "timeframe": 1,
+        "window_bars": 30
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=996 forex pairs. Signal: 'cross_ema50_ema200_dn'. Top results: PKRGBP.FOREX (strength 0.996, 2026-08-26 — PKR/GBP), BYNUSD.FOREX (0.898 — Belarusian Ruble/USD), RUBPLN.FOREX (0.887 — Russian Ruble/PLN), RUBCHF.FOREX (0.831), CNYKRW.FOREX (0.826 — CNY/KRW), MYRUSD.FOREX (0.811), SGDKRW.FOREX (0.804), RUBUSD.FOREX (0.801), BRLZAR.FOREX (0.798), KRW.FOREX/USDKRW.FOREX (0.796). All results are .FOREX pairs.",
+  "verdict": "PASS",
+  "reason": "Returns forex-only pairs (.FOREX suffix confirmed), death cross correctly identified as ema50 crossing BELOW ema200 (bearish crossover_down). No equities or crypto returned. Multiple diverse forex pairs confirmed.",
+  "defects": []
+}

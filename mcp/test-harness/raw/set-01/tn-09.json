@@ -1,0 +1,1666 @@
+{
+  "id": "tn-09",
+  "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "macd just crossed above signal bullish"
+        ]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "macd_line",
+                "b": "macd_signal"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "window_bars": 10,
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 59,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 12.5986,
+              "close_vs_ema200": 0.0149,
+              "rsi14": 59.7164
+            }
+          },
+          "head_listing_id": 1419470,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Taipei Star Bank",
+          "score": 1.0,
+          "ticker": "5863.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 40.9911,
+              "close_vs_ema200": -0.1288,
+              "rsi14": 49.6593
+            }
+          },
+          "head_listing_id": 1420677,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.4502,
+                  "b": -0.5284
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bioray Biotech Co., Ltd",
+          "score": 1.0,
+          "ticker": "7561.TWO"
+        },
+        {
+          "also_known_as": [
+            "0I35.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 13.05,
+              "close_vs_ema200": 0.0202,
+              "rsi14": 47.7782
+            }
+          },
+          "head_listing_id": 11315,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Consolidated Edison Inc",
+          "score": 1.0,
+          "ticker": "ED.US"
+        },
+        {
+          "also_known_as": [
+            "KMPB.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 15.4723,
+              "close_vs_ema200": -0.1624,
+              "rsi14": 51.8268
+            }
+          },
+          "head_listing_id": 25377,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Kemper Corporation",
+          "score": 1.0,
+          "ticker": "KMPR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 25.1086,
+              "close_vs_ema200": -0.1238,
+              "rsi14": 37.2577
+            }
+          },
+          "head_listing_id": 1419830,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Tsky Co.,Ltd",
+          "score": 1.0,
+          "ticker": "6784.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 11.419,
+              "close_vs_ema200": -0.0356,
+              "rsi14": 54.5614
+            }
+          },
+          "head_listing_id": 1417625,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "TTFB Co Ltd",
+          "score": 1.0,
+          "ticker": "2729.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 32.016,
+              "close_vs_ema200": 1.0135,
+              "rsi14": 86.9073
+            }
+          },
+          "head_listing_id": 40339,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0593,
+                  "b": -0.0376
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Skye Bioscience, Inc. Common Stock",
+          "score": 1.0,
+          "ticker": "SKYE.US"
+        },
+        {
+          "also_known_as": [
+            "0Q89.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 35.0366,
+              "close_vs_ema200": 0.0335,
+              "rsi14": 61.1574
+            }
+          },
+          "head_listing_id": 44139,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Thomson Reuters Corporation Common Shares",
+          "score": 1.0,
+          "ticker": "TRI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 18.5204,
+              "close_vs_ema200": 4.1068,
+              "rsi14": 95.3901
+            }
+          },
+          "head_listing_id": 22401,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "InterCure Ltd.",
+          "score": 1.0,
+          "ticker": "INCR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 9.2507,
+              "close_vs_ema200": 0.1133,
+              "rsi14": 51.2215
+            }
+          },
+          "head_listing_id": 32857,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "OneSpaWorld Holdings Ltd",
+          "score": 1.0,
+          "ticker": "OSW.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 12.541,
+              "close_vs_ema200": 0.0279,
+              "rsi14": 39.9509
+            }
+          },
+          "head_listing_id": 12611,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Evergy, Inc.",
+          "score": 1.0,
+          "ticker": "EVRG.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 14.1087,
+              "close_vs_ema200": 0.1133,
+              "rsi14": 47.6754
+            }
+          },
+          "head_listing_id": 30130,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -4.8446,
+                  "b": -5.083
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Murphy USA Inc",
+          "score": 1.0,
+          "ticker": "MUSA.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 29.1535,
+              "rsi14": 40.3174
+            }
+          },
+          "head_listing_id": 26455,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Liminatus Pharma, Inc. Class A Common Stock",
+          "score": 1.0,
+          "ticker": "LIMN.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 10.3994,
+              "close_vs_ema200": -0.2281,
+              "rsi14": 45.989
+            }
+          },
+          "head_listing_id": 5269,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.0825,
+                  "b": -0.0846
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BRC Inc.",
+          "score": 1.0,
+          "ticker": "BRCC.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 44.5931,
+              "close_vs_ema200": 0.1468,
+              "rsi14": 71.6101
+            }
+          },
+          "head_listing_id": 23378,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Jacobs Solutions Inc.",
+          "score": 1.0,
+          "ticker": "J.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 27.0968,
+              "close_vs_ema200": -0.0301,
+              "rsi14": 36.0525
+            }
+          },
+          "head_listing_id": 11473,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Enerflex Ltd.",
+          "score": 1.0,
+          "ticker": "EFXT.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.4764,
+              "close_vs_ema200": -0.1069,
+              "rsi14": 50.0359
+            }
+          },
+          "head_listing_id": 1419983,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BiOptic Inc.",
+          "score": 1.0,
+          "ticker": "6850.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 29.7699,
+              "close_vs_ema200": -0.1618,
+              "rsi14": 38.449
+            }
+          },
+          "head_listing_id": 2872,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "AdvanSix Inc",
+          "score": 1.0,
+          "ticker": "ASIX.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 91.1364,
+              "close_vs_ema200": 0.1188,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 7490259,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 2.3932,
+                  "b": 0.4786
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CHUOU INTERNATIONAL GROUP CO. LTD.",
+          "score": 1.0,
+          "ticker": "7170.JP"
+        },
+        {
+          "also_known_as": [
+            "0JSC.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 9.7067,
+              "close_vs_ema200": -0.0799,
+              "rsi14": 46.6305
+            }
+          },
+          "head_listing_id": 3844,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bath & Body Works Inc.",
+          "score": 1.0,
+          "ticker": "BBWI.US"
+        },
+        {
+          "also_known_as": [
+            "0HVF.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 11.9658,
+              "close_vs_ema200": -0.0419,
+              "rsi14": 31.3154
+            }
+          },
+          "head_listing_id": 8066,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CenterPoint Energy Inc",
+          "score": 1.0,
+          "ticker": "CNP.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 25.682,
+              "close_vs_ema200": 0.1046,
+              "rsi14": 62.8056
+            }
+          },
+          "head_listing_id": 44314,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 1.5961,
+                  "b": 1.4518
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "TransUnion",
+          "score": 1.0,
+          "ticker": "TRU.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 22.1998,
+              "close_vs_ema200": -0.0312,
+              "rsi14": 37.6214
+            }
+          },
+          "head_listing_id": 3259,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Avista Corporation",
+          "score": 1.0,
+          "ticker": "AVA.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 21.6224,
+              "close_vs_ema200": 0.2196,
+              "rsi14": 44.5295
+            }
+          },
+          "head_listing_id": 44813,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Twin Disc Incorporated",
+          "score": 1.0,
+          "ticker": "TWIN.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 22.4519,
+              "close_vs_ema200": 0.1551,
+              "rsi14": 61.1545
+            }
+          },
+          "head_listing_id": 11372,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.0582,
+                  "b": -0.2125
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Excelerate Energy Inc",
+          "score": 1.0,
+          "ticker": "EE.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 13.2552,
+              "rsi14": 57.2017
+            }
+          },
+          "head_listing_id": 3272,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Avidia Bancorp, Inc.",
+          "score": 1.0,
+          "ticker": "AVBC.US"
+        },
+        {
+          "also_known_as": [
+            "0JWG.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 26.4662,
+              "close_vs_ema200": 0.0141,
+              "rsi14": 37.23
+            }
+          },
+          "head_listing_id": 28879,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "MKS Instruments Inc",
+          "score": 1.0,
+          "ticker": "MKSI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.4961,
+              "close_vs_ema200": 0.0546,
+              "rsi14": 64.3526
+            }
+          },
+          "head_listing_id": 45443,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "United States Lime & Minerals Inc",
+          "score": 1.0,
+          "ticker": "USLM.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 13.7946,
+              "close_vs_ema200": -0.021,
+              "rsi14": 41.1096
+            }
+          },
+          "head_listing_id": 3105,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Atmos Energy Corporation",
+          "score": 1.0,
+          "ticker": "ATO.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 33.6934,
+              "close_vs_ema200": -0.1924,
+              "rsi14": 29.3046
+            }
+          },
+          "head_listing_id": 5862,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BWX Technologies Inc",
+          "score": 1.0,
+          "ticker": "BWXT.US"
+        },
+        {
+          "also_known_as": [
+            "KELYB.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 47.8904,
+              "close_vs_ema200": 0.3982,
+              "rsi14": 66.7119
+            }
+          },
+          "head_listing_id": 25164,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Kelly Services A Inc",
+          "score": 1.0,
+          "ticker": "KELYA.US"
+        },
+        {
+          "also_known_as": [
+            "0JSP.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 20.4871,
+              "close_vs_ema200": 0.088,
+              "rsi14": 55.4968
+            }
+          },
+          "head_listing_id": 27117,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "LTC Properties Inc",
+          "score": 1.0,
+          "ticker": "LTC.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.1829,
+              "close_vs_ema200": -0.1365,
+              "rsi14": 41.7362
+            }
+          },
+          "head_listing_id": 39857,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -1.8281,
+                  "b": -1.8523
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Somnigroup International Inc.",
+          "score": 1.0,
+          "ticker": "SGI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 24.2964,
+              "close_vs_ema200": -0.0337,
+              "rsi14": 47.5268
+            }
+          },
+          "head_listing_id": 37861,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -1.7462,
+                  "b": -1.8318
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Regional Management Corp",
+          "score": 1.0,
+          "ticker": "RM.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 23.028,
+              "close_vs_ema200": 0.0038,
+              "rsi14": 52.5345
+            }
+          },
+          "head_listing_id": 8248,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -1.2608,
+                  "b": -1.4772
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Columbia Sportswear Company",
+          "score": 1.0,
+          "ticker": "COLM.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 37.8627,
+              "close_vs_ema200": 0.5102,
+              "rsi14": 56.5854
+            }
+          },
+          "head_listing_id": 49677,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.1537,
+                  "b": 0.1436
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Infraset Public Company Limited",
+          "score": 1.0,
+          "ticker": "INSET.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 17.2449,
+              "close_vs_ema200": -0.0229,
+              "rsi14": 57.9025
+            }
+          },
+          "head_listing_id": 47869,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.5949,
+                  "b": -0.6462
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Warner Music Group",
+          "score": 1.0,
+          "ticker": "WMG.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 12.8543,
+              "close_vs_ema200": 0.0356,
+              "rsi14": 60.3438
+            }
+          },
+          "head_listing_id": 50147,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0108,
+                  "b": 0.0091
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Thanapiriya Public Company Limited",
+          "score": 1.0,
+          "ticker": "TNP.BK"
+        },
+        {
+          "also_known_as": [
+            "0JYW.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 12.6731,
+              "close_vs_ema200": 0.0555,
+              "rsi14": 49.3781
+            }
+          },
+          "head_listing_id": 27570,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -4.9663,
+                  "b": -5.0789
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Marriott International Inc",
+          "score": 1.0,
+          "ticker": "MAR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 14.6796,
+              "rsi14": 46.1897
+            }
+          },
+          "head_listing_id": 49682,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0038,
+                  "b": 0.0007
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "IROYAL_INTERROYAL ENGINEERING",
+          "score": 1.0,
+          "ticker": "IROYAL.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.382,
+              "close_vs_ema200": 0.1439,
+              "rsi14": 63.1807
+            }
+          },
+          "head_listing_id": 4275,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.0995,
+                  "b": -0.1134
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BGC Group Inc. ",
+          "score": 1.0,
+          "ticker": "BGC.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 21.8828,
+              "close_vs_ema200": 0.2279,
+              "rsi14": 59.1052
+            }
+          },
+          "head_listing_id": 49557,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0122,
+                  "b": 0.0089
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Communication & System Solution Public Company Limited",
+          "score": 1.0,
+          "ticker": "CSS.BK"
+        },
+        {
+          "also_known_as": [
+            "0JQQ.LSE",
+            "ADM.XETRA"
+          ],
+          "context": {
+            "ta": {
+              "adx": 19.074,
+              "close_vs_ema200": 0.0895,
+              "rsi14": 43.6136
+            }
+          },
+          "head_listing_id": 784,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.0208,
+                  "b": -0.1696
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Archer-Daniels-Midland Company",
+          "score": 1.0,
+          "ticker": "ADM.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 20.3422,
+              "close_vs_ema200": 0.1919,
+              "rsi14": 60.646
+            }
+          },
+          "head_listing_id": 7271,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Chord Energy Corp",
+          "score": 1.0,
+          "ticker": "CHRD.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 19.7161,
+              "rsi14": 50.3755
+            }
+          },
+          "head_listing_id": 28909,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.0763,
+                  "b": -0.0876
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Mount Logan Capital Inc. Common Stock",
+          "score": 1.0,
+          "ticker": "MLCI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 12.0306,
+              "close_vs_ema200": 0.3328,
+              "rsi14": 61.6705
+            }
+          },
+          "head_listing_id": 21130,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.2312,
+                  "b": 0.2016
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Himalaya Shipping Ltd.",
+          "score": 1.0,
+          "ticker": "HSHP.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 22.5615,
+              "close_vs_ema200": -0.2875,
+              "rsi14": 40.1634
+            }
+          },
+          "head_listing_id": 1420126,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "HD Renewable Energy Co. Ltd.",
+          "score": 0.999,
+          "ticker": "6873.TW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.3968,
+              "close_vs_ema200": -0.0438,
+              "rsi14": 42.5474
+            }
+          },
+          "head_listing_id": 3825,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Barrett Business Services Inc",
+          "score": 0.999,
+          "ticker": "BBSI.US"
+        },
+        {
+          "also_known_as": [
+            "VIA.XETRA",
+            "0A5V.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 17.7367,
+              "close_vs_ema200": 0.1445,
+              "rsi14": 51.1734
+            }
+          },
+          "head_listing_id": 46769,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Viatris Inc",
+          "score": 0.999,
+          "ticker": "VTRS.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 18.4938,
+              "rsi14": 47.5351
+            }
+          },
+          "head_listing_id": 248023,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ARKO Petroleum Corp.",
+          "score": 0.999,
+          "ticker": "APC.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 30.6814,
+              "close_vs_ema200": -0.1547,
+              "rsi14": 34.2759
+            }
+          },
+          "head_listing_id": 26604,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "LeMaitre Vascular Inc",
+          "score": 0.999,
+          "ticker": "LMAT.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 12.0798,
+              "close_vs_ema200": 0.0651,
+              "rsi14": 53.1928
+            }
+          },
+          "head_listing_id": 34687,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Palomar Holdings Inc",
+          "score": 0.999,
+          "ticker": "PLMR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 18.5011,
+              "close_vs_ema200": 0.0233,
+              "rsi14": 41.6316
+            }
+          },
+          "head_listing_id": 17169,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Fortis Inc",
+          "score": 0.999,
+          "ticker": "FTS.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 30.1115,
+              "close_vs_ema200": -0.5456,
+              "rsi14": 37.2083
+            }
+          },
+          "head_listing_id": 6560,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cogent Communications Group Inc",
+          "score": 0.999,
+          "ticker": "CCOI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 11.3637,
+              "close_vs_ema200": -0.1588,
+              "rsi14": 36.9944
+            }
+          },
+          "head_listing_id": 8219,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cohen & Company Inc",
+          "score": 0.999,
+          "ticker": "COHN.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 24.5715,
+              "close_vs_ema200": -0.0497,
+              "rsi14": 30.1341
+            }
+          },
+          "head_listing_id": 48235,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Woodward Inc",
+          "score": 0.999,
+          "ticker": "WWD.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 35.3527,
+              "close_vs_ema200": -0.1185,
+              "rsi14": 32.5924
+            }
+          },
+          "head_listing_id": 49707,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.998,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Karmarts Public Company Limited",
+          "score": 0.998,
+          "ticker": "KAMART.BK"
+        },
+        {
+          "also_known_as": [
+            "0L45.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 14.9275,
+              "close_vs_ema200": -0.0163,
+              "rsi14": 42.3289
+            }
+          },
+          "head_listing_id": 40581,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "kind": "signal",
+                "strength": 0.998,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Scotts Miracle-Gro Company",
+          "score": 0.998,
+          "ticker": "SMG.US"
+        },
+        {
+          "also_known_as": [
+            "SBXD-UN.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 32.4696,
+              "rsi14": 88.0652
+            }
+          },
+          "head_listing_id": 39177,
+          "matched": {
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0267,
+                  "b": 0.0037
+                },
+                "kind": "signal",
+                "strength": 0.998,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "SilverBox Corp IV",
+          "score": 0.998,
+          "ticker": "SBXD.US"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 59,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 59 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "A MACD crossover is when the MACD line crosses its signal line; a BULLISH one (MACD crossing ABOVE the signal) is an early momentum-turning-up signal. A few that just had a bullish MACD cross: 5863.TWO, 7561.TWO, ED.US, KMPR.US, 6784.TWO, 2729.TWO. ~59 names had a fresh bullish MACD cross in the last ~10 days."
+}

@@ -1,0 +1,74 @@
+{
+  "id": "op-01",
+  "question": "Which stocks is the crowd suddenly getting nervous or scared about, even though the price hasn't really dropped yet?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "crowd suddenly nervous or scared even though price has not dropped"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "fear_building",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "crowd suddenly nervous or scared even though price has not dropped",
+          "candidates": [
+            {
+              "pattern": "fear_building",
+              "label": "Fear building (crash-pricing)",
+              "supported": "yes",
+              "description": "Put-skew unusually elevated vs own history — the market pricing downside fear."
+            },
+            {
+              "pattern": "bullish_positioning",
+              "label": "Bullish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bullish (positioning score high, calls heavier)."
+            },
+            {
+              "pattern": "bearish_positioning",
+              "label": "Bearish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bearish (positioning score low, puts heavier)."
+            },
+            {
+              "pattern": "positioning_flip",
+              "label": "Positioning flip",
+              "supported": "approx",
+              "description": "Positioning reversed sharply vs the prior day."
+            },
+            {
+              "pattern": "unusual_activity",
+              "label": "Unusual options activity",
+              "supported": "yes",
+              "description": "Option/stock volume unusually high vs own history."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "fear_building",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "The right lens for 'nervous/scared before the price has moved' is elevated put-skew — what the options desk calls 'fear building' (crash-pricing). The MCP resolved your question to that pattern (`fear_building`) correctly. However, the actual stock-scanning endpoint that would return the list of names is not live yet — it currently returns a POC stub ('the /v1/options/scan endpoint is not built yet'). So I can confirm we know exactly HOW to look for this, but I can't hand you the list of specific tickers right now. If you have a specific name in mind, I can read its options positioning directly."
+}

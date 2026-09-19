@@ -1,0 +1,1782 @@
+{
+  "id": "fe-04",
+  "question": "Screen for stocks trading below their sector's average P/E but with ROE above the sector average — cheap relative to peers yet more profitable. Restrict to US large caps.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "pe",
+            "pattern": "below_average",
+            "vs_cohort": {
+              "own": true
+            }
+          },
+          {
+            "concept": "roe",
+            "pattern": "above_average",
+            "vs_cohort": {
+              "own": true
+            }
+          }
+        ],
+        "country": [
+          "US"
+        ],
+        "size": [
+          "large"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          }
+        }
+      },
+      "capped": false,
+      "count": 41,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NVDA.SW",
+            "0R1I.LSE",
+            "NVDA01.BK",
+            "NVDA03.BK",
+            "NVDA06.BK",
+            "NVDA19.BK",
+            "NVDA23.BK",
+            "NVDA80.BK",
+            "NVD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0632,
+              "eps_diluted": 6.53,
+              "market_cap_usd": 5322322739200.0,
+              "net_income_usd": 159613000000.0,
+              "net_margin": 0.6297,
+              "normalized_pe": 33.3451707517558,
+              "revenue_usd": 253491000000.0,
+              "roa": 0.6151
+            }
+          },
+          "head_listing_id": 31809,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 33.650842
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.8165
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NVIDIA Corporation",
+          "score": 5322322739200.0,
+          "ticker": "NVDA.US"
+        },
+        {
+          "also_known_as": [
+            "0R2V.LSE",
+            "AAPL01.BK",
+            "AAPL03.BK",
+            "AAPL19.BK",
+            "AAPL80.BK",
+            "APC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.7844,
+              "eps_diluted": 8.72,
+              "market_cap_usd": 4524633751552.0,
+              "net_income_usd": 128930000000.0,
+              "net_margin": 0.2762,
+              "normalized_pe": 35.0937233502831,
+              "revenue_usd": 466823000000.0,
+              "roa": 0.3364
+            }
+          },
+          "head_listing_id": 231,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 35.083716
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 1.1991
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Apple Inc.",
+          "score": 4524633751552.0,
+          "ticker": "AAPL.US"
+        },
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.176,
+              "eps_diluted": 19.93,
+              "market_cap_usd": 4173832126464.0,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "normalized_pe": 33.7029547069683,
+              "revenue_usd": 445867000000.0,
+              "roa": 0.2649
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 25.2348160920265,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 17.123934
+              },
+              "roe": {
+                "cohort_benchmark": 0.277448036702763,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.3813
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "LLY23.BK",
+            "LLY80.BK",
+            "LLY.SW",
+            "LLY.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.6207,
+              "eps_diluted": 29.79,
+              "market_cap_usd": 1093034115072.0,
+              "net_income_usd": 26711200000.0,
+              "net_margin": 0.3353,
+              "normalized_pe": 34.8579418928311,
+              "revenue_usd": 79665800000.0,
+              "roa": 0.1877
+            }
+          },
+          "head_listing_id": 26596,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 41.145686
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.7884
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eli Lilly and Company",
+          "score": 1093034115072.0,
+          "ticker": "LLY.US"
+        },
+        {
+          "also_known_as": [
+            "MICRON01.BK",
+            "MICRON03.BK",
+            "MICRON19.BK",
+            "MICRON23.BK",
+            "MICRON80.BK",
+            "0R2T.LSE",
+            "MTE.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0633,
+              "eps_diluted": 44.24,
+              "market_cap_usd": 1029204672512.0,
+              "net_income_usd": 50469000000.0,
+              "net_margin": 0.5591,
+              "normalized_pe": 20.3928089027324,
+              "revenue_usd": 90274000000.0,
+              "roa": 0.3763
+            }
+          },
+          "head_listing_id": 30067,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 21.264919
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.5011
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Micron Technology Inc",
+          "score": 1029204672512.0,
+          "ticker": "MU.US"
+        },
+        {
+          "also_known_as": [
+            "JPMUS06.BK",
+            "JPMUS19.BK",
+            "CMC.XETRA",
+            "0Q1F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.37949663114795,
+              "eps_diluted": 23.34,
+              "market_cap_usd": 965586124800.0,
+              "net_income_usd": 65067000000.0,
+              "net_margin": 0.3338,
+              "normalized_pe": 15.7304708952858,
+              "revenue_usd": 194911000000.0,
+              "roa": 0.013
+            }
+          },
+          "head_listing_id": 24608,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 18.1220555753456,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 15.56341
+              },
+              "roe": {
+                "cohort_benchmark": 0.132450715779739,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1737
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "JPMorgan Chase & Co",
+          "score": 965586124800.0,
+          "ticker": "JPM.US"
+        },
+        {
+          "also_known_as": [
+            "JNJ03.BK",
+            "JNJ.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.5771,
+              "eps_diluted": 8.62,
+              "market_cap_usd": 653347520512.0,
+              "net_income_usd": 21037000000.0,
+              "net_margin": 0.2148,
+              "normalized_pe": 29.8124007786065,
+              "revenue_usd": 97929000000.0,
+              "roa": 0.1046
+            }
+          },
+          "head_listing_id": 24500,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 31.451276
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.2476
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Johnson & Johnson",
+          "score": 653347520512.0,
+          "ticker": "JNJ.US"
+        },
+        {
+          "also_known_as": [
+            "ORCL01.BK",
+            "ORCL06.BK",
+            "ORCL19.BK",
+            "ORC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 3.6743,
+              "eps_diluted": 5.83,
+              "market_cap_usd": 411302428672.0,
+              "net_income_usd": 17087000000.0,
+              "net_margin": 0.2537,
+              "normalized_pe": 25.532351603285,
+              "revenue_usd": 67358000000.0,
+              "roa": 0.0653
+            }
+          },
+          "head_listing_id": 32732,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 24.492281
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.402
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Oracle Corporation",
+          "score": 411302428672.0,
+          "ticker": "ORCL.US"
+        },
+        {
+          "also_known_as": [
+            "KO80.BK",
+            "0QZK.LSE",
+            "CCC3.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.2045,
+              "eps_diluted": 3.33,
+              "market_cap_usd": 382152409088.0,
+              "net_income_usd": 14316000000.0,
+              "net_margin": 0.2856,
+              "normalized_pe": 26.5928597362645,
+              "revenue_usd": 50129000000.0,
+              "roa": 0.1327
+            }
+          },
+          "head_listing_id": 25444,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 30.7331366114541,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 26.672673
+              },
+              "roe": {
+                "cohort_benchmark": 0.214488117367272,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.396
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The Coca-Cola Company",
+          "score": 382152409088.0,
+          "ticker": "KO.US"
+        },
+        {
+          "also_known_as": [
+            "UNH19.BK",
+            "UNH.XETRA",
+            "0R0O.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.796,
+              "eps_diluted": 15.56,
+              "market_cap_usd": 353589526528.0,
+              "net_income_usd": 12044000000.0,
+              "net_margin": 0.0268,
+              "normalized_pe": 28.7391087481561,
+              "revenue_usd": 449713000000.0,
+              "roa": 0.0385
+            }
+          },
+          "head_listing_id": 45221,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 25.316838
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.123
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "UnitedHealth Group Incorporated",
+          "score": 353589526528.0,
+          "ticker": "UNH.US"
+        },
+        {
+          "also_known_as": [
+            "MS06.BK",
+            "0QYU.LSE",
+            "MS-PQ.US",
+            "DWD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 3.6309,
+              "eps_diluted": 12.38,
+              "market_cap_usd": 343026139136.0,
+              "net_income_usd": 20155000000.0,
+              "net_margin": 0.2759,
+              "normalized_pe": 16.8993866597392,
+              "revenue_usd": 73053000000.0,
+              "roa": 0.012
+            }
+          },
+          "head_listing_id": 29658,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 18.1220555753456,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 17.572698
+              },
+              "roe": {
+                "cohort_benchmark": 0.132450715779739,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1733
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Morgan Stanley",
+          "score": 343026139136.0,
+          "ticker": "MS.US"
+        },
+        {
+          "also_known_as": [
+            "0R1G.LSE",
+            "HDI.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 4.5522,
+              "eps_diluted": 14.29,
+              "market_cap_usd": 336905797632.0,
+              "net_income_usd": 14012000000.0,
+              "net_margin": 0.0841,
+              "normalized_pe": 24.044090610334,
+              "revenue_usd": 166592000000.0,
+              "roa": 0.1299
+            }
+          },
+          "head_listing_id": 20195,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 37.9634969420738,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 23.617215
+              },
+              "roe": {
+                "cohort_benchmark": 0.208862619238371,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 1.0099
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The Home Depot Inc",
+          "score": 336905797632.0,
+          "ticker": "HD.US"
+        },
+        {
+          "also_known_as": [
+            "PRG.XETRA",
+            "0NOF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6477,
+              "eps_diluted": 6.62,
+              "market_cap_usd": 334037516288.0,
+              "net_income_usd": 16045000000.0,
+              "net_margin": 0.1844,
+              "normalized_pe": 20.818791915737,
+              "revenue_usd": 87033000000.0,
+              "roa": 0.1268
+            }
+          },
+          "head_listing_id": 34076,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 30.7331366114541,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 21.669184
+              },
+              "roe": {
+                "cohort_benchmark": 0.214488117367272,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.2967
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Procter & Gamble Company",
+          "score": 334037516288.0,
+          "ticker": "PG.US"
+        },
+        {
+          "also_known_as": [
+            "NFLX06.BK",
+            "NFLX80.BK",
+            "0QYI.LSE",
+            "NFC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4746,
+              "eps_diluted": 3.18,
+              "market_cap_usd": 316542681088.0,
+              "net_income_usd": 13649642000.0,
+              "net_margin": 0.2822,
+              "normalized_pe": 23.1905482274187,
+              "revenue_usd": 48370764000.0,
+              "roa": 0.2335
+            }
+          },
+          "head_listing_id": 30925,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 25.2348160920265,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 24.455975
+              },
+              "roe": {
+                "cohort_benchmark": 0.277448036702763,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.4527
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Netflix Inc",
+          "score": 316542681088.0,
+          "ticker": "NFLX.US"
+        },
+        {
+          "also_known_as": [
+            "0R3G.LSE",
+            "GSUS06.BK",
+            "GOS.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 3.5407,
+              "eps_diluted": 64.76,
+              "market_cap_usd": 302955102208.0,
+              "net_income_usd": 18068000000.0,
+              "net_margin": 0.2989,
+              "normalized_pe": 16.4435133134952,
+              "revenue_usd": 60448000000.0,
+              "roa": 0.0088
+            }
+          },
+          "head_listing_id": 19383,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 18.1220555753456,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 16.066553
+              },
+              "roe": {
+                "cohort_benchmark": 0.132450715779739,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1472
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Goldman Sachs Group Inc",
+          "score": 302955102208.0,
+          "ticker": "GS.US"
+        },
+        {
+          "also_known_as": [
+            "GEV80.BK",
+            "GEV23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2337,
+              "eps_diluted": 34.88,
+              "market_cap_usd": 267540086784.0,
+              "net_income_usd": 9529000000.0,
+              "net_margin": 0.2304,
+              "normalized_pe": 50.4297840834539,
+              "revenue_usd": 41367000000.0,
+              "roa": 0.1179
+            }
+          },
+          "head_listing_id": 18244,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 35.3645573249105,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 30.934633
+              },
+              "roe": {
+                "cohort_benchmark": 0.188345944749005,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.7969
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GE Vernova LLC",
+          "score": 267540086784.0,
+          "ticker": "GEV.US"
+        },
+        {
+          "also_known_as": [
+            "AMGN06.BK",
+            "0R0T.LSE",
+            "AMG.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 4.9028,
+              "eps_diluted": 16.1,
+              "market_cap_usd": 230076481536.0,
+              "net_income_usd": 8743000000.0,
+              "net_margin": 0.2295,
+              "normalized_pe": 26.3155074386366,
+              "revenue_usd": 38095000000.0,
+              "roa": 0.0914
+            }
+          },
+          "head_listing_id": 1915,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 26.048447
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.748
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amgen Inc",
+          "score": 230076481536.0,
+          "ticker": "AMGN.US"
+        },
+        {
+          "also_known_as": [
+            "0R0H.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.8077,
+              "eps_diluted": 18.58,
+              "market_cap_usd": 217795936256.0,
+              "net_income_usd": 6967000000.0,
+              "net_margin": 0.1504,
+              "normalized_pe": 30.0248126404657,
+              "revenue_usd": 46336000000.0,
+              "roa": 0.0616
+            }
+          },
+          "head_listing_id": 43728,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 31.702906
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1323
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Thermo Fisher Scientific Inc",
+          "score": 217795936256.0,
+          "ticker": "TMO.US"
+        },
+        {
+          "also_known_as": [
+            "0Q15.LSE",
+            "ABL.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.654,
+              "eps_diluted": 3.09,
+              "market_cap_usd": 196267507712.0,
+              "net_income_usd": 6276000000.0,
+              "net_margin": 0.1391,
+              "normalized_pe": 31.4878551185591,
+              "revenue_usd": 45134000000.0,
+              "roa": 0.0568
+            }
+          },
+          "head_listing_id": 406,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 35.718447
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1206
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Abbott Laboratories",
+          "score": 196267507712.0,
+          "ticker": "ABT.US"
+        },
+        {
+          "also_known_as": [
+            "PEP80.BK",
+            "0QOS.LSE",
+            "PEP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 2.4081,
+              "eps_diluted": 7.63,
+              "market_cap_usd": 191417581568.0,
+              "net_income_usd": 10451000000.0,
+              "net_margin": 0.1078,
+              "normalized_pe": 18.1343387483533,
+              "revenue_usd": 96904000000.0,
+              "roa": 0.0932
+            }
+          },
+          "head_listing_id": 33895,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 30.7331366114541,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 18.365662
+              },
+              "roe": {
+                "cohort_benchmark": 0.214488117367272,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.4729
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PepsiCo Inc",
+          "score": 191417581568.0,
+          "ticker": "PEP.US"
+        },
+        {
+          "also_known_as": [
+            "NEE80.BK",
+            "0K80.LSE",
+            "NEE-P-T.US",
+            "NEE-P-U.US",
+            "NEE-PS.US"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.929,
+              "eps_diluted": 4.45,
+              "market_cap_usd": 179853049856.0,
+              "net_income_usd": 9299000000.0,
+              "net_margin": 0.324,
+              "normalized_pe": 20.9869452135712,
+              "revenue_usd": 28701000000.0,
+              "roa": 0.0399
+            }
+          },
+          "head_listing_id": 30785,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 20.5109453427297,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 19.375281
+              },
+              "roe": {
+                "cohort_benchmark": 0.123351677881068,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1628
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Nextera Energy Inc",
+          "score": 179853049856.0,
+          "ticker": "NEE.US"
+        },
+        {
+          "also_known_as": [
+            "0QZF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1633,
+              "eps_diluted": 24.276762,
+              "market_cap_usd": 178885984256.0,
+              "net_income_usd": 6486000000.0,
+              "net_margin": 0.5507,
+              "normalized_pe": 26.6038569834708,
+              "revenue_usd": 11777000000.0,
+              "roa": 0.4311
+            }
+          },
+          "head_listing_id": 47377,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 20.437651
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.67
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Western Digital Corporation",
+          "score": 178885984256.0,
+          "ticker": "WDC.US"
+        },
+        {
+          "also_known_as": [
+            "0R2E.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.5077,
+              "eps_diluted": 12.35,
+              "market_cap_usd": 177474109440.0,
+              "net_income_usd": 7330000000.0,
+              "net_margin": 0.2885,
+              "normalized_pe": 24.2120203874488,
+              "revenue_usd": 25410000000.0,
+              "roa": 0.1029
+            }
+          },
+          "head_listing_id": 45242,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 35.3645573249105,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 24.189474
+              },
+              "roe": {
+                "cohort_benchmark": 0.188345944749005,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.3546
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Union Pacific Corporation",
+          "score": 177474109440.0,
+          "ticker": "UNP.US"
+        },
+        {
+          "also_known_as": [
+            "0LCE.LSE",
+            "TJX.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.3631,
+              "eps_diluted": 5.14,
+              "market_cap_usd": 166644662272.0,
+              "net_income_usd": 5790000000.0,
+              "net_margin": 0.094,
+              "normalized_pe": 28.7814615322971,
+              "revenue_usd": 61584000000.0,
+              "roa": 0.1601
+            }
+          },
+          "head_listing_id": 43467,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 37.9634969420738,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 29.348249
+              },
+              "roe": {
+                "cohort_benchmark": 0.208862619238371,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.5566
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The TJX Companies Inc",
+          "score": 166644662272.0,
+          "ticker": "TJX.US"
+        },
+        {
+          "also_known_as": [
+            "0L8B.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6827,
+              "eps_diluted": 6.744391,
+              "market_cap_usd": 158567743488.0,
+              "net_income_usd": 5662400000.0,
+              "net_margin": 0.3587,
+              "normalized_pe": 28.0036280531224,
+              "revenue_usd": 15787500000.0,
+              "roa": 0.2347
+            }
+          },
+          "head_listing_id": 39214,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 36.625309658373,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 27.845361
+              },
+              "roe": {
+                "cohort_benchmark": 0.0888673094928848,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.4483
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Southern Copper Corporation",
+          "score": 158567743488.0,
+          "ticker": "SCCO.US"
+        },
+        {
+          "also_known_as": [
+            "UBER06.BK",
+            "0A1U.LSE",
+            "UT8.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.5393,
+              "eps_diluted": 4.56,
+              "market_cap_usd": 152497553408.0,
+              "net_income_usd": 9579000000.0,
+              "net_margin": 0.1734,
+              "normalized_pe": 16.210706406874,
+              "revenue_usd": 55227000000.0,
+              "roa": 0.1456
+            }
+          },
+          "head_listing_id": 44957,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 35.3645573249105,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 16.372807
+              },
+              "roe": {
+                "cohort_benchmark": 0.188345944749005,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.3507
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Uber Technologies Inc",
+          "score": 152497553408.0,
+          "ticker": "UBER.US"
+        },
+        {
+          "also_known_as": [
+            "ISRG01.BK",
+            "ISRG06.BK",
+            "ISRG19.BK",
+            "IUI1.XETRA",
+            "0R29.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0048810592459605,
+              "eps_diluted": 8.72,
+              "market_cap_usd": 140151209984.0,
+              "net_income_usd": 3138800000.0,
+              "net_margin": 0.2845,
+              "normalized_pe": 44.6512074627246,
+              "revenue_usd": 11034400000.0,
+              "roa": 0.1504
+            }
+          },
+          "head_listing_id": 23002,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 44.860092
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1728
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intuitive Surgical Inc",
+          "score": 140151209984.0,
+          "ticker": "ISRG.US"
+        },
+        {
+          "also_known_as": [
+            "LOM.XETRA",
+            "0R3E.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 2.3424,
+              "eps_diluted": 27.12,
+              "market_cap_usd": 140129222656.0,
+              "net_income_usd": 6287000000.0,
+              "net_margin": 0.0816,
+              "normalized_pe": 22.2887263648799,
+              "revenue_usd": 77014000000.0,
+              "roa": 0.1007
+            }
+          },
+          "head_listing_id": 26697,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 35.3645573249105,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 22.388274
+              },
+              "roe": {
+                "cohort_benchmark": 0.188345944749005,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.717
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lockheed Martin Corporation",
+          "score": 140129222656.0,
+          "ticker": "LMT.US"
+        },
+        {
+          "also_known_as": [
+            "0KOD.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6783,
+              "eps_diluted": 4.49,
+              "market_cap_usd": 136112242688.0,
+              "net_income_usd": 4208216000.0,
+              "net_margin": 0.4579,
+              "normalized_pe": 54.4405323235516,
+              "revenue_usd": 9189768000.0,
+              "roa": 0.0417
+            }
+          },
+          "head_listing_id": 34616,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.162834810668,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 31.184855
+              },
+              "roe": {
+                "cohort_benchmark": 0.0686660435348412,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.0783
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Prologis Inc",
+          "score": 136112242688.0,
+          "ticker": "PLD.US"
+        },
+        {
+          "also_known_as": [
+            "CELG-RI.US",
+            "BRM.XETRA",
+            "0R1F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 2.0186,
+              "eps_diluted": 4.54,
+              "market_cap_usd": 134921306112.0,
+              "net_income_usd": 9282000000.0,
+              "net_margin": 0.1887,
+              "normalized_pe": 12.7958044260579,
+              "revenue_usd": 49187000000.0,
+              "roa": 0.1059
+            }
+          },
+          "head_listing_id": 4989,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 14.235683
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.4159
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Bristol-Myers Squibb Company",
+          "score": 134921306112.0,
+          "ticker": "BMY.US"
+        },
+        {
+          "also_known_as": [
+            "0QZU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0977,
+              "eps_diluted": 17.17,
+              "market_cap_usd": 133875531776.0,
+              "net_income_usd": 4405200000.0,
+              "net_margin": 0.35,
+              "normalized_pe": 30.4316710342102,
+              "revenue_usd": 12587200000.0,
+              "roa": 0.1606
+            }
+          },
+          "head_listing_id": 46555,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 30.762376
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.2176
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vertex Pharmaceuticals Inc",
+          "score": 133875531776.0,
+          "ticker": "VRTX.US"
+        },
+        {
+          "also_known_as": [
+            "0R2S.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6229,
+              "eps_diluted": 9.65,
+              "market_cap_usd": 127104598016.0,
+              "net_income_usd": 3729000000.0,
+              "net_margin": 0.1443,
+              "normalized_pe": 33.4811709638559,
+              "revenue_usd": 25837000000.0,
+              "roa": 0.0778
+            }
+          },
+          "head_listing_id": 42278,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 61.9182083344244,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 34.33886
+              },
+              "roe": {
+                "cohort_benchmark": 0.0930557036359491,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.1555
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Stryker Corporation",
+          "score": 127104598016.0,
+          "ticker": "SYK.US"
+        },
+        {
+          "also_known_as": [
+            "NEM06.BK",
+            "NEM23.BK",
+            "0R28.LSE",
+            "NMM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1588,
+              "eps_diluted": 7.93,
+              "market_cap_usd": 122207232000.0,
+              "net_income_usd": 8597000000.0,
+              "net_margin": 0.3336,
+              "normalized_pe": 13.0485631947655,
+              "revenue_usd": 25767000000.0,
+              "roa": 0.1491
+            }
+          },
+          "head_listing_id": 30817,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 36.625309658373,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 14.625473
+              },
+              "roe": {
+                "cohort_benchmark": 0.0888673094928848,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.2439
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Newmont Goldcorp Corp",
+          "score": 122207232000.0,
+          "ticker": "NEM.US"
+        },
+        {
+          "also_known_as": [
+            "0KOC.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.227451109718695,
+              "eps_diluted": 19.93,
+              "market_cap_usd": 120477671424.0,
+              "net_income_usd": 11695000000.0,
+              "net_margin": 0.1285,
+              "normalized_pe": 10.3016392837965,
+              "revenue_usd": 91019000000.0,
+              "roa": 0.0936
+            }
+          },
+          "head_listing_id": 34190,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 18.1220555753456,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 10.397893
+              },
+              "roe": {
+                "cohort_benchmark": 0.132450715779739,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.3406
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Progressive Corp",
+          "score": 120477671424.0,
+          "ticker": "PGR.US"
+        },
+        {
+          "also_known_as": [
+            "0HJI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.8739,
+              "eps_diluted": 10.94,
+              "market_cap_usd": 106986831872.0,
+              "net_income_usd": 4413400000.0,
+              "net_margin": 0.2011,
+              "normalized_pe": 24.2535970885302,
+              "revenue_usd": 21947500000.0,
+              "roa": 0.0698
+            }
+          },
+          "head_listing_id": 805,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 35.3645573249105,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 24.319927
+              },
+              "roe": {
+                "cohort_benchmark": 0.188345944749005,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.7318
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Automatic Data Processing Inc",
+          "score": 106986831872.0,
+          "ticker": "ADP.US"
+        },
+        {
+          "also_known_as": [
+            "ADBE03.BK",
+            "ADBE06.BK",
+            "ADB.XETRA",
+            "0R2Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6134,
+              "eps_diluted": 17.48,
+              "market_cap_usd": 104598159360.0,
+              "net_income_usd": 7229000000.0,
+              "net_margin": 0.2869,
+              "normalized_pe": 14.5356377730675,
+              "revenue_usd": 25198000000.0,
+              "roa": 0.2415
+            }
+          },
+          "head_listing_id": 733,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 14.533181
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.6276
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Adobe Systems Incorporated",
+          "score": 104598159360.0,
+          "ticker": "ADBE.US"
+        },
+        {
+          "also_known_as": [
+            "APPL03.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.1113,
+              "eps_diluted": 13.01,
+              "market_cap_usd": 103220781056.0,
+              "net_income_usd": 4409965000.0,
+              "net_margin": 0.6458,
+              "normalized_pe": 23.4063275645631,
+              "revenue_usd": 6829124000.0,
+              "roa": 0.5333
+            }
+          },
+          "head_listing_id": 2373,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 41.6517839591187,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 23.980015
+              },
+              "roe": {
+                "cohort_benchmark": 0.35592230622922,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 1.3942
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Applovin Corp",
+          "score": 103220781056.0,
+          "ticker": "APP.US"
+        },
+        {
+          "also_known_as": [
+            "0JYA.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.7976,
+              "eps_diluted": 28.84,
+              "market_cap_usd": 102840836096.0,
+              "net_income_usd": 8554000000.0,
+              "net_margin": 0.0557,
+              "normalized_pe": 12.2212138707169,
+              "revenue_usd": 153577000000.0,
+              "roa": 0.0907
+            }
+          },
+          "head_listing_id": 29412,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 16.098300317621,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 12.697989
+              },
+              "roe": {
+                "cohort_benchmark": 0.175262764281728,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.4484
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Marathon Petroleum Corp",
+          "score": 102840836096.0,
+          "ticker": "MPC.US"
+        },
+        {
+          "also_known_as": [
+            "0LK6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4539,
+              "eps_diluted": 23.98,
+              "market_cap_usd": 100789002240.0,
+              "net_income_usd": 7212000000.0,
+              "net_margin": 0.0517,
+              "normalized_pe": 13.9751805657238,
+              "revenue_usd": 139397000000.0,
+              "roa": 0.1115
+            }
+          },
+          "head_listing_id": 46239,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 16.098300317621,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 14.597581
+              },
+              "roe": {
+                "cohort_benchmark": 0.175262764281728,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.2885
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Valero Energy Corporation",
+          "score": 100789002240.0,
+          "ticker": "VLO.US"
+        },
+        {
+          "also_known_as": [
+            "0KHZ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6527,
+              "eps_diluted": 17.52,
+              "market_cap_usd": 97157611520.0,
+              "net_income_usd": 7093000000.0,
+              "net_margin": 0.0466,
+              "normalized_pe": 15.7774163016324,
+              "revenue_usd": 152167000000.0,
+              "roa": 0.0867
+            }
+          },
+          "head_listing_id": 35809,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 16.098300317621,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 13.897831
+              },
+              "roe": {
+                "cohort_benchmark": 0.175262764281728,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.2251
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Phillips 66",
+          "score": 97157611520.0,
+          "ticker": "PSX.US"
+        },
+        {
+          "also_known_as": [
+            "0A79.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.3955,
+              "eps_diluted": 1.89,
+              "market_cap_usd": 96724697088.0,
+              "net_income_usd": 1568000000.0,
+              "net_margin": 0.0626,
+              "normalized_pe": 61.25460532722,
+              "revenue_usd": 25058000000.0,
+              "roa": 0.1078
+            }
+          },
+          "head_listing_id": 9222,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 37.9634969420738,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 37.084656
+              },
+              "roe": {
+                "cohort_benchmark": 0.208862619238371,
+                "cohort_scope": "own_sector",
+                "kind": "cohort",
+                "value": 0.3893
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Carvana Co",
+          "score": 96724697088.0,
+          "ticker": "CVNA.US"
+        }
+      ],
+      "sort": "ta",
+      "universe": 126,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 41,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 41 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "US large-cap, each stock judged against ITS OWN sector cohort (vs_cohort own=true): P/E below the sector average AND ROE above the sector average — intersected. 41 matches from a 126-stock US-large-cap universe. Each row shows its own cohort benchmark, e.g. NVIDIA P/E 33.7 vs its sector avg 41.7 (cheaper) and ROE 82% vs sector avg 36% (more profitable). Other hits: Apple, Alphabet, Eli Lilly, Micron, JPMorgan, J&J, Oracle. Peer-relative on both legs, not fixed thresholds."
+}

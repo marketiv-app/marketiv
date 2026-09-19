@@ -1,0 +1,23 @@
+{
+  "id": "ma-05",
+  "question": "What crypto is really oversold right now — RSI below 30?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["RSI below 30 oversold"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"anchor": [{"pattern": "oversold", "a": "rsi"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=2154. Top results: PLSPAD-USD.CC (RSI 15.1), TITANX-USD.CC (RSI 0.33), KAITO-USD.CC (RSI 28.4), OPSEC-USD.CC (RSI 12.3), SATS28194-USD.CC (RSI 0.0), TABOO-USD.CC (RSI 12.2), DPR-USD.CC (RSI 27.5), IKA37454-USD.CC (RSI 28.8), MV-USD.CC (RSI 5.3), ONE-USD.CC (RSI 18.2). All RSI values confirmed <30. All tickers are .CC crypto.",
+  "verdict": "PASS",
+  "reason": "Returns crypto-only assets (.CC suffix confirmed), all RSI values confirmed below 30, oversold state correctly identified. No stocks or forex contamination.",
+  "defects": []
+}

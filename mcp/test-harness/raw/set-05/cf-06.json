@@ -1,0 +1,1869 @@
+{
+  "id": "cf-06",
+  "question": "I'm looking for large-cap value stocks — high free cash flow yield — that are coming out of a long volatility squeeze and starting to move up.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "fcf_yield",
+            "pattern": "high"
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "squeeze_fired_up"
+              }
+            ]
+          }
+        ],
+        "size": [
+          "large"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 20,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "atr_pct": {
+            "definition": "Average True Range ÷ price — volatility as a fraction of price."
+          },
+          "bb_width": {
+            "definition": "Bollinger-band width ÷ mid — lower = tighter (a squeeze)."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NEM06.BK",
+            "NEM23.BK",
+            "0R28.LSE",
+            "NMM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.008795,
+              "fcf_margin": 0.3777,
+              "free_cash_flow_usd": 9733000000.0,
+              "market_cap_usd": 122207232000.0,
+              "net_margin": 0.3336,
+              "pe": 14.625473,
+              "revenue_usd": 25767000000.0
+            },
+            "ta": {
+              "adx": 34.8038,
+              "atr_pct": 0.0347,
+              "bb_width": 0.4703
+            }
+          },
+          "head_listing_id": 30817,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.079244
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.413,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Newmont Goldcorp Corp",
+          "score": 0.413,
+          "ticker": "NEM.US"
+        },
+        {
+          "also_known_as": [
+            "0JYA.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.010677,
+              "fcf_margin": 0.084,
+              "free_cash_flow_usd": 12899000000.0,
+              "market_cap_usd": 102840836096.0,
+              "net_margin": 0.0557,
+              "pe": 12.697989,
+              "revenue_usd": 153577000000.0
+            },
+            "ta": {
+              "adx": 41.7707,
+              "atr_pct": 0.0293,
+              "bb_width": 0.3078
+            }
+          },
+          "head_listing_id": 29412,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.124463
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.335,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Marathon Petroleum Corp",
+          "score": 0.335,
+          "ticker": "MPC.US"
+        },
+        {
+          "also_known_as": [
+            "0MJK.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.006198,
+              "fcf_margin": 0.4947,
+              "free_cash_flow_usd": 7718987600.0,
+              "market_cap_usd": 54953474800.435196,
+              "net_margin": 0.2811,
+              "pe": 13.534676,
+              "revenue_usd": 15603594200.0
+            },
+            "ta": {
+              "adx": 16.2916,
+              "atr_pct": 0.0196,
+              "bb_width": 0.1086
+            }
+          },
+          "head_listing_id": 241918,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.143779
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.273,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Erste Group Bank AG",
+          "score": 0.273,
+          "ticker": "EBO.XETRA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.006088,
+              "fcf_margin": 0.306892016823136,
+              "free_cash_flow_usd": 3002726.3924986,
+              "market_cap_usd": 21339500.000000004,
+              "net_margin": 0.0283337022617482,
+              "pe": 78.391623,
+              "revenue_usd": 9784309.22896601
+            },
+            "ta": {
+              "adx": 15.1423,
+              "atr_pct": 0.0273,
+              "bb_width": 0.1191
+            }
+          },
+          "head_listing_id": 51433,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.136662
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.265,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Macau E And M Holding Ltd",
+          "score": 0.265,
+          "ticker": "1408.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.00789,
+              "fcf_margin": 0.4273269993267,
+              "free_cash_flow_usd": 691380581.7288,
+              "market_cap_usd": 7508840585.216001,
+              "net_margin": 0.4952,
+              "pe": 9.125659,
+              "revenue_usd": 1678156740.27809
+            },
+            "ta": {
+              "adx": 26.1798,
+              "atr_pct": 0.0278,
+              "bb_width": 0.2182
+            }
+          },
+          "head_listing_id": 236553,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.092761
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.26,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Lion Finance Group PLC",
+          "score": 0.26,
+          "ticker": "BGEO.LSE"
+        },
+        {
+          "also_known_as": [
+            "1919.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.089735,
+              "fcf_margin": 0.0935301235438721,
+              "free_cash_flow_usd": 2935821174.0,
+              "market_cap_usd": 36842861800.652794,
+              "net_margin": 0.140588228071946,
+              "pe": 8.237374,
+              "revenue_usd": 31389044115.0
+            },
+            "ta": {
+              "adx": 36.1502,
+              "atr_pct": 0.0208,
+              "bb_width": 0.164
+            }
+          },
+          "head_listing_id": 229271,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.08221
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.243,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "COSCO SHIPPING Holdings Co Ltd",
+          "score": 0.243,
+          "ticker": "601919.CG"
+        },
+        {
+          "also_known_as": [
+            "2142.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.037279,
+              "fcf_margin": 3.22875944295274,
+              "free_cash_flow_usd": 34458815000.0,
+              "market_cap_usd": 31808068429.4144,
+              "net_margin": 0.4008,
+              "pe": 7.29932,
+              "revenue_usd": 10794670000.0
+            },
+            "ta": {
+              "adx": 26.3275,
+              "atr_pct": 0.0216,
+              "bb_width": 0.1017
+            }
+          },
+          "head_listing_id": 231292,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 1.117973
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.242,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bank of Ningbo Co Ltd",
+          "score": 0.242,
+          "ticker": "002142.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.055556,
+              "fcf_margin": 0.0796,
+              "free_cash_flow_usd": 1377317339.9,
+              "market_cap_usd": 4559382560.768,
+              "net_margin": 0.0382,
+              "pe": 12.162162,
+              "revenue_usd": 17304270544.7
+            },
+            "ta": {
+              "adx": 32.121,
+              "atr_pct": 0.0201,
+              "bb_width": 0.1251
+            }
+          },
+          "head_listing_id": 49540,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.26219
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.227,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Charoen Pokphand Foods Public Company Limited",
+          "score": 0.227,
+          "ticker": "CPF.BK"
+        },
+        {
+          "also_known_as": [
+            "GIS.XETRA",
+            "0QYQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.023179,
+              "fcf_margin": 0.425,
+              "free_cash_flow_usd": 12943000000.0,
+              "market_cap_usd": 177859182592.0,
+              "net_margin": -0.1064,
+              "pe": 17.859864,
+              "revenue_usd": 30456000000.0
+            },
+            "ta": {
+              "adx": 31.8922,
+              "atr_pct": 0.0267,
+              "bb_width": 0.1626
+            }
+          },
+          "head_listing_id": 18517,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.075076
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.225,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Gilead Sciences Inc",
+          "score": 0.225,
+          "ticker": "GILD.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.009396,
+              "fcf_margin": 0.14146823074516,
+              "free_cash_flow_usd": 643656299.0,
+              "market_cap_usd": 6337653690.368001,
+              "net_margin": 0.0789508422356007,
+              "pe": 17.086813,
+              "revenue_usd": 4549829284.0
+            },
+            "ta": {
+              "adx": 17.6066,
+              "atr_pct": 0.0522,
+              "bb_width": 0.1533
+            }
+          },
+          "head_listing_id": 51933,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.105622
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.221,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "AAC Technologies Holdings Inc",
+          "score": 0.221,
+          "ticker": "2018.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.008559,
+              "fcf_margin": 0.1655,
+              "free_cash_flow_usd": 1375958236.45275,
+              "market_cap_usd": 11177937795.4816,
+              "net_margin": 0.0279,
+              "pe": 50.045181,
+              "revenue_usd": 8314240278.79635
+            },
+            "ta": {
+              "adx": 18.3917,
+              "atr_pct": 0.0489,
+              "bb_width": 0.282
+            }
+          },
+          "head_listing_id": 228666,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.125897
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.213,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "China Shipbuilding Industry Group Power Co Ltd",
+          "score": 0.213,
+          "ticker": "600482.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.03127,
+              "fcf_margin": 0.160818185112447,
+              "free_cash_flow_usd": 4110000300.0,
+              "market_cap_usd": 16156557164.7963,
+              "net_margin": 0.0936862233421428,
+              "pe": 7.030838,
+              "revenue_usd": 25556813100.0
+            },
+            "ta": {
+              "adx": 19.5475,
+              "atr_pct": 0.0252,
+              "bb_width": 0.1228
+            }
+          },
+          "head_listing_id": 574504,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.244149
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.193,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kansai Electric Power Company, Incorporated",
+          "score": 0.193,
+          "ticker": "9503.JP"
+        },
+        {
+          "also_known_as": [
+            "SINOBIO19.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.024201,
+              "fcf_margin": 0.238385866296954,
+              "free_cash_flow_usd": 1085211556.0,
+              "market_cap_usd": 10857821149.593601,
+              "net_margin": 0.0736103561646727,
+              "pe": 31.736744,
+              "revenue_usd": 4552331784.0
+            },
+            "ta": {
+              "adx": 22.7864,
+              "atr_pct": 0.0436,
+              "bb_width": 0.2106
+            }
+          },
+          "head_listing_id": 51241,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.102646
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.191,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Sino Biopharmaceutical Ltd",
+          "score": 0.191,
+          "ticker": "1177.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.023753,
+              "fcf_margin": 2.0681,
+              "free_cash_flow_usd": 1232341836.6071,
+              "market_cap_usd": 6169346818.047999,
+              "net_margin": 0.4121,
+              "pe": 20.292683,
+              "revenue_usd": 595879835.71945
+            },
+            "ta": {
+              "adx": 9.9832,
+              "atr_pct": 0.0482,
+              "bb_width": 0.1287
+            }
+          },
+          "head_listing_id": 229017,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.203316
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.175,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Huaan Securities Co Ltd",
+          "score": 0.175,
+          "ticker": "600909.CG"
+        },
+        {
+          "also_known_as": [
+            "TM5.XETRA",
+            "0R2L.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.02156,
+              "fcf_margin": 0.1761,
+              "free_cash_flow_usd": 16236000000.0,
+              "market_cap_usd": 196030742528.0,
+              "net_margin": 0.1145,
+              "pe": 19.116109,
+              "revenue_usd": 92189000000.0
+            },
+            "ta": {
+              "adx": 12.8559,
+              "atr_pct": 0.0289,
+              "bb_width": 0.075
+            }
+          },
+          "head_listing_id": 43753,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.082658
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.169,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "T-Mobile US Inc",
+          "score": 0.169,
+          "ticker": "TMUS.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.035294,
+              "fcf_margin": 0.05,
+              "free_cash_flow_usd": 1542493225.4228,
+              "market_cap_usd": 12338310283.264,
+              "net_margin": 0.0296,
+              "pe": 14.253049,
+              "revenue_usd": 30829541547.9879
+            },
+            "ta": {
+              "adx": 15.5022,
+              "atr_pct": 0.0174,
+              "bb_width": 0.0846
+            }
+          },
+          "head_listing_id": 49537,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.120607
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.165,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CP ALL Public Company Limited",
+          "score": 0.165,
+          "ticker": "CPALL.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.012458,
+              "fcf_margin": 0.6499,
+              "free_cash_flow_usd": 562999006.73555,
+              "market_cap_usd": 6053417504.768,
+              "net_margin": 0.3841,
+              "pe": 14.241935,
+              "revenue_usd": 866302242.5409
+            },
+            "ta": {
+              "adx": 13.3476,
+              "atr_pct": 0.032,
+              "bb_width": 0.1001
+            }
+          },
+          "head_listing_id": 229113,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.094691
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.163,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Caitong Securities Co Ltd",
+          "score": 0.163,
+          "ticker": "601108.CG"
+        },
+        {
+          "also_known_as": [
+            "SANOFI80.BK",
+            "SNY.US",
+            "0A2V.LSE",
+            "SNW.XETRA",
+            "0O59.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.053045,
+              "fcf_margin": 0.1722,
+              "free_cash_flow_usd": 9621892800.0,
+              "market_cap_usd": 107375002476.54399,
+              "net_margin": 0.0809,
+              "pe": 23.752294,
+              "revenue_usd": 55875281800.0
+            },
+            "ta": {
+              "adx": 13.4983,
+              "atr_pct": 0.0202,
+              "bb_width": 0.1002
+            }
+          },
+          "head_listing_id": 1753476,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.089333
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.161,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Sanofi SA",
+          "score": 0.161,
+          "ticker": "SAN.PA"
+        },
+        {
+          "also_known_as": [
+            "0UNI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.017446,
+              "fcf_margin": 0.438719238988075,
+              "free_cash_flow_usd": 10601247400.0,
+              "market_cap_usd": 111033073664.0,
+              "net_margin": 0.3161,
+              "pe": 17.045266,
+              "revenue_usd": 22870214300.0
+            },
+            "ta": {
+              "adx": 24.2579,
+              "atr_pct": 0.0205,
+              "bb_width": 0.0789
+            }
+          },
+          "head_listing_id": 7710,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.091606
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.161,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Canadian Imperial Bank Of Commerce",
+          "score": 0.161,
+          "ticker": "CM.US"
+        },
+        {
+          "also_known_as": [
+            "DB.US",
+            "0H7D.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.030483,
+              "fcf_margin": 1.45241284775227,
+              "free_cash_flow_usd": 54765688700.0,
+              "market_cap_usd": 71127085459.8656,
+              "net_margin": 0.2203,
+              "pe": 9.981258,
+              "revenue_usd": 37549825000.0
+            },
+            "ta": {
+              "adx": 24.0051,
+              "atr_pct": 0.0202,
+              "bb_width": 0.0678
+            }
+          },
+          "head_listing_id": 241763,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.756336
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.159,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Deutsche Bank Aktiengesellschaft",
+          "score": 0.159,
+          "ticker": "DBK.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0UKH.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.018723,
+              "fcf_margin": 0.235768303831131,
+              "free_cash_flow_usd": 13047972300.0,
+              "market_cap_usd": 127875072000.0,
+              "net_margin": 0.2592,
+              "pe": 19.805727,
+              "revenue_usd": 27638493100.0
+            },
+            "ta": {
+              "adx": 30.3575,
+              "atr_pct": 0.0194,
+              "bb_width": 0.0847
+            }
+          },
+          "head_listing_id": 4944,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.098114
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.158,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bank of Montreal",
+          "score": 0.158,
+          "ticker": "BMO.US"
+        },
+        {
+          "also_known_as": [
+            "0UKI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.02531,
+              "fcf_margin": 0.136399169744184,
+              "free_cash_flow_usd": 20299791000.0,
+              "market_cap_usd": 111562924032.0,
+              "net_margin": 0.2486,
+              "pe": 17.536534,
+              "revenue_usd": 28276128900.0
+            },
+            "ta": {
+              "adx": 23.0235,
+              "atr_pct": 0.0173,
+              "bb_width": 0.0682
+            }
+          },
+          "head_listing_id": 5049,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.176761
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.153,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bank of Nova Scotia",
+          "score": 0.153,
+          "ticker": "BNS.US"
+        },
+        {
+          "also_known_as": [
+            "0939.HK",
+            "00939.TW"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.052782,
+              "fcf_margin": 2.73122452225741,
+              "free_cash_flow_usd": 306768670000.0,
+              "market_cap_usd": 404635364700.9792,
+              "net_margin": 0.4161,
+              "pe": 8.023077,
+              "revenue_usd": 114957450000.0
+            },
+            "ta": {
+              "adx": 23.4532,
+              "atr_pct": 0.0222,
+              "bb_width": 0.1032
+            }
+          },
+          "head_listing_id": 229276,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.77539
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.153,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "China Construction Bank Co",
+          "score": 0.153,
+          "ticker": "601939.CG"
+        },
+        {
+          "also_known_as": [
+            "HTHT.US"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.058793,
+              "fcf_margin": 0.2799,
+              "free_cash_flow_usd": 1051540000.0,
+              "market_cap_usd": 14221807085.158401,
+              "net_margin": 0.1931,
+              "pe": 17.768601,
+              "revenue_usd": 3756660000.0
+            },
+            "ta": {
+              "adx": 18.6945,
+              "atr_pct": 0.0308,
+              "bb_width": 0.2509
+            }
+          },
+          "head_listing_id": 51242,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.083998
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.152,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Huazhu Group Ltd",
+          "score": 0.152,
+          "ticker": "1179.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.033759,
+              "fcf_margin": 0.222294781570133,
+              "free_cash_flow_usd": 2995920900.0,
+              "market_cap_usd": 26212106163.0456,
+              "net_margin": 0.136279388288859,
+              "pe": 14.243003,
+              "revenue_usd": 13477243500.0
+            },
+            "ta": {
+              "adx": 23.3165,
+              "atr_pct": 0.0254,
+              "bb_width": 0.133
+            }
+          },
+          "head_listing_id": 574962,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.114886
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.151,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Astellas Pharma Inc.",
+          "score": 0.151,
+          "ticker": "4503.JP"
+        },
+        {
+          "also_known_as": [
+            "0LK6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.013512,
+              "fcf_margin": 0.0726,
+              "free_cash_flow_usd": 10120000000.0,
+              "market_cap_usd": 100789002240.0,
+              "net_margin": 0.0517,
+              "pe": 14.597581,
+              "revenue_usd": 139397000000.0
+            },
+            "ta": {
+              "adx": 31.8471,
+              "atr_pct": 0.0309,
+              "bb_width": 0.2376
+            }
+          },
+          "head_listing_id": 46239,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.100407
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.15,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Valero Energy Corporation",
+          "score": 0.15,
+          "ticker": "VLO.US"
+        },
+        {
+          "also_known_as": [
+            "0998.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.051087,
+              "fcf_margin": 1.91314733512722,
+              "free_cash_flow_usd": 59371265000.0,
+              "market_cap_usd": 64449506131.967995,
+              "net_margin": 0.342,
+              "pe": 6.508333,
+              "revenue_usd": 31292015000.0
+            },
+            "ta": {
+              "adx": 37.4852,
+              "atr_pct": 0.0242,
+              "bb_width": 0.1713
+            }
+          },
+          "head_listing_id": 229295,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.942171
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.145,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "China Citic Bank Corp Ltd Class A",
+          "score": 0.145,
+          "ticker": "601998.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.128205,
+              "fcf_margin": 0.1822,
+              "free_cash_flow_usd": 741194418.6816,
+              "market_cap_usd": 7284338370.150399,
+              "net_margin": 0.058,
+              "pe": 42.282051,
+              "revenue_usd": 4067573590.70725
+            },
+            "ta": {
+              "adx": 25.1453,
+              "atr_pct": 0.0427,
+              "bb_width": 0.1724
+            }
+          },
+          "head_listing_id": 229224,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.103626
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.128,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shanxi LuAn Environmental Energy Development Co Ltd",
+          "score": 0.128,
+          "ticker": "601699.CG"
+        },
+        {
+          "also_known_as": [
+            "0HT4.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.01445,
+              "fcf_margin": 0.4795,
+              "free_cash_flow_usd": 29701000000.0,
+              "market_cap_usd": 135868489728.0,
+              "net_margin": 0.1698,
+              "pe": 11.754246,
+              "revenue_usd": 61938000000.0
+            },
+            "ta": {
+              "adx": 18.9931,
+              "atr_pct": 0.025,
+              "bb_width": 0.0918
+            }
+          },
+          "head_listing_id": 8197,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.218621
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.125,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Capital One Financial Corporation",
+          "score": 0.125,
+          "ticker": "COF.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.038204,
+              "fcf_margin": 0.172882191436461,
+              "free_cash_flow_usd": 1109159100.0,
+              "market_cap_usd": 12292388332.308,
+              "net_margin": 0.130587884096453,
+              "pe": 14.927288,
+              "revenue_usd": 6415693200.0
+            },
+            "ta": {
+              "adx": 36.6248,
+              "atr_pct": 0.0268,
+              "bb_width": 0.2661
+            }
+          },
+          "head_listing_id": 573460,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.088675
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.121,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kawasaki Kisen Kaisha, Ltd.",
+          "score": 0.121,
+          "ticker": "9107.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.063924,
+              "fcf_margin": 0.1429,
+              "free_cash_flow_usd": 4077889031.9851,
+              "market_cap_usd": 18393492452.147198,
+              "net_margin": 0.0351816468065166,
+              "pe": 14.03125,
+              "revenue_usd": 28532197621.9437
+            },
+            "ta": {
+              "adx": 27.3841,
+              "atr_pct": 0.0424,
+              "bb_width": 0.166
+            }
+          },
+          "head_listing_id": 228576,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.222456
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.12,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hengli Petrochemical Co Ltd",
+          "score": 0.12,
+          "ticker": "600346.CG"
+        },
+        {
+          "also_known_as": [
+            "BAC03.BK",
+            "NCB.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.01753,
+              "fcf_margin": 0.111523736261793,
+              "free_cash_flow_usd": 56567000000.0,
+              "market_cap_usd": 449144258560.0,
+              "net_margin": 0.2732,
+              "pe": 14.755196,
+              "revenue_usd": 116003000000.0
+            },
+            "ta": {
+              "adx": 32.0648,
+              "atr_pct": 0.0177,
+              "bb_width": 0.0653
+            }
+          },
+          "head_listing_id": 3570,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.124178
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.119,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bank of America Corp",
+          "score": 0.119,
+          "ticker": "BAC.US"
+        },
+        {
+          "also_known_as": [
+            "PETFF.US",
+            "PUTRF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.051852,
+              "fcf_margin": 0.0385,
+              "free_cash_flow_usd": 3165264857.781,
+              "market_cap_usd": 30052828289.4336,
+              "net_margin": 0.0345,
+              "pe": 12.461538,
+              "revenue_usd": 82295988286.1066
+            },
+            "ta": {
+              "adx": 25.9854,
+              "atr_pct": 0.018,
+              "bb_width": 0.0939
+            }
+          },
+          "head_listing_id": 49921,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.089879
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.11,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "PTT Public Company Limited",
+          "score": 0.11,
+          "ticker": "PTT.BK"
+        },
+        {
+          "also_known_as": [
+            "CPN-R.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.03609,
+              "fcf_margin": 0.7621,
+              "free_cash_flow_usd": 1186267950.3029,
+              "market_cap_usd": 9084721410.8672,
+              "net_margin": 0.3863,
+              "pe": 14.876957,
+              "revenue_usd": 1556587509.4935
+            },
+            "ta": {
+              "adx": 11.2479,
+              "atr_pct": 0.0193,
+              "bb_width": 0.087
+            }
+          },
+          "head_listing_id": 49544,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.12947
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.1,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Central Pattana Public Company Limited",
+          "score": 0.1,
+          "ticker": "CPN.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.014662,
+              "fcf_margin": 0.325508282892172,
+              "free_cash_flow_usd": 4175980200.0,
+              "market_cap_usd": 21169738829.0367,
+              "net_margin": 0.0951164967397806,
+              "pe": 17.877917,
+              "revenue_usd": 12829105800.0
+            },
+            "ta": {
+              "adx": 41.5908,
+              "atr_pct": 0.0282,
+              "bb_width": 0.2075
+            }
+          },
+          "head_listing_id": 571509,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.194106
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.097,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "LY Corporation",
+          "score": 0.097,
+          "ticker": "4689.JP"
+        },
+        {
+          "also_known_as": [
+            "201872.CS",
+            "0144.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.036668,
+              "fcf_margin": 0.2887,
+              "free_cash_flow_usd": 726743817.21925,
+              "market_cap_usd": 8241816700.518399,
+              "net_margin": 0.2629,
+              "pe": 11.652406,
+              "revenue_usd": 2517307050.049
+            },
+            "ta": {
+              "adx": 27.4477,
+              "atr_pct": 0.0284,
+              "bb_width": 0.0966
+            }
+          },
+          "head_listing_id": 231155,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.092677
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.096,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "China Merchants Port Group Co Ltd",
+          "score": 0.096,
+          "ticker": "001872.CS"
+        },
+        {
+          "also_known_as": [
+            "0728.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.0414,
+              "fcf_margin": 0.0980438440287107,
+              "free_cash_flow_usd": 7424560000.0,
+              "market_cap_usd": 89158242002.5344,
+              "net_margin": 0.0626653498477035,
+              "pe": 18.25,
+              "revenue_usd": 75726937000.0
+            },
+            "ta": {
+              "adx": 42.3871,
+              "atr_pct": 0.0261,
+              "bb_width": 0.086
+            }
+          },
+          "head_listing_id": 229230,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.08636
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.086,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "China Telecom Corp Ltd",
+          "score": 0.086,
+          "ticker": "601728.CG"
+        },
+        {
+          "also_known_as": [
+            "2888.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.017402,
+              "fcf_margin": 1.72646329003065,
+              "free_cash_flow_usd": 35484000000.0,
+              "market_cap_usd": 65410977532.31361,
+              "net_margin": 0.2732,
+              "pe": 14.056623,
+              "revenue_usd": 21406000000.0
+            },
+            "ta": {
+              "adx": 15.3781,
+              "atr_pct": 0.0235,
+              "bb_width": 0.0651
+            }
+          },
+          "head_listing_id": 239651,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.545463
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.086,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Standard Chartered PLC",
+          "score": 0.086,
+          "ticker": "STAN.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.02755,
+              "fcf_margin": 0.175840019966679,
+              "free_cash_flow_usd": 2263526400.0,
+              "market_cap_usd": 29420293387.5711,
+              "net_margin": 0.195806699079375,
+              "pe": 10.197742,
+              "revenue_usd": 12872646400.0
+            },
+            "ta": {
+              "adx": 22.0687,
+              "atr_pct": 0.0276,
+              "bb_width": 0.1742
+            }
+          },
+          "head_listing_id": 574808,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.080612
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.068,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Inpex Corporation",
+          "score": 0.068,
+          "ticker": "1605.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_yield": 0.032945,
+              "fcf_margin": 0.4116,
+              "free_cash_flow_usd": 1217352000.0,
+              "market_cap_usd": 4934105443.020801,
+              "net_margin": 0.0781,
+              "pe": 16.552226,
+              "revenue_usd": 2957728000.0
+            },
+            "ta": {
+              "adx": 37.4637,
+              "atr_pct": 0.0546,
+              "bb_width": 0.201
+            }
+          },
+          "head_listing_id": 239441,
+          "matched": {
+            "fundamental": {
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.245176
+              }
+            },
+            "ta": {
+              "ttm_sqz_fired_up": {
+                "kind": "signal",
+                "strength": 0.056,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Seplat Petroleum Development Company PLC",
+          "score": 0.056,
+          "ticker": "SEPL.LSE"
+        }
+      ],
+      "sort": "ta",
+      "universe": 1097,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Found 40 large-cap stocks with a high free-cash-flow yield that are firing out of a volatility squeeze to the upside (squeeze_fired_up). Both legs verified per name — high fcf_yield (matched.fundamental) + the self-contained squeeze-fired-up event (matched.ta). Examples: NEM.US, MPC.US, EBO.XETRA, 1408.HK."
+}

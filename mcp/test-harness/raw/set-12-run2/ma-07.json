@@ -1,0 +1,22 @@
+{
+  "id": "ma-07",
+  "question": "Which forex pairs are showing a death cross — 50-day moving average crossing below the 200-day?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["death cross 50-day below 200-day"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Currency"],
+        "ta": [{"anchor": [{"pattern": "crossover_down", "a": "ema50", "b": "ema200"}]}],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "Returned 60 results (capped=true). All tickers end in .FOREX confirming forex-only universe. Top results: PKRGBP.FOREX (strength=0.996, fired 2026-08-26), BYNUSD.FOREX (strength=0.898, fired 2026-08-18), plus more. Signal matched as 'cross_ema50_ema200_dn' confirming 50-day crossed BELOW 200-day (bearish). close_vs_ema200 values are negative (e.g. -0.0286, -0.0313) confirming price is below the 200-day EMA consistent with a death cross pattern.",
+  "verdict": "PASS",
+  "reason": "Forex-only universe confirmed (.FOREX tickers), death cross correctly mapped to ema50 crossing BELOW ema200 (bearish crossover_down), no stocks or crypto returned, signal direction is correct (bearish not bullish).",
+  "defects": []
+}

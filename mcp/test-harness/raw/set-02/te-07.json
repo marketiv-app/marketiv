@@ -1,0 +1,648 @@
+{
+ "id": "te-07",
+ "question": "Show global small caps (under $1B) that are up more than 30% over the last month on above-average volume, but where the daily RSI is now flashing bearish divergence against the recent price high — I'm hunting momentum names that may be topping.",
+ "tools_called": [
+  {
+   "tool": "screen_unified",
+   "args": {
+    "ta": [
+     {
+      "anchor": [
+       {
+        "pattern": "divergence_bear",
+        "a": "rsi",
+        "window_bars": 30
+       }
+      ],
+      "quals": [
+       {
+        "any": [
+         {
+          "pattern": "net_change_up",
+          "a": "close",
+          "b": "0.30",
+          "window_bars": 21
+         }
+        ]
+       },
+       {
+        "any": [
+         {
+          "pattern": "volume_spike"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "max_market_cap_usd": 1000000000,
+    "asset_type": [
+     "Common Stock"
+    ],
+    "timeframe": 1,
+    "window_bars": 30,
+    "limit": 15
+   }
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "adx": {
+      "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+     },
+     "atr_pct": {
+      "definition": "Average True Range ÷ price — volatility as a fraction of price."
+     },
+     "close_vs_ema200": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "close_vs_ema50": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "detail.osc": {
+      "definition": "[oscillator at prior pivot t(n), oscillator at t(m)] — the divergence read against the price pivots."
+     },
+     "detail.px": {
+      "definition": "[price at prior pivot t(n), price at t(m)] — the two points that define the divergence."
+     },
+     "rsi14": {
+      "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+     },
+     "strength": {
+      "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+     }
+    }
+   },
+   "capped": false,
+   "count": 12,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "ta": {
+       "adx": 44.98,
+       "atr_pct": 0.0841,
+       "close_vs_ema50": 0.4669,
+       "rsi14": 68.0632
+      }
+     },
+     "head_listing_id": 572092,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 23,
+         "osc": [
+          96.3342,
+          75.1143
+         ],
+         "px": [
+          697,
+          801
+         ],
+         "tn": "2026-07-22"
+        },
+        "kind": "signal",
+        "strength": 0.795,
+        "value": "2026-08-24"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "JSH Co.,Ltd.",
+     "score": 0.795,
+     "ticker": "150A.JP"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 45.3265,
+       "atr_pct": 0.1664,
+       "close_vs_ema200": 0.3974,
+       "close_vs_ema50": 0.0755,
+       "rsi14": 47.3539
+      }
+     },
+     "head_listing_id": 51932,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 23,
+         "osc": [
+          84.2773,
+          70.7743
+         ],
+         "px": [
+          0.38,
+          0.56
+         ],
+         "tn": "2026-07-20"
+        },
+        "kind": "signal",
+        "strength": 0.716,
+        "value": "2026-08-20"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Chanhigh Holdings Ltd",
+     "score": 0.716,
+     "ticker": "2017.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 40.3321,
+       "atr_pct": 0.1203,
+       "close_vs_ema200": 0.8122,
+       "close_vs_ema50": 0.7775,
+       "rsi14": 65.3238
+      }
+     },
+     "head_listing_id": 1752617,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 19,
+         "osc": [
+          94.7749,
+          72.9625
+         ],
+         "px": [
+          0.9,
+          1.4
+         ],
+         "tn": "2026-07-27"
+        },
+        "kind": "signal",
+        "strength": 0.705,
+        "value": "2026-08-21"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Klarsen SA",
+     "score": 0.705,
+     "ticker": "ALKLA.PA"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 49.339,
+       "atr_pct": 0.1812,
+       "close_vs_ema50": 0.3811,
+       "rsi14": 57.5644
+      }
+     },
+     "head_listing_id": 7499,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 18,
+         "osc": [
+          92.8504,
+          71.3199
+         ],
+         "px": [
+          2.7,
+          2.72
+         ],
+         "tn": "2026-07-27"
+        },
+        "kind": "signal",
+        "strength": 0.682,
+        "value": "2026-08-20"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Callan JMB Inc. Common Stock",
+     "score": 0.682,
+     "ticker": "CJMB.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 52.3818,
+       "atr_pct": 0.1238,
+       "close_vs_ema50": 2.5545,
+       "rsi14": 84.458
+      }
+     },
+     "head_listing_id": 37363,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 10,
+         "osc": [
+          84.2304,
+          64.6663
+         ],
+         "px": [
+          11.08,
+          11.1
+         ],
+         "tn": "2026-07-24"
+        },
+        "kind": "signal",
+        "strength": 0.5,
+        "value": "2026-08-07"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "RF Acquisition Corp II Ordinary Shares",
+     "score": 0.5,
+     "ticker": "RFAI.US"
+    },
+    {
+     "also_known_as": [
+      "391.HK"
+     ],
+     "context": {
+      "ta": {
+       "adx": 56.8496,
+       "atr_pct": 0.0897,
+       "close_vs_ema200": 0.9361,
+       "close_vs_ema50": 0.4911,
+       "rsi14": 71.3312
+      }
+     },
+     "head_listing_id": 50613,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 18,
+         "osc": [
+          92.1808,
+          81.4196
+         ],
+         "px": [
+          0.188,
+          0.242
+         ],
+         "tn": "2026-07-30"
+        },
+        "kind": "signal",
+        "strength": 0.489,
+        "value": "2026-08-25"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Mei Ah Entertainment Group Ltd",
+     "score": 0.489,
+     "ticker": "0391.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 73.2934,
+       "atr_pct": 0.052,
+       "close_vs_ema50": 0.5022,
+       "rsi14": 84.4027
+      }
+     },
+     "head_listing_id": 6307205,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 30,
+         "osc": [
+          84.7753,
+          77.31
+         ],
+         "px": [
+          35.2,
+          39.8
+         ],
+         "tn": "2026-06-15"
+        },
+        "kind": "signal",
+        "strength": 0.475,
+        "value": "2026-07-27"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-13"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Rentguarantor Holdings PLC",
+     "score": 0.475,
+     "ticker": "RGG.LSE"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 55.5067,
+       "atr_pct": 0.0449,
+       "close_vs_ema200": 0.9119,
+       "close_vs_ema50": 0.3388,
+       "rsi14": 77.4648
+      }
+     },
+     "head_listing_id": 33289,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 14,
+         "osc": [
+          75.0395,
+          64.1086
+         ],
+         "px": [
+          9.12,
+          9.25
+         ],
+         "tn": "2026-07-13"
+        },
+        "kind": "signal",
+        "strength": 0.431,
+        "value": "2026-07-31"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-07"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Paysign Inc",
+     "score": 0.431,
+     "ticker": "PAYS.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 61.8634,
+       "atr_pct": 0.1132,
+       "close_vs_ema200": 2.4769,
+       "close_vs_ema50": 1.2832,
+       "rsi14": 80.5418
+      }
+     },
+     "head_listing_id": 51734,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 26,
+         "osc": [
+          89.4135,
+          82.3988
+         ],
+         "px": [
+          0.445,
+          0.61
+         ],
+         "tn": "2026-07-10"
+        },
+        "kind": "signal",
+        "strength": 0.404,
+        "value": "2026-08-17"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Wecon Holdings Ltd",
+     "score": 0.404,
+     "ticker": "1793.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.0127,
+       "atr_pct": 0.1356,
+       "close_vs_ema200": 0.5815,
+       "close_vs_ema50": 0.319,
+       "rsi14": 55.6817
+      }
+     },
+     "head_listing_id": 573446,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 10,
+         "osc": [
+          80.4905,
+          68.3983
+         ],
+         "px": [
+          312,
+          422
+         ],
+         "tn": "2026-07-22"
+        },
+        "kind": "signal",
+        "strength": 0.403,
+        "value": "2026-08-05"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-14"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Ficha, Inc.",
+     "score": 0.403,
+     "ticker": "4052.JP"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 40.8334,
+       "atr_pct": 0.1034,
+       "close_vs_ema200": 0.4646,
+       "close_vs_ema50": 0.2075,
+       "rsi14": 56.8288
+      }
+     },
+     "head_listing_id": 51444,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 13,
+         "osc": [
+          73.3154,
+          62.9782
+         ],
+         "px": [
+          0.52,
+          0.53
+         ],
+         "tn": "2026-07-15"
+        },
+        "kind": "signal",
+        "strength": 0.392,
+        "value": "2026-08-03"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-06"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kingbo Strike Ltd",
+     "score": 0.392,
+     "ticker": "1421.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.5705,
+       "atr_pct": 0.0693,
+       "close_vs_ema200": 0.3509,
+       "close_vs_ema50": 0.2364,
+       "rsi14": 66.7753
+      }
+     },
+     "head_listing_id": 14612,
+     "matched": {
+      "ta": {
+       "net_change_up": {
+        "kind": "signal"
+       },
+       "rsi_div_bear": {
+        "detail": {
+         "fw": 27,
+         "osc": [
+          78.7385,
+          73.1449
+         ],
+         "px": [
+          6.17,
+          6.64
+         ],
+         "tn": "2026-07-08"
+        },
+        "kind": "signal",
+        "strength": 0.331,
+        "value": "2026-08-14"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Foghorn Therapeutics Inc",
+     "score": 0.331,
+     "ticker": "FHTX.US"
+    }
+   ],
+   "sort": "ta",
+   "universe": 16779,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 12,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 12 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "Global small caps (<$1B) up >30% over the last month on a volume spike, that are ALSO flashing bearish RSI divergence (price higher-high vs RSI lower-high) — momentum names that may be topping. Found 12 (e.g. 150A.JP, 2017.HK, ALKLA.PA, CJMB.US, RFAI.US)."
+}

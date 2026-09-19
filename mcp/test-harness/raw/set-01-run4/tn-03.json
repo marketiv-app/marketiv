@@ -1,0 +1,24 @@
+{
+  "id": "tn-03",
+  "question": "I keep hearing about the golden cross thing. Can you find me stocks where the 50 day moving average just crossed above the 200 day?",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}],
+        "asset_type": ["Common Stock"],
+        "window_bars": 20,
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "60 results (capped). Top: PUAL.LSE (Puma Alpha VCT, cross 2026-08-18, strength 0.995), MLVIE.PA (Integritas Viager SA, cross 2026-08-17, strength 0.991). Signal cross_ema50_ema200_up correctly matched. Many global stocks included (LSE, PA, etc.).",
+  "verdict": "PASS",
+  "reason": "Correctly identifies golden cross as ema50 crossing above ema200 (bullish), provides dates and strength scores. Not confused with death cross.",
+  "defects": [
+    {
+      "desc": "No asset_type filter prevents non-Common-Stock entries (e.g. VCTs/investment trusts like PUAL.LSE appearing at top). Client should add asset_type=['Common Stock'] but this was included in the call — PUAL.LSE may be misclassified as Common Stock in asset_universe.",
+      "side": "server"
+    }
+  ]
+}

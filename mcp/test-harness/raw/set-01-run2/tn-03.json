@@ -1,0 +1,16 @@
+{
+  "id": "tn-03",
+  "question": "I keep hearing about the golden cross thing. Can you find me stocks where the 50 day moving average just crossed above the 200 day?",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}],
+        "asset_type": ["Common Stock"],
+        "window_bars": 10,
+        "limit": 15
+      },
+      "result_summary": "58 stocks with a recent golden cross (50-day EMA crossing above 200-day EMA within last 10 bars). Top results: 067390.KQ AeroSpace Technology of Korea, GAME.US GameSquare Holdings, 3676.JP DIGITAL HEARTS HOLDINGS, CXAI.US CXApp, INCR.US InterCure, 000017.CS China Bicycle, GJAJ.PA Groupe JAJ, GCM.LSE GCM Resources, 6904.JP Harada Industry, PEMB.LSE Pembroke VCT, 002084.CS Guangzhou Seagull Kitchen, 600613.CG Shanghai Shenqi Pharmaceutical, BWMN.US Bowman Consulting, 600127.CG JinJian Cereals, SF3.XETRA STS Group AG."
+    }
+  ]
+}

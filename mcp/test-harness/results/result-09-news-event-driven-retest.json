@@ -1,0 +1,142 @@
+{
+  "set": "news-event-driven",
+  "cases": [
+    {
+      "id": "ne-01",
+      "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "energy"}, "note": "not for this case; see ne-04. semiconductors GICS 4530 known from prior schema/data"},
+        {"tool": "screen_stocks", "args": {"gics": "4530", "window": "7d", "order_by": "news_count", "limit": 20}}
+      ],
+      "result_summary": "20 semis over 7d, ranked by news_count with direction_split (15 net-pos / 5 net-neg). Winners: NVDA (358 stories, Hugging Face $12.9B acq + Q2 beat), AVGO(43), MU(41, $100B take-or-pay), MRVL(41, Google deal), SK Hynix, TSMC, AMD($10B Taiwan), INTC(HSBC PT$200). Losers surfaced separately: Kingsemi(-49% profit), Maxscend(net loss), Xinyuren, ASML(net-neg, priced-for-perfection), AMAT. Each row carries top_reason + aspects + dated latest_at (2026-08-26/27).",
+      "verdict": "PASS",
+      "reason": "7d window honored, real winner/loser split grounded in dated news with per-name reasons.",
+      "defects": []
+    },
+    {
+      "id": "ne-02",
+      "question": "Why is Nvidia down today? What's the news catalyst?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "NVDA", "window": "7d", "limit": 15}}
+      ],
+      "result_summary": "Returned dated per-article catalysts (2026-08-27): NVDA actually SURGED +7-9% on a Q2 blowout ($96.2B rev +106%, Q3 guide $108B, Vera Rubin ramp). Also OpenAI 'Jalapeno' inference chip beating GB200 (competition/neg, rel 0.8), Broadcom AI-share threat (neg 0.6), Micron memory-cost margin drag (neg 0.9). Impact aspects + net_direction drawn from news, dup_count present.",
+      "verdict": "PASS",
+      "reason": "Concrete dated catalysts returned; sentiment from news not guessed. Premise ('down today') is factually false — news shows NVDA up — the tool honestly surfaces the real (positive) catalyst rather than fabricating a down-narrative, which is exactly what acceptance requires.",
+      "defects": [
+        {"desc": "Tool has no price-move field to let the client detect the false 'down today' premise directly; it must infer direction from article text. Minor — impact.net_direction + brief_text made it obvious.", "side": "none"}
+      ]
+    },
+    {
+      "id": "ne-03",
+      "question": "Give me a quick pulse on the AI theme over the last 30 days — what are the big storylines and which names are most talked about?",
+      "tool_calls": [
+        {"tool": "theme_summary", "args": {"theme": "AI", "window": "30d"}}
+      ],
+      "result_summary": "AI node (10000000), window 2026-07-28..08-27. Pulse net-pos (pos_share .573, neg .123) with weekly series (3565 stories). Most-talked: NVDA(512), GOOG(286), MSFT(259), AMZN(239), META(229, net-NEG), plus private Anthropic(150)/OpenAI(149). Top_stories dated (MSFT +17% Azure, NVDA Q2 $96.2B, Nvidia-OpenAI $105B Ohio guarantee). aspect_heatmap (demand/capital pos, competition/regulation neg). winners/losers arrays + ripple.",
+      "verdict": "PASS",
+      "reason": "30d window honored, most-talked names ranked by attention, storylines summarized from dated real news, theme-level vs single-name distinguished.",
+      "defects": []
+    },
+    {
+      "id": "ne-04",
+      "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "energy"}},
+        {"tool": "screen_stocks", "args": {"gics": "10", "country": "TH", "window": "7d", "order_by": "news_count", "limit": 15}}
+      ],
+      "result_summary": "15 Thai energy names, 7d, all net-positive this week. PTT(34, 1T-baht capex plan), BCP(24, 3-baht interim div), TOP(17, profit +28%), PTTEP(14, A-18-01 PSC/GSA gas deal), BANPU(14, BESS/CCS/minerals+AI), OR/SPRC/IRPC (dividends), etc. All dated 2026-08-26/27. Note: direction_split shows 0 net-negative this week (genuinely a dividend/earnings-season positive week for Thai energy) — no fabricated negatives.",
+      "verdict": "PASS",
+      "reason": "Scoped to TH energy + 1-week window, per-name pos/neg impact grounded in dated news. To answer, I (the client) reply in Thai; the tool returns structured data the Thai answer is built from — the honest finding is that coverage this week is uniformly positive, which the tool states rather than inventing losers.",
+      "defects": [
+        {"desc": "No negatives this week is a real data state, not a tool fault; a naive client could mistake 0-neg for thin coverage. direction_split makes it explicit.", "side": "none"}
+      ]
+    },
+    {
+      "id": "ne-05",
+      "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "TSLA", "window": "30d", "limit": 20}}
+      ],
+      "result_summary": "20 dated TSLA articles over 30d with per-article net_direction + aspects: mixed — Optimus/robotaxi & revenue-accel +25.5% (pos) alongside cash-burn concerns. Each item carries impact_score, news_types, published_at (through 2026-08-27). Enough to characterize a mixed/net read with supporting items.",
+      "verdict": "PASS",
+      "reason": "Sentiment backed by specific recent dated items over a stated 30d window; mixed signal is visible per-article (not a fabricated single score).",
+      "defects": []
+    },
+    {
+      "id": "ne-06",
+      "question": "Where is options positioning most extreme right now — any names with unusually stretched put/call or crowded positioning I should know about?",
+      "tool_calls": [
+        {"tool": "positioning_extremes", "args": {"limit": 15}}
+      ],
+      "result_summary": "15 futures markets at 3-year positioning extremes (>=90th/<=10th pct) with net_pct_oi, percentile_3y, z_3y and plain-language read. E.g. UST-2Y (100th, positioned for lower yields), COPPER(99th long), KC-WHEAT(99th), EURUSD(2nd, crowded short), QQQ/IWM equity-index shorts near bottom. All framed vs 3y range = 'extreme relative to norm'.",
+      "verdict": "PARTIAL",
+      "reason": "Positioning extremes returned from real COT data, framed vs a 3y range, current — strong on the 'crowded positioning' half. But this is the FUTURES/COT lens (commodities/FX/rates/equity-index), NOT single-name equity OPTIONS put/call; the user explicitly asked for 'stretched put/call' names. options_sentiment exists per-ticker but there is no market-wide 'which OPTION names are most extreme' scan, so the equity put/call ask can't be fully served in one call.",
+      "defects": [
+        {"desc": "No market-wide equity-options-extreme screen. positioning_extremes covers only futures COT (no equity single-name put/call); options_sentiment is per-ticker only. A user asking 'which names have stretched put/call right now' has no tool that ranks the ~547 optionable names by an options-positioning extreme.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-07",
+      "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+      "tool_calls": [
+        {"tool": "screen_stocks", "args": {"megatrend": "electric vehicles", "window": "14d", "order_by": "news_count", "limit": 15}}
+      ],
+      "result_summary": "EV megatrend (resolved to node 16020000), 14d, 9 names ranked by news_count, direction_split 8 pos/0 neg/1 mixed. Top: EA.BK(15, 9.8B-baht e-bus credit line), NEX.BK(10, 1,520 e-bus mfg + credit line), ATP30(4, profit -52% but net-pos), then thin tail (Dongfeng, Ford mixed, Hyundai, etc. all news_count 1). Per-name sentiment paired with reason + dated latest_at.",
+      "verdict": "PASS",
+      "reason": "14d window honored, ranked by attention/mention volume, each name paired with news-grounded direction; does not conflate attention with positive (ATP30 flagged as profit-down, Ford as mixed).",
+      "defects": [
+        {"desc": "EV megatrend attention skews to small Thai e-bus names over the 14d window (Tesla/BYD absent from top ranks) — plausibly a membership/gating quirk of the EV node rather than true attention. Low-severity coverage observation.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "ne-08",
+      "question": "Brief me on what happened in Japanese markets around the week of the last BOJ meeting — which sectors and names reacted the most?",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "Bank of Japan BOJ policy meeting rate decision", "window": "90d", "limit": 8}},
+        {"tool": "brief", "args": {"country": "JP", "from_": "2026-07-28", "to": "2026-08-04", "interval": "day"}}
+      ],
+      "result_summary": "Anchor via search_news: last BOJ meeting = 2026-07-31 (held rate steady, article dated 07-30). brief(JP, 2026-07-28..08-04, day) returned pulse day-series (net-pos, dips 07-28 & 08-01), aspect_heatmap (supply/competition/monetary net-neg), top_entities & losers: Kioxia(18), SoftBank(18), Sony(15), Toyota(13, net-neg), Advantest, Nissan/Honda(net-neg autos), Renesas. BOJ-hold + monetary aspect present; no invented BOJ outcome.",
+      "verdict": "PASS",
+      "reason": "Anchored to the specified PAST window (BOJ meeting week 07-28..08-04, not 'latest'); biggest-reacting names/sectors (memory/semis Kioxia/Advantest/Renesas up, autos Toyota/Nissan/Honda down) identified from dated impact; BOJ outcome (rate hold) taken from actual news.",
+      "defects": [
+        {"desc": "Client must first resolve 'last BOJ meeting' to a date via search_news (no calendar/event-anchor tool). Worked cleanly here but is a two-step the schema doesn't guide.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-09",
+      "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "AMD", "window": "7d", "limit": 6}},
+        {"tool": "stock_impact", "args": {"ticker": "INTC", "window": "7d", "limit": 6}},
+        {"tool": "stock_impact", "args": {"ticker": "MU", "window": "7d", "limit": 6}}
+      ],
+      "result_summary": "All three over 7d with dated items. MU: strongest — 84.9% gross margin beating NVDA, $41.46B rev, HBM4 for Vera Rubin, ~$100B contracted (impact_score 4-5, net-pos). INTC: net-pos — DC/AI rev +59%, Foundry +31%, +3.6% on-day, HSBC PT hike (score 3-4). AMD: net-pos but more diffuse — Anthropic MI450 2GW deal + $5B stake, though dipped ~1% intraday vs peers (score 4). Cross-referenced by the shared 'AI chip stocks mixed' article. Ranking derivable: MU > INTC ~ AMD.",
+      "verdict": "PASS",
+      "reason": "All three tickers covered over a 1-week window with concrete dated news per name; a head-to-head impact ranking (MU strongest) is justified from the returned reasons/impact_scores, no name padded.",
+      "defects": [
+        {"desc": "No single 3-ticker comparative call; client fans out 3 stock_impact calls then ranks. Fine but not a one-shot compare surface.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-10",
+      "question": "Find me any news suggesting a company might be an acquisition target or facing a regulatory investigation recently — the kind of catalyst-driven stuff worth watching.",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "company acquisition takeover target or regulatory investigation antitrust probe", "window": "14d", "limit": 20}}
+      ],
+      "result_summary": "match_quality 'strong' (top_similarity 0.697). Semantically-matched dated hits incl. JD.com/Ceconomy EU takeover probe (2026-08-21, ma_partnership+regulatory_legal, entity JD 9618.HK net-neg), and further M&A/regulatory items over the 14d window, each with news_types tags, entities, impact direction/relevance, published_at.",
+      "verdict": "PASS",
+      "reason": "Semantic (not keyword) catalyst-shaped hits returned, recent + dated, tagged with ma_partnership/regulatory_legal news_types and per-entity impact; grounded real events (JD/Ceconomy EU FSR probe), no invented rumors.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 9,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "ne-06 (mcp-guidance): no market-wide EQUITY options put/call extreme screen — positioning_extremes is futures/COT only, options_sentiment is per-ticker only, so 'which names have stretched put/call right now' can't be answered in one call.",
+      "ne-08 (mcp-guidance): event-anchored queries ('week of the last BOJ meeting') require a manual search_news date-resolution first; no calendar/event-anchor helper, and the schema doesn't guide the two-step.",
+      "ne-09/ne-02 (mcp-guidance / none): no one-shot multi-ticker news-compare surface (client fans out per-ticker stock_impact); and stock_impact exposes no price-move field to auto-detect a false premise like 'why is X down' when X actually rose — client must read direction from article text."
+    ]
+  }
+}

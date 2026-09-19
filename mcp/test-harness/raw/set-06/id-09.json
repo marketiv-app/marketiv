@@ -1,0 +1,7 @@
+{
+  "id": "id-09",
+  "question": "Is XYZ's dividend safe? I hold it for income and I'm worried they might cut.",
+  "tools_called": [],
+  "raw_responses": [],
+  "answer_to_user": "Happy to check this — but 'XYZ' is a placeholder, so I don't have a real ticker to pull. Tell me the actual company or ticker and I'll run its dividend-safety read. Here's exactly what I'd look at (and what I can/can't tell you): (1) PAYOUT / COVERAGE — the payout ratio and whether the dividend is covered by earnings and, importantly, by cash flow (a payout ratio above 1 means it's paying out more than it earns, a cut-risk flag; for REITs/BDCs I'd use FFO/cash-flow coverage instead of EPS). (2) DIVIDEND HISTORY I can actually see — the no-cut streak over my ~10-year tracked window (capped at 10 years) and whether the last payment was rising or falling year-over-year; I'd tell you the exact window rather than claim a multi-decade 'never cut' record I can't verify. (3) PRICE & NEWS — whether the yield has spiked because the price fell, and whether recent news/fundamentals point to stress that often precedes a cut. The honest limit: I can assess current safety indicators, but I cannot predict whether management will cut in the future — no data can. Give me the real name/ticker and I'll pull all of this and give you a grounded trap-vs-safe read (not a hold/sell recommendation)."
+}

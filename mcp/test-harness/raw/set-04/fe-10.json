@@ -1,0 +1,3446 @@
+{
+  "id": "fe-10",
+  "question": "I'm hunting compounders: 3-year revenue CAGR above 20%, EPS CAGR above 25% (so earnings growing faster than sales — margin leverage), ROE consistently over 20%, and net debt/EBITDA under 2x. Global, any sector.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "compound_growth",
+            "threshold": 0.2,
+            "N": 3
+          },
+          {
+            "concept": "eps_diluted",
+            "pattern": "compound_growth",
+            "threshold": 0.25,
+            "N": 3
+          },
+          {
+            "concept": "roe",
+            "pattern": "sustained_above",
+            "threshold": 0.2,
+            "N": 3
+          },
+          {
+            "concept": "net_debt_ebitda",
+            "pattern": "below",
+            "threshold": 2.0
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NVDA.SW",
+            "0R1I.LSE",
+            "NVDA01.BK",
+            "NVDA03.BK",
+            "NVDA06.BK",
+            "NVDA19.BK",
+            "NVDA23.BK",
+            "NVDA80.BK",
+            "NVD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0632,
+              "ebitda_usd": 192970000000.0,
+              "free_cash_flow_usd": 119076000000.0,
+              "gross_margin": 0.7415,
+              "interest_coverage": 636.7148,
+              "market_cap_usd": 5322322739200.0,
+              "net_debt_usd": -889000000.0,
+              "net_income_usd": 159613000000.0,
+              "net_margin": 0.6297,
+              "normalized_income_usd": 159613000000.0,
+              "normalized_pe": 33.3451707517558,
+              "operating_margin": 0.6402,
+              "pe": 33.650842,
+              "roa": 0.6151,
+              "shares_outstanding": 24220525225.0
+            }
+          },
+          "head_listing_id": 31809,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 2.0424,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.0046
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.0005,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 1.0149,
+                "requested_n": 3,
+                "value": 0.9146,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NVIDIA Corporation",
+          "score": 5322322739200.0,
+          "ticker": "NVDA.US"
+        },
+        {
+          "also_known_as": [
+            "LLY23.BK",
+            "LLY80.BK",
+            "LLY.SW",
+            "LLY.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.6207,
+              "ebitda_usd": 43304800000.0,
+              "free_cash_flow_usd": 13560000000.0,
+              "gross_margin": 0.834,
+              "interest_coverage": 38.0425313861132,
+              "market_cap_usd": 1093034115072.0,
+              "net_debt_usd": 45958000000.0,
+              "net_income_usd": 26711200000.0,
+              "net_margin": 0.3353,
+              "normalized_income_usd": 31356817290.9483,
+              "normalized_pe": 34.8579418928311,
+              "operating_margin": 0.4972,
+              "pe": 41.145686,
+              "roa": 0.1877,
+              "shares_outstanding": 891500000.0
+            }
+          },
+          "head_listing_id": 26596,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5171,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 1.0613
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3169,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 1.0116,
+                "requested_n": 3,
+                "value": 0.4892,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eli Lilly and Company",
+          "score": 1093034115072.0,
+          "ticker": "LLY.US"
+        },
+        {
+          "also_known_as": [
+            "ANET23.BK",
+            "ANET80.BK",
+            "0HHR.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.00355393880603048,
+              "ebitda_usd": 4639600000.0,
+              "free_cash_flow_usd": 5155300000.0,
+              "gross_margin": 0.63,
+              "market_cap_usd": 243643383808.0,
+              "net_debt_usd": -627743000.0,
+              "net_income_usd": 4044600000.0,
+              "net_margin": 0.3837,
+              "normalized_income_usd": 4044600000.0,
+              "normalized_pe": 60.2391791049795,
+              "operating_margin": 0.4314,
+              "pe": 63.860759,
+              "roa": 0.1705,
+              "shares_outstanding": 1261200000.0
+            }
+          },
+          "head_listing_id": 2085,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3708,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.488694988164024
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2715,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.314,
+                "requested_n": 3,
+                "value": 0.314,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Arista Networks",
+          "score": 243643383808.0,
+          "ticker": "ANET.US"
+        },
+        {
+          "also_known_as": [
+            "0HFB.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.3414,
+              "ebitda_usd": 7954600000.0,
+              "free_cash_flow_usd": 4631700000.0,
+              "gross_margin": 0.3735,
+              "interest_coverage": 13.5871,
+              "market_cap_usd": 196747182080.0,
+              "net_debt_usd": 14620900000.0,
+              "net_income_usd": 4465500000.0,
+              "net_margin": 0.1724,
+              "normalized_income_usd": 4580085986.75563,
+              "normalized_pe": 42.9570935237765,
+              "operating_margin": 0.2645,
+              "pe": 42.7175,
+              "roa": 0.106,
+              "shares_outstanding": 1229430709.0
+            }
+          },
+          "head_listing_id": 2305,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2972,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 1.838
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2231,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.368,
+                "requested_n": 3,
+                "value": 0.251,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amphenol Corporation",
+          "score": 196747182080.0,
+          "ticker": "APH.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.7634,
+              "ebitda_usd": 2445362587.2,
+              "free_cash_flow_usd": -260256016.8,
+              "gross_margin": 0.08,
+              "interest_coverage": 19.42,
+              "market_cap_usd": 110286847921.35681,
+              "net_debt_usd": 1123242619.2,
+              "net_income_usd": 1729703102.4,
+              "net_margin": 0.0525,
+              "normalized_income_usd": 1723586435.35528,
+              "normalized_pe": 63.9868391042562,
+              "operating_margin": 0.0654,
+              "pe": 22.23303,
+              "roa": 0.1282,
+              "shares_outstanding": 185840791.0
+            }
+          },
+          "head_listing_id": 1420049,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4887,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.4593
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4806,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4803,
+                "requested_n": 3,
+                "value": 0.2973,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wiwynn Corp",
+          "score": 110286847921.35681,
+          "ticker": "6669.TW"
+        },
+        {
+          "also_known_as": [
+            "VRT01.BK",
+            "VRT23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.7017,
+              "ebitda_usd": 2553100000.0,
+              "free_cash_flow_usd": 2924000000.0,
+              "gross_margin": 0.3804,
+              "interest_coverage": 27.6969,
+              "market_cap_usd": 104924676096.0,
+              "net_debt_usd": 527600000.0,
+              "net_income_usd": 1732000000.0,
+              "net_margin": 0.1509,
+              "normalized_income_usd": 1780068215.90909,
+              "normalized_pe": 58.9441882947246,
+              "operating_margin": 0.194,
+              "pe": 61.660633,
+              "roa": 0.1089,
+              "shares_outstanding": 384936985.0
+            }
+          },
+          "head_listing_id": 46545,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 3.4011,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.2067
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2159,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4181,
+                "requested_n": 3,
+                "value": 0.2229,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vertiv Holdings Co",
+          "score": 104924676096.0,
+          "ticker": "VRT.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.5253,
+              "ebitda_usd": 731087791.2,
+              "free_cash_flow_usd": -41178384.0,
+              "gross_margin": 0.2963,
+              "interest_coverage": 43.8792,
+              "market_cap_usd": 69143232223.6416,
+              "net_debt_usd": 95084464.8,
+              "net_income_usd": 499937318.4,
+              "net_margin": 0.1568,
+              "normalized_income_usd": 511132892.184988,
+              "normalized_pe": 135.274472218113,
+              "operating_margin": 0.208,
+              "pe": 99.908352,
+              "roa": 0.1223,
+              "shares_outstanding": 358321000.0
+            }
+          },
+          "head_listing_id": 1418365,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4004,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.1301
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3458,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3424,
+                "requested_n": 3,
+                "value": 0.2245,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Elite Material Co Ltd",
+          "score": 69143232223.6416,
+          "ticker": "2383.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.102,
+              "ebitda_usd": 2000175000.0,
+              "free_cash_flow_usd": 2159806000.0,
+              "gross_margin": 0.2566,
+              "interest_coverage": 250.233,
+              "market_cap_usd": 61205749760.0,
+              "net_debt_usd": -1526761000.0,
+              "net_income_usd": 1434401000.0,
+              "net_margin": 0.1278,
+              "normalized_income_usd": 1462575482.39672,
+              "normalized_pe": 41.8479254552403,
+              "operating_margin": 0.1645,
+              "pe": 46.300273,
+              "roa": 0.169,
+              "shares_outstanding": 35200209.0
+            }
+          },
+          "head_listing_id": 14954,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6178,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.7633
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3003,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4924,
+                "requested_n": 3,
+                "value": 0.284,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Comfort Systems USA Inc",
+          "score": 61205749760.0,
+          "ticker": "FIX.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0007,
+              "ebitda_usd": 327791973.39415,
+              "free_cash_flow_usd": 127204202.1391,
+              "gross_margin": 0.5474,
+              "interest_coverage": 2643.1543,
+              "market_cap_usd": 46356626862.89919,
+              "net_debt_usd": -438340094.63155,
+              "net_income_usd": 281788703.8269,
+              "net_margin": 0.3863,
+              "normalized_income_usd": 288262003.690729,
+              "normalized_pe": 160.814211617825,
+              "operating_margin": 0.4605,
+              "pe": 143.922542,
+              "roa": 0.2784,
+              "shares_outstanding": 1088382247.0
+            }
+          },
+          "head_listing_id": 232479,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.7031,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.3373
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6281,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4253,
+                "requested_n": 3,
+                "value": 0.2509,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Suzhou TFC Optical Communication Co Ltd",
+          "score": 46356626862.89919,
+          "ticker": "300394.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1036,
+              "ebitda_usd": 1111321598.4,
+              "free_cash_flow_usd": 243762854.4,
+              "gross_margin": 0.1878,
+              "interest_coverage": 297.3266,
+              "market_cap_usd": 38661345129.267204,
+              "net_debt_usd": -571977182.4,
+              "net_income_usd": 837912067.2,
+              "net_margin": 0.1094,
+              "normalized_income_usd": 837884632.56662,
+              "normalized_pe": 46.1416090313522,
+              "operating_margin": 0.1353,
+              "pe": 36.169165,
+              "roa": 0.1633,
+              "shares_outstanding": 558908000.0
+            }
+          },
+          "head_listing_id": 1418335,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4794,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.5147
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4761,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.5613,
+                "requested_n": 3,
+                "value": 0.3901,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Accton Technology Corp",
+          "score": 38661345129.267204,
+          "ticker": "2345.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.8369,
+              "ebitda_usd": 1257680299.2,
+              "free_cash_flow_usd": 1167719155.2,
+              "gross_margin": 0.2698,
+              "interest_coverage": 55.35,
+              "market_cap_usd": 37289820435.251205,
+              "net_debt_usd": -938531131.2,
+              "net_income_usd": 745317081.6,
+              "net_margin": 0.1445,
+              "normalized_income_usd": 749791314.147905,
+              "normalized_pe": 49.7335988449385,
+              "operating_margin": 0.2142,
+              "pe": 52.508751,
+              "roa": 0.1357,
+              "shares_outstanding": 392178807.0
+            }
+          },
+          "head_listing_id": 1418867,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6049,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.7462
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3559,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.5223,
+                "requested_n": 3,
+                "value": 0.2827,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Asia Vital Components Co Ltd",
+          "score": 37289820435.251205,
+          "ticker": "3017.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0013,
+              "ebitda_usd": 505586265.6,
+              "free_cash_flow_usd": 457171946.4,
+              "gross_margin": 0.5615,
+              "interest_coverage": 16812.6782511211,
+              "market_cap_usd": 36747553105.5104,
+              "net_debt_usd": -1498923784.8,
+              "net_income_usd": 417118634.4,
+              "net_margin": 0.4076,
+              "normalized_income_usd": 414522526.106917,
+              "normalized_pe": 88.6503164270309,
+              "operating_margin": 0.4916,
+              "pe": 76.432002,
+              "roa": 0.1659,
+              "shares_outstanding": 179903000.0
+            }
+          },
+          "head_listing_id": 1420344,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4077,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -2.9647
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3099,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3445,
+                "requested_n": 3,
+                "value": 0.256,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hon. Precision, Inc.",
+          "score": 36747553105.5104,
+          "ticker": "7769.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1464,
+              "ebitda_usd": 2032560240.4341,
+              "free_cash_flow_usd": 1244391618.3566,
+              "gross_margin": 0.3098,
+              "interest_coverage": 44.9219,
+              "market_cap_usd": 36292254357.9136,
+              "net_debt_usd": -3323152460.96915,
+              "net_income_usd": 1682856058.9199,
+              "net_margin": 0.1417,
+              "normalized_income_usd": 1931881877.47406,
+              "normalized_pe": 18.7859593182611,
+              "operating_margin": 0.1866,
+              "pe": 20.518135,
+              "roa": 0.0952,
+              "shares_outstanding": 2073211424.0
+            }
+          },
+          "head_listing_id": 232376,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5574,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.635
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3036,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3224,
+                "requested_n": 3,
+                "value": 0.3224,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sungrow Power Supply Co Ltd",
+          "score": 36292254357.9136,
+          "ticker": "300274.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1246,
+              "ebitda_usd": 786975316.694,
+              "free_cash_flow_usd": 521687086.067,
+              "gross_margin": 0.3459,
+              "interest_coverage": 68.566,
+              "market_cap_usd": 19979549487.9232,
+              "net_debt_usd": -674643896.731,
+              "net_income_usd": 550621880.816,
+              "net_margin": 0.1918,
+              "normalized_income_usd": 573190227.294403,
+              "normalized_pe": 34.856751801634,
+              "operating_margin": 0.2525,
+              "pe": 36.743846,
+              "roa": 0.1461,
+              "shares_outstanding": 35992704.0
+            }
+          },
+          "head_listing_id": 1415760,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6521,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.8573
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2469,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.415,
+                "requested_n": 3,
+                "value": 0.2771,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hyundai Electric & Energy Systems Co Ltd",
+          "score": 19979549487.9232,
+          "ticker": "267260.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4616,
+              "ebitda_usd": 572338915.2,
+              "free_cash_flow_usd": -21403980.0,
+              "gross_margin": 0.3365,
+              "interest_coverage": 63.7603,
+              "market_cap_usd": 17143908931.9936,
+              "net_debt_usd": -195087235.2,
+              "net_income_usd": 353718768.0,
+              "net_margin": 0.1686,
+              "normalized_income_usd": 353247742.448248,
+              "normalized_pe": 48.5322533505087,
+              "operating_margin": 0.2477,
+              "pe": 45.495495,
+              "roa": 0.1344,
+              "shares_outstanding": 505378000.0
+            }
+          },
+          "head_listing_id": 1418354,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2935,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.3409
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2232,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3506,
+                "requested_n": 3,
+                "value": 0.2265,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Gold Circuit Electronics Ltd",
+          "score": 17143908931.9936,
+          "ticker": "2368.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2303,
+              "ebitda_usd": 616643127.68155,
+              "free_cash_flow_usd": 460977961.43585,
+              "gross_margin": 0.3869,
+              "interest_coverage": 68.3796,
+              "market_cap_usd": 17052347319.910398,
+              "net_debt_usd": -543291813.224,
+              "net_income_usd": 512414552.44965,
+              "net_margin": 0.2643,
+              "normalized_income_usd": 516870601.043428,
+              "normalized_pe": 32.9915210605636,
+              "operating_margin": 0.2892,
+              "pe": 34.105944,
+              "roa": 0.1613,
+              "shares_outstanding": 1273065558.0
+            }
+          },
+          "head_listing_id": 229944,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2503,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.881
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2709,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3208,
+                "requested_n": 3,
+                "value": 0.3208,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Ningbo Deye Technology Co Ltd",
+          "score": 17052347319.910398,
+          "ticker": "605117.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2768,
+              "ebitda_usd": 611200000.0,
+              "free_cash_flow_usd": 706686000.0,
+              "gross_margin": 0.2876,
+              "market_cap_usd": 16476250112.0,
+              "net_debt_usd": -382588000.0,
+              "net_income_usd": 491500000.0,
+              "net_margin": 0.1767,
+              "normalized_income_usd": 491500000.0,
+              "normalized_pe": 33.5223806958291,
+              "operating_margin": 0.2097,
+              "pe": 34.682726,
+              "roa": 0.2389,
+              "shares_outstanding": 27910605.0
+            }
+          },
+          "head_listing_id": 28125,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2804,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.626
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2012,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.7023,
+                "requested_n": 3,
+                "value": 0.5842,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Medpace Holdings Inc",
+          "score": 16476250112.0,
+          "ticker": "MEDP.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0035,
+              "ebitda_usd": 171526332.264,
+              "free_cash_flow_usd": 61004130.859,
+              "gross_margin": 0.5567,
+              "interest_coverage": 595.6421,
+              "market_cap_usd": 15636517145.804798,
+              "net_debt_usd": -120714881.546,
+              "net_income_usd": 124803302.589,
+              "net_margin": 0.3713,
+              "normalized_income_usd": 114544049.76553,
+              "normalized_pe": 136.510950833435,
+              "operating_margin": 0.3961,
+              "pe": 122.263748,
+              "roa": 0.2401,
+              "shares_outstanding": 94853002.0
+            }
+          },
+          "head_listing_id": 1415091,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3378,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.7038
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2074,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3476,
+                "requested_n": 3,
+                "value": 0.2743,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hanmi Semicon",
+          "score": 15636517145.804798,
+          "ticker": "042700.KO"
+        },
+        {
+          "also_known_as": [
+            "9980.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.3111,
+              "ebitda_usd": 929435979.038138,
+              "free_cash_flow_usd": 672999719.731966,
+              "gross_margin": 0.4684,
+              "interest_coverage": 65.5651,
+              "market_cap_usd": 13345636759.9616,
+              "net_debt_usd": -1240468221.49945,
+              "net_income_usd": 724601150.525318,
+              "net_margin": 0.2198,
+              "normalized_income_usd": 686205880.454903,
+              "normalized_pe": 19.4484441770077,
+              "operating_margin": 0.2589,
+              "pe": 17.307727,
+              "roa": 0.1373,
+              "shares_outstanding": 734199310.0
+            }
+          },
+          "head_listing_id": 230011,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4526,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.3346
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3489,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.5161,
+                "requested_n": 3,
+                "value": 0.3582,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eastroc Beverage Group Co Ltd",
+          "score": 13345636759.9616,
+          "ticker": "605499.CG"
+        },
+        {
+          "also_known_as": [
+            "WISE.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2103,
+              "ebitda_usd": 694300000.0,
+              "free_cash_flow_usd": 7532500000.0,
+              "gross_margin": 0.731673889691447,
+              "interest_coverage": 34.8666666666667,
+              "market_cap_usd": 12463851520.0,
+              "net_debt_usd": -13074804154.7413,
+              "net_income_usd": 498700000.0,
+              "net_margin": 0.184724228617995,
+              "operating_margin": 0.218802089121013,
+              "pe": 26.16147,
+              "roa": 0.017184433735521,
+              "shares_outstanding": 987972252.0
+            }
+          },
+          "head_listing_id": 295710,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.529,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -17.9956791012531
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3026,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2723,
+                "requested_n": 3,
+                "value": 0.2723,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wise Group plc Class A Ordinary Shares",
+          "score": 12463851520.0,
+          "ticker": "WSE.US"
+        },
+        {
+          "also_known_as": [
+            "MIXUE80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0077,
+              "ebitda_usd": 1158190748.0,
+              "free_cash_flow_usd": 764692214.0,
+              "gross_margin": 0.311435815868827,
+              "interest_coverage": 1532.16284729264,
+              "market_cap_usd": 10862427868.364801,
+              "net_debt_usd": -1035582834.0,
+              "net_income_usd": 841798672.0,
+              "net_margin": 0.175408745723284,
+              "normalized_income_usd": 844755006.314021,
+              "operating_margin": 0.217354700128484,
+              "pe": 12.537474,
+              "roa": 0.232782101300025,
+              "shares_outstanding": 379618800.0
+            }
+          },
+          "head_listing_id": 51962,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4351,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.894138410092014
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3521,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2988,
+                "requested_n": 3,
+                "value": 0.2988,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MIXUE Group",
+          "score": 10862427868.364801,
+          "ticker": "2097.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1946,
+              "ebitda_usd": 347976038.914,
+              "free_cash_flow_usd": 191892387.694,
+              "gross_margin": 0.7692,
+              "interest_coverage": 142.8778,
+              "market_cap_usd": 10286133673.984,
+              "net_debt_usd": -38489896.193,
+              "net_income_usd": 249884258.358,
+              "net_margin": 0.1925,
+              "normalized_income_usd": 252070294.112032,
+              "normalized_pe": 40.8066079750451,
+              "operating_margin": 0.2498,
+              "pe": 40.907186,
+              "roa": 0.3746,
+              "shares_outstanding": 37438155.0
+            }
+          },
+          "head_listing_id": 1415821,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.1205,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.1106
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.566,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.753,
+                "requested_n": 3,
+                "value": 0.4134,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "APR LTD",
+          "score": 10286133673.984,
+          "ticker": "278470.KO"
+        },
+        {
+          "also_known_as": [
+            "0668.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2622,
+              "ebitda_usd": 428786906.2462,
+              "free_cash_flow_usd": -74094934.953,
+              "gross_margin": 0.4483,
+              "interest_coverage": 52.1608,
+              "market_cap_usd": 10141471420.8256,
+              "net_debt_usd": -97545253.37575,
+              "net_income_usd": 326375957.614,
+              "net_margin": 0.0751,
+              "normalized_income_usd": 412792276.89425,
+              "normalized_pe": 24.5679776209177,
+              "operating_margin": 0.101,
+              "pe": 25.377877,
+              "roa": 0.1113,
+              "shares_outstanding": 536158941.0
+            }
+          },
+          "head_listing_id": 232933,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2966,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.2275
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2889,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2612,
+                "requested_n": 3,
+                "value": 0.2176,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Anker Innovations Technology Co Ltd",
+          "score": 10141471420.8256,
+          "ticker": "300866.CS"
+        },
+        {
+          "also_known_as": [
+            "SANRIO23.BK",
+            "SANRIO80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1221,
+              "ebitda_usd": 518464800.0,
+              "free_cash_flow_usd": 295318800.0,
+              "gross_margin": 0.773169902312353,
+              "interest_coverage": 429.318918918919,
+              "market_cap_usd": 9542194435.3302,
+              "net_debt_usd": -670433400.0,
+              "net_income_usd": 344030400.0,
+              "net_margin": 0.281356910267508,
+              "operating_margin": 0.401189151312807,
+              "pe": 26.687528,
+              "roa": 0.249870736004027,
+              "shares_outstanding": 1212444700.0
+            }
+          },
+          "head_listing_id": 572941,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.8786,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.29311266647225
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3877,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4156,
+                "requested_n": 3,
+                "value": 0.2916,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sanrio Co. Ltd.",
+          "score": 9542194435.3302,
+          "ticker": "8136.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1019,
+              "ebitda_usd": 123591487.03065,
+              "free_cash_flow_usd": 25807821.404,
+              "gross_margin": 0.563,
+              "interest_coverage": 27.6943,
+              "market_cap_usd": 9086053018.0096,
+              "net_debt_usd": -176167064.8112,
+              "net_income_usd": 110001233.36635,
+              "net_margin": 0.2966,
+              "normalized_income_usd": 113697209.377554,
+              "normalized_pe": 79.9144769493645,
+              "operating_margin": 0.337,
+              "pe": 73.169901,
+              "roa": 0.1391,
+              "shares_outstanding": 227492714.0
+            }
+          },
+          "head_listing_id": 230040,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3051,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.4254
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3249,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2515,
+                "requested_n": 3,
+                "value": 0.2209,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Anji Microelectronics Tech Co Ltd",
+          "score": 9086053018.0096,
+          "ticker": "688019.CG"
+        },
+        {
+          "also_known_as": [
+            "0QT5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0982,
+              "ebitda_usd": 641386200.0,
+              "free_cash_flow_usd": 449792630.0,
+              "gross_margin": 0.94906600249066,
+              "interest_coverage": 262.884518406455,
+              "market_cap_usd": 8848120856.1152,
+              "net_debt_usd": -366988860.0,
+              "net_income_usd": 485855920.0,
+              "net_margin": 0.515068493150685,
+              "operating_margin": 0.649190535491905,
+              "pe": 17.214765,
+              "roa": 0.444587767386864,
+              "shares_outstanding": 37079094.0
+            }
+          },
+          "head_listing_id": 1753116,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4749,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.404029304029304
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3774,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.7881,
+                "requested_n": 3,
+                "value": 0.6756,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Gaztransport & Technigaz SAS",
+          "score": 8848120856.1152,
+          "ticker": "GTT.PA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.334,
+              "ebitda_usd": 466098000.0,
+              "free_cash_flow_usd": 496615000.0,
+              "gross_margin": 0.8238,
+              "interest_coverage": 10.1444,
+              "market_cap_usd": 8664883200.0,
+              "net_debt_usd": -214050000.0,
+              "net_income_usd": 302175000.0,
+              "net_margin": 0.3832,
+              "normalized_income_usd": 302175000.0,
+              "normalized_pe": 28.6750498883098,
+              "operating_margin": 0.4377,
+              "pe": 39.502353,
+              "roa": 0.1378,
+              "shares_outstanding": 25806000.0
+            }
+          },
+          "head_listing_id": 21795,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5664,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.4592
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2213,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4153,
+                "requested_n": 3,
+                "value": 0.3277,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "InterDigital Inc",
+          "score": 8664883200.0,
+          "ticker": "IDCC.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1028,
+              "ebitda_usd": 249425800.739522,
+              "free_cash_flow_usd": -167541096.133576,
+              "gross_margin": 0.3764,
+              "interest_coverage": 108.8199,
+              "market_cap_usd": 8262615588.864001,
+              "net_debt_usd": -269309911.443958,
+              "net_income_usd": 220918565.49477,
+              "net_margin": 0.204,
+              "normalized_income_usd": 244570611.66239,
+              "normalized_pe": 33.784171911341,
+              "operating_margin": 0.272,
+              "pe": 38.223477,
+              "roa": 0.1161,
+              "shares_outstanding": 472709164.0
+            }
+          },
+          "head_listing_id": 310141,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4782,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.0797
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.315,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2881,
+                "requested_n": 3,
+                "value": 0.256,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "DELTON",
+          "score": 8262615588.864001,
+          "ticker": "1989.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.3031,
+              "ebitda_usd": 197217571.2,
+              "free_cash_flow_usd": 118728760.8,
+              "gross_margin": 0.419,
+              "interest_coverage": 108.5786,
+              "market_cap_usd": 7765308838.707201,
+              "net_debt_usd": -88527472.8,
+              "net_income_usd": 143441875.2,
+              "net_margin": 0.1857,
+              "normalized_income_usd": 144657214.97038,
+              "normalized_pe": 53.6807572321727,
+              "operating_margin": 0.2158,
+              "pe": 54.507914,
+              "roa": 0.1536,
+              "shares_outstanding": 347469100.0
+            }
+          },
+          "head_listing_id": 1417400,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.7416,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.4489
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4661,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4588,
+                "requested_n": 3,
+                "value": 0.4588,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fortune Electric Co Ltd",
+          "score": 7765308838.707201,
+          "ticker": "1519.TW"
+        },
+        {
+          "also_known_as": [
+            "LPGOLD13.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6007,
+              "ebitda_usd": 981271720.0,
+              "free_cash_flow_usd": -1000045618.0,
+              "gross_margin": 0.376283183675574,
+              "interest_coverage": 46.9768242445193,
+              "market_cap_usd": 7615334029.721601,
+              "net_debt_usd": 678766088.0,
+              "net_income_usd": 696114848.0,
+              "net_margin": 0.178291879804202,
+              "operating_margin": 0.239142621607795,
+              "pe": 10.387619,
+              "roa": 0.352886035703504,
+              "shares_outstanding": 176388500.0
+            }
+          },
+          "head_listing_id": 53041,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 2.6454,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.691720829374355
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.7631,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.6484,
+                "requested_n": 3,
+                "value": 0.3491,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Laopu Gold Co Ltd",
+          "score": 7615334029.721601,
+          "ticker": "6181.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0279,
+              "ebitda_usd": 316331730.0,
+              "free_cash_flow_usd": 117222105.0,
+              "gross_margin": 0.742797988105783,
+              "interest_coverage": 269.459597899859,
+              "market_cap_usd": 7118915726.540801,
+              "net_debt_usd": -127796097.0,
+              "net_income_usd": 193759852.0,
+              "net_margin": 0.428623307604707,
+              "operating_margin": 0.635321396937872,
+              "pe": 35.319463,
+              "roa": 0.261166740890749,
+              "shares_outstanding": 4425308800.0
+            }
+          },
+          "head_listing_id": 52824,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.783,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.403993924352767
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6678,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3452,
+                "requested_n": 3,
+                "value": 0.2535,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wanguo International Mining Group Ltd",
+          "score": 7118915726.540801,
+          "ticker": "3939.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4004,
+              "ebitda_usd": 416990343.434,
+              "free_cash_flow_usd": -108721925.088,
+              "gross_margin": 0.4478,
+              "interest_coverage": 35.2485909783808,
+              "market_cap_usd": 7034329209.241599,
+              "net_debt_usd": 118866046.726,
+              "net_income_usd": 272606243.119,
+              "net_margin": 0.1656,
+              "normalized_income_usd": 272606243.119,
+              "normalized_pe": 25.8039916062044,
+              "operating_margin": 0.2229,
+              "pe": 24.350027,
+              "roa": 0.1773,
+              "shares_outstanding": 7458128.0
+            }
+          },
+          "head_listing_id": 1414629,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6956,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.2851
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3728,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3759,
+                "requested_n": 3,
+                "value": 0.2481,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sam Yang Foods",
+          "score": 7034329209.241599,
+          "ticker": "003230.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0298,
+              "ebitda_usd": 279675299.00475,
+              "free_cash_flow_usd": 267486799.91385,
+              "gross_margin": 0.2761,
+              "interest_coverage": 73.2882,
+              "market_cap_usd": 6655916451.0208,
+              "net_debt_usd": -1235137206.7415,
+              "net_income_usd": 244266587.7273,
+              "net_margin": 0.084,
+              "normalized_income_usd": 245851294.172001,
+              "normalized_pe": 27.0729364001811,
+              "operating_margin": 0.0948,
+              "pe": 28.112637,
+              "roa": 0.0878,
+              "shares_outstanding": 153482763.0
+            }
+          },
+          "head_listing_id": 229412,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3257,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -4.4163
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2017,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2446,
+                "requested_n": 3,
+                "value": 0.2178,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zhejiang CFMoto Power Co Ltd",
+          "score": 6655916451.0208,
+          "ticker": "603129.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.002,
+              "ebitda_usd": 429191692.8,
+              "free_cash_flow_usd": 458640031.2,
+              "gross_margin": 0.9773,
+              "interest_coverage": 56778.4728,
+              "market_cap_usd": 6509446925.516801,
+              "net_debt_usd": -54938301.6,
+              "net_income_usd": 349829251.2,
+              "net_margin": 0.4893,
+              "normalized_income_usd": 350208057.363629,
+              "normalized_pe": 18.5873705320203,
+              "operating_margin": 0.5951,
+              "pe": 18.440969,
+              "roa": 0.3806,
+              "shares_outstanding": 281801560.0
+            }
+          },
+          "head_listing_id": 1417938,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.261,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.128
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2263,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.6124,
+                "requested_n": 3,
+                "value": 0.5624,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "International Games System Co Ltd",
+          "score": 6509446925.516801,
+          "ticker": "3293.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.3462,
+              "ebitda_usd": 264613193.2561,
+              "free_cash_flow_usd": 216684435.2504,
+              "gross_margin": 0.3941,
+              "interest_coverage": 44.0011,
+              "market_cap_usd": 6195973202.7392,
+              "net_debt_usd": -180328100.31385,
+              "net_income_usd": 212991726.28385,
+              "net_margin": 0.199,
+              "normalized_income_usd": 222386561.377419,
+              "normalized_pe": 27.8612752693443,
+              "operating_margin": 0.2624,
+              "pe": 24.045249,
+              "roa": 0.1395,
+              "shares_outstanding": 775282899.0
+            }
+          },
+          "head_listing_id": 229748,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5018,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.6815
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2415,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3573,
+                "requested_n": 3,
+                "value": 0.2065,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Neway Valve suzhou Co Ltd",
+          "score": 6195973202.7392,
+          "ticker": "603699.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0225,
+              "ebitda_usd": 411942398.4,
+              "free_cash_flow_usd": 59321620.8,
+              "gross_margin": 0.5081,
+              "interest_coverage": 178.2347,
+              "market_cap_usd": 5784779549.900801,
+              "net_debt_usd": -384511202.4,
+              "net_income_usd": 249185695.2,
+              "net_margin": 0.226,
+              "normalized_income_usd": 249215987.265794,
+              "normalized_pe": 23.2119119377812,
+              "operating_margin": 0.3,
+              "pe": 23.876404,
+              "roa": 0.1469,
+              "shares_outstanding": 112222691.0
+            }
+          },
+          "head_listing_id": 1419068,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3628,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.9334
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 2.2754,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2114,
+                "requested_n": 3,
+                "value": 0.2114,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lotes Co Ltd",
+          "score": 5784779549.900801,
+          "ticker": "3533.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1294,
+              "ebitda_usd": 453536366.4,
+              "free_cash_flow_usd": 534335318.4,
+              "gross_margin": 0.172,
+              "interest_coverage": 285.7213,
+              "market_cap_usd": 5766099597.721601,
+              "net_debt_usd": -1224534074.4,
+              "net_income_usd": 264788596.8,
+              "net_margin": 0.099,
+              "normalized_income_usd": 277020024.185344,
+              "normalized_pe": 20.8147393484585,
+              "operating_margin": 0.1507,
+              "pe": 21.66205,
+              "roa": 0.0982,
+              "shares_outstanding": 235576000.0
+            }
+          },
+          "head_listing_id": 1419763,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.9224,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -2.7
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 2.9807,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4197,
+                "requested_n": 3,
+                "value": 0.3398,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "L&K Engineering Co Ltd",
+          "score": 5766099597.721601,
+          "ticker": "6139.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0338,
+              "ebitda_usd": 123471597.6,
+              "free_cash_flow_usd": 61061613.6,
+              "gross_margin": 0.4693,
+              "interest_coverage": 256.1586,
+              "market_cap_usd": 5588940051.251201,
+              "net_debt_usd": -234809203.2,
+              "net_income_usd": 89721091.2,
+              "net_margin": 0.1847,
+              "normalized_income_usd": 89932187.6575314,
+              "normalized_pe": 62.1461591986877,
+              "operating_margin": 0.2259,
+              "pe": 60.101376,
+              "roa": 0.1411,
+              "shares_outstanding": 71748000.0
+            }
+          },
+          "head_listing_id": 1420342,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4992,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.9017
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2432,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2806,
+                "requested_n": 3,
+                "value": 0.2207,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Syntec Technology Co., Ltd.",
+          "score": 5588940051.251201,
+          "ticker": "7750.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0049,
+              "ebitda_usd": 141645142.82565,
+              "free_cash_flow_usd": 94914993.4291,
+              "gross_margin": 0.7283,
+              "interest_coverage": 670.6312,
+              "market_cap_usd": 4714079193.2928,
+              "net_debt_usd": -142160726.7569,
+              "net_income_usd": 123530213.1757,
+              "net_margin": 0.3234,
+              "normalized_income_usd": 126576848.533257,
+              "normalized_pe": 37.2428232170293,
+              "operating_margin": 0.374,
+              "pe": 36.639478,
+              "roa": 0.2483,
+              "shares_outstanding": 141041779.0
+            }
+          },
+          "head_listing_id": 230508,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3202,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.0036
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2856,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2928,
+                "requested_n": 3,
+                "value": 0.2909,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "APT Medical Inc",
+          "score": 4714079193.2928,
+          "ticker": "688617.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.3631,
+              "ebitda_usd": 180026464.8,
+              "free_cash_flow_usd": 84335284.8,
+              "gross_margin": 0.3051,
+              "interest_coverage": 57.9576,
+              "market_cap_usd": 4030176092.9792004,
+              "net_debt_usd": -117475987.2,
+              "net_income_usd": 121710732.0,
+              "net_margin": 0.1664,
+              "normalized_income_usd": 121733245.462882,
+              "normalized_pe": 33.1066183083736,
+              "operating_margin": 0.2241,
+              "pe": 27.158217,
+              "roa": 0.1467,
+              "shares_outstanding": 125319146.0
+            }
+          },
+          "head_listing_id": 1420415,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5138,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.6525
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2773,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3941,
+                "requested_n": 3,
+                "value": 0.2081,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chenbro Micom Co Ltd",
+          "score": 4030176092.9792004,
+          "ticker": "8210.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0032,
+              "ebitda_usd": 151650720.69,
+              "free_cash_flow_usd": 83006412.748,
+              "gross_margin": 0.466,
+              "interest_coverage": 8925.3782,
+              "market_cap_usd": 3867052920.0127997,
+              "net_debt_usd": -62176019.297,
+              "net_income_usd": 114508890.146,
+              "net_margin": 0.2956,
+              "normalized_income_usd": 115942565.498085,
+              "normalized_pe": 33.3531770959187,
+              "operating_margin": 0.3552,
+              "pe": 36.94332,
+              "roa": 0.2234,
+              "shares_outstanding": 30555097.0
+            }
+          },
+          "head_listing_id": 1415127,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.9222,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.41
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6705,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2921,
+                "requested_n": 3,
+                "value": 0.2921,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sanil Electric Co., Ltd.",
+          "score": 3867052920.0127997,
+          "ticker": "062040.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0515,
+              "ebitda_usd": 159705343.4813,
+              "free_cash_flow_usd": 71358317.1018,
+              "gross_margin": 0.9246,
+              "interest_coverage": 637.8143,
+              "market_cap_usd": 3627832461.7215996,
+              "net_debt_usd": -108715797.2869,
+              "net_income_usd": 138837653.28385,
+              "net_margin": 0.2717,
+              "normalized_income_usd": 138292411.629919,
+              "normalized_pe": 26.2330551543923,
+              "operating_margin": 0.3266,
+              "pe": 24.356275,
+              "roa": 0.2145,
+              "shares_outstanding": 408189480.0
+            }
+          },
+          "head_listing_id": 230263,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5254,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.6807
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3426,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3436,
+                "requested_n": 3,
+                "value": 0.3383,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Xiamen Amoytop Biotech Co Ltd",
+          "score": 3627832461.7215996,
+          "ticker": "688278.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0596,
+              "ebitda_usd": 333693036.1046,
+              "free_cash_flow_usd": -163019610.6534,
+              "gross_margin": 0.2911,
+              "interest_coverage": 486.6818,
+              "market_cap_usd": 3276267479.8591995,
+              "net_debt_usd": -369145919.55275,
+              "net_income_usd": 294229067.651,
+              "net_margin": 0.1659,
+              "normalized_income_usd": 357661456.834376,
+              "normalized_pe": 9.16024753927107,
+              "operating_margin": 0.226,
+              "pe": 9.594249,
+              "roa": 0.0795,
+              "shares_outstanding": 348292006.0
+            }
+          },
+          "head_listing_id": 232799,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3569,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.1062
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3709,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2143,
+                "requested_n": 3,
+                "value": 0.2049,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shenzhen SC New Energy Technology Corp Class A",
+          "score": 3276267479.8591995,
+          "ticker": "300724.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0573,
+              "ebitda_usd": 192015779.1,
+              "free_cash_flow_usd": 112987070.7,
+              "interest_coverage": 149.040816326531,
+              "market_cap_usd": 3206965932.2368,
+              "net_debt_usd": -205859786.4,
+              "net_income_usd": 141314160.3,
+              "net_margin": 0.330728306386406,
+              "operating_margin": 0.418748643215132,
+              "pe": 20.211012,
+              "roa": 0.355161911004272,
+              "shares_outstanding": 396155797.0
+            }
+          },
+          "head_listing_id": 236343,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3108,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.2331118687735
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2472,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4989,
+                "requested_n": 3,
+                "value": 0.4556,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "AJ Bell plc",
+          "score": 3206965932.2368,
+          "ticker": "AJB.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0,
+              "ebitda_usd": 127272600.0,
+              "free_cash_flow_usd": 77754600.0,
+              "gross_margin": 0.753408751617291,
+              "market_cap_usd": 2434708994.9112,
+              "net_debt_usd": -87532200.0,
+              "net_income_usd": 83745900.0,
+              "net_margin": 0.220498954981256,
+              "operating_margin": 0.287711906578642,
+              "pe": 29.544839,
+              "roa": 0.389624093207298,
+              "shares_outstanding": 354109341.0
+            }
+          },
+          "head_listing_id": 574438,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.1898,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.687753687753688
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3007,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.5537,
+                "requested_n": 3,
+                "value": 0.3656,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "RAKUS Co., Ltd.",
+          "score": 2434708994.9112,
+          "ticker": "3923.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6599,
+              "ebitda_usd": 202967474.2686,
+              "free_cash_flow_usd": 158340065.7618,
+              "gross_margin": 0.51726612086762,
+              "interest_coverage": 10.0738435655976,
+              "market_cap_usd": 2209598430.4128,
+              "net_debt_usd": 182952480.0,
+              "net_income_usd": 83678651.5248,
+              "net_margin": 0.131059764377673,
+              "operating_margin": 0.19213056130056,
+              "pe": 20.298038,
+              "roa": 0.156197713748568,
+              "shares_outstanding": 6017097000.0
+            }
+          },
+          "head_listing_id": 49804,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3809,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.757565672340771
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.264,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.364,
+                "requested_n": 3,
+                "value": 0.364,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MRDIYT",
+          "score": 2209598430.4128,
+          "ticker": "MRDIYT.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0384,
+              "ebitda_usd": 70072541.8079,
+              "free_cash_flow_usd": 42457207.16705,
+              "gross_margin": 0.382,
+              "interest_coverage": 88.6075,
+              "market_cap_usd": 2053579812.8639998,
+              "net_debt_usd": -59152899.17165,
+              "net_income_usd": 64197381.64225,
+              "net_margin": 0.132,
+              "normalized_income_usd": 70562387.7350961,
+              "normalized_pe": 29.1030374506814,
+              "operating_margin": 0.1572,
+              "pe": 25.791338,
+              "roa": 0.1069,
+              "shares_outstanding": 312795823.0
+            }
+          },
+          "head_listing_id": 232770,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2814,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.8442
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3207,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2389,
+                "requested_n": 3,
+                "value": 0.2389,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shenzhen Sinexcel Electric Co Ltd",
+          "score": 2053579812.8639998,
+          "ticker": "300693.CS"
+        },
+        {
+          "also_known_as": [
+            "257720.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0976,
+              "ebitda_usd": 182866878.012,
+              "free_cash_flow_usd": 76728241.415,
+              "gross_margin": 0.3064,
+              "interest_coverage": 28.0847,
+              "market_cap_usd": 2042700260.9664,
+              "net_debt_usd": -41558725.229,
+              "net_income_usd": 128901981.621,
+              "net_margin": 0.1513,
+              "normalized_income_usd": 125636064.73132,
+              "normalized_pe": 16.2588685449106,
+              "operating_margin": 0.1826,
+              "pe": 14.614598,
+              "roa": 0.219,
+              "shares_outstanding": 61048708.0
+            }
+          },
+          "head_listing_id": 1420884,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.4797,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.2273
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.8903,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4689,
+                "requested_n": 3,
+                "value": 0.3286,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Silicon2 Co. Ltd.",
+          "score": 2042700260.9664,
+          "ticker": "257720.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0161,
+              "ebitda_usd": 136033234.596,
+              "free_cash_flow_usd": 54308767.618,
+              "gross_margin": 0.7626,
+              "interest_coverage": 446.7874,
+              "market_cap_usd": 1986825368.3711998,
+              "net_debt_usd": -51347788.8,
+              "net_income_usd": 63449061.431,
+              "net_margin": 0.157,
+              "normalized_income_usd": 62343888.5575839,
+              "normalized_pe": 31.8688072614538,
+              "operating_margin": 0.3236,
+              "pe": 30.190751,
+              "roa": 0.3037,
+              "shares_outstanding": 12421540.0
+            }
+          },
+          "head_listing_id": 1416711,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.3379,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.3775
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5297,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.5259,
+                "requested_n": 3,
+                "value": 0.2621,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "d'Alba Global",
+          "score": 1986825368.3711998,
+          "ticker": "483650.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.774,
+              "ebitda_usd": 192120735.5,
+              "free_cash_flow_usd": 132132566.5,
+              "gross_margin": 0.1010446551834,
+              "interest_coverage": 9.13767402883498,
+              "market_cap_usd": 1970364013.3632002,
+              "net_debt_usd": 326656894.5,
+              "net_income_usd": 125966622.5,
+              "net_margin": 0.0672392043689484,
+              "operating_margin": 0.0892283999753345,
+              "pe": 15.957746,
+              "roa": 0.104340983419503,
+              "shares_outstanding": 691680000.0
+            }
+          },
+          "head_listing_id": 52993,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3803,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 1.70026881091136
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2054,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2948,
+                "requested_n": 3,
+                "value": 0.2651,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China Tobacco International HK Co Ltd",
+          "score": 1970364013.3632002,
+          "ticker": "6055.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4935,
+              "ebitda_usd": 129997064.32595,
+              "free_cash_flow_usd": 23492847.83625,
+              "gross_margin": 0.3086,
+              "interest_coverage": 40.5408,
+              "market_cap_usd": 1950949569.024,
+              "net_debt_usd": 109372037.0312,
+              "net_income_usd": 108352525.80715,
+              "net_margin": 0.1276,
+              "normalized_income_usd": 108993691.210288,
+              "normalized_pe": 17.8996559099913,
+              "operating_margin": 0.1616,
+              "pe": 16.323232,
+              "roa": 0.1739,
+              "shares_outstanding": 272709679.0
+            }
+          },
+          "head_listing_id": 231940,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3477,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.8413
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2581,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.387,
+                "requested_n": 3,
+                "value": 0.387,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Yankershop Food Co Ltd",
+          "score": 1950949569.024,
+          "ticker": "002847.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.948,
+              "ebitda_usd": 192502000.0,
+              "free_cash_flow_usd": 157637000.0,
+              "gross_margin": 0.2396,
+              "interest_coverage": 495.7628,
+              "market_cap_usd": 1795510656.0,
+              "net_debt_usd": 171759000.0,
+              "net_income_usd": 156133000.0,
+              "net_margin": 0.1065,
+              "normalized_income_usd": 158166526.85608,
+              "normalized_pe": 11.352026826977,
+              "operating_margin": 0.1163,
+              "pe": 11.971429,
+              "roa": 0.1226,
+              "shares_outstanding": 36202068.0
+            }
+          },
+          "head_listing_id": 18023,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.8154,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.8922
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3807,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3083,
+                "requested_n": 3,
+                "value": 0.3083,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GigaCloud Technology Inc Class A Ordinary Shares",
+          "score": 1795510656.0,
+          "ticker": "GCT.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0,
+              "ebitda_usd": 209825491.2,
+              "free_cash_flow_usd": 73115390.4,
+              "gross_margin": 0.5796,
+              "interest_coverage": 666.267228108304,
+              "market_cap_usd": 1560398697.6768,
+              "net_debt_usd": -220525814.4,
+              "net_income_usd": 159576518.4,
+              "net_margin": 0.4339,
+              "normalized_income_usd": 159591284.225109,
+              "normalized_pe": 9.77746814466259,
+              "operating_margin": 0.5169,
+              "pe": 9.748549,
+              "roa": 0.2206,
+              "shares_outstanding": 989146670.0
+            }
+          },
+          "head_listing_id": 1419297,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.6478,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.10175868597505
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.458,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3339,
+                "requested_n": 3,
+                "value": 0.3339,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Jinan Acetate Chemical Co Ltd",
+          "score": 1560398697.6768,
+          "ticker": "4763.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1011,
+              "ebitda_usd": 71819357.4,
+              "free_cash_flow_usd": 41119287.3,
+              "gross_margin": 0.576848711433533,
+              "interest_coverage": 560.299484186943,
+              "market_cap_usd": 1464785118.1089,
+              "net_debt_usd": -85072598.1,
+              "net_income_usd": 48303063.9,
+              "net_margin": 0.243347087813664,
+              "operating_margin": 0.327734473031082,
+              "pe": 30.324411,
+              "roa": 0.223386334352207,
+              "shares_outstanding": 11760380.0
+            }
+          },
+          "head_listing_id": 572277,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3669,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.18453577391657
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2737,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.3113,
+                "requested_n": 3,
+                "value": 0.2402,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "santec Holdings Corporation",
+          "score": 1464785118.1089,
+          "ticker": "6777.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0767,
+              "ebitda_usd": 37904314.5512162,
+              "free_cash_flow_usd": 4803760.75888716,
+              "gross_margin": 0.5932,
+              "interest_coverage": 78.5408,
+              "market_cap_usd": 1357727554.5856,
+              "net_debt_usd": -12444364.8,
+              "net_income_usd": 31015339.7995086,
+              "net_margin": 0.1718,
+              "normalized_income_usd": 33231899.7596609,
+              "normalized_pe": 40.8561522033026,
+              "operating_margin": 0.2279,
+              "pe": 38.284403,
+              "roa": 0.1915,
+              "shares_outstanding": 18158060.0
+            }
+          },
+          "head_listing_id": 243697,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4108,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.3283
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4674,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.2737,
+                "requested_n": 3,
+                "value": 0.2737,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shelly Group SE",
+          "score": 1357727554.5856,
+          "ticker": "SLYG.XETRA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2284,
+              "ebitda_usd": 226494554.0,
+              "free_cash_flow_usd": 98747792.0,
+              "gross_margin": 0.764307138663793,
+              "interest_coverage": 189.782479383534,
+              "market_cap_usd": 1160509324.0832002,
+              "net_debt_usd": -24325301.0,
+              "net_income_usd": 157668082.0,
+              "net_margin": 0.120134943073479,
+              "operating_margin": 0.151908257712418,
+              "pe": 8.962855,
+              "roa": 0.257492319245226,
+              "shares_outstanding": 398107102.0
+            }
+          },
+          "head_listing_id": 52001,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.8905,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.107399054725175
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5082,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4446,
+                "requested_n": 3,
+                "value": 0.2483,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shanghai Chicmax Cosmetic Co",
+          "score": 1160509324.0832002,
+          "ticker": "2145.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0445,
+              "ebitda_usd": 39227760.0,
+              "free_cash_flow_usd": 19283680.0,
+              "gross_margin": 0.46031746031746,
+              "interest_coverage": 286.0,
+              "market_cap_usd": 1085142810.1952,
+              "net_debt_usd": -31907020.0,
+              "net_income_usd": 27868880.0,
+              "net_margin": 0.197012138188609,
+              "operating_margin": 0.262371615312792,
+              "pe": 28.963964,
+              "roa": 0.313521545319465,
+              "shares_outstanding": 250000000.0
+            }
+          },
+          "head_listing_id": 236397,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3678,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.521885521885522
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4514,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4121,
+                "requested_n": 3,
+                "value": 0.4121,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Applied Nutrition Plc",
+          "score": 1085142810.1952,
+          "ticker": "APN.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0,
+              "ebitda_usd": 132761600.0,
+              "free_cash_flow_usd": 98918400.0,
+              "gross_margin": 0.44657962321079,
+              "market_cap_usd": 1075327666.9821,
+              "net_debt_usd": -141120000.0,
+              "net_income_usd": 90182400.0,
+              "net_margin": 0.253066575672132,
+              "operating_margin": 0.362295935777016,
+              "pe": 12.107818,
+              "roa": 0.429309162921776,
+              "shares_outstanding": 59950923.0
+            }
+          },
+          "head_listing_id": 574960,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.304,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.06295796374855
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.576,
+                "requested_n": 3,
+                "value": 0.5292,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ANYCOLOR Inc.",
+          "score": 1075327666.9821,
+          "ticker": "5032.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.7813,
+              "ebitda_usd": 30617600.0,
+              "free_cash_flow_usd": 940800.0,
+              "gross_margin": 0.283269834904084,
+              "interest_coverage": 31.8264462809917,
+              "market_cap_usd": 1008706846.6188,
+              "net_debt_usd": 42636800.0,
+              "net_income_usd": 19782400.0,
+              "net_margin": 0.206603836641936,
+              "operating_margin": 0.0957155270369628,
+              "pe": 54.546527,
+              "roa": 0.13368798927382,
+              "shares_outstanding": 8845962.0
+            }
+          },
+          "head_listing_id": 574515,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.8108,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 1.39255852842809
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3004,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4751,
+                "requested_n": 3,
+                "value": 0.2606,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Next Generation Technology Group, Inc.",
+          "score": 1008706846.6188,
+          "ticker": "319A.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.8199,
+              "ebitda_usd": 45673485.0,
+              "free_cash_flow_usd": 14283633.0,
+              "gross_margin": 0.944218670980239,
+              "interest_coverage": 59.471941017259,
+              "market_cap_usd": 990736847.6859,
+              "net_debt_usd": -14971729.5,
+              "net_income_usd": 34516501.5,
+              "net_margin": 0.154865599859221,
+              "operating_margin": 0.196780557146026,
+              "pe": 85.53393,
+              "roa": 0.149032085029686,
+              "shares_outstanding": 99918997.0
+            }
+          },
+          "head_listing_id": 571657,
+          "matched": {
+            "fundamental": {
+              "eps_diluted": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.6388,
+                "window": "3y_cagr"
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.329500234107382
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.7669,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "growth",
+                "latest": 0.4493,
+                "requested_n": 3,
+                "value": 0.2907,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Timee, Inc.",
+          "score": 990736847.6859,
+          "ticker": "215A.JP"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Compounder screen, global, all sectors, all conditions intersected: 3-year revenue CAGR > 20% (compound_growth, N=3, thr 0.20), 3-year EPS CAGR > 25% (compound_growth, N=3, thr 0.25 — so EPS compounding faster than sales = margin/operating leverage), ROE sustained > 20% every year (sustained_above, N=3), AND net_debt/EBITDA < 2x (net debt, not gross). 60 matches. Top: NVIDIA, Eli Lilly, Arista, Amphenol, 6669.TW, Vertiv. The EPS-CAGR (25%) > revenue-CAGR (20%) thresholds encode the 'earnings growing faster than sales' quality insight; every metric carries per-row evidence and both CAGRs use the same 3-year window."
+}

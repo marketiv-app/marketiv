@@ -1,0 +1,863 @@
+{
+  "id": "fe-06",
+  "question": "Find profitable software companies with free cash flow above $500M, FCF yield above 4%, and net cash on the balance sheet (more cash than total debt). Any market.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "free_cash_flow",
+            "pattern": "above",
+            "threshold": 500000000
+          },
+          {
+            "concept": "fcf_yield",
+            "pattern": "above",
+            "threshold": 0.04
+          },
+          {
+            "metricA": "cash",
+            "relation": "higher_than",
+            "metricB": "total_debt",
+            "multiple": 1
+          },
+          {
+            "concept": "net_income",
+            "pattern": "above",
+            "threshold": 0
+          }
+        ],
+        "gics": "4510",
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "capex": {
+            "sign": "stored NEGATIVE = cash OUTFLOW (capex/dividends/buybacks/debt-repayment spend cash); a BIGGER outflow is MORE negative — do not read the minus as 'less'."
+          },
+          "cash": {
+            "definition": "Cash & cash equivalents (IAS 7 / ASC 305: ≤3-month highly-liquid); EXCLUDES marketable / short-term investments (see short_term_investments, cash_and_st_investments). Validated exact vs SEC filings."
+          },
+          "total_debt": {
+            "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+          }
+        }
+      },
+      "capped": false,
+      "count": 15,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "0A2W.LSE",
+            "0NW4.LSE",
+            "SAP.US"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -839517000.0,
+              "dividend_yield": 0.013699,
+              "fcf_margin": 0.2286,
+              "market_cap_usd": 243060136861.69598,
+              "net_debt_usd": -4568800.0,
+              "net_margin": 0.2041,
+              "operating_cash_flow_usd": 10810923000.0,
+              "pe": 27.320359,
+              "revenue_usd": 43624044600.0,
+              "roe": 0.1742,
+              "total_debt_usd": 12001095400.0
+            }
+          },
+          "head_listing_id": 243596,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.09952,
+                "relation": "higher_than",
+                "value_a": 8220000000.0,
+                "value_b": 7476000000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.041445
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 9971406000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 8904591200.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SAP SE",
+          "score": 243060136861.69598,
+          "ticker": "SAP.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0Y0Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -600406000.0,
+              "dividend_yield": 0.038357,
+              "fcf_margin": 0.1721,
+              "market_cap_usd": 105823141888.0,
+              "net_debt_usd": -1776475000.0,
+              "net_margin": 0.1066,
+              "operating_cash_flow_usd": 13182094000.0,
+              "pe": 13.576677,
+              "revenue_usd": 73100595000.0,
+              "roe": 0.2443,
+              "total_debt_usd": 8388770000.0
+            }
+          },
+          "head_listing_id": 607,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.40278,
+                "relation": "higher_than",
+                "value_a": 11478729000.0,
+                "value_b": 8182866000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.120973
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 12581688000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7789752000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Accenture plc",
+          "score": 105823141888.0,
+          "ticker": "ACN.US"
+        },
+        {
+          "also_known_as": [
+            "0K6G.LSE",
+            "NETEASE80.BK",
+            "NTES.US"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -275759550.0,
+              "dividend_yield": 0.028346,
+              "fcf_margin": 0.4412,
+              "market_cap_usd": 78386732662.78401,
+              "net_debt_usd": -5779663895.0,
+              "net_margin": 0.2984,
+              "operating_cash_flow_usd": 7593101755.0,
+              "pe": 15.736074,
+              "revenue_usd": 16586338735.0,
+              "roe": 0.2072,
+              "total_debt_usd": 1588541700.0
+            }
+          },
+          "head_listing_id": 53988,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 7.00887,
+                "relation": "higher_than",
+                "value_a": 47167904000.0,
+                "value_b": 6729742000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.094617
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7317342205.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 4949248605.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NetEase Inc",
+          "score": 78386732662.78401,
+          "ticker": "9999.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "capex_usd": -576802800.0,
+              "dividend_yield": 0.008172,
+              "fcf_margin": 0.0968274777941867,
+              "market_cap_usd": 39778393837.2786,
+              "net_debt_usd": -1069859700.0,
+              "net_margin": 0.0754251014518804,
+              "operating_cash_flow_usd": 2762316900.0,
+              "pe": 22.912047,
+              "revenue_usd": 22571217900.0,
+              "roe": 0.130274435013677,
+              "total_debt_usd": 3082054500.0
+            }
+          },
+          "head_listing_id": 573473,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.34713,
+                "relation": "higher_than",
+                "value_a": 659034000000.0,
+                "value_b": 489215000000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.056248
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2185514100.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1702436400.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NEC Corporation",
+          "score": 39778393837.2786,
+          "ticker": "6701.JP"
+        },
+        {
+          "also_known_as": [
+            "0HB4.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -147914900.0,
+              "dividend_yield": 0.012329,
+              "fcf_margin": 0.2562,
+              "market_cap_usd": 32402061441.024,
+              "net_debt_usd": -2606957280.0,
+              "net_margin": 0.2133,
+              "operating_cash_flow_usd": 1964012900.0,
+              "pe": 22.57732,
+              "revenue_usd": 7088607420.0,
+              "roe": 0.1421,
+              "total_debt_usd": 3858008940.0
+            }
+          },
+          "head_listing_id": 1752946,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.30172,
+                "relation": "higher_than",
+                "value_a": 4125400000.0,
+                "value_b": 3169200000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.055253
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1816098000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1511930140.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dassault Systemes SE",
+          "score": 32402061441.024,
+          "ticker": "DSY.PA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "capex_usd": -60664000.0,
+              "fcf_margin": 0.3975,
+              "market_cap_usd": 30704345088.0,
+              "net_debt_usd": -830726000.0,
+              "net_margin": 0.4199,
+              "operating_cash_flow_usd": 2021397000.0,
+              "pe": 15.421208,
+              "revenue_usd": 4933060000.0,
+              "roe": 0.2077,
+              "total_debt_usd": 60212000.0
+            }
+          },
+          "head_listing_id": 49246,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 21.76788,
+                "relation": "higher_than",
+                "value_a": 1272877000.0,
+                "value_b": 58475000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.063803
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1960733000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2071222000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zoom Video Communications Inc",
+          "score": 30704345088.0,
+          "ticker": "ZM.US"
+        },
+        {
+          "also_known_as": [
+            "0QZ5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -319000000.0,
+              "dividend_yield": 0.022743,
+              "fcf_margin": 0.12,
+              "market_cap_usd": 27329939456.0,
+              "net_debt_usd": 1056000000.0,
+              "net_margin": 0.1026,
+              "operating_cash_flow_usd": 2917000000.0,
+              "pe": 12.077253,
+              "revenue_usd": 21642000000.0,
+              "roe": 0.1535,
+              "total_debt_usd": 2094000000.0
+            }
+          },
+          "head_listing_id": 9083,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.65017,
+                "relation": "higher_than",
+                "value_a": 1901000000.0,
+                "value_b": 1152000000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.102128
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2598000000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2220000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cognizant Technology Solutions Corp Class A",
+          "score": 27329939456.0,
+          "ticker": "CTSH.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "capex_usd": -27842000.0,
+              "fcf_margin": 0.2723,
+              "market_cap_usd": 14296673280.0,
+              "net_debt_usd": -898507000.0,
+              "net_margin": 0.0722,
+              "operating_cash_flow_usd": 598398000.0,
+              "pe": 95.22,
+              "revenue_usd": 2095586000.0,
+              "roe": 0.0618,
+              "total_debt_usd": 159273000.0
+            }
+          },
+          "head_listing_id": 10764,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 6.67717,
+                "relation": "higher_than",
+                "value_a": 1097220000.0,
+                "value_b": 164324000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.041275
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 570556000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 151365000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dynatrace Holdings LLC",
+          "score": 14296673280.0,
+          "ticker": "DT.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "capex_usd": -24964000.0,
+              "fcf_margin": 0.2905,
+              "market_cap_usd": 13604754432.0,
+              "net_debt_usd": 559677000.0,
+              "net_margin": 0.1336,
+              "operating_cash_flow_usd": 730747000.0,
+              "pe": 43.654402,
+              "revenue_usd": 2429657000.0,
+              "roe": 0.1069,
+              "total_debt_usd": 1455030000.0
+            }
+          },
+          "head_listing_id": 44913,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.58012,
+                "relation": "higher_than",
+                "value_a": 1015400000.0,
+                "value_b": 642608000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.051905
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 705783000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 324616000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Tyler Technologies Inc",
+          "score": 13604754432.0,
+          "ticker": "TYL.US"
+        },
+        {
+          "also_known_as": [
+            "WISE.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -21400000.0,
+              "fcf_margin": 2.79012482868467,
+              "market_cap_usd": 12463851520.0,
+              "net_debt_usd": -13074804154.7413,
+              "net_margin": 0.184724228617995,
+              "operating_cash_flow_usd": 7553900000.0,
+              "pe": 26.16147,
+              "revenue_usd": 2699700000.0,
+              "roe": 0.272320209687108,
+              "total_debt_usd": 404858843.605971
+            }
+          },
+          "head_listing_id": 295710,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 26.83089,
+                "relation": "higher_than",
+                "value_a": 12978100000.0,
+                "value_b": 483700000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.601752
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7532500000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 498700000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wise Group plc Class A Ordinary Shares",
+          "score": 12463851520.0,
+          "ticker": "WSE.US"
+        },
+        {
+          "also_known_as": [
+            "018260.KQ"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -257571657.133,
+              "dividend_yield": 0.013101,
+              "fcf_margin": 0.0637,
+              "market_cap_usd": 12372161226.3424,
+              "net_debt_usd": -943152870.884,
+              "net_margin": 0.0464,
+              "operating_cash_flow_usd": 872352669.048,
+              "pe": 29.411765,
+              "revenue_usd": 9655115750.301,
+              "roe": 0.0646,
+              "total_debt_usd": 590401335.328
+            }
+          },
+          "head_listing_id": 1414982,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.90796,
+                "relation": "higher_than",
+                "value_a": 1558981444010.0,
+                "value_b": 817091707590.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.04663
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 614781011.915
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 448296617.832
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Samsung SDS Co Ltd",
+          "score": 12372161226.3424,
+          "ticker": "018260.KO"
+        },
+        {
+          "also_known_as": [
+            "0XNH.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -115074000.0,
+              "fcf_margin": 0.3409,
+              "market_cap_usd": 11458585600.0,
+              "net_debt_usd": -364694000.0,
+              "net_margin": 0.0959,
+              "operating_cash_flow_usd": 1235256000.0,
+              "pe": 38.844156,
+              "revenue_usd": 3286081000.0,
+              "roe": 0.1732,
+              "total_debt_usd": 183333000.0
+            }
+          },
+          "head_listing_id": 10475,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 3.25435,
+                "relation": "higher_than",
+                "value_a": 602442000.0,
+                "value_b": 185119000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.096997
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1120182000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 315195000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "DocuSign Inc",
+          "score": 11458585600.0,
+          "ticker": "DOCU.US"
+        },
+        {
+          "also_known_as": [
+            "0TZZ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "capex_usd": -198473000.0,
+              "fcf_margin": 0.1907,
+              "market_cap_usd": 11281729536.0,
+              "net_debt_usd": -721400000.0,
+              "net_margin": 0.0426,
+              "operating_cash_flow_usd": 856365000.0,
+              "pe": 80.512456,
+              "revenue_usd": 3448999000.0,
+              "roe": 0.0886,
+              "total_debt_usd": 236914000.0
+            }
+          },
+          "head_listing_id": 21273,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 3.36342,
+                "relation": "higher_than",
+                "value_a": 882242000.0,
+                "value_b": 262305000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.058559
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 657892000.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 146854000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "HubSpot Inc",
+          "score": 11281729536.0,
+          "ticker": "HUBS.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "capex_usd": -15348318.005,
+              "dividend_yield": 0.000943,
+              "fcf_margin": 1.5269,
+              "market_cap_usd": 7419957747.3024,
+              "net_debt_usd": -1245574699.59,
+              "net_margin": 0.1531,
+              "operating_cash_flow_usd": 436609287.686,
+              "pe": 265.09375,
+              "revenue_usd": 346445628.42,
+              "roe": 0.1276,
+              "total_debt_usd": 400755123.51
+            }
+          },
+          "head_listing_id": 232870,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 9.23329,
+                "relation": "higher_than",
+                "value_a": 9251245571.0,
+                "value_b": 1001944358.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.070524
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 528978078.89
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 53026069.35
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Beijing Compass Technology Develop",
+          "score": 7419957747.3024,
+          "ticker": "300803.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "capex_usd": -25508438.2,
+              "dividend_yield": 0.023154,
+              "fcf_margin": 0.1316,
+              "market_cap_usd": 4957654325.657599,
+              "net_debt_usd": -237137971.0,
+              "net_margin": 0.0741,
+              "operating_cash_flow_usd": 432736851.4,
+              "pe": 16.722478,
+              "revenue_usd": 4363211713.0,
+              "roe": 0.1579,
+              "total_debt_usd": 379617247.1
+            }
+          },
+          "head_listing_id": 1415132,
+          "matched": {
+            "fundamental": {
+              "cash": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "total_debt",
+                "ratio": 1.4785,
+                "relation": "higher_than",
+                "value_a": 1140987852000.0,
+                "value_b": 771718752000.0
+              },
+              "fcf_yield": {
+                "kind": "level",
+                "value": 0.105935
+              },
+              "free_cash_flow": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 574043001.0
+              },
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 323106147.7
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "LG CNS",
+          "score": 4957654325.657599,
+          "ticker": "064400.KO"
+        }
+      ],
+      "sort": "ta",
+      "universe": 1528,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 15,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 15 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Software sector (GICS 4510) global screen: FCF > $500M (absolute USD), FCF yield > 4% (FCF/market-cap ratio), profitable (net income > 0), AND net cash — cash > total debt (relation cash higher_than total_debt). 15 matches from a 1,528-stock software universe. Top: SAP, Accenture, Xiaomi(9999.HK), NEC(6701.JP), Dassault Systèmes, Zoom, Cognizant, Dynatrace. Note SAP shows net_debt −$4.6M (net cash). The two FCF conditions are kept distinct (absolute floor vs yield ratio) and net-cash is the true cash>debt structural test, not just 'has cash'."
+}

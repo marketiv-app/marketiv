@@ -1,0 +1,28 @@
+{
+  "id": "ma-01",
+  "question": "What assets across all markets — stocks, crypto, forex — are showing RSI above 70 right now?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["RSI above 70 overbought"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [{"anchor": [{"pattern": "overbought", "a": "rsi"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=27740 combined. All 40 returned results are Crypto (.CC): ETH-USD.CC (RSI 70.7), BTC-USD.CC (RSI 70.7), ALEX-USD.CC (RSI 71.2), BORG-USD.CC (RSI 70.6), CBETH-USD.CC (RSI 71.0), DMTR-USD.CC (RSI 87.4), EPIK-USD.CC (RSI 74.3), etc. Zero forex (.FOREX) or stock tickers appear despite those being in asset_type.",
+  "verdict": "PARTIAL",
+  "reason": "RSI values are all confirmed above 70 and crypto is included, but no forex or stock tickers appear in the 40-item buffer. The multi-asset breadth acceptance criterion fails — a blind client sees only crypto as overbought.",
+  "defects": [
+    {
+      "desc": "When asset_type includes multiple classes (Common Stock + Crypto + Currency), the result buffer is entirely populated by Crypto assets, giving a blind client a false impression that no forex or stock assets are overbought. Separate screens confirm stocks and forex DO have RSI-overbought hits, but the combined screen's ranking/volume causes crypto to crowd out the buffer entirely. No diversity guarantee or note is provided.",
+      "side": "server"
+    }
+  ]
+}

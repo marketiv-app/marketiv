@@ -1,0 +1,2648 @@
+{
+  "id": "cf-10",
+  "question": "I want financially strong companies — growing earnings, low debt-to-equity — that are showing bullish divergence on the daily chart. Any sector, global.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "net_income",
+            "pattern": "compound_growth",
+            "threshold": 0.0
+          },
+          {
+            "concept": "debt_to_equity",
+            "pattern": "low"
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "divergence_bull"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 50,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "close_vs_ema50": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "detail.osc": {
+            "definition": "[oscillator at prior pivot t(n), oscillator at t(m)] — the divergence read against the price pivots."
+          },
+          "detail.px": {
+            "definition": "[price at prior pivot t(n), price at t(m)] — the two points that define the divergence."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          },
+          "total_debt": {
+            "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 110.8244,
+              "market_cap_usd": 510873750.73279995,
+              "net_debt_ebitda": -1.6259,
+              "net_margin": 0.0616,
+              "operating_cash_flow_usd": 46351534.313,
+              "pe": 20.869344,
+              "revenue_usd": 414657068.385,
+              "roe": 0.0712,
+              "total_debt_usd": 8511408.458
+            },
+            "ta": {
+              "adx": 15.8104,
+              "close_vs_ema200": -0.2774,
+              "close_vs_ema50": -0.0638,
+              "rsi14": 46.0932
+            }
+          },
+          "head_listing_id": 1420186,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0237
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0308,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    20.6596,
+                    35.2612
+                  ],
+                  "px": [
+                    40450,
+                    37800
+                  ],
+                  "tn": "2026-06-08"
+                },
+                "kind": "signal",
+                "strength": 0.973,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "YG Entertainment Inc",
+          "score": 0.973,
+          "ticker": "122870.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 367.426770631616,
+              "market_cap_usd": 1026828782.3871999,
+              "net_debt_ebitda": -0.7944,
+              "net_margin": 0.3667,
+              "operating_cash_flow_usd": 42923043.60058,
+              "pe": 31.793313,
+              "revenue_usd": 77613113.8793,
+              "roe": 0.0661,
+              "total_debt_usd": 2344614.6403
+            },
+            "ta": {
+              "adx": 14.0934,
+              "close_vs_ema200": -0.0903,
+              "close_vs_ema50": 0.006,
+              "rsi14": 56.476
+            }
+          },
+          "head_listing_id": 233249,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0054
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1434,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    25.1513,
+                    39.4293
+                  ],
+                  "px": [
+                    5.03,
+                    5
+                  ],
+                  "tn": "2026-06-11"
+                },
+                "kind": "signal",
+                "strength": 0.952,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CATARC Automotive Proving Ground Co.Ltd.",
+          "score": 0.952,
+          "ticker": "301215.CS"
+        },
+        {
+          "also_known_as": [
+            "239.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 197.932234432234,
+              "market_cap_usd": 96875163.84,
+              "net_debt_ebitda": -2.86628738992634,
+              "net_margin": 0.42681855562201,
+              "operating_cash_flow_usd": 14490945.0,
+              "pe": 8.191126,
+              "revenue_usd": 27501056.0,
+              "roe": 0.125591205068415,
+              "total_debt_usd": 616029.0
+            },
+            "ta": {
+              "adx": 30.6434,
+              "close_vs_ema200": 0.0636,
+              "close_vs_ema50": 0.067,
+              "rsi14": 73.8044
+            }
+          },
+          "head_listing_id": 50475,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0066
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4501,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 29,
+                  "osc": [
+                    25.7079,
+                    40.9956
+                  ],
+                  "px": [
+                    2.32,
+                    2.3
+                  ],
+                  "tn": "2026-06-11"
+                },
+                "kind": "signal",
+                "strength": 0.932,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Pak Fah Yeow International Limited",
+          "score": 0.932,
+          "ticker": "0239.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 465.30706287683,
+              "market_cap_usd": 49530257.3178,
+              "net_debt_ebitda": -3.09142929018568,
+              "net_margin": 0.0633156581203371,
+              "operating_cash_flow_usd": 5244064.0,
+              "pe": 11.45336,
+              "revenue_usd": 77342208.0,
+              "roe": 0.239992723235149,
+              "total_debt_usd": 787500.0
+            },
+            "ta": {
+              "adx": 17.8548,
+              "close_vs_ema200": -0.0376,
+              "close_vs_ema50": 0.0155,
+              "rsi14": 59.7156
+            }
+          },
+          "head_listing_id": 571565,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.037
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2005,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 27,
+                  "osc": [
+                    17.8445,
+                    34.4633
+                  ],
+                  "px": [
+                    1900,
+                    1864
+                  ],
+                  "tn": "2026-06-02"
+                },
+                "kind": "signal",
+                "strength": 0.886,
+                "value": "2026-07-09"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Japaniace Co., Ltd.",
+          "score": 0.886,
+          "ticker": "9558.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 777.5384,
+              "market_cap_usd": 317759320.8832,
+              "net_debt_ebitda": -1.3548,
+              "net_margin": 0.1111,
+              "operating_cash_flow_usd": -4684465.744,
+              "pe": 10.363636,
+              "revenue_usd": 276023370.679,
+              "roe": 0.2461,
+              "total_debt_usd": 642639.431
+            },
+            "ta": {
+              "adx": 18.3622,
+              "close_vs_ema50": -0.272,
+              "rsi14": 39.1461
+            }
+          },
+          "head_listing_id": 3980477,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0052
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5426,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    25.3757,
+                    38.0326
+                  ],
+                  "px": [
+                    21266.666,
+                    20400
+                  ],
+                  "tn": "2026-06-09"
+                },
+                "kind": "signal",
+                "strength": 0.844,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "MNC Solution",
+          "score": 0.844,
+          "ticker": "484870.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 1157396.08666667,
+              "market_cap_usd": 13118677.1968,
+              "net_debt_ebitda": -2.57978881563752,
+              "net_margin": 0.051,
+              "operating_cash_flow_usd": 1889660.689,
+              "pe": 6.583333,
+              "revenue_usd": 38657838.66,
+              "roe": 0.0538,
+              "total_debt_usd": 153.3
+            },
+            "ta": {
+              "adx": 20.1412,
+              "close_vs_ema200": -0.4309,
+              "close_vs_ema50": -0.109,
+              "rsi14": 42.7366
+            }
+          },
+          "head_listing_id": 1418123,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 4.22201540738656e-06
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.19,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 24,
+                  "osc": [
+                    20.3849,
+                    36.0546
+                  ],
+                  "px": [
+                    2000,
+                    1792
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.818,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "PN Poong Nyun Co. Ltd",
+          "score": 0.818,
+          "ticker": "024940.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 1633.6317,
+              "market_cap_usd": 107961434.11199999,
+              "net_debt_ebitda": -2.3179,
+              "net_margin": 0.1673,
+              "operating_cash_flow_usd": 23217844.538,
+              "pe": 5.996287,
+              "revenue_usd": 111678949.907,
+              "roe": 0.0984,
+              "total_debt_usd": 700000.0
+            },
+            "ta": {
+              "adx": 15.4345,
+              "close_vs_ema200": -0.1798,
+              "close_vs_ema50": -0.0429,
+              "rsi14": 50.0571
+            }
+          },
+          "head_listing_id": 1419201,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0037
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1176,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 24,
+                  "osc": [
+                    19.5305,
+                    36.4847
+                  ],
+                  "px": [
+                    7800,
+                    7590
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.818,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Ubiquoss Holdings Inc",
+          "score": 0.818,
+          "ticker": "078070.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 37.3495455545101,
+              "market_cap_usd": 57762026.2912,
+              "net_debt_ebitda": -0.6038,
+              "net_margin": 0.1253,
+              "operating_cash_flow_usd": 10580848.775,
+              "pe": 9.326923,
+              "revenue_usd": 49649480.783,
+              "roe": 0.0393,
+              "total_debt_usd": 3786161.792
+            },
+            "ta": {
+              "adx": 26.9753,
+              "close_vs_ema200": -0.0548,
+              "close_vs_ema50": 0.0543,
+              "rsi14": 68.6026
+            }
+          },
+          "head_listing_id": 1417751,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0239
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.028,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 24,
+                  "osc": [
+                    21.9412,
+                    37.143
+                  ],
+                  "px": [
+                    12240,
+                    12130
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.818,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Sam-A Pharm. Co. Ltd",
+          "score": 0.818,
+          "ticker": "009300.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 65.469,
+              "market_cap_usd": 122608283.87840001,
+              "net_debt_ebitda": -4.1892,
+              "net_margin": 0.2113,
+              "operating_cash_flow_usd": 804336.0,
+              "pe": 35.967302,
+              "revenue_usd": 12204316.8,
+              "roe": 0.095,
+              "total_debt_usd": 859934.4
+            },
+            "ta": {
+              "adx": 23.8513,
+              "close_vs_ema200": -0.0806,
+              "close_vs_ema50": -0.0425,
+              "rsi14": 43.7873
+            }
+          },
+          "head_listing_id": 1419727,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0317
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.1323,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 27,
+                  "osc": [
+                    24.0065,
+                    37.1206
+                  ],
+                  "px": [
+                    135.5,
+                    133
+                  ],
+                  "tn": "2026-06-29"
+                },
+                "kind": "signal",
+                "strength": 0.775,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Major-Power Technology Co., Ltd.",
+          "score": 0.775,
+          "ticker": "6720.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 414878423.2448,
+              "net_debt_ebitda": -3.5514,
+              "net_margin": 0.219,
+              "operating_cash_flow_usd": 27953457.29033,
+              "pe": 28.040816,
+              "revenue_usd": 62645294.6431,
+              "roe": 0.0672,
+              "total_debt_usd": 1315937.1557
+            },
+            "ta": {
+              "adx": 31.0117,
+              "close_vs_ema200": -0.0251,
+              "close_vs_ema50": 0.1448,
+              "rsi14": 74.6837
+            }
+          },
+          "head_listing_id": 229330,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0064
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0903,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    18.5554,
+                    30.1777
+                  ],
+                  "px": [
+                    13.2,
+                    12.03
+                  ],
+                  "tn": "2026-05-29"
+                },
+                "kind": "signal",
+                "strength": 0.775,
+                "value": "2026-07-15"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Jiangsu Rutong Petro-Machinery",
+          "score": 0.775,
+          "ticker": "603036.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 236.6184,
+              "market_cap_usd": 1319698057.4208,
+              "net_debt_ebitda": -0.9484,
+              "net_margin": 0.1775,
+              "operating_cash_flow_usd": 34063604.41198,
+              "pe": 32.912281,
+              "revenue_usd": 279497249.65935,
+              "roe": 0.0881,
+              "total_debt_usd": 19954534.7885
+            },
+            "ta": {
+              "adx": 39.0649,
+              "close_vs_ema200": 0.1301,
+              "close_vs_ema50": 0.1982,
+              "rsi14": 73.411
+            }
+          },
+          "head_listing_id": 229193,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0354
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1912,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 22,
+                  "osc": [
+                    22.8796,
+                    38.2644
+                  ],
+                  "px": [
+                    14.17,
+                    13.96
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.773,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kuaijishan Shaoxing Rice Wine",
+          "score": 0.773,
+          "ticker": "601579.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 99.1094,
+              "market_cap_usd": 48663592.1408,
+              "net_debt_ebitda": -2.4267,
+              "net_margin": 0.0452,
+              "operating_cash_flow_usd": 12578686.505,
+              "pe": 8.0,
+              "revenue_usd": 137243341.816,
+              "roe": 0.057,
+              "total_debt_usd": 1087020.2
+            },
+            "ta": {
+              "adx": 20.9876,
+              "close_vs_ema200": -0.1433,
+              "close_vs_ema50": 0.0068,
+              "rsi14": 56.3929
+            }
+          },
+          "head_listing_id": 1418761,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.01
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.3354,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 24,
+                  "osc": [
+                    21.3485,
+                    34.9898
+                  ],
+                  "px": [
+                    5310,
+                    5170
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.744,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Yura Tech. Co. Ltd",
+          "score": 0.744,
+          "ticker": "048430.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 21021.6435,
+              "market_cap_usd": 20591500.6976,
+              "net_debt_ebitda": -0.471846113810448,
+              "net_margin": 0.0741,
+              "operating_cash_flow_usd": 3821591.592,
+              "pe": 4.099424,
+              "revenue_usd": 68627200.103,
+              "roe": 0.0999,
+              "total_debt_usd": 1050000.0
+            },
+            "ta": {
+              "adx": 27.098,
+              "close_vs_ema200": -0.0143,
+              "close_vs_ema50": 0.1087,
+              "rsi14": 69.3144
+            }
+          },
+          "head_listing_id": 1419214,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.00103437928374001
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0246,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 25,
+                  "osc": [
+                    20.2868,
+                    32.6047
+                  ],
+                  "px": [
+                    4460,
+                    4380
+                  ],
+                  "tn": "2026-06-25"
+                },
+                "kind": "signal",
+                "strength": 0.691,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hanchang Ind.Co.Ltd",
+          "score": 0.691,
+          "ticker": "079170.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 773.427384143009,
+              "market_cap_usd": 447398919.0656,
+              "net_debt_ebitda": -0.8765,
+              "net_margin": 0.2305,
+              "operating_cash_flow_usd": 16777228.96564,
+              "pe": 26.125729,
+              "revenue_usd": 68403346.60275,
+              "roe": 0.0954,
+              "total_debt_usd": 33299.06005
+            },
+            "ta": {
+              "adx": 10.3026,
+              "close_vs_ema200": -0.085,
+              "close_vs_ema50": -0.0161,
+              "rsi14": 52.3162
+            }
+          },
+          "head_listing_id": 233078,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0002
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0306,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 21,
+                  "osc": [
+                    23.8345,
+                    37.4569
+                  ],
+                  "px": [
+                    14.8417,
+                    13.9
+                  ],
+                  "tn": "2026-06-29"
+                },
+                "kind": "signal",
+                "strength": 0.681,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Ningbo Color Master Batch Co. Ltd.",
+          "score": 0.681,
+          "ticker": "301019.CS"
+        },
+        {
+          "also_known_as": [
+            "251120.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 275.8702,
+              "market_cap_usd": 55404052.48,
+              "net_debt_ebitda": -1.2643,
+              "net_margin": 0.3294,
+              "operating_cash_flow_usd": 4823158.403,
+              "pe": 12.796143,
+              "revenue_usd": 13197169.244,
+              "roe": 0.0875,
+              "total_debt_usd": 224016.002
+            },
+            "ta": {
+              "adx": 27.2608,
+              "close_vs_ema200": -0.2551,
+              "close_vs_ema50": 0.0089,
+              "rsi14": 57.7254
+            }
+          },
+          "head_listing_id": 1420870,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0045
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1542,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 19,
+                  "osc": [
+                    21.0657,
+                    35.3285
+                  ],
+                  "px": [
+                    7840,
+                    7730
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.67,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bio-FD&C Co. Ltd.",
+          "score": 0.67,
+          "ticker": "251120.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 141.5316,
+              "market_cap_usd": 1009601798.8095999,
+              "net_debt_ebitda": -0.5418,
+              "net_margin": 0.1167,
+              "operating_cash_flow_usd": 69927331.08504,
+              "pe": 17.303922,
+              "revenue_usd": 362944414.9428,
+              "roe": 0.0843,
+              "total_debt_usd": 14476572.8604
+            },
+            "ta": {
+              "adx": 20.6062,
+              "close_vs_ema200": -0.2114,
+              "close_vs_ema50": -0.1054,
+              "rsi14": 42.5398
+            }
+          },
+          "head_listing_id": 232519,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0288
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1745,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    18.54,
+                    28.5537
+                  ],
+                  "px": [
+                    17.14,
+                    16.14
+                  ],
+                  "tn": "2026-06-09"
+                },
+                "kind": "signal",
+                "strength": 0.668,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hangzhou Zhongtai Cryogenic Technology Corp",
+          "score": 0.668,
+          "ticker": "300435.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 79.9464722901774,
+              "market_cap_usd": 137479578.16320002,
+              "net_debt_ebitda": -11.4156046595315,
+              "net_margin": 0.0418678572861735,
+              "operating_cash_flow_usd": 38795406.97607,
+              "pe": 6.777103,
+              "revenue_usd": 491470458.1358,
+              "roe": 0.0235645318210508,
+              "total_debt_usd": 1727242.60995
+            },
+            "ta": {
+              "adx": 15.3945,
+              "close_vs_ema200": -0.0895,
+              "close_vs_ema50": 0.0051,
+              "rsi14": 55.3138
+            }
+          },
+          "head_listing_id": 51727,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.002
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0756,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 17,
+                  "osc": [
+                    17.0715,
+                    32.5329
+                  ],
+                  "px": [
+                    0.69,
+                    0.68
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.659,
+                "value": "2026-07-22"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CRCC High-Tech Equip Corp",
+          "score": 0.659,
+          "ticker": "1786.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 310.535714285714,
+              "market_cap_usd": 147193810.0376,
+              "net_debt_ebitda": -0.408930965147453,
+              "net_margin": 0.178704455708965,
+              "operating_cash_flow_usd": 14156538.0,
+              "pe": 18.390805,
+              "revenue_usd": 48118753.2,
+              "roe": 0.20671893222755,
+              "total_debt_usd": 645469.8
+            },
+            "ta": {
+              "adx": 18.3819,
+              "close_vs_ema200": -0.0951,
+              "close_vs_ema50": -0.0295,
+              "rsi14": 45.658
+            }
+          },
+          "head_listing_id": 239204,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0151
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0815,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 17,
+                  "osc": [
+                    13.9892,
+                    29.3678
+                  ],
+                  "px": [
+                    222.5,
+                    215
+                  ],
+                  "tn": "2026-06-23"
+                },
+                "kind": "signal",
+                "strength": 0.659,
+                "value": "2026-07-16"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Quartix Holdings Plc",
+          "score": 0.659,
+          "ticker": "QTX.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 189.5019,
+              "market_cap_usd": 162901516.288,
+              "net_debt_ebitda": -3.3245,
+              "net_margin": 0.1269,
+              "operating_cash_flow_usd": 8773000.355,
+              "pe": 19.717038,
+              "revenue_usd": 65102780.001,
+              "roe": 0.0203,
+              "total_debt_usd": 23796.262
+            },
+            "ta": {
+              "adx": 12.9651,
+              "close_vs_ema200": -0.009,
+              "close_vs_ema50": 0.0055,
+              "rsi14": 50.4077
+            }
+          },
+          "head_listing_id": 1414705,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0001
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2395,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 31,
+                  "osc": [
+                    29.3673,
+                    39.4158
+                  ],
+                  "px": [
+                    60100,
+                    59100
+                  ],
+                  "tn": "2026-05-20"
+                },
+                "kind": "signal",
+                "strength": 0.655,
+                "value": "2026-07-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Cho Kwang Leat",
+          "score": 0.655,
+          "ticker": "004700.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 125.5765,
+              "market_cap_usd": 494194938.98239994,
+              "net_debt_ebitda": -7.4646,
+              "net_margin": 0.1219,
+              "operating_cash_flow_usd": 13958969.67751,
+              "pe": 35.165253,
+              "revenue_usd": 88358639.83115,
+              "roe": 0.0645,
+              "total_debt_usd": 6251324.79165
+            },
+            "ta": {
+              "adx": 19.6132,
+              "close_vs_ema200": -0.0685,
+              "close_vs_ema50": 0.0787,
+              "rsi14": 64.4392
+            }
+          },
+          "head_listing_id": 233186,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0375
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0515,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    25.3407,
+                    34.4468
+                  ],
+                  "px": [
+                    26.33,
+                    23.44
+                  ],
+                  "tn": "2026-06-11"
+                },
+                "kind": "signal",
+                "strength": 0.607,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Guangzhou Huayan Precision Machinery Co.Ltd.",
+          "score": 0.607,
+          "ticker": "301138.CS"
+        },
+        {
+          "also_known_as": [
+            "210540.KQ"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 101.855022017463,
+              "market_cap_usd": 92286595.072,
+              "net_debt_ebitda": -1.395,
+              "net_margin": 0.0666,
+              "operating_cash_flow_usd": 24290639.793,
+              "pe": 5.073996,
+              "revenue_usd": 274407066.094,
+              "roe": 0.081,
+              "total_debt_usd": 654919.475
+            },
+            "ta": {
+              "adx": 16.3611,
+              "close_vs_ema200": -0.0919,
+              "close_vs_ema50": -0.0075,
+              "rsi14": 52.6323
+            }
+          },
+          "head_listing_id": 1415530,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0029
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1209,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 27,
+                  "osc": [
+                    24.1595,
+                    34.3071
+                  ],
+                  "px": [
+                    10610,
+                    10140
+                  ],
+                  "tn": "2026-06-23"
+                },
+                "kind": "signal",
+                "strength": 0.6,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "DY Power Corp",
+          "score": 0.6,
+          "ticker": "210540.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 233.2329,
+              "market_cap_usd": 299129012.224,
+              "net_debt_ebitda": -0.7014,
+              "net_margin": 0.2176,
+              "operating_cash_flow_usd": 83078091.957,
+              "pe": 4.38782,
+              "revenue_usd": 325455232.452,
+              "roe": 0.2232,
+              "total_debt_usd": 7398470.912
+            },
+            "ta": {
+              "adx": 31.2479,
+              "close_vs_ema200": -0.3316,
+              "close_vs_ema50": -0.1461,
+              "rsi14": 33.6138
+            }
+          },
+          "head_listing_id": 1419059,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0233
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1946,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 28,
+                  "osc": [
+                    27.4678,
+                    37.2982
+                  ],
+                  "px": [
+                    45500,
+                    45200
+                  ],
+                  "tn": "2026-06-11"
+                },
+                "kind": "signal",
+                "strength": 0.596,
+                "value": "2026-07-22"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "AfreecaTV Co. Ltd",
+          "score": 0.596,
+          "ticker": "067160.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 30.7204,
+              "market_cap_usd": 21230239.744,
+              "net_debt_ebitda": -0.8714,
+              "net_margin": 0.0314,
+              "operating_cash_flow_usd": 4082244.061,
+              "pe": 14.913295,
+              "revenue_usd": 45571496.509,
+              "roe": 0.04,
+              "total_debt_usd": 1119300.0
+            },
+            "ta": {
+              "adx": 21.297,
+              "close_vs_ema200": -0.2668,
+              "close_vs_ema50": -0.0953,
+              "rsi14": 42.1527
+            }
+          },
+          "head_listing_id": 1420173,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0313
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0773,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 17,
+                  "osc": [
+                    22.1352,
+                    35.6492
+                  ],
+                  "px": [
+                    2405,
+                    2395
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.594,
+                "value": "2026-07-22"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Formetal Co. Ltd",
+          "score": 0.594,
+          "ticker": "119500.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 47.5667,
+              "market_cap_usd": 404339242.90559995,
+              "net_debt_ebitda": -10.991,
+              "net_margin": 0.0369,
+              "operating_cash_flow_usd": 32904217.78072,
+              "pe": 40.9375,
+              "revenue_usd": 292845209.1226,
+              "roe": 0.0342,
+              "total_debt_usd": 7253745.42975
+            },
+            "ta": {
+              "adx": 16.525,
+              "close_vs_ema200": -0.1123,
+              "close_vs_ema50": 0.0159,
+              "rsi14": 59.1959
+            }
+          },
+          "head_listing_id": 231500,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0229
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1369,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 19,
+                  "osc": [
+                    20.2189,
+                    32.4117
+                  ],
+                  "px": [
+                    5.98,
+                    5.76
+                  ],
+                  "tn": "2026-06-29"
+                },
+                "kind": "signal",
+                "strength": 0.573,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shandong Longji Machinery Co Ltd",
+          "score": 0.573,
+          "ticker": "002363.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 256.1626,
+              "market_cap_usd": 912494750.0031999,
+              "net_debt_ebitda": -1.2075,
+              "net_margin": 0.2034,
+              "operating_cash_flow_usd": 81512101.73392,
+              "pe": 13.849057,
+              "revenue_usd": 324057934.80355,
+              "roe": 0.1201,
+              "total_debt_usd": 7984279.1445
+            },
+            "ta": {
+              "adx": 11.4145,
+              "close_vs_ema200": -0.1647,
+              "close_vs_ema50": -0.0392,
+              "rsi14": 44.8129
+            }
+          },
+          "head_listing_id": 229964,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0145
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0931,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 23,
+                  "osc": [
+                    24.2833,
+                    34.988
+                  ],
+                  "px": [
+                    14.36,
+                    13.81
+                  ],
+                  "tn": "2026-06-11"
+                },
+                "kind": "signal",
+                "strength": 0.568,
+                "value": "2026-07-15"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Quechen Silicon Chemical Co. Ltd.",
+          "score": 0.568,
+          "ticker": "605183.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 5449.08441936481,
+              "market_cap_usd": 517662006.91199994,
+              "net_debt_ebitda": -0.9079,
+              "net_margin": 0.2109,
+              "operating_cash_flow_usd": 24079255.31726,
+              "pe": 20.703839,
+              "revenue_usd": 127036514.268246,
+              "roe": 0.0729,
+              "total_debt_usd": 622137.93829
+            },
+            "ta": {
+              "adx": 12.8946,
+              "close_vs_ema200": -0.1379,
+              "close_vs_ema50": -0.0198,
+              "rsi14": 51.6607
+            }
+          },
+          "head_listing_id": 231438,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0017
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2162,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 21,
+                  "osc": [
+                    26.7824,
+                    38.118
+                  ],
+                  "px": [
+                    8.61,
+                    8.45
+                  ],
+                  "tn": "2026-06-29"
+                },
+                "kind": "signal",
+                "strength": 0.567,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "HeNan Splendor Science & Technology Co Ltd",
+          "score": 0.567,
+          "ticker": "002296.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 453.29598947571,
+              "market_cap_usd": 384303167.84639996,
+              "net_debt_ebitda": -4.5306,
+              "net_margin": 0.0582,
+              "operating_cash_flow_usd": 14526991.19014,
+              "pe": 57.400034,
+              "revenue_usd": 94618634.0191,
+              "roe": 0.0556,
+              "total_debt_usd": 1889872.32625
+            },
+            "ta": {
+              "adx": 16.1615,
+              "close_vs_ema200": -0.2044,
+              "close_vs_ema50": -0.0449,
+              "rsi14": 53.0611
+            }
+          },
+          "head_listing_id": 231925,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0191
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3124,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 32,
+                  "osc": [
+                    17.8564,
+                    26.349
+                  ],
+                  "px": [
+                    14.52,
+                    11.23
+                  ],
+                  "tn": "2026-06-09"
+                },
+                "kind": "signal",
+                "strength": 0.566,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shenzhen Mingdiao Decoration Co Ltd",
+          "score": 0.566,
+          "ticker": "002830.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 408.429192615951,
+              "market_cap_usd": 29466902.527999997,
+              "net_debt_ebitda": -4.3472,
+              "net_margin": 0.4237,
+              "operating_cash_flow_usd": 4244281.622,
+              "pe": 7.055016,
+              "revenue_usd": 9855120.912,
+              "roe": 0.0838,
+              "total_debt_usd": 46990.3
+            },
+            "ta": {
+              "adx": 19.294,
+              "close_vs_ema50": -0.0131,
+              "rsi14": 52.097
+            }
+          },
+          "head_listing_id": 3944552,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0009
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0891,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 18,
+                  "osc": [
+                    18.7709,
+                    31.2258
+                  ],
+                  "px": [
+                    7720,
+                    7410
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.566,
+                "value": "2026-07-23"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Synapsoft Corporation",
+          "score": 0.566,
+          "ticker": "466410.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 59439.4631234856,
+              "market_cap_usd": 516030697.4208,
+              "net_debt_ebitda": -1.0263155952072,
+              "net_margin": 0.0833,
+              "operating_cash_flow_usd": 24791929.28355,
+              "pe": 40.302703,
+              "revenue_usd": 169550244.872,
+              "roe": 0.0502,
+              "total_debt_usd": 0.0
+            },
+            "ta": {
+              "adx": 10.052,
+              "close_vs_ema200": -0.1608,
+              "close_vs_ema50": -0.044,
+              "rsi14": 46.9221
+            }
+          },
+          "head_listing_id": 233235,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.000137028645775518
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.715,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 21,
+                  "osc": [
+                    26.9004,
+                    38.1761
+                  ],
+                  "px": [
+                    17.01,
+                    16.5
+                  ],
+                  "tn": "2026-06-29"
+                },
+                "kind": "signal",
+                "strength": 0.564,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "MH Robot & Automation Co. Ltd.",
+          "score": 0.564,
+          "ticker": "301199.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 2510.9639,
+              "market_cap_usd": 575961819.0784,
+              "net_debt_ebitda": -0.6233,
+              "net_margin": 0.621,
+              "operating_cash_flow_usd": 205536000.0,
+              "pe": 2.611042,
+              "revenue_usd": 335734000.0,
+              "roe": 0.5023,
+              "total_debt_usd": 1399000.0
+            },
+            "ta": {
+              "adx": 22.5443,
+              "close_vs_ema200": 0.1366,
+              "close_vs_ema50": 0.1983,
+              "rsi14": 74.8236
+            }
+          },
+          "head_listing_id": 239790,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0034
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.7166,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 21,
+                  "osc": [
+                    25.9334,
+                    37.09
+                  ],
+                  "px": [
+                    56.2,
+                    55
+                  ],
+                  "tn": "2026-06-11"
+                },
+                "kind": "signal",
+                "strength": 0.558,
+                "value": "2026-07-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Thor Explorations Ltd.",
+          "score": 0.558,
+          "ticker": "THX.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 406.973025456811,
+              "market_cap_usd": 377276314.41919994,
+              "net_debt_ebitda": -3.836,
+              "net_margin": 0.0397,
+              "operating_cash_flow_usd": 43223324.081,
+              "pe": 11.69361,
+              "revenue_usd": 909069770.574,
+              "roe": 0.1711,
+              "total_debt_usd": 1954594.369
+            },
+            "ta": {
+              "adx": 19.7919,
+              "close_vs_ema200": 0.0105,
+              "close_vs_ema50": 0.1065,
+              "rsi14": 61.5181
+            }
+          },
+          "head_listing_id": 1418940,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0093
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0907,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 24,
+                  "osc": [
+                    26.585,
+                    36.6105
+                  ],
+                  "px": [
+                    12000,
+                    11240
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.547,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "NHN KCP Corp",
+          "score": 0.547,
+          "ticker": "060250.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 94641.69325357,
+              "market_cap_usd": 1144913509.2224,
+              "net_debt_ebitda": -0.53,
+              "net_margin": 0.3223,
+              "operating_cash_flow_usd": 158747496.63773,
+              "pe": 19.909802,
+              "revenue_usd": 331292485.11735,
+              "roe": 0.2247,
+              "total_debt_usd": 290000.0
+            },
+            "ta": {
+              "adx": 15.6162,
+              "close_vs_ema200": -0.2138,
+              "close_vs_ema50": -0.0705,
+              "rsi14": 40.3438
+            }
+          },
+          "head_listing_id": 232719,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0006
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.3386,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 30,
+                  "osc": [
+                    27.6954,
+                    36.0849
+                  ],
+                  "px": [
+                    14.17,
+                    13.75
+                  ],
+                  "tn": "2026-06-08"
+                },
+                "kind": "signal",
+                "strength": 0.534,
+                "value": "2026-07-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Jiangsu Zhengdan Chemical Industry Co Ltd",
+          "score": 0.534,
+          "ticker": "300641.CS"
+        },
+        {
+          "also_known_as": [
+            "376300.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 168.6146,
+              "market_cap_usd": 312563587.4816,
+              "net_debt_ebitda": -2.2435,
+              "net_margin": 0.2807,
+              "operating_cash_flow_usd": 26642677.404,
+              "pe": 18.66164,
+              "revenue_usd": 62786916.241,
+              "roe": 0.1186,
+              "total_debt_usd": 3101867.762
+            },
+            "ta": {
+              "adx": 13.502,
+              "close_vs_ema200": -0.3696,
+              "close_vs_ema50": -0.1257,
+              "rsi14": 40.7861
+            }
+          },
+          "head_listing_id": 1421098,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0209
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0435,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 23,
+                  "osc": [
+                    28.9061,
+                    38.8705
+                  ],
+                  "px": [
+                    19530,
+                    18900
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.528,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Dear U Co. Ltd.",
+          "score": 0.528,
+          "ticker": "376300.KQ"
+        },
+        {
+          "also_known_as": [
+            "294570.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 121.8102,
+              "market_cap_usd": 145558396.92799997,
+              "net_debt_ebitda": -3.222,
+              "net_margin": 0.3545,
+              "operating_cash_flow_usd": 32348019.634,
+              "pe": 8.645833,
+              "revenue_usd": 47715715.453,
+              "roe": 0.1358,
+              "total_debt_usd": 4553827.6
+            },
+            "ta": {
+              "adx": 28.6404,
+              "close_vs_ema200": 0.0599,
+              "close_vs_ema50": 0.2806,
+              "rsi14": 76.5947
+            }
+          },
+          "head_listing_id": 1420950,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0366
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.805,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 18,
+                  "osc": [
+                    24.0768,
+                    35.6681
+                  ],
+                  "px": [
+                    17910,
+                    16790
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.527,
+                "value": "2026-07-23"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "coocon Corp.",
+          "score": 0.527,
+          "ticker": "294570.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 171.5432,
+              "market_cap_usd": 734079248.3327999,
+              "net_debt_ebitda": -0.6365,
+              "net_margin": 0.1204,
+              "operating_cash_flow_usd": 96571677.66389,
+              "pe": 17.586771,
+              "revenue_usd": 370544948.3915,
+              "roe": 0.2022,
+              "total_debt_usd": 8096645.99985
+            },
+            "ta": {
+              "adx": 16.2142,
+              "close_vs_ema200": -0.2479,
+              "close_vs_ema50": -0.0689,
+              "rsi14": 43.2509
+            }
+          },
+          "head_listing_id": 232614,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0367
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5539,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 23,
+                  "osc": [
+                    28.2326,
+                    38.1246
+                  ],
+                  "px": [
+                    14.34,
+                    13.91
+                  ],
+                  "tn": "2026-06-17"
+                },
+                "kind": "signal",
+                "strength": 0.525,
+                "value": "2026-07-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shenzhen Bingchuan Network Co Ltd",
+          "score": 0.525,
+          "ticker": "300533.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 82.2642,
+              "market_cap_usd": 294409203.25119996,
+              "net_debt_ebitda": -3.9524,
+              "net_margin": 0.0209,
+              "operating_cash_flow_usd": 18105652.18891,
+              "pe": 78.714162,
+              "revenue_usd": 178987826.30595,
+              "roe": 0.0469,
+              "total_debt_usd": 1611348.75
+            },
+            "ta": {
+              "adx": 22.0387,
+              "close_vs_ema200": -0.0603,
+              "close_vs_ema50": 0.0443,
+              "rsi14": 63.9728
+            }
+          },
+          "head_listing_id": 228388,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0202
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3812,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 18,
+                  "osc": [
+                    20.2003,
+                    31.5908
+                  ],
+                  "px": [
+                    7.98,
+                    7.6
+                  ],
+                  "tn": "2026-06-30"
+                },
+                "kind": "signal",
+                "strength": 0.518,
+                "value": "2026-07-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Linhai Co Ltd",
+          "score": 0.518,
+          "ticker": "600099.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 495.6328,
+              "market_cap_usd": 631314988.7487999,
+              "net_debt_ebitda": -0.322,
+              "net_margin": 0.2592,
+              "operating_cash_flow_usd": 35210597.57787,
+              "pe": 12.5685,
+              "revenue_usd": 203347963.32805,
+              "roe": 0.1312,
+              "total_debt_usd": 4693045.87635
+            },
+            "ta": {
+              "adx": 12.9969,
+              "close_vs_ema50": -0.0135,
+              "rsi14": 52.1397
+            }
+          },
+          "head_listing_id": 229562,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0117
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2012,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 22,
+                  "osc": [
+                    27.542,
+                    37.5786
+                  ],
+                  "px": [
+                    50.49,
+                    50.3
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.517,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shanghai Bloom Technology Inc",
+          "score": 0.517,
+          "ticker": "603325.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 420.9642,
+              "market_cap_usd": 123070061.5424,
+              "net_debt_ebitda": -1.9761,
+              "net_margin": 0.1169,
+              "operating_cash_flow_usd": 13261996.8,
+              "pe": 10.864333,
+              "revenue_usd": 82142268.0,
+              "roe": 0.1058,
+              "total_debt_usd": 961396.8
+            },
+            "ta": {
+              "adx": 21.1992,
+              "close_vs_ema200": -0.0257,
+              "close_vs_ema50": -0.0373,
+              "rsi14": 39.1322
+            }
+          },
+          "head_listing_id": 1418491,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0106
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0571,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 16,
+                  "osc": [
+                    26.0569,
+                    37.7657
+                  ],
+                  "px": [
+                    48.35,
+                    48.25
+                  ],
+                  "tn": "2026-07-15"
+                },
+                "kind": "signal",
+                "strength": 0.497,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hanpin Electron Co Ltd",
+          "score": 0.497,
+          "ticker": "2488.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 130.9132,
+              "market_cap_usd": 4806772226.662399,
+              "net_debt_ebitda": -1.692,
+              "net_margin": 0.1968,
+              "operating_cash_flow_usd": 56382972.57879,
+              "pe": 52.058824,
+              "revenue_usd": 502952340.5066,
+              "roe": 0.1016,
+              "total_debt_usd": 26442124.33175
+            },
+            "ta": {
+              "adx": 37.5952,
+              "close_vs_ema200": 0.0401,
+              "close_vs_ema50": 0.0757,
+              "rsi14": 61.6479
+            }
+          },
+          "head_listing_id": 228731,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0271
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.046,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 13,
+                  "osc": [
+                    24.7937,
+                    37.8845
+                  ],
+                  "px": [
+                    19.97,
+                    19.92
+                  ],
+                  "tn": "2026-06-26"
+                },
+                "kind": "signal",
+                "strength": 0.496,
+                "value": "2026-07-15"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Glarun Technology Co Ltd",
+          "score": 0.496,
+          "ticker": "600562.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 2877.033,
+              "market_cap_usd": 77642285.2096,
+              "net_debt_ebitda": -0.5806,
+              "net_margin": 0.1967,
+              "operating_cash_flow_usd": 9202252.8,
+              "pe": 11.132686,
+              "revenue_usd": 33507364.8,
+              "roe": 0.1728,
+              "total_debt_usd": 92227.2
+            },
+            "ta": {
+              "adx": 25.6574,
+              "close_vs_ema200": -0.0323,
+              "close_vs_ema50": -0.0028,
+              "rsi14": 57.405
+            }
+          },
+          "head_listing_id": 1420807,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0024
+              },
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.037,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "rsi_div_bull": {
+                "detail": {
+                  "fw": 13,
+                  "osc": [
+                    23.3391,
+                    35.8725
+                  ],
+                  "px": [
+                    68.4,
+                    68.3
+                  ],
+                  "tn": "2026-07-17"
+                },
+                "kind": "signal",
+                "strength": 0.475,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Wellpool Co Ltd",
+          "score": 0.475,
+          "ticker": "8424.TWO"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Found 40 financially strong companies globally — growing earnings (net_income compound growth) and low debt-to-equity — that are showing a bullish divergence on the daily chart. Both fundamental legs plus the divergence_bull signal matched per row. Examples: 122870.KQ, 301215.CS, 0239.HK, 9558.JP."
+}

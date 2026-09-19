@@ -1,0 +1,670 @@
+{
+  "id": "id-03",
+  "question": "Which of these payers are actually growing their dividend, not just paying a fat static one? I want dividend growth.",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "order_by": "cagr",
+        "min_cagr": 5,
+        "limit": 20
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 20,
+      "has_more": true,
+      "limit": 20,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 136.1,
+            "ffo_payout": null,
+            "last_cut_year": 2020,
+            "no_cut_streak_yrs": 5,
+            "payout_ratio": 1.4028,
+            "payout_ratio_eff": 1.4028,
+            "ttm_div_yoy_pct": 160.7,
+            "yield_pct": 8.99,
+            "yield_trailing_pct": 6.51
+          },
+          "eps": 1.05,
+          "exchange": "CS",
+          "gic_code": "15101030",
+          "market_cap_usd": null,
+          "name": "Shenzhen Batian Ecotypic Engineering Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.710417,
+          "pe_ratio": 10.799198,
+          "stock_id": 231318,
+          "symbol": "002170",
+          "ticker": "002170.CS",
+          "week52_high": 14.4928,
+          "week52_low": 9.5484
+        },
+        {
+          "country": "Germany",
+          "dividend": {
+            "cagr_5y_pct": 118.0,
+            "ffo_payout": null,
+            "last_cut_year": 2022,
+            "no_cut_streak_yrs": 3,
+            "payout_ratio": 1.0098,
+            "payout_ratio_eff": 1.0098,
+            "ttm_div_yoy_pct": 5.1,
+            "yield_pct": 8.5,
+            "yield_trailing_pct": 8.65
+          },
+          "eps": 2.04,
+          "exchange": "XETRA",
+          "gic_code": "50101020",
+          "market_cap_usd": null,
+          "name": "freenet AG",
+          "news": {
+            "neg": 1,
+            "net_direction": "mixed",
+            "pos": 1,
+            "top_reason": "Surpassed 10 million subscribers with strong net additions, driving revenue and EBITDA growth."
+          },
+          "pb_ratio": 1.795341,
+          "pe_ratio": 10.886878,
+          "stock_id": 242379,
+          "symbol": "FNTN",
+          "ticker": "FNTN.XETRA",
+          "week52_high": 31.3117,
+          "week52_low": 22.28
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": 115.1,
+            "ffo_payout": null,
+            "last_cut_year": 2020,
+            "no_cut_streak_yrs": 5,
+            "payout_ratio": 0.4822,
+            "payout_ratio_eff": 0.4822,
+            "ttm_div_yoy_pct": 25.0,
+            "yield_pct": 6.55,
+            "yield_trailing_pct": 6.53
+          },
+          "eps": 10.37,
+          "exchange": "TW",
+          "gic_code": "50202010",
+          "market_cap_usd": null,
+          "name": "B’IN Live Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.620025,
+          "pe_ratio": 7.478092,
+          "stock_id": 1420036,
+          "symbol": "6625",
+          "ticker": "6625.TW",
+          "week52_high": 85.7996,
+          "week52_low": 69.4657
+        },
+        {
+          "country": "GG",
+          "dividend": {
+            "cagr_5y_pct": 111.9,
+            "ffo_payout": null,
+            "last_cut_year": 2023,
+            "no_cut_streak_yrs": 2,
+            "payout_ratio": 0.0,
+            "payout_ratio_eff": 0.0,
+            "ttm_div_yoy_pct": -98.2,
+            "yield_pct": 0.0,
+            "yield_trailing_pct": 4.8
+          },
+          "eps": 4.16,
+          "exchange": "LSE",
+          "gic_code": "40203010",
+          "market_cap_usd": null,
+          "name": "Tetragon Financial Group Ltd",
+          "news": {
+            "neg": 1,
+            "net_direction": "mixed",
+            "pos": 1,
+            "top_reason": "Reported negative NAV return and net loss driven by investment performance."
+          },
+          "pb_ratio": null,
+          "pe_ratio": null,
+          "stock_id": 239773,
+          "symbol": "TFGS",
+          "ticker": "TFGS.LSE",
+          "week52_high": 1461.6651,
+          "week52_low": 882.2107
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 97.4,
+            "ffo_payout": null,
+            "last_cut_year": 2020,
+            "no_cut_streak_yrs": 5,
+            "payout_ratio": 1.3089,
+            "payout_ratio_eff": 1.3089,
+            "ttm_div_yoy_pct": 14.3,
+            "yield_pct": 5.73,
+            "yield_trailing_pct": 5.65
+          },
+          "eps": 0.61,
+          "exchange": "CS",
+          "gic_code": "15101010",
+          "market_cap_usd": null,
+          "name": "Jiangsu Zhengdan Chemical Industry Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.406679,
+          "pe_ratio": 19.909802,
+          "stock_id": 232719,
+          "symbol": "300641",
+          "ticker": "300641.CS",
+          "week52_high": 25.1737,
+          "week52_low": 13.52
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": 87.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 6,
+            "payout_ratio": 0.0214,
+            "payout_ratio_eff": 0.0214,
+            "ttm_div_yoy_pct": 70.4,
+            "yield_pct": 5.9,
+            "yield_trailing_pct": 5.94
+          },
+          "eps": 6.62,
+          "exchange": "TWO",
+          "gic_code": "45203015",
+          "market_cap_usd": null,
+          "name": "Powertip Image Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.441637,
+          "pe_ratio": 11.374622,
+          "stock_id": 1419609,
+          "symbol": "6498",
+          "ticker": "6498.TWO",
+          "week52_high": 110.0289,
+          "week52_low": 67.2
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": 86.0,
+            "ffo_payout": null,
+            "last_cut_year": 2019,
+            "no_cut_streak_yrs": 6,
+            "payout_ratio": 0.6632,
+            "payout_ratio_eff": 0.6632,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 8.36,
+            "yield_trailing_pct": 8.49
+          },
+          "eps": 9.8,
+          "exchange": "TWO",
+          "gic_code": "25301020",
+          "market_cap_usd": null,
+          "name": "Life Travel & Tourist Service Co., Ltd.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.671351,
+          "pe_ratio": 9.910011,
+          "stock_id": 1417663,
+          "symbol": "2745",
+          "ticker": "2745.TWO",
+          "week52_high": 110.9882,
+          "week52_low": 84.0
+        },
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": 85.3,
+            "ffo_payout": null,
+            "last_cut_year": 2025,
+            "no_cut_streak_yrs": 0,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -18.2,
+            "yield_pct": 5.81,
+            "yield_trailing_pct": 5.81
+          },
+          "eps": 0.38,
+          "exchange": "BK",
+          "gic_code": "10102030",
+          "market_cap_usd": 71004322.2528,
+          "name": "Sea Oil Public Company Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.901294,
+          "pe_ratio": 8.95373,
+          "stock_id": 49992,
+          "symbol": "SEAOIL",
+          "ticker": "SEAOIL.BK",
+          "week52_high": 4.1247,
+          "week52_low": 2.2362
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 82.5,
+            "ffo_payout": null,
+            "last_cut_year": 2020,
+            "no_cut_streak_yrs": 5,
+            "payout_ratio": 0.4296,
+            "payout_ratio_eff": 0.4296,
+            "ttm_div_yoy_pct": 217.0,
+            "yield_pct": 6.46,
+            "yield_trailing_pct": 5.91
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "25203010",
+          "market_cap_usd": 1358087476.8384,
+          "name": "361 Degrees International Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.822214,
+          "pe_ratio": 6.331057,
+          "stock_id": 51398,
+          "symbol": "1361",
+          "ticker": "1361.HK",
+          "week52_high": 7.0845,
+          "week52_low": 3.95
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 80.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 7,
+            "payout_ratio": 0.0,
+            "payout_ratio_eff": 0.0,
+            "ttm_div_yoy_pct": -54.4,
+            "yield_pct": 6.7,
+            "yield_trailing_pct": 5.93
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "40202010",
+          "market_cap_usd": 950404260.0448,
+          "name": "SY Holdings Group Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.531181,
+          "pe_ratio": 13.100809,
+          "stock_id": 52999,
+          "symbol": "6069",
+          "ticker": "6069.HK",
+          "week52_high": 13.848,
+          "week52_low": 6.13
+        },
+        {
+          "country": "UK",
+          "dividend": {
+            "cagr_5y_pct": 80.4,
+            "ffo_payout": null,
+            "last_cut_year": 2020,
+            "no_cut_streak_yrs": 5,
+            "payout_ratio": 0.9381,
+            "payout_ratio_eff": 0.9381,
+            "ttm_div_yoy_pct": -76.1,
+            "yield_pct": 7.6,
+            "yield_trailing_pct": 7.27
+          },
+          "eps": 0.93,
+          "exchange": "US",
+          "gic_code": "25301010",
+          "market_cap_usd": 2160014592.0,
+          "name": "Brightstar Lottery PLC",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": "CEO stepping down and internal promotion announced; leadership change impact unclear."
+          },
+          "pb_ratio": 2.4622,
+          "pe_ratio": 9.0,
+          "stock_id": 5394,
+          "symbol": "BRSL",
+          "ticker": "BRSL.US",
+          "week52_high": 17.278,
+          "week52_low": 9.7032
+        },
+        {
+          "country": "IT",
+          "dividend": {
+            "cagr_5y_pct": 76.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 6,
+            "payout_ratio": 0.0425,
+            "payout_ratio_eff": 0.0425,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 8.11,
+            "yield_trailing_pct": 23.6
+          },
+          "eps": null,
+          "exchange": "LSE",
+          "gic_code": "10101020",
+          "market_cap_usd": null,
+          "name": "Saipem SpA",
+          "news": {
+            "neg": 1,
+            "net_direction": "pos",
+            "pos": 6,
+            "top_reason": "Won $911M contracts from Eni for subsea and biorefinery projects."
+          },
+          "pb_ratio": null,
+          "pe_ratio": null,
+          "stock_id": 235827,
+          "symbol": "0RPI",
+          "ticker": "0RPI.LSE",
+          "week52_high": 4.921,
+          "week52_low": 2.0888
+        },
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": 72.0,
+            "ffo_payout": null,
+            "last_cut_year": 2022,
+            "no_cut_streak_yrs": 2,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.75,
+            "yield_trailing_pct": 6.75
+          },
+          "eps": 0.29,
+          "exchange": "BK",
+          "gic_code": "25101020",
+          "market_cap_usd": 81398279.5776,
+          "name": "Hwa Fong Rubber (Thailand) Public Company Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "Second-quarter net profit surged 86.77% on FX gains and margin recovery."
+          },
+          "pb_ratio": 0.74581,
+          "pe_ratio": 14.618153,
+          "stock_id": 49650,
+          "symbol": "HFT",
+          "ticker": "HFT.BK",
+          "week52_high": 4.6,
+          "week52_low": 3.2635
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 71.9,
+            "ffo_payout": null,
+            "last_cut_year": 2024,
+            "no_cut_streak_yrs": 1,
+            "payout_ratio": 0.0153,
+            "payout_ratio_eff": 0.0153,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 9.37,
+            "yield_trailing_pct": 9.37
+          },
+          "eps": 1.89,
+          "exchange": "US",
+          "gic_code": "20303010",
+          "market_cap_usd": 1722842240.0,
+          "name": "FLEX LNG Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.392402,
+          "pe_ratio": 22.215827,
+          "stock_id": 15281,
+          "symbol": "FLNG",
+          "ticker": "FLNG.US",
+          "week52_high": 33.26,
+          "week52_low": 22.1249
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 71.9,
+            "ffo_payout": 0.5288,
+            "last_cut_year": 2020,
+            "no_cut_streak_yrs": 5,
+            "payout_ratio": 0.5454,
+            "payout_ratio_eff": 0.5288,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 5.22,
+            "yield_trailing_pct": 5.22
+          },
+          "eps": 0.01,
+          "exchange": "US",
+          "gic_code": "60103010",
+          "market_cap_usd": 1765782528.0,
+          "name": "RLJ Lodging Trust",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.792352,
+          "pe_ratio": 1119.0,
+          "stock_id": 37834,
+          "symbol": "RLJ",
+          "ticker": "RLJ.US",
+          "week52_high": 12.89,
+          "week52_low": 6.2051
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 71.9,
+            "ffo_payout": null,
+            "last_cut_year": 2019,
+            "no_cut_streak_yrs": 6,
+            "payout_ratio": 0.4614,
+            "payout_ratio_eff": 0.4614,
+            "ttm_div_yoy_pct": 10.0,
+            "yield_pct": 4.69,
+            "yield_trailing_pct": 4.66
+          },
+          "eps": 0.7,
+          "exchange": "CS",
+          "gic_code": "20106020",
+          "market_cap_usd": null,
+          "name": "Huayi Compressor Co Ltd",
+          "news": {
+            "neg": 5,
+            "net_direction": "neg",
+            "pos": 1,
+            "top_reason": "Net profit attributable to parent fell 2.6% year on year, though non-recurring profit rose."
+          },
+          "pb_ratio": 1.123675,
+          "pe_ratio": 9.682238,
+          "stock_id": 230700,
+          "symbol": "000404",
+          "ticker": "000404.CS",
+          "week52_high": 9.5945,
+          "week52_low": 6.1631
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 71.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 6,
+            "payout_ratio": 0.2679,
+            "payout_ratio_eff": 0.2679,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 4.58,
+            "yield_trailing_pct": 4.62
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "25504040",
+          "market_cap_usd": 75998184.3456,
+          "name": "King Fook Holdings Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.653272,
+          "pe_ratio": 5.714286,
+          "stock_id": 50514,
+          "symbol": "0280",
+          "ticker": "0280.HK",
+          "week52_high": 0.655,
+          "week52_low": 0.455
+        },
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": 69.5,
+            "ffo_payout": null,
+            "last_cut_year": 2023,
+            "no_cut_streak_yrs": 2,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -26.2,
+            "yield_pct": 6.28,
+            "yield_trailing_pct": 6.28
+          },
+          "eps": -0.81,
+          "exchange": "BK",
+          "gic_code": "45203030",
+          "market_cap_usd": 82510337.4336,
+          "name": "Interlink Communication Public Company Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 3,
+            "top_reason": "Received a 1.81 billion baht contract from the Provincial Electricity Authority for a submarine cable project, boosting future revenue."
+          },
+          "pb_ratio": 0.696615,
+          "pe_ratio": null,
+          "stock_id": 49668,
+          "symbol": "ILINK",
+          "ticker": "ILINK.BK",
+          "week52_high": 5.1,
+          "week52_low": 4.0784
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 69.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.875,
+            "payout_ratio_eff": 0.875,
+            "ttm_div_yoy_pct": 1264.8,
+            "yield_pct": 4.78,
+            "yield_trailing_pct": 4.78
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "30202030",
+          "market_cap_usd": null,
+          "name": "Namyang Dairy Products Co Ltd Peffered Series 1",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.194093,
+          "pe_ratio": 20.116807,
+          "stock_id": 1414667,
+          "symbol": "003925",
+          "ticker": "003925.KO",
+          "week52_high": 47400.0,
+          "week52_low": 28900.0
+        },
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": 67.5,
+            "ffo_payout": null,
+            "last_cut_year": 2024,
+            "no_cut_streak_yrs": 1,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 3.0,
+            "yield_pct": 4.96,
+            "yield_trailing_pct": 4.96
+          },
+          "eps": 0.81,
+          "exchange": "BK",
+          "gic_code": "30202030",
+          "market_cap_usd": 67428323.0208,
+          "name": "United Palm Oil Industry Public Company Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.187531,
+          "pe_ratio": 9.246575,
+          "stock_id": 50212,
+          "symbol": "UPOIC",
+          "ticker": "UPOIC.BK",
+          "week52_high": 8.2,
+          "week52_low": 5.7519
+        }
+      ],
+      "total": 914
+    }
+  ],
+  "answer_to_user": "I ranked by 5-year dividend growth (CAGR) rather than current yield, so these are payers whose dividend is actually rising. Fastest growers in the screen: Shenzhen Batian Ecotypic (002170.CS) ~136% 5y CAGR, freenet AG (FNTN.XETRA, Germany) ~118%, B'IN Live (6625.TW) ~115%, Tetragon Financial (TFGS.LSE) ~112%, Jiangsu Zhengdan Chemical (300641.CS) ~97%, and Powertip Image (6498.TWO) ~88%. Two honest caveats. First, the classic trade-off: strong dividend growers often start at a LOWER current yield (they compound income over time) rather than paying a fat static yield today — though several here happen to pay ~6-9% now. Second, and important: this CAGR and the no-cut 'streak' are measured over a ~10-year tracked window at most — I can see 5-year growth and up to a 10-year no-cut streak, but I cannot verify multi-decade growth records. Note also that some of these have a payout ratio above 1 (Shenzhen Batian ~1.40, freenet ~1.01, Jiangsu Zhengdan ~1.31), meaning the dividend currently exceeds earnings — fast recent growth off a low base isn't the same as a sustainable, sustainably-growing dividend. So treat this as 'who has grown the dividend within the years I can see,' pair it with payout sustainability, and don't read it as a guaranteed forward growth streak."
+}

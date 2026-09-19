@@ -1,0 +1,23 @@
+{
+  "id": "ma-06",
+  "question": "I want to find assets across all markets that have been quietly consolidating — low volatility squeeze — and might be about to make a big move.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["Bollinger band squeeze low volatility"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [{"anchor": [{"pattern": "bb_squeeze"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    }
+  ],
+  "result_summary": "count=39 (EXACT total, not capped), universe=27740. Results span multiple asset types: XPD-USD.CC (Crypto: Palladium Spot Token, bb_width=0.0), DLC-USD.CC (Crypto), BLU-USD.CC (Crypto), 0374.HK (HK stock), DNM.LSE (UK stock), PLBT-USD.CC (Crypto), ORNT.LSE (UK stock), SYLO-USD.CC (Crypto), XBTC21-USD.CC (Crypto), JPYUSD.FOREX (Forex!), ARSMYR.FOREX (Forex), KRWMYR.FOREX (Forex), MKTX.US (US stock: MarketAxess), CMX.LSE (UK stock), FBRX.US (US stock). Signal: 'bb_sqz'. bb_width=0 indicates tightest possible coil.",
+  "verdict": "PASS",
+  "reason": "Results span at least 5 asset types: Crypto (.CC), US stocks, UK/LSE stocks, HK stocks, and Forex pairs (.FOREX). Correctly maps squeeze to Bollinger compression (bb_squeeze), NOT short squeeze. Only 39 total matches globally — complete set, not capped.",
+  "defects": []
+}

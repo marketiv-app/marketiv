@@ -1,0 +1,74 @@
+{
+  "id": "op-04",
+  "question": "Which large caps have the cheapest implied vol versus their own history right now?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "cheapest implied vol versus own history, large caps"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "iv_cheap",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "cheapest implied vol versus own history, large caps",
+          "candidates": [
+            {
+              "pattern": "iv_cheap",
+              "label": "IV cheap",
+              "supported": "yes",
+              "description": "Implied vol at the low end of its own history."
+            },
+            {
+              "pattern": "iv_rich",
+              "label": "IV rich",
+              "supported": "yes",
+              "description": "Implied vol at the high end of its own history."
+            },
+            {
+              "pattern": "iv_crush",
+              "label": "IV crush (post-event)",
+              "supported": "future",
+              "description": "Implied vol collapsing fast after an event. (planned)"
+            },
+            {
+              "pattern": "iv_vs_realized",
+              "label": "IV vs realized vol",
+              "supported": "no",
+              "description": "IV relative to realized vol — NOT supported (opana has no realized vol)."
+            },
+            {
+              "pattern": "term_structure_inversion",
+              "label": "Term-structure inversion",
+              "supported": "no",
+              "description": "Front vol above back — NOT supported (opana has only 2 horizons)."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "iv_cheap",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "'Cheapest implied vol vs its own history' is the `iv_cheap` pattern (IV at the low end of its own range), which the MCP matched correctly. But the scanning endpoint isn't built yet — it returns a POC stub — so I can't return the ranked large-cap list. Note also there's no large-cap-only universe filter exposed on the scan tool; even once it's live, the universe is ~547 popular US optionable names rather than a strict large-cap screen."
+}

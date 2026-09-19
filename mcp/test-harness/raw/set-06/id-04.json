@@ -1,0 +1,670 @@
+{
+  "id": "id-04",
+  "question": "Give me dividend aristocrats — companies that have raised their dividend every year for 25+ years.",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "order_by": "streak",
+        "min_streak_years": 10,
+        "limit": 20
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 20,
+      "has_more": true,
+      "limit": 20,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 1.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.3293,
+            "payout_ratio_eff": 0.3293,
+            "ttm_div_yoy_pct": -4.7,
+            "yield_pct": 15.91,
+            "yield_trailing_pct": 16.43
+          },
+          "eps": 0.51,
+          "exchange": "US",
+          "gic_code": "40203010",
+          "market_cap_usd": 740165504.0,
+          "name": "PennantPark Floating Rate Capital Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 3,
+            "top_reason": "Declared monthly distribution of $0.0833 per share, indicating stable income for shareholders."
+          },
+          "pb_ratio": 0.699244,
+          "pe_ratio": 14.352941,
+          "stock_id": 34010,
+          "symbol": "PFLT",
+          "ticker": "PFLT.US",
+          "week52_high": 8.9872,
+          "week52_low": 6.7549
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 0.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6351,
+            "payout_ratio_eff": 0.6351,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 12.88,
+            "yield_trailing_pct": 12.88
+          },
+          "eps": 1.24,
+          "exchange": "US",
+          "gic_code": "40201060",
+          "market_cap_usd": 2282954240.0,
+          "name": "Western Union Co",
+          "news": {
+            "neg": 8,
+            "net_direction": "pos",
+            "pos": 19,
+            "top_reason": "Partnership embeds Western Union's money transfer service into Total Wireless plans, driving recurring usage and customer loyalty."
+          },
+          "pb_ratio": 2.457722,
+          "pe_ratio": 5.814516,
+          "stock_id": 48215,
+          "symbol": "WU",
+          "ticker": "WU.US",
+          "week52_high": 9.7777,
+          "week52_low": 6.27
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 2.3,
+            "ffo_payout": 0.8291,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 1.4411,
+            "payout_ratio_eff": 0.8291,
+            "ttm_div_yoy_pct": -6.0,
+            "yield_pct": 11.85,
+            "yield_trailing_pct": 11.86
+          },
+          "eps": 0.68,
+          "exchange": "US",
+          "gic_code": "60105010",
+          "market_cap_usd": 432291232.0,
+          "name": "Community Healthcare Trust Inc",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.014791,
+          "pe_ratio": 21.895522,
+          "stock_id": 7169,
+          "symbol": "CHCT",
+          "ticker": "CHCT.US",
+          "week52_high": 18.7374,
+          "week52_low": 11.8352
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 0.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 1.2549,
+            "payout_ratio_eff": 1.2549,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 11.72,
+            "yield_trailing_pct": 11.72
+          },
+          "eps": 0.59,
+          "exchange": "US",
+          "gic_code": "40204010",
+          "market_cap_usd": 6186436608.0,
+          "name": "Starwood Property Trust Inc",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.926148,
+          "pe_ratio": 27.525424,
+          "stock_id": 41907,
+          "symbol": "STWD",
+          "ticker": "STWD.US",
+          "week52_high": 18.72,
+          "week52_low": 15.51
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.0,
+            "payout_ratio_eff": 0.0,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 11.64,
+            "yield_trailing_pct": 11.64
+          },
+          "eps": null,
+          "exchange": "KQ",
+          "gic_code": "20102010",
+          "market_cap_usd": null,
+          "name": "S.Y.PANEL Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.562181,
+          "pe_ratio": null,
+          "stock_id": 1420144,
+          "symbol": "109610",
+          "ticker": "109610.KQ",
+          "week52_high": 3563.1898,
+          "week52_low": 1479.0
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 0.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.0,
+            "payout_ratio_eff": 0.0,
+            "ttm_div_yoy_pct": 100.0,
+            "yield_pct": 11.22,
+            "yield_trailing_pct": 11.22
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25203010",
+          "market_cap_usd": null,
+          "name": "Hansae Yes24",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.378783,
+          "pe_ratio": null,
+          "stock_id": 1414961,
+          "symbol": "016450",
+          "ticker": "016450.KO",
+          "week52_high": 4900.0,
+          "week52_low": 3368.9024
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 16.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4813,
+            "payout_ratio_eff": 0.4813,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 11.16,
+            "yield_trailing_pct": 11.16
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "50201010",
+          "market_cap_usd": null,
+          "name": "GIIR Inc",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.570896,
+          "pe_ratio": 7.4197,
+          "stock_id": 1415070,
+          "symbol": "035000",
+          "ticker": "035000.KO",
+          "week52_high": 9060.0,
+          "week52_low": 5750.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 27.5,
+            "yield_pct": 10.7713,
+            "yield_trailing_pct": 10.7713
+          },
+          "eps": 49.8936,
+          "exchange": "JP",
+          "gic_code": "25302020",
+          "market_cap_usd": null,
+          "name": "Take and Give. Needs Co., Ltd.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.618637,
+          "pe_ratio": null,
+          "stock_id": 571505,
+          "symbol": "4331",
+          "ticker": "4331.JP",
+          "week52_high": 881.0,
+          "week52_low": 644.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 52.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.019,
+            "payout_ratio_eff": 0.019,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 10.55,
+            "yield_trailing_pct": 7.63
+          },
+          "eps": 1.79,
+          "exchange": "CS",
+          "gic_code": "35202010",
+          "market_cap_usd": null,
+          "name": "Shandong Shanda Wit Science and Technology Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.035381,
+          "pe_ratio": 13.101523,
+          "stock_id": 230988,
+          "symbol": "000915",
+          "ticker": "000915.CS",
+          "week52_high": 33.6054,
+          "week52_low": 23.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 10.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4688,
+            "payout_ratio_eff": 0.4688,
+            "ttm_div_yoy_pct": 0.8,
+            "yield_pct": 10.32,
+            "yield_trailing_pct": 5.19
+          },
+          "eps": 5.71,
+          "exchange": "CG",
+          "gic_code": "40101010",
+          "market_cap_usd": 145980542209.229,
+          "name": "China Merchants Bank Co Ltd",
+          "news": {
+            "neg": 3,
+            "net_direction": "pos",
+            "pos": 4,
+            "top_reason": "China Merchants Bank announced a cash dividend of 1.003 yuan per share, which is a direct financial return to shareholders."
+          },
+          "pb_ratio": 0.753043,
+          "pe_ratio": 6.705779,
+          "stock_id": 228347,
+          "symbol": "600036",
+          "ticker": "600036.CG",
+          "week52_high": 41.7622,
+          "week52_low": 34.3376
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 16.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.9079,
+            "payout_ratio_eff": 0.9079,
+            "ttm_div_yoy_pct": 13.1,
+            "yield_pct": 10.24,
+            "yield_trailing_pct": 5.41
+          },
+          "eps": 1.91,
+          "exchange": "CG",
+          "gic_code": "30202030",
+          "market_cap_usd": null,
+          "name": "Inner Mongolia Yili Industrial Group Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 3,
+            "top_reason": "Yili hosts congress, launches data hub and innovations, positioning as industry leader."
+          },
+          "pb_ratio": 2.669707,
+          "pe_ratio": 13.167539,
+          "stock_id": 229003,
+          "symbol": "600887",
+          "ticker": "600887.CG",
+          "week52_high": 28.5004,
+          "week52_low": 23.76
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 12.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.9524,
+            "payout_ratio_eff": 0.9524,
+            "ttm_div_yoy_pct": -20.0,
+            "yield_pct": 9.89,
+            "yield_trailing_pct": 9.74
+          },
+          "eps": 0.89,
+          "exchange": "CS",
+          "gic_code": "25201020",
+          "market_cap_usd": null,
+          "name": "Suofeiya Home Collection Co Ltd",
+          "news": {
+            "neg": 1,
+            "net_direction": "neg",
+            "pos": 0,
+            "top_reason": "Company forecasts 78%-85% drop in net profit due to slowing macro, real estate downturn, weak consumer confidence, and intensified competition"
+          },
+          "pb_ratio": 1.056683,
+          "pe_ratio": 9.104225,
+          "stock_id": 231693,
+          "symbol": "002572",
+          "ticker": "002572.CS",
+          "week52_high": 14.2609,
+          "week52_low": 7.18
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 54.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 3.4483,
+            "payout_ratio_eff": 3.4483,
+            "ttm_div_yoy_pct": -40.9,
+            "yield_pct": 9.78,
+            "yield_trailing_pct": 9.78
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "15104050",
+          "market_cap_usd": null,
+          "name": "Kisco Holdings",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.299055,
+          "pe_ratio": null,
+          "stock_id": 1414560,
+          "symbol": "001940",
+          "ticker": "001940.KO",
+          "week52_high": 28650.0,
+          "week52_low": 20150.0
+        },
+        {
+          "country": "JE",
+          "dividend": {
+            "cagr_5y_pct": 1.6,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 1.1929,
+            "payout_ratio_eff": 1.1929,
+            "ttm_div_yoy_pct": 0.8,
+            "yield_pct": 9.73,
+            "yield_trailing_pct": 7.32
+          },
+          "eps": 0.72,
+          "exchange": "LSE",
+          "gic_code": "40203010",
+          "market_cap_usd": null,
+          "name": "Henderson Far East Income Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.981335,
+          "pe_ratio": 3.556572,
+          "stock_id": 237840,
+          "symbol": "HFEL",
+          "ticker": "HFEL.LSE",
+          "week52_high": 274.5589,
+          "week52_low": 207.8918
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 25.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4649,
+            "payout_ratio_eff": 0.4649,
+            "ttm_div_yoy_pct": 36.4,
+            "yield_pct": 9.68,
+            "yield_trailing_pct": 9.68
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25503030",
+          "market_cap_usd": null,
+          "name": "Gwangjushinseg",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.341326,
+          "pe_ratio": 6.235828,
+          "stock_id": 1415084,
+          "symbol": "037710",
+          "ticker": "037710.KO",
+          "week52_high": 59600.0,
+          "week52_low": 27162.0158
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 40.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.635,
+            "payout_ratio_eff": 0.635,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 9.58,
+            "yield_trailing_pct": 9.57
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "25202010",
+          "market_cap_usd": 540663567.7696,
+          "name": "Dream International Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.983186,
+          "pe_ratio": 5.963661,
+          "stock_id": 51198,
+          "symbol": "1126",
+          "ticker": "1126.HK",
+          "week52_high": 14.6381,
+          "week52_low": 5.885
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 52.3,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6234,
+            "payout_ratio_eff": 0.6234,
+            "ttm_div_yoy_pct": 23.8,
+            "yield_pct": 9.54,
+            "yield_trailing_pct": 9.54
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20301010",
+          "market_cap_usd": null,
+          "name": "Hansol Csn",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.545478,
+          "pe_ratio": 5.232342,
+          "stock_id": 1414851,
+          "symbol": "009180",
+          "ticker": "009180.KO",
+          "week52_high": 3666.0448,
+          "week52_low": 2256.3604
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 122.0,
+            "yield_pct": 9.4398,
+            "yield_trailing_pct": 9.4398
+          },
+          "eps": 99.7528,
+          "exchange": "JP",
+          "gic_code": "20104010",
+          "market_cap_usd": null,
+          "name": "Helios Techno Holding Co., Ltd.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.014097,
+          "pe_ratio": 10.698448,
+          "stock_id": 571743,
+          "symbol": "6927",
+          "ticker": "6927.JP",
+          "week52_high": 1402.0,
+          "week52_low": 836.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 144.2,
+            "yield_pct": 9.3044,
+            "yield_trailing_pct": 9.3044
+          },
+          "eps": 752.2965,
+          "exchange": "JP",
+          "gic_code": "40203020",
+          "market_cap_usd": null,
+          "name": "Yutaka Trusty Securities Co., Ltd.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.668637,
+          "pe_ratio": 2.742873,
+          "stock_id": 572164,
+          "symbol": "8747",
+          "ticker": "8747.JP",
+          "week52_high": 3445.0,
+          "week52_low": 1573.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 5.3,
+            "yield_pct": 9.2928,
+            "yield_trailing_pct": 9.2928
+          },
+          "eps": 495.9592,
+          "exchange": "JP",
+          "gic_code": "45103010",
+          "market_cap_usd": null,
+          "name": "Oracle Corporation Japan",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 6.804527,
+          "pe_ratio": 18.314715,
+          "stock_id": 571578,
+          "symbol": "4716",
+          "ticker": "4716.JP",
+          "week52_high": 17090.0,
+          "week52_low": 7758.0
+        }
+      ],
+      "total": 486
+    }
+  ],
+  "answer_to_user": "Straight answer first: I can't confirm a true 25-year (multi-decade) dividend-aristocrat streak from my data. My dividend-reliability signal only looks back over a roughly 10-year window and caps the no-cut streak at 10 years — so I have no way to verify that a company raised its dividend every year for 25+ years, and I won't quote a streak I can't see. What I CAN offer is the closest honest proxy: companies that have gone the full ~10-year tracked window with no dividend cut (streak = 10, clean through the 2020 and 2022 stress years). Examples: Western Union (WU.US) ~12.9% yield, PennantPark Floating Rate (PFLT.US), Community Healthcare Trust (CHCT.US, a REIT), Starwood Property Trust (STWD.US), and Hansae Yes24 (016450.KO) — all showing a 10-year no-cut streak. Note that a clean no-cut streak isn't the same as raising every year, and some of these (CHCT payout ~1.44, STWD ~1.25) pay out more than they earn on an EPS basis, which is normal for REITs/BDCs but worth checking on a cash-flow basis. For a verified 25-year aristocrat/king list you'd need a dedicated dividend-history source; from here, 'clean for 10y+ (the full tracked window)' is the most I can honestly stand behind. Not advice."
+}

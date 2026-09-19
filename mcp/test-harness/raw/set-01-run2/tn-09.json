@@ -1,0 +1,16 @@
+{
+  "id": "tn-09",
+  "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}],
+        "asset_type": ["Common Stock"],
+        "window_bars": 10,
+        "limit": 15
+      },
+      "result_summary": "60 results (capped) with a bullish MACD crossover (MACD line crossing above signal line) within last 10 bars. Top results: 7731.TWO MARX Biotech, EME.LSE Empyrean Energy, EOAN.XETRA E.ON SE, 6886.TWO Far East Bio-Tec, ROCK.LSE Rockfire Resources, 026960.KO Dongsuh, 097950.KO CJ Cheiljedang, MBG.XETRA Mercedes-Benz Group, ALRT.LSE Defence Holdings, 0P52.LSE Salvatore Ferragamo, BMW.XETRA Bayerische Motoren Werke (BMW), 0NQC.LSE Pandora A/S, ADS.XETRA adidas AG, SIGN.SW SIG Combibloc Group, MRK.XETRA Merck KGaA. Explanation: a bullish MACD crossover occurs when the MACD line (12-day EMA minus 26-day EMA) crosses above the signal line (9-day EMA of MACD); signals shifting momentum from bearish to bullish."
+    }
+  ]
+}

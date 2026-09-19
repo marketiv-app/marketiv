@@ -1,0 +1,1528 @@
+{
+  "id": "tm-10",
+  "question": "Compare copper as a play on electrification: give me the commodity backdrop and the biggest copper miners, then tell me which of those miners look cheapest on fundamentals.",
+  "tools_called": [
+    {
+      "tool": "commodity_pulse",
+      "args": {
+        "q": "copper"
+      },
+      "note": "copper backdrop (COPPER.COMM)"
+    },
+    {
+      "tool": "find_megatrend",
+      "args": {
+        "terms": [
+          "copper mining",
+          "copper electrification"
+        ]
+      },
+      "note": "resolved node 30020100 Copper Mining & Concentrate"
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "30020100",
+        "country": "all",
+        "limit": 25
+      },
+      "note": "copper-miner cohort"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "theme": [
+          30020100
+        ],
+        "fundamental": [
+          {
+            "concept": "pe",
+            "pattern": "low"
+          }
+        ],
+        "sort": "pe",
+        "limit": 15
+      },
+      "note": "rank the copper-miner cohort by lowest P/E for the 'cheapest on fundamentals' step"
+    }
+  ],
+  "raw_responses": [
+    {
+      "ticker": "COPPER.COMM",
+      "name": "Copper Futures",
+      "region": "Global",
+      "currency": "USD",
+      "description": "Copper futures (COMEX/CME, USD) — a core industrial metal widely watched as a barometer of global manufacturing and growth.",
+      "price": {
+        "last_close": 6.71,
+        "metric_kind": "return",
+        "windows": {
+          "1mo": {
+            "change_pct": 6.15
+          },
+          "1w": {
+            "change_pct": 3.52
+          },
+          "1y": {
+            "change_pct": 50.79
+          },
+          "3mo": {
+            "change_pct": 5.5
+          },
+          "ytd": {
+            "change_pct": 19.2
+          }
+        },
+        "range_read": "near 52-week highs",
+        "trend_read": "uptrend — above both the 50-day and 200-day average",
+        "drawdown_from_52w_high_pct": -0.28,
+        "realized_vol_percentile_1y": 8.33,
+        "volume_conviction_read": "accumulation — heavier volume on up days"
+      },
+      "impact": {
+        "articles": [
+          {
+            "title": "Copper prices hit record high, up 16% this year",
+            "brief_text": "Copper prices on the London Metal Exchange (LME) closed at a record high on Tuesday and continued to rise on Wednesday amid tight supply, with prices up about 16% since the start of the year. This is due to traders shipping large amounts of copper to the United States, reducing stocks in other markets, while global mines are not producing enough to meet demand. Most recently, copper prices rose 0.5% to $14,415.50 per ton, near the all-time high of $14,527.50 per ton set in January. Although the spread between spot and futures copper has narrowed from over $500 per ton, it remains at about $156 per ton, indicating that supply pressures have not yet subsided.",
+            "url": "https://moneyandbanking.co.th/2026/265446/",
+            "publisher": "Money & Banking",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "supply",
+                  "direction": "pos",
+                  "reason": "Tight supply and reduced stocks due to shipments to the US drive copper prices to record highs.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "commodity_supply"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-26T03:27:53+00:00"
+          },
+          {
+            "title": "New York Copper Closes Up 1.6% on Speculative Import Tariff Buying",
+            "brief_text": "COMEX copper futures for December delivery closed up 10.85 cents, or 1.62%, at $6.8155 per pound on Tuesday (Aug. 25), amid concerns that the U.S. may impose import tariffs on copper, prompting traders to rush shipments into the U.S. and drawing supply away from other markets, tightening stocks outside the U.S. Meanwhile, withdrawal orders from LME warehouses added to global supply worries. The U.S. is considering tariffs on copper imports, with Trump to decide after receiving a report from the Commerce Department. If imposed, the tariff would start at 15% in 2027 and rise to 30% in 2028.",
+            "url": "https://infoquest.co.th/2026/637703",
+            "publisher": "InfoQuest",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "tariff",
+                  "direction": "pos",
+                  "reason": "Potential US import tariffs on copper prompt speculative buying and supply tightening, boosting copper futures.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "commodity_supply",
+              "geopolitics"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-26T02:23:41+00:00"
+          },
+          {
+            "title": "Copper market swings to deficit on supply setbacks",
+            "brief_text": "Copper prices are rising again as the International Copper Study Group reports a significant June deficit and a sharply reduced year-to-date surplus. Commerzbank's Barbara Lambrecht notes the supply setbacks have pushed the market into deficit. The data indicate a tightening in global copper balances.",
+            "url": "https://fxstreet.com/news/copper-supply-setbacks-push-market-into-deficit-commerzbank-202608251345",
+            "publisher": "Commerzbank",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "supply",
+                  "direction": "pos",
+                  "reason": "ICSG reports June deficit and reduced surplus due to supply setbacks, tightening copper balances.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "commodity_supply"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-25T13:45:06+00:00"
+          },
+          {
+            "title": "US EXIM issues $1.1bn project letter for Ivanhoe Electric copper project",
+            "brief_text": "The Export-Import Bank of the US has issued a preliminary project letter outlining possible debt financing of $1.1 billion to advance Ivanhoe Electric's Santa Cruz Copper Project in Arizona. The letter increases the proposed financing from the $825 million outlined in US EXIM's previous letter of interest issued in April 2025. Ivanhoe Electric submitted its application through US EXIM's Make More in America Initiative, and the preliminary project letter is not a commitment to finance, with any funding subject to further review and final approval. The company expects US EXIM's board to consider the financing application in the spring of 2027, and an updated preliminary feasibility study for the project is expected in September 2026. Ivanhoe Electric executive chairman Robert Friedland said the company is building a modern American copper mine capable of producing 99.99% pure copper metal without a smelting process.",
+            "url": "https://finance.yahoo.com/markets/commodities/articles/us-exim-issues-1-1bn-112341375.html",
+            "publisher": "Mining Technology",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "supply",
+                  "direction": "pos",
+                  "reason": "News of financing for a new copper mine may signal future supply increase, but impact on copper price is indirect and long-term.",
+                  "relevance": 0.3
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.3
+            },
+            "news_types": [
+              "corporate_action"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-25T11:23:41+00:00"
+          },
+          {
+            "title": "Societe Generale says AI demand is reshaping copper pricing",
+            "brief_text": "Societe Generale's Commodity Compass Analytics team, led by Michael Haigh and Jeremy Sellem, argues that copper has been increasingly driven by AI-related demand, arbitrage flows and US trade policy since February 2025.",
+            "url": "https://fxstreet.com/news/copper-ai-driven-demand-reshapes-pricing-societe-generale-202608241457",
+            "publisher": "FXStreet",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "AI-related demand is reshaping copper pricing, indicating increased demand for copper.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "industry_thematic",
+              "commodity_supply"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-24T14:57:23+00:00"
+          },
+          {
+            "title": "Hegang Resources posts first-half loss of 129 million yuan, swinging to a loss year-on-year",
+            "brief_text": "Hegang Resources disclosed its semi-annual report. In the first half of 2026, the company achieved total operating revenue of 2.122 billion yuan, down 24.81 percent year-on-year. Net profit attributable to shareholders of the listed company was negative 129 million yuan, compared with a profit of 262 million yuan in the same period last year, swinging from profit to loss year-on-year. During the reporting period, the location of the company's South African subsidiary PC Company experienced the most severe flooding since 2000. Underground copper mine production was temporarily suspended, with no casualties. As of the end of the reporting period, emergency repair work at the plant site has been completed, and production and operations have returned to normal. The incident had a significant adverse impact on the company's operating performance during the reporting period, and insurance claims work is progressing.",
+            "url": "http://finance.eastmoney.com/a/202608243851638286.html",
+            "publisher": "证券时报",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "supply",
+                  "direction": "neg",
+                  "reason": "Flooding temporarily suspended underground copper mine production, reducing supply.",
+                  "relevance": 0.3
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "neg",
+              "relevance": 0.3
+            },
+            "news_types": [
+              "earnings_results",
+              "commodity_supply"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Critical Materials & Supply Chain",
+            "trend_id": 30000000,
+            "published_at": "2026-08-24T00:00:00+00:00"
+          }
+        ]
+      },
+      "positioning": {
+        "score": 56,
+        "crowding": "crowded",
+        "read": "The speculators in COPPER.COMM are near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns. commercial hedgers — the group that tends to know the fundamentals — are unusually bearish (selling more than they normally do), leaning against the crowd. speculators TRIMMED the position this week (starting to unwind — the reversal often starts here). On fragility, concentration data unavailable. Vs price: price is UP ~6% and the crowd is ADDING — the trend is confirmed by positioning (just watch the crowding). Seasonally, this is extreme even FOR THIS TIME OF YEAR (~94th seasonal percentile) — a genuine crowd, not just a seasonal pattern. On the news: the news is mostly positive AND the crowd is already crowded the same way — the move looks largely PRICED IN, so risk is skewed to a reversal if the news cools."
+      },
+      "variants": [],
+      "_guide": "Lead with the PRICE level + trend (quote the `*_read` labels). Explain the WHY from `impact` — supply/demand, geopolitics, inventories. 🎯 The embedded `positioning` block is the FUTURES crowd's stance (crowded = a contrarian RISK; whether the good news is already priced-in) — weave its plain `read` into the answer; for the full breakdown call the `positioning` tool. If `variants` exist (onshore vs offshore, e.g. LME vs Shanghai; USD vs CNY/MYR), COMPARE them — an onshore-offshore divergence is the insight (different currency → convert before comparing levels). A commodity has NO options / PE / competitors — do not mention or flag them as missing. `impact` empty = no news in coverage (2026-01-01+), say so plainly; price still stands. 🌐 TRADE LENS: a commodity IS a traded good → for the PHYSICAL supply/demand behind the price you MAY deepen with the trade tools: find_hs(this commodity) → `top_traders` (who produces/exports the most, or whose exports are growing/streaking), `top_partners` / `search_trade` on the swing buyer (China imports rising/falling), `trade_balance`. Adds the flow substrate news+price can't (e.g. 'global import demand +X%, China −2 quarters, Chile exports +5y CAGR 14%'). BYOK — relay the connect CTA if no key."
+    },
+    {
+      "copper mining": [
+        {
+          "id": 30020100,
+          "name": "Copper Mining & Concentrate",
+          "tier": 3
+        }
+      ],
+      "copper electrification": [
+        {
+          "id": 14080000,
+          "name": "Grid, Transmission & Power Equipment",
+          "tier": 2
+        },
+        {
+          "id": 30020300,
+          "name": "Copper Fabrication & Products",
+          "tier": 3
+        }
+      ]
+    },
+    {
+      "stocks": [
+        {
+          "stock_id": 39214,
+          "symbol": "SCCO",
+          "ticker": "SCCO.US",
+          "type": null,
+          "name": "Southern Copper Corporation",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "15104025",
+          "market_cap_usd": 185502302208.0,
+          "market_cap_local": 185502302208.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104025",
+            "market_cap_local": 185502302208.0,
+            "market_cap_usd": 185502302208.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Southern Copper Corporation",
+            "stock_id": 39214,
+            "symbol": "SCCO",
+            "ticker": "SCCO.US"
+          }
+        },
+        {
+          "stock_id": 229265,
+          "symbol": "601899",
+          "ticker": "601899.CG",
+          "type": null,
+          "name": "Zijin Mining Group Co Ltd Class A",
+          "exchange": "CG",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104030",
+          "market_cap_usd": 133261598864.179,
+          "market_cap_local": 895575261184.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CG",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104030",
+            "market_cap_local": 895575261184.0,
+            "market_cap_usd": 133261598864.179,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Zijin Mining Group Co Ltd Class A",
+            "stock_id": 229265,
+            "symbol": "601899",
+            "ticker": "601899.CG"
+          }
+        },
+        {
+          "stock_id": 13627,
+          "symbol": "FCX",
+          "ticker": "FCX.US",
+          "type": null,
+          "name": "Freeport-McMoran Copper & Gold Inc",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "15104025",
+          "market_cap_usd": 114752167936.0,
+          "market_cap_local": 114752167936.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104025",
+            "market_cap_local": 114752167936.0,
+            "market_cap_usd": 114752167936.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Freeport-McMoran Copper & Gold Inc",
+            "stock_id": 13627,
+            "symbol": "FCX",
+            "ticker": "FCX.US"
+          }
+        },
+        {
+          "stock_id": 236261,
+          "symbol": "AAL",
+          "ticker": "AAL.LSE",
+          "type": null,
+          "name": "Anglo American PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 61454268870.656,
+          "market_cap_local": 45034639360.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 45034639360.0,
+            "market_cap_usd": 61454268870.656,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Anglo American PLC",
+            "stock_id": 236261,
+            "symbol": "AAL",
+            "ticker": "AAL.LSE"
+          }
+        },
+        {
+          "stock_id": 229905,
+          "symbol": "603993",
+          "ticker": "603993.CG",
+          "type": null,
+          "name": "China Molybdenum Co Ltd Class A",
+          "exchange": "CG",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104020",
+          "market_cap_usd": 58639580921.856,
+          "market_cap_local": 394083205120.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CG",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104020",
+            "market_cap_local": 394083205120.0,
+            "market_cap_usd": 58639580921.856,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "China Molybdenum Co Ltd Class A",
+            "stock_id": 229905,
+            "symbol": "603993",
+            "ticker": "603993.CG"
+          }
+        },
+        {
+          "stock_id": 236388,
+          "symbol": "ANTO",
+          "ticker": "ANTO.LSE",
+          "type": null,
+          "name": "Antofagasta PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104025",
+          "market_cap_usd": 53933080647.2704,
+          "market_cap_local": 39522996224.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104025",
+            "market_cap_local": 39522996224.0,
+            "market_cap_usd": 53933080647.2704,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Antofagasta PLC",
+            "stock_id": 236388,
+            "symbol": "ANTO",
+            "ticker": "ANTO.LSE"
+          }
+        },
+        {
+          "stock_id": 228588,
+          "symbol": "600362",
+          "ticker": "600362.CG",
+          "type": null,
+          "name": "Jiangxi Copper Co Ltd Class A",
+          "exchange": "CG",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104025",
+          "market_cap_usd": 22748471623.68,
+          "market_cap_local": 152879513600.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CG",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104025",
+            "market_cap_local": 152879513600.0,
+            "market_cap_usd": 22748471623.68,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Jiangxi Copper Co Ltd Class A",
+            "stock_id": 228588,
+            "symbol": "600362",
+            "ticker": "600362.CG"
+          }
+        },
+        {
+          "stock_id": 51267,
+          "symbol": "1208",
+          "ticker": "1208.HK",
+          "type": null,
+          "name": "MMG Ltd",
+          "exchange": "HK",
+          "country": "Hong Kong",
+          "domicile": "HK",
+          "currency": "HKD",
+          "gic_code": "15104020",
+          "market_cap_usd": 15085233500.16,
+          "market_cap_local": 118315556864.0,
+          "fx_rate_usd": 0.1275,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "Hong Kong",
+            "currency": "HKD",
+            "domicile": "HK",
+            "exchange": "HK",
+            "fx_rate_usd": 0.1275,
+            "gic_code": "15104020",
+            "market_cap_local": 118315556864.0,
+            "market_cap_usd": 15085233500.16,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "MMG Ltd",
+            "stock_id": 51267,
+            "symbol": "1208",
+            "ticker": "1208.HK"
+          }
+        },
+        {
+          "stock_id": 20085,
+          "symbol": "HBM",
+          "ticker": "HBM.US",
+          "type": null,
+          "name": "Hudbay Minerals Inc.",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "15104020",
+          "market_cap_usd": 13675217920.0,
+          "market_cap_local": 13675217920.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104020",
+            "market_cap_local": 13675217920.0,
+            "market_cap_usd": 13675217920.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Hudbay Minerals Inc.",
+            "stock_id": 20085,
+            "symbol": "HBM",
+            "ticker": "HBM.US"
+          }
+        },
+        {
+          "stock_id": 229135,
+          "symbol": "601168",
+          "ticker": "601168.CG",
+          "type": null,
+          "name": "Western Mining Co Ltd",
+          "exchange": "CG",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104020",
+          "market_cap_usd": 12882270643.8144,
+          "market_cap_local": 86574399488.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CG",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104020",
+            "market_cap_local": 86574399488.0,
+            "market_cap_usd": 12882270643.8144,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Western Mining Co Ltd",
+            "stock_id": 229135,
+            "symbol": "601168",
+            "ticker": "601168.CG"
+          }
+        },
+        {
+          "stock_id": 230811,
+          "symbol": "000630",
+          "ticker": "000630.CS",
+          "type": null,
+          "name": "Tongling Nonferrous Metals Group Co Ltd",
+          "exchange": "CS",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104025",
+          "market_cap_usd": 12829967096.2176,
+          "market_cap_local": 86222897152.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CS",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104025",
+            "market_cap_local": 86222897152.0,
+            "market_cap_usd": 12829967096.2176,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Tongling Nonferrous Metals Group Co Ltd",
+            "stock_id": 230811,
+            "symbol": "000630",
+            "ticker": "000630.CS"
+          }
+        },
+        {
+          "stock_id": 51312,
+          "symbol": "1258",
+          "ticker": "1258.HK",
+          "type": null,
+          "name": "China Nonferrous Mining Corp Ltd",
+          "exchange": "HK",
+          "country": "Hong Kong",
+          "domicile": "HK",
+          "currency": "HKD",
+          "gic_code": "15104020",
+          "market_cap_usd": 7761149644.8,
+          "market_cap_local": 60871761920.0,
+          "fx_rate_usd": 0.1275,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "Hong Kong",
+            "currency": "HKD",
+            "domicile": "HK",
+            "exchange": "HK",
+            "fx_rate_usd": 0.1275,
+            "gic_code": "15104020",
+            "market_cap_local": 60871761920.0,
+            "market_cap_usd": 7761149644.8,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "China Nonferrous Mining Corp Ltd",
+            "stock_id": 51312,
+            "symbol": "1258",
+            "ticker": "1258.HK"
+          }
+        },
+        {
+          "stock_id": 235154,
+          "symbol": "0O8D",
+          "ticker": "0O8D.LSE",
+          "type": null,
+          "name": "KGHM Polska Miedz SA",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "PL",
+          "currency": "PLN",
+          "gic_code": "15104025",
+          "market_cap_usd": 7569270000.0,
+          "market_cap_local": 27900000000.0,
+          "fx_rate_usd": 0.2713,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "PLN",
+            "domicile": "PL",
+            "exchange": "LSE",
+            "fx_rate_usd": 0.2713,
+            "gic_code": "15104025",
+            "market_cap_local": 27900000000.0,
+            "market_cap_usd": 7569270000.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "KGHM Polska Miedz SA",
+            "stock_id": 235154,
+            "symbol": "0O8D",
+            "ticker": "0O8D.LSE"
+          }
+        },
+        {
+          "stock_id": 229147,
+          "symbol": "601212",
+          "ticker": "601212.CG",
+          "type": null,
+          "name": "Baiyin Nonferrous Group Co Ltd",
+          "exchange": "CG",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104020",
+          "market_cap_usd": 7150879152.5376,
+          "market_cap_local": 48056983552.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CG",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104020",
+            "market_cap_local": 48056983552.0,
+            "market_cap_usd": 7150879152.5376,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Baiyin Nonferrous Group Co Ltd",
+            "stock_id": 229147,
+            "symbol": "601212",
+            "ticker": "601212.CG"
+          }
+        },
+        {
+          "stock_id": 230959,
+          "symbol": "000878",
+          "ticker": "000878.CS",
+          "type": null,
+          "name": "Yunnan Copper Co Ltd",
+          "exchange": "CS",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104025",
+          "market_cap_usd": 5968746813.8496,
+          "market_cap_local": 40112545792.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CS",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104025",
+            "market_cap_local": 40112545792.0,
+            "market_cap_usd": 5968746813.8496,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Yunnan Copper Co Ltd",
+            "stock_id": 230959,
+            "symbol": "000878",
+            "ticker": "000878.CS"
+          }
+        },
+        {
+          "stock_id": 12240,
+          "symbol": "ERO",
+          "ticker": "ERO.US",
+          "type": null,
+          "name": "Ero Copper Corp",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "15104025",
+          "market_cap_usd": 4213826560.0,
+          "market_cap_local": 4213826560.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104025",
+            "market_cap_local": 4213826560.0,
+            "market_cap_usd": 4213826560.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Ero Copper Corp",
+            "stock_id": 12240,
+            "symbol": "ERO",
+            "ticker": "ERO.US"
+          }
+        },
+        {
+          "stock_id": 230881,
+          "symbol": "000737",
+          "ticker": "000737.CS",
+          "type": null,
+          "name": "North Copper Shanxi Co Ltd",
+          "exchange": "CS",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "30301010",
+          "market_cap_usd": 4072771249.7664,
+          "market_cap_local": 27370774528.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CS",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "30301010",
+            "market_cap_local": 27370774528.0,
+            "market_cap_usd": 4072771249.7664,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "North Copper Shanxi Co Ltd",
+            "stock_id": 230881,
+            "symbol": "000737",
+            "ticker": "000737.CS"
+          }
+        },
+        {
+          "stock_id": 43040,
+          "symbol": "TGB",
+          "ticker": "TGB.US",
+          "type": null,
+          "name": "Taseko Mines Ltd",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "15104025",
+          "market_cap_usd": 3480881920.0,
+          "market_cap_local": 3480881920.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104025",
+            "market_cap_local": 3480881920.0,
+            "market_cap_usd": 3480881920.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Taseko Mines Ltd",
+            "stock_id": 43040,
+            "symbol": "TGB",
+            "ticker": "TGB.US"
+          }
+        },
+        {
+          "stock_id": 228672,
+          "symbol": "600490",
+          "ticker": "600490.CG",
+          "type": null,
+          "name": "Pengxin International Mining Co Ltd",
+          "exchange": "CG",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "15104025",
+          "market_cap_usd": 2370798659.1744,
+          "market_cap_local": 15932786688.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CG",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "15104025",
+            "market_cap_local": 15932786688.0,
+            "market_cap_usd": 2370798659.1744,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Pengxin International Mining Co Ltd",
+            "stock_id": 228672,
+            "symbol": "600490",
+            "ticker": "600490.CG"
+          }
+        },
+        {
+          "stock_id": 236457,
+          "symbol": "ATYM",
+          "ticker": "ATYM.LSE",
+          "type": null,
+          "name": "Atalaya Mining Ltd",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "CY",
+          "currency": "GBX",
+          "gic_code": "15104025",
+          "market_cap_usd": 2119716977.3568,
+          "market_cap_local": 1553361408.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "CY",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104025",
+            "market_cap_local": 1553361408.0,
+            "market_cap_usd": 2119716977.3568,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Atalaya Mining Ltd",
+            "stock_id": 236457,
+            "symbol": "ATYM",
+            "ticker": "ATYM.LSE"
+          }
+        },
+        {
+          "stock_id": 21872,
+          "symbol": "IE",
+          "ticker": "IE.US",
+          "type": null,
+          "name": "Ivanhoe Electric Inc.",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "15104020",
+          "market_cap_usd": 1796986368.0,
+          "market_cap_local": 1796986368.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104020",
+            "market_cap_local": 1796986368.0,
+            "market_cap_usd": 1796986368.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Ivanhoe Electric Inc.",
+            "stock_id": 21872,
+            "symbol": "IE",
+            "ticker": "IE.US"
+          }
+        },
+        {
+          "stock_id": 8030,
+          "symbol": "CNL",
+          "ticker": "CNL.US",
+          "type": null,
+          "name": "Collective Mining Ltd. Common Shares",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "15104020",
+          "market_cap_usd": 1527472256.0,
+          "market_cap_local": 1527472256.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104020",
+            "market_cap_local": 1527472256.0,
+            "market_cap_usd": 1527472256.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Collective Mining Ltd. Common Shares",
+            "stock_id": 8030,
+            "symbol": "CNL",
+            "ticker": "CNL.US"
+          }
+        },
+        {
+          "stock_id": 52304,
+          "symbol": "2546",
+          "ticker": "2546.HK",
+          "type": null,
+          "name": "Xizang Zhihui Mining Co Ltd",
+          "exchange": "HK",
+          "country": "Hong Kong",
+          "domicile": "HK",
+          "currency": "HKD",
+          "gic_code": "15104020",
+          "market_cap_usd": 1352124142.08,
+          "market_cap_local": 10604895232.0,
+          "fx_rate_usd": 0.1275,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "Hong Kong",
+            "currency": "HKD",
+            "domicile": "HK",
+            "exchange": "HK",
+            "fx_rate_usd": 0.1275,
+            "gic_code": "15104020",
+            "market_cap_local": 10604895232.0,
+            "market_cap_usd": 1352124142.08,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Xizang Zhihui Mining Co Ltd",
+            "stock_id": 52304,
+            "symbol": "2546",
+            "ticker": "2546.HK"
+          }
+        },
+        {
+          "stock_id": 52177,
+          "symbol": "2362",
+          "ticker": "2362.HK",
+          "type": null,
+          "name": "Jinchuan Group International Resources Co Ltd",
+          "exchange": "HK",
+          "country": "Hong Kong",
+          "domicile": "KY",
+          "currency": "HKD",
+          "gic_code": "15104025",
+          "market_cap_usd": 1071577858.56,
+          "market_cap_local": 8404532224.0,
+          "fx_rate_usd": 0.1275,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "Hong Kong",
+            "currency": "HKD",
+            "domicile": "KY",
+            "exchange": "HK",
+            "fx_rate_usd": 0.1275,
+            "gic_code": "15104025",
+            "market_cap_local": 8404532224.0,
+            "market_cap_usd": 1071577858.56,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Jinchuan Group International Resources Co Ltd",
+            "stock_id": 52177,
+            "symbol": "2362",
+            "ticker": "2362.HK"
+          }
+        },
+        {
+          "stock_id": 235838,
+          "symbol": "0RQ9",
+          "ticker": "0RQ9.LSE",
+          "type": null,
+          "name": "Lundin Mining Corp.",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "SEK",
+          "gic_code": "15104020",
+          "market_cap_usd": 842016347.2,
+          "market_cap_local": 7966096000.0,
+          "fx_rate_usd": 0.1057,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30020100,
+            "node_name": "Copper Mining & Concentrate",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "SEK",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 0.1057,
+            "gic_code": "15104020",
+            "market_cap_local": 7966096000.0,
+            "market_cap_usd": 842016347.2,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30020100,
+              "node_name": "Copper Mining & Concentrate",
+              "role": null
+            },
+            "name": "Lundin Mining Corp.",
+            "stock_id": 235838,
+            "symbol": "0RQ9",
+            "ticker": "0RQ9.LSE"
+          }
+        }
+      ],
+      "count": 25,
+      "total": 122,
+      "note": "showing 25 of 122 — this is a curated top slice, not the full list; tell the user more exist, and raise `limit` or narrow the scope to see them"
+    },
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          }
+        }
+      },
+      "capped": false,
+      "count": 5,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 0.0012,
+              "market_cap_usd": 2469392.3044000003,
+              "net_income_usd": 565144.3596,
+              "revenue_usd": 0.0
+            }
+          },
+          "head_listing_id": 236779,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.125
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chesterfield Resources PLC",
+          "score": 8.125,
+          "ticker": "CHF.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.95,
+              "market_cap_usd": 3438857984.0,
+              "net_income_usd": 311262000.0,
+              "net_margin": 0.2979,
+              "normalized_pe": 13.3359428076026,
+              "revenue_usd": 1044729000.0
+            }
+          },
+          "head_listing_id": 12240,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.833898
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Ero Copper Corp",
+          "score": 11.833898,
+          "ticker": "ERO.US"
+        },
+        {
+          "also_known_as": [
+            "ZIJIN13.BK",
+            "ZIJIN23.BK",
+            "ZIJIN80.BK",
+            "2899.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.484,
+              "market_cap_usd": 132340603387.90399,
+              "net_income_usd": 8306303364.405,
+              "net_margin": 0.1586,
+              "normalized_pe": 17.0887637470994,
+              "revenue_usd": 52357756002.93
+            }
+          },
+          "head_listing_id": 229265,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.784141
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zijin Mining Group Co Ltd Class A",
+          "score": 14.784141,
+          "ticker": "601899.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 0.705,
+              "market_cap_usd": 1897373252.5568001,
+              "net_income_usd": 96814195.2,
+              "net_margin": 0.1782,
+              "normalized_pe": 16.0981953204413,
+              "revenue_usd": 543400457.4
+            }
+          },
+          "head_listing_id": 236457,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 15.351485
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Atalaya Mining Ltd",
+          "score": 15.351485,
+          "ticker": "ATYM.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.5,
+              "market_cap_usd": 13680072024.064,
+              "net_income_usd": 873800345.4268,
+              "net_margin": 0.0875,
+              "normalized_pe": 14.2235506560725,
+              "revenue_usd": 9988539792.9724
+            }
+          },
+          "head_listing_id": 229135,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 15.58
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Western Mining Co Ltd",
+          "score": 15.58,
+          "ticker": "601168.CG"
+        }
+      ],
+      "sort": "pe",
+      "universe": 46,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 5,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 5 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Commodity backdrop: copper (COPPER.COMM) last ~$6.71, near 52-week highs (only -0.3% off the peak), +3.5% on the week, +6.2% on the month, +19.2% YTD and +50.8% over the year — a strong uptrend with accumulation, driven by tight supply (news: LME copper at record highs, mines not producing enough, stock draws to the US). Classic electrification tightness.\n\nThe biggest copper miners (core cohort): Southern Copper (SCCO.US), Freeport-McMoRan (FCX.US), Zijin Mining (601899.CG), Anglo American (AAL.LSE), Antofagasta (ANTO.LSE), China Molybdenum (603993.CG), Jiangxi Copper (600362.CG), MMG (1208.HK), Hudbay (HBM.US), plus KGHM (0O8D.LSE) and Ero Copper (ERO.US).\n\nCheapest on fundamentals (P/E, low tail of the copper cohort):\n- Ero Copper (ERO.US) — P/E ~11.8\n- Zijin Mining (601899.CG) — P/E ~14.8 (the cheapest of the true large-caps)\n- Atalaya Mining (ATYM.LSE) — ~15.4\n- Western Mining (601168.CG) — ~15.6\n(Chesterfield Resources at ~8.1x is a tiny explorer, not a major.)\n\nSo the metal is ripping on supply tightness, and among the large copper miners Zijin screens as the cheapest on P/E, with Ero Copper the cheapest mid-cap."
+}

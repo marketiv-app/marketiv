@@ -1,0 +1,1810 @@
+{
+  "id": "tn-03",
+  "question": "I keep hearing about the golden cross thing. Can you find me stocks where the 50 day moving average just crossed above the 200 day?",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "the 50-day crossed above the 200-day golden cross"
+        ]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "ema50",
+                "b": "ema200"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "window_bars": 30,
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 59,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 99.8651,
+              "close_vs_ema200": 3.7336,
+              "rsi14": 99.949
+            }
+          },
+          "head_listing_id": 239168,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 16.2469,
+                  "b": 14.6045
+                },
+                "kind": "signal",
+                "strength": 0.995,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Puma Alpha VCT Ord",
+          "score": 0.995,
+          "ticker": "PUAL.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.929,
+              "close_vs_ema200": 0.0408,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 1753338,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 115.1961,
+                  "b": 115.0535
+                },
+                "kind": "signal",
+                "strength": 0.991,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Integritas Viager SA",
+          "score": 0.991,
+          "ticker": "MLVIE.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 56.7482,
+              "close_vs_ema200": 0.1032,
+              "rsi14": 83.1362
+            }
+          },
+          "head_listing_id": 53358,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 0.3063,
+                  "b": 0.3052
+                },
+                "kind": "signal",
+                "strength": 0.99,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Oriental University City Holdings HK Ltd",
+          "score": 0.99,
+          "ticker": "8067.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 9.7879,
+              "close_vs_ema200": 1.4288,
+              "rsi14": 48.7745
+            }
+          },
+          "head_listing_id": 26138,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 5.2832,
+                  "b": 1.9793
+                },
+                "kind": "signal",
+                "strength": 0.988,
+                "value": "2026-07-29"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Lexaria Bioscience Corp",
+          "score": 0.988,
+          "ticker": "LEXX.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.1672,
+              "close_vs_ema200": 0.2389,
+              "rsi14": 89.9812
+            }
+          },
+          "head_listing_id": 572262,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 853.6538,
+                  "b": 851.9266
+                },
+                "kind": "signal",
+                "strength": 0.979,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "DIGITAL HEARTS HOLDINGS Co., Ltd.",
+          "score": 0.979,
+          "ticker": "3676.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 38.745,
+              "close_vs_ema200": 6.6178,
+              "rsi14": 82.933
+            }
+          },
+          "head_listing_id": 9337,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 0.4848,
+                  "b": 0.4089
+                },
+                "kind": "signal",
+                "strength": 0.978,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CXApp Inc.",
+          "score": 0.978,
+          "ticker": "CXAI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 18.5204,
+              "close_vs_ema200": 4.1068,
+              "rsi14": 95.3901
+            }
+          },
+          "head_listing_id": 22401,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1.1213,
+                  "b": 1.073
+                },
+                "kind": "signal",
+                "strength": 0.977,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "InterCure Ltd.",
+          "score": 0.977,
+          "ticker": "INCR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 10.3994,
+              "close_vs_ema200": -0.2281,
+              "rsi14": 45.989
+            }
+          },
+          "head_listing_id": 5269,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1.3785,
+                  "b": 1.2922
+                },
+                "kind": "signal",
+                "strength": 0.973,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BRC Inc.",
+          "score": 0.973,
+          "ticker": "BRCC.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 64.7723,
+              "close_vs_ema200": 0.3939,
+              "rsi14": 80.8645
+            }
+          },
+          "head_listing_id": 45574,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 9.5359,
+                  "b": 9.5102
+                },
+                "kind": "signal",
+                "strength": 0.971,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Utz Brands Inc",
+          "score": 0.971,
+          "ticker": "UTZ.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.5945,
+              "close_vs_ema200": 1.1674,
+              "rsi14": 84.5846
+            }
+          },
+          "head_listing_id": 232929,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 23.9306,
+                  "b": 23.7137
+                },
+                "kind": "signal",
+                "strength": 0.97,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Anhui Landun Photoelectron Co Ltd",
+          "score": 0.97,
+          "ticker": "300862.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.69,
+              "close_vs_ema200": 1.1615,
+              "rsi14": 66.8933
+            }
+          },
+          "head_listing_id": 1752610,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 0.8765,
+                  "b": 0.8643
+                },
+                "kind": "signal",
+                "strength": 0.969,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Invibes Advertising NV",
+          "score": 0.969,
+          "ticker": "ALINV.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.7814,
+              "close_vs_ema200": 0.5311,
+              "rsi14": 62.2777
+            }
+          },
+          "head_listing_id": 231922,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 32.4946,
+                  "b": 32.4608
+                },
+                "kind": "signal",
+                "strength": 0.969,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Tibet GaoZheng Explosive Co Ltd",
+          "score": 0.969,
+          "ticker": "002827.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 39.977,
+              "close_vs_ema200": 0.3943,
+              "rsi14": 50.9089
+            }
+          },
+          "head_listing_id": 232111,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 6.6515,
+                  "b": 6.6308
+                },
+                "kind": "signal",
+                "strength": 0.966,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Jiangsu Chuanzhiboke Education Tech",
+          "score": 0.966,
+          "ticker": "003032.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 39.0865,
+              "close_vs_ema200": 0.131,
+              "rsi14": 40.446
+            }
+          },
+          "head_listing_id": 31756,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 7.5063,
+                  "b": 5.2406
+                },
+                "kind": "signal",
+                "strength": 0.966,
+                "value": "2026-07-30"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "T3 Defense Inc.",
+          "score": 0.966,
+          "ticker": "DFNS.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 30.0487,
+              "close_vs_ema200": 0.1635,
+              "rsi14": 64.2594
+            }
+          },
+          "head_listing_id": 574212,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1077.6648,
+                  "b": 1075.1901
+                },
+                "kind": "signal",
+                "strength": 0.963,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Origin Company,Limited",
+          "score": 0.963,
+          "ticker": "6513.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.6587,
+              "close_vs_ema200": 0.3177,
+              "rsi14": 72.1557
+            }
+          },
+          "head_listing_id": 571836,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 707.6227,
+                  "b": 707.4979
+                },
+                "kind": "signal",
+                "strength": 0.96,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Sun A. Kaken Co., Ltd.",
+          "score": 0.96,
+          "ticker": "4234.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 44.8126,
+              "close_vs_ema200": 0.1254,
+              "rsi14": 78.023
+            }
+          },
+          "head_listing_id": 1753097,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1.1461,
+                  "b": 1.1433
+                },
+                "kind": "signal",
+                "strength": 0.953,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Groupe JAJ",
+          "score": 0.953,
+          "ticker": "GJAJ.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 48.4973,
+              "close_vs_ema200": 2.3233,
+              "rsi14": 96.6312
+            }
+          },
+          "head_listing_id": 237624,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 5.9937,
+                  "b": 5.7172
+                },
+                "kind": "signal",
+                "strength": 0.95,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "GCM Resources Plc",
+          "score": 0.95,
+          "ticker": "GCM.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.3802,
+              "close_vs_ema200": 0.5401,
+              "rsi14": 90.3835
+            }
+          },
+          "head_listing_id": 46499,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 11.6081,
+                  "b": 11.4172
+                },
+                "kind": "signal",
+                "strength": 0.95,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Varex Imaging Corp",
+          "score": 0.95,
+          "ticker": "VREX.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 43.5054,
+              "close_vs_ema200": 0.1972,
+              "rsi14": 77.8393
+            }
+          },
+          "head_listing_id": 573925,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 469.5788,
+                  "b": 466.6214
+                },
+                "kind": "signal",
+                "strength": 0.945,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Harada Industry Co., Ltd.",
+          "score": 0.945,
+          "ticker": "6904.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 54.9745,
+              "close_vs_ema200": 0.5683,
+              "rsi14": 58.3695
+            }
+          },
+          "head_listing_id": 229962,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 18.0108,
+                  "b": 17.9216
+                },
+                "kind": "signal",
+                "strength": 0.944,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Zhejiang Yiming Food Co. Ltd.",
+          "score": 0.944,
+          "ticker": "605179.CG"
+        },
+        {
+          "also_known_as": [
+            "0HQI.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 52.7701,
+              "close_vs_ema200": 0.2701,
+              "rsi14": 76.9072
+            }
+          },
+          "head_listing_id": 6433,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 42.0085,
+                  "b": 41.7601
+                },
+                "kind": "signal",
+                "strength": 0.944,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CBIZ Inc",
+          "score": 0.944,
+          "ticker": "CBZ.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.7273,
+              "close_vs_ema200": 0.011,
+              "rsi14": 99.9946
+            }
+          },
+          "head_listing_id": 239062,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 92.4885,
+                  "b": 92.4816
+                },
+                "kind": "signal",
+                "strength": 0.943,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Pembroke VCT PLC",
+          "score": 0.943,
+          "ticker": "PEMB.LSE"
+        },
+        {
+          "also_known_as": [
+            "0K17.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 10.8311,
+              "close_vs_ema200": -0.8353,
+              "rsi14": 43.2382
+            }
+          },
+          "head_listing_id": 30175,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 0.8325,
+                  "b": 0.78
+                },
+                "kind": "signal",
+                "strength": 0.942,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Microvision Inc",
+          "score": 0.942,
+          "ticker": "MVIS.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.4225,
+              "close_vs_ema200": 0.7456,
+              "rsi14": 95.144
+            }
+          },
+          "head_listing_id": 228777,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 5.9829,
+                  "b": 5.8832
+                },
+                "kind": "signal",
+                "strength": 0.937,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shanghai Shenqi Pharmaceutical Investment Management Co Ltd A",
+          "score": 0.937,
+          "ticker": "600613.CG"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.035,
+              "close_vs_ema200": 0.3163,
+              "rsi14": 84.687
+            }
+          },
+          "head_listing_id": 5845,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 32.2041,
+                  "b": 31.9978
+                },
+                "kind": "signal",
+                "strength": 0.935,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bowman Consulting Group Ltd",
+          "score": 0.935,
+          "ticker": "BWMN.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 42.5298,
+              "close_vs_ema200": 0.3786,
+              "rsi14": 65.1822
+            }
+          },
+          "head_listing_id": 50196,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1.1683,
+                  "b": 1.1677
+                },
+                "kind": "signal",
+                "strength": 0.931,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Thai Wire Products Public Company Limited",
+          "score": 0.931,
+          "ticker": "TWP.BK"
+        },
+        {
+          "also_known_as": [
+            "0GN6.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 29.9539,
+              "close_vs_ema200": 0.1296,
+              "rsi14": 63.229
+            }
+          },
+          "head_listing_id": 1752753,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 63.2637,
+                  "b": 63.2526
+                },
+                "kind": "signal",
+                "strength": 0.931,
+                "value": "2026-07-28"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Argan SA",
+          "score": 0.931,
+          "ticker": "ARG.PA"
+        },
+        {
+          "also_known_as": [
+            "003010.KQ"
+          ],
+          "context": {
+            "ta": {
+              "adx": 51.5753,
+              "close_vs_ema200": 0.8298,
+              "rsi14": 70.5961
+            }
+          },
+          "head_listing_id": 1414618,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 5466.4616,
+                  "b": 5405.6732
+                },
+                "kind": "signal",
+                "strength": 0.929,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Hae In",
+          "score": 0.929,
+          "ticker": "003010.KO"
+        },
+        {
+          "also_known_as": [
+            "FLDYY.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 54.2897,
+              "close_vs_ema200": 0.4096,
+              "rsi14": 69.2442
+            }
+          },
+          "head_listing_id": 573451,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1689.812,
+                  "b": 1669.0198
+                },
+                "kind": "signal",
+                "strength": 0.929,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "TSUBURAYA FIELDS HOLDINGS INC.",
+          "score": 0.929,
+          "ticker": "2767.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 46.9729,
+              "close_vs_ema200": 0.3892,
+              "rsi14": 85.9672
+            }
+          },
+          "head_listing_id": 243647,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 3.3007,
+                  "b": 3.2751
+                },
+                "kind": "signal",
+                "strength": 0.926,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "STS Group AG",
+          "score": 0.926,
+          "ticker": "SF3.XETRA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.3811,
+              "close_vs_ema200": 0.072,
+              "rsi14": 65.1555
+            }
+          },
+          "head_listing_id": 572457,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 7186.3247,
+                  "b": 7172.3168
+                },
+                "kind": "signal",
+                "strength": 0.922,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Takigami Steel Construction Co., Ltd.",
+          "score": 0.922,
+          "ticker": "5918.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 36.5141,
+              "close_vs_ema200": 0.3173,
+              "rsi14": 84.7337
+            }
+          },
+          "head_listing_id": 573742,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1845.7237,
+                  "b": 1843.0794
+                },
+                "kind": "signal",
+                "strength": 0.918,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "GMO Pepabo, Inc.",
+          "score": 0.918,
+          "ticker": "3633.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 21.8957,
+              "close_vs_ema200": 0.0573,
+              "rsi14": 48.3279
+            }
+          },
+          "head_listing_id": 241171,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 2.9092,
+                  "b": 2.8998
+                },
+                "kind": "signal",
+                "strength": 0.917,
+                "value": "2026-07-30"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ALBIS Leasing AG",
+          "score": 0.917,
+          "ticker": "ALG.XETRA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 39.0721,
+              "close_vs_ema200": 0.3302,
+              "rsi14": 59.1623
+            }
+          },
+          "head_listing_id": 231570,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 3.1959,
+                  "b": 3.1607
+                },
+                "kind": "signal",
+                "strength": 0.915,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Harbin Gloria Pharmaceuticals",
+          "score": 0.915,
+          "ticker": "002437.CS"
+        },
+        {
+          "also_known_as": [
+            "0QKD.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 44.7548,
+              "close_vs_ema200": 0.1598,
+              "rsi14": 63.9428
+            }
+          },
+          "head_listing_id": 1754280,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 789.9882,
+                  "b": 785.5952
+                },
+                "kind": "signal",
+                "strength": 0.915,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Forbo Holding AG",
+          "score": 0.915,
+          "ticker": "FORN.SW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 47.2097,
+              "close_vs_ema200": 0.1242,
+              "rsi14": 80.0278
+            }
+          },
+          "head_listing_id": 574715,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 712.2012,
+                  "b": 711.6183
+                },
+                "kind": "signal",
+                "strength": 0.913,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Betrend Corp.",
+          "score": 0.913,
+          "ticker": "4020.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 48.2272,
+              "close_vs_ema200": 0.4133,
+              "rsi14": 76.9861
+            }
+          },
+          "head_listing_id": 50217,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 4.3932,
+                  "b": 4.3491
+                },
+                "kind": "signal",
+                "strength": 0.913,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Varopakorn Public Company Limited",
+          "score": 0.913,
+          "ticker": "VARO.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 35.5639,
+              "close_vs_ema200": 0.2092,
+              "rsi14": 72.7004
+            }
+          },
+          "head_listing_id": 235237,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 50.1445,
+                  "b": 50.0919
+                },
+                "kind": "signal",
+                "strength": 0.913,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bulten AB",
+          "score": 0.913,
+          "ticker": "0P49.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.2891,
+              "close_vs_ema200": 1.463,
+              "rsi14": 54.0355
+            }
+          },
+          "head_listing_id": 49340,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 28.3308,
+                  "b": 25.9105
+                },
+                "kind": "signal",
+                "strength": 0.912,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "NASDAQ TEST STOCK",
+          "score": 0.912,
+          "ticker": "ZVZZT.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 58.797,
+              "close_vs_ema200": 0.4191,
+              "rsi14": 76.8011
+            }
+          },
+          "head_listing_id": 571669,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1354.916,
+                  "b": 1343.0175
+                },
+                "kind": "signal",
+                "strength": 0.912,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Achilles Corporation",
+          "score": 0.912,
+          "ticker": "5142.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 49.7125,
+              "close_vs_ema200": 0.4813,
+              "rsi14": 76.0545
+            }
+          },
+          "head_listing_id": 42809,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 115.3714,
+                  "b": 114.5297
+                },
+                "kind": "signal",
+                "strength": 0.91,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Atlassian Corp Plc",
+          "score": 0.91,
+          "ticker": "TEAM.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 54.3059,
+              "close_vs_ema200": 0.0487,
+              "rsi14": 68.3605
+            }
+          },
+          "head_listing_id": 49554,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 44.4068,
+                  "b": 44.3555
+                },
+                "kind": "signal",
+                "strength": 0.909,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Crown Seal Public Company Limited",
+          "score": 0.909,
+          "ticker": "CSC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.3178,
+              "close_vs_ema200": 0.1308,
+              "rsi14": 49.5628
+            }
+          },
+          "head_listing_id": 1418812,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 7832.9708,
+                  "b": 7803.469
+                },
+                "kind": "signal",
+                "strength": 0.908,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "GaeaSoft Corp",
+          "score": 0.908,
+          "ticker": "051160.KQ"
+        },
+        {
+          "also_known_as": [
+            "0NW2.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 47.1181,
+              "close_vs_ema200": 0.2706,
+              "rsi14": 66.4455
+            }
+          },
+          "head_listing_id": 1748546,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 29.8154,
+                  "b": 29.7785
+                },
+                "kind": "signal",
+                "strength": 0.908,
+                "value": "2026-07-29"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Randstad NV",
+          "score": 0.908,
+          "ticker": "RAND.AS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 47.4151,
+              "close_vs_ema200": 0.7395,
+              "rsi14": 82.3947
+            }
+          },
+          "head_listing_id": 571921,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 2745.8163,
+                  "b": 2701.847
+                },
+                "kind": "signal",
+                "strength": 0.907,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bengo4.com, Inc.",
+          "score": 0.907,
+          "ticker": "6027.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 34.1547,
+              "close_vs_ema200": 0.254,
+              "rsi14": 59.364
+            }
+          },
+          "head_listing_id": 43777,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 53.2589,
+                  "b": 52.9064
+                },
+                "kind": "signal",
+                "strength": 0.906,
+                "value": "2026-07-29"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "TriNet Group Inc",
+          "score": 0.906,
+          "ticker": "TNET.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 64.2084,
+              "close_vs_ema200": 0.3402,
+              "rsi14": 80.2669
+            }
+          },
+          "head_listing_id": 239091,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 322.0919,
+                  "b": 320.3423
+                },
+                "kind": "signal",
+                "strength": 0.904,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Pinewood Technologies Group PLC",
+          "score": 0.904,
+          "ticker": "PINE.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 38.7679,
+              "close_vs_ema200": 0.4979,
+              "rsi14": 86.64
+            }
+          },
+          "head_listing_id": 572434,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 2608.7653,
+                  "b": 2592.0103
+                },
+                "kind": "signal",
+                "strength": 0.903,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "freee K.K.",
+          "score": 0.903,
+          "ticker": "4478.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 47.8846,
+              "close_vs_ema200": 0.2713,
+              "rsi14": 62.8856
+            }
+          },
+          "head_listing_id": 239709,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 44.1663,
+                  "b": 43.6674
+                },
+                "kind": "signal",
+                "strength": 0.903,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shearwater Group plc",
+          "score": 0.903,
+          "ticker": "SWG.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.4781,
+              "close_vs_ema200": 0.501,
+              "rsi14": 88.2921
+            }
+          },
+          "head_listing_id": 49541,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 8.3391,
+                  "b": 8.3175
+                },
+                "kind": "signal",
+                "strength": 0.902,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Castle Peak Holdings Public Company Limited",
+          "score": 0.902,
+          "ticker": "CPH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 27.9902,
+              "close_vs_ema200": 0.0952,
+              "rsi14": 42.4244
+            }
+          },
+          "head_listing_id": 233056,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 12.0299,
+                  "b": 12.0155
+                },
+                "kind": "signal",
+                "strength": 0.901,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Pansoft Company Limited",
+          "score": 0.901,
+          "ticker": "300996.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 35.7128,
+              "close_vs_ema200": 0.1269,
+              "rsi14": 70.0765
+            }
+          },
+          "head_listing_id": 571658,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 650.2604,
+                  "b": 648.4451
+                },
+                "kind": "signal",
+                "strength": 0.897,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Zoom Corp.",
+          "score": 0.897,
+          "ticker": "6694.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 38.6336,
+              "close_vs_ema200": 0.2522,
+              "rsi14": 60.3109
+            }
+          },
+          "head_listing_id": 573734,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1922.8509,
+                  "b": 1910.8066
+                },
+                "kind": "signal",
+                "strength": 0.897,
+                "value": "2026-07-31"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "AIRMAN CORP",
+          "score": 0.897,
+          "ticker": "6364.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 29.8292,
+              "close_vs_ema200": 0.0968,
+              "rsi14": 65.8644
+            }
+          },
+          "head_listing_id": 1752570,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 0.6928,
+                  "b": 0.6916
+                },
+                "kind": "signal",
+                "strength": 0.894,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Florentaise SA",
+          "score": 0.894,
+          "ticker": "ALFLO.PA"
+        },
+        {
+          "also_known_as": [
+            "661.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 41.788,
+              "close_vs_ema200": 0.5303,
+              "rsi14": 85.9536
+            }
+          },
+          "head_listing_id": 50818,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 0.1092,
+                  "b": 0.1085
+                },
+                "kind": "signal",
+                "strength": 0.892,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "China Daye Non-Ferrous Metals Mining Ltd",
+          "score": 0.892,
+          "ticker": "0661.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 52.9033,
+              "close_vs_ema200": 0.1726,
+              "rsi14": 58.1756
+            }
+          },
+          "head_listing_id": 572672,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 1779.4598,
+                  "b": 1773.0301
+                },
+                "kind": "signal",
+                "strength": 0.892,
+                "value": "2026-07-30"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Sagami Holdings Corp.",
+          "score": 0.892,
+          "ticker": "9900.JP"
+        },
+        {
+          "also_known_as": [
+            "0KGH.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 48.0931,
+              "close_vs_ema200": 0.4478,
+              "rsi14": 77.8874
+            }
+          },
+          "head_listing_id": 33285,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 152.9827,
+                  "b": 152.9558
+                },
+                "kind": "signal",
+                "strength": 0.891,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Paycom Software, Inc.",
+          "score": 0.891,
+          "ticker": "PAYC.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 34.0127,
+              "close_vs_ema200": 0.5815,
+              "rsi14": 55.6817
+            }
+          },
+          "head_listing_id": 573446,
+          "matched": {
+            "ta": {
+              "cross_ema50_ema200_up": {
+                "detail": {
+                  "a": 309.9058,
+                  "b": 306.18
+                },
+                "kind": "signal",
+                "strength": 0.891,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Ficha, Inc.",
+          "score": 0.891,
+          "ticker": "4052.JP"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 59,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 59 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "A golden cross = the 50-day moving average crossing ABOVE the 200-day (a bullish trend signal). Stocks that had that cross recently: PUAL.LSE, MLVIE.PA, 8067.HK, LEXX.US, 3676.JP, CXAI.US, INCR.US, BRCC.US, UTZ.US, 300862.CS. About 59 names market-wide had a fresh 50/200 bullish crossover in the last ~30 trading days."
+}

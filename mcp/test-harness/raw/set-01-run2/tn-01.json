@@ -1,0 +1,16 @@
+{
+  "id": "tn-01",
+  "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "overbought"}]}],
+        "asset_type": ["Common Stock"],
+        "sort": "rsi",
+        "limit": 15
+      },
+      "result_summary": "60 results (count capped). Top 15 by RSI: CRNX.US (RSI 89.5), CYCU.US (86.8), BWMN.US (84.7), AMR.US (84.4), DNMX.US (84.2), BANL.US (82.7), ARCT.US (81.8), CRM.US (80.8, Salesforce), CXM.US (80.7), EVOX.US (79.9), GAME.US (78.8), APGE.US (78.2), CHAR.US (77.8), BMEA.US (77.7), ANF.US (77.7, Abercrombie & Fitch). All RSI > 70. Notable names with RSI above 73: ESTC.US Elastic (77.5), CBZ.US CBIZ (74.4), CTSH.US Cognizant (73.4), DASH.US DoorDash (72.5), CME.US CME Group (71.8), BDX.US Becton Dickinson (70.0)."
+    }
+  ]
+}

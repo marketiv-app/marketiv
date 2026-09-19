@@ -1,0 +1,74 @@
+{
+  "id": "op-03",
+  "question": "Which stocks do people seem to doubt in the short term but believe in for the long term?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "doubt in short term but believe in long term, short-term bearish long-term bullish"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "distrust_short_believe_long",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "doubt in short term but believe in long term, short-term bearish long-term bullish",
+          "candidates": [
+            {
+              "pattern": "bullish_positioning",
+              "label": "Bullish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bullish (positioning score high, calls heavier)."
+            },
+            {
+              "pattern": "distrust_short_believe_long",
+              "label": "Distrust short / believe long",
+              "supported": "yes",
+              "description": "Bearish short-term but bullish long-term positioning."
+            },
+            {
+              "pattern": "believe_short_distrust_long",
+              "label": "Believe short / distrust long",
+              "supported": "yes",
+              "description": "Bullish short-term but bearish long-term positioning."
+            },
+            {
+              "pattern": "bearish_positioning",
+              "label": "Bearish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bearish (positioning score low, puts heavier)."
+            },
+            {
+              "pattern": "crowded_one_sided",
+              "label": "Crowded / one-sided",
+              "supported": "yes",
+              "description": "Extreme one-sided positioning either way — unwind/squeeze risk."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "distrust_short_believe_long",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "There's a dedicated pattern for exactly this — `distrust_short_believe_long` (bearish short-dated but bullish long-dated positioning), which the MCP matched to your question. Unfortunately the scanner that would return the actual stocks isn't live yet (POC stub), so I can't produce the list. The concept is supported; the endpoint just isn't built."
+}

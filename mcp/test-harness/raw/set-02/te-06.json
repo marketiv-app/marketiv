@@ -1,0 +1,3459 @@
+{
+ "id": "te-06",
+ "question": "Find me quality growth names in a healthy pullback: 20% EPS growth and gross margin over 50%, but the stock has pulled back to near its 200-day EMA (within 3%) on the daily chart while daily RSI is between 40 and 50. US and China.",
+ "tools_called": [
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "eps_diluted",
+      "pattern": "latest_yoy",
+      "threshold": 0.2
+     },
+     {
+      "concept": "gross_margin",
+      "pattern": "above",
+      "threshold": 0.5
+     }
+    ],
+    "ta": [
+     {
+      "anchor": [
+       {
+        "pattern": "near_ma",
+        "b": "ema200"
+       }
+      ],
+      "quals": [
+       {
+        "any": [
+         {
+          "pattern": "in_range",
+          "a": "rsi",
+          "b": "40-50"
+         }
+        ],
+        "within": 0
+       }
+      ]
+     }
+    ],
+    "country": [
+     "US",
+     "CN"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "timeframe": 1,
+    "limit": 15
+   }
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "adx": {
+      "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+     },
+     "atr_pct": {
+      "definition": "Average True Range ÷ price — volatility as a fraction of price."
+     },
+     "close_vs_ema200": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "eps_diluted": {
+      "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+     },
+     "rsi14": {
+      "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+     },
+     "strength": {
+      "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+     }
+    }
+   },
+   "capped": false,
+   "count": 59,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 30659000.0,
+       "market_cap_usd": 64895888.0,
+       "net_income_usd": -8835000.0,
+       "net_margin": -0.1344,
+       "normalized_income_usd": -8835000.0,
+       "operating_margin": -0.2161,
+       "revenue_usd": 65733000.0,
+       "shares_outstanding": 20532531.0
+      },
+      "ta": {
+       "adx": 15.4083,
+       "atr_pct": 0.0698,
+       "close_vs_ema200": -0.0672,
+       "rsi14": 43.4797
+      }
+     },
+     "head_listing_id": 8133,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.25,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5336
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.995,
+        "value": "2026-08-18"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.936,
+        "value": "2026-08-19"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Cineverse Corp.",
+     "score": 1.0,
+     "ticker": "CNVS.US"
+    },
+    {
+     "also_known_as": [
+      "0YU1.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 166868000.0,
+       "market_cap_usd": 3282217472.0,
+       "net_income_usd": -69630000.0,
+       "net_margin": -0.1718,
+       "normalized_income_usd": -69630000.0,
+       "operating_margin": -0.1878,
+       "revenue_usd": 405187000.0,
+       "shares_outstanding": 43861484.0
+      },
+      "ta": {
+       "adx": 16.8001,
+       "atr_pct": 0.0685,
+       "close_vs_ema200": -0.0104,
+       "rsi14": 40.6604
+      }
+     },
+     "head_listing_id": 1858,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2931,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5882
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.98,
+        "value": "2026-07-29"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.996,
+        "value": "2026-07-28"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Ambarella Inc",
+     "score": 1.0,
+     "ticker": "AMBA.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 4450000.0,
+       "market_cap_usd": 7772822016.0,
+       "net_income_usd": -248697000.0,
+       "net_margin": -20.0159,
+       "normalized_income_usd": -117231000.0,
+       "operating_margin": -13.7288,
+       "revenue_usd": 12425000.0,
+       "shares_outstanding": 372011420.0
+      },
+      "ta": {
+       "adx": 11.7639,
+       "atr_pct": 0.0777,
+       "close_vs_ema200": -0.0993,
+       "rsi14": 45.1968
+      }
+     },
+     "head_listing_id": 36317,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.7636,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6419
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.974,
+        "value": "2026-08-17"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.977,
+        "value": "2026-08-07"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "D-Wave Quantum Inc. Common Stock",
+     "score": 0.999,
+     "ticker": "QBTS.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 10647000.0,
+       "market_cap_usd": 1778351616.0,
+       "net_income_usd": -220765000.0,
+       "net_margin": -0.8752,
+       "normalized_income_usd": -220765000.0,
+       "operating_margin": -0.7698,
+       "revenue_usd": 252251000.0,
+       "shares_outstanding": 89150619.0
+      },
+      "ta": {
+       "adx": 30.4644,
+       "atr_pct": 0.0503,
+       "close_vs_ema200": -0.0177,
+       "rsi14": 44.4752
+      }
+     },
+     "head_listing_id": 40763,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.3373,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.9578
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.719,
+        "value": "2026-08-07"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.998,
+        "value": "2026-08-05"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Syndax Pharmaceuticals Inc",
+     "score": 0.999,
+     "ticker": "SNDX.US"
+    },
+    {
+     "also_known_as": [
+      "0R2S.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 9049000000.0,
+       "market_cap_usd": 127104598016.0,
+       "net_income_usd": 3729000000.0,
+       "net_margin": 0.1443,
+       "normalized_income_usd": 3796300856.77749,
+       "normalized_pe": 33.4811709638559,
+       "operating_margin": 0.2173,
+       "pe": 34.33886,
+       "revenue_usd": 25837000000.0,
+       "shares_outstanding": 383573046.0
+      },
+      "ta": {
+       "adx": 8.6802,
+       "atr_pct": 0.031,
+       "close_vs_ema200": -0.0309,
+       "rsi14": 46.3799
+      }
+     },
+     "head_listing_id": 42278,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.441,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6498
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.986,
+        "value": "2026-08-03"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.963,
+        "value": "2026-08-07"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Stryker Corporation",
+     "score": 0.999,
+     "ticker": "SYK.US"
+    },
+    {
+     "also_known_as": [
+      "0IFS.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 273581000.0,
+       "market_cap_usd": 296092768.0,
+       "net_income_usd": 4763000.0,
+       "net_margin": 0.0064,
+       "normalized_income_usd": 4291961.0,
+       "normalized_pe": 68.9877582764615,
+       "operating_margin": 0.0306,
+       "pe": 68.0,
+       "revenue_usd": 744561000.0,
+       "shares_outstanding": 143970000.0
+      },
+      "ta": {
+       "adx": 9.9655,
+       "atr_pct": 0.0675,
+       "close_vs_ema200": -0.0213,
+       "rsi14": 46.9045
+      }
+     },
+     "head_listing_id": 11493,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.6667,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6326
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.882,
+        "value": "2026-08-18"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.979,
+        "value": "2026-08-20"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "8x8 Inc Common Stock",
+     "score": 0.998,
+     "ticker": "EGHT.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 9268376.0,
+       "market_cap_usd": 119350376.0,
+       "net_income_usd": 4936726.0,
+       "net_margin": 0.1766,
+       "normalized_income_usd": 4962393.612322,
+       "normalized_pe": 24.0509692144621,
+       "operating_margin": 0.2201,
+       "pe": 23.795455,
+       "revenue_usd": 27950076.0,
+       "shares_outstanding": 11276152.0
+      },
+      "ta": {
+       "adx": 11.9103,
+       "atr_pct": 0.0391,
+       "close_vs_ema200": -0.0508,
+       "rsi14": 44.7224
+      }
+     },
+     "head_listing_id": 8177,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.875,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6684
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.966,
+        "value": "2026-08-14"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.927,
+        "value": "2026-08-06"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Coda Octopus Group Inc",
+     "score": 0.998,
+     "ticker": "CODA.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 598571000.0,
+       "market_cap_usd": 1625012864.0,
+       "net_income_usd": 72640000.0,
+       "net_margin": 0.0554,
+       "normalized_income_usd": 69274000.0,
+       "normalized_pe": 23.4577599676646,
+       "operating_margin": 0.0605,
+       "pe": 22.411765,
+       "revenue_usd": 1310287000.0,
+       "shares_outstanding": 71085345.0
+      },
+      "ta": {
+       "adx": 16.1013,
+       "atr_pct": 0.0421,
+       "close_vs_ema200": 0.0117,
+       "rsi14": 48.7632
+      }
+     },
+     "head_listing_id": 38529,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.8571,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5432
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.998,
+        "value": "2026-08-14"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Revolve Group LLC",
+     "score": 0.998,
+     "ticker": "RVLV.US"
+    },
+    {
+     "also_known_as": [
+      "0LS8.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 175560000.0,
+       "market_cap_usd": 16183427072.0,
+       "net_income_usd": 651006000.0,
+       "net_margin": 0.3634,
+       "normalized_income_usd": 490522936.631568,
+       "normalized_pe": 32.9921923389189,
+       "operating_margin": 0.5286,
+       "pe": 24.328767,
+       "revenue_usd": 1791423000.0,
+       "shares_outstanding": 227807251.0
+      },
+      "ta": {
+       "adx": 18.962,
+       "atr_pct": 0.0164,
+       "close_vs_ema200": 0.0101,
+       "rsi14": 45.2657
+      }
+     },
+     "head_listing_id": 47972,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.5652,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.902
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.853,
+        "value": "2026-08-21"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.984,
+        "value": "2026-08-11"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "W P Carey Inc",
+     "score": 0.998,
+     "ticker": "WPC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 0.0,
+       "market_cap_usd": 124579208.0,
+       "net_income_usd": -101421000.0,
+       "net_margin": -23.6633,
+       "normalized_income_usd": -94220150.0,
+       "operating_margin": -13.7571,
+       "revenue_usd": 4286000.0,
+       "shares_outstanding": 76283095.0
+      },
+      "ta": {
+       "adx": 19.3565,
+       "atr_pct": 0.0911,
+       "close_vs_ema200": -0.0858,
+       "rsi14": 46.8258
+      }
+     },
+     "head_listing_id": 6416,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.7537,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 1.0
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.965,
+        "value": "2026-08-10"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.93,
+        "value": "2026-08-11"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Cibus Global LLC",
+     "score": 0.998,
+     "ticker": "CBUS.US"
+    },
+    {
+     "also_known_as": [
+      "0JR2.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 8476000000.0,
+       "market_cap_usd": 73194987520.0,
+       "net_income_usd": 3467000000.0,
+       "net_margin": 0.1931,
+       "normalized_income_usd": 3467000000.0,
+       "normalized_pe": 21.1119087164696,
+       "operating_margin": 0.2905,
+       "pe": 21.206452,
+       "revenue_usd": 17959000000.0,
+       "shares_outstanding": 2224819927.0
+      },
+      "ta": {
+       "adx": 16.6375,
+       "atr_pct": 0.0247,
+       "close_vs_ema200": 0.0013,
+       "rsi14": 41.7894
+      }
+     },
+     "head_listing_id": 25365,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2188,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.528
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.762,
+        "value": "2026-08-05"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.993,
+        "value": "2026-08-07"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Kinder Morgan Inc",
+     "score": 0.998,
+     "ticker": "KMI.US"
+    },
+    {
+     "also_known_as": [
+      "0I35.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 8249000000.0,
+       "market_cap_usd": 40370495488.0,
+       "net_income_usd": 2217000000.0,
+       "net_margin": 0.1253,
+       "normalized_income_usd": 2026339649.85994,
+       "normalized_pe": 19.9228670725514,
+       "operating_margin": 0.1842,
+       "pe": 17.925987,
+       "revenue_usd": 17688000000.0,
+       "shares_outstanding": 370000000.0
+      },
+      "ta": {
+       "adx": 13.05,
+       "atr_pct": 0.0187,
+       "close_vs_ema200": 0.0202,
+       "rsi14": 47.7782
+      }
+     },
+     "head_listing_id": 11315,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2206,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5336
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.981,
+        "value": "2026-08-05"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.871,
+        "value": "2026-08-21"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Consolidated Edison Inc",
+     "score": 0.998,
+     "ticker": "ED.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 67101000.0,
+       "market_cap_usd": 1226788480.0,
+       "net_income_usd": -21031000.0,
+       "net_margin": -0.0724,
+       "normalized_income_usd": 3775160.470657,
+       "normalized_pe": 324.963267001601,
+       "operating_margin": 0.0213,
+       "revenue_usd": 290375000.0,
+       "shares_outstanding": 49780000.0
+      },
+      "ta": {
+       "adx": 16.4063,
+       "atr_pct": 0.0577,
+       "close_vs_ema200": -0.0674,
+       "rsi14": 40.9567
+      }
+     },
+     "head_listing_id": 41651,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.0909,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7689
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.923,
+        "value": "2026-08-10"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.963,
+        "value": "2026-08-11"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "STAAR Surgical Company",
+     "score": 0.997,
+     "ticker": "STAA.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 70680000.0,
+       "market_cap_usd": 6061757440.0,
+       "net_income_usd": -38382000.0,
+       "net_margin": -0.038,
+       "normalized_income_usd": -47423695.5441,
+       "operating_margin": 0.1157,
+       "pe": 7.898601,
+       "revenue_usd": 1008754000.0,
+       "shares_outstanding": 83327286.0
+      },
+      "ta": {
+       "adx": 19.3982,
+       "atr_pct": 0.037,
+       "close_vs_ema200": 0.0025,
+       "rsi14": 42.6146
+      }
+     },
+     "head_listing_id": 35848,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.1084,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.9299
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.969,
+        "value": "2026-08-06"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.904,
+        "value": "2026-08-20"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "PTC Therapeutics Inc",
+     "score": 0.997,
+     "ticker": "PTCT.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 106236000.0,
+       "market_cap_usd": 598528960.0,
+       "net_income_usd": -6783000.0,
+       "net_margin": -0.0306,
+       "normalized_income_usd": -6782770.0,
+       "operating_margin": -0.0073,
+       "revenue_usd": 221551000.0,
+       "shares_outstanding": 201457000.0
+      },
+      "ta": {
+       "adx": 16.1716,
+       "atr_pct": 0.0662,
+       "close_vs_ema200": 0.1391,
+       "rsi14": 47.7553
+      }
+     },
+     "head_listing_id": 6825,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.6667,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5205
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.978,
+        "value": "2026-08-06"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.86,
+        "value": "2026-08-05"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Cerus Corporation",
+     "score": 0.997,
+     "ticker": "CERS.US"
+    },
+    {
+     "also_known_as": [
+      "0I1B.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 893535000.0,
+       "market_cap_usd": 1426743296.0,
+       "net_income_usd": -1101689000.0,
+       "net_margin": -0.4797,
+       "normalized_income_usd": -225801810.0,
+       "operating_margin": 0.0312,
+       "revenue_usd": 2296603000.0,
+       "shares_outstanding": 57665074.0
+      },
+      "ta": {
+       "adx": 14.9298,
+       "atr_pct": 0.0607,
+       "close_vs_ema200": -0.0371,
+       "rsi14": 45.6877
+      }
+     },
+     "head_listing_id": 12013,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.9688,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6109
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.994,
+        "value": "2026-08-20"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Enovis Corp",
+     "score": 0.994,
+     "ticker": "ENOV.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 28057012.0,
+       "market_cap_usd": 881108160.0,
+       "net_income_usd": 39151878.0,
+       "net_margin": 0.1563,
+       "normalized_income_usd": 36625060.08573,
+       "normalized_pe": 24.0575212146423,
+       "operating_margin": 0.363017013144954,
+       "pe": 33.777778,
+       "revenue_usd": 250488578.0,
+       "shares_outstanding": 95983416.0
+      },
+      "ta": {
+       "adx": 17.2528,
+       "atr_pct": 0.0517,
+       "close_vs_ema200": 0.0696,
+       "rsi14": 48.3101
+      }
+     },
+     "head_listing_id": 437,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.4,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.877323907472017
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.946,
+        "value": "2026-08-18"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.831,
+        "value": "2026-08-11"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Abacus Global Management, Inc.",
+     "score": 0.991,
+     "ticker": "ABX.US"
+    },
+    {
+     "also_known_as": [
+      "0JBD.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 30703000.0,
+       "market_cap_usd": 1519732736.0,
+       "net_income_usd": 137807000.0,
+       "net_margin": 0.5227,
+       "normalized_income_usd": 130703140.0,
+       "normalized_pe": 11.6273620970391,
+       "operating_margin": 0.4691,
+       "pe": 12.470588,
+       "revenue_usd": 263653000.0,
+       "shares_outstanding": 28314520.0
+      },
+      "ta": {
+       "adx": 45.6693,
+       "atr_pct": 0.027,
+       "close_vs_ema200": -0.0066,
+       "rsi14": 40.3828
+      }
+     },
+     "head_listing_id": 22171,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.5814,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.8835
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.94,
+        "value": "2026-08-10"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.837,
+        "value": "2026-08-24"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Innovative Industrial Properties Inc",
+     "score": 0.99,
+     "ticker": "IIPR.US"
+    },
+    {
+     "also_known_as": [
+      "0LEE.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 663000000.0,
+       "market_cap_usd": 2560290048.0,
+       "net_income_usd": 458000000.0,
+       "net_margin": 0.2708,
+       "normalized_income_usd": 88291361.027846,
+       "normalized_pe": 28.998194366859,
+       "operating_margin": 0.0751,
+       "pe": 5.993684,
+       "revenue_usd": 1691000000.0,
+       "shares_outstanding": 93400000.0
+      },
+      "ta": {
+       "adx": 18.3858,
+       "atr_pct": 0.0501,
+       "close_vs_ema200": -0.0567,
+       "rsi14": 43.162
+      }
+     },
+     "head_listing_id": 42756,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 4.3333,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6079
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.802,
+        "value": "2026-07-27"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.946,
+        "value": "2026-07-28"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Teradata Corp",
+     "score": 0.989,
+     "ticker": "TDC.US"
+    },
+    {
+     "also_known_as": [
+      "MCHPP.US",
+      "0K19.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 2039000000.0,
+       "market_cap_usd": 42457849856.0,
+       "net_income_usd": 478400000.0,
+       "net_margin": 0.0934,
+       "normalized_income_usd": 507204921.896023,
+       "normalized_pe": 83.7094594770195,
+       "operating_margin": 0.1623,
+       "pe": 114.985294,
+       "revenue_usd": 5122300000.0,
+       "shares_outstanding": 543008365.0
+      },
+      "ta": {
+       "adx": 18.1944,
+       "atr_pct": 0.0507,
+       "close_vs_ema200": -0.0437,
+       "rsi14": 41.5977
+      }
+     },
+     "head_listing_id": 27834,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 5.1111,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6019
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.86,
+        "value": "2026-08-14"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.91,
+        "value": "2026-08-18"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Microchip Technology Inc",
+     "score": 0.987,
+     "ticker": "MCHP.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 203215000.0,
+       "market_cap_usd": 1628527616.0,
+       "net_income_usd": 10383000.0,
+       "net_margin": 0.0153,
+       "normalized_income_usd": 10383000.0,
+       "normalized_pe": 156.845576037754,
+       "operating_margin": -0.0191,
+       "pe": 172.0,
+       "revenue_usd": 677212000.0,
+       "shares_outstanding": 26025761.0
+      },
+      "ta": {
+       "adx": 14.4101,
+       "atr_pct": 0.0413,
+       "close_vs_ema200": -0.0527,
+       "rsi14": 49.2375
+      }
+     },
+     "head_listing_id": 29517,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 8.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6999
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.561,
+        "value": "2026-08-03"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.97,
+        "value": "2026-07-31"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Marqeta Inc",
+     "score": 0.987,
+     "ticker": "MQ.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 32837000.0,
+       "market_cap_usd": 1184365184.0,
+       "net_income_usd": -66705000.0,
+       "net_margin": -0.6124,
+       "normalized_income_usd": -56172780.0,
+       "operating_margin": -0.4344,
+       "revenue_usd": 108922000.0,
+       "shares_outstanding": 40628000.0
+      },
+      "ta": {
+       "adx": 22.8182,
+       "atr_pct": 0.083,
+       "close_vs_ema200": -0.052,
+       "rsi14": 44.4484
+      }
+     },
+     "head_listing_id": 4720,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.5748,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6985
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.765,
+        "value": "2026-08-21"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.916,
+        "value": "2026-08-20"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Blacksky Technology Inc",
+     "score": 0.98,
+     "ticker": "BKSY.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 193156000.0,
+       "market_cap_usd": 20371550208.0,
+       "net_income_usd": 14092000.0,
+       "net_margin": 0.0301,
+       "normalized_income_usd": 30140722.774707,
+       "normalized_pe": 675.881277309483,
+       "operating_margin": 0.0019,
+       "pe": 1133.433333,
+       "revenue_usd": 467851000.0,
+       "shares_outstanding": 26512000.0
+      },
+      "ta": {
+       "adx": 16.3404,
+       "atr_pct": 0.0874,
+       "close_vs_ema200": 0.1365,
+       "rsi14": 44.4782
+      }
+     },
+     "head_listing_id": 40240,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.7857,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5871
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.938,
+        "value": "2026-07-28"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.645,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Sitime Corporation",
+     "score": 0.978,
+     "ticker": "SITM.US"
+    },
+    {
+     "also_known_as": [
+      "0HK4.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 3631000000.0,
+       "market_cap_usd": 4861529600.0,
+       "net_income_usd": -636000000.0,
+       "net_margin": -0.0538,
+       "normalized_income_usd": -117055589.041096,
+       "operating_margin": 0.0483,
+       "revenue_usd": 11831000000.0,
+       "shares_outstanding": 35258652.0
+      },
+      "ta": {
+       "adx": 16.8001,
+       "atr_pct": 0.047,
+       "close_vs_ema200": -0.0814,
+       "rsi14": 49.4695
+      }
+     },
+     "head_listing_id": 6191,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 8.8,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6931
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.976,
+        "value": "2026-07-27"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Avis Budget Group Inc",
+     "score": 0.976,
+     "ticker": "CAR.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 68827000.0,
+       "market_cap_usd": 2023950464.0,
+       "net_income_usd": 10308000.0,
+       "net_margin": 0.0427,
+       "operating_margin": 0.0815,
+       "pe": 191.72,
+       "revenue_usd": 241177000.0,
+       "shares_outstanding": 39910993.0
+      },
+      "ta": {
+       "adx": 24.9144,
+       "atr_pct": 0.0815,
+       "close_vs_ema200": 0.0344,
+       "rsi14": 40.9903
+      }
+     },
+     "head_listing_id": 33697,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.3333,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.723212981225802
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.514,
+        "value": "2026-07-28"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.947,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "PDF Solutions Inc",
+     "score": 0.974,
+     "ticker": "PDFS.US"
+    },
+    {
+     "also_known_as": [
+      "PHM7.XETRA",
+      "0R31.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 5675000000.0,
+       "market_cap_usd": 108850610176.0,
+       "net_income_usd": 7973000000.0,
+       "net_margin": 0.39,
+       "normalized_income_usd": 8921247109.7158,
+       "normalized_pe": 12.201277336826,
+       "operating_margin": 0.5995,
+       "pe": 13.724211,
+       "revenue_usd": 20444000000.0,
+       "shares_outstanding": 1669743926.0
+      },
+      "ta": {
+       "adx": 16.7643,
+       "atr_pct": 0.0259,
+       "close_vs_ema200": 0.0228,
+       "rsi14": 51.4481
+      }
+     },
+     "head_listing_id": 29307,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.1746,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7224
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.783,
+        "value": "2026-08-05"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.868,
+        "value": "2026-08-10"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Altria Group",
+     "score": 0.971,
+     "ticker": "MO.US"
+    },
+    {
+     "also_known_as": [
+      "LRCX01.BK",
+      "LRCX23.BK",
+      "0JT5.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 11507382000.0,
+       "market_cap_usd": 410333184000.0,
+       "net_income_usd": 7265396000.0,
+       "net_margin": 0.3127,
+       "normalized_income_usd": 7291774918.76429,
+       "normalized_pe": 56.2734297988366,
+       "operating_margin": 0.3529,
+       "pe": 56.930556,
+       "revenue_usd": 23232690000.0,
+       "shares_outstanding": 1251278000.0
+      },
+      "ta": {
+       "adx": 10.076,
+       "atr_pct": 0.0654,
+       "close_vs_ema200": 0.1852,
+       "rsi14": 47.2006
+      }
+     },
+     "head_listing_id": 26959,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.3407,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5047
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.971,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Lam Research Corp",
+     "score": 0.971,
+     "ticker": "LRCX.US"
+    },
+    {
+     "also_known_as": [
+      "0KBL.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 33083000.0,
+       "market_cap_usd": 14828165120.0,
+       "net_income_usd": 858426000.0,
+       "net_margin": 0.6696,
+       "normalized_income_usd": 587288911.998609,
+       "normalized_pe": 25.2485017459943,
+       "operating_margin": 0.6304,
+       "pe": 16.52669,
+       "revenue_usd": 1282009000.0,
+       "shares_outstanding": 299111000.0
+      },
+      "ta": {
+       "adx": 25.3337,
+       "atr_pct": 0.0195,
+       "close_vs_ema200": 0.0153,
+       "rsi14": 39.481
+      }
+     },
+     "head_listing_id": 32406,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.587,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.9742
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.969,
+        "value": "2026-08-12"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Omega Healthcare Investors Inc",
+     "score": 0.969,
+     "ticker": "OHI.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 376829000.0,
+       "market_cap_usd": 1295634944.0,
+       "net_income_usd": -62216000.0,
+       "net_margin": -0.0797,
+       "normalized_income_usd": -62216000.0,
+       "operating_margin": -0.0742,
+       "revenue_usd": 781101000.0,
+       "shares_outstanding": 174132000.0
+      },
+      "ta": {
+       "adx": 19.2948,
+       "atr_pct": 0.0646,
+       "close_vs_ema200": -0.0174,
+       "rsi14": 48.6886
+      }
+     },
+     "head_listing_id": 692,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.3333,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5176
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.848,
+        "value": "2026-08-18"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.779,
+        "value": "2026-08-19"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "ACV Auctions Inc.",
+     "score": 0.966,
+     "ticker": "ACVA.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 6308000.0,
+       "market_cap_usd": 45293740.0,
+       "net_income_usd": -2186000.0,
+       "net_margin": -0.193009219340718,
+       "normalized_income_usd": -2503392.927308,
+       "operating_margin": -0.221861112953505,
+       "revenue_usd": 30154000.0,
+       "shares_outstanding": 43077252.0
+      },
+      "ta": {
+       "adx": 25.8084,
+       "atr_pct": 0.0654,
+       "close_vs_ema200": -0.0595,
+       "rsi14": 41.9927
+      }
+     },
+     "head_listing_id": 28457,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.25,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.725343238044704
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.849,
+        "value": "2026-07-29"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.773,
+        "value": "2026-08-12"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Marygold Companies Inc",
+     "score": 0.966,
+     "ticker": "MGLD.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 527614000.0,
+       "market_cap_usd": 12596832256.0,
+       "net_income_usd": -33158000.0,
+       "net_margin": -0.0304,
+       "normalized_income_usd": 72236215.980124,
+       "normalized_pe": 174.383888816464,
+       "operating_margin": 0.1038,
+       "revenue_usd": 1089933000.0,
+       "shares_outstanding": 93129478.0
+      },
+      "ta": {
+       "adx": 11.479,
+       "atr_pct": 0.0934,
+       "close_vs_ema200": 0.1034,
+       "rsi14": 44.2306
+      }
+     },
+     "head_listing_id": 40693,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2273,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5159
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.671,
+        "value": "2026-07-28"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.882,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Semtech Corporation",
+     "score": 0.961,
+     "ticker": "SMTC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 588500000.0,
+       "market_cap_usd": 10208039936.0,
+       "net_income_usd": -55100000.0,
+       "net_margin": -0.0403,
+       "normalized_income_usd": -8084750.0,
+       "operating_margin": 0.0555,
+       "pe": 302.5,
+       "revenue_usd": 1365700000.0,
+       "shares_outstanding": 233900000.0
+      },
+      "ta": {
+       "adx": 18.5206,
+       "atr_pct": 0.0862,
+       "close_vs_ema200": 0.0498,
+       "rsi14": 42.897
+      }
+     },
+     "head_listing_id": 46073,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.25,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5691
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.855,
+        "value": "2026-07-30"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.598,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Viavi Solutions Inc",
+     "score": 0.942,
+     "ticker": "VIAV.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 0.0,
+       "market_cap_usd": 712184192.0,
+       "net_income_usd": 129868000.0,
+       "net_margin": 0.3336,
+       "normalized_income_usd": 131381895.142699,
+       "normalized_pe": 5.42071790962118,
+       "operating_margin": 0.6064,
+       "pe": 5.455696,
+       "revenue_usd": 389316000.0,
+       "shares_outstanding": 165239947.0
+      },
+      "ta": {
+       "adx": 11.2162,
+       "atr_pct": 0.0608,
+       "close_vs_ema200": 0.131,
+       "rsi14": 49.3495
+      }
+     },
+     "head_listing_id": 22863,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.2143,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 1.38644137618985
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.936,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Ironwood Pharmaceuticals Inc",
+     "score": 0.936,
+     "ticker": "IRWD.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 0.0,
+       "market_cap_usd": 19037008.0,
+       "net_income_usd": -7732026.0,
+       "net_margin": -39.8558,
+       "normalized_income_usd": -7701799.95,
+       "operating_margin": -39.7316,
+       "revenue_usd": 194000.0,
+       "shares_outstanding": 1652496.0
+      },
+      "ta": {
+       "adx": 9.7879,
+       "atr_pct": 0.5913,
+       "close_vs_ema200": 1.4288,
+       "rsi14": 48.7745
+      }
+     },
+     "head_listing_id": 26138,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.4667,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 1.0
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.921,
+        "value": "2026-08-07"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Lexaria Bioscience Corp",
+     "score": 0.921,
+     "ticker": "LEXX.US"
+    },
+    {
+     "also_known_as": [
+      "ONC.US"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 680677000.0,
+       "market_cap_usd": 63223776421.47839,
+       "net_income_usd": 655707000.0,
+       "net_margin": 0.107,
+       "normalized_income_usd": 655707000.0,
+       "normalized_pe": 96.4207739454945,
+       "operating_margin": 0.1506,
+       "pe": 101.31994,
+       "revenue_usd": 6128963000.0,
+       "shares_outstanding": 1469722025.0
+      },
+      "ta": {
+       "adx": 25.0085,
+       "atr_pct": 0.0543,
+       "close_vs_ema200": 0.0688,
+       "rsi14": 48.1287
+      }
+     },
+     "head_listing_id": 230230,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.8889
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.678,
+        "value": "2026-07-31"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.751,
+        "value": "2026-08-03"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "BeiGene Ltd.",
+     "score": 0.92,
+     "ticker": "688235.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 556079000.0,
+       "market_cap_usd": 19279554560.0,
+       "net_income_usd": 132605000.0,
+       "net_margin": 0.1184,
+       "normalized_income_usd": 150466435.522074,
+       "normalized_pe": 128.13192851353,
+       "operating_margin": 0.1381,
+       "pe": 118.134831,
+       "revenue_usd": 1120137000.0,
+       "shares_outstanding": 49743567.0
+      },
+      "ta": {
+       "adx": 12.0787,
+       "atr_pct": 0.0853,
+       "close_vs_ema200": 0.1537,
+       "rsi14": 45.7948
+      }
+     },
+     "head_listing_id": 32612,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.7536,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5036
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.809,
+        "value": "2026-07-28"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.573,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Onto Innovation Inc",
+     "score": 0.919,
+     "ticker": "ONTO.US"
+    },
+    {
+     "also_known_as": [
+      "0KEQ.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 3818600000.0,
+       "market_cap_usd": 4038146816.0,
+       "net_income_usd": 158100000.0,
+       "net_margin": 0.0176,
+       "normalized_income_usd": 158100000.0,
+       "normalized_pe": 25.5417255913978,
+       "operating_margin": 0.0701,
+       "pe": 23.857576,
+       "revenue_usd": 8991700000.0,
+       "shares_outstanding": 46076952.0
+      },
+      "ta": {
+       "adx": 20.9991,
+       "atr_pct": 0.0411,
+       "close_vs_ema200": -0.0302,
+       "rsi14": 40.0037
+      }
+     },
+     "head_listing_id": 36051,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 3.1591,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5753
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.894,
+        "value": "2026-08-19"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "PVH Corp",
+     "score": 0.894,
+     "ticker": "PVH.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 3321000.0,
+       "market_cap_usd": 43345280.0,
+       "net_income_usd": 2929000.0,
+       "net_margin": 0.2319,
+       "normalized_income_usd": 2929000.0,
+       "normalized_pe": 14.7986616592694,
+       "operating_margin": 0.2829,
+       "pe": 14.52381,
+       "revenue_usd": 12632000.0,
+       "shares_outstanding": 14211566.0
+      },
+      "ta": {
+       "adx": 15.1041,
+       "atr_pct": 0.0384,
+       "close_vs_ema200": 0.0396,
+       "rsi14": 47.5008
+      }
+     },
+     "head_listing_id": 36862,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.5,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7371
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.883,
+        "value": "2026-08-17"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Rave Restaurant Group Inc",
+     "score": 0.883,
+     "ticker": "RAVE.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 20248000.0,
+       "market_cap_usd": 2005221632.0,
+       "net_income_usd": 13910000.0,
+       "net_margin": 0.0675,
+       "normalized_income_usd": 28267333.268779,
+       "normalized_pe": 70.9377716296552,
+       "operating_margin": 0.3343,
+       "pe": 146.642857,
+       "revenue_usd": 205996000.0,
+       "shares_outstanding": 101526575.0
+      },
+      "ta": {
+       "adx": 17.8196,
+       "atr_pct": 0.0209,
+       "close_vs_ema200": 0.0472,
+       "rsi14": 48.8928
+      }
+     },
+     "head_listing_id": 31718,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.9017
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.87,
+        "value": "2026-08-11"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Netstreit Corp",
+     "score": 0.87,
+     "ticker": "NTST.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 426767000.0,
+       "market_cap_usd": 45867970560.0,
+       "net_income_usd": 472279000.0,
+       "net_margin": 0.3537,
+       "normalized_income_usd": 472279000.0,
+       "normalized_pe": 97.1204956392302,
+       "operating_margin": 0.3333,
+       "pe": 112.677291,
+       "revenue_usd": 1335116000.0,
+       "shares_outstanding": 185419000.0
+      },
+      "ta": {
+       "adx": 14.0759,
+       "atr_pct": 0.0977,
+       "close_vs_ema200": 0.2177,
+       "rsi14": 45.509
+      }
+     },
+     "head_listing_id": 8593,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 4.125,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6804
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.832,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Credo Technology Group Holding Ltd",
+     "score": 0.832,
+     "ticker": "CRDO.US"
+    },
+    {
+     "also_known_as": [
+      "0KCC.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 949000.0,
+       "market_cap_usd": 140059936.0,
+       "net_income_usd": -47841000.0,
+       "net_margin": -24.5464,
+       "normalized_income_usd": -34025000.0,
+       "operating_margin": -17.9179,
+       "revenue_usd": 1949000.0,
+       "shares_outstanding": 32286113.0
+      },
+      "ta": {
+       "adx": 28.9695,
+       "atr_pct": 0.0859,
+       "close_vs_ema200": -0.1151,
+       "rsi14": 43.7853
+      }
+     },
+     "head_listing_id": 22291,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.5385,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5131
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.532,
+        "value": "2026-08-06"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.641,
+        "value": "2026-07-27"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Insight Molecular Diagnostics Inc.",
+     "score": 0.832,
+     "ticker": "IMDX.US"
+    },
+    {
+     "also_known_as": [
+      "NVDA.SW",
+      "0R1I.LSE",
+      "NVDA01.BK",
+      "NVDA03.BK",
+      "NVDA06.BK",
+      "NVDA19.BK",
+      "NVDA23.BK",
+      "NVDA80.BK",
+      "NVD.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 65539000000.0,
+       "market_cap_usd": 5322322739200.0,
+       "net_income_usd": 159613000000.0,
+       "net_margin": 0.6297,
+       "normalized_income_usd": 159613000000.0,
+       "normalized_pe": 33.3451707517558,
+       "operating_margin": 0.6402,
+       "pe": 33.650842,
+       "revenue_usd": 253491000000.0,
+       "shares_outstanding": 24220525225.0
+      },
+      "ta": {
+       "adx": 16.9073,
+       "atr_pct": 0.0307,
+       "close_vs_ema200": 0.0665,
+       "rsi14": 44.6503
+      }
+     },
+     "head_listing_id": 31809,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.1447,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7415
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.643,
+        "value": "2026-07-30"
+       },
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.485,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "NVIDIA Corporation",
+     "score": 0.816,
+     "ticker": "NVDA.US"
+    },
+    {
+     "also_known_as": [
+      "TER01.BK",
+      "TER23.BK",
+      "0LEF.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 1819468000.0,
+       "market_cap_usd": 63207002112.0,
+       "net_income_usd": 1150219000.0,
+       "net_margin": 0.2577,
+       "normalized_income_usd": 1174870940.13899,
+       "normalized_pe": 53.7991024822884,
+       "operating_margin": 0.3086,
+       "pe": 55.534341,
+       "revenue_usd": 4464031000.0,
+       "shares_outstanding": 156378000.0
+      },
+      "ta": {
+       "adx": 10.981,
+       "atr_pct": 0.0785,
+       "close_vs_ema200": 0.165,
+       "rsi14": 45.8686
+      }
+     },
+     "head_listing_id": 42919,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 3.8571,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5924
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.795,
+        "value": "2026-07-28"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Teradyne Inc",
+     "score": 0.795,
+     "ticker": "TER.US"
+    },
+    {
+     "also_known_as": [
+      "0R3D.LSE",
+      "EBA.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 3304000000.0,
+       "market_cap_usd": 45510148096.0,
+       "net_income_usd": 2222000000.0,
+       "net_margin": 0.185,
+       "normalized_income_usd": 2165550792.00674,
+       "normalized_pe": 21.0155071236299,
+       "operating_margin": 0.2052,
+       "pe": 20.812371,
+       "revenue_usd": 12008000000.0,
+       "shares_outstanding": 445000000.0
+      },
+      "ta": {
+       "adx": 17.9461,
+       "atr_pct": 0.0315,
+       "close_vs_ema200": 0.0705,
+       "rsi14": 49.1328
+      }
+     },
+     "head_listing_id": 11147,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.5513,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7249
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.789,
+        "value": "2026-08-17"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "eBay Inc",
+     "score": 0.789,
+     "ticker": "EBAY.US"
+    },
+    {
+     "also_known_as": [
+      "0LXB.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 4484000000.0,
+       "market_cap_usd": 91896569856.0,
+       "net_income_usd": 3073000000.0,
+       "net_margin": 0.2518,
+       "normalized_income_usd": 2967106635.89634,
+       "normalized_pe": 30.9717786156475,
+       "operating_margin": 0.3833,
+       "pe": 29.932271,
+       "revenue_usd": 12204000000.0,
+       "shares_outstanding": 1223000000.0
+      },
+      "ta": {
+       "adx": 21.912,
+       "atr_pct": 0.0296,
+       "close_vs_ema200": 0.0167,
+       "rsi14": 44.3853
+      }
+     },
+     "head_listing_id": 47843,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2143,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6326
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.747,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Williams Companies Inc",
+     "score": 0.747,
+     "ticker": "WMB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 296706000.0,
+       "market_cap_usd": 817896000.0,
+       "net_income_usd": 40395000.0,
+       "net_margin": 0.0613,
+       "normalized_income_usd": 44770584.467047,
+       "normalized_pe": 18.2686022471296,
+       "operating_margin": 0.0935,
+       "pe": 17.939271,
+       "revenue_usd": 659049000.0,
+       "shares_outstanding": 18411154.0
+      },
+      "ta": {
+       "adx": 29.9662,
+       "atr_pct": 0.0532,
+       "close_vs_ema200": -0.02,
+       "rsi14": 42.9203
+      }
+     },
+     "head_listing_id": 2283,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.2927,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5498
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.732,
+        "value": "2026-08-24"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "American Public Education Inc",
+     "score": 0.732,
+     "ticker": "APEI.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 263889000.0,
+       "market_cap_usd": 974496832.0,
+       "net_income_usd": 16853000.0,
+       "net_margin": 0.0213,
+       "normalized_income_usd": 16853000.0,
+       "normalized_pe": 57.8233449237525,
+       "operating_margin": 0.041,
+       "pe": 63.222222,
+       "revenue_usd": 792494000.0,
+       "shares_outstanding": 167451000.0
+      },
+      "ta": {
+       "adx": 26.0844,
+       "atr_pct": 0.0667,
+       "close_vs_ema200": -0.1721,
+       "rsi14": 43.9212
+      }
+     },
+     "head_listing_id": 27376,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.667
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.722,
+        "value": "2026-07-27"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "LegalZoom.com Inc",
+     "score": 0.722,
+     "ticker": "LZ.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 121127000.0,
+       "market_cap_usd": 644167808.0,
+       "net_income_usd": -10485000.0,
+       "net_margin": -0.0199,
+       "normalized_income_usd": -10485000.0,
+       "operating_margin": 0.09,
+       "revenue_usd": 526908000.0,
+       "shares_outstanding": 188378290.0
+      },
+      "ta": {
+       "adx": 21.6913,
+       "atr_pct": 0.0936,
+       "close_vs_ema200": -0.2991,
+       "rsi14": 44.5361
+      }
+     },
+     "head_listing_id": 30468,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7701
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.716,
+        "value": "2026-08-04"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "N-Able Inc",
+     "score": 0.716,
+     "ticker": "NABL.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 241925000.0,
+       "market_cap_usd": 6587046400.0,
+       "net_income_usd": -103759000.0,
+       "net_margin": -0.1824,
+       "normalized_income_usd": -94703320.278605,
+       "operating_margin": -0.116,
+       "revenue_usd": 568930000.0,
+       "shares_outstanding": 90692000.0
+      },
+      "ta": {
+       "adx": 12.1127,
+       "atr_pct": 0.1252,
+       "close_vs_ema200": 0.1608,
+       "rsi14": 41.3421
+      }
+     },
+     "head_listing_id": 30348,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.0645,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5748
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.602,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "MaxLinear Inc",
+     "score": 0.602,
+     "ticker": "MXL.US"
+    },
+    {
+     "also_known_as": [
+      "GOOGL01.BK",
+      "GOOGL03.BK",
+      "GOOG80.BK",
+      "ABEA.XETRA",
+      "ABEC.XETRA",
+      "GOOG23.BK",
+      "0RIH.LSE",
+      "GOOGL.US",
+      "0HD6.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 174350000000.0,
+       "market_cap_usd": 4173832126464.0,
+       "net_income_usd": 244205000000.0,
+       "net_margin": 0.5477,
+       "normalized_income_usd": 123841727313.037,
+       "normalized_pe": 33.7029547069683,
+       "operating_margin": 0.3311,
+       "pe": 17.123934,
+       "revenue_usd": 445867000000.0,
+       "shares_outstanding": 12229934831.0
+      },
+      "ta": {
+       "adx": 8.9531,
+       "atr_pct": 0.026,
+       "close_vs_ema200": 0.0647,
+       "rsi14": 48.2825
+      }
+     },
+     "head_listing_id": 19071,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 2.9437,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.609
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.593,
+        "value": "2026-07-27"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Alphabet Inc Class C",
+     "score": 0.593,
+     "ticker": "GOOG.US"
+    },
+    {
+     "also_known_as": [
+      "0A46.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 1159400000.0,
+       "market_cap_usd": 2330409216.0,
+       "net_income_usd": 63100000.0,
+       "net_margin": 0.0258,
+       "normalized_income_usd": 122050520.0,
+       "normalized_pe": 19.0938081705838,
+       "operating_margin": 0.0871,
+       "pe": 37.928571,
+       "revenue_usd": 2445900000.0,
+       "shares_outstanding": 438639374.0
+      },
+      "ta": {
+       "adx": 21.3651,
+       "atr_pct": 0.0457,
+       "close_vs_ema200": -0.0755,
+       "rsi14": 40.5855
+      }
+     },
+     "head_listing_id": 35922,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.5,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5261
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.536,
+        "value": "2026-08-14"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Peloton Interactive Inc",
+     "score": 0.536,
+     "ticker": "PTON.US"
+    },
+    {
+     "also_known_as": [
+      "700.HK",
+      "TENCENT01.BK",
+      "TENCENT06.BK",
+      "TENCENT13.BK",
+      "TENCENT19.BK",
+      "TENCENT23.BK",
+      "TENCENT80.BK",
+      "80700.HK",
+      "0LEA.LSE",
+      "0Z4S.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 47071739000.0,
+       "market_cap_usd": 505188134787.4816,
+       "net_income_usd": 32152406000.0,
+       "net_margin": 0.299085087646954,
+       "operating_margin": 0.330910150232918,
+       "pe": 15.735202,
+       "revenue_usd": 107502538000.0,
+       "shares_outstanding": 9032821385.0
+      },
+      "ta": {
+       "adx": 15.0812,
+       "atr_pct": 0.0308,
+       "close_vs_ema200": -0.112,
+       "rsi14": 43.1796
+      }
+     },
+     "head_listing_id": 50851,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2287,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.562133695857488
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.53,
+        "value": "2026-08-05"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Tencent Holdings Ltd",
+     "score": 0.53,
+     "ticker": "0700.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 65213000.0,
+       "market_cap_usd": 221698720.0,
+       "net_income_usd": 2186000.0,
+       "net_margin": 0.0083,
+       "normalized_income_usd": 8427370.336566,
+       "normalized_pe": 26.3069867759411,
+       "operating_margin": 0.0508,
+       "pe": 127.2,
+       "revenue_usd": 262747000.0,
+       "shares_outstanding": 11300000.0
+      },
+      "ta": {
+       "adx": 34.1482,
+       "atr_pct": 0.0487,
+       "close_vs_ema200": -0.0091,
+       "rsi14": 47.6255
+      }
+     },
+     "head_listing_id": 13364,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 3.4545,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7518
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.513,
+        "value": "2026-08-24"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Franklin Covey Company",
+     "score": 0.513,
+     "ticker": "FC.US"
+    },
+    {
+     "also_known_as": [
+      "0HFN.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 4523854000.0,
+       "market_cap_usd": 187250868224.0,
+       "net_income_usd": 3313432000.0,
+       "net_margin": 0.2601,
+       "normalized_income_usd": 3358530306.76523,
+       "normalized_pe": 55.7538122692574,
+       "operating_margin": 0.3291,
+       "pe": 58.077381,
+       "revenue_usd": 12740193000.0,
+       "shares_outstanding": 487087040.0
+      },
+      "ta": {
+       "adx": 14.8336,
+       "atr_pct": 0.0351,
+       "close_vs_ema200": 0.0676,
+       "rsi14": 44.2546
+      }
+     },
+     "head_listing_id": 773,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 1.1053,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6449
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.484,
+        "value": "2026-07-29"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Analog Devices Inc",
+     "score": 0.484,
+     "ticker": "ADI.US"
+    },
+    {
+     "also_known_as": [
+      "0LIF.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 121336000.0,
+       "market_cap_usd": 2513030400.0,
+       "net_income_usd": -585969000.0,
+       "net_margin": -0.817,
+       "normalized_income_usd": -586504620.0,
+       "operating_margin": -0.7364,
+       "revenue_usd": 717212000.0,
+       "shares_outstanding": 98600000.0
+      },
+      "ta": {
+       "adx": 18.969,
+       "atr_pct": 0.056,
+       "close_vs_ema200": -0.0615,
+       "rsi14": 43.6268
+      }
+     },
+     "head_listing_id": 36853,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2308,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.8308
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.474,
+        "value": "2026-08-10"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Ultragenyx",
+     "score": 0.474,
+     "ticker": "RARE.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 413120000.0,
+       "market_cap_usd": 3165602304.0,
+       "net_income_usd": 7742000.0,
+       "net_margin": 0.0085,
+       "normalized_income_usd": 7742000.0,
+       "normalized_pe": 408.886890209248,
+       "operating_margin": 0.0017,
+       "pe": 426.833333,
+       "revenue_usd": 911606000.0,
+       "shares_outstanding": 123426000.0
+      },
+      "ta": {
+       "adx": 12.0928,
+       "atr_pct": 0.0648,
+       "close_vs_ema200": 0.0504,
+       "rsi14": 47.94
+      }
+     },
+     "head_listing_id": 48016,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 5.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.5468
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.46,
+        "value": "2026-08-24"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Warby Parker Inc",
+     "score": 0.46,
+     "ticker": "WRBY.US"
+    },
+    {
+     "also_known_as": [
+      "0I14.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 339024000.0,
+       "market_cap_usd": 10667073536.0,
+       "net_income_usd": 174788000.0,
+       "net_margin": 0.1605,
+       "normalized_income_usd": 161656462.402326,
+       "normalized_pe": 65.9860631457596,
+       "operating_margin": 0.219,
+       "pe": 64.038462,
+       "revenue_usd": 1088930000.0,
+       "shares_outstanding": 168217000.0
+      },
+      "ta": {
+       "adx": 13.5674,
+       "atr_pct": 0.0516,
+       "close_vs_ema200": 0.0601,
+       "rsi14": 40.3625
+      }
+     },
+     "head_listing_id": 7072,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.7917,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6887
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.358,
+        "value": "2026-08-24"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Cognex Corporation",
+     "score": 0.358,
+     "ticker": "CGNX.US"
+    },
+    {
+     "also_known_as": [
+      "0KTS.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 2484100000.0,
+       "market_cap_usd": 22536982528.0,
+       "net_income_usd": 982900000.0,
+       "net_margin": 0.1176,
+       "normalized_income_usd": 1081889073.53382,
+       "normalized_pe": 20.8311397899478,
+       "operating_margin": 0.1642,
+       "pe": 23.834279,
+       "revenue_usd": 8355200000.0,
+       "shares_outstanding": 59581276.0
+      },
+      "ta": {
+       "adx": 14.8378,
+       "atr_pct": 0.0321,
+       "close_vs_ema200": 0.0319,
+       "rsi14": 40.4568
+      }
+     },
+     "head_listing_id": 37798,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 0.2159,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.7027
+       }
+      },
+      "ta": {
+       "near_close_ema200_dn": {
+        "kind": "signal",
+        "strength": 0.357,
+        "value": "2026-08-24"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Ralph Lauren Corp Class A",
+     "score": 0.357,
+     "ticker": "RL.US"
+    },
+    {
+     "also_known_as": [
+      "CWEN-A.US",
+      "CWENA.US"
+     ],
+     "context": {
+      "fundamental": {
+       "cost_of_revenue_usd": 560000000.0,
+       "market_cap_usd": 8166117888.0,
+       "net_income_usd": 91000000.0,
+       "net_margin": 0.0578,
+       "normalized_income_usd": 119549000.0,
+       "normalized_pe": 68.3077055266042,
+       "operating_margin": 0.1487,
+       "pe": 39.709302,
+       "revenue_usd": 1574000000.0,
+       "shares_outstanding": 205267917.0
+      },
+      "ta": {
+       "adx": 18.9534,
+       "atr_pct": 0.0317,
+       "close_vs_ema200": -0.0828,
+       "rsi14": 42.0865
+      }
+     },
+     "head_listing_id": 9276,
+     "matched": {
+      "fundamental": {
+       "eps_diluted": {
+        "kind": "growth",
+        "value": 10.0,
+        "window": "latest_yoy"
+       },
+       "gross_margin": {
+        "kind": "level",
+        "value": 0.6442
+       }
+      },
+      "ta": {
+       "near_close_ema200_up": {
+        "kind": "signal",
+        "strength": 0.325,
+        "value": "2026-08-13"
+       },
+       "rsi14_in_range": {
+        "kind": "signal"
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental",
+      "ta"
+     ],
+     "name": "Clearway Energy Inc Class C",
+     "score": 0.325,
+     "ticker": "CWEN.US"
+    }
+   ],
+   "sort": "ta",
+   "universe": 10546,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 59,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 59 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "US + China quality-growth pullbacks: diluted-EPS YoY growth ≥20% AND gross margin >50% (fundamentals) combined with price pulled back near the 200-day EMA and daily RSI in the 40-50 band (technical buy-the-dip zone). Found 59 names (e.g. CNVS.US, AMBA.US, QBTS.US, SNDX.US, SYK.US)."
+}

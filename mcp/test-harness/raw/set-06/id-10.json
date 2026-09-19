@@ -1,0 +1,671 @@
+{
+  "id": "id-10",
+  "question": "หาหุ้นปันผลที่จ่ายมาตลอดไม่เคยตัดปันผลเลยหลายปี แล้วก็ค่อยๆ เพิ่มปันผลขึ้นทุกปีด้วย",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "min_streak_years": 10,
+        "min_cagr": 3,
+        "order_by": "cagr",
+        "limit": 20
+      },
+      "note": "no-cut (streak=10 = full window) AND rising dividend (positive 5y CAGR)"
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 20,
+      "has_more": true,
+      "limit": 20,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 69.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.875,
+            "payout_ratio_eff": 0.875,
+            "ttm_div_yoy_pct": 1264.8,
+            "yield_pct": 4.78,
+            "yield_trailing_pct": 4.78
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "30202030",
+          "market_cap_usd": null,
+          "name": "Namyang Dairy Products Co Ltd Peffered Series 1",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.194093,
+          "pe_ratio": 20.116807,
+          "stock_id": 1414667,
+          "symbol": "003925",
+          "ticker": "003925.KO",
+          "week52_high": 47400.0,
+          "week52_low": 28900.0
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 60.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.1847,
+            "payout_ratio_eff": 0.1847,
+            "ttm_div_yoy_pct": 330.0,
+            "yield_pct": 7.89,
+            "yield_trailing_pct": 7.89
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20104010",
+          "market_cap_usd": null,
+          "name": "Dsr Wire",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.450449,
+          "pe_ratio": 3.119122,
+          "stock_id": 1415153,
+          "symbol": "069730",
+          "ticker": "069730.KO",
+          "week52_high": 6150.0,
+          "week52_low": 2962.1193
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 54.7,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 3.4483,
+            "payout_ratio_eff": 3.4483,
+            "ttm_div_yoy_pct": -40.9,
+            "yield_pct": 9.78,
+            "yield_trailing_pct": 9.78
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "15104050",
+          "market_cap_usd": null,
+          "name": "Kisco Holdings",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.299055,
+          "pe_ratio": null,
+          "stock_id": 1414560,
+          "symbol": "001940",
+          "ticker": "001940.KO",
+          "week52_high": 28650.0,
+          "week52_low": 20150.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 52.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.019,
+            "payout_ratio_eff": 0.019,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 10.55,
+            "yield_trailing_pct": 7.63
+          },
+          "eps": 1.79,
+          "exchange": "CS",
+          "gic_code": "35202010",
+          "market_cap_usd": null,
+          "name": "Shandong Shanda Wit Science and Technology Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 2.035381,
+          "pe_ratio": 13.101523,
+          "stock_id": 230988,
+          "symbol": "000915",
+          "ticker": "000915.CS",
+          "week52_high": 33.6054,
+          "week52_low": 23.0
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 52.3,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6234,
+            "payout_ratio_eff": 0.6234,
+            "ttm_div_yoy_pct": 23.8,
+            "yield_pct": 9.54,
+            "yield_trailing_pct": 9.54
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20301010",
+          "market_cap_usd": null,
+          "name": "Hansol Csn",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.545478,
+          "pe_ratio": 5.232342,
+          "stock_id": 1414851,
+          "symbol": "009180",
+          "ticker": "009180.KO",
+          "week52_high": 3666.0448,
+          "week52_low": 2256.3604
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": 40.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.635,
+            "payout_ratio_eff": 0.635,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 9.58,
+            "yield_trailing_pct": 9.57
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "25202010",
+          "market_cap_usd": 540663567.7696,
+          "name": "Dream International Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.983186,
+          "pe_ratio": 5.963661,
+          "stock_id": 51198,
+          "symbol": "1126",
+          "ticker": "1126.HK",
+          "week52_high": 14.6381,
+          "week52_low": 5.885
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 39.6,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.2483,
+            "payout_ratio_eff": 0.2483,
+            "ttm_div_yoy_pct": 140.9,
+            "yield_pct": 4.86,
+            "yield_trailing_pct": 4.86
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25101010",
+          "market_cap_usd": null,
+          "name": "Sebang Global Battery Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.473236,
+          "pe_ratio": 5.926834,
+          "stock_id": 1414698,
+          "symbol": "004490",
+          "ticker": "004490.KO",
+          "week52_high": 77700.0,
+          "week52_low": 46900.0
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 39.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.412,
+            "payout_ratio_eff": 0.412,
+            "ttm_div_yoy_pct": 125.3,
+            "yield_pct": 5.39,
+            "yield_trailing_pct": 5.39
+          },
+          "eps": null,
+          "exchange": "KQ",
+          "gic_code": "50203010",
+          "market_cap_usd": null,
+          "name": "AfreecaTV Co. Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.976891,
+          "pe_ratio": 4.38782,
+          "stock_id": 1419059,
+          "symbol": "067160",
+          "ticker": "067160.KQ",
+          "week52_high": 77000.0,
+          "week52_low": 36950.0
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 38.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.1269,
+            "payout_ratio_eff": 0.1269,
+            "ttm_div_yoy_pct": 257.1,
+            "yield_pct": 5.71,
+            "yield_trailing_pct": 5.71
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "15101010",
+          "market_cap_usd": null,
+          "name": "DSR Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.303855,
+          "pe_ratio": 3.739266,
+          "stock_id": 1415421,
+          "symbol": "155660",
+          "ticker": "155660.KO",
+          "week52_high": 4800.0,
+          "week52_low": 3392.4345
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 35.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.2076,
+            "payout_ratio_eff": 0.2076,
+            "ttm_div_yoy_pct": -2.0,
+            "yield_pct": 6.42,
+            "yield_trailing_pct": 6.42
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20104010",
+          "market_cap_usd": null,
+          "name": "Korea Electric Terminal",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.547325,
+          "pe_ratio": 5.689472,
+          "stock_id": 1415018,
+          "symbol": "025540",
+          "ticker": "025540.KO",
+          "week52_high": 94000.0,
+          "week52_low": 54100.0
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 35.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.2611,
+            "payout_ratio_eff": 0.2611,
+            "ttm_div_yoy_pct": 28.6,
+            "yield_pct": 5.58,
+            "yield_trailing_pct": 5.58
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25203030",
+          "market_cap_usd": null,
+          "name": "Baiksan",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.817121,
+          "pe_ratio": 6.666667,
+          "stock_id": 1415071,
+          "symbol": "035150",
+          "ticker": "035150.KO",
+          "week52_high": 14659.0909,
+          "week52_low": 9050.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 32.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.0156,
+            "payout_ratio_eff": 0.0156,
+            "ttm_div_yoy_pct": -26.7,
+            "yield_pct": 4.85,
+            "yield_trailing_pct": 4.76
+          },
+          "eps": 5.34,
+          "exchange": "CS",
+          "gic_code": "30201020",
+          "market_cap_usd": null,
+          "name": "Anhui Gujing Distillery Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 10,
+            "top_reason": "Gujing Gongjiu hit the daily limit-up as the baijiu sector led gains on policy tailwinds, indicating strong sector demand."
+          },
+          "pb_ratio": 1.923061,
+          "pe_ratio": 17.797753,
+          "stock_id": 230789,
+          "symbol": "000596",
+          "ticker": "000596.CS",
+          "week52_high": 169.0762,
+          "week52_low": 72.3785
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 32.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.5255,
+            "payout_ratio_eff": 0.5255,
+            "ttm_div_yoy_pct": 50.0,
+            "yield_pct": 4.55,
+            "yield_trailing_pct": 4.55
+          },
+          "eps": null,
+          "exchange": "KQ",
+          "gic_code": "10102050",
+          "market_cap_usd": null,
+          "name": "Cheryong Industrial Co.Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.612348,
+          "pe_ratio": 9.823129,
+          "stock_id": 1420315,
+          "symbol": "147830",
+          "ticker": "147830.KQ",
+          "week52_high": 15410.0,
+          "week52_low": 5040.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 30.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 1.7704,
+            "payout_ratio_eff": 1.7704,
+            "ttm_div_yoy_pct": -10.2,
+            "yield_pct": 7.24,
+            "yield_trailing_pct": 7.15
+          },
+          "eps": 3.25,
+          "exchange": "CS",
+          "gic_code": "30201020",
+          "market_cap_usd": null,
+          "name": "Wuliangye Yibin Co Ltd",
+          "news": {
+            "neg": 2,
+            "net_direction": "pos",
+            "pos": 23,
+            "top_reason": "Wuliangye Group increased its stake by ~199 million yuan and plans further increases up to 5 billion yuan, signaling confidence."
+          },
+          "pb_ratio": 2.20014,
+          "pe_ratio": 22.349208,
+          "stock_id": 230949,
+          "symbol": "000858",
+          "ticker": "000858.CS",
+          "week52_high": 124.5018,
+          "week52_low": 68.1388
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 30.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6173,
+            "payout_ratio_eff": 0.6173,
+            "ttm_div_yoy_pct": -77.2,
+            "yield_pct": 6.78,
+            "yield_trailing_pct": 6.71
+          },
+          "eps": 6.75,
+          "exchange": "CS",
+          "gic_code": "30201020",
+          "market_cap_usd": null,
+          "name": "Luzhou Lao Jiao Co Ltd",
+          "news": {
+            "neg": 5,
+            "net_direction": "neg",
+            "pos": 3,
+            "top_reason": "First-half net profit down 43.37% and revenue down 36.35% due to decreased product sales volume."
+          },
+          "pb_ratio": 2.463286,
+          "pe_ratio": 12.792593,
+          "stock_id": 230774,
+          "symbol": "000568",
+          "ticker": "000568.CS",
+          "week52_high": 144.2854,
+          "week52_low": 73.37
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 28.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.016,
+            "payout_ratio_eff": 0.016,
+            "ttm_div_yoy_pct": 28.6,
+            "yield_pct": 4.51,
+            "yield_trailing_pct": 4.42
+          },
+          "eps": 0.65,
+          "exchange": "CS",
+          "gic_code": "25203010",
+          "market_cap_usd": null,
+          "name": "Guangdong CHJ Industry Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "Opens a directly-operated store in Malaysia with 8.2M yuan investment, indicating expansion."
+          },
+          "pb_ratio": 2.274865,
+          "pe_ratio": 15.846154,
+          "stock_id": 231483,
+          "symbol": "002345",
+          "ticker": "002345.CS",
+          "week52_high": 16.3663,
+          "week52_low": 8.37
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 27.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.5103,
+            "payout_ratio_eff": 0.5103,
+            "ttm_div_yoy_pct": 3.3,
+            "yield_pct": 4.9,
+            "yield_trailing_pct": 4.9
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20107010",
+          "market_cap_usd": null,
+          "name": "Posco International Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 4,
+            "top_reason": "issued first-ever global bond raising $500M, oversubscribed 4x, proceeds to repay debt"
+          },
+          "pb_ratio": 1.347224,
+          "pe_ratio": 13.365095,
+          "stock_id": 1415098,
+          "symbol": "047050",
+          "ticker": "047050.KO",
+          "week52_high": 88714.2542,
+          "week52_low": 43627.5691
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": 26.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.7119,
+            "payout_ratio_eff": 0.7119,
+            "ttm_div_yoy_pct": 125.3,
+            "yield_pct": 7.85,
+            "yield_trailing_pct": 7.85
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "20106020",
+          "market_cap_usd": null,
+          "name": "Cheil Grinding",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.55316,
+          "pe_ratio": 4.057377,
+          "stock_id": 1414537,
+          "symbol": "001560",
+          "ticker": "001560.KO",
+          "week52_high": 12900.0,
+          "week52_low": 8030.0
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 26.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.3982,
+            "payout_ratio_eff": 0.3982,
+            "ttm_div_yoy_pct": 6.7,
+            "yield_pct": 5.87,
+            "yield_trailing_pct": 5.75
+          },
+          "eps": 17.68,
+          "exchange": "US",
+          "gic_code": "40203010",
+          "market_cap_usd": 1125269248.0,
+          "name": "Virtus Investment Partners, Inc.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.179158,
+          "pe_ratio": 9.510262,
+          "stock_id": 46552,
+          "symbol": "VRTS",
+          "ticker": "VRTS.US",
+          "week52_high": 191.5576,
+          "week52_low": 117.8185
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": 26.5,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 1.1549,
+            "payout_ratio_eff": 1.1549,
+            "ttm_div_yoy_pct": 3.1,
+            "yield_pct": 5.19,
+            "yield_trailing_pct": 5.19
+          },
+          "eps": 1.59,
+          "exchange": "CS",
+          "gic_code": "15104050",
+          "market_cap_usd": null,
+          "name": "Zhejiang JIULI Hi-tech Metals Co Ltd",
+          "news": {
+            "neg": 3,
+            "net_direction": "neg",
+            "pos": 2,
+            "top_reason": "First-half net profit fell 52.55% to 393 million yuan, with Q2 swinging to a loss."
+          },
+          "pb_ratio": 2.082339,
+          "pe_ratio": 12.220126,
+          "stock_id": 231459,
+          "symbol": "002318",
+          "ticker": "002318.CS",
+          "week52_high": 34.7059,
+          "week52_low": 17.12
+        }
+      ],
+      "total": 144
+    }
+  ],
+  "answer_to_user": "คัดหุ้นที่ 'ไม่เคยตัดปันผล' บวกกับ 'ปันผลค่อยๆ เพิ่มขึ้น' พร้อมกัน — คือกรอง no-cut streak เต็ม 10 ปี (สูงสุดของข้อมูลที่ย้อนดูได้ ครอบคลุมช่วงวิกฤติ 2020/2022) และการเติบโตปันผล 5 ปี (CAGR) เป็นบวก ตัวที่ปันผลโตต่อเนื่องและไม่เคยตัด เช่น Dsr Wire (069730.KO) ปันผล ~7.9% โต ~61%/ปี payout ต่ำ ~18%, Shandong Shanda Wit (000915.CS) ~10.6% โต ~53% payout ต่ำมาก ~2%, Dream International (1126.HK) ~9.6% โต ~40% payout ~64%, Hansol CSN (009180.KO) ~9.5% โต ~52% — ทั้งหมด streak = 10 ปี\n\n🔴 สิ่งที่ต้องพูดตรงๆ: ผมยืนยันได้แค่ 'ไม่ตัดปันผลตลอด 10 ปีที่ข้อมูลครอบคลุม' เท่านั้น — ไม่ใช่ 'ตลอดกาล' หรือ 25-30 ปีแบบ dividend aristocrat เพราะข้อมูลย้อนได้แค่ ~10 ปี และ streak ถูก cap ที่ 10 และควรระวังบางตัวที่ payout เกิน 1 เช่น Kisco Holdings (001940.KO) payout ~3.4 หรือ Namyang Dairy (003925.KO) payout ~0.88 — จ่ายปันผลเกินกำไร ความยั่งยืนน่ากังวลแม้ streak จะยาว การเติบโตปันผลสูงๆ จากฐานต่ำก็ไม่การันตีว่าจะโตต่อ สรุปคือนี่คือกลุ่ม 'ไม่ตัด + ปันผลขาขึ้น เท่าที่ข้อมูล 10 ปีเห็น' แยกออกจากพวกยีลด์สูงนิ่งๆ ได้ชัด แต่ควรเช็ค payout/กระแสเงินสดรายตัวก่อน — เป็นข้อมูลประกอบ ไม่ใช่คำแนะนำซื้อขายครับ"
+}

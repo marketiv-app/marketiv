@@ -1,0 +1,32 @@
+{
+  "id": "tn-05",
+  "question": "Show me stocks that dropped a lot lately but the company is actually fine — like still growing revenue and not overpriced. Kinda looking for a dip to buy.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {"q": "revenue growth"},
+      "duration_ms": 1348,
+      "result_summary": "Resolved: concept='revenue' (Total Revenue, income statement). Top match with curated=true."
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {"q": "growing revenue"},
+      "duration_ms": 1210,
+      "result_summary": "Resolved: pattern='consecutive_growth' (revenue grew in every one of the last N years). Also found 'consecutive_growth_sharp' (>10%/yr every year) and 'accelerating' as alternatives."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_down", "a": "close", "b": "0.15", "window_bars": 60}]}],
+        "fundamental": [
+          {"concept": "revenue", "pattern": "consecutive_growth", "N": 2},
+          {"concept": "pe", "pattern": "below_average"}
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "duration_ms": 3200,
+      "result_summary": "Returned 60 (capped) stocks that dropped >=15% over last 60 days AND have consecutive 2-year revenue growth AND PE below sector average. Top hit: head_listing_id=602, RSI 41.6, gross_margin 43.8%, net_margin 14.5%, pe below cohort benchmark of 40.9. Multiple candidates combining technical pullback with fundamental health."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "ma-05",
+  "question": "What crypto is really oversold right now — RSI below 30?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["RSI below 30 oversold"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"anchor": [{"pattern": "oversold"}]}],
+        "sort": "rsi",
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "Returned 60 results (capped=true). All tickers are .CC crypto. Top results: REVU-USD.CC RSI=29.91, APYS-USD.CC RSI=29.71, TRIAS-USD.CC RSI=29.71, NSDX-USD.CC RSI=29.61, ODDZ-USD.CC RSI=29.21, BB30746-USD.CC RSI=29.20. All RSI values confirmed below 30, satisfying the oversold threshold. Signal matched as 'rsi14_oversold' with strength=1.0.",
+  "verdict": "PASS",
+  "reason": "Crypto-only universe confirmed (.CC tickers), all returned RSI values are below 30 (oversold territory confirmed), no stocks returned.",
+  "defects": []
+}

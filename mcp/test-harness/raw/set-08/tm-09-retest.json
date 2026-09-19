@@ -1,0 +1,1558 @@
+{
+  "id": "tm-09-retest",
+  "question": "อยากเล่นธีม GLP-1 (ยาลดความอ้วน/เบาหวาน) ใครคือตัวจริงบ้าง ทั้งคนทำยาและซัพพลายเชน",
+  "tools_called": [
+    {
+      "tool": "find_megatrend",
+      "args": {
+        "terms": [
+          "GLP-1",
+          "obesity drug",
+          "diabetes drug"
+        ]
+      },
+      "note": "Resolve GLP-1 to a megatrend node → 18010000 Metabolic, Diabetes & Obesity (tier-2)."
+    },
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "megatrend": "18010000",
+        "order_by": "market_cap",
+        "limit": 50
+      },
+      "note": "Screen the GLP-1/Metabolic megatrend GLOBALLY (no country filter — real players are global: Novo=Denmark, Lilly=US, plus China/supply chain), ordered by market cap."
+    }
+  ],
+  "raw_responses": [
+    {
+      "GLP-1": [
+        {
+          "id": 18010000,
+          "name": "Metabolic, Diabetes & Obesity",
+          "tier": 2
+        }
+      ],
+      "obesity drug": [
+        {
+          "id": 18010000,
+          "name": "Metabolic, Diabetes & Obesity",
+          "tier": 2
+        }
+      ],
+      "diabetes drug": [
+        {
+          "id": 18010000,
+          "name": "Metabolic, Diabetes & Obesity",
+          "tier": 2
+        },
+        {
+          "id": 18130000,
+          "name": "Diabetes Devices (CGM & Insulin Delivery)",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "scope": {
+        "megatrend": "18010000"
+      },
+      "order_by": "market_cap",
+      "direction": null,
+      "direction_split": {
+        "total": 49,
+        "net_positive": 46,
+        "net_negative": 2,
+        "ambiguous": 0
+      },
+      "stocks": [
+        {
+          "stock_id": 26596,
+          "symbol": "LLY",
+          "ticker": "LLY.US",
+          "name": "Eli Lilly and Company",
+          "country": "USA",
+          "gic_code": "35202010",
+          "market_cap_usd": 1111459889152.0,
+          "impact": {
+            "ambiguous": 12,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "pricing",
+              "regulation",
+              "supply",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 07:15:27.271527+00",
+            "neg": 45,
+            "net_direction": "pos",
+            "news_count": 210,
+            "pos": 154,
+            "top_reason": "Novo Nordisk sues Eli Lilly for false advertising, seeking injunction and disgorgement of profits.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.55,
+            "pb_ratio": 32.254148,
+            "pe_ratio": 41.145686,
+            "week52_high": 1292.65,
+            "week52_low": 707.5873
+          }
+        },
+        {
+          "stock_id": 24500,
+          "symbol": "JNJ",
+          "ticker": "JNJ.US",
+          "name": "Johnson & Johnson",
+          "country": "USA",
+          "gic_code": "35202010",
+          "market_cap_usd": 657998675968.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-07-30 07:50:23.816019+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 11,
+            "pos": 8,
+            "top_reason": "raised 2026 guidance and beat Q2 estimates with strong earnings and sales growth",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.98,
+            "pb_ratio": 7.683736,
+            "pe_ratio": 31.451276,
+            "week52_high": 275.1132,
+            "week52_low": 169.4923
+          }
+        },
+        {
+          "stock_id": 1754790,
+          "symbol": "ROP",
+          "ticker": "ROP.SW",
+          "name": "Roche Holding AG",
+          "country": "Switzerland",
+          "gic_code": "35202010",
+          "market_cap_usd": 369120708296.704,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-07-26 13:38:25.679979+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 7,
+            "top_reason": "Roche reiterated its 2026 outlook, driving a ~5% share price jump.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 2.61,
+            "pb_ratio": 8.795547,
+            "pe_ratio": 22.5,
+            "week52_high": 375.6,
+            "week52_low": 244.7104
+          }
+        },
+        {
+          "stock_id": 1754717,
+          "symbol": "NOVN",
+          "ticker": "NOVN.SW",
+          "name": "Novartis AG",
+          "country": "Switzerland",
+          "gic_code": "35202010",
+          "market_cap_usd": 304117178902.118,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-06 11:25:53.143681+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 12,
+            "pos": 9,
+            "top_reason": "FDA granted traditional approval for Fabhalta in IgAN, expanding label and commercial potential.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 2.92,
+            "pb_ratio": 7.061031,
+            "pe_ratio": 23.312054,
+            "week52_high": 131.5,
+            "week52_low": 93.1943
+          }
+        },
+        {
+          "stock_id": 236491,
+          "symbol": "AZN",
+          "ticker": "AZN.LSE",
+          "name": "AstraZeneca PLC",
+          "country": "UK",
+          "gic_code": "35202010",
+          "market_cap_usd": 264034455614.259,
+          "impact": {
+            "ambiguous": 2,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-17 11:30:29.30246+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 20,
+            "pos": 16,
+            "top_reason": "Q2 earnings and sales beat estimates, driven by strong demand for newer medicines",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.97,
+            "pb_ratio": 4.812562,
+            "pe_ratio": 23.364006,
+            "week52_high": 15467.7038,
+            "week52_low": 9826.6616
+          }
+        },
+        {
+          "stock_id": 1915,
+          "symbol": "AMGN",
+          "ticker": "AMGN.US",
+          "name": "Amgen Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 239954100224.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-05 21:55:52.01086+00",
+            "neg": 3,
+            "net_direction": "pos",
+            "news_count": 12,
+            "pos": 9,
+            "top_reason": "Amgen raised 2026 guidance and beat Q2 estimates, driven by strong growth products.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 2.29,
+            "pb_ratio": 19.411754,
+            "pe_ratio": 26.048447,
+            "week52_high": 445.87,
+            "week52_low": 262.4885
+          }
+        },
+        {
+          "stock_id": 243294,
+          "symbol": "NOV",
+          "ticker": "NOV.XETRA",
+          "name": "Novo Nordisk A/S",
+          "country": "Denmark",
+          "gic_code": "35201010",
+          "market_cap_usd": 210499301670.912,
+          "impact": {
+            "ambiguous": 13,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "pricing",
+              "regulation",
+              "supply",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 02:05:32.600472+00",
+            "neg": 64,
+            "net_direction": "mixed",
+            "news_count": 139,
+            "pos": 64,
+            "top_reason": "Novo Nordisk files lawsuit alleging false advertising by Eli Lilly, seeking to halt ads and recover profits.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 4.92,
+            "pb_ratio": 5.912009,
+            "pe_ratio": 11.26123,
+            "week52_high": 52.3782,
+            "week52_low": 29.196
+          }
+        },
+        {
+          "stock_id": 406,
+          "symbol": "ABT",
+          "ticker": "ABT.US",
+          "name": "Abbott Laboratories",
+          "country": "USA",
+          "gic_code": "35101010",
+          "market_cap_usd": 203217338368.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "regulation"
+            ],
+            "latest_at": "2026-07-17 04:07:13.486666+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "Abbott raised its full-year adjusted EPS outlook after strong Q2 sales.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 2.16,
+            "pb_ratio": 3.692667,
+            "pe_ratio": 35.718447,
+            "week52_high": 134.3838,
+            "week52_low": 81.3895
+          }
+        },
+        {
+          "stock_id": 33957,
+          "symbol": "PFE",
+          "ticker": "PFE.US",
+          "name": "Pfizer Inc",
+          "country": "USA",
+          "gic_code": "35202010",
+          "market_cap_usd": 159419858944.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "pricing",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-19 17:20:39.641671+00",
+            "neg": 3,
+            "net_direction": "pos",
+            "news_count": 19,
+            "pos": 15,
+            "top_reason": "Q2 beat and raised revenue guidance, with reaffirmed EPS and a licensing deal charge.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 6.13,
+            "pb_ratio": 1.8231,
+            "pe_ratio": 35.855263,
+            "week52_high": 28.44,
+            "week52_low": 22.0346
+          }
+        },
+        {
+          "stock_id": 37244,
+          "symbol": "REGN",
+          "ticker": "REGN.US",
+          "name": "Regeneron Pharmaceuticals Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 85298208768.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-06 20:49:23.080901+00",
+            "neg": 3,
+            "net_direction": "pos",
+            "news_count": 10,
+            "pos": 7,
+            "top_reason": "Revenue up 17%, EPS beat, and full repayment of Sanofi Development Balance boosts future profits.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.45,
+            "pb_ratio": 2.635247,
+            "pe_ratio": 20.050483,
+            "week52_high": 847.0,
+            "week52_low": 538.24
+          }
+        },
+        {
+          "stock_id": 228524,
+          "symbol": "600276",
+          "ticker": "600276.CG",
+          "name": "Jiangsu Hengrui Medicine Co Ltd",
+          "country": "China",
+          "gic_code": "35202010",
+          "market_cap_usd": 45914240424.3456,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 06:50:25.620018+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 6,
+            "top_reason": "Reports 2026 interim results with revenue and profit, innovative drug sales up 16.38%.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.38,
+            "pb_ratio": 5.462998,
+            "pe_ratio": 42.92623,
+            "week52_high": 74.04,
+            "week52_low": 45.26
+          }
+        },
+        {
+          "stock_id": 1752,
+          "symbol": "ALNY",
+          "ticker": "ALNY.US",
+          "name": "Alnylam Pharmaceuticals Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 31580289024.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-07-09 17:15:23.123249+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Cramer highlights Alnylam as a prime takeover target with strong fundamentals, suggesting M&A premium.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 22.181713,
+            "pe_ratio": 39.12892,
+            "week52_high": 495.55,
+            "week52_low": 197.81
+          }
+        },
+        {
+          "stock_id": 52742,
+          "symbol": "3692",
+          "ticker": "3692.HK",
+          "name": "Hansoh Pharmaceutical Group Co Ltd",
+          "country": "Hong Kong",
+          "gic_code": "35202010",
+          "market_cap_usd": 24149357322.24,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "demand"
+            ],
+            "latest_at": "2026-07-15 10:18:23.238614+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Hansoh Pharmaceutical had an outbound licensing deal worth several billion USD, part of accelerating internationalization of Chinese innovative drugs.",
+            "top_relevance": 0.6
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.39,
+            "pb_ratio": 4.844223,
+            "pe_ratio": 30.427686,
+            "week52_high": 43.9395,
+            "week52_low": 27.882
+          }
+        },
+        {
+          "stock_id": 51743,
+          "symbol": "1801",
+          "ticker": "1801.HK",
+          "name": "Innovent Biologics Inc",
+          "country": "Hong Kong",
+          "gic_code": "35201010",
+          "market_cap_usd": 22285528719.36,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-10 14:55:42.576413+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 7,
+            "top_reason": "IBI3042 is the world's first small-molecule weekly GLP-1 drug to enter clinical stage, a significant R&D milestone.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 7.340626,
+            "pe_ratio": 174.281431,
+            "week52_high": 109.1,
+            "week52_low": 69.55
+          }
+        },
+        {
+          "stock_id": 30588,
+          "symbol": "NBIX",
+          "ticker": "NBIX.US",
+          "name": "Neurocrine Biosciences Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 15556390912.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-07 13:55:28.867322+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 3,
+            "pos": 3,
+            "top_reason": "Phase 3 and real-world data at ENDO 2026 show CRENESSITY improves multiple outcomes in CAH with no new safety concerns, driving stock up 6.5%",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.242411,
+            "pe_ratio": 22.548246,
+            "week52_high": 186.12,
+            "week52_low": 122.1375
+          }
+        },
+        {
+          "stock_id": 51166,
+          "symbol": "1093",
+          "ticker": "1093.HK",
+          "name": "CSPC Pharmaceutical Group Ltd",
+          "country": "Hong Kong",
+          "gic_code": "35202010",
+          "market_cap_usd": 13683974799.36,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-07-10 09:15:17.386359+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 4,
+            "pos": 4,
+            "top_reason": "Entitled to $30M upfront and up to $1.74B in milestone payments from AstraZeneca.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 3.09,
+            "pb_ratio": 2.5855,
+            "pe_ratio": 22.134058,
+            "week52_high": 11.2032,
+            "week52_low": 6.3868
+          }
+        },
+        {
+          "stock_id": 8311,
+          "symbol": "CORT",
+          "ticker": "CORT.US",
+          "name": "Corcept Therapeutics Incorporated",
+          "country": "USA",
+          "gic_code": "35202010",
+          "market_cap_usd": 13322046464.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-07-31 04:38:33.257193+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "Posted Q2 net income and revenue beat, lifted 2026 revenue forecast.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 17.916596,
+            "pe_ratio": 260.377778,
+            "week52_high": 124.01,
+            "week52_low": 28.66
+          }
+        },
+        {
+          "stock_id": 35876,
+          "symbol": "PTGX",
+          "ticker": "PTGX.US",
+          "name": "Protagonist Therapeutics Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 10011665408.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation"
+            ],
+            "latest_at": "2026-07-17 00:44:18.421781+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "FDA approval of its psoriasis drug drove stock up 204%.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 12.091477,
+            "pe_ratio": 152.757282,
+            "week52_high": 160.81,
+            "week52_low": 54.5
+          }
+        },
+        {
+          "stock_id": 229373,
+          "symbol": "603087",
+          "ticker": "603087.CG",
+          "name": "Gan & Lee Pharmaceuticals Co Ltd",
+          "country": "China",
+          "gic_code": "35101010",
+          "market_cap_usd": 6114398443.9296,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-11 14:25:31.080867+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 6,
+            "pos": 6,
+            "top_reason": "Exclusive licensing deal with Menarini for bofanglutide in Europe, with upfront and milestone payments.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.53,
+            "pb_ratio": 3.665806,
+            "pe_ratio": 41.953757,
+            "week52_high": 82.25,
+            "week52_low": 51.0198
+          }
+        },
+        {
+          "stock_id": 8718,
+          "symbol": "CRSP",
+          "ticker": "CRSP.US",
+          "name": "Crispr Therapeutics AG",
+          "country": "Switzerland",
+          "gic_code": "35201010",
+          "market_cap_usd": 5518733312.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-07-12 06:42:21.067427+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 5,
+            "pos": 4,
+            "top_reason": "Article concludes CRISPR is a more investible choice than Viking due to its approved treatment and modest sales, despite revenue decline and losses.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 3.004067,
+            "pe_ratio": null,
+            "week52_high": 78.48,
+            "week52_low": 44.12
+          }
+        },
+        {
+          "stock_id": 1954,
+          "symbol": "AMLX",
+          "ticker": "AMLX.US",
+          "name": "Amylyx Pharmaceuticals Inc",
+          "country": "USA",
+          "gic_code": "35202010",
+          "market_cap_usd": 4307615232.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-08-11 13:15:25.2074+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "Progress in Phase 3 LUCIDITY trial for Avexitide and completed enrollment in Phase 1 ALS study.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 9.978895,
+            "pe_ratio": null,
+            "week52_high": 41.14,
+            "week52_low": 8.94
+          }
+        },
+        {
+          "stock_id": 573680,
+          "symbol": "4506",
+          "ticker": "4506.JP",
+          "name": "Sumitomo Pharma Co.Ltd.",
+          "country": "Japan",
+          "gic_code": "35202010",
+          "market_cap_usd": 4075293117.8106,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation"
+            ],
+            "latest_at": "2026-07-16 18:37:50.38493+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Sumitomo Pharma co-promotes Wegovy in Japan and benefits from the new MASH approval.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.867809,
+            "pe_ratio": 5.111714,
+            "week52_high": 3288.0,
+            "week52_low": 1188.0
+          }
+        },
+        {
+          "stock_id": 46201,
+          "symbol": "VKTX",
+          "ticker": "VKTX.US",
+          "name": "Viking Therapeutics Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 3876377088.0,
+          "impact": {
+            "ambiguous": 7,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-19 17:20:39.641671+00",
+            "neg": 8,
+            "net_direction": "pos",
+            "news_count": 40,
+            "pos": 26,
+            "top_reason": "Viking starts Phase 1 trial of novel weight-loss drug VK3019, advancing pipeline.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 9.533545,
+            "pe_ratio": null,
+            "week52_high": 43.15,
+            "week52_low": 22.959
+          }
+        },
+        {
+          "stock_id": 232359,
+          "symbol": "300255",
+          "ticker": "300255.CS",
+          "name": "Hebei Changshan Biochem Pharma",
+          "country": "China",
+          "gic_code": "35202010",
+          "market_cap_usd": 3294458245.9392,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation"
+            ],
+            "latest_at": "2026-07-10 12:18:24.25599+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Abenatide under CDE review with steady progress; nadroparin and enoxaparin injections successfully renewed tenders.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 20.718122,
+            "pe_ratio": null,
+            "week52_high": 71.71,
+            "week52_low": 21.19
+          }
+        },
+        {
+          "stock_id": 27747,
+          "symbol": "MBX",
+          "ticker": "MBX.US",
+          "name": "MBX Biosciences, Inc. Common Stock",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 3197348864.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-17 00:44:18.421781+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Encouraging data from multiple clinical programs drove stock up 363%.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 7.78832,
+            "pe_ratio": null,
+            "week52_high": 72.64,
+            "week52_low": 9.63
+          }
+        },
+        {
+          "stock_id": 232306,
+          "symbol": "300199",
+          "ticker": "300199.CS",
+          "name": "Hybio Pharmaceutical",
+          "country": "China",
+          "gic_code": "35202010",
+          "market_cap_usd": 2911092611.4816,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-07 10:05:43.192005+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 3,
+            "pos": 3,
+            "top_reason": "Marketing application accepted by NMPA, first in China for tirzepatide, a regulatory milestone.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 31.194014,
+            "pe_ratio": 261.9,
+            "week52_high": 28.25,
+            "week52_low": 16.23
+          }
+        },
+        {
+          "stock_id": 228985,
+          "symbol": "600867",
+          "ticker": "600867.CG",
+          "name": "Tonghua Dongbao Pharmaceutical Co Ltd",
+          "country": "China",
+          "gic_code": "35202010",
+          "market_cap_usd": 2363506783.0272,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation"
+            ],
+            "latest_at": "2026-07-27 10:16:28.321525+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Tonghua Dongbao's Insulin Aspart Injection received US FDA marketing approval, enabling sales in the US market.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 3.77,
+            "pb_ratio": 2.261594,
+            "pe_ratio": 13.483871,
+            "week52_high": 10.67,
+            "week52_low": 7.16
+          }
+        },
+        {
+          "stock_id": 230166,
+          "symbol": "688166",
+          "ticker": "688166.CG",
+          "name": "BrightGene Bio Medical Technology C",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 2246924073.3696,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "demand"
+            ],
+            "latest_at": "2026-07-15 09:45:16.807287+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "BrightGene surged 20.01% as part of the STAR Market Biomedical Index rally driven by positive outlook for innovative drugs.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.05,
+            "pb_ratio": 6.462803,
+            "pe_ratio": 322.083333,
+            "week52_high": 112.4,
+            "week52_low": 28.74
+          }
+        },
+        {
+          "stock_id": 272501,
+          "symbol": "KLRA",
+          "ticker": "KLRA.US",
+          "name": "Kailera Therapeutics, Inc. Common Stock",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 2144306560.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 06:50:25.620018+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 5,
+            "pos": 4,
+            "top_reason": "Kailera Therapeutics reported positive Phase 3 results for its oral GLP-1 drug, directly advancing its lead asset.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": null,
+            "pe_ratio": null,
+            "week52_high": 28.23,
+            "week52_low": 16.0
+          }
+        },
+        {
+          "stock_id": 4426,
+          "symbol": "BHVN",
+          "ticker": "BHVN.US",
+          "name": "Biohaven Ltd.",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 2066278912.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-16 19:00:48.716831+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Biohaven announced upcoming pivotal study initiations for multiple drug candidates, which is a positive technology development.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 16.80559,
+            "pe_ratio": null,
+            "week52_high": 18.566,
+            "week52_low": 7.48
+          }
+        },
+        {
+          "stock_id": 1754752,
+          "symbol": "PPGN",
+          "ticker": "PPGN.SW",
+          "name": "PolyPeptide Group AG",
+          "country": "Switzerland",
+          "gic_code": "35202010",
+          "market_cap_usd": 1811108736.8192,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-07-22 08:50:26.419275+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 4,
+            "pos": 4,
+            "top_reason": "PolyPeptide receives a premium all-cash offer of 44.31 CHF per share, providing immediate value for shareholders.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.54182,
+            "pe_ratio": null,
+            "week52_high": 50.1,
+            "week52_low": 21.8
+          }
+        },
+        {
+          "stock_id": 230355,
+          "symbol": "688382",
+          "ticker": "688382.CG",
+          "name": "InventisBio Co. Ltd. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1643797114.0608,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "demand"
+            ],
+            "latest_at": "2026-07-15 17:37:54.592126+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "InventisBio gained over 10% as part of innovative drug rally, benefiting from regulatory encouragement and overseas licensing momentum.",
+            "top_relevance": 0.3
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 8.316751,
+            "pe_ratio": null,
+            "week52_high": 45.5,
+            "week52_low": 15.58
+          }
+        },
+        {
+          "stock_id": 29231,
+          "symbol": "MNKD",
+          "ticker": "MNKD.US",
+          "name": "MannKind Corp",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 1308686080.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "competition"
+            ],
+            "latest_at": "2026-07-20 23:50:16.645813+00",
+            "neg": 1,
+            "net_direction": "neg",
+            "news_count": 1,
+            "pos": 0,
+            "top_reason": "United Therapeutics' Tresmi soft-mist inhaler threatens MannKind's 9% royalty on Tyvaso DPI.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": null,
+            "pe_ratio": 125.0,
+            "week52_high": 6.51,
+            "week52_low": 2.23
+          }
+        },
+        {
+          "stock_id": 51632,
+          "symbol": "1672",
+          "ticker": "1672.HK",
+          "name": "Ascletis Pharma Inc",
+          "country": "Hong Kong",
+          "gic_code": "35201010",
+          "market_cap_usd": 1308419312.64,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation"
+            ],
+            "latest_at": "2026-07-06 09:06:18.254548+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "IND submissions to FDA for obesity treatments ASC36 and ASC36_35 FDC, a regulatory step toward clinical trials.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.576618,
+            "pe_ratio": null,
+            "week52_high": 19.86,
+            "week52_low": 7.95
+          }
+        },
+        {
+          "stock_id": 32671,
+          "symbol": "OPK",
+          "ticker": "OPK.US",
+          "name": "Opko Health Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 1104565888.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-07-27 17:07:33.247206+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Entera Bio's financing will support Phase 1 development of EB612 for hypoparathyroidism in collaboration with OPKO Health, potentially benefiting OPKO.",
+            "top_relevance": 0.3
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.856718,
+            "pe_ratio": null,
+            "week52_high": 1.73,
+            "week52_low": 0.9769
+          }
+        },
+        {
+          "stock_id": 27346,
+          "symbol": "LXRX",
+          "ticker": "LXRX.US",
+          "name": "Lexicon Pharmaceuticals Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 1032297728.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-08-24 18:00:43.784765+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 4,
+            "pos": 4,
+            "top_reason": "Multiple pipeline milestones: phase III SONATA-HCM data for sotagliflozin, NDA resubmission for Zynquista, and phase III start for pilavapadin.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 6.169587,
+            "pe_ratio": null,
+            "week52_high": 2.68,
+            "week52_low": 1.03
+          }
+        },
+        {
+          "stock_id": 48227,
+          "symbol": "WVE",
+          "ticker": "WVE.US",
+          "name": "Wave Life Sciences Ltd",
+          "country": "SG",
+          "gic_code": "35202010",
+          "market_cap_usd": 1008886656.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-16 15:09:26.292824+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "Initiation of Phase 2a trial for WVE-007, a novel siRNA obesity therapy, with promising Phase 1 data on fat reduction and muscle preservation.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 2.254451,
+            "pe_ratio": null,
+            "week52_high": 21.73,
+            "week52_low": 5.01
+          }
+        },
+        {
+          "stock_id": 230195,
+          "symbol": "688197",
+          "ticker": "688197.CG",
+          "name": "Shouyao Holdings (Beijing) Co. Ltd. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 801085717.7088,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-07-15 17:37:54.592126+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Shouyao Holdings surged by 20% daily limit up, leading the sector rally driven by regulatory encouragement for innovative drugs and strong overseas licensing data.",
+            "top_relevance": 0.8
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 8.309291,
+            "pe_ratio": null,
+            "week52_high": 51.9,
+            "week52_low": 29.71
+          }
+        },
+        {
+          "stock_id": 1788,
+          "symbol": "ALT",
+          "ticker": "ALT.US",
+          "name": "Altimmune Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 604950016.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-08-19 16:30:29.064732+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 4,
+            "pos": 4,
+            "top_reason": "Leerink initiated coverage with Outperform rating and $10 price target, a positive analyst call.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.375639,
+            "pe_ratio": null,
+            "week52_high": 6.44,
+            "week52_low": 2.56
+          }
+        },
+        {
+          "stock_id": 22704,
+          "symbol": "IPSC",
+          "ticker": "IPSC.US",
+          "name": "Century Therapeutics Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 383879680.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-14 11:06:16.989373+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Abstracts accepted for oral presentations at two congresses, highlighting CNTY-813's preclinical data showing durable glucose control and insulin secretion without immunosuppression, advancing toward a functional cure for type 1 diabetes.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.333366,
+            "pe_ratio": null,
+            "week52_high": 3.04,
+            "week52_low": 0.435
+          }
+        },
+        {
+          "stock_id": 38894,
+          "symbol": "SABS",
+          "ticker": "SABS.US",
+          "name": "SAB Biotherapeutics Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 329370656.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-08-06 11:50:43.964428+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 3,
+            "pos": 3,
+            "top_reason": "Analyst maintained Buy rating with $10 target, citing reduced development risk and positive risk-reward view.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.473281,
+            "pe_ratio": 15.791667,
+            "week52_high": 5.15,
+            "week52_low": 1.85
+          }
+        },
+        {
+          "stock_id": 52319,
+          "symbol": "2565",
+          "ticker": "2565.HK",
+          "name": "PegBio Co Ltd",
+          "country": "Hong Kong",
+          "gic_code": "35201010",
+          "market_cap_usd": 303174126.72,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-10 08:09:16.379789+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "PegBio's obesity/metabolic candidates are being evaluated with Rani's delivery platform, potentially advancing their pipeline.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.629609,
+            "pe_ratio": null,
+            "week52_high": 77.0,
+            "week52_low": 4.94
+          }
+        },
+        {
+          "stock_id": 45681,
+          "symbol": "VANI",
+          "ticker": "VANI.US",
+          "name": "Vivani Medical Inc.",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 124480640.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-07-16 16:29:02.268106+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 5,
+            "pos": 5,
+            "top_reason": "Vivani signs agreement with Novo Nordisk to evaluate its semaglutide implant NPM-139, validating its NanoPortal technology and advancing toward Phase 1 study.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 6.431193,
+            "pe_ratio": null,
+            "week52_high": 1.92,
+            "week52_low": 0.923
+          }
+        },
+        {
+          "stock_id": 4907,
+          "symbol": "BMEA",
+          "ticker": "BMEA.US",
+          "name": "Biomea Fusion Inc",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 114956112.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-06 08:55:44.479276+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Narrowed net loss and reduced cash burn improve financial position.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 8.062388,
+            "pe_ratio": null,
+            "week52_high": 2.99,
+            "week52_low": 0.8719
+          }
+        },
+        {
+          "stock_id": 21621,
+          "symbol": "IBIO",
+          "ticker": "IBIO.US",
+          "name": "iBio, Inc. Common Stock",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 70543552.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-04 17:36:47.428952+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 2,
+            "pos": 2,
+            "top_reason": "IBIO-610 achieved near-complete Activin E inhibition and fat-selective weight loss in obese primates, a significant preclinical milestone.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.64599,
+            "pe_ratio": null,
+            "week52_high": 3.82,
+            "week52_low": 0.76
+          }
+        },
+        {
+          "stock_id": 45892,
+          "symbol": "VERU",
+          "ticker": "VERU.US",
+          "name": "Veru Inc",
+          "country": "USA",
+          "gic_code": "30302010",
+          "market_cap_usd": 44160328.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-08-10 15:45:25.298863+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 5,
+            "pos": 5,
+            "top_reason": "Veru completed enrollment for Phase 2b trial of enobosarm, a potential combination therapy with semaglutide for obesity.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.195043,
+            "pe_ratio": null,
+            "week52_high": 4.59,
+            "week52_low": 2.05
+          }
+        },
+        {
+          "stock_id": 26138,
+          "symbol": "LEXX",
+          "ticker": "LEXX.US",
+          "name": "Lexaria Bioscience Corp",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 17417540.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-12 11:27:34.741323+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Lexaria begins dosing in a human study of its oral DehydraTECH-semaglutide, a key product development milestone.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.01771,
+            "pe_ratio": null,
+            "week52_high": 12.886,
+            "week52_low": 0.3735
+          }
+        },
+        {
+          "stock_id": 30059,
+          "symbol": "MTVA",
+          "ticker": "MTVA.US",
+          "name": "MetaVia Inc.",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 10079794.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-05 17:15:48.669761+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 1,
+            "pos": 1,
+            "top_reason": "Positive phase one data for DA-1726 and promising preclinical data for danuglipron, with key data expected by year-end.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.127955,
+            "pe_ratio": null,
+            "week52_high": 19.03,
+            "week52_low": 0.966
+          }
+        },
+        {
+          "stock_id": 40339,
+          "symbol": "SKYE",
+          "ticker": "SKYE.US",
+          "name": "Skye Bioscience, Inc. Common Stock",
+          "country": "USA",
+          "gic_code": "35201010",
+          "market_cap_usd": 9608059.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "technology"
+            ],
+            "latest_at": "2026-07-17 12:12:16.627821+00",
+            "neg": 1,
+            "net_direction": "neg",
+            "news_count": 1,
+            "pos": 0,
+            "top_reason": "Skye Bioscience's obesity drug missed the main goal in a standalone test, causing a 60%+ one-day drop and 99% loss over five years.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.399337,
+            "pe_ratio": null,
+            "week52_high": 4.99,
+            "week52_low": 0.255
+          }
+        }
+      ],
+      "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+    }
+  ],
+  "answer_to_user": "ธีม GLP-1 / metabolic-obesity-diabetes ตัวจริงในฐานข้อมูล (49 ชื่อ เรียงตามขนาด): ตัวจริง 2 เจ้าใหญ่คนทำยา GLP-1 คือ Eli Lilly (LLY.US, ~$1.11T, ข่าวเยอะสุด 210 ชิ้น — Zepbound/Mounjaro) และ Novo Nordisk (NOV.XETRA, เดนมาร์ก, ~$210B, ข่าว 139 ชิ้น — Wegovy/Ozempic; ทิศทางข่าวสุทธิ 'mixed' เพราะโดนกดดันเรื่องแข่งขัน/ฟ้องร้องกับ Lilly). ผู้ท้าชิง/ไปป์ไลน์รุ่นถัดไป — Viking Therapeutics (VKTX.US, ข่าว 40 ชิ้น, oral GLP-1/GIP), Amgen (AMGN.US, MariTide), AstraZeneca (AZN.LSE), Pfizer (PFE.US), Roche (ROP.SW), Novartis (NOVN.SW), Regeneron, Altimmune (ALT.US), Kailera (KLRA.US), Corcept, Neurocrine, Amylyx, Biohaven, Lexicon. ฝั่งจีนแรงมาก — Jiangsu Hengrui (600276.CG), Innovent (1801.HK), Hansoh (3692.HK), CSPC (1093.HK), Gan & Lee (603087.CG), Tonghua Dongbao, BrightGene, Hybio. ซัพพลายเชน/ผลิต — PolyPeptide Group (PPGN.SW, สวิส — CDMO ผลิตเปปไทด์ตามสัญญา, ตัวแทน supply chain ชัดสุด), Gan & Lee/Hybio (API เปปไทด์จีน) และฝั่งอุปกรณ์ส่งยา Vivani Medical (VANI.US) กับ MannKind (MNKD.US, ทิศทางลบ). สรุป: Novo Nordisk โผล่ชัดเจนในฐานะหนึ่งในสองตัวจริงหลัก. 46 จาก 49 ชื่อข่าวเป็นบวกสุทธิ."
+}

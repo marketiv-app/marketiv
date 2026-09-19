@@ -1,0 +1,1345 @@
+{
+  "id": "tm-07",
+  "question": "Who are the uranium and nuclear-fuel players? I'm betting on the nuclear revival — miners and enrichment, wherever they trade.",
+  "tools_called": [
+    {
+      "tool": "find_megatrend",
+      "args": {
+        "terms": [
+          "uranium mining",
+          "nuclear fuel supply chain"
+        ]
+      },
+      "note": "picked node 30050000 'Uranium & Nuclear Fuel Cycle' (tier-2, spans mining + conversion/enrichment) over the narrower tier-3 nodes"
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "30050000",
+        "country": "all",
+        "limit": 30
+      },
+      "note": "country=all for the cross-market roster"
+    }
+  ],
+  "raw_responses": [
+    {
+      "uranium mining": [
+        {
+          "id": 14030100,
+          "name": "Uranium Mining & Development",
+          "tier": 3
+        },
+        {
+          "id": 30050100,
+          "name": "Uranium Mining",
+          "tier": 3
+        }
+      ],
+      "nuclear fuel supply chain": [
+        {
+          "id": 30050000,
+          "name": "Uranium & Nuclear Fuel Cycle",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "stocks": [
+        {
+          "stock_id": 6532,
+          "symbol": "CCJ",
+          "ticker": "CCJ.US",
+          "type": null,
+          "name": "Cameco Corp",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 46584606720.0,
+          "market_cap_local": 46584606720.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 46584606720.0,
+            "market_cap_usd": 46584606720.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "Cameco Corp",
+            "stock_id": 6532,
+            "symbol": "CCJ",
+            "ticker": "CCJ.US"
+          }
+        },
+        {
+          "stock_id": 231092,
+          "symbol": "001280",
+          "ticker": "001280.CS",
+          "type": null,
+          "name": "China National Uranium Co Ltd",
+          "exchange": "CS",
+          "country": "China",
+          "domicile": "CN",
+          "currency": "CNY",
+          "gic_code": "10102050",
+          "market_cap_usd": 21277519065.9072,
+          "market_cap_local": 142994079744.0,
+          "fx_rate_usd": 0.1488,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "China",
+            "currency": "CNY",
+            "domicile": "CN",
+            "exchange": "CS",
+            "fx_rate_usd": 0.1488,
+            "gic_code": "10102050",
+            "market_cap_local": 142994079744.0,
+            "market_cap_usd": 21277519065.9072,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "China National Uranium Co Ltd",
+            "stock_id": 231092,
+            "symbol": "001280",
+            "ticker": "001280.CS"
+          }
+        },
+        {
+          "stock_id": 5862,
+          "symbol": "BWXT",
+          "ticker": "BWXT.US",
+          "type": null,
+          "name": "BWX Technologies Inc",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "20101010",
+          "market_cap_usd": 13718559744.0,
+          "market_cap_local": 13718559744.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 30050300,
+            "node_name": "Nuclear Fuel Fabrication & Fuel Technology",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "20101010",
+            "market_cap_local": 13718559744.0,
+            "market_cap_usd": 13718559744.0,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 30050300,
+              "node_name": "Nuclear Fuel Fabrication & Fuel Technology",
+              "role": null
+            },
+            "name": "BWX Technologies Inc",
+            "stock_id": 5862,
+            "symbol": "BWXT",
+            "ticker": "BWXT.US"
+          }
+        },
+        {
+          "stock_id": 32028,
+          "symbol": "NXE",
+          "ticker": "NXE.US",
+          "type": null,
+          "name": "NexGen Energy Ltd.",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 7420004864.0,
+          "market_cap_local": 7420004864.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 7420004864.0,
+            "market_cap_usd": 7420004864.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "NexGen Energy Ltd.",
+            "stock_id": 32028,
+            "symbol": "NXE",
+            "ticker": "NXE.US"
+          }
+        },
+        {
+          "stock_id": 45032,
+          "symbol": "UEC",
+          "ticker": "UEC.US",
+          "type": null,
+          "name": "Uranium Energy Corp",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 6505229824.0,
+          "market_cap_local": 6505229824.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 6505229824.0,
+            "market_cap_usd": 6505229824.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Uranium Energy Corp",
+            "stock_id": 45032,
+            "symbol": "UEC",
+            "ticker": "UEC.US"
+          }
+        },
+        {
+          "stock_id": 45586,
+          "symbol": "UUUU",
+          "ticker": "UUUU.US",
+          "type": null,
+          "name": "Energy Fuels Inc",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 3991940864.0,
+          "market_cap_local": 3991940864.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 3991940864.0,
+            "market_cap_usd": 3991940864.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Energy Fuels Inc",
+            "stock_id": 45586,
+            "symbol": "UUUU",
+            "ticker": "UUUU.US"
+          }
+        },
+        {
+          "stock_id": 26123,
+          "symbol": "LEU",
+          "ticker": "LEU.US",
+          "type": null,
+          "name": "Centrus Energy Corp.",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 3858683136.0,
+          "market_cap_local": 3858683136.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 30050200,
+            "node_name": "Conversion, Enrichment & Fuel",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 3858683136.0,
+            "market_cap_usd": 3858683136.0,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 30050200,
+              "node_name": "Conversion, Enrichment & Fuel",
+              "role": null
+            },
+            "name": "Centrus Energy Corp.",
+            "stock_id": 26123,
+            "symbol": "LEU",
+            "ticker": "LEU.US"
+          }
+        },
+        {
+          "stock_id": 10439,
+          "symbol": "DNN",
+          "ticker": "DNN.US",
+          "type": null,
+          "name": "Denison Mines Corp",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 3367120640.0,
+          "market_cap_local": 3367120640.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 3367120640.0,
+            "market_cap_usd": 3367120640.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Denison Mines Corp",
+            "stock_id": 10439,
+            "symbol": "DNN",
+            "ticker": "DNN.US"
+          }
+        },
+        {
+          "stock_id": 51229,
+          "symbol": "1164",
+          "ticker": "1164.HK",
+          "type": null,
+          "name": "CGN Mining Co Ltd",
+          "exchange": "HK",
+          "country": "Hong Kong",
+          "domicile": "KY",
+          "currency": "HKD",
+          "gic_code": "20107010",
+          "market_cap_usd": 2824888596.48,
+          "market_cap_local": 22155988992.0,
+          "fx_rate_usd": 0.1275,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "Hong Kong",
+            "currency": "HKD",
+            "domicile": "KY",
+            "exchange": "HK",
+            "fx_rate_usd": 0.1275,
+            "gic_code": "20107010",
+            "market_cap_local": 22155988992.0,
+            "market_cap_usd": 2824888596.48,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "CGN Mining Co Ltd",
+            "stock_id": 51229,
+            "symbol": "1164",
+            "ticker": "1164.HK"
+          }
+        },
+        {
+          "stock_id": 45336,
+          "symbol": "UROY",
+          "ticker": "UROY.US",
+          "type": null,
+          "name": "Uranium Royalty Corp",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 1688128256.0,
+          "market_cap_local": 1688128256.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "beneficiary"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 1688128256.0,
+            "market_cap_usd": 1688128256.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "beneficiary"
+            },
+            "name": "Uranium Royalty Corp",
+            "stock_id": 45336,
+            "symbol": "UROY",
+            "ticker": "UROY.US"
+          }
+        },
+        {
+          "stock_id": 45319,
+          "symbol": "URG",
+          "ticker": "URG.US",
+          "type": null,
+          "name": "Ur Energy Inc",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 588838272.0,
+          "market_cap_local": 588838272.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 588838272.0,
+            "market_cap_usd": 588838272.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Ur Energy Inc",
+            "stock_id": 45319,
+            "symbol": "URG",
+            "ticker": "URG.US"
+          }
+        },
+        {
+          "stock_id": 27115,
+          "symbol": "LTBR",
+          "ticker": "LTBR.US",
+          "type": null,
+          "name": "Lightbridge Corp",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "20202020",
+          "market_cap_usd": 312025888.0,
+          "market_cap_local": 312025888.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 30050300,
+            "node_name": "Nuclear Fuel Fabrication & Fuel Technology",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "20202020",
+            "market_cap_local": 312025888.0,
+            "market_cap_usd": 312025888.0,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 30050300,
+              "node_name": "Nuclear Fuel Fabrication & Fuel Technology",
+              "role": null
+            },
+            "name": "Lightbridge Corp",
+            "stock_id": 27115,
+            "symbol": "LTBR",
+            "ticker": "LTBR.US"
+          }
+        },
+        {
+          "stock_id": 12496,
+          "symbol": "EU",
+          "ticker": "EU.US",
+          "type": null,
+          "name": "enCore Energy Corp. Common Shares",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102020",
+          "market_cap_usd": 267136336.0,
+          "market_cap_local": 267136336.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102020",
+            "market_cap_local": 267136336.0,
+            "market_cap_usd": 267136336.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "enCore Energy Corp. Common Shares",
+            "stock_id": 12496,
+            "symbol": "EU",
+            "ticker": "EU.US"
+          }
+        },
+        {
+          "stock_id": 52128,
+          "symbol": "2302",
+          "ticker": "2302.HK",
+          "type": null,
+          "name": "CNNC International Limited",
+          "exchange": "HK",
+          "country": "Hong Kong",
+          "domicile": "KY",
+          "currency": "HKD",
+          "gic_code": "20107010",
+          "market_cap_usd": 254465356.8,
+          "market_cap_local": 1995806720.0,
+          "fx_rate_usd": 0.1275,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "Hong Kong",
+            "currency": "HKD",
+            "domicile": "KY",
+            "exchange": "HK",
+            "fx_rate_usd": 0.1275,
+            "gic_code": "20107010",
+            "market_cap_local": 1995806720.0,
+            "market_cap_usd": 254465356.8,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "CNNC International Limited",
+            "stock_id": 52128,
+            "symbol": "2302",
+            "ticker": "2302.HK"
+          }
+        },
+        {
+          "stock_id": 278966,
+          "symbol": "NUCL",
+          "ticker": "NUCL.US",
+          "type": null,
+          "name": "Eagle Nuclear Energy Corp. Common stock",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 212974544.0,
+          "market_cap_local": 212974544.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 212974544.0,
+            "market_cap_usd": 212974544.0,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Eagle Nuclear Energy Corp. Common stock",
+            "stock_id": 278966,
+            "symbol": "NUCL",
+            "ticker": "NUCL.US"
+          }
+        },
+        {
+          "stock_id": 236579,
+          "symbol": "BKY",
+          "ticker": "BKY.LSE",
+          "type": null,
+          "name": "Berkeley Energy Ltd",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "AU",
+          "currency": "GBX",
+          "gic_code": "10102050",
+          "market_cap_usd": 158343020.3536,
+          "market_cap_local": 116036216.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "AU",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "10102050",
+            "market_cap_local": 116036216.0,
+            "market_cap_usd": 158343020.3536,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "Berkeley Energy Ltd",
+            "stock_id": 236579,
+            "symbol": "BKY",
+            "ticker": "BKY.LSE"
+          }
+        },
+        {
+          "stock_id": 178097,
+          "symbol": "AEC",
+          "ticker": "AEC.US",
+          "type": null,
+          "name": "Anfield Energy Inc.",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 94961888.0,
+          "market_cap_local": 94961888.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 94961888.0,
+            "market_cap_usd": 94961888.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Anfield Energy Inc.",
+            "stock_id": 178097,
+            "symbol": "AEC",
+            "ticker": "AEC.US"
+          }
+        },
+        {
+          "stock_id": 236465,
+          "symbol": "AURA",
+          "ticker": "AURA.LSE",
+          "type": null,
+          "name": "Aura Energy Ltd",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "AU",
+          "currency": "GBX",
+          "gic_code": "10102050",
+          "market_cap_usd": 86945630.9184,
+          "market_cap_local": 63715104.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "AU",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "10102050",
+            "market_cap_local": 63715104.0,
+            "market_cap_usd": 86945630.9184,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Aura Energy Ltd",
+            "stock_id": 236465,
+            "symbol": "AURA",
+            "ticker": "AURA.LSE"
+          }
+        },
+        {
+          "stock_id": 238914,
+          "symbol": "NEO",
+          "ticker": "NEO.LSE",
+          "type": null,
+          "name": "Neo Energy Metals Plc",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 34665826.2484,
+          "market_cap_local": 25403654.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 30050000,
+            "node_name": "Uranium & Nuclear Fuel Cycle",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 25403654.0,
+            "market_cap_usd": 34665826.2484,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 30050000,
+              "node_name": "Uranium & Nuclear Fuel Cycle",
+              "role": null
+            },
+            "name": "Neo Energy Metals Plc",
+            "stock_id": 238914,
+            "symbol": "NEO",
+            "ticker": "NEO.LSE"
+          }
+        },
+        {
+          "stock_id": 201810,
+          "symbol": "JAGU",
+          "ticker": "JAGU.US",
+          "type": null,
+          "name": "Jaguar Uranium Corp.",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "CA",
+          "currency": "USD",
+          "gic_code": "10102050",
+          "market_cap_usd": 33723604.0,
+          "market_cap_local": 33723604.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "CA",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "10102050",
+            "market_cap_local": 33723604.0,
+            "market_cap_usd": 33723604.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Jaguar Uranium Corp.",
+            "stock_id": 201810,
+            "symbol": "JAGU",
+            "ticker": "JAGU.US"
+          }
+        },
+        {
+          "stock_id": 235947,
+          "symbol": "0V3P",
+          "ticker": "0V3P.LSE",
+          "type": null,
+          "name": "Laramide Resources Ltd.",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "CA",
+          "currency": "CAD",
+          "gic_code": "10102050",
+          "market_cap_usd": 0.0,
+          "market_cap_local": null,
+          "fx_rate_usd": 0.7221,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "CAD",
+            "domicile": "CA",
+            "exchange": "LSE",
+            "fx_rate_usd": 0.7221,
+            "gic_code": "10102050",
+            "market_cap_local": null,
+            "market_cap_usd": 0.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "Laramide Resources Ltd.",
+            "stock_id": 235947,
+            "symbol": "0V3P",
+            "ticker": "0V3P.LSE"
+          }
+        },
+        {
+          "stock_id": 235938,
+          "symbol": "0UNV",
+          "ticker": "0UNV.LSE",
+          "type": null,
+          "name": "CanAlaska Uranium Ltd.",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "CA",
+          "currency": "CAD",
+          "gic_code": "10102050",
+          "market_cap_usd": 0.0,
+          "market_cap_local": null,
+          "fx_rate_usd": 0.7221,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "CAD",
+            "domicile": "CA",
+            "exchange": "LSE",
+            "fx_rate_usd": 0.7221,
+            "gic_code": "10102050",
+            "market_cap_local": null,
+            "market_cap_usd": 0.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": "leader"
+            },
+            "name": "CanAlaska Uranium Ltd.",
+            "stock_id": 235938,
+            "symbol": "0UNV",
+            "ticker": "0UNV.LSE"
+          }
+        },
+        {
+          "stock_id": 236563,
+          "symbol": "BHP",
+          "ticker": "BHP.LSE",
+          "type": null,
+          "name": "BHP Group Limited",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 247761024643.891,
+          "market_cap_local": 181563113472.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "secondary",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 181563113472.0,
+            "market_cap_usd": 247761024643.891,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "secondary",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "BHP Group Limited",
+            "stock_id": 236563,
+            "symbol": "BHP",
+            "ticker": "BHP.LSE"
+          }
+        },
+        {
+          "stock_id": 572212,
+          "symbol": "2768",
+          "ticker": "2768.JP",
+          "type": null,
+          "name": "Sojitz Corp.",
+          "exchange": "JP",
+          "country": "Japan",
+          "domicile": "JP",
+          "currency": "JPY",
+          "gic_code": "20107010",
+          "market_cap_usd": 6840425012.6961,
+          "market_cap_local": 1085781748047.0,
+          "fx_rate_usd": 0.0063,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "secondary",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "Japan",
+            "currency": "JPY",
+            "domicile": "JP",
+            "exchange": "JP",
+            "fx_rate_usd": 0.0063,
+            "gic_code": "20107010",
+            "market_cap_local": 1085781748047.0,
+            "market_cap_usd": 6840425012.6961,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "secondary",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "Sojitz Corp.",
+            "stock_id": 572212,
+            "symbol": "2768",
+            "ticker": "2768.JP"
+          }
+        },
+        {
+          "stock_id": 2922,
+          "symbol": "ASPI",
+          "ticker": "ASPI.US",
+          "type": null,
+          "name": "ASP Isotopes Inc. Common Stock",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "15104020",
+          "market_cap_usd": 613237504.0,
+          "market_cap_local": 613237504.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "secondary",
+            "node_id": 30050200,
+            "node_name": "Conversion, Enrichment & Fuel",
+            "role": null
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104020",
+            "market_cap_local": 613237504.0,
+            "market_cap_usd": 613237504.0,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "secondary",
+              "node_id": 30050200,
+              "node_name": "Conversion, Enrichment & Fuel",
+              "role": null
+            },
+            "name": "ASP Isotopes Inc. Common Stock",
+            "stock_id": 2922,
+            "symbol": "ASPI",
+            "ticker": "ASPI.US"
+          }
+        },
+        {
+          "stock_id": 237385,
+          "symbol": "FAR",
+          "ticker": "FAR.LSE",
+          "type": null,
+          "name": "Ferro-Alloy Resources Limited",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 38140217.9332,
+          "market_cap_local": 27949742.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.45,
+            "exposure": "secondary",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 27949742.0,
+            "market_cap_usd": 38140217.9332,
+            "megatrend": {
+              "confidence": 0.45,
+              "exposure": "secondary",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "Ferro-Alloy Resources Limited",
+            "stock_id": 237385,
+            "symbol": "FAR",
+            "ticker": "FAR.LSE"
+          }
+        },
+        {
+          "stock_id": 237932,
+          "symbol": "HREE",
+          "ticker": "HREE.LSE",
+          "type": null,
+          "name": "Harena Rare Earths Plc",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 28470785.1472,
+          "market_cap_local": 20863832.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "secondary",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 20863832.0,
+            "market_cap_usd": 28470785.1472,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "secondary",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "Harena Rare Earths Plc",
+            "stock_id": 237932,
+            "symbol": "HREE",
+            "ticker": "HREE.LSE"
+          }
+        },
+        {
+          "stock_id": 180368,
+          "symbol": "ATCX",
+          "ticker": "ATCX.US",
+          "type": null,
+          "name": "Atlas Critical Minerals Corporation",
+          "exchange": "US",
+          "country": "USA",
+          "domicile": "MH",
+          "currency": "USD",
+          "gic_code": "15104020",
+          "market_cap_usd": 18782926.0,
+          "market_cap_local": 18782926.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "secondary",
+            "node_id": 30050000,
+            "node_name": "Uranium & Nuclear Fuel Cycle",
+            "role": "beneficiary"
+          },
+          "raw": {
+            "country": "USA",
+            "currency": "USD",
+            "domicile": "MH",
+            "exchange": "US",
+            "fx_rate_usd": 1.0,
+            "gic_code": "15104020",
+            "market_cap_local": 18782926.0,
+            "market_cap_usd": 18782926.0,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "secondary",
+              "node_id": 30050000,
+              "node_name": "Uranium & Nuclear Fuel Cycle",
+              "role": "beneficiary"
+            },
+            "name": "Atlas Critical Minerals Corporation",
+            "stock_id": 180368,
+            "symbol": "ATCX",
+            "ticker": "ATCX.US"
+          }
+        },
+        {
+          "stock_id": 237495,
+          "symbol": "FMET",
+          "ticker": "FMET.LSE",
+          "type": null,
+          "name": "Fulcrum Metals PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 17027766.7306,
+          "market_cap_local": 12478211.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "secondary",
+            "node_id": 30050000,
+            "node_name": "Uranium & Nuclear Fuel Cycle",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 12478211.0,
+            "market_cap_usd": 17027766.7306,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "secondary",
+              "node_id": 30050000,
+              "node_name": "Uranium & Nuclear Fuel Cycle",
+              "role": null
+            },
+            "name": "Fulcrum Metals PLC",
+            "stock_id": 237495,
+            "symbol": "FMET",
+            "ticker": "FMET.LSE"
+          }
+        },
+        {
+          "stock_id": 239785,
+          "symbol": "THR",
+          "ticker": "THR.LSE",
+          "type": null,
+          "name": "Thor Mining PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "15104020",
+          "market_cap_usd": 8082413.9028,
+          "market_cap_local": 5922918.0,
+          "fx_rate_usd": 1.3646,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "secondary",
+            "node_id": 30050100,
+            "node_name": "Uranium Mining",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3646,
+            "gic_code": "15104020",
+            "market_cap_local": 5922918.0,
+            "market_cap_usd": 8082413.9028,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "secondary",
+              "node_id": 30050100,
+              "node_name": "Uranium Mining",
+              "role": null
+            },
+            "name": "Thor Mining PLC",
+            "stock_id": 239785,
+            "symbol": "THR",
+            "ticker": "THR.LSE"
+          }
+        }
+      ],
+      "count": 30,
+      "total": 30
+    }
+  ],
+  "answer_to_user": "The 'Uranium & Nuclear Fuel Cycle' theme (spanning mining + conversion/enrichment) gives the real cross-market roster:\n\nMiners: Cameco (CCJ.US) — the western major · NexGen Energy (NXE.US) · Uranium Energy (UEC.US) · Energy Fuels (UUUU.US) · Denison Mines (DNN.US) · Ur-Energy (URG.US) · enCore Energy (EU.US) · Uranium Royalty (UROY.US) · plus Chinese names China National Uranium (001280.CS) and CGN Mining (1164.HK).\n\nEnrichment / fuel cycle: Centrus Energy (LEU.US) — US enrichment · BWX Technologies (BWXT.US) — nuclear fuel/components · Lightbridge (LTBR.US) — fuel technology · ASP Isotopes (ASPI.US, secondary).\n\nSo Cameco, Kazatomprom-style miners (NexGen, Denison, UEC) and the enrichers (Centrus, BWXT) are all here — a genuine miners-plus-enrichment list across US, Canada, China and UK-listed juniors, not just power utilities. (Kazatomprom itself doesn't appear in this 30-name slice.)"
+}

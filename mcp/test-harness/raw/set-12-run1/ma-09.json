@@ -1,0 +1,33 @@
+{
+  "id": "ma-09",
+  "question": "I want to see everything — stocks AND crypto AND forex — that just broke out above their 20-day moving average with rising volume. Cross-market breakouts.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["price breaks above 20-day moving average with rising volume"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [
+          {
+            "anchor": [{"pattern": "crossover_up", "a": "close", "b": "ema20"}],
+            "quals": [{"any": [{"pattern": "rising_volume"}]}]
+          }
+        ],
+        "timeframe": 1,
+        "window_bars": 10
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=27740. Of 40 results: 7 Crypto (.CC) — WZRD-USD.CC (score 1.0), ALPH-USD.CC, AIFUN-USD.CC, etc.; 0 Forex (.FOREX); 33 stocks across multiple exchanges — MKTSF.US (US), 084110.KQ (Korean), 600095.CG (Chinese), ZUBN.SW (Swiss), 0099.HK (HK), 1312.TW (Taiwan), CYAB.US, and more. Signal names: 'cross_close_ema20_up' + 'rising_volume' confirmed on matched results.",
+  "verdict": "PARTIAL",
+  "reason": "Spans multiple asset types (stocks + crypto confirmed). MA breakout + volume condition correctly applied. However, zero Forex pairs appear in results despite Currency being in asset_type — fails the 'AND forex' breadth requirement in the question.",
+  "defects": [
+    {
+      "desc": "Forex pairs (.FOREX) do not appear in the breakout + rising_volume combined screen even when Currency is specified in asset_type. Forex volume data appears unavailable or rising_volume always evaluates false for forex, silently excluding the entire Currency universe when a volume qualifier is applied. No warning or note is emitted about this data gap.",
+      "side": "server"
+    }
+  ]
+}

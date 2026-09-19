@@ -1,0 +1,51 @@
+{
+  "id": "fe-02",
+  "question": "หาหุ้นที่มีรายได้เติบโต YoY ติดต่อกันอย่างน้อย 5 ปี และกำไรต่อหุ้น (EPS) ก็โตทุกปีในช่วงเดียวกันด้วย ขอเฉพาะบริษัทที่มีรายได้เกิน 1 พันล้านดอลลาร์",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "consecutive_growth",
+            "N": 5
+          },
+          {
+            "concept": "eps_diluted",
+            "pattern": "consecutive_growth",
+            "N": 5
+          },
+          {
+            "concept": "revenue",
+            "pattern": "above",
+            "threshold": 1000000000
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "capped": false,
+      "count": 0,
+      "currency": "USD",
+      "results": [],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 0,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 0 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "การกรองแบบเข้มงวด: รายได้เติบโต YoY ต่อเนื่อง 5 ปี (consecutive_growth, N=5) และ EPS โตทุกปี 5 ปีในช่วงเดียวกัน พร้อมรายได้เกิน $1B (USD) — ครบทั้งสามเงื่อนไขพร้อมกัน — ผลลัพธ์ = 0 บริษัท จากทั้งหมด 24,045 รายการ กล่าวคือ ในฐานข้อมูลนี้ ไม่มีบริษัทใดที่ทั้งรายได้และ EPS เติบโตบวกทุกปีติดต่อกันครบ 5 ปีเต็มพร้อมรายได้เกินพันล้านดอลลาร์ (เงื่อนไข 5 ปีต่อเนื่องทั้งสองเส้น เข้มมาก — ปีที่มี EPS สะดุดแม้ปีเดียวก็ตกเกณฑ์). หากอยากได้รายชื่อ แนะนำผ่อนเป็น 3 ปีต่อเนื่อง หรือใช้ CAGR 5 ปีเป็นบวกแทน"
+}

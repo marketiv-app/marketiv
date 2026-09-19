@@ -1,0 +1,157 @@
+{
+  "set_summary": {
+    "pass": 10,
+    "partial": 0,
+    "fail": 0,
+    "batch_used": true,
+    "top_defects": [
+      "Transient prod 'Server error' on the very first screen_unified call (case 1) — succeeded on identical retry ~4.3s (cold blip, not a schema/logic defect).",
+      "find_gics 400/empty on multi-word phrasing with a slash ('technology / information technology sector') — bare word 'information technology' resolved cleanly to '45'. Minor resolver brittleness on punctuated queries.",
+      "No direct `inventory_turnover` ratio concept exists; inventory efficiency must be expressed via `dio` (Days Inventory Outstanding, the inverse). Correct answer WAS in find_fsconcept top-k, so not a blocking gap — but a named turnover ratio would be more obvious to a dumb client."
+    ]
+  },
+  "cases": [
+    {
+      "id": 1,
+      "question": "Quality at a reasonable price: net margin above its own sector's average, revenue up every year for 3 years, and P/E below 25.",
+      "tool_calls": [
+        "find_fsconcept(batch) -> net_margin, revenue, pe",
+        "find_fspattern(batch) -> above_average, consecutive_growth, below",
+        "screen_unified(fundamental=[net_margin/above_average vs_cohort{own:true}, revenue/consecutive_growth N=3, pe/below thr=25], asset_type=[Common Stock])"
+      ],
+      "result_summary": "count=32 (capped). GOOG(pe17.1), AMZN(21.0), META(20.5) etc.",
+      "evidence_check": "net_margin.cohort_benchmark shown with cohort_scope=own_sector (GOOG 0.548 vs sector 0.215); revenue growth series[] with years_checked=3, window=min_yoy; pe level all <25.",
+      "confusion_note": "Obvious once schema read. 'each vs its own sector' correctly = vs_cohort{own:true} per schema. First call hit a transient Server error; identical retry succeeded.",
+      "verdict": "PASS",
+      "reason": "All three legs evidenced; per-stock cohort benchmark shown; every P/E strictly <25 and net_margin > own-sector benchmark.",
+      "defects": [{"desc": "Transient Server error on first attempt, fine on retry", "side": "server"}]
+    },
+    {
+      "id": 2,
+      "question": "Asset-light compounders: capex under 5% of revenue AND revenue compounding over 15% a year over 3 years.",
+      "tool_calls": [
+        "screen_unified(fundamental=[capex lower_than revenue multiple=0.05 (relation), revenue/compound_growth thr=0.15 N=3])"
+      ],
+      "result_summary": "count=32. NVDA(capex 2.8% rev, 3y CAGR ~100%), AVGO(1.0%, 24%), ASML(5.0%).",
+      "evidence_check": "Relation shows value_a (capex, stored NEGATIVE outflow) + value_b (revenue) + ratio (0.028); _conventions explains the sign. revenue growth window=3y_cagr, value>0.15.",
+      "confusion_note": "capex<5%-of-revenue is a RELATION not a level — schema's 'percent-of is a FRACTION' guidance made multiple=0.05 obvious. Sign of capex handled by server (ratio positive).",
+      "verdict": "PASS",
+      "reason": "Both operands + ratio shown with correct outflow-sign handling; all ratios <0.05 and CAGR >15%.",
+      "defects": []
+    },
+    {
+      "id": 3,
+      "question": "Banks with ROE above the banking-sector average and dividend yield over 4%.",
+      "tool_calls": [
+        "find_gics(banks) -> 4010 (group)",
+        "screen_unified(fundamental=[roe/above_average, dividend_yield/above thr=0.04], gics='4010')"
+      ],
+      "result_summary": "count=32. All banks (Agri Bank China, CMB, Intesa, BNP, ING, NatWest...).",
+      "evidence_check": "roe.cohort_benchmark=0.0884 (banking avg), cohort_scope=candidate_universe (=the banks scope); each roe > benchmark; dividend_yield all >0.04.",
+      "confusion_note": "Schema explicitly says scope universe to the sector and OMIT vs_cohort so 'above average' means above the sector avg automatically — did exactly that. Clean.",
+      "verdict": "PASS",
+      "reason": "Sector resolved + scoped; benchmark is the banking-sector average; every hit above it and >4% yield.",
+      "defects": []
+    },
+    {
+      "id": 4,
+      "question": "Companies with over $5 billion of revenue AND net profit margin over 20%. (absolute USD, cross-market)",
+      "tool_calls": [
+        "screen_unified(fundamental=[revenue/above thr=5e9, net_margin/above thr=0.20])"
+      ],
+      "result_summary": "count=32. NVDA, AAPL, GOOG, MSFT, TSMC(TW), Samsung(KO)...",
+      "evidence_check": "revenue.value carries unit='usd' (466bn AAPL, 271bn Samsung) — absolute USD, cross-market (US/TW/KO); net_margin all >=0.20 (Samsung 0.2146 borderline-correct).",
+      "confusion_note": "Was the absolute-$ revenue an 'above' level or a size knob? Schema reserves min/max_market_cap for CAP; revenue-$ correctly goes as concept=revenue + above + threshold in USD. unit:usd confirms server USD-normalized it.",
+      "verdict": "PASS",
+      "reason": "Absolute-USD revenue threshold honored cross-market; margin filter correct.",
+      "defects": []
+    },
+    {
+      "id": 5,
+      "question": "Dividend stalwarts: paid a dividend every year for the last 10 years and never cut it. (10-year window — mind data depth)",
+      "tool_calls": [
+        "find_fspattern -> active_every_year, not_declining",
+        "find_fsconcept -> dividends_paid, dps",
+        "screen_unified(fundamental=[dividends_paid/active_every_year N=10, dps/not_declining N=10])"
+      ],
+      "result_summary": "count=0 WITH explicit insufficient-history notes.",
+      "evidence_check": "notes[] state: 'the data exists, but NO company has 10 years of annual history (deepest ~5y) — a 0 count here is INSUFFICIENT HISTORY, not nobody qualified. Re-ask with N<=5.'",
+      "confusion_note": "None. This is the depth trap and the tool handled it exactly right — a guided note, not a bare 0.",
+      "verdict": "PASS",
+      "reason": "N=10 exceeds ~4-5y data depth; server returns a clear INSUFFICIENT-HISTORY note per metric with a re-ask suggestion.",
+      "defects": []
+    },
+    {
+      "id": 6,
+      "question": "Cheap but not junk: P/E between 5 and 12 with positive free cash flow.",
+      "tool_calls": [
+        "screen_unified(fundamental=[pe/between min=5 max=12, free_cash_flow/is_positive])"
+      ],
+      "result_summary": "count=32. China banks (pe 7.6-8.4), Shell, Novo Nordisk, TotalEnergies, AT&T — all pe 5-12.",
+      "evidence_check": "pe.value all within [5,12] (min 7.59, max 11.26 — no sub-2 junk); free_cash_flow.value all positive (usd).",
+      "confusion_note": "None; between + is_positive were direct.",
+      "verdict": "PASS",
+      "reason": "Both bounds of the band respected, no sub-2 junk P/E, FCF strictly positive.",
+      "defects": []
+    },
+    {
+      "id": 7,
+      "question": "Operating-leverage plays: earnings growing faster than revenue over the last 3 years.",
+      "tool_calls": [
+        "find_fspattern -> growth_faster_than (relation)",
+        "screen_unified(fundamental=[net_income growth_faster_than revenue N=3])"
+      ],
+      "result_summary": "count=32. NVDA(NI cagr 2.02 vs rev 1.00), GOOG(0.30 vs 0.13), META(0.38 vs 0.20)...",
+      "evidence_check": "Relation shows BOTH cagr_a (earnings) and cagr_b (revenue), window=cagr_3y; cagr_a > cagr_b in every row.",
+      "confusion_note": "None; growth_faster_than takes no threshold (schema says the growth relations take none). N=3 from 'last 3 years'.",
+      "verdict": "PASS",
+      "reason": "Both CAGRs shown; earnings CAGR exceeds revenue CAGR everywhere over 3y.",
+      "defects": []
+    },
+    {
+      "id": 8,
+      "question": "The most financially volatile US technology companies. (volatility + sector + country)",
+      "tool_calls": [
+        "find_fspattern -> volatile (metric=net_income, min_std yoy_std)",
+        "find_gics(technology) -> 45 (sector)",
+        "screen_unified(fundamental=[net_income/volatile], gics='45', country=['US'], sort='net_income')"
+      ],
+      "result_summary": "count=32. CRM(yoy_std 5.57), NVDA(2.78), ZM, NOW, IBM, AVGO — sorted desc.",
+      "evidence_check": "net_income.value = yoy_std (dispersion), years_checked=3; all US IT-sector names; sorted most-volatile first.",
+      "confusion_note": "'financially volatile' is fuzzy (price vol vs earnings vol). Chose earnings volatility via the curated `volatile` pattern (yoy_std) — grounded, evidenced. A reasonable read, not a guess.",
+      "verdict": "PASS",
+      "reason": "Volatility + sector(45) + country(US) all applied; earnings-dispersion evidence shown and sorted.",
+      "defects": [{"desc": "'financially volatile' is ambiguous; interpreted as earnings volatility (could also mean price/FCF volatility)", "side": "question"}]
+    },
+    {
+      "id": 9,
+      "question": "Companies that spend roughly a quarter of their revenue on R&D.",
+      "tool_calls": [
+        "find_fsconcept -> rnd",
+        "find_fspattern -> ratio_near (relation)",
+        "screen_unified(fundamental=[rnd ratio_near revenue target=0.25])"
+      ],
+      "result_summary": "count=32. AMD(0.234), INTC(0.261), MRK(0.243), AZN, MediaTek, MRVL(0.253)...",
+      "evidence_check": "Relation shows value_a(rnd)+value_b(revenue)+ratio; all ratios within default +-10% band of 0.25 (0.230-0.261).",
+      "confusion_note": "'roughly a quarter' -> ratio_near target=0.25 with default band; schema's 'percent-of is a FRACTION' made 0.25 obvious.",
+      "verdict": "PASS",
+      "reason": "All hits sit within +-10% of 25% R&D-to-revenue with both operands + ratio shown; R&D-heavy semis/pharma as expected.",
+      "defects": []
+    },
+    {
+      "id": 10,
+      "question": "Companies with improving inventory efficiency. (may not be a screenable concept)",
+      "tool_calls": [
+        "find_fsconcept(inventory turnover) -> dio (Days Inventory Outstanding) surfaced; no direct inventory_turnover ratio",
+        "find_fspattern -> consecutive_decline",
+        "screen_unified(fundamental=[dio/consecutive_decline N=3])"
+      ],
+      "result_summary": "count=24. MSFT, AMZN, TSMC, TSLA, WMT, COST — DIO falling every year.",
+      "evidence_check": "dio.series[] all-negative each year (DIO shrinking = inventory clears faster = improving efficiency), years_checked=3.",
+      "confusion_note": "There is no named `inventory_turnover` ratio concept, so 'efficiency improving' was mapped to the inverse `dio` DECLINING. dio was in find_fsconcept top-k, so the right answer was reachable without a low-confidence back-off.",
+      "verdict": "PASS",
+      "reason": "Concept turned out screenable via DIO (the standard inverse) declining; evidence (falling series) is coherent, retailers dominate as expected.",
+      "defects": [{"desc": "No direct inventory-turnover ratio concept; must be expressed as DIO declining (correct but less obvious for a naive client)", "side": "tool"}]
+    }
+  ]
+}

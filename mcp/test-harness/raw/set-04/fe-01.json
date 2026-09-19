@@ -1,0 +1,2310 @@
+{
+  "id": "fe-01",
+  "question": "Find companies globally with revenue above $5B, gross margin over 60%, operating margin over 25%, and net debt/EBITDA under 1.0x. I want large, high-margin, lightly-levered businesses.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "above",
+            "threshold": 5000000000
+          },
+          {
+            "concept": "gross_margin",
+            "pattern": "above",
+            "threshold": 0.6
+          },
+          {
+            "concept": "operating_margin",
+            "pattern": "above",
+            "threshold": 0.25
+          },
+          {
+            "concept": "net_debt_ebitda",
+            "pattern": "below",
+            "threshold": 1.0
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "capped": false,
+      "count": 47,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NVDA.SW",
+            "0R1I.LSE",
+            "NVDA01.BK",
+            "NVDA03.BK",
+            "NVDA06.BK",
+            "NVDA19.BK",
+            "NVDA23.BK",
+            "NVDA80.BK",
+            "NVD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 65539000000.0,
+              "ebitda_usd": 192970000000.0,
+              "free_cash_flow_usd": 119076000000.0,
+              "interest_coverage": 636.7148,
+              "market_cap_usd": 5322322739200.0,
+              "net_debt_usd": -889000000.0,
+              "net_income_usd": 159613000000.0,
+              "net_margin": 0.6297,
+              "operating_income_usd": 162285000000.0,
+              "pe": 33.650842
+            }
+          },
+          "head_listing_id": 31809,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7415
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.0046
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.6402
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 253491000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NVIDIA Corporation",
+          "score": 5322322739200.0,
+          "ticker": "NVDA.US"
+        },
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 174350000000.0,
+              "ebitda_usd": 326758000000.0,
+              "free_cash_flow_usd": 53273000000.0,
+              "interest_coverage": 133.8903,
+              "market_cap_usd": 4173832126464.0,
+              "net_debt_usd": 42254000000.0,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "operating_income_usd": 147628000000.0,
+              "pe": 17.123934
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.609
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.174
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3311
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 445867000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "MSFT01.BK",
+            "MSFT03.BK",
+            "MSFT06.BK",
+            "MSFT19.BK",
+            "MSFT23.BK",
+            "MSFT80.BK",
+            "MSF.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 106374000000.0,
+              "ebitda_usd": 212433000000.0,
+              "free_cash_flow_usd": 66987000000.0,
+              "interest_coverage": 55.3868,
+              "market_cap_usd": 3576365580288.0,
+              "net_debt_usd": 35891000000.0,
+              "net_income_usd": 133749000000.0,
+              "net_margin": 0.4031,
+              "operating_income_usd": 155237000000.0,
+              "pe": 28.685527
+            }
+          },
+          "head_listing_id": 29766,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6794
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.169
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.4678
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 331839000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Microsoft Corporation",
+          "score": 3576365580288.0,
+          "ticker": "MSFT.US"
+        },
+        {
+          "also_known_as": [
+            "0LCV.LSE",
+            "TSM.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 49874412940.0,
+              "ebitda_usd": 96435539014.0,
+              "free_cash_flow_usd": 35703685350.2,
+              "interest_coverage": 166.043547500485,
+              "market_cap_usd": 1931805975589.6833,
+              "net_debt_usd": -67565609400.0,
+              "net_income_usd": 69607787590.8,
+              "net_margin": 0.4992,
+              "operating_income_usd": 78221098700.2,
+              "pe": 27.839513
+            }
+          },
+          "head_listing_id": 1418323,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6423
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.7006
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.561
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 139431486699.8
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+          "score": 1931805975589.6833,
+          "ticker": "2330.TW"
+        },
+        {
+          "also_known_as": [
+            "META01.BK",
+            "META06.BK",
+            "META23.BK",
+            "META80.BK",
+            "0QZI.LSE",
+            "FB2A.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 41660000000.0,
+              "ebitda_usd": 112282000000.0,
+              "free_cash_flow_usd": 40976000000.0,
+              "interest_coverage": 44.1583,
+              "market_cap_usd": 1385002696704.0,
+              "net_debt_usd": 96856000000.0,
+              "net_income_usd": 68098000000.0,
+              "net_margin": 0.2984,
+              "operating_income_usd": 86927000000.0,
+              "pe": 20.477213
+            }
+          },
+          "head_listing_id": 28230,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8175
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.8626
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3808
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 228247000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Meta Platforms Inc.",
+          "score": 1385002696704.0,
+          "ticker": "META.US"
+        },
+        {
+          "also_known_as": [
+            "MICRON01.BK",
+            "MICRON03.BK",
+            "MICRON19.BK",
+            "MICRON23.BK",
+            "MICRON80.BK",
+            "0R2T.LSE",
+            "MTE.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 24763000000.0,
+              "ebitda_usd": 68305000000.0,
+              "free_cash_flow_usd": 26172000000.0,
+              "interest_coverage": 257.8,
+              "market_cap_usd": 1029204672512.0,
+              "net_debt_usd": -18619000000.0,
+              "net_income_usd": 50469000000.0,
+              "net_margin": 0.5591,
+              "operating_income_usd": 59282000000.0,
+              "pe": 21.264919
+            }
+          },
+          "head_listing_id": 30067,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7257
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.2726
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.6567
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 90274000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Micron Technology Inc",
+          "score": 1029204672512.0,
+          "ticker": "MU.US"
+        },
+        {
+          "also_known_as": [
+            "SKHYV.US",
+            "SKHY.US",
+            "HXSCL.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 29270925600.0,
+              "ebitda_usd": 75551007000.0,
+              "free_cash_flow_usd": 28482686400.0,
+              "interest_coverage": 112.3663,
+              "market_cap_usd": 825845250575.59,
+              "net_debt_usd": 465858400.0,
+              "net_income_usd": 52599667400.0,
+              "net_margin": 0.5689,
+              "operating_income_usd": 54163268600.0,
+              "pe": 15.572195
+            }
+          },
+          "head_listing_id": 1414474,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6834
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.0062
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.5858
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 92458674700.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SK Hynix Inc",
+          "score": 825845250575.59,
+          "ticker": "000660.KO"
+        },
+        {
+          "also_known_as": [
+            "0QZ0.LSE",
+            "VISA06.BK",
+            "VISA80.BK",
+            "3V64.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 8817000000.0,
+              "ebitda_usd": 29074000000.0,
+              "free_cash_flow_usd": 21013000000.0,
+              "interest_coverage": 35.7371,
+              "market_cap_usd": 680071987200.0,
+              "net_debt_usd": 11499000000.0,
+              "net_income_usd": 22592000000.0,
+              "net_margin": 0.5078,
+              "operating_income_usd": 29189000000.0,
+              "pe": 31.0
+            }
+          },
+          "head_listing_id": 45629,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8018
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.3955
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.6561
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 44488000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Visa Inc. Class A",
+          "score": 680071987200.0,
+          "ticker": "V.US"
+        },
+        {
+          "also_known_as": [
+            "JNJ03.BK",
+            "JNJ.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 31428000000.0,
+              "ebitda_usd": 33959000000.0,
+              "free_cash_flow_usd": 22228000000.0,
+              "interest_coverage": 25.8972,
+              "market_cap_usd": 653347520512.0,
+              "net_debt_usd": 28614000000.0,
+              "net_income_usd": 21037000000.0,
+              "net_margin": 0.2148,
+              "operating_income_usd": 26256000000.0,
+              "pe": 31.451276
+            }
+          },
+          "head_listing_id": 24500,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6791
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.8426
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2681
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 97929000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Johnson & Johnson",
+          "score": 653347520512.0,
+          "ticker": "JNJ.US"
+        },
+        {
+          "also_known_as": [
+            "MA80.BK",
+            "M4I.XETRA",
+            "0R2Z.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 7695000000.0,
+              "ebitda_usd": 22116000000.0,
+              "free_cash_flow_usd": 15975000000.0,
+              "interest_coverage": 27.9693,
+              "market_cap_usd": 503101259776.0,
+              "net_debt_usd": 13352000000.0,
+              "net_income_usd": 16257000000.0,
+              "net_margin": 0.4634,
+              "operating_income_usd": 20992000000.0,
+              "pe": 31.590209
+            }
+          },
+          "head_listing_id": 27402,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7807
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.6037
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.5984
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 35083000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Mastercard Inc",
+          "score": 503101259776.0,
+          "ticker": "MA.US"
+        },
+        {
+          "also_known_as": [
+            "PLTR01.BK",
+            "PLTR03.BK",
+            "PLTR06.BK",
+            "PLTR23.BK",
+            "PTX.XETRA",
+            "0A7R.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 935941000.0,
+              "ebitda_usd": 2662630000.0,
+              "free_cash_flow_usd": 3358272000.0,
+              "interest_coverage": 407.49711815562,
+              "market_cap_usd": 412220620800.0,
+              "net_debt_usd": -1818647000.0,
+              "net_income_usd": 3016692000.0,
+              "net_margin": 0.49,
+              "operating_income_usd": 2634652000.0,
+              "pe": 146.615385
+            }
+          },
+          "head_listing_id": 34742,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.848
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.683
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.428
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6155941000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Palantir Technologies Inc.",
+          "score": 412220620800.0,
+          "ticker": "PLTR.US"
+        },
+        {
+          "also_known_as": [
+            "KLAC23.BK",
+            "KLAC01.BK",
+            "0JPO.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5255060000.0,
+              "ebitda_usd": 6284343000.0,
+              "free_cash_flow_usd": 3767134000.0,
+              "interest_coverage": 20.7086,
+              "market_cap_usd": 254502240256.0,
+              "net_debt_usd": 4501871000.0,
+              "net_income_usd": 4830771000.0,
+              "net_margin": 0.3557,
+              "operating_income_usd": 5660780000.0,
+              "pe": 53.221311
+            }
+          },
+          "head_listing_id": 25302,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.613
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.7164
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.4169
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 13579476000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "KLA Corporation",
+          "score": 254502240256.0,
+          "ticker": "KLAC.US"
+        },
+        {
+          "also_known_as": [
+            "MOUTAI80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2465946238.30155,
+              "ebitda_usd": 18228679823.8861,
+              "free_cash_flow_usd": 8744781088.7605,
+              "interest_coverage": 2995.661,
+              "market_cap_usd": 248974893239.50076,
+              "net_debt_usd": -7038919126.916,
+              "net_income_usd": 13099125358.2372,
+              "net_margin": 0.4832,
+              "operating_income_usd": 18106910980.0825,
+              "pe": 19.953728
+            }
+          },
+          "head_listing_id": 228697,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.909
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.3861
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.668
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 27107308793.3083
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Kweichow Moutai Co Ltd",
+          "score": 248974893239.50076,
+          "ticker": "600519.CG"
+        },
+        {
+          "also_known_as": [
+            "ANET23.BK",
+            "ANET80.BK",
+            "0HHR.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3899700000.0,
+              "ebitda_usd": 4639600000.0,
+              "free_cash_flow_usd": 5155300000.0,
+              "market_cap_usd": 243643383808.0,
+              "net_debt_usd": -627743000.0,
+              "net_income_usd": 4044600000.0,
+              "net_margin": 0.3837,
+              "operating_income_usd": 4546900000.0,
+              "pe": 63.860759
+            }
+          },
+          "head_listing_id": 2085,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.63
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.488694988164024
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.4314
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 10540800000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Arista Networks",
+          "score": 243643383808.0,
+          "ticker": "ANET.US"
+        },
+        {
+          "also_known_as": [
+            "0A2W.LSE",
+            "0NW4.LSE",
+            "SAP.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 11884591000.0,
+              "ebitda_usd": 14706967200.0,
+              "free_cash_flow_usd": 9971406000.0,
+              "interest_coverage": 20.7357,
+              "market_cap_usd": 243060136861.69598,
+              "net_debt_usd": -4568800.0,
+              "net_income_usd": 8904591200.0,
+              "net_margin": 0.2041,
+              "operating_income_usd": 11668715200.0,
+              "pe": 27.320359
+            }
+          },
+          "head_listing_id": 243596,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7276
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.0003
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2675
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 43624044600.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SAP SE",
+          "score": 243060136861.69598,
+          "ticker": "SAP.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0883.HK",
+            "80883.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 18512923000.0,
+              "ebitda_usd": 36789181000.0,
+              "free_cash_flow_usd": 13940641000.0,
+              "interest_coverage": 27.0662261831592,
+              "market_cap_usd": 231831491143.2704,
+              "net_debt_usd": -1269697000.0,
+              "net_income_usd": 17457726000.0,
+              "net_margin": 0.306569233087238,
+              "operating_income_usd": 24796486000.0,
+              "pe": 13.066148
+            }
+          },
+          "head_listing_id": 229031,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.674900808598262
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.0345127824400331
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.435442720104465
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 56945460000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "CNOOC Limited",
+          "score": 231831491143.2704,
+          "ticker": "600938.CG"
+        },
+        {
+          "also_known_as": [
+            "0HN3.LSE",
+            "BHP.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 14531000000.0,
+              "ebitda_usd": 25767000000.0,
+              "free_cash_flow_usd": 9294000000.0,
+              "interest_coverage": 10.7934898612593,
+              "market_cap_usd": 224074661789.696,
+              "net_debt_usd": 14555000000.0,
+              "net_income_usd": 9019000000.0,
+              "net_margin": 0.175939292263275,
+              "operating_income_usd": 19078000000.0,
+              "pe": 21.750493
+            }
+          },
+          "head_listing_id": 236563,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.716534665054036
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.49392633989211
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.372166517108189
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 51262000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "BHP Group Limited",
+          "score": 224074661789.696,
+          "ticker": "BHP.LSE"
+        },
+        {
+          "also_known_as": [
+            "NOVOB80.BK",
+            "0TDD.LSE",
+            "0QIU.LSE",
+            "NVO.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 9741000000.0,
+              "ebitda_usd": 26987994400.0,
+              "free_cash_flow_usd": 7302159200.0,
+              "interest_coverage": 26.9256,
+              "market_cap_usd": 198339314627.37918,
+              "net_debt_usd": 14614556000.0,
+              "net_income_usd": 17792490400.0,
+              "net_margin": 0.3535,
+              "operating_income_usd": 21712421600.0,
+              "pe": 11.26123
+            }
+          },
+          "head_listing_id": 243294,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8065
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.5415
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.4313
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 50337056800.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Novo Nordisk A/S",
+          "score": 198339314627.37918,
+          "ticker": "NOV.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0HV2.LSE",
+            "HERMES80.BK",
+            "HMI.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5430638100.0,
+              "ebitda_usd": 9110973200.0,
+              "free_cash_flow_usd": 4949011100.0,
+              "interest_coverage": 124.181818181818,
+              "market_cap_usd": 188604268937.216,
+              "net_debt_usd": -11451697200.0,
+              "net_income_usd": 5314342800.0,
+              "net_margin": 0.282732329229423,
+              "operating_income_usd": 7864616500.0,
+              "pe": 36.290698
+            }
+          },
+          "head_listing_id": 1753459,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.711080557465158
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.27552862300155
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.418411349290669
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 18796374700.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hermes International SCA",
+          "score": 188604268937.216,
+          "ticker": "RMS.PA"
+        },
+        {
+          "also_known_as": [
+            "ADVANT23.BK",
+            "ADVANT19.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2535768900.0,
+              "ebitda_usd": 3434041800.0,
+              "free_cash_flow_usd": 1884657600.0,
+              "interest_coverage": 188.625272331155,
+              "market_cap_usd": 157593676070.4327,
+              "net_debt_usd": -2014576200.0,
+              "net_income_usd": 2364723900.0,
+              "net_margin": 0.332579899168003,
+              "operating_income_usd": 3144456000.0,
+              "pe": 69.610793
+            }
+          },
+          "head_listing_id": 574376,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.643363960978549
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.586648712313286
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.442243113210055
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7110243000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advantest Corp.",
+          "score": 157593676070.4327,
+          "ticker": "6857.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1089000000.0,
+              "ebitda_usd": 9921000000.0,
+              "free_cash_flow_usd": 15834000000.0,
+              "interest_coverage": 2.2004,
+              "market_cap_usd": 154297532416.0,
+              "net_debt_usd": -7698000000.0,
+              "net_income_usd": 1126000000.0,
+              "net_margin": 0.1016,
+              "operating_income_usd": 9588000000.0,
+              "pe": 35.936508
+            }
+          },
+          "head_listing_id": 21624,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.9018
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.7759
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.865
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 11085000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Interactive Brokers Group Inc",
+          "score": 154297532416.0,
+          "ticker": "IBKR.US"
+        },
+        {
+          "also_known_as": [
+            "ISRG01.BK",
+            "ISRG06.BK",
+            "ISRG19.BK",
+            "IUI1.XETRA",
+            "0R29.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3676800000.0,
+              "ebitda_usd": 4245400000.0,
+              "free_cash_flow_usd": 3222600000.0,
+              "market_cap_usd": 140151209984.0,
+              "net_income_usd": 3138800000.0,
+              "net_margin": 0.2845,
+              "operating_income_usd": 3451200000.0,
+              "pe": 44.860092
+            }
+          },
+          "head_listing_id": 23002,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6668
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.905703086181196
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3128
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 11034400000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intuitive Surgical Inc",
+          "score": 140151209984.0,
+          "ticker": "ISRG.US"
+        },
+        {
+          "also_known_as": [
+            "0QZU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1762800000.0,
+              "ebitda_usd": 5266000000.0,
+              "free_cash_flow_usd": 3796100000.0,
+              "interest_coverage": 350.112781954887,
+              "market_cap_usd": 133875531776.0,
+              "net_debt_usd": -4165900000.0,
+              "net_income_usd": 4405200000.0,
+              "net_margin": 0.35,
+              "operating_income_usd": 4776600000.0,
+              "pe": 30.762376
+            }
+          },
+          "head_listing_id": 46555,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.86
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.7911
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3795
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 12587200000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vertex Pharmaceuticals Inc",
+          "score": 133875531776.0,
+          "ticker": "VRTX.US"
+        },
+        {
+          "also_known_as": [
+            "0IR9.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1490100000.0,
+              "ebitda_usd": 2799500000.0,
+              "free_cash_flow_usd": 3117000000.0,
+              "interest_coverage": 146.6889,
+              "market_cap_usd": 115934093312.0,
+              "net_debt_usd": -2438000000.0,
+              "net_income_usd": 2120700000.0,
+              "net_margin": 0.2817,
+              "operating_income_usd": 2442200000.0,
+              "pe": 55.070671
+            }
+          },
+          "head_listing_id": 17122,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.802
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.8709
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3244
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7527400000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fortinet Inc",
+          "score": 115934093312.0,
+          "ticker": "FTNT.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 229438300.0,
+              "ebitda_usd": 11788041300.0,
+              "free_cash_flow_usd": 258524000.0,
+              "interest_coverage": 1283.6019,
+              "market_cap_usd": 104721845479.01299,
+              "net_debt_usd": -767204900.0,
+              "net_income_usd": 10912354600.0,
+              "net_margin": 1.0066,
+              "operating_income_usd": 9771206900.0,
+              "pe": 9.647341
+            }
+          },
+          "head_listing_id": 1416319,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.9788
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.0651
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.9013
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 10841185600.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SK Square Co Ltd",
+          "score": 104721845479.01299,
+          "ticker": "402340.KO"
+        },
+        {
+          "also_known_as": [
+            "ADBE03.BK",
+            "ADBE06.BK",
+            "ADB.XETRA",
+            "0R2Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2670000000.0,
+              "ebitda_usd": 10131000000.0,
+              "free_cash_flow_usd": 10280000000.0,
+              "interest_coverage": 35.908,
+              "market_cap_usd": 104598159360.0,
+              "net_debt_usd": 2146000000.0,
+              "net_income_usd": 7229000000.0,
+              "net_margin": 0.2869,
+              "operating_income_usd": 9090000000.0,
+              "pe": 14.533181
+            }
+          },
+          "head_listing_id": 733,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.894
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.2118
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3607
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 25198000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Adobe Systems Incorporated",
+          "score": 104598159360.0,
+          "ticker": "ADBE.US"
+        },
+        {
+          "also_known_as": [
+            "APPL03.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 787817000.0,
+              "ebitda_usd": 5550334000.0,
+              "free_cash_flow_usd": 4499271000.0,
+              "interest_coverage": 26.4164,
+              "market_cap_usd": 103220781056.0,
+              "net_debt_usd": 461766000.0,
+              "net_income_usd": 4409965000.0,
+              "net_margin": 0.6458,
+              "operating_income_usd": 5288460000.0,
+              "pe": 23.980015
+            }
+          },
+          "head_listing_id": 2373,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8846
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.0832
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.7744
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6829124000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Applovin Corp",
+          "score": 103220781056.0,
+          "ticker": "APP.US"
+        },
+        {
+          "also_known_as": [
+            "CME03.BK",
+            "0HR2.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 935200000.0,
+              "ebitda_usd": 6101400000.0,
+              "free_cash_flow_usd": 4212700000.0,
+              "interest_coverage": 32.984,
+              "market_cap_usd": 97640153088.0,
+              "net_debt_usd": 1280000000.0,
+              "net_income_usd": 4287000000.0,
+              "net_margin": 0.633,
+              "operating_income_usd": 4409000000.0,
+              "pe": 22.72095
+            }
+          },
+          "head_listing_id": 7785,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8619
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.2098
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.651
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6772600000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "CME Group Inc",
+          "score": 97640153088.0,
+          "ticker": "CME.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4194000000.0,
+              "ebitda_usd": 6924000000.0,
+              "free_cash_flow_usd": 7715000000.0,
+              "interest_coverage": 24.849,
+              "market_cap_usd": 95850094592.0,
+              "net_debt_usd": 2219000000.0,
+              "net_income_usd": 4584000000.0,
+              "net_margin": 0.2191,
+              "operating_income_usd": 5749000000.0,
+              "pe": 21.3795
+            }
+          },
+          "head_listing_id": 22534,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7996
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.3205
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2747
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 20925000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intuit Inc",
+          "score": 95850094592.0,
+          "ticker": "INTU.US"
+        },
+        {
+          "also_known_as": [
+            "0R2J.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5388172000.0,
+              "ebitda_usd": 10485627000.0,
+              "free_cash_flow_usd": 4548557000.0,
+              "interest_coverage": 572.1533,
+              "market_cap_usd": 94659846144.0,
+              "net_debt_usd": -3143607000.0,
+              "net_income_usd": 5873933000.0,
+              "net_margin": 0.4044,
+              "operating_income_usd": 8475085000.0,
+              "pe": 16.162671
+            }
+          },
+          "head_listing_id": 924,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6291
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.2998
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.5834
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 14525909000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Agnico Eagle Mines Limited",
+          "score": 94659846144.0,
+          "ticker": "AEM.US"
+        },
+        {
+          "also_known_as": [
+            "0HS2.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 824772000.0,
+              "ebitda_usd": 2276611000.0,
+              "free_cash_flow_usd": 1671720000.0,
+              "interest_coverage": 15.5665,
+              "market_cap_usd": 87167385600.0,
+              "net_debt_usd": 1210916000.0,
+              "net_income_usd": 1377994000.0,
+              "net_margin": 0.2361,
+              "operating_income_usd": 1799310000.0,
+              "pe": 64.308151
+            }
+          },
+          "head_listing_id": 6689,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8587
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.5319
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3082
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 5837623000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cadence Design Systems Inc",
+          "score": 87167385600.0,
+          "ticker": "CDNS.US"
+        },
+        {
+          "also_known_as": [
+            "0R2M.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2352100000.0,
+              "ebitda_usd": 5750000000.0,
+              "free_cash_flow_usd": 3575200000.0,
+              "interest_coverage": 94.2491,
+              "market_cap_usd": 83418251264.0,
+              "net_debt_usd": 250800000.0,
+              "net_income_usd": 4328700000.0,
+              "net_margin": 0.2786,
+              "operating_income_usd": 4173800000.0,
+              "pe": 20.050483
+            }
+          },
+          "head_listing_id": 37244,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8486
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.0436
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2687
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 15534700000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Regeneron Pharmaceuticals Inc",
+          "score": 83418251264.0,
+          "ticker": "REGN.US"
+        },
+        {
+          "also_known_as": [
+            "0K6G.LSE",
+            "NETEASE80.BK",
+            "NTES.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5691106305.0,
+              "ebitda_usd": 5835929550.0,
+              "free_cash_flow_usd": 7317342205.0,
+              "market_cap_usd": 78386732662.78401,
+              "net_debt_usd": -5779663895.0,
+              "net_income_usd": 4949248605.0,
+              "net_margin": 0.2984,
+              "operating_income_usd": 5517328445.0,
+              "pe": 15.736074
+            }
+          },
+          "head_listing_id": 53988,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6569
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.9904
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3326
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 16586338735.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NetEase Inc",
+          "score": 78386732662.78401,
+          "ticker": "9999.HK"
+        },
+        {
+          "also_known_as": [
+            "0IDR.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 8725000000.0,
+              "ebitda_usd": 11935000000.0,
+              "free_cash_flow_usd": 3966000000.0,
+              "interest_coverage": 28.7165,
+              "market_cap_usd": 77997490176.0,
+              "net_debt_usd": 4457000000.0,
+              "net_income_usd": 5497000000.0,
+              "net_margin": 0.2339,
+              "operating_income_usd": 7648000000.0,
+              "pe": 11.373541
+            }
+          },
+          "head_listing_id": 12050,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6287
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.3734
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3255
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 23498000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "EOG Resources Inc",
+          "score": 77997490176.0,
+          "ticker": "EOG.US"
+        },
+        {
+          "also_known_as": [
+            "NONGFU80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2966507258.0,
+              "ebitda_usd": 3485918150.0,
+              "free_cash_flow_usd": 2051414079.0,
+              "interest_coverage": 313.674225324743,
+              "market_cap_usd": 60349522948.91521,
+              "net_debt_usd": -955937125.0,
+              "net_income_usd": 2269163182.0,
+              "net_margin": 0.301948531489503,
+              "operating_income_usd": 2903862104.0,
+              "pe": 25.668581
+            }
+          },
+          "head_listing_id": 53856,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.60525866217494
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.274228218754935
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.386405396009469
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7515066130.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Nongfu Spring Co Ltd",
+          "score": 60349522948.91521,
+          "ticker": "9633.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3062379000.0,
+              "ebitda_usd": 2311467000.0,
+              "free_cash_flow_usd": 1599841000.0,
+              "market_cap_usd": 57362059264.0,
+              "net_debt_usd": -2156278000.0,
+              "net_income_usd": 1877294000.0,
+              "net_margin": 0.2447,
+              "operating_income_usd": 2118130000.0,
+              "pe": 30.695562
+            }
+          },
+          "head_listing_id": 19306,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6008
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.9329
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2761
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7671437000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Garmin Ltd",
+          "score": 57362059264.0,
+          "ticker": "GRMN.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 856195200.0,
+              "ebitda_usd": 2443625100.0,
+              "free_cash_flow_usd": 1397749500.0,
+              "interest_coverage": 165.574585635359,
+              "market_cap_usd": 55329461360.8695,
+              "net_debt_usd": -3350661300.0,
+              "net_income_usd": 1594429200.0,
+              "net_margin": 0.254140206699041,
+              "operating_income_usd": 3472093800.0,
+              "pe": 35.344573
+            }
+          },
+          "head_listing_id": 572738,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.863528825800025
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.37118467967938
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.55342603861649
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6273817200.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "HOYA CORPORATION",
+          "score": 55329461360.8695,
+          "ticker": "7741.JP"
+        },
+        {
+          "also_known_as": [
+            "EWL.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1395200000.0,
+              "ebitda_usd": 1559000000.0,
+              "free_cash_flow_usd": 1089500000.0,
+              "interest_coverage": 63.3970588235294,
+              "market_cap_usd": 52440875008.0,
+              "net_debt_usd": -1742600000.0,
+              "net_income_usd": 1096200000.0,
+              "net_margin": 0.1739,
+              "operating_income_usd": 1741000000.0,
+              "pe": 52.796512
+            }
+          },
+          "head_listing_id": 12642,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7787
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.1178
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2762
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6303500000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Edwards Lifesciences Corp",
+          "score": 52440875008.0,
+          "ticker": "EW.US"
+        },
+        {
+          "also_known_as": [
+            "0HJF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 665000000.0,
+              "ebitda_usd": 2225000000.0,
+              "free_cash_flow_usd": 2694000000.0,
+              "interest_coverage": 25.2676056338028,
+              "market_cap_usd": 52108533760.0,
+              "net_debt_usd": 53000000.0,
+              "net_income_usd": 1463000000.0,
+              "net_margin": 0.1949,
+              "operating_income_usd": 2027000000.0,
+              "pe": 35.275912
+            }
+          },
+          "head_listing_id": 821,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.9114
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.0238
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.27
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7507000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Autodesk Inc",
+          "score": 52108533760.0,
+          "ticker": "ADSK.US"
+        },
+        {
+          "also_known_as": [
+            "0Q89.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1854000000.0,
+              "ebitda_usd": 3340000000.0,
+              "free_cash_flow_usd": 2232000000.0,
+              "interest_coverage": 13.011,
+              "market_cap_usd": 43708026880.0,
+              "net_debt_usd": 2364000000.0,
+              "net_income_usd": 1662000000.0,
+              "net_margin": 0.2122,
+              "operating_income_usd": 2170000000.0,
+              "pe": 26.674803
+            }
+          },
+          "head_listing_id": 44139,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.758025682182986
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.7078
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2771
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 7832000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Thomson Reuters Corporation Common Shares",
+          "score": 43708026880.0,
+          "ticker": "TRI.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1416071554.1274,
+              "ebitda_usd": 2428646308.3047,
+              "free_cash_flow_usd": 4101288178.45495,
+              "interest_coverage": 606.941,
+              "market_cap_usd": 41768612977.0496,
+              "net_debt_usd": -17953594833.1842,
+              "net_income_usd": 1827102818.7576,
+              "net_margin": 0.2723,
+              "operating_income_usd": 2049741320.771,
+              "pe": 22.349208
+            }
+          },
+          "head_listing_id": 230949,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.789
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -7.3924
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3054
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6710711400.09975
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wuliangye Yibin Co Ltd",
+          "score": 41768612977.0496,
+          "ticker": "000858.CS"
+        },
+        {
+          "also_known_as": [
+            "0KW4.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2127198000.0,
+              "ebitda_usd": 2179642000.0,
+              "free_cash_flow_usd": 1736263000.0,
+              "interest_coverage": 36.872385578017,
+              "market_cap_usd": 31732621312.0,
+              "net_debt_usd": -817344000.0,
+              "net_income_usd": 1519566000.0,
+              "net_margin": 0.2744,
+              "operating_income_usd": 1916323000.0,
+              "pe": 21.091083
+            }
+          },
+          "head_listing_id": 37889,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6159
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.375
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.346
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 5537789000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ResMed Inc",
+          "score": 31732621312.0,
+          "ticker": "RMD.US"
+        },
+        {
+          "also_known_as": [
+            "TRIPCOM23.BK",
+            "TRIPCOM80.BK",
+            "0I50.LSE",
+            "TCOM.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1848315000.0,
+              "ebitda_usd": 5660945000.0,
+              "free_cash_flow_usd": 1942226000.0,
+              "interest_coverage": 57.5826,
+              "market_cap_usd": 28094601474.867203,
+              "net_debt_usd": -3734185000.0,
+              "net_income_usd": 4761042000.0,
+              "net_margin": 0.533480747969043,
+              "operating_income_usd": 2536920000.0,
+              "pe": 6.648533
+            }
+          },
+          "head_listing_id": 53965,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.8032
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.6596
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.2701
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 9394115000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Trip.com Group Ltd",
+          "score": 28094601474.867203,
+          "ticker": "9961.HK"
+        },
+        {
+          "also_known_as": [
+            "0J9P.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 429600000.0,
+              "ebitda_usd": 2067971000.0,
+              "free_cash_flow_usd": 1890466000.0,
+              "interest_coverage": 847.1776,
+              "market_cap_usd": 25027090432.0,
+              "net_debt_usd": -3944108000.0,
+              "net_income_usd": 1612383000.0,
+              "net_margin": 0.2771,
+              "operating_income_usd": 1839821000.0,
+              "pe": 15.728662
+            }
+          },
+          "head_listing_id": 22402,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.9262
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -1.9072
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3161
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 5819530000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Incyte Corporation",
+          "score": 25027090432.0,
+          "ticker": "INCY.US"
+        },
+        {
+          "also_known_as": [
+            "NHNCF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "ebitda_usd": 1795721663.974,
+              "free_cash_flow_usd": 995637316.758,
+              "interest_coverage": 23.2608721233505,
+              "market_cap_usd": 22721167412.4288,
+              "net_debt_usd": -1050792737.925,
+              "net_income_usd": 1269589738.277,
+              "net_margin": 0.1452,
+              "operating_income_usd": 3246687993.955,
+              "pe": 18.963653
+            }
+          },
+          "head_listing_id": 1415073,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 1.0
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.5852
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3714
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 8742499478.972
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Naver Corporation",
+          "score": 22721167412.4288,
+          "ticker": "035420.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1622121072.107,
+              "ebitda_usd": 2891452880.0366,
+              "free_cash_flow_usd": 1952584589.71875,
+              "interest_coverage": 1782.2713,
+              "market_cap_usd": 21605547787.8784,
+              "net_debt_usd": -1811009604.14405,
+              "net_income_usd": 2135771003.8144,
+              "net_margin": 0.3297,
+              "operating_income_usd": 2856696247.4689,
+              "pe": 13.393641
+            }
+          },
+          "head_listing_id": 228938,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.7496
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": -0.6263
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.4409
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6478750619.78385
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shanxi Xinghuacun Fen Wine Factory Co Ltd",
+          "score": 21605547787.8784,
+          "ticker": "600809.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3211796040.0,
+              "ebitda_usd": 6936971160.0,
+              "free_cash_flow_usd": 890060520.0,
+              "interest_coverage": 10.9225,
+              "market_cap_usd": 15773545175.4496,
+              "net_debt_usd": 1851744870.0,
+              "net_income_usd": 2101485990.0,
+              "net_margin": 0.2232,
+              "operating_income_usd": 3760170420.0,
+              "pe": 8.54848
+            }
+          },
+          "head_listing_id": 49922,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "level",
+                "value": 0.6588
+              },
+              "net_debt_ebitda": {
+                "kind": "level",
+                "value": 0.2669
+              },
+              "operating_margin": {
+                "kind": "level",
+                "value": 0.3995
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 9413342430.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PTT Exploration and Production Public Company Limited",
+          "score": 15773545175.4496,
+          "ticker": "PTTEP.BK"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 47,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 47 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Global screen intersecting ALL FOUR conditions — revenue > $5B (USD), gross margin > 60%, operating margin > 25%, AND net_debt/EBITDA < 1.0x — returned 47 companies out of a 24,045 universe. Top matches include NVIDIA, Alphabet, Microsoft, TSMC, Meta, Micron, SK Hynix and Visa. Each row carries per-metric evidence in 'matched.fundamental' plus context (e.g. NVIDIA: revenue $253B, net_debt −$0.9B = net CASH, so net_debt/EBITDA is well under 1x). Revenue is normalized to USD as an absolute line item; net_debt is debt-minus-cash; no country restriction. These are large, high-margin, lightly-levered businesses."
+}

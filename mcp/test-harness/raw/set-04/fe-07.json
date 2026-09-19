@@ -1,0 +1,3771 @@
+{
+  "id": "fe-07",
+  "question": "Show me companies with expanding margins: gross margin, operating margin, and net margin all higher today than they were three years ago. I care about the trend, not the absolute level.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "gross_margin",
+            "pattern": "consecutive_growth",
+            "N": 3
+          },
+          {
+            "concept": "operating_margin",
+            "pattern": "consecutive_growth",
+            "N": 3
+          },
+          {
+            "concept": "net_margin",
+            "pattern": "consecutive_growth",
+            "N": 3
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NFLX06.BK",
+            "NFLX80.BK",
+            "0QYI.LSE",
+            "NFC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 24612074000.0,
+              "effective_tax_rate": 0.1724,
+              "market_cap_usd": 316542681088.0,
+              "net_income_usd": 13649642000.0,
+              "operating_income_usd": 14354517000.0,
+              "pe": 24.455975,
+              "revenue_usd": 48370764000.0
+            }
+          },
+          "head_listing_id": 30925,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0528,
+                  0.1088,
+                  0.0551
+                ],
+                "value": 0.0528,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0877,
+                  0.3928,
+                  0.1288
+                ],
+                "value": 0.0877,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1041,
+                  0.2953,
+                  0.1571
+                ],
+                "value": 0.1041,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Netflix Inc",
+          "score": 316542681088.0,
+          "ticker": "NFLX.US"
+        },
+        {
+          "also_known_as": [
+            "0M2B.LSE",
+            "LIN.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 18310000000.0,
+              "effective_tax_rate": 0.2231,
+              "market_cap_usd": 220673507328.0,
+              "net_income_usd": 7244000000.0,
+              "operating_income_usd": 9607000000.0,
+              "pe": 30.884194,
+              "revenue_usd": 35449000000.0
+            }
+          },
+          "head_listing_id": 26458,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.016,
+                  0.0278,
+                  0.1213
+                ],
+                "value": 0.016,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0206,
+                  0.0541,
+                  0.5181
+                ],
+                "value": 0.0206,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0457,
+                  0.0555,
+                  0.2743
+                ],
+                "value": 0.0457,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Linde plc Ordinary Shares",
+          "score": 220673507328.0,
+          "ticker": "LIN.US"
+        },
+        {
+          "also_known_as": [
+            "0QWI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 17302620800.0,
+              "effective_tax_rate": 0.2238,
+              "market_cap_usd": 203408143210.90558,
+              "net_income_usd": 7033881300.0,
+              "operating_income_usd": 9031330000.0,
+              "pe": 28.279623,
+              "revenue_usd": 43304640900.0
+            }
+          },
+          "head_listing_id": 242837,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0071,
+                  0.0014,
+                  0.0137
+                ],
+                "value": 0.0014,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0277,
+                  0.014,
+                  0.1806
+                ],
+                "value": 0.014,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0186,
+                  0.0328,
+                  0.0624
+                ],
+                "value": 0.0186,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Industria de Diseno Textil SA",
+          "score": 203408143210.90558,
+          "ticker": "IXD1.XETRA"
+        },
+        {
+          "also_known_as": [
+            "ZJINNO80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3891461766.4431,
+              "effective_tax_rate": 0.1518,
+              "market_cap_usd": 182256589524.17282,
+              "net_income_usd": 1942266122.4156,
+              "operating_income_usd": 2538691332.05965,
+              "pe": 81.297929,
+              "revenue_usd": 6890488118.1095
+            }
+          },
+          "head_listing_id": 5825309,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2438,
+                  0.0246,
+                  0.1256
+                ],
+                "value": 0.0246,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3032,
+                  0.0685,
+                  0.5981
+                ],
+                "value": 0.0685,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.4136,
+                  0.1912,
+                  0.3464
+                ],
+                "value": 0.1912,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ZHONGJI INNOLIGHT CO., LTD. - H SHARES",
+          "score": 182256589524.17282,
+          "ticker": "3308.HK"
+        },
+        {
+          "also_known_as": [
+            "0A6W.LSE",
+            "0NX2.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 21303000000.0,
+              "effective_tax_rate": 0.2416,
+              "market_cap_usd": 179546190461.33762,
+              "net_income_usd": 4979000000.0,
+              "operating_income_usd": 6020000000.0,
+              "pe": 36.962065,
+              "revenue_usd": 35556000000.0
+            }
+          },
+          "head_listing_id": 1753753,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0464,
+                  0.1279,
+                  0.0549
+                ],
+                "value": 0.0464,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1072,
+                  0.1076,
+                  0.3817
+                ],
+                "value": 0.1072,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.11,
+                  0.1503,
+                  0.1657
+                ],
+                "value": 0.11,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ABB Ltd",
+          "score": 179546190461.33762,
+          "ticker": "ABBN.SW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3891461766.4431,
+              "effective_tax_rate": 0.1518,
+              "market_cap_usd": 171407332619.05917,
+              "net_income_usd": 1942266122.4156,
+              "operating_income_usd": 2538691332.05965,
+              "pe": 74.592399,
+              "revenue_usd": 6890488118.1095
+            }
+          },
+          "head_listing_id": 232407,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2438,
+                  0.0246,
+                  0.1256
+                ],
+                "value": 0.0246,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3032,
+                  0.0685,
+                  0.5981
+                ],
+                "value": 0.0685,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.4136,
+                  0.1912,
+                  0.3464
+                ],
+                "value": 0.1912,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shandong Zhongji Electrical Equipment Co Ltd",
+          "score": 171407332619.05917,
+          "ticker": "300308.CS"
+        },
+        {
+          "also_known_as": [
+            "0LCE.LSE",
+            "TJX.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 42276000000.0,
+              "effective_tax_rate": 0.2455,
+              "market_cap_usd": 166644662272.0,
+              "net_income_usd": 5790000000.0,
+              "operating_income_usd": 7548000000.0,
+              "pe": 29.348249,
+              "revenue_usd": 61584000000.0
+            }
+          },
+          "head_listing_id": 43467,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0118,
+                  0.02,
+                  0.0866
+                ],
+                "value": 0.0118,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0545,
+                  0.0461,
+                  0.1786
+                ],
+                "value": 0.0461,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0635,
+                  0.0458,
+                  0.0987
+                ],
+                "value": 0.0458,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The TJX Companies Inc",
+          "score": 166644662272.0,
+          "ticker": "TJX.US"
+        },
+        {
+          "also_known_as": [
+            "CRM01.BK",
+            "CRM06.BK",
+            "CRM80.BK",
+            "FOO.XETRA",
+            "0QYJ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 12145000000.0,
+              "effective_tax_rate": 0.2186,
+              "market_cap_usd": 161727938560.0,
+              "net_income_usd": 8023000000.0,
+              "operating_income_usd": 9366000000.0,
+              "pe": 22.128621,
+              "revenue_usd": 42829000000.0
+            }
+          },
+          "head_listing_id": 8662,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0063,
+                  0.0224,
+                  0.0295
+                ],
+                "value": 0.0063,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0985,
+                  0.3774,
+                  10.0
+                ],
+                "value": 0.0985,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0613,
+                  0.1755,
+                  1.9022
+                ],
+                "value": 0.0613,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Salesforce.com Inc",
+          "score": 161727938560.0,
+          "ticker": "CRM.US"
+        },
+        {
+          "also_known_as": [
+            "HITACHI24.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 46665687600.0,
+              "effective_tax_rate": 0.331219086503984,
+              "market_cap_usd": 157091364699.6078,
+              "net_income_usd": 5054918400.0,
+              "operating_income_usd": 7555432500.0,
+              "pe": 31.2178,
+              "revenue_usd": 66696720300.0
+            }
+          },
+          "head_listing_id": 571502,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0416,
+                  0.0863,
+                  0.0741
+                ],
+                "value": 0.0416,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2051,
+                  0.038,
+                  0.0151
+                ],
+                "value": 0.0151,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.141,
+                  0.278,
+                  0.1294
+                ],
+                "value": 0.1294,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hitachi, Ltd.",
+          "score": 157091364699.6078,
+          "ticker": "6501.JP"
+        },
+        {
+          "also_known_as": [
+            "0HIT.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 21667990880.0,
+              "effective_tax_rate": 0.2071,
+              "market_cap_usd": 155927798924.9024,
+              "net_income_usd": 7849541060.0,
+              "operating_income_usd": 11252840180.0,
+              "pe": 20.517241,
+              "revenue_usd": 48200154680.0
+            }
+          },
+          "head_listing_id": 242676,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0106,
+                  0.1431,
+                  0.2615
+                ],
+                "value": 0.0106,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0927,
+                  0.3398,
+                  0.2114
+                ],
+                "value": 0.0927,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0764,
+                  0.1509,
+                  0.2468
+                ],
+                "value": 0.0764,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Iberdrola S.A.",
+          "score": 155927798924.9024,
+          "ticker": "IBE1.XETRA"
+        },
+        {
+          "also_known_as": [
+            "AIL.XETRA",
+            "0NWF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 11337264640.0,
+              "effective_tax_rate": 0.252022529441884,
+              "market_cap_usd": 122677972434.12479,
+              "net_income_usd": 4132477130.0,
+              "operating_income_usd": 6148732210.0,
+              "pe": 30.181249,
+              "revenue_usd": 31646652940.0
+            }
+          },
+          "head_listing_id": 1752483,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0186,
+                  0.0569,
+                  0.1069
+                ],
+                "value": 0.0186,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0687,
+                  0.096,
+                  0.2093
+                ],
+                "value": 0.0687,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0194,
+                  0.0381,
+                  0.1305
+                ],
+                "value": 0.0194,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Air Liquide SA",
+          "score": 122677972434.12479,
+          "ticker": "AI.PA"
+        },
+        {
+          "also_known_as": [
+            "0TCU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5832000000.0,
+              "effective_tax_rate": 0.1801,
+              "market_cap_usd": 116709228544.0,
+              "net_income_usd": 1871000000.0,
+              "operating_income_usd": 2490000000.0,
+              "pe": 63.071121,
+              "revenue_usd": 9117000000.0
+            }
+          },
+          "head_listing_id": 21373,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0987,
+                  0.106,
+                  0.0207
+                ],
+                "value": 0.0207,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1749,
+                  0.3498,
+                  0.3913
+                ],
+                "value": 0.1749,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1595,
+                  0.2059,
+                  0.072
+                ],
+                "value": 0.072,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Howmet Aerospace Inc",
+          "score": 116709228544.0,
+          "ticker": "HWM.US"
+        },
+        {
+          "also_known_as": [
+            "0HJI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 11760300000.0,
+              "effective_tax_rate": 0.2298,
+              "market_cap_usd": 106986831872.0,
+              "net_income_usd": 4413400000.0,
+              "operating_income_usd": 5778900000.0,
+              "pe": 24.319927,
+              "revenue_usd": 21947500000.0
+            }
+          },
+          "head_listing_id": 805,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0085,
+                  0.013,
+                  0.0156
+                ],
+                "value": 0.0085,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0136,
+                  0.0154,
+                  0.0317
+                ],
+                "value": 0.0136,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0004,
+                  0.0217,
+                  0.0296
+                ],
+                "value": 0.0004,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Automatic Data Processing Inc",
+          "score": 106986831872.0,
+          "ticker": "ADP.US"
+        },
+        {
+          "also_known_as": [
+            "CYPC.LSE",
+            "CYPC80.BK",
+            "CYPC.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4716122718.338,
+              "effective_tax_rate": 0.1667,
+              "market_cap_usd": 102037262820.96638,
+              "net_income_usd": 3788457637.75315,
+              "operating_income_usd": 5372355527.55625,
+              "pe": 19.068285,
+              "revenue_usd": 10919922359.3315
+            }
+          },
+          "head_listing_id": 229011,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.043,
+                  0.0227,
+                  0.0121
+                ],
+                "value": 0.0121,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0403,
+                  0.1033,
+                  0.0119
+                ],
+                "value": 0.0119,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0121,
+                  0.0172,
+                  0.0073
+                ],
+                "value": 0.0073,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China Yangtze Power Co Ltd",
+          "score": 102037262820.96638,
+          "ticker": "600900.CG"
+        },
+        {
+          "also_known_as": [
+            "0Y2S.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 14350000000.0,
+              "effective_tax_rate": 0.1899,
+              "market_cap_usd": 101952143360.0,
+              "net_income_usd": 2949000000.0,
+              "operating_income_usd": 3984700000.0,
+              "pe": 35.077214,
+              "revenue_usd": 22209900000.0
+            }
+          },
+          "head_listing_id": 44614,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0132,
+                  0.0773,
+                  0.067
+                ],
+                "value": 0.0132,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.058,
+                  0.1301,
+                  0.0428
+                ],
+                "value": 0.0428,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.055,
+                  0.0776,
+                  0.082
+                ],
+                "value": 0.055,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Trane Technologies plc",
+          "score": 101952143360.0,
+          "ticker": "TT.US"
+        },
+        {
+          "also_known_as": [
+            "0ID1.LSE",
+            "DUKB.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 16463000000.0,
+              "effective_tax_rate": 0.1301,
+              "market_cap_usd": 96675274752.0,
+              "net_income_usd": 5139000000.0,
+              "operating_income_usd": 8581000000.0,
+              "pe": 18.555556,
+              "revenue_usd": 33166000000.0
+            }
+          },
+          "head_listing_id": 10868,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0224,
+                  0.0575,
+                  0.0494
+                ],
+                "value": 0.0224,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0342,
+                  0.5235,
+                  0.1038
+                ],
+                "value": 0.0342,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0176,
+                  0.07,
+                  0.0945
+                ],
+                "value": 0.0176,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Duke Energy Corporation",
+          "score": 96675274752.0,
+          "ticker": "DUK.US"
+        },
+        {
+          "also_known_as": [
+            "0K36.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2042000000.0,
+              "effective_tax_rate": 0.2217,
+              "market_cap_usd": 84129595392.0,
+              "net_income_usd": 2795000000.0,
+              "operating_income_usd": 3762000000.0,
+              "pe": 30.824239,
+              "revenue_usd": 8160000000.0
+            }
+          },
+          "head_listing_id": 27870,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0259,
+                  0.0151,
+                  0.0139
+                ],
+                "value": 0.0139,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0975,
+                  0.0689,
+                  0.0808
+                ],
+                "value": 0.0689,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0681,
+                  0.1173,
+                  0.0293
+                ],
+                "value": 0.0293,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Moodys Corporation",
+          "score": 84129595392.0,
+          "ticker": "MCO.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 25233068700.0,
+              "effective_tax_rate": 0.175462907521142,
+              "market_cap_usd": 79831047301.8282,
+              "net_income_usd": 2568875400.0,
+              "operating_income_usd": 2728498500.0,
+              "pe": 30.411981,
+              "revenue_usd": 37136906100.0
+            }
+          },
+          "head_listing_id": 572022,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0457,
+                  0.0425,
+                  0.0455
+                ],
+                "value": 0.0425,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1789,
+                  0.083,
+                  0.2664
+                ],
+                "value": 0.083,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0352,
+                  0.136,
+                  0.1927
+                ],
+                "value": 0.0352,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Mitsubishi Electric Corp.",
+          "score": 79831047301.8282,
+          "ticker": "6503.JP"
+        },
+        {
+          "also_known_as": [
+            "0HYJ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5556968000.0,
+              "effective_tax_rate": 0.2017,
+              "market_cap_usd": 79813820416.0,
+              "net_income_usd": 1999968000.0,
+              "operating_income_usd": 2621648000.0,
+              "pe": 40.289206,
+              "revenue_usd": 11264761000.0
+            }
+          },
+          "head_listing_id": 8986,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0126,
+                  0.0248,
+                  0.0315
+                ],
+                "value": 0.0126,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0125,
+                  0.0702,
+                  0.0713
+                ],
+                "value": 0.0125,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0197,
+                  0.0584,
+                  0.0543
+                ],
+                "value": 0.0197,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cintas Corporation",
+          "score": 79813820416.0,
+          "ticker": "CTAS.US"
+        },
+        {
+          "also_known_as": [
+            "2359.HK",
+            "WUXIAT80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3767828556.78634,
+              "effective_tax_rate": 0.1719,
+              "market_cap_usd": 73949122776.2688,
+              "net_income_usd": 3396709888.90807,
+              "operating_income_usd": 3247680467.38238,
+              "pe": 22.653117,
+              "revenue_usd": 7759373986.41816
+            }
+          },
+          "head_listing_id": 229507,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1485,
+                  0.0073,
+                  0.104
+                ],
+                "value": 0.0073,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.7496,
+                  0.0113,
+                  0.0629
+                ],
+                "value": 0.0113,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2643,
+                  0.0144,
+                  0.1776
+                ],
+                "value": 0.0144,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "WuXi AppTec Co Ltd",
+          "score": 73949122776.2688,
+          "ticker": "603259.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2243560269.6,
+              "effective_tax_rate": 0.2353,
+              "market_cap_usd": 69143232223.6416,
+              "net_income_usd": 499937318.4,
+              "operating_income_usd": 662977692.0,
+              "pe": 99.908352,
+              "revenue_usd": 3188084546.4
+            }
+          },
+          "head_listing_id": 1418365,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0688,
+                  0.0171,
+                  0.0928
+                ],
+                "value": 0.0171,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0444,
+                  0.1196,
+                  0.013
+                ],
+                "value": 0.013,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0724,
+                  0.063,
+                  0.105
+                ],
+                "value": 0.063,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Elite Material Co Ltd",
+          "score": 69143232223.6416,
+          "ticker": "2383.TW"
+        },
+        {
+          "also_known_as": [
+            "0REK.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4046000000.0,
+              "effective_tax_rate": 0.2221,
+              "market_cap_usd": 69009735680.0,
+              "net_income_usd": 2129000000.0,
+              "operating_income_usd": 4650000000.0,
+              "pe": 37.421292,
+              "revenue_usd": 10007000000.0
+            }
+          },
+          "head_listing_id": 42764,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0221,
+                  0.0086,
+                  0.0221
+                ],
+                "value": 0.0086,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.088,
+                  0.0954,
+                  0.2357
+                ],
+                "value": 0.088,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0531,
+                  0.0149,
+                  0.088
+                ],
+                "value": 0.0149,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Transdigm Group Incorporated",
+          "score": 69009735680.0,
+          "ticker": "TDG.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 8346798000.0,
+              "effective_tax_rate": 0.2193,
+              "market_cap_usd": 61205749760.0,
+              "net_income_usd": 1434401000.0,
+              "operating_income_usd": 1847239000.0,
+              "pe": 46.300273,
+              "revenue_usd": 11228024000.0
+            }
+          },
+          "head_listing_id": 14954,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1485,
+                  0.1046,
+                  0.062
+                ],
+                "value": 0.062,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.5114,
+                  0.1965,
+                  0.0455
+                ],
+                "value": 0.0455,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3578,
+                  0.3292,
+                  0.312
+                ],
+                "value": 0.312,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Comfort Systems USA Inc",
+          "score": 61205749760.0,
+          "ticker": "FIX.US"
+        },
+        {
+          "also_known_as": [
+            "RELX.US",
+            "REN.AS",
+            "RDEB.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4356790800.0,
+              "effective_tax_rate": 0.244363636363636,
+              "market_cap_usd": 58370567470.284805,
+              "net_income_usd": 2782794000.0,
+              "operating_income_usd": 4019890800.0,
+              "pe": 20.352564,
+              "revenue_usd": 12923484000.0
+            }
+          },
+          "head_listing_id": 239243,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0195,
+                  0.002,
+                  0.0076
+                ],
+                "value": 0.002,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0502,
+                  0.0545,
+                  0.0178
+                ],
+                "value": 0.0178,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0415,
+                  0.0382,
+                  0.0679
+                ],
+                "value": 0.0382,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Relx PLC",
+          "score": 58370567470.284805,
+          "ticker": "REL.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 7790000000.0,
+              "effective_tax_rate": 0.2507,
+              "market_cap_usd": 49781403648.0,
+              "net_income_usd": 1269000000.0,
+              "operating_income_usd": 1964000000.0,
+              "pe": 39.666218,
+              "revenue_usd": 11980000000.0
+            }
+          },
+          "head_listing_id": 47108,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0515,
+                  0.0654,
+                  0.0013
+                ],
+                "value": 0.0013,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0305,
+                  0.2078,
+                  0.1123
+                ],
+                "value": 0.0305,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0368,
+                  0.1843,
+                  0.0819
+                ],
+                "value": 0.0368,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Westinghouse Air Brake Technologies Corp",
+          "score": 49781403648.0,
+          "ticker": "WAB.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 25679682000.0,
+              "effective_tax_rate": 0.205901508238,
+              "market_cap_usd": 48193414857.0945,
+              "net_income_usd": 2327900400.0,
+              "operating_income_usd": 2634489900.0,
+              "pe": 20.427202,
+              "revenue_usd": 32194077300.0
+            }
+          },
+          "head_listing_id": 573630,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0755,
+                  0.0792,
+                  0.0418
+                ],
+                "value": 0.0418,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.7464,
+                  0.2176,
+                  0.21
+                ],
+                "value": 0.21,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1942,
+                  0.3301,
+                  0.1625
+                ],
+                "value": 0.1625,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sumitomo Electric Industries, Ltd.",
+          "score": 48193414857.0945,
+          "ticker": "5802.JP"
+        },
+        {
+          "also_known_as": [
+            "TYHOY.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 61562454200.0,
+              "effective_tax_rate": 0.276827507846479,
+              "market_cap_usd": 43555184417.9466,
+              "net_income_usd": 2428790200.0,
+              "operating_income_usd": 3349812400.0,
+              "pe": 21.008691,
+              "revenue_usd": 69073985000.0
+            }
+          },
+          "head_listing_id": 572755,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0523,
+                  0.0498,
+                  0.0402
+                ],
+                "value": 0.0402,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0831,
+                  0.1246,
+                  0.0433
+                ],
+                "value": 0.0433,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1023,
+                  0.0732,
+                  0.0963
+                ],
+                "value": 0.0732,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Toyota Tsusho Corp.",
+          "score": 43555184417.9466,
+          "ticker": "8015.JP"
+        },
+        {
+          "also_known_as": [
+            "028260.KQ"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 23566914014.252,
+              "effective_tax_rate": 0.0787,
+              "market_cap_usd": 42266963581.33759,
+              "net_income_usd": 1785398381.522,
+              "operating_income_usd": 2308179819.89,
+              "pe": 23.675093,
+              "revenue_usd": 29029898262.442
+            }
+          },
+          "head_listing_id": 1415034,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1179,
+                  0.0772,
+                  0.1201
+                ],
+                "value": 0.0772,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1302,
+                  0.0019,
+                  0.116
+                ],
+                "value": 0.0019,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1108,
+                  0.064,
+                  0.1605
+                ],
+                "value": 0.064,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Samsung C&T Corp",
+          "score": 42266963581.33759,
+          "ticker": "028260.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 15129053100.0,
+              "effective_tax_rate": 0.313558108871727,
+              "market_cap_usd": 39778393837.2786,
+              "net_income_usd": 1702436400.0,
+              "operating_income_usd": 2267451900.0,
+              "pe": 22.912047,
+              "revenue_usd": 22571217900.0
+            }
+          },
+          "head_listing_id": 573473,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0642,
+                  0.0709,
+                  0.0003
+                ],
+                "value": 0.0003,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.4727,
+                  0.1907,
+                  0.2428
+                ],
+                "value": 0.1907,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3418,
+                  0.3845,
+                  0.0525
+                ],
+                "value": 0.0525,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NEC Corporation",
+          "score": 39778393837.2786,
+          "ticker": "6701.JP"
+        },
+        {
+          "also_known_as": [
+            "0QR3.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 15548000000.0,
+              "effective_tax_rate": -0.1471,
+              "market_cap_usd": 39246180352.0,
+              "net_income_usd": 3166000000.0,
+              "operating_income_usd": 5167000000.0,
+              "pe": 12.820144,
+              "revenue_usd": 25837000000.0
+            }
+          },
+          "head_listing_id": 33475,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0555,
+                  0.1026,
+                  0.051
+                ],
+                "value": 0.051,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0534,
+                  0.1136,
+                  0.1039
+                ],
+                "value": 0.0534,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0429,
+                  0.6652,
+                  0.1703
+                ],
+                "value": 0.0429,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PG&E Corp",
+          "score": 39246180352.0,
+          "ticker": "PCG.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 10844920800.0,
+              "effective_tax_rate": 0.280488421661067,
+              "market_cap_usd": 37528330440.2328,
+              "net_income_usd": 1232676900.0,
+              "operating_income_usd": 1716208200.0,
+              "pe": 30.484607,
+              "revenue_usd": 15780366000.0
+            }
+          },
+          "head_listing_id": 574685,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0022,
+                  0.089,
+                  0.0694
+                ],
+                "value": 0.0022,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0303,
+                  0.2782,
+                  0.1317
+                ],
+                "value": 0.0303,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0698,
+                  0.2372,
+                  0.062
+                ],
+                "value": 0.062,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "TDK Corporation",
+          "score": 37528330440.2328,
+          "ticker": "6762.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3767116485.6,
+              "effective_tax_rate": 0.2775,
+              "market_cap_usd": 37289820435.251205,
+              "net_income_usd": 745317081.6,
+              "operating_income_usd": 1104870592.8,
+              "pe": 52.508751,
+              "revenue_usd": 5158743938.4
+            }
+          },
+          "head_listing_id": 1418867,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0978,
+                  0.1233,
+                  0.0805
+                ],
+                "value": 0.0805,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2063,
+                  0.2712,
+                  0.2059
+                ],
+                "value": 0.2059,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3107,
+                  0.2022,
+                  0.1159
+                ],
+                "value": 0.1159,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Asia Vital Components Co Ltd",
+          "score": 37289820435.251205,
+          "ticker": "3017.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 8194498354.7853,
+              "effective_tax_rate": 0.1496,
+              "market_cap_usd": 36292254357.9136,
+              "net_income_usd": 1682856058.9199,
+              "operating_income_usd": 2214922598.90205,
+              "pe": 20.518135,
+              "revenue_usd": 11872051600.9259
+            }
+          },
+          "head_listing_id": 232376,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0631,
+                  0.1015,
+                  0.1071
+                ],
+                "value": 0.0631,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0642,
+                  0.0849,
+                  0.4636
+                ],
+                "value": 0.0642,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0247,
+                  0.0502,
+                  0.6634
+                ],
+                "value": 0.0247,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sungrow Power Supply Co Ltd",
+          "score": 36292254357.9136,
+          "ticker": "300274.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1885632893.68,
+              "effective_tax_rate": 0.1242,
+              "market_cap_usd": 35270497065.3696,
+              "net_income_usd": 584284835.695,
+              "operating_income_usd": 706432285.42,
+              "pe": 56.486792,
+              "revenue_usd": 2920424503.235
+            }
+          },
+          "head_listing_id": 231594,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0272,
+                  0.1138,
+                  0.0241
+                ],
+                "value": 0.0241,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0407,
+                  0.146,
+                  0.0361
+                ],
+                "value": 0.0361,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0452,
+                  0.1661,
+                  0.021
+                ],
+                "value": 0.021,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "WUS Printed Circuit Kunshan Co Ltd",
+          "score": 35270497065.3696,
+          "ticker": "002463.CS"
+        },
+        {
+          "also_known_as": [
+            "0LRK.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5883500000.0,
+              "effective_tax_rate": 0.2168,
+              "market_cap_usd": 35200061440.0,
+              "net_income_usd": 1115800000.0,
+              "operating_income_usd": 1610800000.0,
+              "pe": 32.072019,
+              "revenue_usd": 8115800000.0
+            }
+          },
+          "head_listing_id": 46276,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0156,
+                  0.0767,
+                  0.1761
+                ],
+                "value": 0.0156,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1033,
+                  0.025,
+                  0.5235
+                ],
+                "value": 0.025,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0467,
+                  0.0643,
+                  0.285
+                ],
+                "value": 0.0467,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vulcan Materials Company",
+          "score": 35200061440.0,
+          "ticker": "VMC.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4021135377.93,
+              "effective_tax_rate": 0.1696,
+              "market_cap_usd": 34019013296.128002,
+              "net_income_usd": 1574250771.48,
+              "operating_income_usd": 2078867947.23,
+              "pe": 20.666667,
+              "revenue_usd": 6908571851.58
+            }
+          },
+          "head_listing_id": 49368,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0844,
+                  0.089,
+                  0.051
+                ],
+                "value": 0.051,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2887,
+                  0.0662,
+                  0.0984
+                ],
+                "value": 0.0662,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1942,
+                  0.0998,
+                  0.0763
+                ],
+                "value": 0.0763,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advanced Info Service Public Company Limited",
+          "score": 34019013296.128002,
+          "ticker": "ADVANC.BK"
+        },
+        {
+          "also_known_as": [
+            "0QO1.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4907624000.0,
+              "effective_tax_rate": 0.2097,
+              "market_cap_usd": 33358314882.662403,
+              "net_income_usd": 1209883800.0,
+              "operating_income_usd": 1741836800.0,
+              "pe": 26.451613,
+              "revenue_usd": 13454699600.0
+            }
+          },
+          "head_listing_id": 1754814,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0309,
+                  0.0434,
+                  0.0326
+                ],
+                "value": 0.0309,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.097,
+                  0.1222,
+                  0.3996
+                ],
+                "value": 0.097,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1261,
+                  0.0886,
+                  0.3016
+                ],
+                "value": 0.0886,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Schindler Ps",
+          "score": 33358314882.662403,
+          "ticker": "SCHP.SW"
+        },
+        {
+          "also_known_as": [
+            "0QOT.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4907624000.0,
+              "effective_tax_rate": 0.2097,
+              "market_cap_usd": 33244278316.032,
+              "net_income_usd": 1209883800.0,
+              "operating_income_usd": 1741836800.0,
+              "pe": 25.858481,
+              "revenue_usd": 13454699600.0
+            }
+          },
+          "head_listing_id": 1754813,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0309,
+                  0.0434,
+                  0.0326
+                ],
+                "value": 0.0309,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.097,
+                  0.1222,
+                  0.3996
+                ],
+                "value": 0.097,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1261,
+                  0.0886,
+                  0.3016
+                ],
+                "value": 0.0886,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Schindler Holding AG",
+          "score": 33244278316.032,
+          "ticker": "SCHN.SW"
+        },
+        {
+          "also_known_as": [
+            "0IZ8.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 11833927800.0,
+              "effective_tax_rate": 0.245511176255038,
+              "market_cap_usd": 32630947937.28,
+              "net_income_usd": 2390514500.0,
+              "operating_income_usd": 3248045500.0,
+              "pe": 14.197154,
+              "revenue_usd": 24075476500.0
+            }
+          },
+          "head_listing_id": 242601,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0144,
+                  0.1162,
+                  0.0739
+                ],
+                "value": 0.0144,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0677,
+                  0.5171,
+                  0.0907
+                ],
+                "value": 0.0677,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0298,
+                  0.2743,
+                  0.3112
+                ],
+                "value": 0.0298,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Henkel AG & Co. KGaA",
+          "score": 32630947937.28,
+          "ticker": "HEN.XETRA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 13240060000.0,
+              "effective_tax_rate": 0.2375,
+              "market_cap_usd": 31639199744.0,
+              "net_income_usd": 714448000.0,
+              "operating_income_usd": 1033657000.0,
+              "pe": 45.40762,
+              "revenue_usd": 17561101000.0
+            }
+          },
+          "head_listing_id": 6218,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0455,
+                  0.0448,
+                  0.1071
+                ],
+                "value": 0.0448,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1866,
+                  0.0148,
+                  0.1419
+                ],
+                "value": 0.0148,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.178,
+                  0.0482,
+                  0.125
+                ],
+                "value": 0.0482,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Caseys General Stores Inc",
+          "score": 31639199744.0,
+          "ticker": "CASY.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2400231500.0,
+              "effective_tax_rate": 0.1585,
+              "market_cap_usd": 28850524160.0,
+              "net_income_usd": 1278667500.0,
+              "operating_income_usd": 2464341000.0,
+              "pe": 23.103688,
+              "revenue_usd": 8701279500.0
+            }
+          },
+          "head_listing_id": 17169,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0074,
+                  0.0671,
+                  0.0475
+                ],
+                "value": 0.0074,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0123,
+                  0.0688,
+                  0.0824
+                ],
+                "value": 0.0123,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0028,
+                  0.0683,
+                  0.0794
+                ],
+                "value": 0.0028,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fortis Inc",
+          "score": 28850524160.0,
+          "ticker": "FTS.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1859727000.0,
+              "effective_tax_rate": 0.2002,
+              "market_cap_usd": 28814237696.0,
+              "net_income_usd": 1402443000.0,
+              "operating_income_usd": 1819467000.0,
+              "pe": 20.250298,
+              "revenue_usd": 4921526000.0
+            }
+          },
+          "head_listing_id": 3105,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0036,
+                  0.2032,
+                  0.1182
+                ],
+                "value": 0.0036,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.018,
+                  0.2085,
+                  0.1243
+                ],
+                "value": 0.018,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0194,
+                  0.3037,
+                  0.1387
+                ],
+                "value": 0.0194,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Atmos Energy Corporation",
+          "score": 28814237696.0,
+          "ticker": "ATO.US"
+        },
+        {
+          "also_known_as": [
+            "6031.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 9689637470.0,
+              "effective_tax_rate": 0.1362,
+              "market_cap_usd": 25867856491.315197,
+              "net_income_usd": 1300314035.0,
+              "operating_income_usd": 1729655120.0,
+              "pe": 19.704996,
+              "revenue_usd": 13415767865.0
+            }
+          },
+          "head_listing_id": 228343,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0337,
+                  0.0007,
+                  0.0879
+                ],
+                "value": 0.0007,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2329,
+                  0.2418,
+                  0.1525
+                ],
+                "value": 0.1525,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2576,
+                  0.0951,
+                  0.482
+                ],
+                "value": 0.0951,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sany Heavy Industry Co Ltd",
+          "score": 25867856491.315197,
+          "ticker": "600031.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2102817750.85255,
+              "effective_tax_rate": 0.1307,
+              "market_cap_usd": 24647669034.188797,
+              "net_income_usd": 183135423.61972,
+              "operating_income_usd": 415416046.366,
+              "pe": 83.916667,
+              "revenue_usd": 2862417502.95255
+            }
+          },
+          "head_listing_id": 230825,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0256,
+                  0.0877,
+                  0.2105
+                ],
+                "value": 0.0256,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.082,
+                  0.147,
+                  0.4303
+                ],
+                "value": 0.082,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1966,
+                  0.125,
+                  0.2644
+                ],
+                "value": 0.125,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China Tungsten and Hightech Materials Co Ltd",
+          "score": 24647669034.188797,
+          "ticker": "000657.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 12303213300.0,
+              "effective_tax_rate": 0.255363856229496,
+              "market_cap_usd": 24561642838.5153,
+              "net_income_usd": 1561429800.0,
+              "operating_income_usd": 2609831700.0,
+              "pe": 15.736943,
+              "revenue_usd": 19433477700.0
+            }
+          },
+          "head_listing_id": 572660,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0266,
+                  0.0093,
+                  0.1867
+                ],
+                "value": 0.0093,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0335,
+                  0.0792,
+                  0.7433
+                ],
+                "value": 0.0335,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0291,
+                  0.0324,
+                  1.1607
+                ],
+                "value": 0.0291,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "East Japan Railway Company",
+          "score": 24561642838.5153,
+          "ticker": "9020.JP"
+        },
+        {
+          "also_known_as": [
+            "2600.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 27834975460.0,
+              "effective_tax_rate": 0.1603,
+              "market_cap_usd": 24041578314.137596,
+              "net_income_usd": 2087625030.0,
+              "operating_income_usd": 5117612455.0,
+              "pe": 11.03972,
+              "revenue_usd": 34727658485.0
+            }
+          },
+          "head_listing_id": 229198,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1448,
+                  0.2238,
+                  0.1221
+                ],
+                "value": 0.1221,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0057,
+                  0.7609,
+                  1.0625
+                ],
+                "value": 0.0057,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1551,
+                  0.3459,
+                  0.1196
+                ],
+                "value": 0.1196,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Aluminum Corp of China Ltd",
+          "score": 24041578314.137596,
+          "ticker": "601600.CG"
+        },
+        {
+          "also_known_as": [
+            "0TIQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 356653000.0,
+              "effective_tax_rate": 0.2348,
+              "market_cap_usd": 23284842496.0,
+              "net_income_usd": 815017000.0,
+              "operating_income_usd": 1247220000.0,
+              "pe": 30.816734,
+              "revenue_usd": 2393575000.0
+            }
+          },
+          "head_listing_id": 14680,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0314,
+                  0.0035,
+                  0.0178
+                ],
+                "value": 0.0035,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0968,
+                  0.0525,
+                  0.0461
+                ],
+                "value": 0.0461,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1004,
+                  0.0087,
+                  0.0752
+                ],
+                "value": 0.0087,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fair Isaac Corporation",
+          "score": 23284842496.0,
+          "ticker": "FICO.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 6043249800.0,
+              "effective_tax_rate": 0.27924719069407,
+              "market_cap_usd": 23065403763.5406,
+              "net_income_usd": 3483087300.0,
+              "operating_income_usd": 5230058400.0,
+              "pe": 6.714666,
+              "revenue_usd": 12639173400.0
+            }
+          },
+          "head_listing_id": 574978,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0588,
+                  0.0564,
+                  0.1828
+                ],
+                "value": 0.0564,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1011,
+                  0.1139,
+                  0.434
+                ],
+                "value": 0.1011,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0784,
+                  0.0805,
+                  0.328
+                ],
+                "value": 0.0784,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Central Japan Railway Company",
+          "score": 23065403763.5406,
+          "ticker": "9022.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 411081000.0,
+              "effective_tax_rate": 0.1827,
+              "market_cap_usd": 22923814912.0,
+              "net_income_usd": 57512000.0,
+              "operating_income_usd": -12126000.0,
+              "pe": 395.8,
+              "revenue_usd": 1730595000.0
+            }
+          },
+          "head_listing_id": 22616,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0081,
+                  0.0335,
+                  0.0228
+                ],
+                "value": 0.0081,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.9548,
+                  0.5946,
+                  0.1933
+                ],
+                "value": 0.1933,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.7807,
+                  0.4441,
+                  0.3268
+                ],
+                "value": 0.3268,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Samsara Inc",
+          "score": 22923814912.0,
+          "ticker": "IOT.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 694516000.0,
+              "effective_tax_rate": 0.2169,
+              "market_cap_usd": 22784499712.0,
+              "net_income_usd": 897230000.0,
+              "operating_income_usd": 973685000.0,
+              "pe": 25.171838,
+              "revenue_usd": 2206491000.0
+            }
+          },
+          "head_listing_id": 44784,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0253,
+                  0.0009,
+                  0.0311
+                ],
+                "value": 0.0009,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3627,
+                  0.0656,
+                  0.048
+                ],
+                "value": 0.048,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0365,
+                  0.0723,
+                  0.0335
+                ],
+                "value": 0.0335,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Tradeweb Markets Inc",
+          "score": 22784499712.0,
+          "ticker": "TW.US"
+        },
+        {
+          "also_known_as": [
+            "0KTS.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2484100000.0,
+              "effective_tax_rate": 0.2086,
+              "market_cap_usd": 22536982528.0,
+              "net_income_usd": 982900000.0,
+              "operating_income_usd": 1371600000.0,
+              "pe": 23.834279,
+              "revenue_usd": 8355200000.0
+            }
+          },
+          "head_listing_id": 37798,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0193,
+                  0.0257,
+                  0.0337
+                ],
+                "value": 0.0193,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1058,
+                  0.0759,
+                  0.2022
+                ],
+                "value": 0.0759,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1438,
+                  0.1148,
+                  0.0672
+                ],
+                "value": 0.0672,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Ralph Lauren Corp Class A",
+          "score": 22536982528.0,
+          "ticker": "RL.US"
+        },
+        {
+          "also_known_as": [
+            "3606.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4042784170.445,
+              "effective_tax_rate": 0.1574,
+              "market_cap_usd": 21735323015.5776,
+              "net_income_usd": 1270881691.11,
+              "operating_income_usd": 1440052017.48,
+              "pe": 16.278261,
+              "revenue_usd": 6430162146.945
+            }
+          },
+          "head_listing_id": 228813,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0287,
+                  0.0237,
+                  0.04
+                ],
+                "value": 0.0237,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0649,
+                  0.1249,
+                  0.0035
+                ],
+                "value": 0.0035,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.037,
+                  0.1461,
+                  0.1151
+                ],
+                "value": 0.037,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fuyao Glass Industry Group Co Ltd Class A",
+          "score": 21735323015.5776,
+          "ticker": "600660.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2956616000.0,
+              "effective_tax_rate": 0.1998,
+              "market_cap_usd": 21622579200.0,
+              "net_income_usd": 552030000.0,
+              "operating_income_usd": 671824000.0,
+              "pe": 40.734149,
+              "revenue_usd": 4191991000.0
+            }
+          },
+          "head_listing_id": 48235,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0167,
+                  0.1342,
+                  0.0544
+                ],
+                "value": 0.0167,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1043,
+                  0.4078,
+                  0.1054
+                ],
+                "value": 0.1043,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0427,
+                  0.3615,
+                  0.1129
+                ],
+                "value": 0.0427,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Woodward Inc",
+          "score": 21622579200.0,
+          "ticker": "WWD.US"
+        },
+        {
+          "also_known_as": [
+            "ASICS23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 2241811200.0,
+              "effective_tax_rate": 0.28772099258373,
+              "market_cap_usd": 21543006409.1109,
+              "net_income_usd": 631801600.0,
+              "operating_income_usd": 912128000.0,
+              "pe": 35.495796,
+              "revenue_usd": 5189862400.0
+            }
+          },
+          "head_listing_id": 572313,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0172,
+                  0.073,
+                  0.0477
+                ],
+                "value": 0.0172,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2947,
+                  0.521,
+                  0.5073
+                ],
+                "value": 0.2947,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1919,
+                  0.5526,
+                  0.3533
+                ],
+                "value": 0.1919,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Asics Corporation",
+          "score": 21543006409.1109,
+          "ticker": "7936.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 6676635000.0,
+              "effective_tax_rate": 0.2444,
+              "market_cap_usd": 21170661376.0,
+              "net_income_usd": 624065000.0,
+              "operating_income_usd": 873525000.0,
+              "pe": 34.65535,
+              "revenue_usd": 11919351000.0
+            }
+          },
+          "head_listing_id": 5765,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0134,
+                  0.0176,
+                  0.0498
+                ],
+                "value": 0.0134,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1118,
+                  0.3582,
+                  0.322
+                ],
+                "value": 0.1118,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0863,
+                  0.1936,
+                  0.2795
+                ],
+                "value": 0.0863,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Burlington Stores Inc",
+          "score": 21170661376.0,
+          "ticker": "BURL.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1877804219.613,
+              "effective_tax_rate": 0.239,
+              "market_cap_usd": 19979549487.9232,
+              "net_income_usd": 550621880.816,
+              "operating_income_usd": 724787240.884,
+              "pe": 36.743846,
+              "revenue_usd": 2870931119.497
+            }
+          },
+          "head_listing_id": 1415760,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0859,
+                  0.3924,
+                  0.413
+                ],
+                "value": 0.0859,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1894,
+                  0.5746,
+                  0.2422
+                ],
+                "value": 0.1894,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2115,
+                  0.7273,
+                  0.8247
+                ],
+                "value": 0.2115,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hyundai Electric & Energy Systems Co Ltd",
+          "score": 19979549487.9232,
+          "ticker": "267260.KO"
+        },
+        {
+          "also_known_as": [
+            "0HPW.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 5100700000.0,
+              "effective_tax_rate": 0.2224,
+              "market_cap_usd": 19645718528.0,
+              "net_income_usd": 1124400000.0,
+              "operating_income_usd": 1300600000.0,
+              "pe": 17.950802,
+              "revenue_usd": 7476800000.0
+            }
+          },
+          "head_listing_id": 5247,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0245,
+                  0.0437,
+                  0.0088
+                ],
+                "value": 0.0088,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2338,
+                  0.1361,
+                  0.0317
+                ],
+                "value": 0.0317,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0087,
+                  0.1036,
+                  0.0117
+                ],
+                "value": 0.0087,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Broadridge Financial Solutions Inc",
+          "score": 19645718528.0,
+          "ticker": "BR.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 3445360295.146,
+              "effective_tax_rate": 0.2145,
+              "market_cap_usd": 19404736901.939198,
+              "net_income_usd": 353495171.358,
+              "operating_income_usd": 540500453.255,
+              "pe": 54.47069,
+              "revenue_usd": 4375410294.556
+            }
+          },
+          "head_listing_id": 1415914,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2973,
+                  0.0918,
+                  0.1961
+                ],
+                "value": 0.0918,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.9143,
+                  0.6852,
+                  8.3103
+                ],
+                "value": 0.6852,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.8417,
+                  0.0806,
+                  0.4651
+                ],
+                "value": 0.0806,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hyosung Heavy Industries Corp",
+          "score": 19404736901.939198,
+          "ticker": "298040.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 1712299830.1265,
+              "effective_tax_rate": 0.1118,
+              "market_cap_usd": 19388480004.9152,
+              "net_income_usd": 239084882.68695,
+              "operating_income_usd": 364378141.0911,
+              "pe": 65.783862,
+              "revenue_usd": 2165346564.40595
+            }
+          },
+          "head_listing_id": 232924,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1083,
+                  0.2812,
+                  0.2098
+                ],
+                "value": 0.1083,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0193,
+                  0.5138,
+                  0.4832
+                ],
+                "value": 0.0193,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1642,
+                  0.5019,
+                  0.3563
+                ],
+                "value": 0.1642,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sharetronic Data Technology Co Ltd",
+          "score": 19388480004.9152,
+          "ticker": "300857.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cost_of_revenue_usd": 4244102100.0,
+              "effective_tax_rate": 0.299872185949678,
+              "market_cap_usd": 19283446523.8044,
+              "net_income_usd": 1338970500.0,
+              "operating_income_usd": 1884689100.0,
+              "pe": 14.508362,
+              "revenue_usd": 6663919500.0
+            }
+          },
+          "head_listing_id": 572798,
+          "matched": {
+            "fundamental": {
+              "gross_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0485,
+                  0.0084,
+                  0.0263
+                ],
+                "value": 0.0084,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.063,
+                  0.0322,
+                  0.0627
+                ],
+                "value": 0.0322,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "operating_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0564,
+                  0.0171,
+                  0.0253
+                ],
+                "value": 0.0171,
+                "window": "min_yoy",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sumitomo Realty & Development Co., Ltd.",
+          "score": 19283446523.8044,
+          "ticker": "8830.JP"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Expanding-margins TREND screen (level-agnostic): gross margin, operating margin, AND net margin each trending UP over a 3-year window (consecutive_growth, N=3, on all three margin lines, intersected). 60 matches. Top: Netflix, Linde, 3308.HK, ABB, TJX, Salesforce. No absolute margin threshold imposed — it screens the CHANGE, requiring all three margins higher now than before, jointly. (Interpretation caveat: consecutive_growth requires each year up; a pure 'now vs exactly 3 years ago' delta would be slightly looser, but this correctly captures the upward trend the user asked for on all three lines.)"
+}

@@ -1,0 +1,133 @@
+{
+ "id": "te-02",
+ "question": "หาหุ้นในตลาดไทยที่มี bullish divergence: ราคาทำ lower low แต่ RSI ทำ higher low บนกราฟรายวัน ช่วง 1-2 เดือนที่ผ่านมา เอาเฉพาะที่ volume วันล่าสุดสูงกว่าค่าเฉลี่ย 20 วันอย่างน้อย 1.5 เท่า",
+ "tools_called": [
+  {
+   "tool": "screen_unified",
+   "args": {
+    "ta": [
+     {
+      "anchor": [
+       {
+        "pattern": "divergence_bull",
+        "a": "rsi",
+        "window_bars": 45
+       }
+      ],
+      "quals": [
+       {
+        "any": [
+         {
+          "pattern": "volume_spike"
+         }
+        ],
+        "within": 0
+       }
+      ]
+     }
+    ],
+    "country": [
+     "TH"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "timeframe": 1,
+    "window_bars": 45,
+    "limit": 15
+   }
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "adx": {
+      "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+     },
+     "atr_pct": {
+      "definition": "Average True Range ÷ price — volatility as a fraction of price."
+     },
+     "close_vs_ema200": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "close_vs_ema50": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "detail.osc": {
+      "definition": "[oscillator at prior pivot t(n), oscillator at t(m)] — the divergence read against the price pivots."
+     },
+     "detail.px": {
+      "definition": "[price at prior pivot t(n), price at t(m)] — the two points that define the divergence."
+     },
+     "rsi14": {
+      "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+     },
+     "strength": {
+      "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+     }
+    }
+   },
+   "capped": false,
+   "count": 1,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "ta": {
+       "adx": 14.4634,
+       "atr_pct": 0.0234,
+       "close_vs_ema200": -0.1825,
+       "close_vs_ema50": -0.0369,
+       "rsi14": 45.7789
+      }
+     },
+     "head_listing_id": 49964,
+     "matched": {
+      "ta": {
+       "rsi_div_bull": {
+        "detail": {
+         "fw": 29,
+         "osc": [
+          20.0839,
+          35.0946
+         ],
+         "px": [
+          3.04,
+          3.02
+         ],
+         "tn": "2026-06-19"
+        },
+        "kind": "signal",
+        "strength": 0.932,
+        "value": "2026-08-03"
+       },
+       "vol_spike": {
+        "kind": "signal",
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Samart Telcoms Public Company Limited",
+     "score": 0.932,
+     "ticker": "SAMTEL.BK"
+    }
+   ],
+   "sort": "ta",
+   "universe": 826,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 1,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 1 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "หุ้นไทย (SET/mai) ที่เกิด bullish RSI divergence รายวัน (ราคาทำ lower low แต่ RSI ทำ higher low) ในช่วง ~45 วันทำการที่ผ่านมา และวันล่าสุดมี volume spike (สูงกว่าค่าเฉลี่ย). พบ 1 ตัว เช่น SAMTEL.BK."
+}

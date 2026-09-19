@@ -1,0 +1,23 @@
+{
+  "id": "tn-08",
+  "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {"q": "technology sector"},
+      "duration_ms": 4189,
+      "result_summary": "Resolved: gics code '45' = Information Technology sector."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_up", "a": "close", "b": "0.10", "window_bars": 22}], "quals": [{"any": [{"pattern": "rising_volume"}]}]}],
+        "gics": "45",
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "duration_ms": 2800,
+      "result_summary": "Returned 59 tech-sector stocks that rose >=10% over last 22 trading days (approx 1 month) AND have rising volume. Top hits: CMRC.US (Commerce.com +12.6%), ServiceNow (NOW) also present. All confirmed both net_change_up and rising_volume signals. Covers GICS 45 (IT sector) globally."
+    }
+  ]
+}

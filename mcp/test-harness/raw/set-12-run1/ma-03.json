@@ -1,0 +1,23 @@
+{
+  "id": "ma-03",
+  "question": "Show me forex pairs that are near a 52-week high right now.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["price at 52-week high"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Currency"],
+        "ta": [{"anchor": [{"pattern": "near_high"}]}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=996 forex pairs. All results are .FOREX: AEDCAD.FOREX (ADX 31.1), AEDCHF.FOREX, AEDEUR.FOREX (ADX 79.8), AEDINR.FOREX, AEDJPY.FOREX (ADX 40.5), AEDUSD.FOREX (ADX 70.2), ARS.FOREX (RSI 69.3), AUDAED.FOREX, AUDARS.FOREX, AUDBRL.FOREX (RSI 70.7), AUDCAD.FOREX, AUDGBP.FOREX. near_high signal confirmed on all.",
+  "verdict": "PASS",
+  "reason": "Returns forex-only pairs (.FOREX suffix confirmed), near_high signal correctly applied, no equities or crypto contamination. Forex screening is fully supported.",
+  "defects": []
+}

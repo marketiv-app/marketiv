@@ -1,0 +1,1876 @@
+{
+  "id": "fe-09",
+  "question": "Screen for companies with revenue over $10B that spend more than $2B a year on R&D and whose R&D as a percent of revenue is above 15% — heavy, committed innovators at scale.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "above",
+            "threshold": 10000000000
+          },
+          {
+            "concept": "rnd",
+            "pattern": "above",
+            "threshold": 2000000000
+          },
+          {
+            "metricA": "rnd",
+            "relation": "higher_than",
+            "metricB": "revenue",
+            "multiple": 0.15
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "capped": false,
+      "count": 43,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 53273000000.0,
+              "gross_margin": 0.609,
+              "market_cap_usd": 4173832126464.0,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "operating_margin": 0.3311,
+              "pe": 17.123934
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 445867000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.15164,
+                "relation": "higher_than",
+                "value_a": 61087000000.0,
+                "value_b": 402836000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "SPX.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -14121000000.0,
+              "gross_margin": 0.493895255435365,
+              "market_cap_usd": 1889476280320.0,
+              "net_income_usd": -4937000000.0,
+              "net_margin": -0.264378279961444,
+              "operating_margin": -0.11052800685445
+            }
+          },
+          "head_listing_id": 41042,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 18674000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.46284,
+                "relation": "higher_than",
+                "value_a": 8643000000.0,
+                "value_b": 18674000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Space Exploration Technologies Corp. Class A Common Stock",
+          "score": 1889476280320.0,
+          "ticker": "SPCX.US"
+        },
+        {
+          "also_known_as": [
+            "1YD.XETRA",
+            "AVGO.SW",
+            "0YXG.LSE",
+            "AVGO23.BK",
+            "AVGO80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 32762000000.0,
+              "gross_margin": 0.6828,
+              "market_cap_usd": 1807880552448.0,
+              "net_income_usd": 29317000000.0,
+              "net_margin": 0.3885,
+              "operating_margin": 0.4406,
+              "pe": 65.296173
+            }
+          },
+          "head_listing_id": 3311,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 75465000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.17182,
+                "relation": "higher_than",
+                "value_a": 10977000000.0,
+                "value_b": 63887000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Broadcom Inc",
+          "score": 1807880552448.0,
+          "ticker": "AVGO.US"
+        },
+        {
+          "also_known_as": [
+            "META01.BK",
+            "META06.BK",
+            "META23.BK",
+            "META80.BK",
+            "0QZI.LSE",
+            "FB2A.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 40976000000.0,
+              "gross_margin": 0.8175,
+              "market_cap_usd": 1385002696704.0,
+              "net_income_usd": 68098000000.0,
+              "net_margin": 0.2984,
+              "operating_margin": 0.3808,
+              "pe": 20.477213
+            }
+          },
+          "head_listing_id": 28230,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 228247000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.28548,
+                "relation": "higher_than",
+                "value_a": 57372000000.0,
+                "value_b": 200966000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Meta Platforms Inc.",
+          "score": 1385002696704.0,
+          "ticker": "META.US"
+        },
+        {
+          "also_known_as": [
+            "LLY23.BK",
+            "LLY80.BK",
+            "LLY.SW",
+            "LLY.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 13560000000.0,
+              "gross_margin": 0.834,
+              "market_cap_usd": 1093034115072.0,
+              "net_income_usd": 26711200000.0,
+              "net_margin": 0.3353,
+              "operating_margin": 0.4972,
+              "pe": 41.145686
+            }
+          },
+          "head_listing_id": 26596,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 79665800000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.20462,
+                "relation": "higher_than",
+                "value_a": 13337000000.0,
+                "value_b": 65179000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eli Lilly and Company",
+          "score": 1093034115072.0,
+          "ticker": "LLY.US"
+        },
+        {
+          "also_known_as": [
+            "AMD03.BK",
+            "AMD23.BK",
+            "0QZD.LSE",
+            "AMD.XETRA",
+            "AMD80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 8403000000.0,
+              "gross_margin": 0.532,
+              "market_cap_usd": 790754623488.0,
+              "net_income_usd": 6434000000.0,
+              "net_margin": 0.1558,
+              "operating_margin": 0.1571,
+              "pe": 129.74359
+            }
+          },
+          "head_listing_id": 1884,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 41305000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.23358,
+                "relation": "higher_than",
+                "value_a": 8091000000.0,
+                "value_b": 34639000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advanced Micro Devices Inc",
+          "score": 790754623488.0,
+          "ticker": "AMD.US"
+        },
+        {
+          "also_known_as": [
+            "JNJ03.BK",
+            "JNJ.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 22228000000.0,
+              "gross_margin": 0.6791,
+              "market_cap_usd": 653347520512.0,
+              "net_income_usd": 21037000000.0,
+              "net_margin": 0.2148,
+              "operating_margin": 0.2681,
+              "pe": 31.451276
+            }
+          },
+          "head_listing_id": 24500,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 97929000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.15569,
+                "relation": "higher_than",
+                "value_a": 14665000000.0,
+                "value_b": 94193000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Johnson & Johnson",
+          "score": 653347520512.0,
+          "ticker": "JNJ.US"
+        },
+        {
+          "also_known_as": [
+            "INTEL03.BK",
+            "0R24.LSE",
+            "INTEL01.BK",
+            "INTEL23.BK",
+            "INL.XETRA",
+            "INTC.SW"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 2831000000.0,
+              "gross_margin": 0.386,
+              "market_cap_usd": 511087050752.0,
+              "net_income_usd": -11289000000.0,
+              "net_margin": -0.1979,
+              "operating_margin": 0.0755
+            }
+          },
+          "head_listing_id": 22519,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 57032000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.26061,
+                "relation": "higher_than",
+                "value_a": 13774000000.0,
+                "value_b": 52853000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intel Corporation",
+          "score": 511087050752.0,
+          "ticker": "INTC.US"
+        },
+        {
+          "also_known_as": [
+            "4333.HK",
+            "CSCO06.BK",
+            "CIS.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 11788000000.0,
+              "gross_margin": 0.6433,
+              "market_cap_usd": 439903518720.0,
+              "net_income_usd": 11958000000.0,
+              "net_margin": 0.1969,
+              "operating_margin": 0.2372,
+              "pe": 37.633333
+            }
+          },
+          "head_listing_id": 8801,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 60746000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.16415,
+                "relation": "higher_than",
+                "value_a": 9300000000.0,
+                "value_b": 56654000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cisco Systems Inc",
+          "score": 439903518720.0,
+          "ticker": "CSCO.US"
+        },
+        {
+          "also_known_as": [
+            "ORCL01.BK",
+            "ORCL06.BK",
+            "ORCL19.BK",
+            "ORC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -23686000000.0,
+              "gross_margin": 0.6582,
+              "market_cap_usd": 411302428672.0,
+              "net_income_usd": 17087000000.0,
+              "net_margin": 0.2537,
+              "operating_margin": 0.3332,
+              "pe": 24.492281
+            }
+          },
+          "head_listing_id": 32732,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 67358000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.1525,
+                "relation": "higher_than",
+                "value_a": 10272000000.0,
+                "value_b": 67357000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Oracle Corporation",
+          "score": 411302428672.0,
+          "ticker": "ORCL.US"
+        },
+        {
+          "also_known_as": [
+            "RO.SW",
+            "0QOK.LSE",
+            "0TDF.LSE",
+            "0QQ6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 16492896800.0,
+              "gross_margin": 0.737278237262453,
+              "market_cap_usd": 352255996615.0656,
+              "net_income_usd": 16249408000.0,
+              "net_margin": 0.203295662604962,
+              "operating_margin": 0.291621945829914,
+              "pe": 22.5
+            }
+          },
+          "head_listing_id": 1754790,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 79929929600.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.21075,
+                "relation": "higher_than",
+                "value_a": 13352000000.0,
+                "value_b": 63356000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Roche Holding AG",
+          "score": 352255996615.0656,
+          "ticker": "ROP.SW"
+        },
+        {
+          "also_known_as": [
+            "0QAH.LSE",
+            "6MK.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 16063000000.0,
+              "gross_margin": 0.7297,
+              "market_cap_usd": 333487570944.0,
+              "net_income_usd": 3173000000.0,
+              "net_margin": 0.0477,
+              "operating_margin": 0.1049,
+              "pe": 108.136
+            }
+          },
+          "head_listing_id": 29600,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 66569000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.24287,
+                "relation": "higher_than",
+                "value_a": 15789000000.0,
+                "value_b": 65011000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Merck & Company Inc",
+          "score": 333487570944.0,
+          "ticker": "MRK.US"
+        },
+        {
+          "also_known_as": [
+            "PANW80.BK",
+            "5AP.XETRA",
+            "0KF5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3793500000.0,
+              "gross_margin": 0.7194,
+              "market_cap_usd": 304924098560.0,
+              "net_income_usd": 842800000.0,
+              "net_margin": 0.0795,
+              "operating_margin": 0.0962,
+              "pe": 325.33913
+            }
+          },
+          "head_listing_id": 33197,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 10606300000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.21516,
+                "relation": "higher_than",
+                "value_a": 1984100000.0,
+                "value_b": 9221500000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Palo Alto Networks Inc",
+          "score": 304924098560.0,
+          "ticker": "PANW.US"
+        },
+        {
+          "also_known_as": [
+            "0K9E.LSE",
+            "NVS.US",
+            "0QLR.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 14980000000.0,
+              "gross_margin": 0.7474,
+              "market_cap_usd": 293329325717.91364,
+              "net_income_usd": 12757000000.0,
+              "net_margin": 0.225,
+              "operating_margin": 0.3017,
+              "pe": 23.312054
+            }
+          },
+          "head_listing_id": 1754717,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 56693000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.19762,
+                "relation": "higher_than",
+                "value_a": 11200000000.0,
+                "value_b": 56674000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Novartis AG",
+          "score": 293329325717.91364,
+          "ticker": "NOVN.SW"
+        },
+        {
+          "also_known_as": [
+            "AZN.US",
+            "ZEG.XETRA",
+            "AZNCF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 6044000000.0,
+              "gross_margin": 0.8188,
+              "market_cap_usd": 247200033814.93762,
+              "net_income_usd": 10446000000.0,
+              "net_margin": 0.1702,
+              "operating_margin": 0.2277,
+              "pe": 23.364006
+            }
+          },
+          "head_listing_id": 236491,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 61366000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.24229,
+                "relation": "higher_than",
+                "value_a": 14232000000.0,
+                "value_b": 58739000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "AstraZeneca PLC",
+          "score": 247200033814.93762,
+          "ticker": "AZN.LSE"
+        },
+        {
+          "also_known_as": [
+            "0A2W.LSE",
+            "0NW4.LSE",
+            "SAP.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 9971406000.0,
+              "gross_margin": 0.7276,
+              "market_cap_usd": 243060136861.69598,
+              "net_income_usd": 8904591200.0,
+              "net_margin": 0.2041,
+              "operating_margin": 0.2675,
+              "pe": 27.320359
+            }
+          },
+          "head_listing_id": 243596,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 43624044600.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.18024,
+                "relation": "higher_than",
+                "value_a": 6633000000.0,
+                "value_b": 36800000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SAP SE",
+          "score": 243060136861.69598,
+          "ticker": "SAP.XETRA"
+        },
+        {
+          "also_known_as": [
+            "AMGN06.BK",
+            "0R0T.LSE",
+            "AMG.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10175000000.0,
+              "gross_margin": 0.6952,
+              "market_cap_usd": 230076481536.0,
+              "net_income_usd": 8743000000.0,
+              "net_margin": 0.2295,
+              "operating_margin": 0.2999,
+              "pe": 26.048447
+            }
+          },
+          "head_listing_id": 1915,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 38095000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.19787,
+                "relation": "higher_than",
+                "value_a": 7272000000.0,
+                "value_b": 36751000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amgen Inc",
+          "score": 230076481536.0,
+          "ticker": "AMGN.US"
+        },
+        {
+          "also_known_as": [
+            "NOVOB80.BK",
+            "0TDD.LSE",
+            "0QIU.LSE",
+            "NVO.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7302159200.0,
+              "gross_margin": 0.8065,
+              "market_cap_usd": 198339314627.37918,
+              "net_income_usd": 17792490400.0,
+              "net_margin": 0.3535,
+              "operating_margin": 0.4313,
+              "pe": 11.26123
+            }
+          },
+          "head_listing_id": 243294,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 50337056800.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.16838,
+                "relation": "higher_than",
+                "value_a": 52039000000.0,
+                "value_b": 309064000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Novo Nordisk A/S",
+          "score": 198339314627.37918,
+          "ticker": "NOV.XETRA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3344995524.0,
+              "gross_margin": 0.4703,
+              "market_cap_usd": 198332243037.38882,
+              "net_income_usd": 3124627646.4,
+              "net_margin": 0.1692,
+              "operating_margin": 0.1627,
+              "pe": 64.521268
+            }
+          },
+          "head_listing_id": 1418465,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 18464283396.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.24885,
+                "relation": "higher_than",
+                "value_a": 148306389000.0,
+                "value_b": 595965682000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MediaTek Inc",
+          "score": 198332243037.38882,
+          "ticker": "2454.TW"
+        },
+        {
+          "also_known_as": [
+            "GIS.XETRA",
+            "0QYQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 12943000000.0,
+              "gross_margin": 0.7959,
+              "market_cap_usd": 177859182592.0,
+              "net_income_usd": -3240000000.0,
+              "net_margin": -0.1064,
+              "operating_margin": 0.3847,
+              "pe": 17.859864
+            }
+          },
+          "head_listing_id": 18517,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 30456000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.19696,
+                "relation": "higher_than",
+                "value_a": 5799000000.0,
+                "value_b": 29442000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Gilead Sciences Inc",
+          "score": 177859182592.0,
+          "ticker": "GILD.US"
+        },
+        {
+          "also_known_as": [
+            "QCOM06.BK",
+            "0QZ3.LSE",
+            "QCI.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10416000000.0,
+              "gross_margin": 0.5423,
+              "market_cap_usd": 168236974080.0,
+              "net_income_usd": 9259000000.0,
+              "net_margin": 0.2101,
+              "operating_margin": 0.2328,
+              "pe": 18.307429
+            }
+          },
+          "head_listing_id": 36368,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 44069000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.20418,
+                "relation": "higher_than",
+                "value_a": 9042000000.0,
+                "value_b": 44284000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Qualcomm Incorporated",
+          "score": 168236974080.0,
+          "ticker": "QCOM.US"
+        },
+        {
+          "also_known_as": [
+            "PFIZER19.BK",
+            "0Q1N.LSE",
+            "PFE.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10985000000.0,
+              "gross_margin": 0.7318,
+              "market_cap_usd": 155316109312.0,
+              "net_income_usd": 4332000000.0,
+              "net_margin": 0.068,
+              "operating_margin": 0.2672,
+              "pe": 35.855263
+            }
+          },
+          "head_listing_id": 33957,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 63695000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.16678,
+                "relation": "higher_than",
+                "value_a": 10437000000.0,
+                "value_b": 62579000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Pfizer Inc",
+          "score": 155316109312.0,
+          "ticker": "PFE.US"
+        },
+        {
+          "also_known_as": [
+            "CELG-RI.US",
+            "BRM.XETRA",
+            "0R1F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 11440000000.0,
+              "gross_margin": 0.7016,
+              "market_cap_usd": 134921306112.0,
+              "net_income_usd": 9282000000.0,
+              "net_margin": 0.1887,
+              "operating_margin": 0.2814,
+              "pe": 14.235683
+            }
+          },
+          "head_listing_id": 4989,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 49187000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.20647,
+                "relation": "higher_than",
+                "value_a": 9951000000.0,
+                "value_b": 48195000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Bristol-Myers Squibb Company",
+          "score": 134921306112.0,
+          "ticker": "BMY.US"
+        },
+        {
+          "also_known_as": [
+            "0QZU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3796100000.0,
+              "gross_margin": 0.86,
+              "market_cap_usd": 133875531776.0,
+              "net_income_usd": 4405200000.0,
+              "net_margin": 0.35,
+              "operating_margin": 0.3795,
+              "pe": 30.762376
+            }
+          },
+          "head_listing_id": 46555,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 12587200000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.33684,
+                "relation": "higher_than",
+                "value_a": 4042500000.0,
+                "value_b": 12001300000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vertex Pharmaceuticals Inc",
+          "score": 133875531776.0,
+          "ticker": "VRTX.US"
+        },
+        {
+          "also_known_as": [
+            "NOW19.BK",
+            "4S0.XETRA",
+            "0L5N.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4571000000.0,
+              "gross_margin": 0.7477,
+              "market_cap_usd": 123536171008.0,
+              "net_income_usd": 1670000000.0,
+              "net_margin": 0.1134,
+              "operating_margin": 0.114,
+              "pe": 74.68125
+            }
+          },
+          "head_listing_id": 31392,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 14732000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.22293,
+                "relation": "higher_than",
+                "value_a": 2960000000.0,
+                "value_b": 13278000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ServiceNow Inc",
+          "score": 123536171008.0,
+          "ticker": "NOW.US"
+        },
+        {
+          "also_known_as": [
+            "ABNB06.BK",
+            "6Z1.XETRA",
+            "0A8C.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4860000000.0,
+              "gross_margin": 0.829,
+              "market_cap_usd": 109727473664.0,
+              "net_income_usd": 2691000000.0,
+              "net_margin": 0.2045,
+              "operating_margin": 0.2081,
+              "pe": 40.93379
+            }
+          },
+          "head_listing_id": 357,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 13159000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.1923,
+                "relation": "higher_than",
+                "value_a": 2354000000.0,
+                "value_b": 12241000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Airbnb Inc",
+          "score": 109727473664.0,
+          "ticker": "ABNB.US"
+        },
+        {
+          "also_known_as": [
+            "SANOFI80.BK",
+            "SNY.US",
+            "0A2V.LSE",
+            "SNW.XETRA",
+            "0O59.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 9621892800.0,
+              "gross_margin": 0.7277,
+              "market_cap_usd": 107375002476.54399,
+              "net_income_usd": 4520827600.0,
+              "net_margin": 0.0809,
+              "operating_margin": 0.2058,
+              "pe": 23.752294
+            }
+          },
+          "head_listing_id": 1753476,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 55875281800.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.16787,
+                "relation": "higher_than",
+                "value_a": 7842000000.0,
+                "value_b": 46716000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sanofi SA",
+          "score": 107375002476.54399,
+          "ticker": "SAN.PA"
+        },
+        {
+          "also_known_as": [
+            "ADBE03.BK",
+            "ADBE06.BK",
+            "ADB.XETRA",
+            "0R2Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10280000000.0,
+              "gross_margin": 0.894,
+              "market_cap_usd": 104598159360.0,
+              "net_income_usd": 7229000000.0,
+              "net_margin": 0.2869,
+              "operating_margin": 0.3607,
+              "pe": 14.533181
+            }
+          },
+          "head_listing_id": 733,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 25198000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.18066,
+                "relation": "higher_than",
+                "value_a": 4294000000.0,
+                "value_b": 23769000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Adobe Systems Incorporated",
+          "score": 104598159360.0,
+          "ticker": "ADBE.US"
+        },
+        {
+          "also_known_as": [
+            "GSK.US",
+            "GS71.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7065707400.0,
+              "gross_margin": 0.7273,
+              "market_cap_usd": 102102580168.2944,
+              "net_income_usd": 6389753400.0,
+              "net_margin": 0.1452,
+              "operating_margin": 0.207,
+              "pe": 16.027165
+            }
+          },
+          "head_listing_id": 237763,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 44007256200.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.23035,
+                "relation": "higher_than",
+                "value_a": 7525000000.0,
+                "value_b": 32667000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GSK plc",
+          "score": 102102580168.2944,
+          "ticker": "GSK.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7715000000.0,
+              "gross_margin": 0.7996,
+              "market_cap_usd": 95850094592.0,
+              "net_income_usd": 4584000000.0,
+              "net_margin": 0.2191,
+              "operating_margin": 0.2747,
+              "pe": 21.3795
+            }
+          },
+          "head_listing_id": 22534,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 20925000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.15549,
+                "relation": "higher_than",
+                "value_a": 2928000000.0,
+                "value_b": 18831000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intuit Inc",
+          "score": 95850094592.0,
+          "ticker": "INTU.US"
+        },
+        {
+          "also_known_as": [
+            "0KED.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 1456305000.0,
+              "gross_margin": 0.3942,
+              "market_cap_usd": 92923564489.1136,
+              "net_income_usd": 1384346400.0,
+              "net_margin": 0.0777,
+              "operating_margin": 0.149,
+              "pe": 69.804878
+            }
+          },
+          "head_listing_id": 242693,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 17808040200.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.15189,
+                "relation": "higher_than",
+                "value_a": 2227000000.0,
+                "value_b": 14662000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Infineon Technologies AG",
+          "score": 92923564489.1136,
+          "ticker": "IFX.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0R2M.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3575200000.0,
+              "gross_margin": 0.8486,
+              "market_cap_usd": 83418251264.0,
+              "net_income_usd": 4328700000.0,
+              "net_margin": 0.2786,
+              "operating_margin": 0.2687,
+              "pe": 20.050483
+            }
+          },
+          "head_listing_id": 37244,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 15534700000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.40788,
+                "relation": "higher_than",
+                "value_a": 5850200000.0,
+                "value_b": 14342900000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Regeneron Pharmaceuticals Inc",
+          "score": 83418251264.0,
+          "ticker": "REGN.US"
+        },
+        {
+          "also_known_as": [
+            "0K6G.LSE",
+            "NETEASE80.BK",
+            "NTES.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7317342205.0,
+              "gross_margin": 0.6569,
+              "market_cap_usd": 78386732662.78401,
+              "net_income_usd": 4949248605.0,
+              "net_margin": 0.2984,
+              "operating_margin": 0.3326,
+              "pe": 15.736074
+            }
+          },
+          "head_listing_id": 53988,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 16586338735.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.15733,
+                "relation": "higher_than",
+                "value_a": 17719110000.0,
+                "value_b": 112625807000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NetEase Inc",
+          "score": 78386732662.78401,
+          "ticker": "9999.HK"
+        },
+        {
+          "also_known_as": [
+            "0K8D.LSE",
+            "NOK.US",
+            "0HAF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 612219200.0,
+              "gross_margin": 0.444,
+              "market_cap_usd": 58155541466.316795,
+              "net_income_usd": 808677600.0,
+              "net_margin": 0.0349,
+              "operating_margin": 0.034,
+              "pe": 68.369231
+            }
+          },
+          "head_listing_id": 243291,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 23146683000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.2441,
+                "relation": "higher_than",
+                "value_a": 4855000000.0,
+                "value_b": 19889000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Nokia Corporation",
+          "score": 58155541466.316795,
+          "ticker": "NOA3.XETRA"
+        },
+        {
+          "also_known_as": [
+            "TAK.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3016576520.0,
+              "gross_margin": 0.655,
+              "market_cap_usd": 57333864056.3955,
+              "net_income_usd": -1013303200.0,
+              "net_margin": -0.0354,
+              "operating_margin": 0.1042
+            }
+          },
+          "head_listing_id": 573223,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 28637397000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.15001,
+                "relation": "higher_than",
+                "value_a": 675924000000.0,
+                "value_b": 4505720000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Takeda Pharmaceutical Co. Ltd.",
+          "score": 57333864056.3955,
+          "ticker": "4502.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 222000000.0,
+              "gross_margin": 0.3429,
+              "market_cap_usd": 46680930046.361595,
+              "net_income_usd": 466000000.0,
+              "net_margin": 0.0356,
+              "operating_margin": 0.0542,
+              "pe": 384.578386
+            }
+          },
+          "head_listing_id": 243654,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 13099000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.17322,
+                "relation": "higher_than",
+                "value_a": 2044000000.0,
+                "value_b": 11800000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "STMicroelectronics N.V",
+          "score": 46680930046.361595,
+          "ticker": "SGM.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0INB.LSE",
+            "0L9Y.LSE",
+            "SGM.XETRA",
+            "STM.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 222000000.0,
+              "gross_margin": 0.3429,
+              "market_cap_usd": 46660332506.726395,
+              "net_income_usd": 466000000.0,
+              "net_margin": 0.0356,
+              "operating_margin": 0.0542,
+              "pe": 102.516096
+            }
+          },
+          "head_listing_id": 1753537,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 13099000000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.17322,
+                "relation": "higher_than",
+                "value_a": 2044000000.0,
+                "value_b": 11800000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "STMicroelectronics N.V.",
+          "score": 46660332506.726395,
+          "ticker": "STMPA.PA"
+        },
+        {
+          "also_known_as": [
+            "BIDU.US",
+            "BIDU01.BK",
+            "BIDU06.BK",
+            "BIDU23.BK",
+            "BIDU80.BK",
+            "89888.HK",
+            "0HL1.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -1125055000.0,
+              "gross_margin": 0.4208,
+              "market_cap_usd": 34950158791.475204,
+              "net_income_usd": 190965000.0,
+              "net_margin": 0.0102,
+              "operating_margin": 0.0703,
+              "pe": 63.582828
+            }
+          },
+          "head_listing_id": 53925,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 18661790000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.1583,
+                "relation": "higher_than",
+                "value_a": 20433000000.0,
+                "value_b": 129079000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Baidu Inc",
+          "score": 34950158791.475204,
+          "ticker": "9888.HK"
+        },
+        {
+          "also_known_as": [
+            "0R1B.LSE",
+            "IDP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 2490000000.0,
+              "gross_margin": 0.7399,
+              "market_cap_usd": 31405113344.0,
+              "net_income_usd": 834600000.0,
+              "net_margin": 0.0832,
+              "operating_margin": 0.1929,
+              "pe": 37.149201
+            }
+          },
+          "head_listing_id": 4491,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 10027900000.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.17983,
+                "relation": "higher_than",
+                "value_a": 1778600000.0,
+                "value_b": 9890600000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Biogen Inc",
+          "score": 31405113344.0,
+          "ticker": "BIIB.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -449486100.0,
+              "gross_margin": 0.684865370258285,
+              "market_cap_usd": 30952300902.1002,
+              "net_income_usd": 1637206200.0,
+              "net_margin": 0.122406260818777,
+              "operating_margin": 0.107905861627992,
+              "pe": 19.234879
+            }
+          },
+          "head_listing_id": 572410,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 13375183500.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.2195,
+                "relation": "higher_than",
+                "value_a": 466005000000.0,
+                "value_b": 2123045000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Daiichi Sankyo Company, Limited",
+          "score": 30952300902.1002,
+          "ticker": "4568.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -394546885.0,
+              "gross_margin": 0.3067,
+              "market_cap_usd": 25552526329.446396,
+              "net_income_usd": 966247375.0,
+              "net_margin": 0.0476,
+              "operating_margin": 0.0571,
+              "pe": 39.152174
+            }
+          },
+          "head_listing_id": 230672,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 20287914540.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.16995,
+                "relation": "higher_than",
+                "value_a": 22754978000.0,
+                "value_b": 133895460000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ZTE Corp",
+          "score": 25552526329.446396,
+          "ticker": "000063.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -394546885.0,
+              "gross_margin": 0.3067,
+              "market_cap_usd": 15064920113.152002,
+              "net_income_usd": 966247375.0,
+              "net_margin": 0.0476,
+              "operating_margin": 0.0571,
+              "pe": 24.035269
+            }
+          },
+          "head_listing_id": 50899,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 20287914540.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.16995,
+                "relation": "higher_than",
+                "value_a": 22754978000.0,
+                "value_b": 133895460000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ZTE Corp-H",
+          "score": 15064920113.152002,
+          "ticker": "0763.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 170137800.0,
+              "gross_margin": 0.1883,
+              "market_cap_usd": 4265834706.0736,
+              "net_income_usd": -649301400.0,
+              "net_margin": -0.0309,
+              "operating_margin": -0.0489
+            }
+          },
+          "head_listing_id": 241194,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 21005652600.0
+              },
+              "rnd": {
+                "basis": "annual",
+                "kind": "level",
+                "metric_b": "revenue",
+                "ratio": 0.17456,
+                "relation": "higher_than",
+                "value_a": 3238000000.0,
+                "value_b": 18550000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "AUMOVIO N",
+          "score": 4265834706.0736,
+          "ticker": "AMV0.XETRA"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 43,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 43 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Heavy-innovator-at-scale screen, all three intersected: revenue > $10B (USD), R&D spend > $2B/yr (absolute USD line item), AND R&D/revenue > 15% (intensity ratio, via relation rnd higher_than revenue, multiple 0.15). 43 matches. Top: Alphabet, Broadcom, Meta, Eli Lilly, AMD, J&J, Intel. The absolute $2B floor and the 15% intensity gate are BOTH applied — a $2B-R&D spender at $60B revenue (3.3% intensity) is excluded by the intensity gate. Dollar figures normalized to USD across markets."
+}

@@ -1,0 +1,2190 @@
+{
+  "id": "vv-09-retest",
+  "question": "ช่วยหาหุ้นที่ PEG ต่ำกว่า 1 ในตลาดหุ้นสหรัฐ — ถูกเมื่อเทียบกับการเติบโต ไม่ใช่แค่ P/E ต่ำเฉยๆ (Find US stocks with PEG below 1 — cheap relative to growth, not just low P/E.)",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "q": "PEG ratio price/earnings to growth"
+      },
+      "note": "no direct PEG concept; resolved to pe + eps_diluted_growth (PEG = P/E / EPS growth%)"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "metricA": "pe",
+            "relation": "lower_than",
+            "metricB": "eps_diluted_growth",
+            "multiple": 1
+          }
+        ],
+        "country": [
+          "US"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      },
+      "note": "RELATION form: pe <= 1 x eps_diluted_growth(%). growth is in percent (e.g. 204.24) so multiple=1 == PEG<=1. All 60 rows have ratio<1."
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NVDA.SW",
+            "0R1I.LSE",
+            "NVDA01.BK",
+            "NVDA03.BK",
+            "NVDA06.BK",
+            "NVDA19.BK",
+            "NVDA23.BK",
+            "NVDA80.BK",
+            "NVD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.53,
+              "market_cap_usd": 5322322739200.0,
+              "net_income_usd": 159613000000.0,
+              "net_margin": 0.6297,
+              "normalized_pe": 33.3451707517558,
+              "revenue_usd": 253491000000.0
+            }
+          },
+          "head_listing_id": 31809,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.22859,
+                "relation": "lower_than",
+                "value_a": 46.688094,
+                "value_b": 204.24
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NVIDIA Corporation",
+          "score": 5322322739200.0,
+          "ticker": "NVDA.US"
+        },
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 19.93,
+              "market_cap_usd": 4173832126464.0,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "normalized_pe": 33.7029547069683,
+              "revenue_usd": 445867000000.0
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.93242,
+                "relation": "lower_than",
+                "value_a": 31.086723,
+                "value_b": 33.34
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "META01.BK",
+            "META06.BK",
+            "META23.BK",
+            "META80.BK",
+            "0QZI.LSE",
+            "FB2A.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 26.55,
+              "market_cap_usd": 1385002696704.0,
+              "net_income_usd": 68098000000.0,
+              "net_margin": 0.2984,
+              "normalized_pe": 20.0632608106919,
+              "revenue_usd": 228247000000.0
+            }
+          },
+          "head_listing_id": 28230,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.72108,
+                "relation": "lower_than",
+                "value_a": 28.72796,
+                "value_b": 39.84
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Meta Platforms Inc.",
+          "score": 1385002696704.0,
+          "ticker": "META.US"
+        },
+        {
+          "also_known_as": [
+            "JPMUS06.BK",
+            "JPMUS19.BK",
+            "CMC.XETRA",
+            "0Q1F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 23.34,
+              "market_cap_usd": 965586124800.0,
+              "net_income_usd": 65067000000.0,
+              "net_margin": 0.3338,
+              "normalized_pe": 15.7304708952858,
+              "revenue_usd": 194911000000.0
+            }
+          },
+          "head_listing_id": 24608,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.86813,
+                "relation": "lower_than",
+                "value_a": 15.895374,
+                "value_b": 18.31
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "JPMorgan Chase & Co",
+          "score": 965586124800.0,
+          "ticker": "JPM.US"
+        },
+        {
+          "also_known_as": [
+            "GCP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8.48,
+              "market_cap_usd": 389179310080.0,
+              "net_income_usd": 8972000000.0,
+              "net_margin": 0.1772,
+              "normalized_pe": 43.026113559408,
+              "revenue_usd": 50638000000.0
+            }
+          },
+          "head_listing_id": 18116,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.09562,
+                "relation": "lower_than",
+                "value_a": 42.651293,
+                "value_b": 446.03
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GE Aerospace",
+          "score": 389179310080.0,
+          "ticker": "GE.US"
+        },
+        {
+          "also_known_as": [
+            "MS06.BK",
+            "0QYU.LSE",
+            "MS-PQ.US",
+            "DWD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.38,
+              "market_cap_usd": 343026139136.0,
+              "net_income_usd": 20155000000.0,
+              "net_margin": 0.2759,
+              "normalized_pe": 16.8993866597392,
+              "revenue_usd": 73053000000.0
+            }
+          },
+          "head_listing_id": 29658,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.99695,
+                "relation": "lower_than",
+                "value_a": 18.353918,
+                "value_b": 18.41
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Morgan Stanley",
+          "score": 343026139136.0,
+          "ticker": "MS.US"
+        },
+        {
+          "also_known_as": [
+            "0R3G.LSE",
+            "GSUS06.BK",
+            "GOS.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 64.76,
+              "market_cap_usd": 302955102208.0,
+              "net_income_usd": 18068000000.0,
+              "net_margin": 0.2989,
+              "normalized_pe": 16.4435133134952,
+              "revenue_usd": 60448000000.0
+            }
+          },
+          "head_listing_id": 19383,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.94234,
+                "relation": "lower_than",
+                "value_a": 18.394522,
+                "value_b": 19.52
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Goldman Sachs Group Inc",
+          "score": 302955102208.0,
+          "ticker": "GS.US"
+        },
+        {
+          "also_known_as": [
+            "DELL19.BK",
+            "12DA.XETRA",
+            "0A7D.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.55,
+              "market_cap_usd": 302814625792.0,
+              "net_income_usd": 8409000000.0,
+              "net_margin": 0.0628,
+              "normalized_pe": 38.1806203518329,
+              "revenue_usd": 134002000000.0
+            }
+          },
+          "head_listing_id": 9779,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.43535,
+                "relation": "lower_than",
+                "value_a": 16.930695,
+                "value_b": 38.89
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dell Technologies Inc",
+          "score": 302814625792.0,
+          "ticker": "DELL.US"
+        },
+        {
+          "also_known_as": [
+            "NWT.XETRA",
+            "0R2F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.88,
+              "market_cap_usd": 264297529344.0,
+              "net_income_usd": 22610000000.0,
+              "net_margin": 0.2605,
+              "normalized_pe": 11.6894086397169,
+              "revenue_usd": 86796000000.0
+            }
+          },
+          "head_listing_id": 47495,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.59666,
+                "relation": "lower_than",
+                "value_a": 15.429687,
+                "value_b": 25.86
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wells Fargo & Company",
+          "score": 264297529344.0,
+          "ticker": "WFC.US"
+        },
+        {
+          "also_known_as": [
+            "KLAC23.BK",
+            "KLAC01.BK",
+            "0JPO.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.66,
+              "market_cap_usd": 254502240256.0,
+              "net_income_usd": 4830771000.0,
+              "net_margin": 0.3557,
+              "normalized_pe": 52.8455825016065,
+              "revenue_usd": 13579476000.0
+            }
+          },
+          "head_listing_id": 25302,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.26827,
+                "relation": "lower_than",
+                "value_a": 3.989186,
+                "value_b": 14.87
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "KLA Corporation",
+          "score": 254502240256.0,
+          "ticker": "KLAC.US"
+        },
+        {
+          "also_known_as": [
+            "IBM06.BK",
+            "IBM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 11.29,
+              "market_cap_usd": 219206402048.0,
+              "net_income_usd": 10725000000.0,
+              "net_margin": 0.1552,
+              "normalized_pe": 19.1218208000035,
+              "revenue_usd": 69097000000.0
+            }
+          },
+          "head_listing_id": 21628,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.40701,
+                "relation": "lower_than",
+                "value_a": 34.09074,
+                "value_b": 83.76
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "International Business Machines",
+          "score": 219206402048.0,
+          "ticker": "IBM.US"
+        },
+        {
+          "also_known_as": [
+            "TM5.XETRA",
+            "0R2L.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.56,
+              "market_cap_usd": 196030742528.0,
+              "net_income_usd": 10560000000.0,
+              "net_margin": 0.1145,
+              "normalized_pe": 18.1951651266009,
+              "revenue_usd": 92189000000.0
+            }
+          },
+          "head_listing_id": 43753,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.281,
+                "relation": "lower_than",
+                "value_a": 19.032081,
+                "value_b": 67.73
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "T-Mobile US Inc",
+          "score": 196030742528.0,
+          "ticker": "TMUS.US"
+        },
+        {
+          "also_known_as": [
+            "DISNEY19.BK",
+            "0QZO.LSE",
+            "WDP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.85,
+              "market_cap_usd": 179489095680.0,
+              "net_income_usd": 8600000000.0,
+              "net_margin": 0.087,
+              "normalized_pe": 18.4153361701841,
+              "revenue_usd": 98861000000.0
+            }
+          },
+          "head_listing_id": 10183,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.27695,
+                "relation": "lower_than",
+                "value_a": 16.204307,
+                "value_b": 58.51
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Walt Disney Company",
+          "score": 179489095680.0,
+          "ticker": "DIS.US"
+        },
+        {
+          "also_known_as": [
+            "GIS.XETRA",
+            "0QYQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": -2.65,
+              "market_cap_usd": 177859182592.0,
+              "net_income_usd": -3240000000.0,
+              "net_margin": -0.1064,
+              "normalized_pe": 38.5118550191629,
+              "revenue_usd": 30456000000.0
+            }
+          },
+          "head_listing_id": 18517,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.80708,
+                "relation": "lower_than",
+                "value_a": 18.595031,
+                "value_b": 23.04
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Gilead Sciences Inc",
+          "score": 177859182592.0,
+          "ticker": "GILD.US"
+        },
+        {
+          "also_known_as": [
+            "CRM01.BK",
+            "CRM06.BK",
+            "CRM80.BK",
+            "FOO.XETRA",
+            "0QYJ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8.63,
+              "market_cap_usd": 161727938560.0,
+              "net_income_usd": 8023000000.0,
+              "net_margin": 0.1873,
+              "normalized_pe": 22.2681909188174,
+              "revenue_usd": 42829000000.0
+            }
+          },
+          "head_listing_id": 8662,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.14419,
+                "relation": "lower_than",
+                "value_a": 33.68972,
+                "value_b": 233.65
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Salesforce.com Inc",
+          "score": 161727938560.0,
+          "ticker": "CRM.US"
+        },
+        {
+          "also_known_as": [
+            "BKNG03.BK",
+            "BKNG80.BK",
+            "0W2Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.0028,
+              "market_cap_usd": 156474982400.0,
+              "net_income_usd": 7209000000.0,
+              "net_margin": 0.2553,
+              "normalized_pe": 21.5448530720718,
+              "revenue_usd": 28241000000.0
+            }
+          },
+          "head_listing_id": 4701,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.04685,
+                "relation": "lower_than",
+                "value_a": 1.379357,
+                "value_b": 29.44
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Booking Holdings Inc",
+          "score": 156474982400.0,
+          "ticker": "BKNG.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.52,
+              "market_cap_usd": 154297532416.0,
+              "net_income_usd": 1126000000.0,
+              "net_margin": 0.1016,
+              "normalized_pe": 139.017935768168,
+              "revenue_usd": 11085000000.0
+            }
+          },
+          "head_listing_id": 21624,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.97241,
+                "relation": "lower_than",
+                "value_a": 32.371677,
+                "value_b": 33.29
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Interactive Brokers Group Inc",
+          "score": 154297532416.0,
+          "ticker": "IBKR.US"
+        },
+        {
+          "also_known_as": [
+            "PAR.XETRA",
+            "0KFZ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 28.48,
+              "market_cap_usd": 131363102720.0,
+              "net_income_usd": 3480172000.0,
+              "net_margin": 0.1658,
+              "normalized_pe": 37.8337229905539,
+              "revenue_usd": 20987074000.0
+            }
+          },
+          "head_listing_id": 34240,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.81243,
+                "relation": "lower_than",
+                "value_a": 31.717303,
+                "value_b": 39.04
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Parker-Hannifin Corporation",
+          "score": 131363102720.0,
+          "ticker": "PH.US"
+        },
+        {
+          "also_known_as": [
+            "0KOC.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 19.93,
+              "market_cap_usd": 120477671424.0,
+              "net_income_usd": 11695000000.0,
+              "net_margin": 0.1285,
+              "normalized_pe": 10.3016392837965,
+              "revenue_usd": 91019000000.0
+            }
+          },
+          "head_listing_id": 34190,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.07576,
+                "relation": "lower_than",
+                "value_a": 11.630966,
+                "value_b": 153.53
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Progressive Corp",
+          "score": 120477671424.0,
+          "ticker": "PGR.US"
+        },
+        {
+          "also_known_as": [
+            "0HLQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8.57,
+              "market_cap_usd": 111227174912.0,
+              "net_income_usd": 5961000000.0,
+              "net_margin": 0.2921,
+              "normalized_pe": 18.4043124107794,
+              "revenue_usd": 20408000000.0
+            }
+          },
+          "head_listing_id": 5063,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.45516,
+                "relation": "lower_than",
+                "value_a": 16.68153,
+                "value_b": 36.65
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The Bank of New York Mellon Corporation",
+          "score": 111227174912.0,
+          "ticker": "BNY.US"
+        },
+        {
+          "also_known_as": [
+            "VRT01.BK",
+            "VRT23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.42,
+              "market_cap_usd": 104924676096.0,
+              "net_income_usd": 1732000000.0,
+              "net_margin": 0.1509,
+              "normalized_pe": 58.9441882947246,
+              "revenue_usd": 11479600000.0
+            }
+          },
+          "head_listing_id": 46545,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.19476,
+                "relation": "lower_than",
+                "value_a": 66.238377,
+                "value_b": 340.11
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vertiv Holdings Co",
+          "score": 104924676096.0,
+          "ticker": "VRT.US"
+        },
+        {
+          "also_known_as": [
+            "0ID1.LSE",
+            "DUKB.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.66,
+              "market_cap_usd": 96675274752.0,
+              "net_income_usd": 5139000000.0,
+              "net_margin": 0.1549,
+              "normalized_pe": 20.8786423084963,
+              "revenue_usd": 33166000000.0
+            }
+          },
+          "head_listing_id": 10868,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.75885,
+                "relation": "lower_than",
+                "value_a": 18.02274,
+                "value_b": 23.75
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Duke Energy Corporation",
+          "score": 96675274752.0,
+          "ticker": "DUK.US"
+        },
+        {
+          "also_known_as": [
+            "0QYF.LSE",
+            "CTP2.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.12,
+              "market_cap_usd": 92974284800.0,
+              "net_income_usd": 11200000000.0,
+              "net_margin": 0.0897,
+              "normalized_pe": 8.6139555690098,
+              "revenue_usd": 124905000000.0
+            }
+          },
+          "head_listing_id": 7759,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.06868,
+                "relation": "lower_than",
+                "value_a": 4.432924,
+                "value_b": 64.54
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Comcast Corp",
+          "score": 92974284800.0,
+          "ticker": "CMCSA.US"
+        },
+        {
+          "also_known_as": [
+            "MELI06.BK",
+            "0K0E.LSE",
+            "MELI23.BK",
+            "MLB1.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 36.76,
+              "market_cap_usd": 90196705280.0,
+              "net_income_usd": 1863000000.0,
+              "net_margin": 0.053,
+              "normalized_pe": 44.9708039548528,
+              "revenue_usd": 35182000000.0
+            }
+          },
+          "head_listing_id": 28166,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.79627,
+                "relation": "lower_than",
+                "value_a": 48.174274,
+                "value_b": 60.5
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MercadoLibre Inc.",
+          "score": 90196705280.0,
+          "ticker": "MELI.US"
+        },
+        {
+          "also_known_as": [
+            "0JC3.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.09,
+              "market_cap_usd": 87678590976.0,
+              "net_income_usd": 4038000000.0,
+              "net_margin": 0.3008,
+              "normalized_pe": 21.3842264280618,
+              "revenue_usd": 13426000000.0
+            }
+          },
+          "head_listing_id": 21697,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.94055,
+                "relation": "lower_than",
+                "value_a": 28.940747,
+                "value_b": 30.77
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intercontinental Exchange Inc",
+          "score": 87678590976.0,
+          "ticker": "ICE.US"
+        },
+        {
+          "also_known_as": [
+            "0L6P.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 14.17,
+              "market_cap_usd": 83748741120.0,
+              "net_income_usd": 4693481000.0,
+              "net_margin": 0.7059,
+              "normalized_pe": 34.0653452370194,
+              "revenue_usd": 6648586000.0
+            }
+          },
+          "head_listing_id": 41078,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.88676,
+                "relation": "lower_than",
+                "value_a": 26.185953,
+                "value_b": 29.53
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Simon Property Group Inc",
+          "score": 83748741120.0,
+          "ticker": "SPG.US"
+        },
+        {
+          "also_known_as": [
+            "TRVUS06.BK",
+            "0R03.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 37.21,
+              "market_cap_usd": 76741009408.0,
+              "net_income_usd": 8303000000.0,
+              "net_margin": 0.1695,
+              "normalized_pe": 9.24256406214621,
+              "revenue_usd": 48979000000.0
+            }
+          },
+          "head_listing_id": 44331,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.34181,
+                "relation": "lower_than",
+                "value_a": 11.136257,
+                "value_b": 32.58
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The Travelers Companies Inc",
+          "score": 76741009408.0,
+          "ticker": "TRV.US"
+        },
+        {
+          "also_known_as": [
+            "0HOY.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.47,
+              "market_cap_usd": 73142616064.0,
+              "net_income_usd": 3565000000.0,
+              "net_margin": 0.1729,
+              "normalized_pe": 19.2205923666442,
+              "revenue_usd": 20615000000.0
+            }
+          },
+          "head_listing_id": 5582,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.80712,
+                "relation": "lower_than",
+                "value_a": 50.647059,
+                "value_b": 62.75
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Boston Scientific Corp",
+          "score": 73142616064.0,
+          "ticker": "BSX.US"
+        },
+        {
+          "also_known_as": [
+            "0LD9.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 10.46,
+              "market_cap_usd": 63851122688.0,
+              "net_income_usd": 2267600000.0,
+              "net_margin": 0.1354,
+              "normalized_pe": 28.1580184723937,
+              "revenue_usd": 16741500000.0
+            }
+          },
+          "head_listing_id": 44128,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.81248,
+                "relation": "lower_than",
+                "value_a": 24.805,
+                "value_b": 30.53
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Targa Resources Inc",
+          "score": 63851122688.0,
+          "ticker": "TRGP.US"
+        },
+        {
+          "also_known_as": [
+            "0K0X.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.22,
+              "market_cap_usd": 61469683712.0,
+              "net_income_usd": 3626000000.0,
+              "net_margin": 0.0467,
+              "normalized_pe": 16.9524775819084,
+              "revenue_usd": 77665000000.0
+            }
+          },
+          "head_listing_id": 28226,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.80068,
+                "relation": "lower_than",
+                "value_a": 14.81258,
+                "value_b": 18.5
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MetLife Inc",
+          "score": 61469683712.0,
+          "ticker": "MET.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 40.63,
+              "market_cap_usd": 61205749760.0,
+              "net_income_usd": 1434401000.0,
+              "net_margin": 0.1278,
+              "normalized_pe": 41.8479254552403,
+              "revenue_usd": 11228024000.0
+            }
+          },
+          "head_listing_id": 14954,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.68738,
+                "relation": "lower_than",
+                "value_a": 42.466398,
+                "value_b": 61.78
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Comfort Systems USA Inc",
+          "score": 61205749760.0,
+          "ticker": "FIX.US"
+        },
+        {
+          "also_known_as": [
+            "0IC9.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.87,
+              "market_cap_usd": 60344274944.0,
+              "net_income_usd": 2954000000.0,
+              "net_margin": 0.1693,
+              "normalized_pe": 18.0411718356015,
+              "revenue_usd": 17449000000.0
+            }
+          },
+          "head_listing_id": 9439,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.40508,
+                "relation": "lower_than",
+                "value_a": 18.965719,
+                "value_b": 46.82
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dominion Energy Inc",
+          "score": 60344274944.0,
+          "ticker": "D.US"
+        },
+        {
+          "also_known_as": [
+            "0QZ4.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.03,
+              "market_cap_usd": 60067287040.0,
+              "net_income_usd": 3951000000.0,
+              "net_margin": 0.0579,
+              "normalized_pe": 16.6984444349449,
+              "revenue_usd": 68287000000.0
+            }
+          },
+          "head_listing_id": 9474,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.17597,
+                "relation": "lower_than",
+                "value_a": 9.664513,
+                "value_b": 54.92
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Delta Air Lines Inc",
+          "score": 60067287040.0,
+          "ticker": "DAL.US"
+        },
+        {
+          "also_known_as": [
+            "0HWH.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 13.2,
+              "market_cap_usd": 56544923648.0,
+              "net_income_usd": 2917000000.0,
+              "net_margin": 0.1357,
+              "normalized_pe": 19.2041913888262,
+              "revenue_usd": 21491000000.0
+            }
+          },
+          "head_listing_id": 26729,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.1759,
+                "relation": "lower_than",
+                "value_a": 10.965723,
+                "value_b": 62.34
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cheniere Energy Inc",
+          "score": 56544923648.0,
+          "ticker": "LNG.US"
+        },
+        {
+          "also_known_as": [
+            "0R9U.LSE",
+            "PYPL06.BK",
+            "2PP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.29,
+              "market_cap_usd": 52090658816.0,
+              "net_income_usd": 4902000000.0,
+              "net_margin": 0.1436,
+              "normalized_pe": 9.95005671351188,
+              "revenue_usd": 34128000000.0
+            }
+          },
+          "head_listing_id": 36231,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.31102,
+                "relation": "lower_than",
+                "value_a": 11.601225,
+                "value_b": 37.3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PayPal Holdings Inc",
+          "score": 52090658816.0,
+          "ticker": "PYPL.US"
+        },
+        {
+          "also_known_as": [
+            "0R1T.LSE",
+            "EXPE06.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 15.9,
+              "market_cap_usd": 38577500160.0,
+              "net_income_usd": 2036000000.0,
+              "net_margin": 0.1297,
+              "normalized_pe": 18.0453779963385,
+              "revenue_usd": 15700000000.0
+            }
+          },
+          "head_listing_id": 12728,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.41533,
+                "relation": "lower_than",
+                "value_a": 27.141551,
+                "value_b": 65.35
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Expedia Group Inc.",
+          "score": 38577500160.0,
+          "ticker": "EXPE.US"
+        },
+        {
+          "also_known_as": [
+            "UAL1.XETRA",
+            "0LIU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 10.68,
+              "market_cap_usd": 38532919296.0,
+              "net_income_usd": 3497000000.0,
+              "net_margin": 0.0556,
+              "normalized_pe": 12.891335952531,
+              "revenue_usd": 62901000000.0
+            }
+          },
+          "head_listing_id": 44937,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.17157,
+                "relation": "lower_than",
+                "value_a": 11.323647,
+                "value_b": 66.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "United Airlines Holdings Inc",
+          "score": 38532919296.0,
+          "ticker": "UAL.US"
+        },
+        {
+          "also_known_as": [
+            "0J3H.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 15.45,
+              "market_cap_usd": 38093221888.0,
+              "net_income_usd": 4365000000.0,
+              "net_margin": 0.1525,
+              "normalized_pe": 9.41270617445021,
+              "revenue_usd": 28626000000.0
+            }
+          },
+          "head_listing_id": 20568,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.31971,
+                "relation": "lower_than",
+                "value_a": 11.119599,
+                "value_b": 34.78
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hartford Financial Services Group",
+          "score": 38093221888.0,
+          "ticker": "HIG.US"
+        },
+        {
+          "also_known_as": [
+            "0KS2.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.02,
+              "market_cap_usd": 37680553984.0,
+              "net_income_usd": 2012000000.0,
+              "net_margin": 0.1604,
+              "normalized_pe": 20.5953172490352,
+              "revenue_usd": 12543000000.0
+            }
+          },
+          "head_listing_id": 33836,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.70784,
+                "relation": "lower_than",
+                "value_a": 19.147091,
+                "value_b": 27.05
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Public Service Enterprise Group Inc",
+          "score": 37680553984.0,
+          "ticker": "PEG.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 32.12,
+              "market_cap_usd": 36369936384.0,
+              "net_income_usd": 1439158000.0,
+              "net_margin": 0.0774,
+              "normalized_pe": 25.2716771779054,
+              "revenue_usd": 18597775000.0
+            }
+          },
+          "head_listing_id": 11838,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.49804,
+                "relation": "lower_than",
+                "value_a": 25.669163,
+                "value_b": 51.54
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "EMCOR Group Inc",
+          "score": 36369936384.0,
+          "ticker": "EME.US"
+        },
+        {
+          "also_known_as": [
+            "0JW2.LSE",
+            "MTB-PJ.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 18.89,
+              "market_cap_usd": 36320690176.0,
+              "net_income_usd": 3033000000.0,
+              "net_margin": 0.3088,
+              "normalized_pe": 11.9751698569074,
+              "revenue_usd": 9823000000.0
+            }
+          },
+          "head_listing_id": 29939,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.89878,
+                "relation": "lower_than",
+                "value_a": 12.421173,
+                "value_b": 13.82
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "M&T Bank Corporation",
+          "score": 36320690176.0,
+          "ticker": "MTB.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.78,
+              "market_cap_usd": 33750974464.0,
+              "net_income_usd": 4692000000.0,
+              "net_margin": 0.2523,
+              "normalized_pe": 7.19330231543052,
+              "revenue_usd": 18595000000.0
+            }
+          },
+          "head_listing_id": 538,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.19522,
+                "relation": "lower_than",
+                "value_a": 8.796626,
+                "value_b": 45.06
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Arch Capital Group Ltd.",
+          "score": 33750974464.0,
+          "ticker": "ACGL.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.51,
+              "market_cap_usd": 33264445440.0,
+              "net_income_usd": 3140000000.0,
+              "net_margin": 0.2731,
+              "normalized_pe": 10.5724927661522,
+              "revenue_usd": 11497000000.0
+            }
+          },
+          "head_listing_id": 8523,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.82134,
+                "relation": "lower_than",
+                "value_a": 13.552115,
+                "value_b": 16.5
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cheniere Energy Partners LP",
+          "score": 33264445440.0,
+          "ticker": "CQP.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.41,
+              "market_cap_usd": 30837145600.0,
+              "net_income_usd": 475800000.0,
+              "net_margin": 0.1009,
+              "normalized_pe": 65.9268148290771,
+              "revenue_usd": 4715200000.0
+            }
+          },
+          "head_listing_id": 3068,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.8795,
+                "relation": "lower_than",
+                "value_a": 38.451613,
+                "value_b": 43.72
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Allegheny Technologies Incorporated",
+          "score": 30837145600.0,
+          "ticker": "ATI.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.79,
+              "market_cap_usd": 30704345088.0,
+              "net_income_usd": 2071222000.0,
+              "net_margin": 0.4199,
+              "normalized_pe": 25.9188412177778,
+              "revenue_usd": 4933060000.0
+            }
+          },
+          "head_listing_id": 49246,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.09949,
+                "relation": "lower_than",
+                "value_a": 16.210117,
+                "value_b": 162.93
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zoom Video Communications Inc",
+          "score": 30704345088.0,
+          "ticker": "ZM.US"
+        },
+        {
+          "also_known_as": [
+            "0HQN.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.83,
+              "market_cap_usd": 30388379648.0,
+              "net_income_usd": 1353100000.0,
+              "net_margin": 0.2673,
+              "normalized_pe": 23.4228682467968,
+              "revenue_usd": 5061300000.0
+            }
+          },
+          "head_listing_id": 6366,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.38946,
+                "relation": "lower_than",
+                "value_a": 26.557118,
+                "value_b": 68.19
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cboe Global Markets Inc",
+          "score": 30388379648.0,
+          "ticker": "CBOE.US"
+        },
+        {
+          "also_known_as": [
+            "0A0X.LSE",
+            "FOX.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.84,
+              "market_cap_usd": 28968448000.0,
+              "net_income_usd": 1685000000.0,
+              "net_margin": 0.0984,
+              "normalized_pe": 12.2288631367159,
+              "revenue_usd": 17126000000.0
+            }
+          },
+          "head_listing_id": 16050,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.91028,
+                "relation": "lower_than",
+                "value_a": 16.49436,
+                "value_b": 18.12
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fox Corp Class A",
+          "score": 28968448000.0,
+          "ticker": "FOXA.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.58,
+              "market_cap_usd": 28528918528.0,
+              "net_income_usd": 2765718000.0,
+              "net_margin": 0.675,
+              "normalized_pe": 10.3097719800217,
+              "revenue_usd": 4097604000.0
+            }
+          },
+          "head_listing_id": 46082,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.38165,
+                "relation": "lower_than",
+                "value_a": 10.357947,
+                "value_b": 27.14
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "VICI Properties Inc",
+          "score": 28528918528.0,
+          "ticker": "VICI.US"
+        },
+        {
+          "also_known_as": [
+            "0IFJ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.69,
+              "market_cap_usd": 28356943872.0,
+              "net_income_usd": 3942000000.0,
+              "net_margin": 0.203,
+              "normalized_pe": 11.7111839287379,
+              "revenue_usd": 19423000000.0
+            }
+          },
+          "head_listing_id": 11654,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.08239,
+                "relation": "lower_than",
+                "value_a": 7.6846,
+                "value_b": 93.27
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Edison International",
+          "score": 28356943872.0,
+          "ticker": "EIX.US"
+        },
+        {
+          "also_known_as": [
+            "0IP9.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.22,
+              "market_cap_usd": 27502974976.0,
+              "net_income_usd": 2801000000.0,
+              "net_margin": 0.1342,
+              "normalized_pe": 10.9614814134566,
+              "revenue_usd": 20866000000.0
+            }
+          },
+          "head_listing_id": 14898,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.57995,
+                "relation": "lower_than",
+                "value_a": 10.137558,
+                "value_b": 17.48
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Fiserv, Inc.",
+          "score": 27502974976.0,
+          "ticker": "FISV.US"
+        },
+        {
+          "also_known_as": [
+            "0IPB.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 0.4675,
+              "market_cap_usd": 27346522112.0,
+              "net_income_usd": 1085000000.0,
+              "net_margin": 0.0686,
+              "normalized_pe": 17.3043111957629,
+              "revenue_usd": 15825000000.0
+            }
+          },
+          "head_listing_id": 13822,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.54056,
+                "relation": "lower_than",
+                "value_a": 19.103522,
+                "value_b": 35.34
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "FirstEnergy Corporation",
+          "score": 27346522112.0,
+          "ticker": "FE.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.5,
+              "market_cap_usd": 26430758912.0,
+              "net_income_usd": 479100000.0,
+              "net_margin": 0.1582,
+              "normalized_pe": 53.9656149034299,
+              "revenue_usd": 3028800000.0
+            }
+          },
+          "head_listing_id": 8711,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.37648,
+                "relation": "lower_than",
+                "value_a": 41.318814,
+                "value_b": 109.75
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Carpenter Technology Corporation",
+          "score": 26430758912.0,
+          "ticker": "CRS.US"
+        },
+        {
+          "also_known_as": [
+            "0LC3.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.625,
+              "market_cap_usd": 26218383360.0,
+              "net_income_usd": 3518000000.0,
+              "net_margin": 0.234,
+              "normalized_pe": 7.45263881750995,
+              "revenue_usd": 15032000000.0
+            }
+          },
+          "head_listing_id": 42262,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.62362,
+                "relation": "lower_than",
+                "value_a": 9.167226,
+                "value_b": 14.7
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Synchrony Financial",
+          "score": 26218383360.0,
+          "ticker": "SYF.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.9,
+              "market_cap_usd": 25872756736.0,
+              "net_income_usd": 695219000.0,
+              "net_margin": 0.1006,
+              "normalized_pe": 37.215261286012,
+              "revenue_usd": 6909956000.0
+            }
+          },
+          "head_listing_id": 40735,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.64623,
+                "relation": "lower_than",
+                "value_a": 28.111111,
+                "value_b": 43.5
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SharkNinja, Inc.",
+          "score": 25872756736.0,
+          "ticker": "SN.US"
+        },
+        {
+          "also_known_as": [
+            "0J9P.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.85,
+              "market_cap_usd": 25027090432.0,
+              "net_income_usd": 1612383000.0,
+              "net_margin": 0.2771,
+              "normalized_pe": 15.3935112213942,
+              "revenue_usd": 5819530000.0
+            }
+          },
+          "head_listing_id": 22402,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.27924,
+                "relation": "lower_than",
+                "value_a": 17.189831,
+                "value_b": 61.56
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Incyte Corporation",
+          "score": 25027090432.0,
+          "ticker": "INCY.US"
+        },
+        {
+          "also_known_as": [
+            "FCZBV.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 186.46,
+              "market_cap_usd": 24931481600.0,
+              "net_income_usd": 2354000000.0,
+              "net_margin": 0.2523,
+              "normalized_pe": 10.4089661904637,
+              "revenue_usd": 9329000000.0
+            }
+          },
+          "head_listing_id": 13519,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.36618,
+                "relation": "lower_than",
+                "value_a": 12.757599,
+                "value_b": 34.84
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "First Citizens BancShares, Inc.",
+          "score": 24931481600.0,
+          "ticker": "FCNCA.US"
+        },
+        {
+          "also_known_as": [
+            "SMCI03.BK",
+            "MS51.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.26,
+              "market_cap_usd": 24199520256.0,
+              "net_income_usd": 1247390000.0,
+              "net_margin": 0.037,
+              "normalized_pe": 19.4001236630084,
+              "revenue_usd": 33700206000.0
+            }
+          },
+          "head_listing_id": 40530,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.5219,
+                "relation": "lower_than",
+                "value_a": 24.377953,
+                "value_b": 46.71
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Super Micro Computer Inc",
+          "score": 24199520256.0,
+          "ticker": "SMCI.US"
+        },
+        {
+          "also_known_as": [
+            "0IW7.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": -3.03,
+              "market_cap_usd": 23913564160.0,
+              "net_income_usd": -934174000.0,
+              "net_margin": -0.0913,
+              "normalized_pe": 69.8366654923434,
+              "revenue_usd": 10230917000.0
+            }
+          },
+          "head_listing_id": 19162,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.07368,
+                "relation": "lower_than",
+                "value_a": 10.577602,
+                "value_b": 143.57
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Global Payments Inc",
+          "score": 23913564160.0,
+          "ticker": "GPN.US"
+        },
+        {
+          "also_known_as": [
+            "TR1.XETRA",
+            "0KNY.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.96,
+              "market_cap_usd": 23533004800.0,
+              "net_income_usd": 2221600000.0,
+              "net_margin": 0.2926,
+              "normalized_pe": 12.3975550244673,
+              "revenue_usd": 7592000000.0
+            }
+          },
+          "head_listing_id": 44215,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.98225,
+                "relation": "lower_than",
+                "value_a": 11.109291,
+                "value_b": 11.31
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "T. Rowe Price Group Inc",
+          "score": 23533004800.0,
+          "ticker": "TROW.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.25,
+              "market_cap_usd": 23127918592.0,
+              "net_income_usd": 728000000.0,
+              "net_margin": 0.0181,
+              "normalized_pe": 30.7046616606668,
+              "revenue_usd": 40133000000.0
+            }
+          },
+          "head_listing_id": 45412,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "basis": "annual",
+                "kind": "relation",
+                "metric_b": "eps_diluted_growth",
+                "ratio": 0.72698,
+                "relation": "lower_than",
+                "value_a": 31.1,
+                "value_b": 42.78
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "US Foods Holding Corp",
+          "score": 23127918592.0,
+          "ticker": "USFD.US"
+        }
+      ],
+      "sort": "ta",
+      "universe": 4359,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Modeled PEG = P/E divided by EPS growth-rate (no ready-made PEG field exists, so I used the screener's relation form: P/E lower_than EPS-growth%, which is exactly PEG < 1). Screened US common stocks. Every returned row satisfies PEG < 1 (60 matches, market-cap-ranked, buffer capped). The largest cheap-relative-to-growth names: NVDA.US PEG=0.23 (P/E 46.7 vs EPS growth 204%); GOOG.US PEG=0.93 (P/E 31.1 vs EPS growth 33%); META.US PEG=0.72 (P/E 28.7 vs EPS growth 40%); JPM.US PEG=0.87 (P/E 15.9 vs EPS growth 18%); GE.US PEG=0.10 (P/E 42.7 vs EPS growth 446%); MS.US PEG=1.00 (P/E 18.4 vs EPS growth 18%); GS.US PEG=0.94 (P/E 18.4 vs EPS growth 20%); DELL.US PEG=0.44 (P/E 16.9 vs EPS growth 39%); WFC.US PEG=0.60 (P/E 15.4 vs EPS growth 26%); KLAC.US PEG=0.27 (P/E 4.0 vs EPS growth 15%). So mega-caps like NVDA (PEG 0.23), GOOG (0.93), META (0.72), JPM (0.87), plus DELL (0.44), Wells Fargo (0.60), T-Mobile (0.28) and Disney (0.28) all screen cheap versus their growth. Caveat: growth here is trailing diluted-EPS growth (NVDA 204%, GE 446%), so a very high recent growth spurt can flatter PEG."
+}

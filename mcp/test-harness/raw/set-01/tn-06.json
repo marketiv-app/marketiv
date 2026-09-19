@@ -1,0 +1,1589 @@
+{
+  "id": "tn-06",
+  "question": "Which stocks are like coiling up / getting really quiet before a big move? I think it's called a squeeze?",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "low volatility squeeze coiling quiet"
+        ]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "bb_squeeze",
+                "window_bars": 3
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "atr_pct": {
+            "definition": "Average True Range ÷ price — volatility as a fraction of price."
+          },
+          "bb_width": {
+            "definition": "Bollinger-band width ÷ mid — lower = tighter (a squeeze)."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 85.6186,
+              "atr_pct": 0.01,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 50512,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Tern Properties Co Ltd",
+          "score": 1.0,
+          "ticker": "0277.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 65.2957,
+              "atr_pct": 0.0082,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 1752589,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Hamilton Global Opportunities PLC",
+          "score": 1.0,
+          "ticker": "ALHGO.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 33.6951,
+              "atr_pct": 0.0204,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 53858,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Ferretti SpA",
+          "score": 1.0,
+          "ticker": "9638.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.9996,
+              "atr_pct": 0.0582,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 237377,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.998,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Fadel Partners Inc",
+          "score": 0.998,
+          "ticker": "FADL.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 45.8015,
+              "atr_pct": 0.0118,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 51554,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.998,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Quanzhou Huixin Micro credit Co Ltd",
+          "score": 0.998,
+          "ticker": "1577.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 8.678,
+              "atr_pct": 0.0197,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 51489,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.994,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Best Food Holding Co Ltd",
+          "score": 0.994,
+          "ticker": "1488.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 35.5916,
+              "atr_pct": 0.1091,
+              "bb_width": 0.0611
+            }
+          },
+          "head_listing_id": 236353,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.994,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Alina Holdings PLC",
+          "score": 0.994,
+          "ticker": "ALNA.LSE"
+        },
+        {
+          "also_known_as": [
+            "266.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 25.3409,
+              "atr_pct": 0.0074,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 50502,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.99,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Tian Teck Land Ltd",
+          "score": 0.99,
+          "ticker": "0266.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.9973,
+              "atr_pct": 0.0139,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 50770,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.989,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "JIAHUA STORES H",
+          "score": 0.989,
+          "ticker": "0602-OL.HK"
+        },
+        {
+          "also_known_as": [
+            "0733-OL.HK",
+            "733.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 8.0245,
+              "atr_pct": 0.0091,
+              "bb_width": 0.0054
+            }
+          },
+          "head_listing_id": 50878,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.987,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Hopefluent Group Holdings Ltd",
+          "score": 0.987,
+          "ticker": "0733.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.4493,
+              "atr_pct": 0.0033,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 1753285,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.985,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CMG Cleantech S.A.",
+          "score": 0.985,
+          "ticker": "MLCMG.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 11.4943,
+              "atr_pct": 0.0019,
+              "bb_width": 0.0
+            }
+          },
+          "head_listing_id": 1753301,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.983,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Société Hôtelière et Immobilière de Nice S.A.",
+          "score": 0.983,
+          "ticker": "MLHIN.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 90.0333,
+              "atr_pct": 0.0065,
+              "bb_width": 0.0143
+            }
+          },
+          "head_listing_id": 52827,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.979,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "China Rongzhong Finl Hldg Co",
+          "score": 0.979,
+          "ticker": "3963.HK"
+        },
+        {
+          "also_known_as": [
+            "0AAJ.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 7.7661,
+              "atr_pct": 0.0098,
+              "bb_width": 0.0071
+            }
+          },
+          "head_listing_id": 1754752,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.977,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "PolyPeptide Group AG",
+          "score": 0.977,
+          "ticker": "PPGN.SW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 83.6704,
+              "atr_pct": 0.0187,
+              "bb_width": 0.0071
+            }
+          },
+          "head_listing_id": 13333,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.968,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Forte Biosciences Inc",
+          "score": 0.968,
+          "ticker": "FBRX.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 52.5839,
+              "atr_pct": 0.0097,
+              "bb_width": 0.0078
+            }
+          },
+          "head_listing_id": 239252,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.953,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Ramsdens Holdings PLC",
+          "score": 0.953,
+          "ticker": "RFX.LSE"
+        },
+        {
+          "also_known_as": [
+            "760.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 25.1601,
+              "atr_pct": 0.0446,
+              "bb_width": 0.0202
+            }
+          },
+          "head_listing_id": 50897,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.944,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Talent Property Group Ltd",
+          "score": 0.944,
+          "ticker": "0760.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 14.563,
+              "atr_pct": 0.2743,
+              "bb_width": 0.2299
+            }
+          },
+          "head_listing_id": 52401,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.939,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Quantgroup Holding Ltd",
+          "score": 0.939,
+          "ticker": "2685.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 21.0051,
+              "atr_pct": 0.023,
+              "bb_width": 0.0301
+            }
+          },
+          "head_listing_id": 53631,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.936,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BCI Group Holdings Ltd",
+          "score": 0.936,
+          "ticker": "8412.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.9854,
+              "atr_pct": 0.0483,
+              "bb_width": 0.0651
+            }
+          },
+          "head_listing_id": 239384,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.932,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Scancell Hldgs Plc",
+          "score": 0.932,
+          "ticker": "SCLP.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 43.0665,
+              "atr_pct": 0.1834,
+              "bb_width": 0.3061
+            }
+          },
+          "head_listing_id": 36950,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.928,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Robin Energy Ltd.",
+          "score": 0.928,
+          "ticker": "RBNE.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 60.9128,
+              "atr_pct": 0.0098,
+              "bb_width": 0.0069
+            }
+          },
+          "head_listing_id": 38924,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.927,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Safety Insurance Group Inc",
+          "score": 0.927,
+          "ticker": "SAFT.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.7054,
+              "atr_pct": 0.2456,
+              "bb_width": 0.3416
+            }
+          },
+          "head_listing_id": 2047,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.916,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Amaze Holdings Inc",
+          "score": 0.916,
+          "ticker": "AMZE.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 14.2204,
+              "atr_pct": 0.0856,
+              "bb_width": 0.1109
+            }
+          },
+          "head_listing_id": 574897,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.916,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bitcoin Japan Corporation",
+          "score": 0.916,
+          "ticker": "8105.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 60.8224,
+              "atr_pct": 0.1768,
+              "bb_width": 0.3143
+            }
+          },
+          "head_listing_id": 3864402,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.915,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "446840",
+          "score": 0.915,
+          "ticker": "446840.KQ"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 40.9085,
+              "atr_pct": 0.0321,
+              "bb_width": 0.0607
+            }
+          },
+          "head_listing_id": 52298,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.915,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Palasino Holdings Ltd",
+          "score": 0.915,
+          "ticker": "2536.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 8.6265,
+              "atr_pct": 0.0775,
+              "bb_width": 0.0592
+            }
+          },
+          "head_listing_id": 50713,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.91,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Wong’s Kong King International Holdings Ltd",
+          "score": 0.91,
+          "ticker": "0532.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 46.8087,
+              "atr_pct": 0.0077,
+              "bb_width": 0.0707
+            }
+          },
+          "head_listing_id": 1752755,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.906,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Artois Nom.",
+          "score": 0.906,
+          "ticker": "ARTO.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 24.1031,
+              "atr_pct": 0.0233,
+              "bb_width": 0.0358
+            }
+          },
+          "head_listing_id": 1752756,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.903,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ARVERNE GROUP",
+          "score": 0.903,
+          "ticker": "ARVEN.PA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 40.0466,
+              "atr_pct": 0.0125,
+              "bb_width": 0.0405
+            }
+          },
+          "head_listing_id": 53479,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.902,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "China Health Group Inc",
+          "score": 0.902,
+          "ticker": "8225.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 47.0454,
+              "atr_pct": 0.0309,
+              "bb_width": 0.0558
+            }
+          },
+          "head_listing_id": 51896,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.901,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Tian Tu Capital Co Ltd",
+          "score": 0.901,
+          "ticker": "1973.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 24.9983,
+              "atr_pct": 0.0233,
+              "bb_width": 0.0445
+            }
+          },
+          "head_listing_id": 1418002,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.901,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "New Advanced Electronics Technologies Co Ltd",
+          "score": 0.901,
+          "ticker": "3465.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 35.6544,
+              "atr_pct": 0.1699,
+              "bb_width": 0.1946
+            }
+          },
+          "head_listing_id": 6510,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.901,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CCH Holdings Ltd Ordinary Shares",
+          "score": 0.901,
+          "ticker": "CCHH.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.409,
+              "atr_pct": 0.4646,
+              "bb_width": 0.5319
+            }
+          },
+          "head_listing_id": 23865,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.9,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "707 Cayman Holdings Limited Ordinary Shares",
+          "score": 0.9,
+          "ticker": "JEM.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 26.2716,
+              "atr_pct": 0.1576,
+              "bb_width": 0.3325
+            }
+          },
+          "head_listing_id": 52382,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.899,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shanghai Zhida Tech Dvlp Co",
+          "score": 0.899,
+          "ticker": "2650.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 12.0285,
+              "atr_pct": 0.1879,
+              "bb_width": 0.1861
+            }
+          },
+          "head_listing_id": 40903,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.899,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Sobr Safe Inc",
+          "score": 0.899,
+          "ticker": "SOBR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.2492,
+              "atr_pct": 0.0087,
+              "bb_width": 0.0123
+            }
+          },
+          "head_listing_id": 53492,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.896,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Ying Kee Tea House Group Ltd",
+          "score": 0.896,
+          "ticker": "8241.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 13.8248,
+              "atr_pct": 0.1457,
+              "bb_width": 0.209
+            }
+          },
+          "head_listing_id": 29203,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.893,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Mobile-health Network Solutions Class A Ordinary Shares",
+          "score": 0.893,
+          "ticker": "MNDR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 8.8216,
+              "atr_pct": 0.0136,
+              "bb_width": 0.0142
+            }
+          },
+          "head_listing_id": 575059,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.892,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Medical Net,Inc.",
+          "score": 0.892,
+          "ticker": "3645.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 13.7945,
+              "atr_pct": 0.1151,
+              "bb_width": 0.2011
+            }
+          },
+          "head_listing_id": 20109,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.891,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Huachen AI Parking Management Technology Holding Co Ltd",
+          "score": 0.891,
+          "ticker": "HCAI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 48.5522,
+              "atr_pct": 0.0272,
+              "bb_width": 0.0301
+            }
+          },
+          "head_listing_id": 51233,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.885,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Sinolink Worldwide Holdings Ltd",
+          "score": 0.885,
+          "ticker": "1168.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 43.1474,
+              "atr_pct": 0.0279,
+              "bb_width": 0.0383
+            }
+          },
+          "head_listing_id": 1417416,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.884,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Klingon Aerospace Inc",
+          "score": 0.884,
+          "ticker": "1529.TW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 11.0504,
+              "atr_pct": 0.0103,
+              "bb_width": 0.0195
+            }
+          },
+          "head_listing_id": 241759,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.882,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Datron AG",
+          "score": 0.882,
+          "ticker": "DAR.XETRA"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.2809,
+              "atr_pct": 0.0113,
+              "bb_width": 0.0171
+            }
+          },
+          "head_listing_id": 238839,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.881,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Mitie Group PLC",
+          "score": 0.881,
+          "ticker": "MTO.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 19.8688,
+              "atr_pct": 0.2885,
+              "bb_width": 0.2968
+            }
+          },
+          "head_listing_id": 41726,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.879,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Star Fashion Culture Holdings Limited",
+          "score": 0.879,
+          "ticker": "STFS.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 19.7229,
+              "atr_pct": 0.0561,
+              "bb_width": 0.0312
+            }
+          },
+          "head_listing_id": 1418027,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.878,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Seoul Pharma Co. Ltd",
+          "score": 0.878,
+          "ticker": "018680.KQ"
+        },
+        {
+          "also_known_as": [
+            "200550.CS"
+          ],
+          "context": {
+            "ta": {
+              "adx": 14.79,
+              "atr_pct": 0.0241,
+              "bb_width": 0.0957
+            }
+          },
+          "head_listing_id": 230758,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.878,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Jiangling Motors Corp Ltd",
+          "score": 0.878,
+          "ticker": "000550.CS"
+        },
+        {
+          "also_known_as": [
+            "354200.KO"
+          ],
+          "context": {
+            "ta": {
+              "adx": 16.935,
+              "atr_pct": 0.1874,
+              "bb_width": 0.4049
+            }
+          },
+          "head_listing_id": 1421059,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.875,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "NGeneBio Co. Ltd.",
+          "score": 0.875,
+          "ticker": "354200.KQ"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.3537,
+              "atr_pct": 0.0078,
+              "bb_width": 0.0316
+            }
+          },
+          "head_listing_id": 53700,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.874,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Jia Group Holdings Limited",
+          "score": 0.874,
+          "ticker": "8519.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 24.4142,
+              "atr_pct": 0.0118,
+              "bb_width": 0.0286
+            }
+          },
+          "head_listing_id": 234431,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.873,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Rejlers AB Series B",
+          "score": 0.873,
+          "ticker": "0JH0.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 42.8451,
+              "atr_pct": 0.0659,
+              "bb_width": 0.0983
+            }
+          },
+          "head_listing_id": 41189,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.872,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Spero Therapeutics Inc",
+          "score": 0.872,
+          "ticker": "SPRO.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 14.8032,
+              "atr_pct": 0.1206,
+              "bb_width": 0.1771
+            }
+          },
+          "head_listing_id": 2469,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.87,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Arrive AI Inc.",
+          "score": 0.87,
+          "ticker": "ARAI.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 15.2211,
+              "atr_pct": 0.0457,
+              "bb_width": 0.063
+            }
+          },
+          "head_listing_id": 1419595,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.87,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ATrack Technology",
+          "score": 0.87,
+          "ticker": "6465.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 9.9637,
+              "atr_pct": 0.0209,
+              "bb_width": 0.026
+            }
+          },
+          "head_listing_id": 1418199,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.869,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Jia Jie Biomedical Co Ltd",
+          "score": 0.869,
+          "ticker": "4109.TWO"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.8455,
+              "atr_pct": 0.025,
+              "bb_width": 0.0211
+            }
+          },
+          "head_listing_id": 236476,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.869,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Avingtrans Plc",
+          "score": 0.869,
+          "ticker": "AVG.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 29.0055,
+              "atr_pct": 0.0046,
+              "bb_width": 0.0061
+            }
+          },
+          "head_listing_id": 572912,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.869,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Oomitsu Co., Ltd.",
+          "score": 0.869,
+          "ticker": "3160.JP"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 22.9587,
+              "atr_pct": 0.0559,
+              "bb_width": 0.0711
+            }
+          },
+          "head_listing_id": 50496,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.868,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "YEEBO (INT'L H)",
+          "score": 0.868,
+          "ticker": "0259-OL.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.8443,
+              "atr_pct": 0.0173,
+              "bb_width": 0.0463
+            }
+          },
+          "head_listing_id": 51372,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.868,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Time2U Intl Hldg Ltd",
+          "score": 0.868,
+          "ticker": "1327.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 22.9587,
+              "atr_pct": 0.0559,
+              "bb_width": 0.0711
+            }
+          },
+          "head_listing_id": 50495,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.868,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Yeebo International Holdings Ltd",
+          "score": 0.868,
+          "ticker": "0259.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 19.6176,
+              "atr_pct": 0.0322,
+              "bb_width": 0.0489
+            }
+          },
+          "head_listing_id": 229034,
+          "matched": {
+            "ta": {
+              "bb_sqz": {
+                "kind": "signal",
+                "strength": 0.868,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Lihuayi Weiyuan Chemical Co Ltd",
+          "score": 0.868,
+          "ticker": "600955.CG"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Yes — that's a volatility squeeze (very tight, low-volatility range that often precedes a big move). Stocks coiling the tightest right now: 0277.HK, ALHGO.PA, 9638.HK, FADL.LSE, 1577.HK, 1488.HK, ALNA.LSE, 0266.HK, 0602-OL.HK, 0733.HK. These have the narrowest Bollinger-band width (bb_width ~0 = maximally coiled). ~60 names are in a tight squeeze; a squeeze tells you a move is BUILDING, not its direction."
+}

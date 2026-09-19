@@ -1,0 +1,160 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "question": "stocks with P/E below their own sector's average (each vs its own sector)",
+      "tool_calls": [
+        "find_fsconcept queries=[price to earnings ratio] -> pe",
+        "find_fspattern queries=[below its sector average] -> below_average",
+        "screen_unified fundamental=[{concept:pe,pattern:below_average,vs_cohort:{own:true}}] asset_type=[Common Stock]"
+      ],
+      "result_summary": "count>=20 of universe 24046. Whole-market, each judged vs its OWN sector. NVDA pe 33.65 vs tech 41.76; JPM pe 15.56 vs banks 18.16; Alphabet/Meta vs 25.25; BRK-B 12.53 vs 18.16; China Construction Bank 8.02 vs 9.91.",
+      "evidence_check": "PASS. Every row's matched.fundamental.pe carries value + cohort_benchmark + cohort_scope='own_sector'. Benchmark VARIES per row's sector (41.76 tech, 18.16 banks, 25.25, 63.5 pharma, 9.9 CN banks) proving per-own-sector. Can say 'NVDA PE 33.65 vs its own-sector avg 41.76'.",
+      "confusion_note": "None. vs_cohort:{own:true} for 'each vs its own sector' is documented explicitly in the schema.",
+      "verdict": "pass",
+      "reason": "Correct tool+params obvious; cohort_benchmark+own_sector scope present and per-sector-correct.",
+      "defects": []
+    },
+    {
+      "id": 2,
+      "question": "stocks with net margin above the market average",
+      "tool_calls": [
+        "find_fsconcept -> net_margin",
+        "find_fspattern [above the market average] -> above_average",
+        "screen_unified fundamental=[{concept:net_margin,pattern:above_average}] asset_type=[Common Stock]"
+      ],
+      "result_summary": "count>=20/24046. Market-wide, no scope. NVDA net_margin 62.97%, AAPL 27.62%, GOOG 54.77% all vs market benchmark 3.58%.",
+      "evidence_check": "PASS. cohort_benchmark=0.0358, cohort_scope='candidate_universe' (whole market). 'NVDA net margin 62.97% vs market avg 3.58%'.",
+      "confusion_note": "None. Omitting vs_cohort + omitting scope = whole-market benchmark, per schema default.",
+      "verdict": "pass",
+      "reason": "Benchmark is the true market average (candidate_universe), value+scope present.",
+      "defects": []
+    },
+    {
+      "id": 3,
+      "question": "banks with ROE above the average for banks (resolve sector, scope to it)",
+      "tool_calls": [
+        "find_gics 'banks' -> 4010 (Banks group)",
+        "find_fsconcept -> roe",
+        "find_fspattern -> above_average",
+        "screen_unified fundamental=[{concept:roe,pattern:above_average}] gics='4010' asset_type=[Common Stock]"
+      ],
+      "result_summary": "universe scoped to 568 banks. JPM ROE 17.37%, BAC 10.54%, HSBC 11.33%, RBC 15.73% all vs bank benchmark 8.83%.",
+      "evidence_check": "PASS. cohort_benchmark=0.08834, cohort_scope='candidate_universe' where candidate_universe IS the 568-bank scope (universe=568). 'JPM ROE 17.37% vs bank-average 8.83%'.",
+      "confusion_note": "None. Resolved sector via find_gics; above_average benchmarks against the scoped universe (banks) automatically, no vs_cohort needed.",
+      "verdict": "pass",
+      "reason": "Sector resolved correctly, scoped to banks, benchmark = bank average, evidence present.",
+      "defects": []
+    },
+    {
+      "id": 4,
+      "question": "stocks with P/E in the cheapest quartile",
+      "tool_calls": [
+        "find_fspattern 'in the cheapest quartile' -> bottom_quartile",
+        "screen_unified fundamental=[{concept:pe,pattern:bottom_quartile}] asset_type=[Common Stock]"
+      ],
+      "result_summary": "count>=20/24046. CN mega-banks + Shell etc. pe 7.6-10.1 vs benchmark 11.61 (the 25th-percentile cut).",
+      "evidence_check": "PASS. cohort_benchmark=11.612903, cohort_scope='candidate_universe'. Each value below the quartile line.",
+      "confusion_note": "None. bottom_quartile is the exact percentile shape for 'cheapest quartile'.",
+      "verdict": "pass",
+      "reason": "Percentile cohort pattern resolved and applied; benchmark+scope present.",
+      "defects": []
+    },
+    {
+      "id": 5,
+      "question": "stocks with P/E far below average",
+      "tool_calls": [
+        "find_fspattern 'far below average' -> far_below_average",
+        "screen_unified fundamental=[{concept:pe,pattern:far_below_average}] asset_type=[Common Stock]"
+      ],
+      "result_summary": "SoftBank pe 6.68, China Life 7.22, China Merchants Bank 6.71 vs benchmark 7.43 (the 10th-percentile line).",
+      "evidence_check": "PASS. cohort_benchmark=7.434773, cohort_scope='candidate_universe'.",
+      "confusion_note": "None.",
+      "verdict": "pass",
+      "reason": "Degree-token cohort pattern (p10) resolved; benchmark+scope present.",
+      "defects": []
+    },
+    {
+      "id": 6,
+      "question": "US retail stocks cheaper than the US retail average (country + sector scope)",
+      "tool_calls": [
+        "find_gics 'retail' -> 2550 (Consumer Discretionary Distribution & Retail) [also 3010 staples]",
+        "screen_unified fundamental=[{concept:pe,pattern:below_average}] gics='2550' country=[US] asset_type=[Common Stock]"
+      ],
+      "result_summary": "universe scoped to 134 US retail. Lowe's pe 18.23, Best Buy 15.82, Tractor Supply 18.08 vs US-retail benchmark 18.87.",
+      "evidence_check": "PASS. cohort_benchmark=18.869743, cohort_scope='candidate_universe' (= the 134-name US-retail scope). 'Best Buy PE 15.82 vs US-retail avg 18.87'.",
+      "confusion_note": "Retail resolves to TWO GICS groups (2550 discretionary, 3010 staples); schema says one cohort carries one prefix, so I used the primary 2550 (consumer-discretionary retail). Screening staples-retail too would need a second screen. Minor scoping choice, not an unknown-param.",
+      "verdict": "pass",
+      "reason": "Country+sector scoped correctly; below_average benchmarks against the scoped US-retail universe. Only caveat = single-prefix limitation for the two retail groups.",
+      "defects": [
+        {"desc": "'retail' spans 2 GICS groups (2550 + 3010) but a cohort takes only one prefix, so a full 'US retail' needs two screens; not surfaced as a single combined cohort.", "side": "minor/design"}
+      ]
+    },
+    {
+      "id": 7,
+      "question": "high ROE stocks (VAGUE, no number)",
+      "tool_calls": [
+        "screen_unified fundamental=[{concept:roe,pattern:above_average}] asset_type=[Common Stock]"
+      ],
+      "result_summary": "Used cohort above_average (peer-relative), NOT an invented absolute threshold. NVDA ROE 81.65%, AAPL 119.91% vs market benchmark 4.65%.",
+      "evidence_check": "PASS. matched shows kind='cohort', cohort_benchmark=0.04648, cohort_scope='candidate_universe'. No fabricated number.",
+      "confusion_note": "None. Schema explicitly says: vague quality word with NO number -> use above_average, never invent a threshold.",
+      "verdict": "pass",
+      "reason": "Vague-quality correctly routed to cohort shape; no invented threshold.",
+      "defects": []
+    },
+    {
+      "id": 8,
+      "question": "stocks with ROE above 20 percent (real number, fraction scaling)",
+      "tool_calls": [
+        "screen_unified fundamental=[{concept:roe,pattern:above,threshold:0.20}] asset_type=[Common Stock]"
+      ],
+      "result_summary": "Scaled 20% -> 0.20. All returned ROE >= 0.20 (NVDA 0.8165, AAPL 1.1991, GOOG 0.3813, MSFT 0.3023, AMZN 0.2055). matched kind='level' (absolute, no cohort benchmark, correct).",
+      "evidence_check": "PASS. Threshold applied as fraction 0.20; boundary AMZN=0.2055 confirms scaling (had I sent 20 literal, nothing would pass since ROE is a fraction).",
+      "confusion_note": "None. Schema: ratio/percent metric is a FRACTION -> 0.20 for 20%.",
+      "verdict": "pass",
+      "reason": "Correct fraction scaling; level screen (not cohort), all results above 20%.",
+      "defects": []
+    },
+    {
+      "id": 9,
+      "question": "the cheapest stocks by P/E (absolute low; check for sub-2 junk)",
+      "tool_calls": [
+        "screen_unified fundamental=[{concept:pe,pattern:low}] sort=pe asset_type=[Common Stock] limit=10"
+      ],
+      "result_summary": "40-row buffer is DOMINATED by implausible sub-2 P/Es: top rows pe 0.006 (Connexa), 0.011 (Seafco), 0.016, 0.017, 0.021... ~30 of 40 are P/E < 2. Legit-cheap names (Country Garden 1.30, Villeroy & Boch 1.08) are buried; real value names (single-digit-but-plausible PE) never surface at all.",
+      "evidence_check": "FAIL on hygiene. A P/E of 0.006 = the whole company priced at 0.6% of one year's earnings = stale/one-off/erroneous earnings, not a real bargain. The engine does NOT exclude implausible near-zero P/E value-traps; 'low' just returns the raw arithmetic bottom.",
+      "confusion_note": "Tool+params were OBVIOUS. The defect is in the ENGINE output, not param selection.",
+      "verdict": "fail",
+      "reason": "Absolute cheap-P/E screen returns nonsensical sub-2 / near-zero P/E junk with no abnormal-value filtering; result is unusable for the user's real intent (cheap real companies).",
+      "defects": [
+        {"desc": "No implausible-value hygiene on absolute low-P/E screens: sub-2 and near-zero P/E (0.006, 0.01, 0.02...) pass straight through. ~30/40 rows are junk value-traps; genuine cheap names are crowded out. Engine should floor/flag abnormally-low P/E (e.g. exclude PE below ~2-3 or mark as abnormal) the same way abnormality SIGNALS exist elsewhere.", "side": "engine"}
+      ]
+    },
+    {
+      "id": 10,
+      "question": "stocks trading below 12x earnings (absolute P/E threshold)",
+      "tool_calls": [
+        "screen_unified fundamental=[{concept:pe,pattern:below,threshold:12}] sort=pe asset_type=[Common Stock] limit=10"
+      ],
+      "result_summary": "Threshold=12 applied (P/E ratio, sent as 12 not 0.12 - correct, multiples are not fractions). But sorted-ascending output is the SAME sub-2 junk flood as case 9: pe 0.006, 0.01, 0.015... ~30/40 sub-2.",
+      "evidence_check": "PARTIAL. The 12x threshold itself is correct and correctly-scaled (multiple, not fraction). But 'below 12' with no lower floor lets every near-zero P/E through, so the practical result is the same value-trap junk. No abnormal-low exclusion.",
+      "confusion_note": "Tool+params OBVIOUS; correctly did NOT scale 12 to 0.12 (P/E is a multiple). Defect is again engine-side (no lower-bound hygiene).",
+      "verdict": "partial",
+      "reason": "Threshold param correct and correctly-scaled, but absence of an implausible-low floor means sub-2 junk dominates, same as case 9.",
+      "defects": [
+        {"desc": "Absolute 'below X' P/E has no implausible-low floor -> the same near-zero P/E value-traps flood the top. A sane cheap-P/E screen should exclude/flag PE below ~2 (or negative/near-zero earnings artifacts).", "side": "engine"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 7,
+    "partial": 1,
+    "fail": 1,
+    "note_on_case6": "case 6 passed with a minor single-prefix design caveat",
+    "top_defects": [
+      "ENGINE: no implausible-value hygiene on absolute low-P/E screens (pattern 'low' and 'below X'). Sub-2 / near-zero P/E value-traps (0.006, 0.01, 0.02) pass straight through and dominate ~30/40 rows, burying genuine cheap companies (cases 9 & 10). Cohort/percentile shapes are unaffected.",
+      "DESIGN(minor): 'retail' maps to two GICS groups (2550 + 3010) but a cohort carries only one prefix, so a complete 'US retail' cohort needs two separate screens (case 6)."
+    ]
+  }
+}

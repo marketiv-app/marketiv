@@ -1,0 +1,579 @@
+{
+  "id": "ne-03",
+  "question": "Give me a quick pulse on the AI theme over the last 30 days — what are the big storylines and which names are most talked about?",
+  "tools_called": [
+    {
+      "tool": "theme_pulse",
+      "args": {
+        "q": "AI",
+        "window": "30d"
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "query": "AI",
+      "concepts": [
+        "AI"
+      ],
+      "window": "30d",
+      "angles": {
+        "theme": {
+          "megatrends": [
+            {
+              "id": 10000000,
+              "name": "Artificial Intelligence",
+              "tier": 1
+            }
+          ],
+          "brief": {
+            "applied_scope": {
+              "aspect": [],
+              "country": [],
+              "gics": [],
+              "megatrend": [
+                10000000
+              ],
+              "news_type": []
+            },
+            "window": {
+              "from": "2026-07-27 17:35:45.612126+00",
+              "label": "30d",
+              "to": "2026-08-26 17:35:45.612126+00"
+            },
+            "winners": [
+              {
+                "agg_relevance": 341.4,
+                "amb": 39,
+                "name": "NVIDIA Corporation",
+                "neg": 86,
+                "net_direction": "pos",
+                "pos": 349,
+                "story_count": 474,
+                "ticker": "NVDA.US"
+              },
+              {
+                "agg_relevance": 211.9,
+                "amb": 29,
+                "name": "Alphabet Inc Class C",
+                "neg": 101,
+                "net_direction": "pos",
+                "pos": 168,
+                "story_count": 298,
+                "ticker": "GOOG.US"
+              },
+              {
+                "agg_relevance": 209.1,
+                "amb": 26,
+                "name": "Microsoft Corporation",
+                "neg": 59,
+                "net_direction": "pos",
+                "pos": 189,
+                "story_count": 274,
+                "ticker": "MSFT.US"
+              },
+              {
+                "agg_relevance": 183.2,
+                "amb": 13,
+                "name": "Amazon.com Inc",
+                "neg": 62,
+                "net_direction": "pos",
+                "pos": 166,
+                "story_count": 241,
+                "ticker": "AMZN.US"
+              },
+              {
+                "agg_relevance": 98.7,
+                "amb": 4,
+                "name": "Micron Technology Inc",
+                "neg": 26,
+                "net_direction": "pos",
+                "pos": 92,
+                "story_count": 122,
+                "ticker": "MU.US"
+              }
+            ],
+            "losers": [
+              {
+                "agg_relevance": 187.2,
+                "amb": 32,
+                "name": "Meta Platforms Inc.",
+                "neg": 107,
+                "net_direction": "neg",
+                "pos": 101,
+                "story_count": 240,
+                "ticker": "META.US"
+              },
+              {
+                "agg_relevance": 87.2,
+                "amb": 9,
+                "name": "Apple Inc.",
+                "neg": 59,
+                "net_direction": "neg",
+                "pos": 39,
+                "story_count": 107,
+                "ticker": "AAPL.US"
+              },
+              {
+                "agg_relevance": 9.0,
+                "amb": 0,
+                "name": "Baidu Inc",
+                "neg": 7,
+                "net_direction": "neg",
+                "pos": 4,
+                "story_count": 11,
+                "ticker": "9888.HK"
+              },
+              {
+                "agg_relevance": 7.4,
+                "amb": 0,
+                "name": "TE Connectivity Ltd",
+                "neg": 6,
+                "net_direction": "neg",
+                "pos": 3,
+                "story_count": 9,
+                "ticker": "TEL.US"
+              },
+              {
+                "agg_relevance": 3.9,
+                "amb": 0,
+                "name": "Applovin Corp",
+                "neg": 3,
+                "net_direction": "neg",
+                "pos": 1,
+                "story_count": 4,
+                "ticker": "APP.US"
+              }
+            ],
+            "top_stories": [
+              {
+                "article_published_at": "2026-08-26T07:48:56+00:00",
+                "brief_text": "Wall Street is eagerly anticipating Nvidia Corp.'s earnings on Wednesday afternoon, not so much for the numbers but for what they signal about the AI trade and the broader market. Nvidia, the world's most valuable company with a market cap over $5 trillion, is up 14% in 2026, a far cry from its past performance, and its shares have been volatile, recently ending a seven-day losing streak that matched the longest since 2019. Investors are focused on CEO Jensen Huang's comments about capital spending by big customers, future demand, and new financing deals, including a $500 billion partnership with Goldman Sachs, BlackRock, and Apollo for AI infrastructure, and a $105 billion commitment to an Ohio data center campus leased by OpenAI. Analysts expect revenue to nearly double from a year ago, but the market is more concerned about the circularity of financing and whether Nvidia's own investments are driving demand. The options market is pricing a roughly 5% swing in either direction, and the stock is near its cheapest valuation since late 2018, trading at about 19 times forward earnings.",
+                "direction": "pos",
+                "dup_count": 15,
+                "impact_score": 5,
+                "publisher": "Bloomberg",
+                "story_id": "b65250fe-f4b1-4fce-be60-f170e4c63f1a",
+                "title": "Nvidia Earnings to Gauge AI Trade Health",
+                "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-earnings-investors-barometer-state-074856874.html"
+              },
+              {
+                "article_published_at": "2026-08-25T09:30:05+00:00",
+                "brief_text": "Data centers are driving the largest capital investment in US history, with the five biggest hyperscalers—Amazon, Microsoft, Google, Meta and Oracle—set to spend more than $750 billion on capital expenditures this year, up 67% from last year and roughly 75% earmarked for AI infrastructure. The buildout is straining the electric grid, with utilities now forecasting a sixfold jump in 2030 peak demand growth from predictions just three years ago, and data center electricity use is forecast to rise from 4.4% of US consumption in 2023 to almost 12% by 2030. Politically, more than 70% of Americans oppose a data center in their area, and at least 75 projects totaling roughly $130 billion in potential investment were delayed in Q1 2026, with Pennsylvania Governor Josh Shapiro imposing new requirements, Michigan Senate nominee Mike Rogers backing a one-year moratorium, and Texas Governor Greg Abbott freezing new data centers. Meta is committing more than $50 billion to build Hyperion, a 5-gigawatt data center in Louisiana powered by 10 new natural gas plants, while Nvidia announced over $100 billion in guarantees for an 8-gigawatt project in Ohio to power OpenAI.",
+                "direction": "pos",
+                "dup_count": 1,
+                "impact_score": 5,
+                "publisher": "Axios",
+                "story_id": "3e019686-112c-4b11-a193-a617ac7e6dd1",
+                "title": "Data centers reshape US economy and politics",
+                "url": "https://finance.yahoo.com/technology/ai/articles/data-center-era-thats-reshaping-093005658.html"
+              },
+              {
+                "article_published_at": "2026-08-22T14:10:36+00:00",
+                "brief_text": "Nvidia has agreed to provide more than $100B in credit support to backstop a massive new OpenAI data center campus in Pike County, Ohio. The project is being developed, owned, and operated by SB Energy, a SoftBank Group subsidiary, with OpenAI signing a 20-year lease as the anchor tenant, according to a report by the Financial Times. As part of the transaction, Nvidia will also make a $1.5B direct equity investment in SB Energy. Under the terms of the deal, Nvidia will serve as the exclusive supplier of AI computing systems for the site, potentially generating $150B to $200B in hardware revenue as the facility expands to house over 1M Nvidia chips. Separately, Broadcom is reportedly engaged in discussions with Blackstone and Apollo Global Management to raise more than $60B in debt in a deal that will benefit Anthropic, and Micron Technology showed off its new U.S.-based Micron Research Labs backed by a $10B investment.",
+                "direction": "pos",
+                "dup_count": 8,
+                "impact_score": 5,
+                "publisher": "Seeking Alpha",
+                "story_id": "9cf87637-6473-4d37-ad18-43260038c6aa",
+                "title": "Nvidia pledges $100B backing for OpenAI's Ohio data center",
+                "url": "https://seekingalpha.com/news/4636009-notable-tech-headlines-for-the-week-nvidia-micron-broadcom-in-focus?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news"
+              },
+              {
+                "article_published_at": "2026-08-20T20:49:53+00:00",
+                "brief_text": "Broadcom Inc. is negotiating with a group of lenders to secure more than $60 billion in debt financing for an artificial intelligence chip deal that would support Anthropic PBC and other companies, Bloomberg reported Thursday citing people familiar with the matter. The financing package, which remains under discussion, may include an additional junior debt tranche of approximately $30 billion, bringing the overall financing to as much as $100 billion. Broadcom would reportedly guarantee part of the senior-secured tranche under the proposed arrangement, which could total between $60 billion and $70 billion. Blackstone Inc. and Apollo Global Management are in discussions with Broadcom to join the chip financing, building on a partnership the three companies formed in June to fund computing infrastructure. The deal would provide companies including Anthropic with access to chips and other essential AI infrastructure, and the structure could resemble the $35 billion debt agreement that launched the group's AI XPV partnership.",
+                "direction": "pos",
+                "dup_count": 11,
+                "impact_score": 5,
+                "publisher": "Investing.com",
+                "story_id": "ded0b56c-39df-4962-b3e0-7ec8429d0c43",
+                "title": "Broadcom reportedly seeking over $60 billion for AI chip deal",
+                "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-repoirtedly-seeking-raise-over-204953745.html"
+              },
+              {
+                "article_published_at": "2026-08-18T01:30:00+00:00",
+                "brief_text": "Nvidia is backing a massive artificial intelligence infrastructure development in Ohio that could ultimately require at least 10 gigawatts of new power generation. The chipmaker has partnered with SB Energy to secure land, power and data center shell capacity at the PORTS-Pike Technology Campus in Pike County, where OpenAI will be the customer under a 20-year lease. The first phase is designed to provide 4.25 gigawatts of IT capacity, with Nvidia holding an option covering another 3.75 GW, bringing the project to 8 GW of AI computing capacity at full buildout. SB Energy, backed by SoftBank Group and OpenAI, will build, own and operate the data center infrastructure, while Nvidia will exclusively supply AI computing systems including GPUs, CPUs and networking equipment through its DSX AI factory platform. SB Energy and SoftBank plan to develop at least 10 GW of new electricity generation and invest at least $4.2 billion in regional grid infrastructure through a partnership with AEP Ohio. Nvidia will also invest $1.5 billion directly in SB Energy, joining SoftBank and OpenAI as investors. Development is expected to proceed in phases beginning in 2028, and OpenAI has added $40 million to an existing $40 million community benefits fund, bringing the initial fund to $80 million.",
+                "direction": "pos",
+                "dup_count": 4,
+                "impact_score": 5,
+                "publisher": "Oilprice.com",
+                "story_id": "684afa5c-43b2-4a7a-9c50-d0154896d241",
+                "title": "Nvidia Backs 8-GW Ohio AI Campus for OpenAI With $1.5 Billion Investment",
+                "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backs-8-gw-ohio-013000089.html"
+              }
+            ],
+            "pulse": {
+              "story_count": 3543,
+              "net_direction": "pos",
+              "pos_share": 0.572
+            }
+          }
+        },
+        "gics": {
+          "gics_codes": [
+            "45"
+          ],
+          "brief": {
+            "applied_scope": {
+              "aspect": [],
+              "country": [],
+              "gics": [
+                "45"
+              ],
+              "megatrend": [],
+              "news_type": []
+            },
+            "window": {
+              "from": "2026-07-27 17:35:45.61465+00",
+              "label": "30d",
+              "to": "2026-08-26 17:35:45.61465+00"
+            },
+            "winners": [
+              {
+                "agg_relevance": 376.099,
+                "amb": 45,
+                "name": "NVIDIA Corporation",
+                "neg": 108,
+                "net_direction": "pos",
+                "pos": 380,
+                "story_count": 533,
+                "ticker": "NVDA.US"
+              },
+              {
+                "agg_relevance": 254.7,
+                "amb": 32,
+                "name": "Microsoft Corporation",
+                "neg": 79,
+                "net_direction": "pos",
+                "pos": 237,
+                "story_count": 348,
+                "ticker": "MSFT.US"
+              },
+              {
+                "agg_relevance": 153.6,
+                "amb": 10,
+                "name": "SK Hynix Inc",
+                "neg": 77,
+                "net_direction": "pos",
+                "pos": 103,
+                "story_count": 190,
+                "ticker": "000660.KO"
+              },
+              {
+                "agg_relevance": 138.2,
+                "amb": 7,
+                "name": "Micron Technology Inc",
+                "neg": 51,
+                "net_direction": "pos",
+                "pos": 115,
+                "story_count": 173,
+                "ticker": "MU.US"
+              },
+              {
+                "agg_relevance": 124.0,
+                "amb": 12,
+                "name": "Samsung Electronics Co Ltd",
+                "neg": 49,
+                "net_direction": "pos",
+                "pos": 101,
+                "story_count": 162,
+                "ticker": "005930.KO"
+              }
+            ],
+            "losers": [
+              {
+                "agg_relevance": 184.0,
+                "amb": 20,
+                "name": "Apple Inc.",
+                "neg": 121,
+                "net_direction": "neg",
+                "pos": 81,
+                "story_count": 222,
+                "ticker": "AAPL.US"
+              },
+              {
+                "agg_relevance": 65.2,
+                "amb": 11,
+                "name": "MicroStrategy Incorporated",
+                "neg": 34,
+                "net_direction": "neg",
+                "pos": 30,
+                "story_count": 75,
+                "ticker": "MSTR.US"
+              },
+              {
+                "agg_relevance": 42.9,
+                "amb": 1,
+                "name": "Delta Electronics (Thailand) Public Company Limited",
+                "neg": 26,
+                "net_direction": "neg",
+                "pos": 21,
+                "story_count": 48,
+                "ticker": "DELTA.BK"
+              },
+              {
+                "agg_relevance": 31.1,
+                "amb": 1,
+                "name": "ASML Holding N.V.",
+                "neg": 21,
+                "net_direction": "neg",
+                "pos": 20,
+                "story_count": 42,
+                "ticker": "ASML.AS"
+              },
+              {
+                "agg_relevance": 31.1,
+                "amb": 0,
+                "name": "Western Digital Corporation",
+                "neg": 19,
+                "net_direction": "neg",
+                "pos": 20,
+                "story_count": 39,
+                "ticker": "WDC.US"
+              }
+            ],
+            "top_stories": [
+              {
+                "article_published_at": "2026-08-26T07:48:56+00:00",
+                "brief_text": "Wall Street is eagerly anticipating Nvidia Corp.'s earnings on Wednesday afternoon, not so much for the numbers but for what they signal about the AI trade and the broader market. Nvidia, the world's most valuable company with a market cap over $5 trillion, is up 14% in 2026, a far cry from its past performance, and its shares have been volatile, recently ending a seven-day losing streak that matched the longest since 2019. Investors are focused on CEO Jensen Huang's comments about capital spending by big customers, future demand, and new financing deals, including a $500 billion partnership with Goldman Sachs, BlackRock, and Apollo for AI infrastructure, and a $105 billion commitment to an Ohio data center campus leased by OpenAI. Analysts expect revenue to nearly double from a year ago, but the market is more concerned about the circularity of financing and whether Nvidia's own investments are driving demand. The options market is pricing a roughly 5% swing in either direction, and the stock is near its cheapest valuation since late 2018, trading at about 19 times forward earnings.",
+                "direction": "pos",
+                "dup_count": 15,
+                "impact_score": 5,
+                "publisher": "Bloomberg",
+                "story_id": "b65250fe-f4b1-4fce-be60-f170e4c63f1a",
+                "title": "Nvidia Earnings to Gauge AI Trade Health",
+                "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-earnings-investors-barometer-state-074856874.html"
+              },
+              {
+                "article_published_at": "2026-08-25T09:30:05+00:00",
+                "brief_text": "Data centers are driving the largest capital investment in US history, with the five biggest hyperscalers—Amazon, Microsoft, Google, Meta and Oracle—set to spend more than $750 billion on capital expenditures this year, up 67% from last year and roughly 75% earmarked for AI infrastructure. The buildout is straining the electric grid, with utilities now forecasting a sixfold jump in 2030 peak demand growth from predictions just three years ago, and data center electricity use is forecast to rise from 4.4% of US consumption in 2023 to almost 12% by 2030. Politically, more than 70% of Americans oppose a data center in their area, and at least 75 projects totaling roughly $130 billion in potential investment were delayed in Q1 2026, with Pennsylvania Governor Josh Shapiro imposing new requirements, Michigan Senate nominee Mike Rogers backing a one-year moratorium, and Texas Governor Greg Abbott freezing new data centers. Meta is committing more than $50 billion to build Hyperion, a 5-gigawatt data center in Louisiana powered by 10 new natural gas plants, while Nvidia announced over $100 billion in guarantees for an 8-gigawatt project in Ohio to power OpenAI.",
+                "direction": "pos",
+                "dup_count": 1,
+                "impact_score": 5,
+                "publisher": "Axios",
+                "story_id": "3e019686-112c-4b11-a193-a617ac7e6dd1",
+                "title": "Data centers reshape US economy and politics",
+                "url": "https://finance.yahoo.com/technology/ai/articles/data-center-era-thats-reshaping-093005658.html"
+              },
+              {
+                "article_published_at": "2026-08-22T14:10:36+00:00",
+                "brief_text": "Nvidia has agreed to provide more than $100B in credit support to backstop a massive new OpenAI data center campus in Pike County, Ohio. The project is being developed, owned, and operated by SB Energy, a SoftBank Group subsidiary, with OpenAI signing a 20-year lease as the anchor tenant, according to a report by the Financial Times. As part of the transaction, Nvidia will also make a $1.5B direct equity investment in SB Energy. Under the terms of the deal, Nvidia will serve as the exclusive supplier of AI computing systems for the site, potentially generating $150B to $200B in hardware revenue as the facility expands to house over 1M Nvidia chips. Separately, Broadcom is reportedly engaged in discussions with Blackstone and Apollo Global Management to raise more than $60B in debt in a deal that will benefit Anthropic, and Micron Technology showed off its new U.S.-based Micron Research Labs backed by a $10B investment.",
+                "direction": "pos",
+                "dup_count": 8,
+                "impact_score": 5,
+                "publisher": "Seeking Alpha",
+                "story_id": "9cf87637-6473-4d37-ad18-43260038c6aa",
+                "title": "Nvidia pledges $100B backing for OpenAI's Ohio data center",
+                "url": "https://seekingalpha.com/news/4636009-notable-tech-headlines-for-the-week-nvidia-micron-broadcom-in-focus?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news"
+              },
+              {
+                "article_published_at": "2026-08-20T20:49:53+00:00",
+                "brief_text": "Broadcom Inc. is negotiating with a group of lenders to secure more than $60 billion in debt financing for an artificial intelligence chip deal that would support Anthropic PBC and other companies, Bloomberg reported Thursday citing people familiar with the matter. The financing package, which remains under discussion, may include an additional junior debt tranche of approximately $30 billion, bringing the overall financing to as much as $100 billion. Broadcom would reportedly guarantee part of the senior-secured tranche under the proposed arrangement, which could total between $60 billion and $70 billion. Blackstone Inc. and Apollo Global Management are in discussions with Broadcom to join the chip financing, building on a partnership the three companies formed in June to fund computing infrastructure. The deal would provide companies including Anthropic with access to chips and other essential AI infrastructure, and the structure could resemble the $35 billion debt agreement that launched the group's AI XPV partnership.",
+                "direction": "pos",
+                "dup_count": 11,
+                "impact_score": 5,
+                "publisher": "Investing.com",
+                "story_id": "ded0b56c-39df-4962-b3e0-7ec8429d0c43",
+                "title": "Broadcom reportedly seeking over $60 billion for AI chip deal",
+                "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-repoirtedly-seeking-raise-over-204953745.html"
+              },
+              {
+                "article_published_at": "2026-08-18T01:30:00+00:00",
+                "brief_text": "Nvidia is backing a massive artificial intelligence infrastructure development in Ohio that could ultimately require at least 10 gigawatts of new power generation. The chipmaker has partnered with SB Energy to secure land, power and data center shell capacity at the PORTS-Pike Technology Campus in Pike County, where OpenAI will be the customer under a 20-year lease. The first phase is designed to provide 4.25 gigawatts of IT capacity, with Nvidia holding an option covering another 3.75 GW, bringing the project to 8 GW of AI computing capacity at full buildout. SB Energy, backed by SoftBank Group and OpenAI, will build, own and operate the data center infrastructure, while Nvidia will exclusively supply AI computing systems including GPUs, CPUs and networking equipment through its DSX AI factory platform. SB Energy and SoftBank plan to develop at least 10 GW of new electricity generation and invest at least $4.2 billion in regional grid infrastructure through a partnership with AEP Ohio. Nvidia will also invest $1.5 billion directly in SB Energy, joining SoftBank and OpenAI as investors. Development is expected to proceed in phases beginning in 2028, and OpenAI has added $40 million to an existing $40 million community benefits fund, bringing the initial fund to $80 million.",
+                "direction": "pos",
+                "dup_count": 4,
+                "impact_score": 5,
+                "publisher": "Oilprice.com",
+                "story_id": "684afa5c-43b2-4a7a-9c50-d0154896d241",
+                "title": "Nvidia Backs 8-GW Ohio AI Campus for OpenAI With $1.5 Billion Investment",
+                "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backs-8-gw-ohio-013000089.html"
+              }
+            ],
+            "pulse": {
+              "story_count": 4759,
+              "net_direction": "pos",
+              "pos_share": 0.678
+            }
+          }
+        },
+        "asset": [
+          {
+            "concept": "AI",
+            "etf": "QQQ",
+            "etf_name": "Nasdaq 100",
+            "options": {
+              "positioning_score": -0.5082,
+              "stale": false,
+              "audience": "Write for a GENERAL, non-expert reader. Explain in plain everyday language — do NOT use raw options jargon (gamma, skew, put/call ratio, max pain, O/S, IV, delta). If a concept is needed, say what it MEANS in one simple phrase (e.g. instead of 'dealers are short gamma' say 'the way market-makers hedge will tend to make today's price swings bigger'). Keep a number only when it helps a layperson.",
+              "flow": {
+                "os_ratio": 29.138006922397626,
+                "signals": [
+                  {
+                    "because": "option/stock volume ratio in 100th percentile of this asset's own 90d (options unusually active vs the stock — possible informed/event positioning)",
+                    "dimension": "options_activity",
+                    "driver": "os_ratio_percentile_90d",
+                    "read": "unusual_high_activity",
+                    "value": 29.138
+                  }
+                ]
+              },
+              "horizons": {
+                "long_term": {
+                  "positioning_score": -1.0,
+                  "metrics": {
+                    "atm_iv": 22.605862538557915,
+                    "gex_dealer_net": -25695467.9369615,
+                    "max_pain_distance_pct": 0.07032454775267044,
+                    "pcr_oi_notional": 2.746432651056973,
+                    "skew_25d_rr": 6.056213210512284,
+                    "skew_norm": 0.2679045402573091
+                  },
+                  "signals": [
+                    {
+                      "read": "bearish_lean",
+                      "because": "$-notional put/call ratio 2.75 (puts heavier)"
+                    },
+                    {
+                      "read": "typical_for_asset",
+                      "because": "normalized put-skew in 54th percentile of this asset's own 90d (normal for it)"
+                    },
+                    {
+                      "read": "compressed",
+                      "because": "ATM IV 22.6% = 19th percentile of this asset's own 90d"
+                    },
+                    {
+                      "read": "unstable_amplifying",
+                      "because": "dealers net short gamma → amplify moves"
+                    }
+                  ]
+                },
+                "medium_term": {
+                  "positioning_score": -1.0,
+                  "metrics": {
+                    "atm_iv": 20.5934448193457,
+                    "gex_dealer_net": -44495956.86482829,
+                    "max_pain_distance_pct": 0.018998190980512503,
+                    "pcr_oi_notional": 1.7094601258689524,
+                    "skew_25d_rr": 5.977421112288492,
+                    "skew_norm": 0.290258437319493
+                  },
+                  "signals": [
+                    {
+                      "read": "bearish_lean",
+                      "because": "$-notional put/call ratio 1.71 (puts heavier)"
+                    },
+                    {
+                      "read": "typical_for_asset",
+                      "because": "normalized put-skew in 77th percentile of this asset's own 90d (normal for it)"
+                    },
+                    {
+                      "read": "mid_range",
+                      "because": "ATM IV 20.6% = 35th percentile of this asset's own 90d"
+                    },
+                    {
+                      "read": "unstable_amplifying",
+                      "because": "dealers net short gamma → amplify moves"
+                    },
+                    {
+                      "read": "pin_candidate",
+                      "because": "spot within +1.9% of max-pain 723.5549504785777 (gravitational pull)"
+                    }
+                  ]
+                },
+                "short_term": {
+                  "positioning_score": -0.0946,
+                  "metrics": {
+                    "atm_iv": 18.29401549138818,
+                    "gex_dealer_net": 193763063.43445227,
+                    "max_pain_distance_pct": -0.004316506235344728,
+                    "pcr_oi_notional": 0.7570507171623321,
+                    "skew_25d_rr": 3.186192750962587,
+                    "skew_norm": 0.1741658496169128
+                  },
+                  "signals": [
+                    {
+                      "read": "bullish_lean",
+                      "because": "$-notional put/call ratio 0.76 (calls heavier)"
+                    },
+                    {
+                      "read": "typical_for_asset",
+                      "because": "normalized put-skew in 62th percentile of this asset's own 90d (normal for it)"
+                    },
+                    {
+                      "read": "mid_range",
+                      "because": "ATM IV 18.3% = 38th percentile of this asset's own 90d"
+                    },
+                    {
+                      "read": "pinned_suppressing",
+                      "because": "dealers net long gamma → dampen moves"
+                    },
+                    {
+                      "read": "pin_candidate",
+                      "because": "spot within -0.4% of max-pain 707.0 (gravitational pull)"
+                    }
+                  ]
+                }
+              },
+              "key_dates": [
+                {
+                  "expiry": "2026-08-25",
+                  "dte": 0,
+                  "read": "routine_0dte_concentration",
+                  "because": "30% of total open interest sits here; 89% of today's volume → standard 0DTE expiry flow (mechanical); no IV premium vs neighbours, so NOT evidence of a catalyst"
+                },
+                {
+                  "expiry": "2026-11-20",
+                  "dte": 87,
+                  "read": "expiry_concentration",
+                  "because": "26% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+                },
+                {
+                  "expiry": "2027-09-17",
+                  "dte": 388,
+                  "read": "expiry_concentration",
+                  "because": "18% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+                }
+              ]
+            }
+          }
+        ],
+        "commodity": [
+          {
+            "concept": "AI",
+            "ticker": "ALUMINUM_CN.COMM",
+            "name": "Aluminum (Shanghai)",
+            "region": "China (onshore)",
+            "currency": "CNY",
+            "description": "Aluminum futures on the Shanghai Futures Exchange (SHFE), RMB-denominated — the onshore China price and a primary global price-discovery venue. Counterpart to ALUMINUM (CME, USD).",
+            "metric_kind": "return",
+            "last_close": 23760.0,
+            "range_read": "mid-range",
+            "trend_read": "uptrend — above both the 50-day and 200-day average",
+            "realized_vol_percentile_1y": 18.25,
+            "windows": {
+              "1mo": {
+                "change_pct": 1.3
+              },
+              "1w": {
+                "change_pct": 0.36
+              },
+              "1y": {
+                "change_pct": 14.18
+              },
+              "3mo": {
+                "change_pct": -2.96
+              },
+              "ytd": {
+                "change_pct": 3.64
+              }
+            }
+          }
+        ]
+      },
+      "skipped": [],
+      "_guide": "Present each angle SEPARATELY — they are DIFFERENT cohorts/lenses: `theme` = MarketDX megatrend membership (trend-exposed, may cross sectors); `gics` = standard GICS sector classification (different winners/losers); `asset` = a LIST of per-concept ETF options positioning; `commodity` = a LIST of per-concept underlying COMMODITY PRICE reads (level/change/trend — the price lens for carbon/gold/copper that has no options ETF; narrate a `metric_kind:yield` move in bps). With MULTIPLE `concepts`, theme+gics MERGE them into one union pulse while asset+commodity stay per-concept — so you can still tell which concept each ETF/commodity belongs to. Do NOT merge the four angles. `skipped` angles don't apply. Lead with the sharpest cross-angle read (megatrend vs GICS divergence, options contradicting news breadth). Narrate options from its read/because for a non-expert."
+    }
+  ],
+  "answer_to_user": "AI theme, last 30 days (2026-07-27 to 08-26). Overall pulse is net-positive: on the MarketDX 'Artificial Intelligence' megatrend, 3,543 stories with a 57% positive share.\n\nMost-talked-about names (by story count, megatrend lens):\n- NVIDIA (NVDA) — dominant, 474 stories, net-positive (349 pos / 86 neg).\n- Alphabet (GOOG) — 298, net-positive (TPU story).\n- Microsoft (MSFT) — 274, net-positive.\n- Amazon (AMZN) — 241, net-positive (Trainium).\n- Micron (MU) — 122, net-positive.\nNet-negative attention: Meta (META, 240 stories, 107 neg vs 101 pos) and Apple (AAPL, 107, net-negative) are the crowded-but-souring names. (The GICS-tech lens adds SK Hynix and Samsung as memory winners, and flags Apple, ASML and Western Digital as net-negative.)\n\nBig storylines (top impact-5 stories):\n1. Nvidia earnings as the barometer for the whole AI trade (~$5T market cap, cheapest valuation since ~2018 at ~19x fwd) — the market cares more about financing circularity than the numbers.\n2. The financing/infrastructure buildout: Nvidia pledging >$100B credit support for OpenAI's 8-GW Ohio data center (with SB Energy/SoftBank) + a $500B AI-infra platform with Goldman/BlackRock/Apollo.\n3. Broadcom seeking >$60B (up to $100B) in debt for an AI-chip deal benefiting Anthropic.\n4. Data centers as the largest capex cycle in US history — hyperscalers spending >$750B this year (+67%), straining the power grid and drawing political pushback.\n\nTheme-level narrative vs stock noise: the through-line is an AI capex/financing supercycle (data centers, power, debt) rather than any single product — with the key tension being whether that circular financing is healthy. Individual-name noise (Meta/Apple souring, memory names ripping) sits underneath that. On the options lens, QQQ positioning skews mildly bearish/put-heavy at longer horizons — a mild hedge against the otherwise-bullish news breadth."
+}

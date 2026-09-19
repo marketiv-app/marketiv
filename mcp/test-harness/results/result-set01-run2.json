@@ -1,0 +1,289 @@
+{
+  "set": "technical-novice-run2",
+  "cases": [
+    {
+      "id": "tn-01",
+      "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "overbought"}]}],
+            "asset_type": ["Common Stock"],
+            "sort": "rsi",
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "60 results (capped). Top names: CRNX.US Crinetics Pharma (RSI 89.5, held 41 bars), CYCU.US Cycurion (RSI 86.8), BWMN.US Bowman Consulting (RSI 84.7), AMR.US Alpha Metallurgical (RSI 84.4). All clearly above RSI 70. Sorted by RSI descending.",
+      "verdict": "PASS",
+      "reason": "Returns real stock names with RSI values all clearly above 70, explicitly uses overbought signal. Sort by RSI delivers highest-overbought first. Identical outcome to run 1.",
+      "defects": []
+    },
+    {
+      "id": "tn-02",
+      "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "at_new_high"}]}],
+            "country": ["TH"],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "7 Thai stocks at 52-week high (2026-08-29): AWC.BK, BCP.BK, GEL.BK, GGC.BK, MORE.BK, PTTGC.BK, TFG.BK — all BK exchange (SET). Universe was 826. Exact same 7 names as run 1.",
+      "verdict": "PASS",
+      "reason": "Returns exclusively Thai SET-listed stocks (.BK suffix) with confirmed 52-week highs on 2026-08-29. All 7 tickers are Thai-only. Identical outcome to run 1.",
+      "defects": []
+    },
+    {
+      "id": "tn-03",
+      "question": "I keep hearing about the golden cross thing. Can you find me stocks where the 50 day moving average just crossed above the 200 day?",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "60 results (capped). First few: PUAL.LSE, MLVIE.PA, 8067.HK, 067390.KQ, GAME.US. Signal correctly identified as cross_ema50_ema200_up. Mix of global names. Same result set as run 1.",
+      "verdict": "PASS",
+      "reason": "Correctly maps golden cross to ema50 crossover_up ema200. Results show genuine recent crossovers. Identical tool call and same outcome as run 1.",
+      "defects": [
+        {
+          "desc": "No default country/size scoping means golden cross results are dominated by low-liquidity LSE/European OTC names that a novice may not recognize; client has no guidance to add country=US or size=large to get intuitive results",
+          "side": "mcp-guidance"
+        }
+      ]
+    },
+    {
+      "id": "tn-04",
+      "question": "Is Tesla overbought or oversold right now? Just tell me if it's a good time to buy or if I should wait.",
+      "tool_calls": [
+        {
+          "tool": "asset_pulse",
+          "args": {
+            "ticker": "TSLA",
+            "window": "30d"
+          }
+        }
+      ],
+      "result_summary": "TSLA: last close $348.75 (2026-08-28), close_vs_sma200_pct=-13.01%, close_vs_sma50_pct=-3.25%, range_position_52w_pct=25.5 (lower half), drawdown_from_52w_high=-30.09%, trend_read='downtrend — below both the 50-day and 200-day average', realized_vol_30d_annual_pct=58.35%, realized_vol_percentile_1y=92.86%.",
+      "verdict": "PASS",
+      "reason": "asset_pulse returns rich price context: SMA distances, 52w range position, realized volatility, drawdown, and a clear trend_read string. Data clearly supports a directional oversold/bearish timing read. Same data as run 1.",
+      "defects": [
+        {
+          "desc": "asset_pulse does not surface a current RSI value directly in price context (RSI appears only when screener returns matched.ta context); a novice asking 'is it overbought?' can't see the actual RSI number from asset_pulse alone — must cross-reference with screen_unified",
+          "side": "mcp-guidance"
+        }
+      ]
+    },
+    {
+      "id": "tn-05",
+      "question": "Show me stocks that dropped a lot lately but the company is actually fine — like still growing revenue and not overpriced. Kinda looking for a dip to buy.",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.15", "window_bars": 60}]}],
+            "fundamental": [{"concept": "revenue", "pattern": "above_average"}, {"concept": "pe", "pattern": "below_average"}],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        },
+        {
+          "tool": "find_fsconcept",
+          "args": {"q": "revenue growth"}
+        },
+        {
+          "tool": "find_fspattern",
+          "args": {"q": "accelerating growth, falling"}
+        },
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.15", "window_bars": 60}]}],
+            "fundamental": [{"concept": "revenue", "pattern": "accelerating"}],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "First call: immediate error — 'revenue' field cannot be used with above_average pattern (capability limit, not a timeout). After resolving concept/pattern via find_fsconcept+find_fspattern, retry with revenue+accelerating returned 60 results (capped). Top examples: AAOI.US Applied Opt (net_chg -28.3%, rev YoY +86.4%), ADEA.US ADEIA (-21.75%, rev +12.1%), AIP.US Arteris (-54.7%, rev +46.3%).",
+      "verdict": "PARTIAL",
+      "reason": "First call fails fast with a useful error (improvement from run 1 timeout), but still requires a discovery loop (find_fsconcept + find_fspattern) to find the working concept/pattern combination. Final call returns real dip-buy candidates with both price drop and revenue growth confirmed. PE/valuation filter still not applied in final result.",
+      "defects": [
+        {
+          "desc": "'revenue' + 'above_average' returns an immediate capability error ('revenue is a real field but CANNOT be screened') — server improvement vs run 1 timeout, but client needs discovery loop to find working pattern. No PE/valuation data shown in results — 'not overpriced' half of the question not verified in the output.",
+          "side": "mcp-guidance"
+        }
+      ]
+    },
+    {
+      "id": "tn-06",
+      "question": "Which stocks are like coiling up / getting really quiet before a big move? I think it's called a squeeze?",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "bb_squeeze", "window_bars": 5}]}],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "59 results. Top hits: 0374.HK Four Seas Mercantile (bb_width=0.0), DNM.LSE Dianomi (bb_width=0.0), ORNT.LSE Orient Telecoms (bb_width=0.0), PRIM.LSE Primorus (bb_width=0.0). Correctly uses bb_squeeze pattern, NOT short squeeze. Same result count and same top names as run 1.",
+      "verdict": "PASS",
+      "reason": "Correctly interprets 'squeeze' as Bollinger Band volatility squeeze (not short squeeze). Results show bb_width=0.0 (maximum tightness) confirming genuine coiling. Identical outcome to run 1.",
+      "defects": []
+    },
+    {
+      "id": "tn-07",
+      "question": "any crypto near its 52 week low right now?",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "near_low"}]}],
+            "asset_type": ["Crypto"],
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "60 results (capped). All .CC tickers (crypto). Top names: ACE22307-USD.CC (rsi=0), ACES-USD.CC (rsi=0), ACOIN-USD.CC (rsi=0.05), ACT-USD.CC (rsi=3.09). Many with rsi=0 indicating illiquid/dead tokens. Same outcome as run 1.",
+      "verdict": "PASS",
+      "reason": "Returns crypto assets exclusively (all .CC tickers, no stocks). near_low pattern correctly applied. Results are genuinely crypto near yearly low. Identical to run 1.",
+      "defects": [
+        {
+          "desc": "Many returned crypto results have rsi14=0.0 which likely indicates dead/illiquid tokens with stale data rather than genuinely 'near 52w low' — no liquidity or volume filter is applied or suggested, leading to misleading results for a novice",
+          "side": "data-coverage"
+        }
+      ]
+    },
+    {
+      "id": "tn-08",
+      "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+      "tool_calls": [
+        {
+          "tool": "find_gics",
+          "args": {"q": "technology"}
+        },
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.10", "window_bars": 22}], "quals": [{"any": [{"pattern": "rising_volume", "for_bars": 5}]}]}],
+            "gics": "45",
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        },
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.10", "window_bars": 22}], "quals": [{"any": [{"pattern": "rising_volume", "for_bars": 5}]}]}],
+            "gics": "45",
+            "country": ["TH"],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        },
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.05", "window_bars": 22}], "quals": [{"any": [{"pattern": "rising_volume", "for_bars": 3}]}]}],
+            "gics": "45",
+            "country": ["TH"],
+            "asset_type": ["Common Stock"],
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "Global tech (gics=45): 6 results — CMRC.US Commerce.com, 688138.CG Shenzhen Qingyi, 000586.CS Sichuan Huiyuan, NOW.US ServiceNow (+15.8%, rising vol), 5291.TWO EISO Enterprise, 5443.TWO Gallant Precision. Thai-only strict: 0 results. Thai relaxed threshold: 1 result — KCE.BK KCE Electronics (semiconductor, rising volume matched). Identical to run 1.",
+      "verdict": "PARTIAL",
+      "reason": "Question asks for Thai tech stocks specifically. Thai IT universe is thin (66 stocks) — only 1 match (KCE.BK) at relaxed threshold. Global tech works well (6 results). Tool supports the request but Thai tech universe too thin to produce multiple stocks. Identical outcome to run 1.",
+      "defects": [
+        {
+          "desc": "Thai IT universe is only 66 stocks and very few pass simultaneous price-gain + volume criteria — tool returns 0 or 1 results without explaining that the universe is small or suggesting a broader region. A client following the schema guidance gets an empty/sparse result with no diagnostic feedback",
+          "side": "mcp-guidance"
+        }
+      ]
+    },
+    {
+      "id": "tn-09",
+      "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+      "tool_calls": [
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}],
+            "asset_type": ["Common Stock"],
+            "limit": 10
+          }
+        }
+      ],
+      "result_summary": "39 results. Top names: CJ Cheiljedang (097950.KO), Mercedes-Benz (MBG.XETRA), Empyrean Energy (EME.LSE), BASF (BAS.XETRA), E.ON (EOAN.XETRA). Signal correctly identified as macd_x_signal_up. All very recent crossovers. Identical count and top names to run 1.",
+      "verdict": "PASS",
+      "reason": "MACD crossover_up with macd_line crossing above macd_signal correctly encoded. Returns 39 recent bullish MACD crosses with recognizable names (Mercedes, BASF). Signal interpretation correct. Identical to run 1.",
+      "defects": []
+    },
+    {
+      "id": "tn-10",
+      "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+      "tool_calls": [
+        {
+          "tool": "macro_pulse",
+          "args": {"scope": "economy"}
+        },
+        {
+          "tool": "screen_unified",
+          "args": {
+            "ta": [{"anchor": [{"pattern": "below", "a": "close", "b": "ema200"}]}],
+            "size": ["large"],
+            "asset_type": ["Common Stock"],
+            "country": ["US"],
+            "sort": "mcap",
+            "limit": 15
+          }
+        }
+      ],
+      "result_summary": "macro_pulse: GDP growth at 23rd percentile (falling), CPI 3.304% rising (71st pct), core PCE 3.344% (74th pct) — mixed/cautious signal. Stock screen: 24 US large-caps matched, including NVDA (FALSE POSITIVE: close_vs_ema200=+0.1081), BA (-4%), COST (-1.7%), HD (-4.5%), IBM (-7.5%), META (-6.7%), NFLX (-6.1%), ORCL (-11.7%), TSLA (-8.5%), WMT (-10.2%), APP (-29.9%). Same NVDA false positive defect persists from run 1.",
+      "verdict": "PARTIAL",
+      "reason": "Market timing read via macro_pulse available (GDP slowing + inflation elevated = cautious). Large-cap below 200-day MA screen returns familiar names. NVDA still appears as a false positive — close_vs_ema200=+0.108 (positive = above MA) yet screen includes it. Defect persists unresolved from run 1. Same verdict as run 1.",
+      "defects": [
+        {
+          "desc": "NVDA (NVDA.US) matched close_below_ema200 signal but context.ta.close_vs_ema200=+0.1081 (positive = above MA); false positive in 'below ema200' screen — stale/wrong signal row persists from run 1, still not fixed",
+          "side": "ta-backend"
+        },
+        {
+          "desc": "macro_pulse returns FRED macro indicators but cannot directly answer 'is the stock market toppy' — no equity index level/valuation read (PE, Shiller CAPE) is returned; client must infer from GDP/inflation alone",
+          "side": "mcp-guidance"
+        }
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 6,
+    "partial": 3,
+    "fail": 0,
+    "top_defects": [
+      "NVDA false positive in 'below ema200' screen (ta-backend): close_vs_ema200=+0.108 in context yet signal fired — stale/wrong signal row, PERSISTS unresolved from run 1",
+      "TN-05 revenue+above_average capability error (mcp-guidance): now fails fast with a useful error instead of timing out (improvement), but client still needs a find_fsconcept+find_fspattern discovery loop to find the working pattern; PE/valuation half of dip-buy question not addressed in final results",
+      "Thai IT universe too thin for TN-08 (mcp-guidance): only 1 result at relaxed threshold with no diagnostic feedback about universe size — novice gets empty/sparse result with no guidance to broaden scope",
+      "No RSI value in asset_pulse price context (mcp-guidance): users asking 'is X overbought?' via asset_pulse cannot see the RSI number directly — requires a separate screen_unified call"
+    ],
+    "vs_run1": {
+      "matching_verdicts": 10,
+      "changed_verdicts": 0,
+      "notes": [
+        "TN-05: Changed from timeout to fast capability error for revenue+above_average — behavior improved (fails fast with a useful message) but final verdict still PARTIAL for same reason (PE check missing, discovery loop required)",
+        "All other cases: identical tool calls, identical results, identical verdicts"
+      ]
+    }
+  }
+}

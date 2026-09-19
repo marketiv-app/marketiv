@@ -1,0 +1,1418 @@
+{
+  "id": "fn-01",
+  "question": "I'm just starting out. Can you find me some big, well-known companies that aren't too expensive right now?",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "pe",
+            "pattern": "below_average"
+          }
+        ],
+        "size": [
+          "large"
+        ],
+        "min_market_cap_usd": 100000000000,
+        "country": [
+          "US"
+        ],
+        "sort": "mcap",
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 19.93,
+              "market_cap_usd": 4173832126464.0,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "normalized_pe": 33.7029547069683,
+              "revenue_usd": 445867000000.0
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 17.123934
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "AMZN01.BK",
+            "AMZN03.BK",
+            "AMZN06.BK",
+            "AMZN80.BK",
+            "AMZN23.BK",
+            "AMZ.XETRA",
+            "0R1O.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.43,
+              "market_cap_usd": 2798509096960.0,
+              "net_income_usd": 90798000000.0,
+              "net_margin": 0.1222,
+              "normalized_pe": 40.4320257850702,
+              "revenue_usd": 742776000000.0
+            }
+          },
+          "head_listing_id": 2048,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.022526
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amazon.com Inc",
+          "score": 2798509096960.0,
+          "ticker": "AMZN.US"
+        },
+        {
+          "also_known_as": [
+            "META01.BK",
+            "META06.BK",
+            "META23.BK",
+            "META80.BK",
+            "0QZI.LSE",
+            "FB2A.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 26.55,
+              "market_cap_usd": 1385002696704.0,
+              "net_income_usd": 68098000000.0,
+              "net_margin": 0.2984,
+              "normalized_pe": 20.0632608106919,
+              "revenue_usd": 228247000000.0
+            }
+          },
+          "head_listing_id": 28230,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.477213
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Meta Platforms Inc.",
+          "score": 1385002696704.0,
+          "ticker": "META.US"
+        },
+        {
+          "also_known_as": [
+            "BRK-A.US",
+            "BRKB23.BK",
+            "BRKB80.BK",
+            "0R37.LSE",
+            "BRYN.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 39.767353,
+              "market_cap_usd": 1076691337216.0,
+              "net_income_usd": 67342000000.0,
+              "net_margin": 0.1602,
+              "normalized_pe": 15.9884074903626,
+              "revenue_usd": 420276000000.0
+            }
+          },
+          "head_listing_id": 5325,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 12.528619
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Berkshire Hathaway Inc",
+          "score": 1076691337216.0,
+          "ticker": "BRK-B.US"
+        },
+        {
+          "also_known_as": [
+            "MICRON01.BK",
+            "MICRON03.BK",
+            "MICRON19.BK",
+            "MICRON23.BK",
+            "MICRON80.BK",
+            "0R2T.LSE",
+            "MTE.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 44.24,
+              "market_cap_usd": 1029204672512.0,
+              "net_income_usd": 50469000000.0,
+              "net_margin": 0.5591,
+              "normalized_pe": 20.3928089027324,
+              "revenue_usd": 90274000000.0
+            }
+          },
+          "head_listing_id": 30067,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.264919
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Micron Technology Inc",
+          "score": 1029204672512.0,
+          "ticker": "MU.US"
+        },
+        {
+          "also_known_as": [
+            "JPMUS06.BK",
+            "JPMUS19.BK",
+            "CMC.XETRA",
+            "0Q1F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 23.34,
+              "market_cap_usd": 965586124800.0,
+              "net_income_usd": 65067000000.0,
+              "net_margin": 0.3338,
+              "normalized_pe": 15.7304708952858,
+              "revenue_usd": 194911000000.0
+            }
+          },
+          "head_listing_id": 24608,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 15.56341
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "JPMorgan Chase & Co",
+          "score": 965586124800.0,
+          "ticker": "JPM.US"
+        },
+        {
+          "also_known_as": [
+            "0R1M.LSE",
+            "XONA.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.77,
+              "market_cap_usd": 680768110592.0,
+              "net_income_usd": 32757000000.0,
+              "net_margin": 0.0907,
+              "normalized_pe": 20.7823705037702,
+              "revenue_usd": 361060000000.0
+            }
+          },
+          "head_listing_id": 48736,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.307593
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Exxon Mobil Corp",
+          "score": 680768110592.0,
+          "ticker": "XOM.US"
+        },
+        {
+          "also_known_as": [
+            "BAC03.BK",
+            "NCB.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.33,
+              "market_cap_usd": 449144258560.0,
+              "net_income_usd": 31697000000.0,
+              "net_margin": 0.2732,
+              "normalized_pe": 14.1699296009086,
+              "revenue_usd": 116003000000.0
+            }
+          },
+          "head_listing_id": 3570,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 14.755196
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Bank of America Corp",
+          "score": 449144258560.0,
+          "ticker": "BAC.US"
+        },
+        {
+          "also_known_as": [
+            "ORCL01.BK",
+            "ORCL06.BK",
+            "ORCL19.BK",
+            "ORC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.83,
+              "market_cap_usd": 411302428672.0,
+              "net_income_usd": 17087000000.0,
+              "net_margin": 0.2537,
+              "normalized_pe": 25.532351603285,
+              "revenue_usd": 67358000000.0
+            }
+          },
+          "head_listing_id": 32732,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 24.492281
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Oracle Corporation",
+          "score": 411302428672.0,
+          "ticker": "ORCL.US"
+        },
+        {
+          "also_known_as": [
+            "0R2Q.LSE",
+            "CHV.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 10.39,
+              "market_cap_usd": 403580289024.0,
+              "net_income_usd": 20591000000.0,
+              "net_margin": 0.0987,
+              "normalized_pe": 19.5998392027585,
+              "revenue_usd": 208711000000.0
+            }
+          },
+          "head_listing_id": 9257,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 19.509143
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chevron Corp",
+          "score": 403580289024.0,
+          "ticker": "CVX.US"
+        },
+        {
+          "also_known_as": [
+            "UNH19.BK",
+            "UNH.XETRA",
+            "0R0O.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 15.56,
+              "market_cap_usd": 353589526528.0,
+              "net_income_usd": 12044000000.0,
+              "net_margin": 0.0268,
+              "normalized_pe": 28.7391087481561,
+              "revenue_usd": 449713000000.0
+            }
+          },
+          "head_listing_id": 45221,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 25.316838
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "UnitedHealth Group Incorporated",
+          "score": 353589526528.0,
+          "ticker": "UNH.US"
+        },
+        {
+          "also_known_as": [
+            "MS06.BK",
+            "0QYU.LSE",
+            "MS-PQ.US",
+            "DWD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.38,
+              "market_cap_usd": 343026139136.0,
+              "net_income_usd": 20155000000.0,
+              "net_margin": 0.2759,
+              "normalized_pe": 16.8993866597392,
+              "revenue_usd": 73053000000.0
+            }
+          },
+          "head_listing_id": 29658,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 17.572698
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Morgan Stanley",
+          "score": 343026139136.0,
+          "ticker": "MS.US"
+        },
+        {
+          "also_known_as": [
+            "0R1G.LSE",
+            "HDI.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 14.29,
+              "market_cap_usd": 336905797632.0,
+              "net_income_usd": 14012000000.0,
+              "net_margin": 0.0841,
+              "normalized_pe": 24.044090610334,
+              "revenue_usd": 166592000000.0
+            }
+          },
+          "head_listing_id": 20195,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 23.617215
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "The Home Depot Inc",
+          "score": 336905797632.0,
+          "ticker": "HD.US"
+        },
+        {
+          "also_known_as": [
+            "PRG.XETRA",
+            "0NOF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.62,
+              "market_cap_usd": 334037516288.0,
+              "net_income_usd": 16045000000.0,
+              "net_margin": 0.1844,
+              "normalized_pe": 20.818791915737,
+              "revenue_usd": 87033000000.0
+            }
+          },
+          "head_listing_id": 34076,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.669184
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Procter & Gamble Company",
+          "score": 334037516288.0,
+          "ticker": "PG.US"
+        },
+        {
+          "also_known_as": [
+            "NFLX06.BK",
+            "NFLX80.BK",
+            "0QYI.LSE",
+            "NFC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.18,
+              "market_cap_usd": 316542681088.0,
+              "net_income_usd": 13649642000.0,
+              "net_margin": 0.2822,
+              "normalized_pe": 23.1905482274187,
+              "revenue_usd": 48370764000.0
+            }
+          },
+          "head_listing_id": 30925,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 24.455975
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Netflix Inc",
+          "score": 316542681088.0,
+          "ticker": "NFLX.US"
+        },
+        {
+          "also_known_as": [
+            "0R3G.LSE",
+            "GSUS06.BK",
+            "GOS.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 64.76,
+              "market_cap_usd": 302955102208.0,
+              "net_income_usd": 18068000000.0,
+              "net_margin": 0.2989,
+              "normalized_pe": 16.4435133134952,
+              "revenue_usd": 60448000000.0
+            }
+          },
+          "head_listing_id": 19383,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 16.066553
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Goldman Sachs Group Inc",
+          "score": 302955102208.0,
+          "ticker": "GS.US"
+        },
+        {
+          "also_known_as": [
+            "NWT.XETRA",
+            "0R2F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.88,
+              "market_cap_usd": 264297529344.0,
+              "net_income_usd": 22610000000.0,
+              "net_margin": 0.2605,
+              "normalized_pe": 11.6894086397169,
+              "revenue_usd": 86796000000.0
+            }
+          },
+          "head_listing_id": 47495,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 12.703488
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wells Fargo & Company",
+          "score": 264297529344.0,
+          "ticker": "WFC.US"
+        },
+        {
+          "also_known_as": [
+            "SNDK03.BK",
+            "SNDK23.BK",
+            "SNDK80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 73.76,
+              "market_cap_usd": 238045102080.0,
+              "net_income_usd": 4507000000.0,
+              "net_margin": 0.3419,
+              "normalized_pe": 51.7184663122378,
+              "revenue_usd": 13184000000.0
+            }
+          },
+          "head_listing_id": 40758,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 22.041486
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sandisk Corp",
+          "score": 238045102080.0,
+          "ticker": "SNDK.US"
+        },
+        {
+          "also_known_as": [
+            "0R01.LSE",
+            "TRVC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.28,
+              "market_cap_usd": 230899171328.0,
+              "net_income_usd": 17839000000.0,
+              "net_margin": 0.1956,
+              "normalized_pe": 12.5212608555924,
+              "revenue_usd": 91193000000.0
+            }
+          },
+          "head_listing_id": 5979,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 14.925647
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Citigroup Inc.",
+          "score": 230899171328.0,
+          "ticker": "C.US"
+        },
+        {
+          "also_known_as": [
+            "AMGN06.BK",
+            "0R0T.LSE",
+            "AMG.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 16.1,
+              "market_cap_usd": 230076481536.0,
+              "net_income_usd": 8743000000.0,
+              "net_margin": 0.2295,
+              "normalized_pe": 26.3155074386366,
+              "revenue_usd": 38095000000.0
+            }
+          },
+          "head_listing_id": 1915,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 26.048447
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amgen Inc",
+          "score": 230076481536.0,
+          "ticker": "AMGN.US"
+        },
+        {
+          "also_known_as": [
+            "AXP06.BK",
+            "0R3C.LSE",
+            "AEC1.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 16.48,
+              "market_cap_usd": 228605870080.0,
+              "net_income_usd": 11445000000.0,
+              "net_margin": 0.1507,
+              "normalized_pe": 19.8416943958331,
+              "revenue_usd": 75952000000.0
+            }
+          },
+          "head_listing_id": 3472,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.401092
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "American Express Company",
+          "score": 228605870080.0,
+          "ticker": "AXP.US"
+        },
+        {
+          "also_known_as": [
+            "IBM06.BK",
+            "IBM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 11.29,
+              "market_cap_usd": 219206402048.0,
+              "net_income_usd": 10725000000.0,
+              "net_margin": 0.1552,
+              "normalized_pe": 19.1218208000035,
+              "revenue_usd": 69097000000.0
+            }
+          },
+          "head_listing_id": 21628,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.608503
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "International Business Machines",
+          "score": 219206402048.0,
+          "ticker": "IBM.US"
+        },
+        {
+          "also_known_as": [
+            "0Q1S.LSE",
+            "BAC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.84,
+              "market_cap_usd": 201672802304.0,
+              "net_income_usd": 16172000000.0,
+              "net_margin": 0.1164,
+              "normalized_pe": 12.7347050212715,
+              "revenue_usd": 138895000000.0
+            }
+          },
+          "head_listing_id": 47096,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 12.640625
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Verizon Communications Inc",
+          "score": 201672802304.0,
+          "ticker": "VZ.US"
+        },
+        {
+          "also_known_as": [
+            "TM5.XETRA",
+            "0R2L.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.56,
+              "market_cap_usd": 196030742528.0,
+              "net_income_usd": 10560000000.0,
+              "net_margin": 0.1145,
+              "normalized_pe": 18.1951651266009,
+              "revenue_usd": 92189000000.0
+            }
+          },
+          "head_listing_id": 43753,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 19.116109
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "T-Mobile US Inc",
+          "score": 196030742528.0,
+          "ticker": "TMUS.US"
+        },
+        {
+          "also_known_as": [
+            "0L3I.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.49,
+              "market_cap_usd": 193132216320.0,
+              "net_income_usd": 10096000000.0,
+              "net_margin": 0.3879,
+              "normalized_pe": 19.1295776862124,
+              "revenue_usd": 26025000000.0
+            }
+          },
+          "head_listing_id": 39287,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.342441
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Charles Schwab Corp",
+          "score": 193132216320.0,
+          "ticker": "SCHW.US"
+        },
+        {
+          "also_known_as": [
+            "PEP80.BK",
+            "0QOS.LSE",
+            "PEP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.63,
+              "market_cap_usd": 191417581568.0,
+              "net_income_usd": 10451000000.0,
+              "net_margin": 0.1078,
+              "normalized_pe": 18.1343387483533,
+              "revenue_usd": 96904000000.0
+            }
+          },
+          "head_listing_id": 33895,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 18.365662
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PepsiCo Inc",
+          "score": 191417581568.0,
+          "ticker": "PEP.US"
+        },
+        {
+          "also_known_as": [
+            "0R16.LSE",
+            "MDO.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.31,
+              "market_cap_usd": 188933210112.0,
+              "net_income_usd": 8787000000.0,
+              "net_margin": 0.3172,
+              "normalized_pe": 21.245393714682,
+              "revenue_usd": 27702000000.0
+            }
+          },
+          "head_listing_id": 27793,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.688871
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "McDonald’s Corporation",
+          "score": 188933210112.0,
+          "ticker": "MCD.US"
+        },
+        {
+          "also_known_as": [
+            "NEE80.BK",
+            "0K80.LSE",
+            "NEE-P-T.US",
+            "NEE-P-U.US",
+            "NEE-PS.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.45,
+              "market_cap_usd": 179853049856.0,
+              "net_income_usd": 9299000000.0,
+              "net_margin": 0.324,
+              "normalized_pe": 20.9869452135712,
+              "revenue_usd": 28701000000.0
+            }
+          },
+          "head_listing_id": 30785,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 19.375281
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Nextera Energy Inc",
+          "score": 179853049856.0,
+          "ticker": "NEE.US"
+        },
+        {
+          "also_known_as": [
+            "DISNEY19.BK",
+            "0QZO.LSE",
+            "WDP.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.85,
+              "market_cap_usd": 179489095680.0,
+              "net_income_usd": 8600000000.0,
+              "net_margin": 0.087,
+              "normalized_pe": 18.4153361701841,
+              "revenue_usd": 98861000000.0
+            }
+          },
+          "head_listing_id": 10183,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.340206
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Walt Disney Company",
+          "score": 179489095680.0,
+          "ticker": "DIS.US"
+        },
+        {
+          "also_known_as": [
+            "0QZF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 24.276762,
+              "market_cap_usd": 178885984256.0,
+              "net_income_usd": 6486000000.0,
+              "net_margin": 0.5507,
+              "normalized_pe": 26.6038569834708,
+              "revenue_usd": 11777000000.0
+            }
+          },
+          "head_listing_id": 47377,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.437651
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Western Digital Corporation",
+          "score": 178885984256.0,
+          "ticker": "WDC.US"
+        },
+        {
+          "also_known_as": [
+            "GIS.XETRA",
+            "0QYQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": -2.65,
+              "market_cap_usd": 177859182592.0,
+              "net_income_usd": -3240000000.0,
+              "net_margin": -0.1064,
+              "normalized_pe": 38.5118550191629,
+              "revenue_usd": 30456000000.0
+            }
+          },
+          "head_listing_id": 18517,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 17.859864
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Gilead Sciences Inc",
+          "score": 177859182592.0,
+          "ticker": "GILD.US"
+        },
+        {
+          "also_known_as": [
+            "0R2E.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.35,
+              "market_cap_usd": 177474109440.0,
+              "net_income_usd": 7330000000.0,
+              "net_margin": 0.2885,
+              "normalized_pe": 24.2120203874488,
+              "revenue_usd": 25410000000.0
+            }
+          },
+          "head_listing_id": 45242,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 24.189474
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Union Pacific Corporation",
+          "score": 177474109440.0,
+          "ticker": "UNP.US"
+        },
+        {
+          "also_known_as": [
+            "0QZ1.LSE",
+            "SOBA.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.02,
+              "market_cap_usd": 170624401408.0,
+              "net_income_usd": 21558000000.0,
+              "net_margin": 0.1694,
+              "normalized_pe": 7.68687316391356,
+              "revenue_usd": 127239000000.0
+            }
+          },
+          "head_listing_id": 42336,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 8.245033
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "AT&T Inc.",
+          "score": 170624401408.0,
+          "ticker": "T.US"
+        },
+        {
+          "also_known_as": [
+            "QCOM06.BK",
+            "0QZ3.LSE",
+            "QCI.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8.75,
+              "market_cap_usd": 168236974080.0,
+              "net_income_usd": 9259000000.0,
+              "net_margin": 0.2101,
+              "normalized_pe": 19.7000000600425,
+              "revenue_usd": 44069000000.0
+            }
+          },
+          "head_listing_id": 36368,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 18.307429
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Qualcomm Incorporated",
+          "score": 168236974080.0,
+          "ticker": "QCOM.US"
+        },
+        {
+          "also_known_as": [
+            "CRM01.BK",
+            "CRM06.BK",
+            "CRM80.BK",
+            "FOO.XETRA",
+            "0QYJ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8.63,
+              "market_cap_usd": 161727938560.0,
+              "net_income_usd": 8023000000.0,
+              "net_margin": 0.1873,
+              "normalized_pe": 22.2681909188174,
+              "revenue_usd": 42829000000.0
+            }
+          },
+          "head_listing_id": 8662,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 22.128621
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Salesforce.com Inc",
+          "score": 161727938560.0,
+          "ticker": "CRM.US"
+        },
+        {
+          "also_known_as": [
+            "BKNG03.BK",
+            "BKNG80.BK",
+            "0W2Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.0028,
+              "market_cap_usd": 156474982400.0,
+              "net_income_usd": 7209000000.0,
+              "net_margin": 0.2553,
+              "normalized_pe": 21.5448530720718,
+              "revenue_usd": 28241000000.0
+            }
+          },
+          "head_listing_id": 4701,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 22.744035
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Booking Holdings Inc",
+          "score": 156474982400.0,
+          "ticker": "BKNG.US"
+        },
+        {
+          "also_known_as": [
+            "YCP.XETRA",
+            "0QZA.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.56,
+              "market_cap_usd": 155837497344.0,
+              "net_income_usd": 9282000000.0,
+              "net_margin": 0.1465,
+              "normalized_pe": 17.2057653685478,
+              "revenue_usd": 63345000000.0
+            }
+          },
+          "head_listing_id": 8289,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 16.873016
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ConocoPhillips",
+          "score": 155837497344.0,
+          "ticker": "COP.US"
+        },
+        {
+          "also_known_as": [
+            "UBER06.BK",
+            "0A1U.LSE",
+            "UT8.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.56,
+              "market_cap_usd": 152497553408.0,
+              "net_income_usd": 9579000000.0,
+              "net_margin": 0.1734,
+              "normalized_pe": 16.210706406874,
+              "revenue_usd": 55227000000.0
+            }
+          },
+          "head_listing_id": 44957,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 16.372807
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Uber Technologies Inc",
+          "score": 152497553408.0,
+          "ticker": "UBER.US"
+        },
+        {
+          "also_known_as": [
+            "LOM.XETRA",
+            "0R3E.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 27.12,
+              "market_cap_usd": 140129222656.0,
+              "net_income_usd": 6287000000.0,
+              "net_margin": 0.0816,
+              "normalized_pe": 22.2887263648799,
+              "revenue_usd": 77014000000.0
+            }
+          },
+          "head_listing_id": 26697,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 22.388274
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lockheed Martin Corporation",
+          "score": 140129222656.0,
+          "ticker": "LMT.US"
+        },
+        {
+          "also_known_as": [
+            "0HT4.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 18.84,
+              "market_cap_usd": 135868489728.0,
+              "net_income_usd": 10520000000.0,
+              "net_margin": 0.1698,
+              "normalized_pe": 12.074045260946,
+              "revenue_usd": 61938000000.0
+            }
+          },
+          "head_listing_id": 8197,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "cohort_benchmark": 26.672673,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 11.754246
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Capital One Financial Corporation",
+          "score": 135868489728.0,
+          "ticker": "COF.US"
+        }
+      ],
+      "sort": "mcap",
+      "universe": 124,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Here are some big, well-established companies that currently look reasonably-priced, not stretched. \"Not too expensive\" here means the price you pay for each dollar of the company's earnings (the P/E ratio) is BELOW the average of its large-cap peers. Examples from the screen: Alphabet/Google (GOOG) trades around 17x earnings vs a peer average near 27x, plus Amazon (AMZN), Meta (META), Berkshire Hathaway (BRK-B), JPMorgan Chase (JPM), Bank of America (BAC), Exxon Mobil (XOM), Chevron (CVX), UnitedHealth (UNH) and Oracle (ORCL). All are genuinely large, household-name businesses. A lower P/E just means the market is asking less for the earnings today — it does NOT guarantee the stock is 'safe' or will go up, and a low multiple can also signal slower expected growth. This is information to research further, not a recommendation to buy."
+}

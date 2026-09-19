@@ -1,0 +1,28 @@
+{
+  "id": "ma-01",
+  "question": "What assets across all markets — stocks, crypto, forex — are showing RSI above 70 right now?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["RSI above 70 overbought"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [{"anchor": [{"pattern": "overbought"}]}],
+        "sort": "rsi",
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "screen_unified returned 60 results (capped=true, actual universe >100) with `overbought` pattern across all three asset types. However, due to sort=rsi, ALL 60 returned rows are Crypto (.CC) with RSI=100. Stocks ARE overbought (20 hits, top AMR.US RSI=84.4) and Forex ARE overbought (20 hits, top XOFGBP.FOREX RSI=100) when screened separately, but in the combined multi-asset screen the crypto RSI=100 flood dominates the 60-row buffer and squeezes out stocks and forex entirely from the returned set.",
+  "verdict": "PARTIAL",
+  "reason": "Screen correctly covers all three asset types and RSI values are confirmed above 70, but the sorted combined response shows ONLY crypto in the returned 60 rows — stocks and forex are displaced by the crypto RSI=100 flood. Acceptance criterion 'returns results from more than one asset type' fails on the actual result set.",
+  "defects": [
+    {
+      "desc": "When sort=rsi is used on a combined multi-asset screen, crypto assets (RSI=100 stagnant tokens) dominate the entire result buffer, making it impossible for the client to see stocks/forex hits in a single call. The tool should either (a) cap per-asset-type representation, (b) warn that the buffer is single-asset-type dominated, or (c) not sort by oscillator when spanning asset types with very different RSI distributions.",
+      "side": "server"
+    }
+  ]
+}

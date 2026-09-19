@@ -1,0 +1,28 @@
+{
+  "id": "ma-08",
+  "question": "Show me the top crypto tokens that are at a 52-week high right now.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["price at 52-week high"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"pattern": "at_new_high"}],
+        "timeframe": 1,
+        "window_bars": 5
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=2154. All results are .CC: ADOGE-USD.CC, ADZ-USD.CC, AIDOGE-USD.CC, AMB-USD.CC, ANG-USD.CC, ARGUS-USD.CC, ATL-USD.CC, BABYDOGE-USD.CC, BAD-USD.CC, BARA34141-USD.CC, BCUG-USD.CC, BIZZ-USD.CC, BNBTiger, BRISE-USD.CC, BUZZ-USD.CC (RSI 80.3, ADX 74.6, solid mover), DAI-USD.CC, etc. Many have ADX=0 and RSI=100 indicating illiquid/stale tokens.",
+  "verdict": "PASS",
+  "reason": "Returns crypto-only assets (.CC format confirmed), at_new_high signal correctly applied, no stocks or forex contamination. Result quality is diluted by illiquid token noise but the tool's data is correct.",
+  "defects": [
+    {
+      "desc": "Many crypto 52-week-high results have ADX=0.0 and RSI=100.0 or 0.0, indicating illiquid/zombie tokens with flat prices that trivially satisfy the 52-week high condition by never moving. These dominate the top results. No liquidity filter is applied and no warning is emitted — a blind client would receive mostly junk tickers at the top.",
+      "side": "server"
+    }
+  ]
+}

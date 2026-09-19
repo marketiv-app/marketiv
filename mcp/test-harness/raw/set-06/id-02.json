@@ -1,0 +1,672 @@
+{
+  "id": "id-02",
+  "question": "Find me high but SAFE dividend yields — around 5-7% — where the payout ratio isn't stretched.",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "min_yield": 5,
+        "max_yield": 7,
+        "max_payout": 70,
+        "order_by": "yield",
+        "limit": 20
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 20,
+      "has_more": true,
+      "limit": 20,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.0166,
+            "payout_ratio_eff": 0.0166,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 7.0,
+            "yield_trailing_pct": 7.0
+          },
+          "eps": 0.98,
+          "exchange": "US",
+          "gic_code": "60107010",
+          "market_cap_usd": 1185648128.0,
+          "name": "Saul Centers Inc",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 2,
+            "top_reason": "Company declared unchanged quarterly dividends on common and preferred stock, signaling stable financial health."
+          },
+          "pb_ratio": 2.841549,
+          "pe_ratio": 35.329897,
+          "stock_id": 4248,
+          "symbol": "BFS",
+          "ticker": "BFS.US",
+          "week52_high": 37.7946,
+          "week52_low": 27.6773
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.0257,
+            "payout_ratio_eff": 0.0257,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.98,
+            "yield_trailing_pct": 6.98
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "10102050",
+          "market_cap_usd": null,
+          "name": "Shinhan Seobu T&D REIT Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.944274,
+          "pe_ratio": 120.588235,
+          "stock_id": 1416330,
+          "symbol": "404990",
+          "ticker": "404990.KO",
+          "week52_high": 4920.0,
+          "week52_low": 3228.6831
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.6363,
+            "payout_ratio_eff": 0.6363,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.97,
+            "yield_trailing_pct": 6.07
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "55102010",
+          "market_cap_usd": 127909204.4032,
+          "name": "Huzhou Gas Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.677001,
+          "pe_ratio": 9.038507,
+          "stock_id": 53105,
+          "symbol": "6661",
+          "ticker": "6661.HK",
+          "week52_high": 5.772,
+          "week52_low": 4.6456
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.565,
+            "payout_ratio_eff": 0.565,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.96,
+            "yield_trailing_pct": 6.94
+          },
+          "eps": 1.77,
+          "exchange": "TWO",
+          "gic_code": "50202020",
+          "market_cap_usd": null,
+          "name": "Fun Yours Technology Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.854953,
+          "pe_ratio": 16.045198,
+          "stock_id": 1419600,
+          "symbol": "6482",
+          "ticker": "6482.TWO",
+          "week52_high": 50.8253,
+          "week52_low": 27.0
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.6897,
+            "payout_ratio_eff": 0.6897,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.96,
+            "yield_trailing_pct": 6.25
+          },
+          "eps": 1.32,
+          "exchange": "CG",
+          "gic_code": "25503030",
+          "market_cap_usd": null,
+          "name": "Dashang Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "Subsidiary signs 183 million yuan renovation contract to expand and upgrade store, expected to boost operational efficiency and consolidate regional advantages."
+          },
+          "pb_ratio": 0.601398,
+          "pe_ratio": 11.015171,
+          "stock_id": 228841,
+          "symbol": "600694",
+          "ticker": "600694.CG",
+          "week52_high": 20.45,
+          "week52_low": 12.97
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.3913,
+            "payout_ratio_eff": 0.3913,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.95,
+            "yield_trailing_pct": 6.82
+          },
+          "eps": 0.46,
+          "exchange": "CG",
+          "gic_code": "25203010",
+          "market_cap_usd": null,
+          "name": "HLA GROUP CORP LTD",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.461334,
+          "pe_ratio": 12.73913,
+          "stock_id": 228617,
+          "symbol": "600398",
+          "ticker": "600398.CG",
+          "week52_high": 7.43,
+          "week52_low": 5.09
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.5536,
+            "payout_ratio_eff": 0.5536,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.95,
+            "yield_trailing_pct": 6.13
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "55105020",
+          "market_cap_usd": 891545879.3472,
+          "name": "Xinyi Energy Holdings Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.537361,
+          "pe_ratio": 6.958333,
+          "stock_id": 52793,
+          "symbol": "3868",
+          "ticker": "3868.HK",
+          "week52_high": 1.3654,
+          "week52_low": 0.8
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.6248,
+            "payout_ratio_eff": 0.6248,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.95,
+            "yield_trailing_pct": 4.9
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "30202030",
+          "market_cap_usd": 568731811.2256,
+          "name": "Guoquan Food (Shanghai) Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.473311,
+          "pe_ratio": 10.435322,
+          "stock_id": 52283,
+          "symbol": "2517",
+          "ticker": "2517.HK",
+          "week52_high": 4.7377,
+          "week52_low": 1.65
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.2106,
+            "payout_ratio_eff": 0.2106,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.94,
+            "yield_trailing_pct": 6.94
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "25101010",
+          "market_cap_usd": null,
+          "name": "Sjm Holdings",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.272652,
+          "pe_ratio": 5.007072,
+          "stock_id": 1415017,
+          "symbol": "025530",
+          "ticker": "025530.KO",
+          "week52_high": 4005.0,
+          "week52_low": 3180.0
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.5769,
+            "payout_ratio_eff": 0.5769,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.94,
+            "yield_trailing_pct": 6.94
+          },
+          "eps": 1.3,
+          "exchange": "TWO",
+          "gic_code": "50201020",
+          "market_cap_usd": null,
+          "name": "Taiwan Television Enterprise Co.Ltd.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.66163,
+          "pe_ratio": 8.269231,
+          "stock_id": 1420791,
+          "symbol": "8329",
+          "ticker": "8329.TWO",
+          "week52_high": 12.0,
+          "week52_low": 9.59
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": 2025,
+            "no_cut_streak_yrs": 0,
+            "payout_ratio": 0.1985,
+            "payout_ratio_eff": 0.1985,
+            "ttm_div_yoy_pct": -19.7,
+            "yield_pct": 6.93,
+            "yield_trailing_pct": 35.87
+          },
+          "eps": 0.69,
+          "exchange": "US",
+          "gic_code": "40203010",
+          "market_cap_usd": 634191232.0,
+          "name": "Vinci Partners Investments Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 1,
+            "top_reason": "Declared a quarterly dividend of $0.17 per share, consistent with prior payout, providing income to shareholders."
+          },
+          "pb_ratio": 1.553545,
+          "pe_ratio": 11.92801,
+          "stock_id": 46123,
+          "symbol": "VINP",
+          "ticker": "VINP.US",
+          "week52_high": 12.9336,
+          "week52_low": 9.0283
+        },
+        {
+          "country": "UK",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.5898,
+            "payout_ratio_eff": 0.5898,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.93,
+            "yield_trailing_pct": 6.94
+          },
+          "eps": 0.15,
+          "exchange": "LSE",
+          "gic_code": "25203010",
+          "market_cap_usd": null,
+          "name": "Me Group International PLC",
+          "news": {
+            "neg": 1,
+            "net_direction": "mixed",
+            "pos": 1,
+            "top_reason": "Laundry revenue up 16% and EBITDA up 21%, driving group EBITDA margins higher."
+          },
+          "pb_ratio": 2.085419,
+          "pe_ratio": 7.887324,
+          "stock_id": 238721,
+          "symbol": "MEGP",
+          "ticker": "MEGP.LSE",
+          "week52_high": 195.9381,
+          "week52_low": 98.5
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.0311,
+            "payout_ratio_eff": 0.0311,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.93,
+            "yield_trailing_pct": 6.93
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "10102050",
+          "market_cap_usd": null,
+          "name": "Shinhan Alpha REIT Co Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.031419,
+          "pe_ratio": 64.878049,
+          "stock_id": 1415898,
+          "symbol": "293940",
+          "ticker": "293940.KO",
+          "week52_high": 6051.3908,
+          "week52_low": 4863.5424
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.6671,
+            "payout_ratio_eff": 0.6671,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.93,
+            "yield_trailing_pct": 3.14
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "20305020",
+          "market_cap_usd": 770718764.8512,
+          "name": "Yuexiu Transport Infrastructure Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.419345,
+          "pe_ratio": 9.440324,
+          "stock_id": 51131,
+          "symbol": "1052",
+          "ticker": "1052.HK",
+          "week52_high": 4.6509,
+          "week52_low": 3.445
+        },
+        {
+          "country": "Hong Kong",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.0255,
+            "payout_ratio_eff": 0.0255,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.91,
+            "yield_trailing_pct": 6.94
+          },
+          "eps": 0.16,
+          "exchange": "HK",
+          "gic_code": "25301010",
+          "market_cap_usd": 3946557965.9264,
+          "name": "Wynn Macau Ltd",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": null,
+          "pe_ratio": 18.725806,
+          "stock_id": 51200,
+          "symbol": "1128",
+          "ticker": "1128.HK",
+          "week52_high": 7.0502,
+          "week52_low": 4.87
+        },
+        {
+          "country": "Korea",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.117,
+            "payout_ratio_eff": 0.117,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.91,
+            "yield_trailing_pct": 6.91
+          },
+          "eps": null,
+          "exchange": "KO",
+          "gic_code": "15101010",
+          "market_cap_usd": null,
+          "name": "Chinyang Hold",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.517178,
+          "pe_ratio": 5.193371,
+          "stock_id": 1415253,
+          "symbol": "100250",
+          "ticker": "100250.KO",
+          "week52_high": 3276.9816,
+          "week52_low": 2721.0651
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.0349,
+            "payout_ratio_eff": 0.0349,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.91,
+            "yield_trailing_pct": 6.88
+          },
+          "eps": 3.07,
+          "exchange": "TW",
+          "gic_code": "30301010",
+          "market_cap_usd": null,
+          "name": "Yuen Foong Yu Consumer Prod",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.661995,
+          "pe_ratio": 12.385621,
+          "stock_id": 1420088,
+          "symbol": "6790",
+          "ticker": "6790.TW",
+          "week52_high": 39.35,
+          "week52_low": 34.4448
+        },
+        {
+          "country": "China",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.4921,
+            "payout_ratio_eff": 0.4921,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.9,
+            "yield_trailing_pct": 6.35
+          },
+          "eps": 0.0,
+          "exchange": "HK",
+          "gic_code": "55105010",
+          "market_cap_usd": 284398179.2256,
+          "name": "Huadian Fuxin Energy Corporation Limited",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.213411,
+          "pe_ratio": 6.165087,
+          "stock_id": 50936,
+          "symbol": "0816",
+          "ticker": "0816.HK",
+          "week52_high": 3.102,
+          "week52_low": 2.04
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.0234,
+            "payout_ratio_eff": 0.0234,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.89,
+            "yield_trailing_pct": 6.93
+          },
+          "eps": 16.46,
+          "exchange": "TW",
+          "gic_code": "20202010",
+          "market_cap_usd": null,
+          "name": "104 Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 3.894618,
+          "pe_ratio": 13.001215,
+          "stock_id": 1418961,
+          "symbol": "3130",
+          "ticker": "3130.TW",
+          "week52_high": 215.1636,
+          "week52_low": 202.5
+        },
+        {
+          "country": "Taiwan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": null,
+            "payout_ratio": 0.6667,
+            "payout_ratio_eff": 0.6667,
+            "ttm_div_yoy_pct": null,
+            "yield_pct": 6.89,
+            "yield_trailing_pct": 6.9
+          },
+          "eps": 2.55,
+          "exchange": "TW",
+          "gic_code": "15102010",
+          "market_cap_usd": null,
+          "name": "Universal Cement Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.735283,
+          "pe_ratio": 10.490196,
+          "stock_id": 1417192,
+          "symbol": "1104",
+          "ticker": "1104.TW",
+          "week52_high": 32.85,
+          "week52_low": 26.25
+        }
+      ],
+      "total": 562
+    }
+  ],
+  "answer_to_user": "I screened for a 5-7% yield band with a payout-ratio ceiling of 70% (so the dividend isn't paying out more than the company can comfortably cover). Top results include Saul Centers (BFS.US) ~7.0% with a very low reported payout, Shinhan Seobu T&D REIT (404990.KO) ~6.98%, Huzhou Gas (6661.HK) ~6.97% at a ~64% payout, Fun Yours Technology (6482.TWO) ~6.96% at ~56% payout, Dashang Co (600694.CG) ~6.96% at ~69% payout, and HLA Group (600398.CG) ~6.95% at ~39% payout. The reason the payout ratio matters: a company earning $1 and paying $0.90 has little room to keep paying if earnings dip, whereas one paying $0.40 has a cushion — that's what separates a durable 6% from a 6% about to be cut. One important nuance the data itself flags: payout ratio is interpreted differently by sector. REITs (like the Saul Centers / Shinhan entries here) legally distribute most of their cash flow, so a 'high' payout on an earnings basis is normal for them — you'd look at FFO coverage rather than EPS payout. So these look safer than the trap-tier 40% yields from a pure ranking, but confirm each name's payout basis (REIT vs ordinary) and dividend history before treating any as safe. Not personalized advice."
+}

@@ -1,0 +1,132 @@
+{
+  "cases": [
+    {
+      "id": "C1",
+      "question": "Which US stocks have the most stretched put/call ratio or crowded one-sided options positioning right now?",
+      "tool_calls": [
+        {"tool": "find_oppattern", "args": {"queries": ["most stretched put/call ratio crowded one-sided options positioning"]}},
+        {"tool": "options_scan", "args": {"pattern": "crowded_one_sided", "limit": 10}}
+      ],
+      "result_summary": "Routed to EQUITY options scan. crowded_one_sided returned 10 US optionable names at |positioning|=1.0: CHT (p/c 0.39 call-heavy), CCL (p/c 3.96 put-heavy), A, CARR, BDX, ARES, ARGX, AIG, ALNY, CM. Each carries the $-notional put/call ratio as the 'because'.",
+      "verdict": "PASS",
+      "reason": "find_oppattern top candidate (exec_path=scan) fed verbatim to options_scan; correct equity-options backend, one-sided put/call extremes returned with reasons.",
+      "defects": []
+    },
+    {
+      "id": "C2",
+      "question": "Which commodity or FX futures have the speculative crowd at the most extreme / crowded positioning right now?",
+      "tool_calls": [
+        {"tool": "cot_extremes", "args": {"asset_class": "commodity", "limit": 10}},
+        {"tool": "cot_extremes", "args": {"asset_class": "fx", "limit": 10}}
+      ],
+      "result_summary": "Commodities: WHEAT-HRW (99th pct, z 2.25), COTTON (96th), COPPER (99th), SUGAR (91st), GASOLINE (90th) crowded long; LEAN HOGS (3rd), ORANGE JUICE (8th) crowded short. FX: EURUSD (2nd pct, z -2.4 crowded short), AUDUSD (93rd long), BRLUSD (95th), MXNUSD (96th) long, CADUSD (9th short). All at 3y >=90/<=10 pct extremes.",
+      "verdict": "PASS",
+      "reason": "Correctly used the CFTC-COT futures tool (cot_extremes) with asset_class enum commodity + fx; returned genuine speculative-positioning extremes, NOT the equity options scan.",
+      "defects": []
+    },
+    {
+      "id": "C3",
+      "question": "Find US stocks where implied vol looks rich relative to their own realized volatility.",
+      "tool_calls": [
+        {"tool": "find_oppattern", "args": {"queries": ["implied vol rich relative to realized volatility"]}},
+        {"tool": "find_tasignal", "args": {"q": ["realized volatility in low band"]}},
+        {"tool": "screen_unified", "args": {"options": "iv_rich", "ta": [{"anchor": [{"pattern": "in_range", "a": "realized_vol", "b": "0-20"}]}], "country": ["US"], "asset_type": ["Common Stock"], "sort": "options", "limit": 10}}
+      ],
+      "result_summary": "find_oppattern flagged iv_vs_realized as exec_path=compose with a live recipe (options iv_rich INTERSECT ta realized_vol low band). Built it: 5 US common-stock hits, e.g. MTB (ATM IV 31.9% = 100th pct of own 90d) with realized_vol_pct_1y 5.16% (low band) — IV rich vs quiet realized.",
+      "verdict": "PASS",
+      "reason": "Resolver told me IV-vs-realized isn't a single scan token but a live compose recipe; followed it via screen_unified intersecting the options IV leg with the TA realized_vol leg. Correct, honest routing.",
+      "defects": []
+    },
+    {
+      "id": "C4",
+      "question": "Show me stocks whose realized volatility is unusually low vs their own history (bottom of their range).",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["realized volatility unusually low vs its own history"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "in_range", "a": "realized_vol", "b": "0-20"}]}], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "find_tasignal resolved to indicator realized_vol (own-1y percentile, use in_range 0-20 = bottom quintile) + signal in_range. screen_unified TA-only leg returned quiet-underlying names in the bottom realized-vol band (strength 1.0).",
+      "verdict": "PASS",
+      "reason": "This is a price/TA question (realized vol, not options IV). find_tasignal correctly surfaced realized_vol + the in_range band pattern; screen_unified executed the own-history low-band screen cleanly.",
+      "defects": []
+    },
+    {
+      "id": "C5",
+      "question": "What's the news pulse on the AI theme over the last two weeks?",
+      "tool_calls": [
+        {"tool": "theme_pulse", "args": {"q": "AI", "window": "14d"}},
+        {"tool": "news_feed", "args": {"megatrend": "ai-applications-copilots", "window": "14d", "limit": 3}}
+      ],
+      "result_summary": "theme_pulse('AI', window=14d) failed with HTTP 402 'Insufficient Balance' (server-side LLM/provider billing) on both the first call and the retry. The 14d window itself was ACCEPTED: news_feed with window='14d' ran fine and returned real 2-week AI news (e.g. Salesforce +21% Q2, Agentforce ARR $1.5B). So the window value is not the problem; theme_pulse is down due to an upstream LLM balance error.",
+      "verdict": "PARTIAL",
+      "reason": "'14d' / two-week window was accepted (proven via news_feed), but the primary pulse tool theme_pulse 402'd on an LLM-billing failure both times, so the composed pulse couldn't be produced. Answerable via news_feed fallback.",
+      "defects": [
+        {"desc": "theme_pulse returns HTTP 402 Insufficient Balance (upstream LLM provider balance exhausted) — pulse composition unavailable; not a param/window issue.", "side": "server"}
+      ]
+    },
+    {
+      "id": "C6",
+      "question": "In the EV theme, which names are most talked about — do the big EV makers show up?",
+      "tool_calls": [
+        {"tool": "theme_players", "args": {"theme": "EV", "limit": 50}}
+      ],
+      "result_summary": "EV resolved to the Electric Vehicles megatrend roster with sub-nodes (Western/Legacy & Pure-play OEMs, China NEV Leaders, Battery Cells, E-motors, Charging, EV Power Semis). Marquee names present: Tesla (leader, core, node 16010200), BYD (China NEV Leaders), CATL/Contemporary Amperex (Battery leader), Toyota (leader), GM (leader), Rivian, Xiaomi, Panasonic, Infineon, ABB, Delta.",
+      "verdict": "PASS",
+      "reason": "theme resolver mapped 'EV' to the Electric Vehicles roster and marquee EV makers (Tesla, BYD-class China NEV leaders, CATL, Toyota, GM, Rivian) show up as leaders/core members across the value chain.",
+      "defects": []
+    },
+    {
+      "id": "C7",
+      "question": "Which stocks does the options crowd seem to have flipped on — from fearful to confident recently?",
+      "tool_calls": [
+        {"tool": "find_oppattern", "args": {"queries": ["crowd flipped from fearful to confident recently"]}},
+        {"tool": "options_scan", "args": {"pattern": "fear_to_confidence", "limit": 10}}
+      ],
+      "result_summary": "Resolver top hit fear_to_confidence (temporal_mode=flip, supported=yes). options_scan returned 10 flip-up names over ~2 weeks: SLF (-1 -> 1), PBR (-1 -> 0.88), TECK (-0.78 -> 1), FTS, SQQQ, IBIT, AU, SPGI, ETHA, COIN — each with prev/value positioning delta.",
+      "verdict": "PASS",
+      "reason": "Tense (flip, recent) matched exactly to fear_to_confidence; equity options scan returned bearish->bullish positioning reversals with the -> deltas as evidence.",
+      "defects": []
+    },
+    {
+      "id": "C8",
+      "question": "Give me the most extreme options positioning across single stocks — most one-sided names.",
+      "tool_calls": [
+        {"tool": "find_oppattern", "args": {"queries": ["most extreme one-sided options positioning single stocks"]}},
+        {"tool": "options_scan", "args": {"pattern": "crowded_one_sided", "limit": 8}}
+      ],
+      "result_summary": "find_oppattern top candidate = crowded_one_sided (exec_path=scan, sim 0.744), guidance explicitly routes to options_scan. Returned A, CARR, AIG, ALNY, BDX, ARES, ARGX, CCL at |positioning|=1.0 with $-notional put/call ratios.",
+      "verdict": "PASS",
+      "reason": "Guided cleanly to the EQUITY options scan (find_oppattern -> options_scan crowded_one_sided); did NOT mislead toward a futures/COT tool (that stays reserved for the .COMM/.FOREX futures question C2).",
+      "defects": []
+    },
+    {
+      "id": "C9",
+      "question": "Filter news to only negative-impact stories on Nvidia in the last week.",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "NVDA", "direction": "neg", "window": "7d", "limit": 10}}
+      ],
+      "result_summary": "stock_impact NVDA direction=neg window=7d returned neg-tagged Nvidia stories: 'Nvidia pauses revenue-sharing deals with AI cloud partners' (regulation neg, relevance 0.9), the Q2 beat article carrying a neg SUPPLY aspect (memory/data-center constraints, rel 0.8), and a rally-steadies-futures piece with a minor neg regulation aspect (rel 0.3).",
+      "verdict": "PASS",
+      "reason": "direction enum offered pos|neg|ambiguous; picked 'neg' cleanly. Filter returned articles whose net/aspect direction is negative. One row is a net-positive rally story surfaced via a minor neg aspect (rel 0.3) — expected aspect-level behaviour, not a filter defect.",
+      "defects": []
+    },
+    {
+      "id": "C10",
+      "question": "Rank dividend stocks by dividend growth (CAGR).",
+      "tool_calls": [
+        {"tool": "screen_dividends", "args": {"order_by": "cagr", "min_cagr": 5, "limit": 10}}
+      ],
+      "result_summary": "order_by enum = yield|streak|cagr; chose 'cagr'. Ranked by 5y dividend CAGR: FNF (485.3%), Shenzhen Batian (136.1%), a German name (118.0%), ... Guide warns high CAGR off a low base / recent last_cut_year can be misleading (FNF last_cut 2020, streak 5).",
+      "verdict": "PASS",
+      "reason": "order_by enum constrained the choice cleanly to 'cagr'; results ranked by 5y dividend CAGR descending with a decomposition guide. Note extreme CAGRs reflect low-base rebuilds, which the guide flags.",
+      "defects": []
+    }
+  ],
+  "summary": {
+    "pass": 9,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "theme_pulse HTTP 402 Insufficient Balance (upstream LLM provider balance exhausted) — C5 pulse composition unavailable; window param itself accepted"
+    ]
+  }
+}

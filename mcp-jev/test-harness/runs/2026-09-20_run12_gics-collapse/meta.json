@@ -1,0 +1,9 @@
+{
+  "run": "2026-09-20_run12", "date": "2026-09-20",
+  "purpose": "Collapse find_gics into its 6 consumers (screen_unified.gics/exclude_gics/vs_cohort + brief + screen_stocks + screen_dividends + write_note + query_notes) via _resolve_gics (reuse _resolve_gics_codes shortlist + Jev pick) + DELETE find_gics. Prove no round-trip; NL sector resolves server-side; nested→broadest; boundary honest; theme_pulse KEPT.",
+  "server": {"mcp_jev_port": 8902, "mdx_api_base": "http://127.0.0.1:8090 (DEBUG build — correctness only)", "health_checked": true, "mechanical": "find_gics ABSENT; consumers present; theme_pulse still resolves gics"},
+  "mdx_api_sha": "8fb26c4e", "mcp_jev_sha": "c15d3cf (untracked wc)",
+  "jev_key_suffix": "f2f2ec", "bearer_suffix": "c449ff",
+  "sets": [{"name": "resolver-gics-v1", "cases": ["gi01","gi02","gi03","gi04","gi05","gi06"]}],
+  "diff_baseline": "run11 (oppattern collapse; gics still via find_gics)", "model": "claude-opus-4-8"
+}

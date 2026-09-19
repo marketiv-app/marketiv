@@ -1,0 +1,1708 @@
+{
+ "id": "te-05",
+ "question": "Screen for extreme overbought exhaustion: stocks where the WEEKLY RSI(14) is above 80 right now, across any global market. Rank them by how far above 80 they are.",
+ "tools_called": [
+  {
+   "tool": "screen_unified",
+   "args": {
+    "ta": [
+     {
+      "anchor": [
+       {
+        "pattern": "above",
+        "a": "rsi",
+        "b": "80"
+       }
+      ]
+     }
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "timeframe": 2,
+    "sort": "rsi",
+    "limit": 15
+   }
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "adx": {
+      "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+     },
+     "close_vs_ema200": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "rsi14": {
+      "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+     },
+     "strength": {
+      "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+     }
+    }
+   },
+   "capped": false,
+   "count": 59,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "ta": {
+       "adx": 0.0,
+       "rsi14": 100.0
+      }
+     },
+     "head_listing_id": 35862,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 24
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "PTEST-X",
+     "score": 1.0,
+     "ticker": "PTEST-X.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 22.8353,
+       "rsi14": 92.1083
+      }
+     },
+     "head_listing_id": 17775,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "GameSquare Holdings Inc.",
+     "score": 1.0,
+     "ticker": "GAME.US"
+    },
+    {
+     "also_known_as": [
+      "PSQH-WT.US"
+     ],
+     "context": {
+      "ta": {
+       "adx": 40.5923,
+       "rsi14": 91.5598
+      }
+     },
+     "head_listing_id": 35757,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 7
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "PSQ Holdings Inc.",
+     "score": 1.0,
+     "ticker": "PSQH.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 25.4089,
+       "rsi14": 91.0004
+      }
+     },
+     "head_listing_id": 22401,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "InterCure Ltd.",
+     "score": 1.0,
+     "ticker": "INCR.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 41.0257,
+       "rsi14": 90.7136
+      }
+     },
+     "head_listing_id": 3684,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "CBL International Limited Ordinary Shares",
+     "score": 1.0,
+     "ticker": "BANL.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 52.8452,
+       "rsi14": 89.7798
+      }
+     },
+     "head_listing_id": 25544,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Karat Packaging Inc",
+     "score": 1.0,
+     "ticker": "KRT.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 43.4862,
+       "close_vs_ema200": 0.6084,
+       "rsi14": 89.1309
+      }
+     },
+     "head_listing_id": 49714,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "KCE Electronics Public Company Limited",
+     "score": 1.0,
+     "ticker": "KCE.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 38.1167,
+       "rsi14": 88.4532
+      }
+     },
+     "head_listing_id": 48690,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Xencor Inc",
+     "score": 1.0,
+     "ticker": "XNCR.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 57.4245,
+       "rsi14": 87.3624
+      }
+     },
+     "head_listing_id": 12469,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Eton Pharmaceuticals Inc",
+     "score": 1.0,
+     "ticker": "ETON.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 66.8376,
+       "close_vs_ema200": 1.056,
+       "rsi14": 86.9572
+      }
+     },
+     "head_listing_id": 1758,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "AstroNova Inc",
+     "score": 1.0,
+     "ticker": "ALOT.US"
+    },
+    {
+     "also_known_as": [
+      "232.HK"
+     ],
+     "context": {
+      "ta": {
+       "adx": 62.0575,
+       "close_vs_ema200": 1.7762,
+       "rsi14": 86.8019
+      }
+     },
+     "head_listing_id": 50470,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 12
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Continental Aerospace Technologies Holding Ltd",
+     "score": 1.0,
+     "ticker": "0232.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 48.5766,
+       "close_vs_ema200": 1.1659,
+       "rsi14": 86.758
+      }
+     },
+     "head_listing_id": 6106,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 5
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "The Cheesecake Factory",
+     "score": 1.0,
+     "ticker": "CAKE.US"
+    },
+    {
+     "also_known_as": [
+      "301.HK"
+     ],
+     "context": {
+      "ta": {
+       "adx": 56.6734,
+       "rsi14": 86.5928
+      }
+     },
+     "head_listing_id": 50531,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sanvo Fine Chemicals Group Ltd",
+     "score": 1.0,
+     "ticker": "0301.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 74.2706,
+       "rsi14": 86.1589
+      }
+     },
+     "head_listing_id": 37363,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "RF Acquisition Corp II Ordinary Shares",
+     "score": 1.0,
+     "ticker": "RFAI.US"
+    },
+    {
+     "also_known_as": [
+      "0A88.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 57.3664,
+       "rsi14": 86.1032
+      }
+     },
+     "head_listing_id": 44866,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "10X Genomics Inc",
+     "score": 1.0,
+     "ticker": "TXG.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 35.3459,
+       "close_vs_ema200": 0.1794,
+       "rsi14": 85.6733
+      }
+     },
+     "head_listing_id": 49541,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Castle Peak Holdings Public Company Limited",
+     "score": 1.0,
+     "ticker": "CPH.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 49.4874,
+       "close_vs_ema200": 0.6409,
+       "rsi14": 85.5687
+      }
+     },
+     "head_listing_id": 50093,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Thanachart Capital Public Company Limited",
+     "score": 1.0,
+     "ticker": "TCAP.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 41.6245,
+       "close_vs_ema200": 0.2891,
+       "rsi14": 85.3602
+      }
+     },
+     "head_listing_id": 50092,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Tropical Canning (Thailand) Public Company Limited",
+     "score": 1.0,
+     "ticker": "TC.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.2166,
+       "close_vs_ema200": 1.0651,
+       "rsi14": 85.0008
+      }
+     },
+     "head_listing_id": 49440,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Banpu Public Company Limited",
+     "score": 1.0,
+     "ticker": "BANPU.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 69.5,
+       "rsi14": 84.6634
+      }
+     },
+     "head_listing_id": 49470,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "BKI HOLDINGS PUBLIC COMPANY LIMITED",
+     "score": 1.0,
+     "ticker": "BKIH.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 46.6234,
+       "rsi14": 84.6448
+      }
+     },
+     "head_listing_id": 24704,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Jerash Holdings US Inc",
+     "score": 1.0,
+     "ticker": "JRSH.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 44.4397,
+       "rsi14": 84.1294
+      }
+     },
+     "head_listing_id": 38946,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "SAIHEAT Limited",
+     "score": 1.0,
+     "ticker": "SAIH.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 37.5159,
+       "rsi14": 83.9487
+      }
+     },
+     "head_listing_id": 1954,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Amylyx Pharmaceuticals Inc",
+     "score": 1.0,
+     "ticker": "AMLX.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 26.6245,
+       "rsi14": 83.8264
+      }
+     },
+     "head_listing_id": 50135,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Techno Medical Public Company Limited",
+     "score": 1.0,
+     "ticker": "TM.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 39.0147,
+       "rsi14": 83.1524
+      }
+     },
+     "head_listing_id": 49366,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Applied DB Public Company Limited",
+     "score": 1.0,
+     "ticker": "ADB.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 43.342,
+       "rsi14": 83.0447
+      }
+     },
+     "head_listing_id": 13333,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 5
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Forte Biosciences Inc",
+     "score": 1.0,
+     "ticker": "FBRX.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 60.9392,
+       "rsi14": 82.8477
+      }
+     },
+     "head_listing_id": 42294,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Spyre Therapeutics Inc.",
+     "score": 1.0,
+     "ticker": "SYRE.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 49.5714,
+       "close_vs_ema200": 1.526,
+       "rsi14": 82.8256
+      }
+     },
+     "head_listing_id": 49532,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Christiani & Nielsen (Thai) Public Company Limited",
+     "score": 1.0,
+     "ticker": "CNT.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 44.8314,
+       "close_vs_ema200": 0.237,
+       "rsi14": 82.7642
+      }
+     },
+     "head_listing_id": 49506,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Seafresh Industry Public Company Limited",
+     "score": 1.0,
+     "ticker": "CFRESH.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 39.8201,
+       "rsi14": 82.5575
+      }
+     },
+     "head_listing_id": 8686,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 8
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Crinetics Pharmaceuticals Inc",
+     "score": 1.0,
+     "ticker": "CRNX.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.1101,
+       "rsi14": 82.3749
+      }
+     },
+     "head_listing_id": 3263,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Aveanna Healthcare Holdings Inc",
+     "score": 1.0,
+     "ticker": "AVAH.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 56.1426,
+       "rsi14": 82.313
+      }
+     },
+     "head_listing_id": 2297,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 10
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Apogee Therapeutics, Inc. Common Stock",
+     "score": 1.0,
+     "ticker": "APGE.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "rsi14": 82.2951
+      }
+     },
+     "head_listing_id": 8270,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Concentra Group Holdings Parent, Inc.",
+     "score": 1.0,
+     "ticker": "CON.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 30.9771,
+       "close_vs_ema200": 0.358,
+       "rsi14": 82.2347
+      }
+     },
+     "head_listing_id": 3126,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "AtriCure Inc",
+     "score": 1.0,
+     "ticker": "ATRC.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 33.0087,
+       "close_vs_ema200": 0.2735,
+       "rsi14": 82.2104
+      }
+     },
+     "head_listing_id": 23100,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 5
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Integer Holdings Corp",
+     "score": 1.0,
+     "ticker": "ITGR.US"
+    },
+    {
+     "also_known_as": [
+      "474.HK"
+     ],
+     "context": {
+      "ta": {
+       "adx": 30.6038,
+       "close_vs_ema200": 0.2933,
+       "rsi14": 81.5602
+      }
+     },
+     "head_listing_id": 50671,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Aceso Life Science Group Ltd",
+     "score": 1.0,
+     "ticker": "0474.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 30.4476,
+       "close_vs_ema200": 1.2185,
+       "rsi14": 81.5216
+      }
+     },
+     "head_listing_id": 11138,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Brinker International Inc",
+     "score": 1.0,
+     "ticker": "EAT.US"
+    },
+    {
+     "also_known_as": [
+      "0I3Q.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 45.6926,
+       "close_vs_ema200": 1.3754,
+       "rsi14": 81.4581
+      }
+     },
+     "head_listing_id": 8311,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Corcept Therapeutics Incorporated",
+     "score": 1.0,
+     "ticker": "CORT.US"
+    },
+    {
+     "also_known_as": [
+      "613.HK"
+     ],
+     "context": {
+      "ta": {
+       "adx": 58.8169,
+       "close_vs_ema200": 2.8732,
+       "rsi14": 81.4146
+      }
+     },
+     "head_listing_id": 50782,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Planetree International Development",
+     "score": 1.0,
+     "ticker": "0613.HK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 61.1937,
+       "rsi14": 81.1251
+      }
+     },
+     "head_listing_id": 38531,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Revolution Medicines Inc",
+     "score": 1.0,
+     "ticker": "RVMD.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 41.6111,
+       "close_vs_ema200": 0.2093,
+       "rsi14": 81.1238
+      }
+     },
+     "head_listing_id": 50194,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Thai Vegetable Oil Public Company Limited",
+     "score": 1.0,
+     "ticker": "TVO.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.5619,
+       "close_vs_ema200": 0.0955,
+       "rsi14": 81.0057
+      }
+     },
+     "head_listing_id": 27535,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "ManpowerGroup Inc",
+     "score": 1.0,
+     "ticker": "MAN.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 50.7853,
+       "close_vs_ema200": 1.5698,
+       "rsi14": 80.9182
+      }
+     },
+     "head_listing_id": 49794,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Mida Leasing Public Company Limited",
+     "score": 1.0,
+     "ticker": "ML.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 31.891,
+       "close_vs_ema200": 0.4431,
+       "rsi14": 80.7486
+      }
+     },
+     "head_listing_id": 39599,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "SEI Investments Company",
+     "score": 1.0,
+     "ticker": "SEIC.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 46.7465,
+       "close_vs_ema200": 0.5031,
+       "rsi14": 80.7154
+      }
+     },
+     "head_listing_id": 49655,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Halcyon Technology Public Company Limited",
+     "score": 1.0,
+     "ticker": "HTECH.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 47.5479,
+       "close_vs_ema200": -0.0467,
+       "rsi14": 80.7047
+      }
+     },
+     "head_listing_id": 50214,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "United Paper Public Company Limited",
+     "score": 1.0,
+     "ticker": "UTP.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "rsi14": 80.694
+      }
+     },
+     "head_listing_id": 13773,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Fifth District Bancorp, Inc. Common Stock",
+     "score": 1.0,
+     "ticker": "FDSB.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 33.4174,
+       "rsi14": 80.6365
+      }
+     },
+     "head_listing_id": 20293,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Cybin Inc. Common Stock",
+     "score": 1.0,
+     "ticker": "HELP.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 39.1544,
+       "close_vs_ema200": 0.5084,
+       "rsi14": 80.6137
+      }
+     },
+     "head_listing_id": 49709,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 9
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kasikornbank Public Company Limited",
+     "score": 1.0,
+     "ticker": "KBANK.BK"
+    },
+    {
+     "also_known_as": [
+      "0L9G.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 51.2293,
+       "close_vs_ema200": 0.7575,
+       "rsi14": 80.4949
+      }
+     },
+     "head_listing_id": 41887,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "State Street Corp",
+     "score": 1.0,
+     "ticker": "STT.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 52.9399,
+       "rsi14": 80.4519
+      }
+     },
+     "head_listing_id": 35876,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Protagonist Therapeutics Inc",
+     "score": 1.0,
+     "ticker": "PTGX.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 51.5931,
+       "rsi14": 80.4463
+      }
+     },
+     "head_listing_id": 44853,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Twist Bioscience Corp",
+     "score": 1.0,
+     "ticker": "TWST.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.6287,
+       "close_vs_ema200": 0.5738,
+       "rsi14": 80.4091
+      }
+     },
+     "head_listing_id": 4773,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "BioLife Solutions Inc",
+     "score": 1.0,
+     "ticker": "BLFS.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 30.4948,
+       "close_vs_ema200": 0.4371,
+       "rsi14": 80.3305
+      }
+     },
+     "head_listing_id": 49448,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Bangchak Corporation Public Company Limited",
+     "score": 1.0,
+     "ticker": "BCP.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 41.1016,
+       "rsi14": 80.1437
+      }
+     },
+     "head_listing_id": 49670,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Intermedical Care and Lab Hospital Public Company Limited",
+     "score": 1.0,
+     "ticker": "IMH.BK"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 26.9233,
+       "rsi14": 80.1434
+      }
+     },
+     "head_listing_id": 32114,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "OmniAb Inc.",
+     "score": 1.0,
+     "ticker": "OABI.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.392,
+       "close_vs_ema200": 0.4648,
+       "rsi14": 80.0053
+      }
+     },
+     "head_listing_id": 19965,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Haemonetics Corporation",
+     "score": 1.0,
+     "ticker": "HAE.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 16.9343,
+       "rsi14": 41.7829
+      }
+     },
+     "head_listing_id": 5269,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "BRC Inc.",
+     "score": 1.0,
+     "ticker": "BRCC.US"
+    },
+    {
+     "also_known_as": [
+      "NHPAP.US",
+      "NHPBP.US"
+     ],
+     "context": {
+      "ta": {}
+     },
+     "head_listing_id": 3601765,
+     "matched": {
+      "ta": {
+       "rsi14_above_80": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "National Healthcare Properties, Inc.",
+     "score": 1.0,
+     "ticker": "NHP.US"
+    }
+   ],
+   "sort": "rsi",
+   "universe": 24045,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 59,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 59 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "Global common stocks with WEEKLY RSI(14) above 80 (extreme overbought), ranked by RSI descending. Found 59; most-overbought: PTEST-X.US, GAME.US, PSQH.US, INCR.US, BANL.US. Note: extreme overbought alone is exhaustion context, not a short signal by itself."
+}

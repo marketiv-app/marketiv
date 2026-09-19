@@ -1,0 +1,28 @@
+{
+  "id": "ma-04",
+  "question": "Are there any assets — doesn't matter if it's stocks, crypto, or forex — that just had a golden cross (50-day crossing above 200-day)?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["50-day MA crosses above 200-day golden cross"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}],
+        "timeframe": 1,
+        "window_bars": 30
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=27740 combined. Signal: 'cross_ema50_ema200_up'. Results span multiple asset types: HMQ-USD.CC (Crypto, score 0.998), COMET-USD.CC (Crypto), FRN-USD.CC (Crypto), PUAL.LSE (UK stock, 0.995), 8067.HK (HK stock), MLVIE.PA (French stock), 067390.KQ (Korean stock), 3676.JP (Japan stock), UTZ.US (US stock, 0.971), CXAI.US (US stock), BOME-USD.CC (Crypto), ALINV.PA (French stock), 000017.CS (China stock).",
+  "verdict": "PASS",
+  "reason": "Results span at least 5 asset types: Crypto (.CC), US stocks, UK/LSE stocks, HK stocks, French stocks, Korean stocks, Japanese stocks, Chinese stocks. Golden cross correctly maps to ema50 crossing above ema200 (bullish crossover_up). Acceptance criterion of 2+ asset types confirmed.",
+  "defects": [
+    {
+      "desc": "No forex (.FOREX) golden crosses appear in results — forex 50/200-day MA crosses are rare/absent. Not a clear defect but worth noting that Currency universe produces no golden-cross hits in this 30-bar window, effectively excluding that asset class from the answer.",
+      "side": "observation"
+    }
+  ]
+}

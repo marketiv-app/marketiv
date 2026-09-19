@@ -1,0 +1,74 @@
+{
+  "id": "op-09",
+  "question": "Find stocks where the options crowd has flipped hard from bearish to bullish over the past week.",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "options crowd flipped from bearish to bullish over the past week"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "positioning_flip",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "options crowd flipped from bearish to bullish over the past week",
+          "candidates": [
+            {
+              "pattern": "bullish_positioning",
+              "label": "Bullish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bullish (positioning score high, calls heavier)."
+            },
+            {
+              "pattern": "bearish_positioning",
+              "label": "Bearish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bearish (positioning score low, puts heavier)."
+            },
+            {
+              "pattern": "positioning_flip",
+              "label": "Positioning flip",
+              "supported": "approx",
+              "description": "Positioning reversed sharply vs the prior day."
+            },
+            {
+              "pattern": "iv_cheap",
+              "label": "IV cheap",
+              "supported": "yes",
+              "description": "Implied vol at the low end of its own history."
+            },
+            {
+              "pattern": "options_vs_price_divergence",
+              "label": "Options vs price divergence",
+              "supported": "approx",
+              "description": "Options positioning opposite to the price trend."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "positioning_flip",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "'Flipped from bearish to bullish' maps to the `positioning_flip` pattern — but note it's flagged 'approx': it detects a sharp positioning reversal vs the PRIOR DAY, not specifically a week-long bear→bull flip (there's no explicit lookback window on the tool). And in any case the scanner isn't live yet — it returns a POC stub — so I can't give you the actual names. Pattern matched (approximately); data endpoint not built."
+}

@@ -1,0 +1,720 @@
+{
+ "id": "vv-09",
+ "question": "ช่วยหาหุ้นที่ PEG ต่ำกว่า 1 ในตลาดหุ้นสหรัฐ — ถูกเมื่อเทียบกับการเติบโต ไม่ใช่แค่ P/E ต่ำเฉยๆ",
+ "tools_called": [
+  {
+   "tool": "find_fsconcept",
+   "args": {
+    "q": "PEG price earnings to growth ratio"
+   },
+   "note": "no native PEG field — top match was pe; PEG is not a stored metric"
+  },
+  {
+   "tool": "find_fspattern",
+   "args": {
+    "q": "PEG cheap relative to earnings growth"
+   },
+   "note": "no native PEG pattern; decided to decompose PEG into its two drivers (low P/E + real positive earnings growth)"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "pe",
+      "pattern": "low"
+     },
+     {
+      "concept": "net_income",
+      "pattern": "consecutive_growth_sharp",
+      "N": 3
+     }
+    ],
+    "country": [
+     "US"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "sort": "pe",
+    "limit": 20
+   },
+   "note": "PEG proxy: low P/E AND earnings growing >10% every year for 3y (sharp) → ensures the growth denominator is positive and real, so a low P/E over strong growth ≈ PEG<1"
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "eps_diluted": {
+      "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+     }
+    }
+   },
+   "capped": false,
+   "count": 16,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.74,
+       "market_cap_usd": 44655432.0,
+       "net_margin": 0.0221,
+       "normalized_pe": 4.26114096809064,
+       "operating_cash_flow_usd": 18369000.0,
+       "revenue_usd": 233648000.0,
+       "roe": 0.1506
+      }
+     },
+     "head_listing_id": 5078,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.9601,
+         0.5307,
+         0.214
+        ],
+        "value": 0.214,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 3.678161
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "The Beachbody Company, Inc.",
+     "score": 3.678161,
+     "ticker": "BODI.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.14,
+       "market_cap_usd": 2600228864.0,
+       "net_margin": 0.4002,
+       "normalized_pe": 4.67869019720743,
+       "operating_cash_flow_usd": 1037014000.0,
+       "revenue_usd": 1388800000.0,
+       "roe": 0.4651
+      }
+     },
+     "head_listing_id": 40377,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         1.2074,
+         1.302,
+         2.9182
+        ],
+        "value": 1.2074,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.376812
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Slide Insurance Holdings, Inc. Common Stock",
+     "score": 5.376812,
+     "ticker": "SLDE.US"
+    },
+    {
+     "also_known_as": [
+      "0LEE.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.75,
+       "market_cap_usd": 2560290048.0,
+       "net_margin": 0.2708,
+       "normalized_pe": 28.998194366859,
+       "operating_cash_flow_usd": 761000000.0,
+       "revenue_usd": 1691000000.0,
+       "roe": 0.7723
+      }
+     },
+     "head_listing_id": 42756,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.1404,
+         0.8387,
+         0.8788
+        ],
+        "value": 0.1404,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 5.993684
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Teradata Corp",
+     "score": 5.993684,
+     "ticker": "TDC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.76,
+       "market_cap_usd": 711850688.0,
+       "net_margin": 0.3289,
+       "normalized_pe": 6.60981548061209,
+       "operating_cash_flow_usd": 22790000.0,
+       "revenue_usd": 327409000.0,
+       "roe": 0.1493
+      }
+     },
+     "head_listing_id": 45865,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.5355,
+         0.3089,
+         0.6228
+        ],
+        "value": 0.3089,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.532609
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Velocity Financial Llc",
+     "score": 6.532609,
+     "ticker": "VEL.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.57,
+       "market_cap_usd": 395726496.0,
+       "net_margin": 0.6113,
+       "normalized_pe": 3.8945851176579,
+       "operating_cash_flow_usd": 16277000.0,
+       "revenue_usd": 169420000.0,
+       "roe": 0.1351
+      }
+     },
+     "head_listing_id": 31481,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         2.6002,
+         1.0889,
+         1.0716
+        ],
+        "value": 1.0716,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 6.684825
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Nexpoint Real Estate Finance Inc",
+     "score": 6.684825,
+     "ticker": "NREF.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.78,
+       "market_cap_usd": 935039488.0,
+       "net_margin": 0.0784,
+       "normalized_pe": 39.8788539258754,
+       "operating_cash_flow_usd": 61613000.0,
+       "revenue_usd": 299254000.0,
+       "roe": 0.0736
+      }
+     },
+     "head_listing_id": 29278,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.8045,
+         0.3829,
+         0.436
+        ],
+        "value": 0.3829,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.022472
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "MNTN, Inc.",
+     "score": 7.022472,
+     "ticker": "MNTN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.12,
+       "market_cap_usd": 2363793664.0,
+       "net_margin": 0.1662,
+       "normalized_pe": 111.011906488366,
+       "operating_cash_flow_usd": 388300000.0,
+       "revenue_usd": 2042400000.0,
+       "roe": 0.2969
+      }
+     },
+     "head_listing_id": 44199,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.8288,
+         0.3057,
+         0.7637
+        ],
+        "value": 0.3057,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.201456
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Trinity Industries Inc",
+     "score": 7.201456,
+     "ticker": "TRN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.32,
+       "market_cap_usd": 601032320.0,
+       "net_margin": 0.3506,
+       "normalized_pe": 6.80562900559368,
+       "operating_cash_flow_usd": 27559000.0,
+       "revenue_usd": 251875000.0,
+       "roe": 0.1497
+      }
+     },
+     "head_listing_id": 31401,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.5122,
+         0.6338,
+         0.4528
+        ],
+        "value": 0.4528,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.491379
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Northpointe Bancshares, Inc.",
+     "score": 7.491379,
+     "ticker": "NPB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.2254,
+       "market_cap_usd": 98618664.0,
+       "net_margin": 0.179445799118144,
+       "operating_cash_flow_usd": -9732429.0,
+       "revenue_usd": 65822739.0,
+       "roe": 0.377547121934589
+      }
+     },
+     "head_listing_id": 48988,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.8237,
+         0.1634,
+         0.2741
+        ],
+        "value": 0.1634,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 7.808341
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "One and One Green Technologies. Inc Class A Ordinary Shares",
+     "score": 7.808341,
+     "ticker": "YDDL.US"
+    },
+    {
+     "also_known_as": [
+      "0J3H.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 15.45,
+       "market_cap_usd": 38093221888.0,
+       "net_margin": 0.1525,
+       "normalized_pe": 9.41270617445021,
+       "operating_cash_flow_usd": 5880000000.0,
+       "revenue_usd": 28626000000.0,
+       "roe": 0.2223
+      }
+     },
+     "head_listing_id": 20568,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.233,
+         0.2424,
+         0.3766
+        ],
+        "value": 0.233,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 8.994175
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hartford Financial Services Group",
+     "score": 8.994175,
+     "ticker": "HIG.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": -0.01,
+       "market_cap_usd": 16592422.0,
+       "net_margin": -0.0008,
+       "operating_cash_flow_usd": -1646107.0,
+       "revenue_usd": 25992171.0,
+       "roe": -0.0016
+      }
+     },
+     "head_listing_id": 2715,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         2.3669,
+         0.1514,
+         1.7298
+        ],
+        "value": 0.1514,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.351136
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Arts-Way Manufacturing Co Inc",
+     "score": 10.351136,
+     "ticker": "ARTW.US"
+    },
+    {
+     "also_known_as": [
+      "0KOC.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 19.93,
+       "market_cap_usd": 120477671424.0,
+       "net_margin": 0.1285,
+       "normalized_pe": 10.3016392837965,
+       "operating_cash_flow_usd": 16339000000.0,
+       "revenue_usd": 91019000000.0,
+       "roe": 0.3406
+      }
+     },
+     "head_listing_id": 34190,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.3335,
+         1.1727,
+         4.4058
+        ],
+        "value": 0.3335,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 10.397893
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Progressive Corp",
+     "score": 10.397893,
+     "ticker": "PGR.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.02,
+       "market_cap_usd": 760132800.0,
+       "net_margin": 0.3162,
+       "normalized_pe": 10.6251000303567,
+       "operating_cash_flow_usd": 32747000.0,
+       "revenue_usd": 234994000.0,
+       "roe": 0.1108
+      }
+     },
+     "head_listing_id": 42621,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.3906,
+         0.4272,
+         0.7901
+        ],
+        "value": 0.3906,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 11.353234
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Third Coast Bancshares, Inc.",
+     "score": 11.353234,
+     "ticker": "TCBX.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.87,
+       "market_cap_usd": 126603368.0,
+       "net_margin": 0.3249,
+       "normalized_pe": 7.26051716461066,
+       "operating_cash_flow_usd": 22576000.0,
+       "revenue_usd": 53683000.0,
+       "roe": 0.1375
+      }
+     },
+     "head_listing_id": 32663,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.2685,
+         1.0888,
+         0.5618
+        ],
+        "value": 0.2685,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 11.528736
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "OptimumBank Holdings, Inc.",
+     "score": 11.528736,
+     "ticker": "OPHC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 4.28,
+       "market_cap_usd": 2090259584.0,
+       "net_margin": 0.1056,
+       "normalized_pe": 11.7893941567964,
+       "operating_cash_flow_usd": 566100000.0,
+       "revenue_usd": 1678800000.0,
+       "roe": 0.118
+      }
+     },
+     "head_listing_id": 20816,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.5768,
+         1.2844,
+         1.2727
+        ],
+        "value": 0.5768,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 12.058411
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Horace Mann Educators Corporation",
+     "score": 12.058411,
+     "ticker": "HMN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": -0.05,
+       "market_cap_usd": 472676032.0,
+       "net_margin": 0.0002,
+       "normalized_pe": 3029.97456410256,
+       "operating_cash_flow_usd": -16710000.0,
+       "revenue_usd": 765672000.0,
+       "roe": 0.0005
+      }
+     },
+     "head_listing_id": 46164,
+     "matched": {
+      "fundamental": {
+       "net_income": {
+        "kind": "growth",
+        "requested_n": 3,
+        "series": [
+         0.2415,
+         1.0882,
+         10.0
+        ],
+        "value": 0.2415,
+        "window": "min_yoy",
+        "years_checked": 3
+       },
+       "pe": {
+        "kind": "level",
+        "value": 12.269231
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Vital Farms Inc",
+     "score": 12.269231,
+     "ticker": "VITL.US"
+    }
+   ],
+   "sort": "pe",
+   "universe": 4360,
+   "_pagination": {
+    "intended_show": 20,
+    "returned": 16,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (20) as a look-ahead buffer so 'a few more' is served from these 16 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "ข้อจำกัดที่ต้องบอกก่อน: ระบบไม่มีตัวเลข PEG สำเร็จรูปเป็น field เดียว (PEG = P/E ÷ อัตราการเติบโตกำไร) ผมเลยแยก PEG ออกเป็น 2 องค์ประกอบของมันแล้วสกรีนพร้อมกัน — P/E ต่ำ + กำไรโตแรงจริง (โตเกิน 10% ทุกปีต่อเนื่อง 3 ปี) ซึ่งเงื่อนไขนี้บังคับให้ตัวหารเป็นบวกและมีนัยสำคัญ ป้องกัน PEG เพี้ยนจากกำไรติดลบ/โตเกือบศูนย์ พอ P/E ต่ำแต่กำไรโตแรง = โดยนัยคือ PEG ต่ำกว่า 1.\n\nในตลาดสหรัฐ (universe 4,360 ตัว) เจอ 16 ตัวที่เข้าเงื่อนไข ตัวที่ถูกสุดเทียบกับการเติบโต เช่น Beachbody (BODI.US) P/E 3.7, Slide Insurance (SLDE.US) 5.4, Teradata (TDC.US) 6.0, Velocity Financial (VEL.US) 6.5, NexPoint RE Finance (NREF.US) 6.7, MNTN (7.0), Trinity Industries (TRN.US) 7.2, Northpointe Bancshares (NPB.US) 7.5, Hartford Financial (HIG.US) 9.0, Progressive (PGR.US) 10.4 — ทุกตัว P/E หลักเดียวถึงต้นๆ สิบ ขณะที่กำไรโต >10%/ปี = PEG โดยประมาณต่ำกว่า 1 ครับ. หมายเหตุ: ตัวเลข PEG เป๊ะๆ ต้องเอา P/E ของแต่ละตัวหารด้วย % การเติบโตกำไรจริงอีกที ระบบยังไม่ให้ค่านั้นสำเร็จรูป."
+}

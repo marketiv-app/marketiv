@@ -1,0 +1,30 @@
+{
+  "tool": "screen_dividends",
+  "args_sent": {
+    "country": "TH",
+    "min_streak_years": 5,
+    "min_yield": 4
+  },
+  "min_streak_years_chosen": 5,
+  "min_yield_chosen": 4,
+  "why_that_streak": "I used the user's EXPLICIT 'at least 5 years' (min_streak_years=5) rather than the schema's general 'push toward the 10 cap for safe/stable intent' guidance, because the user gave a specific number and I must honor exactly what was asked.",
+  "count": 15,
+  "results_tickers": [
+    "PACO.BK",
+    "BTNC.BK",
+    "ESTAR.BK",
+    "ROJNA.BK",
+    "SNNP.BK",
+    "MFEC.BK",
+    "KBS.BK",
+    "TNR.BK",
+    "SCCC.BK",
+    "AKR.BK",
+    "HUMAN.BK",
+    "TACC.BK",
+    "BA.BK",
+    "SAK.BK",
+    "TTW.BK"
+  ],
+  "answer_to_user": "หุ้นไทย (SET) ที่จ่ายปันผลต่อเนื่องอย่างน้อย 5 ปีไม่ตัดปันผล (no_cut_streak_yrs >= 5) และ dividend yield เกิน 4% มี 29 ตัว (แสดง 15 อันดับแรกเรียงตาม yield สูงสุด). ตัวอย่าง: PACO 10.95%, BTNC 10.42%, ESTAR 9.52%, ROJNA 9.26%, SNNP 8.81%, MFEC 8.62%, KBS 8.62%, SCCC 7.51%, HUMAN 6.93%, TTW 6.35%. ข้อควรระวัง: yield สูงบางตัวมาจากราคาตกหรือปันผลพิเศษ — เช่น PACO และ SNNP มี ttm_div_yoy ติดลบ (ปันผลลดลง), ส่วน HUMAN (streak 8 ปี, yield 6.93%, ปันผลโต +6.7%), ROJNA (cagr 5y 20%, ข่าวบวก), และ TTW/SCCC เป็นกลุ่มที่ปันผลมั่นคงกว่า (สาธารณูปโภค/วัสดุก่อสร้าง). Note: no_cut_streak_yrs cap ที่ 10 ปี = สะอาดตลอดทั้งหน้าต่าง 10 ปีที่ติดตาม."
+}

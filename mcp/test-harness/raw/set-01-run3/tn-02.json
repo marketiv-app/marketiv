@@ -1,0 +1,23 @@
+{
+  "id": "tn-02",
+  "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["price at 52 week high", "near 52 week high"]},
+      "duration_ms": 1367,
+      "result_summary": "Resolved: pattern='at_new_high' (price AT 52-week high) and 'near_high' (within 3% of 52-week high). Using 'near_high' to catch stocks just at or very near the top."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "near_high"}]}],
+        "country": ["TH"],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "duration_ms": 1734,
+      "result_summary": "Returned 47 Thai-listed stocks (BK exchange) near 52-week high. Top names: AWC.BK (Asset World Corp), AYUD.BK (Allianz Ayudhya), BCP.BK (Bangchak Corp), GGC.BK (Global Green Chemicals RSI 86.0), TC.BK (Tropical Canning RSI 90.6), SVT.BK (Sun Vending RSI 84.8), KCE.BK (KCE Electronics RSI 74.0). All confirmed near_high signal as of 2026-08-29."
+    }
+  ]
+}

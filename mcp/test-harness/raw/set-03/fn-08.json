@@ -1,0 +1,2413 @@
+{
+  "id": "fn-08",
+  "question": "I want quality — companies that are really good at making profit from what they own, cheap-ish, growing, and not drowning in debt. Give me a few.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "roe",
+            "pattern": "above_average"
+          },
+          {
+            "concept": "pe",
+            "pattern": "below_average"
+          },
+          {
+            "concept": "revenue",
+            "pattern": "consecutive_growth",
+            "params": {
+              "N": 3,
+              "threshold": 0.05
+            }
+          },
+          {
+            "concept": "debt_to_equity",
+            "pattern": "below",
+            "params": {
+              "threshold": 0.5
+            }
+          }
+        ],
+        "size": [
+          "large"
+        ],
+        "sort": "mcap",
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          },
+          "total_debt": {
+            "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 19.93,
+              "free_cash_flow_usd": 53273000000.0,
+              "gross_margin": 0.609,
+              "interest_coverage": 133.8903,
+              "market_cap_usd": 4173832126464.0,
+              "net_debt_ebitda": 0.174,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "normalized_pe": 33.7029547069683,
+              "operating_margin": 0.3311,
+              "roa": 0.2649,
+              "total_debt_usd": 112756000000.0
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.176
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 17.123934
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1509,
+                  0.1387,
+                  0.0868
+                ],
+                "value": 0.0868,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3813
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "AMZN01.BK",
+            "AMZN03.BK",
+            "AMZN06.BK",
+            "AMZN80.BK",
+            "AMZN23.BK",
+            "AMZ.XETRA",
+            "0R1O.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 12.43,
+              "free_cash_flow_usd": -2472000000.0,
+              "gross_margin": 0.506,
+              "interest_coverage": 46.5847,
+              "market_cap_usd": 2798509096960.0,
+              "net_debt_ebitda": 0.5735,
+              "net_income_usd": 90798000000.0,
+              "net_margin": 0.1222,
+              "normalized_pe": 40.4320257850702,
+              "operating_margin": 0.115,
+              "roa": 0.0991,
+              "total_debt_usd": 209888000000.0
+            }
+          },
+          "head_listing_id": 2048,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.475
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.022526
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1238,
+                  0.1099,
+                  0.1183
+                ],
+                "value": 0.1099,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2055
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amazon.com Inc",
+          "score": 2798509096960.0,
+          "ticker": "AMZN.US"
+        },
+        {
+          "also_known_as": [
+            "META01.BK",
+            "META06.BK",
+            "META23.BK",
+            "META80.BK",
+            "0QZI.LSE",
+            "FB2A.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 26.55,
+              "free_cash_flow_usd": 40976000000.0,
+              "gross_margin": 0.8175,
+              "interest_coverage": 44.1583,
+              "market_cap_usd": 1385002696704.0,
+              "net_debt_ebitda": 0.8626,
+              "net_income_usd": 68098000000.0,
+              "net_margin": 0.2984,
+              "normalized_pe": 20.0632608106919,
+              "operating_margin": 0.3808,
+              "roa": 0.1513,
+              "total_debt_usd": 112318000000.0
+            }
+          },
+          "head_listing_id": 28230,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.43
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.477213
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2217,
+                  0.2194,
+                  0.1569
+                ],
+                "value": 0.1569,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2607
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Meta Platforms Inc.",
+          "score": 1385002696704.0,
+          "ticker": "META.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.302,
+              "free_cash_flow_usd": 27194453000.0,
+              "gross_margin": 0.562133695857488,
+              "interest_coverage": 21.6041171224732,
+              "market_cap_usd": 586532273600.0001,
+              "net_debt_ebitda": 0.691531201206505,
+              "net_income_usd": 32152406000.0,
+              "net_margin": 0.299085087646954,
+              "operating_margin": 0.330910150232918,
+              "roa": 0.117718910120234,
+              "total_debt_usd": 57583045600.0
+            }
+          },
+          "head_listing_id": 53221,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3701
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 14.909106
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1386,
+                  0.0841,
+                  0.0982
+                ],
+                "value": 0.0841,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.211347464398176
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Tencent Holdings Ltd",
+          "score": 586532273600.0001,
+          "ticker": "700.HK"
+        },
+        {
+          "also_known_as": [
+            "700.HK",
+            "TENCENT01.BK",
+            "TENCENT06.BK",
+            "TENCENT13.BK",
+            "TENCENT19.BK",
+            "TENCENT23.BK",
+            "TENCENT80.BK",
+            "80700.HK",
+            "0LEA.LSE",
+            "0Z4S.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 24.153,
+              "free_cash_flow_usd": 27194453000.0,
+              "gross_margin": 0.562133695857488,
+              "interest_coverage": 21.6041171224732,
+              "market_cap_usd": 505188134787.4816,
+              "net_debt_ebitda": 0.691531201206505,
+              "net_income_usd": 32152406000.0,
+              "net_margin": 0.299085087646954,
+              "operating_margin": 0.330910150232918,
+              "roa": 0.117718910120234,
+              "total_debt_usd": 57583045600.0
+            }
+          },
+          "head_listing_id": 50851,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3701
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 15.735202
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1386,
+                  0.0841,
+                  0.0982
+                ],
+                "value": 0.0841,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.211347464398176
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Tencent Holdings Ltd",
+          "score": 505188134787.4816,
+          "ticker": "0700.HK"
+        },
+        {
+          "also_known_as": [
+            "SNDK03.BK",
+            "SNDK23.BK",
+            "SNDK80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 73.76,
+              "free_cash_flow_usd": 4460000000.0,
+              "gross_margin": 0.5604,
+              "interest_coverage": 46.9821,
+              "market_cap_usd": 238045102080.0,
+              "net_debt_ebitda": -0.6567,
+              "net_income_usd": 4507000000.0,
+              "net_margin": 0.3419,
+              "normalized_pe": 51.7184663122378,
+              "operating_margin": 0.4158,
+              "roa": 0.264,
+              "total_debt_usd": 182000000.0
+            }
+          },
+          "head_listing_id": 40758,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0132
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 22.041486
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  1.753,
+                  0.1039,
+                  0.0948
+                ],
+                "value": 0.0948,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3271
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sandisk Corp",
+          "score": 238045102080.0,
+          "ticker": "SNDK.US"
+        },
+        {
+          "also_known_as": [
+            "0VQD.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 28.22,
+              "free_cash_flow_usd": 15376000000.0,
+              "interest_coverage": 18.0732984293194,
+              "market_cap_usd": 133212839936.0,
+              "net_income_usd": 11185000000.0,
+              "net_margin": 0.1796,
+              "normalized_pe": 11.8272823966604,
+              "roa": 0.0398,
+              "total_debt_usd": 18115000000.0
+            }
+          },
+          "head_listing_id": 6262,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.233564271865721
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 12.078668
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0674,
+                  0.1241,
+                  0.1573
+                ],
+                "value": 0.0674,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1484
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chubb Ltd",
+          "score": 133212839936.0,
+          "ticker": "CB.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 64.52,
+              "free_cash_flow_usd": 15474642150.0,
+              "gross_margin": 0.5598,
+              "market_cap_usd": 124219809792.0,
+              "net_debt_ebitda": -0.9765,
+              "net_income_usd": 13868917950.0,
+              "net_margin": 0.2162,
+              "normalized_pe": 8.81698925367216,
+              "operating_margin": 0.2183,
+              "roa": 0.15,
+              "total_debt_usd": 742690000.0
+            }
+          },
+          "head_listing_id": 33666,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0121
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 9.120727
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0965,
+                  0.5904,
+                  0.8968
+                ],
+                "value": 0.0965,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2259
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PDD Holdings Inc.",
+          "score": 124219809792.0,
+          "ticker": "PDD.US"
+        },
+        {
+          "also_known_as": [
+            "0KOC.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 19.93,
+              "free_cash_flow_usd": 15951000000.0,
+              "interest_coverage": 52.1618705035971,
+              "market_cap_usd": 120477671424.0,
+              "net_income_usd": 11695000000.0,
+              "net_margin": 0.1285,
+              "normalized_pe": 10.3016392837965,
+              "roa": 0.0936,
+              "total_debt_usd": 8387000000.0
+            }
+          },
+          "head_listing_id": 34190,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.227451109718695
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 10.397893
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1632,
+                  0.2136,
+                  0.252
+                ],
+                "value": 0.1632,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3406
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Progressive Corp",
+          "score": 120477671424.0,
+          "ticker": "PGR.US"
+        },
+        {
+          "also_known_as": [
+            "0R2J.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 11.68,
+              "free_cash_flow_usd": 4548557000.0,
+              "gross_margin": 0.6291,
+              "interest_coverage": 572.1533,
+              "market_cap_usd": 94659846144.0,
+              "net_debt_ebitda": -0.2998,
+              "net_income_usd": 5873933000.0,
+              "net_margin": 0.4044,
+              "normalized_pe": 16.5363669647556,
+              "operating_margin": 0.5834,
+              "roa": 0.1554,
+              "total_debt_usd": 320350000.0
+            }
+          },
+          "head_listing_id": 924,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0112
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 16.162671
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.4371,
+                  0.2503,
+                  0.1543
+                ],
+                "value": 0.1543,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2054
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Agnico Eagle Mines Limited",
+          "score": 94659846144.0,
+          "ticker": "AEM.US"
+        },
+        {
+          "also_known_as": [
+            "MIDEA80.BK",
+            "0300.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.82,
+              "free_cash_flow_usd": 5555726330.0,
+              "gross_margin": 0.2647,
+              "interest_coverage": 27.7424,
+              "market_cap_usd": 94556421075.7632,
+              "net_debt_ebitda": -0.6437,
+              "net_income_usd": 6488789730.0,
+              "net_margin": 0.0937,
+              "normalized_pe": 14.3542460422228,
+              "operating_margin": 0.1015,
+              "roa": 0.0729,
+              "total_debt_usd": 8442631090.0
+            }
+          },
+          "head_listing_id": 230694,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2506
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 14.194158
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1208,
+                  0.0947,
+                  0.081
+                ],
+                "value": 0.081,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1926
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Midea Group Co Ltd",
+          "score": 94556421075.7632,
+          "ticker": "000333.CS"
+        },
+        {
+          "also_known_as": [
+            "1TY.XETRA",
+            "0A28.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.23,
+              "free_cash_flow_usd": 1401000000.0,
+              "gross_margin": 0.464399793920659,
+              "interest_coverage": 19.2604651162791,
+              "market_cap_usd": 90873253821.64479,
+              "net_debt_ebitda": 0.844133776164362,
+              "net_income_usd": 11638000000.0,
+              "net_margin": 1.19917568263782,
+              "operating_margin": 0.0313240597630088,
+              "roa": 0.153471842176404,
+              "total_debt_usd": 17611000000.0
+            }
+          },
+          "head_listing_id": 1748538,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3275
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 8.154521
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.5729,
+                  0.1286,
+                  0.1051
+                ],
+                "value": 0.1051,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.222042031156095
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Prosus N.V.",
+          "score": 90873253821.64479,
+          "ticker": "PRX.AS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 350.38,
+              "free_cash_flow_usd": 2250688000.0,
+              "gross_margin": 0.561928381408292,
+              "interest_coverage": 4.79000379110014,
+              "market_cap_usd": 77510692792.9656,
+              "net_debt_ebitda": 0.749463912584812,
+              "net_income_usd": 3265120000.0,
+              "net_margin": 0.147123072375583,
+              "operating_margin": 0.24619002645865,
+              "roa": 0.0607713937819551,
+              "total_debt_usd": 10395986400.0
+            }
+          },
+          "head_listing_id": 574199,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3816
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.263714
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1344,
+                  0.0759,
+                  0.0689
+                ],
+                "value": 0.0689,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.129922037864122
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Japan Tobacco Inc.",
+          "score": 77510692792.9656,
+          "ticker": "2914.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 118.445,
+              "free_cash_flow_usd": 1278673200.0,
+              "gross_margin": 0.202347631811147,
+              "interest_coverage": 22.2994476535818,
+              "market_cap_usd": 48193414857.0945,
+              "net_debt_ebitda": 0.609736825782929,
+              "net_income_usd": 2327900400.0,
+              "net_margin": 0.0723083434977029,
+              "operating_margin": 0.0818315081824072,
+              "roa": 0.0797542801166524,
+              "total_debt_usd": 4341871800.0
+            }
+          },
+          "head_listing_id": 573630,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2512
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.427202
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.092,
+                  0.0629,
+                  0.0992
+                ],
+                "value": 0.0629,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.146809942651994
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sumitomo Electric Industries, Ltd.",
+          "score": 48193414857.0945,
+          "ticker": "5802.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 0.82,
+              "free_cash_flow_usd": 1787220000.0,
+              "gross_margin": 0.526964714274038,
+              "interest_coverage": 89.4682149625775,
+              "market_cap_usd": 47189640727.756805,
+              "net_debt_ebitda": -0.857284216087566,
+              "net_income_usd": 1601556000.0,
+              "net_margin": 0.297494557423823,
+              "operating_margin": 0.487160349810903,
+              "roa": 0.178245623563526,
+              "total_debt_usd": 653834000.0
+            }
+          },
+          "head_listing_id": 52097,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0781
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.989927
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.8005,
+                  0.3216,
+                  0.2444
+                ],
+                "value": 0.2444,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.29936071012644
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zijin Gold Intl Co Ltd",
+          "score": 47189640727.756805,
+          "ticker": "2259.HK"
+        },
+        {
+          "also_known_as": [
+            "1339.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.0,
+              "free_cash_flow_usd": 16972527000.0,
+              "interest_coverage": 23.409696969697,
+              "market_cap_usd": 44990749333.9136,
+              "net_income_usd": 6607601000.0,
+              "net_margin": 0.0713989919124305,
+              "roa": 0.0243584921425452,
+              "total_debt_usd": 6289712000.0
+            }
+          },
+          "head_listing_id": 229164,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.14225879171882
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 6.91
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0797,
+                  0.1305,
+                  0.116
+                ],
+                "value": 0.0797,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.159872259964121
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "People's Insurance of China Ltd",
+          "score": 44990749333.9136,
+          "ticker": "601319.CG"
+        },
+        {
+          "also_known_as": [
+            "PPCCF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.815,
+              "free_cash_flow_usd": 5663658000.0,
+              "interest_coverage": 49.8739754098361,
+              "market_cap_usd": 43214357613.772804,
+              "net_income_usd": 5772910000.0,
+              "net_margin": 0.0788797011285835,
+              "roa": 0.0492695006291411,
+              "total_debt_usd": 1887886000.0
+            }
+          },
+          "head_listing_id": 52149,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0461650359822921
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 7.308007
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.063,
+                  0.0936,
+                  0.0784
+                ],
+                "value": 0.063,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.148446951450456
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "PICC Property & Casualty-H",
+          "score": 43214357613.772804,
+          "ticker": "2328.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 768.01,
+              "free_cash_flow_usd": 1676224000.0,
+              "gross_margin": 0.716830059800105,
+              "interest_coverage": 18.3135427070617,
+              "market_cap_usd": 39828026863.0377,
+              "net_debt_ebitda": -0.501720281985547,
+              "net_income_usd": 2324160000.0,
+              "net_margin": 0.147090273693625,
+              "operating_margin": 0.191221811241642,
+              "roa": 0.0915102825277602,
+              "total_debt_usd": 1204052400.0
+            }
+          },
+          "head_listing_id": 573103,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0599
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 15.676879
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0597,
+                  0.1542,
+                  0.1614
+                ],
+                "value": 0.0597,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.125940172955757
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Otsuka Holdings Co., Ltd.",
+          "score": 39828026863.0377,
+          "ticker": "4578.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 18016.0,
+              "free_cash_flow_usd": 2565152800.0,
+              "gross_margin": 0.1923,
+              "interest_coverage": 170.0711,
+              "market_cap_usd": 37326526034.7392,
+              "net_debt_ebitda": -1.0679,
+              "net_income_usd": 4899602400.0,
+              "net_margin": 0.0605,
+              "normalized_pe": 7.60153347114469,
+              "operating_margin": 0.0716,
+              "roa": 0.0664,
+              "total_debt_usd": 1863743700.0
+            }
+          },
+          "head_listing_id": 1414452,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0432
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 7.865231
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0623,
+                  0.0765,
+                  0.1531
+                ],
+                "value": 0.0623,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1136
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Kia Corp",
+          "score": 37326526034.7392,
+          "ticker": "000270.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.79,
+              "free_cash_flow_usd": 1244391618.3566,
+              "gross_margin": 0.3098,
+              "interest_coverage": 44.9219,
+              "market_cap_usd": 36292254357.9136,
+              "net_debt_ebitda": -1.635,
+              "net_income_usd": 1682856058.9199,
+              "net_margin": 0.1417,
+              "normalized_pe": 18.7859593182611,
+              "operating_margin": 0.1866,
+              "roa": 0.0952,
+              "total_debt_usd": 1033014022.70865
+            }
+          },
+          "head_listing_id": 232376,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1464
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 20.518135
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1455,
+                  0.0776,
+                  0.7947
+                ],
+                "value": 0.0776,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2385
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sungrow Power Supply Co Ltd",
+          "score": 36292254357.9136,
+          "ticker": "300274.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 140.37,
+              "free_cash_flow_usd": -449486100.0,
+              "gross_margin": 0.684865370258285,
+              "interest_coverage": 33.9867267718507,
+              "market_cap_usd": 30952300902.1002,
+              "net_debt_ebitda": -0.428017817116585,
+              "net_income_usd": 1637206200.0,
+              "net_margin": 0.122406260818777,
+              "operating_margin": 0.107905861627992,
+              "roa": 0.0696572234919237,
+              "total_debt_usd": 1893030300.0
+            }
+          },
+          "head_listing_id": 572410,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1806
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 19.234879
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1255,
+                  0.1777,
+                  0.2528
+                ],
+                "value": 0.1255,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.158093682463929
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Daiichi Sankyo Company, Limited",
+          "score": 30952300902.1002,
+          "ticker": "4568.JP"
+        },
+        {
+          "also_known_as": [
+            "TRIPCOM23.BK",
+            "TRIPCOM80.BK",
+            "0I50.LSE",
+            "TCOM.US"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 45.25,
+              "free_cash_flow_usd": 1942226000.0,
+              "gross_margin": 0.8032,
+              "interest_coverage": 57.5826,
+              "market_cap_usd": 28094601474.867203,
+              "net_debt_ebitda": -0.6596,
+              "net_income_usd": 4761042000.0,
+              "net_margin": 0.533480747969043,
+              "normalized_pe": 6.14785734993221,
+              "operating_margin": 0.2701,
+              "roa": 0.130572898691683,
+              "total_debt_usd": 4548795000.0
+            }
+          },
+          "head_listing_id": 53965,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.19
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 6.648533
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.171,
+                  0.1973,
+                  1.2212
+                ],
+                "value": 0.171,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.212402591395826
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Trip.com Group Ltd",
+          "score": 28094601474.867203,
+          "ticker": "9961.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 162.22,
+              "free_cash_flow_usd": 2995920900.0,
+              "gross_margin": 0.809079838915131,
+              "interest_coverage": 27.7614411597499,
+              "market_cap_usd": 26212106163.0456,
+              "net_debt_ebitda": 0.485853126767398,
+              "net_income_usd": 1836670500.0,
+              "net_margin": 0.136279388288859,
+              "operating_margin": 0.177660342784487,
+              "roa": 0.0844223180598924,
+              "total_debt_usd": 3565497600.0
+            }
+          },
+          "head_listing_id": 574962,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3094
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 14.243003
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1187,
+                  0.1925,
+                  0.056
+                ],
+                "value": 0.056,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.174451777055254
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Astellas Pharma Inc.",
+          "score": 26212106163.0456,
+          "ticker": "4503.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 227.66,
+              "free_cash_flow_usd": 1850095800.0,
+              "gross_margin": 0.254942859226816,
+              "interest_coverage": 25.9502868068834,
+              "market_cap_usd": 25684225171.3278,
+              "net_debt_ebitda": -0.216482160080862,
+              "net_income_usd": 2767382100.0,
+              "net_margin": 0.0698028449855211,
+              "operating_margin": 0.0989849462105871,
+              "roa": 0.0695567038191447,
+              "total_debt_usd": 4716324900.0
+            }
+          },
+          "head_listing_id": 573556,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2213
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 9.140824
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0803,
+                  0.0873,
+                  0.1542
+                ],
+                "value": 0.0803,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.138292073203654
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Suzuki Motor Corp.",
+          "score": 25684225171.3278,
+          "ticker": "7269.JP"
+        },
+        {
+          "also_known_as": [
+            "ANTA13.BK",
+            "ANTA23.BK",
+            "82020.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.8,
+              "free_cash_flow_usd": 2614040000.0,
+              "gross_margin": 0.619977810743091,
+              "interest_coverage": 26.7454981992797,
+              "market_cap_usd": 25466183496.499203,
+              "net_debt_ebitda": 0.684385265953729,
+              "net_income_usd": 1943084000.0,
+              "net_margin": 0.16938630499009,
+              "operating_margin": 0.235255986736309,
+              "roa": 0.114710227512558,
+              "total_debt_usd": 4542252000.0
+            }
+          },
+          "head_listing_id": 51936,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.4829
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 12.912888
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1326,
+                  0.1358,
+                  0.1623
+                ],
+                "value": 0.1326,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.213126710636729
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ANTA Sports Products Ltd",
+          "score": 25466183496.499203,
+          "ticker": "2020.HK"
+        },
+        {
+          "also_known_as": [
+            "GEELY06.BK",
+            "GEELY80.BK",
+            "80175.HK",
+            "0YZ2.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.63,
+              "free_cash_flow_usd": 4197724531.0,
+              "gross_margin": 0.166110605655815,
+              "interest_coverage": 29.9976205322267,
+              "market_cap_usd": 25089703736.115204,
+              "net_debt_ebitda": -0.586683522776863,
+              "net_income_usd": 2409869033.0,
+              "net_margin": 0.0488141921616402,
+              "operating_margin": 0.0371189911105656,
+              "roa": 0.0600274662856734,
+              "total_debt_usd": 6249302774.0
+            }
+          },
+          "head_listing_id": 50418,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.473
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 9.839771
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2512,
+                  0.5396,
+                  0.2111
+                ],
+                "value": 0.2111,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.188359371565656
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Geely Automobile Holdings Ltd",
+          "score": 25089703736.115204,
+          "ticker": "0175.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8.9983,
+              "free_cash_flow_usd": 1952584589.71875,
+              "gross_margin": 0.7496,
+              "interest_coverage": 1782.2713,
+              "market_cap_usd": 21605547787.8784,
+              "net_debt_ebitda": -0.6263,
+              "net_income_usd": 2135771003.8144,
+              "net_margin": 0.3297,
+              "normalized_pe": 10.2625328706299,
+              "operating_margin": 0.4409,
+              "roa": 0.2288,
+              "total_debt_usd": 3460595.96225
+            }
+          },
+          "head_listing_id": 228938,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0005
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 13.393641
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0752,
+                  0.1279,
+                  0.218
+                ],
+                "value": 0.0752,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3272
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shanxi Xinghuacun Fen Wine Factory Co Ltd",
+          "score": 21605547787.8784,
+          "ticker": "600809.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.436,
+              "free_cash_flow_usd": 1385259426.5,
+              "gross_margin": 0.55951653379486,
+              "interest_coverage": 69.5532269901707,
+              "market_cap_usd": 19471245574.144,
+              "net_debt_ebitda": -0.825417335323058,
+              "net_income_usd": 1371578802.5,
+              "net_margin": 0.216759972239329,
+              "operating_margin": 0.195413945218874,
+              "roa": 0.109799754897562,
+              "total_debt_usd": 261790737.0
+            }
+          },
+          "head_listing_id": 50289,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0245
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 14.178982
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1338,
+                  0.2171,
+                  2.1101
+                ],
+                "value": 0.1338,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.134185966433661
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Galaxy Entertainment Group Ltd",
+          "score": 19471245574.144,
+          "ticker": "0027.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 11.43,
+              "free_cash_flow_usd": 470959130.0,
+              "gross_margin": 0.2489,
+              "interest_coverage": 49.5784,
+              "market_cap_usd": 17699595881.676804,
+              "net_debt_ebitda": 0.9108,
+              "net_income_usd": 1334831865.0,
+              "net_margin": 0.1788,
+              "normalized_pe": 13.377333432922,
+              "operating_margin": 0.204,
+              "roa": 0.0941,
+              "total_debt_usd": 3160008780.0
+            }
+          },
+          "head_listing_id": 51952,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3508
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 13.543685
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1088,
+                  0.1526,
+                  0.086
+                ],
+                "value": 0.086,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1482
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zto Express Cayman Inc",
+          "score": 17699595881.676804,
+          "ticker": "2057.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 0.87,
+              "free_cash_flow_usd": 1037842418.7654,
+              "gross_margin": 0.7041,
+              "interest_coverage": 87.1881,
+              "market_cap_usd": 15379525901.516798,
+              "net_debt_ebitda": -1.3225,
+              "net_income_usd": 860052984.41105,
+              "net_margin": 0.1525,
+              "normalized_pe": 17.2577389192031,
+              "operating_margin": 0.207,
+              "roa": 0.13,
+              "total_debt_usd": 401793676.74595
+            }
+          },
+          "head_listing_id": 231723,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0858
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 16.172414
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.6755,
+                  0.7027,
+                  0.1577
+                ],
+                "value": 0.1577,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1837
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zhejiang Century Huatong Group Co Ltd",
+          "score": 15379525901.516798,
+          "ticker": "002602.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.55,
+              "free_cash_flow_usd": 941951153.0,
+              "gross_margin": 0.150799055530727,
+              "interest_coverage": 87.3071178278488,
+              "market_cap_usd": 13887111328.563202,
+              "net_debt_ebitda": -1.75939945521895,
+              "net_income_usd": 1003760329.0,
+              "net_margin": 0.0640792978804215,
+              "operating_margin": 0.0675667537285279,
+              "roa": 0.0496229214887465,
+              "total_debt_usd": 783409770.0
+            }
+          },
+          "head_listing_id": 52774,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1218
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 13.313892
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1523,
+                  0.1119,
+                  0.4392
+                ],
+                "value": 0.1119,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.162953989887608
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sinotruk Hong Kong Ltd",
+          "score": 13887111328.563202,
+          "ticker": "3808.HK"
+        },
+        {
+          "also_known_as": [
+            "9980.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.081808,
+              "free_cash_flow_usd": 672999719.731966,
+              "gross_margin": 0.4684,
+              "interest_coverage": 65.5651,
+              "market_cap_usd": 13345636759.9616,
+              "net_debt_ebitda": -1.3346,
+              "net_income_usd": 724601150.525318,
+              "net_margin": 0.2198,
+              "normalized_pe": 19.4484441770077,
+              "operating_margin": 0.2589,
+              "roa": 0.1373,
+              "total_debt_usd": 893102996.219588
+            }
+          },
+          "head_listing_id": 230011,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3111
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 17.307727
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.318,
+                  0.4063,
+                  0.3242
+                ],
+                "value": 0.318,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2524
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eastroc Beverage Group Co Ltd",
+          "score": 13345636759.9616,
+          "ticker": "605499.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 570.43,
+              "free_cash_flow_usd": 657558100.0,
+              "gross_margin": 0.384112843558664,
+              "interest_coverage": 34.5735443294786,
+              "market_cap_usd": 11917361944.9962,
+              "net_debt_ebitda": 0.321067054743476,
+              "net_income_usd": 711219600.0,
+              "net_margin": 0.154391300958552,
+              "operating_margin": 0.187182289009815,
+              "roa": 0.102069241121539,
+              "total_debt_usd": 1527504300.0
+            }
+          },
+          "head_listing_id": 572559,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3159
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 16.699683
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1198,
+                  0.0627,
+                  0.0923
+                ],
+                "value": 0.0627,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.156577845092067
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Niterra Co.,Ltd.",
+          "score": 11917361944.9962,
+          "ticker": "5334.JP"
+        },
+        {
+          "also_known_as": [
+            "6693.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.92,
+              "free_cash_flow_usd": 332753858.40985,
+              "gross_margin": 0.5429,
+              "interest_coverage": 99.281,
+              "market_cap_usd": 11664984266.3424,
+              "net_debt_ebitda": -1.0573,
+              "net_income_usd": 452331806.2332,
+              "net_margin": 0.2433,
+              "normalized_pe": 24.7286318068608,
+              "operating_margin": 0.4286,
+              "roa": 0.1255,
+              "total_debt_usd": 113796500.5777
+            }
+          },
+          "head_listing_id": 229062,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0549
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 21.984375
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.4003,
+                  0.2499,
+                  0.1523
+                ],
+                "value": 0.1523,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2183
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chifeng Jilong Gold Mining Co Ltd",
+          "score": 11664984266.3424,
+          "ticker": "600988.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.739,
+              "free_cash_flow_usd": 553415577.0,
+              "gross_margin": 0.355438118819298,
+              "interest_coverage": 49.245419561828,
+              "market_cap_usd": 11637436810.8544,
+              "net_debt_ebitda": -0.572699540961097,
+              "net_income_usd": 567570289.0,
+              "net_margin": 0.220236773412909,
+              "operating_margin": 0.2830829063184,
+              "roa": 0.136408980003037,
+              "total_debt_usd": 316733846.0
+            }
+          },
+          "head_listing_id": 51268,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1433
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 19.760079
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0506,
+                  0.1617,
+                  0.2289
+                ],
+                "value": 0.0506,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.24836330842289
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China Resources Mixc Lifestyle Serv",
+          "score": 11637436810.8544,
+          "ticker": "1209.HK"
+        },
+        {
+          "also_known_as": [
+            "MIXUE80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 15.65,
+              "free_cash_flow_usd": 764692214.0,
+              "gross_margin": 0.311435815868827,
+              "interest_coverage": 1532.16284729264,
+              "market_cap_usd": 10862427868.364801,
+              "net_debt_ebitda": -0.894138410092014,
+              "net_income_usd": 841798672.0,
+              "net_margin": 0.175408745723284,
+              "operating_margin": 0.217354700128484,
+              "roa": 0.232782101300025,
+              "total_debt_usd": 26778466.0
+            }
+          },
+          "head_listing_id": 51962,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0077
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 12.537474
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3516,
+                  0.2229,
+                  0.4955
+                ],
+                "value": 0.2229,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.298782912310952
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MIXUE Group",
+          "score": 10862427868.364801,
+          "ticker": "2097.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 0.8,
+              "free_cash_flow_usd": -374119153.59955,
+              "gross_margin": 0.2811,
+              "interest_coverage": 58.1215,
+              "market_cap_usd": 10002506281.7792,
+              "net_debt_ebitda": -0.38,
+              "net_income_usd": 497003883.9038,
+              "net_margin": 0.1788,
+              "normalized_pe": 21.4128312911419,
+              "operating_margin": 0.2099,
+              "roa": 0.0777,
+              "total_debt_usd": 480085141.363
+            }
+          },
+          "head_listing_id": 228626,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1387
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 15.375
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2662,
+                  0.3927,
+                  0.483
+                ],
+                "value": 0.2662,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1436
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zhejiang China Commodities City Group Co Ltd",
+          "score": 10002506281.7792,
+          "ticker": "600415.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2.48,
+              "free_cash_flow_usd": 1028622028.96537,
+              "gross_margin": 0.2513,
+              "interest_coverage": 3235.93589006769,
+              "market_cap_usd": 9803850150.7072,
+              "net_debt_ebitda": -1.0828,
+              "net_income_usd": 782702943.25916,
+              "net_margin": 0.128,
+              "normalized_pe": 12.7202777619056,
+              "operating_margin": 0.1433,
+              "roa": 0.1704,
+              "total_debt_usd": 30778940.88379
+            }
+          },
+          "head_listing_id": 228367,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0161
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 11.931452
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1131,
+                  0.3763,
+                  0.2405
+                ],
+                "value": 0.1131,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.4092
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zhengzhou Yutong Bus Co Ltd",
+          "score": 9803850150.7072,
+          "ticker": "600066.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.4101,
+              "free_cash_flow_usd": -184829491.74855,
+              "gross_margin": 0.0995,
+              "interest_coverage": 40.7304,
+              "market_cap_usd": 9536139389.337599,
+              "net_debt_ebitda": -0.0358,
+              "net_income_usd": 674822340.9869,
+              "net_margin": 0.0614,
+              "normalized_pe": 14.1254503176882,
+              "operating_margin": 0.0779,
+              "roa": 0.0854,
+              "total_debt_usd": 1143050413.9843
+            }
+          },
+          "head_listing_id": 228494,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2178
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 13.651514
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0905,
+                  0.1967,
+                  0.0774
+                ],
+                "value": 0.0774,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.1286
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "YTO Express Group Co Ltd",
+          "score": 9536139389.337599,
+          "ticker": "600233.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.04,
+              "free_cash_flow_usd": 1589704545.0,
+              "gross_margin": 0.091034968360095,
+              "interest_coverage": 9.56864809655585,
+              "market_cap_usd": 9088829661.184002,
+              "net_debt_ebitda": 0.20444073548796,
+              "net_income_usd": 950475669.0,
+              "net_margin": 0.030609142325374,
+              "operating_margin": 0.0292369381539562,
+              "roa": 0.0548253866728924,
+              "total_debt_usd": 3209882676.0
+            }
+          },
+          "head_listing_id": 52363,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.4105
+              },
+              "pe": {
+                "cohort_benchmark": 22.466887,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 9.970162
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1876,
+                  0.0973,
+                  0.2127
+                ],
+                "value": 0.0973,
+                "window": "min_yoy",
+                "years_checked": 3
+              },
+              "roe": {
+                "cohort_benchmark": 0.113316636326017,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.120848411582594
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "JD Logistics Inc",
+          "score": 9088829661.184002,
+          "ticker": "2618.HK"
+        }
+      ],
+      "sort": "mcap",
+      "universe": 1139,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Here's a short list that tries to hit ALL four of your 'quality' tests at once — good at turning what they own into profit (high return on equity, above peer average), reasonably-priced (P/E below the peer average), growing revenue each year, and not loaded with debt. Names that cleared every filter include Alphabet/Google (GOOG), Amazon (AMZN), Meta (META), Tencent (0700.HK), Chubb (CB), Progressive (PGR) and PDD Holdings (PDD). Why they qualify as 'quality': e.g. Alphabet combines a fat ~55% net margin, huge free cash flow, tiny debt and a below-average ~17x P/E; Meta and Amazon show strong margins and low leverage with steady growth; the insurers (Chubb, Progressive) are steady, profitable and reasonably valued. A trade-off to be honest about: it's rare for a company to be top-tier on profitability AND growth AND cheap AND debt-free — usually something gives, so treat 'cheap-ish' as relative to peers rather than an outright bargain. Informational only — not a recommendation to buy, and figures are the companies' real reported numbers."
+}

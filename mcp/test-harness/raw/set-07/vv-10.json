@@ -1,0 +1,657 @@
+{
+ "id": "vv-10",
+ "question": "I have got a shortlist of five oil majors and I am comparing their P/E to decide the cheapest. But is five names enough to trust a peer average, or should I benchmark them against the whole energy sector instead?",
+ "tools_called": [
+  {
+   "tool": "find_stock",
+   "args": {
+    "queries": [
+     "ExxonMobil",
+     "Chevron",
+     "Shell plc",
+     "BP plc",
+     "TotalEnergies"
+    ]
+   },
+   "note": "resolved XOM.US, CVX.US, SHEL.LSE, BP.LSE, TTE.PA"
+  },
+  {
+   "tool": "financials",
+   "args": {
+    "tickers": [
+     "XOM.US",
+     "CVX.US",
+     "SHEL.LSE",
+     "BP.LSE",
+     "TTE.PA"
+    ],
+    "period": "1"
+   },
+   "note": "the 5 majors multiples, all normalized to USD (currency-consistent, ratio multiples)"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "pe",
+      "pattern": "below_average"
+     }
+    ],
+    "gics": "10",
+    "asset_type": [
+     "Common Stock"
+    ],
+    "sort": "pe",
+    "limit": 5
+   },
+   "note": "used the cohort_benchmark from a below_average energy screen to read the WHOLE-SECTOR average P/E (829-name energy cohort) as the robust benchmark"
+  }
+ ],
+ "raw_responses": [
+  {
+   "count": 5,
+   "format": "text",
+   "text": "period: last 1 year\n\n### XOM.US  [USD]  as-of 2026-06-30\nRevenue 323.9B, net margin 9%, FCF 23.6B, debt/equity 0.2x · 4 signal(s)\nvaluation: pe 21.31 · pb 2.62 · ev_ebitda 9.40 · dividend_yield 2.5% · fcf_yield 4.5%\nmetrics: accruals_ocf_ni 1.82 · asset_turnover 0.78 · buybacks -20273000000.00 · bvps 63.08 · capex_to_da 0.98 · capex_to_revenue 0.08 · cash 10681000000.00 · cash_conversion_cycle -1.10 · current_assets 83382000000.00 · current_liabilities 72330000000.00 · current_ratio 1.13 · debt_to_ebitda 0.56 · debt_to_equity 0.16 · dio 32.56 · dividend_cagr_5y_pct 2.80 · dividend_payout 52.6% · dividends_paid -17231000000.00 · dpo 94.88 · dso 61.22 · ebitda_interest_coverage 97.78 · ebitda_margin 21.0% · effective_tax_rate 25.6% · eps_basic 7.77 · eps_diluted 7.77 · fcf_conversion 0.93 · fcf_margin 8.5% · free_cash_flow 23612000000.00 · gross_margin 20.6% · gross_profit 71240000000.00 · interest_coverage 59.52 · interest_expense 603000000.00 · net_debt_ebitda 0.42 · net_income 28844000000.00 · net_margin 9.1% · net_stock_issuance -20273000000.00 · no_cut_streak_yrs 10.00 · operating_cash_flow 51970000000.00 · operating_income 33938000000.00 · operating_margin 10.7% · quick_ratio 0.85 · revenue 323905000000.00 · roa 7.0% · roe 12.6% · roic 11.8% · total_assets 448980000000.00 · total_borrowings 37224000000.00 · total_debt 43537000000.00 · total_equity 259386000000.00\ngrowth: eps_diluted -15% (decline_accel) · free_cash_flow -23% (decline_accel) · gross_profit -7% (bottoming) · net_income -14% (decline_accel) · revenue -5% (decline_accel)\nsignals:\n  [context] capex intensity rose 4.6%→8.8% (sustained) 📊\n  [quality] shareholder returns 37.5B (dividends 17.2B + buybacks 20.3B) EXCEED free cash flow 23.6B — funded by debt/cash, not sustainable from operations\n  [ratio] net_debt_ebitda rose 0.11→0.48 (τ=1.00) ⚠\n  [ratio] roe fell 28.6%→11.0% (τ=-1.00) ⚠\nrevenue_by_region: FOREIGN_REST 59% · US 41%\n\n### CVX.US  [USD]  as-of 2026-06-30\nRevenue 184.4B, net margin 10%, FCF 16.6B, debt/equity 0.2x · 4 signal(s)\nvaluation: pe 19.51 · pb 2.09 · ev_ebitda 7.62 · dividend_yield 3.4% · fcf_yield 6.8%\nmetrics: accruals_ocf_ni 2.20 · asset_turnover 0.63 · buybacks -12079000000.00 · bvps 96.80 · capex_to_da 0.78 · capex_to_revenue 0.09 · cash 6293000000.00 · cash_conversion_cycle 7.05 · current_assets 38552000000.00 · current_liabilities 33387000000.00 · current_ratio 1.25 · debt_to_ebitda 0.66 · debt_to_equity 0.20 · dio 27.20 · dividend_cagr_5y_pct 5.80 · dividend_payout 67.3% · dividends_paid -12751000000.00 · dpo 63.13 · dso 42.98 · ebitda_interest_coverage 39.18 · ebitda_margin 26.8% · effective_tax_rate 31.6% · eps_basic 10.42 · eps_diluted 10.39 · fcf_conversion 1.31 · fcf_margin 12.9% · free_cash_flow 16592000000.00 · gross_margin 32.4% · gross_profit 56086000000.00 · interest_coverage 22.46 · interest_expense 1217000000.00 · net_debt_ebitda 0.51 · net_income 12299000000.00 · net_margin 9.9% · net_stock_issuance -12079000000.00 · no_cut_streak_yrs 10.00 · operating_cash_flow 33939000000.00 · operating_income 16674000000.00 · operating_margin 12.4% · quick_ratio 0.98 · revenue 184432000000.00 · roa 6.2% · roe 10.8% · roic 10.1% · total_assets 324012000000.00 · total_borrowings 39313000000.00 · total_debt 40758000000.00 · total_equity 186450000000.00\ngrowth: eps_diluted -32% (decline_accel) · free_cash_flow +10% (accelerating) · gross_profit -1% (flat) · net_income -30% (decline_accel) · revenue -5% (decline_accel)\nsignals:\n  [context] capex intensity rose 5.1%→9.4% (sustained) 📊\n  [quality] shareholder returns 24.8B (dividends 12.8B + buybacks 12.1B) EXCEED free cash flow 16.6B — funded by debt/cash, not sustainable from operations\n  [ratio] net_debt_ebitda rose 0.09→0.83 (τ=1.00) ⚠\n  [ratio] roe fell 22.3%→7.3% (τ=-1.00) ⚠\nrevenue_by_region: \n\n### SHEL.LSE  [USD]  as-of 2026-06-30\nRevenue 351.9B, net margin 9%, FCF 31.5B, debt/equity 0.4x · 4 signal(s)\nvaluation: pe 10.12 · pb 1.40 · ev_ebitda 4.35 · dividend_yield 2.5% · fcf_yield 12.4%\nmetrics: accruals_ocf_ni 1.89 · asset_turnover 0.78 · buybacks -18302366583.84 · bvps 32.62 · capex_to_da 0.77 · capex_to_revenue 0.06 · cash 39929388000.00 · cash_conversion_cycle 14.51 · current_assets 144426334800.00 · current_liabilities 111062454000.00 · current_ratio 1.43 · debt_to_ebitda 1.08 · debt_to_equity 0.40 · dio 39.55 · dividend_cagr_5y_pct 8.30 · dividend_payout 32.5% · dividends_paid -11172105317.26 · dpo 90.19 · dso 65.15 · ebitda_interest_coverage 13.23 · ebitda_margin 22.9% · effective_tax_rate 34.4% · eps_basic 4.57 · eps_diluted 4.52 · fcf_conversion 1.21 · fcf_margin 10.6% · free_cash_flow 31538251979.18 · gross_margin 17.1% · gross_profit 56038552343.84 · interest_coverage 8.77 · interest_expense 6252000862.74 · last_cut_year 2021.00 · net_debt_ebitda 0.61 · net_income 23521818052.88 · net_margin 8.8% · net_stock_issuance -20016688693.42 · no_cut_streak_yrs 4.00 · operating_cash_flow 56523837371.78 · operating_income 36372640328.22 · operating_margin 12.3% · quick_ratio 1.12 · revenue 351945054261.37 · roa 6.8% · roe 14.4% · roic 13.3% · total_assets 499083660000.00 · total_borrowings 62946396000.00 · total_debt 101936506800.00 · total_equity 235010659200.00\ngrowth: eps_diluted +19% (accelerating) · free_cash_flow -32% (decline_accel) · gross_profit -8% (decline_accel) · net_income +11% (accelerating) · revenue -6% (bottoming)\nsignals:\n  [ratio] net_debt_ebitda rose 0.47→0.81 (τ=0.67) ⚠\n  [ratio] roe fell 22.2%→10.1% (τ=-0.67) ⚠\n  [trend] declining 381.3B→296.6B (29% of revenue, τ=-0.60)\n  [trend] declining 242.0B→180.8B (16% of total assets, τ=-1.00)\n\n### BP.LSE  [USD]  as-of 2026-06-30\nRevenue 249.7B, net margin 3%, FCF 14.9B, debt/equity 1.2x · 3 signal(s)\nvaluation: pe 20.64 · pb 1.90 · ev_ebitda 3.68 · dividend_yield 3.5% · fcf_yield 14.5%\nmetrics: accruals_ocf_ni 5.30 · asset_turnover 0.74 · buybacks -5915729987.40 · bvps 3.78 · capex_to_da 0.72 · capex_to_revenue 0.06 · cash 49262865600.00 · cash_conversion_cycle -5.95 · current_assets 137166813600.00 · current_liabilities 108590955600.00 · current_ratio 1.27 · debt_to_ebitda 1.82 · debt_to_equity 1.24 · dio 65.12 · dividend_cagr_5y_pct 0.20 · dividend_payout 93.7% · dividends_paid -6671350424.93 · dpo 129.90 · dso 58.83 · ebitda_interest_coverage 8.10 · ebitda_margin 18.4% · effective_tax_rate 59.1% · eps_basic 0.35 · eps_diluted 0.35 · fcf_conversion 2.94 · fcf_margin 7.4% · free_cash_flow 14864491399.45 · gross_margin 20.0% · gross_profit 44215004624.93 · interest_coverage 4.43 · interest_expense 6762341367.67 · last_cut_year 2021.00 · net_debt_ebitda 0.89 · net_income 72529012.33 · net_margin 2.5% · net_stock_issuance -5915729987.40 · no_cut_streak_yrs 4.00 · operating_cash_flow 32299147253.97 · operating_income 20846156852.60 · operating_margin 11.4% · quick_ratio 0.95 · revenue 249677828168.49 · roa 1.9% · roe 9.4% · roic 9.5% · total_assets 375341637600.00 · total_borrowings 78104200800.00 · total_debt 97740080400.00 · total_equity 71492875200.00\ngrowth: eps_diluted -85% () · free_cash_flow -6% (bottoming) · gross_profit +11% (accelerating) · net_income -86% () · revenue +0% (flat)\nsignals:\n  [ratio] debt_to_equity rose 0.82→1.37 (τ=1.00) ⚠\n  [ratio] interest_coverage latest 2.51 = -8.8σ from its 6.87 norm ⚠\n  [trend] rising 29.2B→144.5B (53% of revenue, τ=0.80)\n\n### TTE.PA  [USD]  as-of 2026-06-30\nRevenue 182.3B, net margin 9%, FCF 10.4B, debt/equity 0.5x · 5 signal(s)\nvaluation: pe 10.89 · pb 1.51 · ev_ebitda 4.91 · dividend_yield 6.5% · fcf_yield 8.4%\nmetrics: accruals_ocf_ni 1.85 · asset_turnover 0.63 · buybacks -7714000000.00 · bvps 57.73 · capex_to_da 1.15 · capex_to_revenue 0.09 · cash 24152000000.00 · cash_conversion_cycle -14.41 · current_assets 89469000000.00 · current_liabilities 92563000000.00 · current_ratio 1.06 · debt_to_ebitda 1.35 · debt_to_equity 0.49 · dio 57.29 · dividend_cagr_5y_pct 3.90 · dividend_payout 48.2% · dividends_paid -8121000000.00 · dpo 111.08 · dso 39.37 · ebitda_interest_coverage 17.74 · ebitda_margin 23.7% · effective_tax_rate 38.2% · fcf_conversion 0.91 · fcf_margin 8.3% · free_cash_flow 10390000000.00 · gross_margin 30.7% · gross_profit 51847000000.00 · interest_coverage 12.16 · interest_expense 2558000000.00 · last_cut_year 2025.00 · net_debt_ebitda 0.75 · net_income 13127000000.00 · net_margin 9.1% · net_stock_issuance -7222000000.00 · no_cut_streak_yrs 0.00 · operating_cash_flow 27343000000.00 · operating_income 19925000000.00 · operating_margin 13.7% · quick_ratio 0.85 · revenue 182344000000.00 · roa 5.7% · roe 13.9% · roic 12.1% · total_assets 291055000000.00 · total_borrowings 58195000000.00 · total_debt 60071000000.00 · total_equity 114883000000.00\ngrowth: eps_diluted -14% (bottoming) · free_cash_flow -35% (decline_accel) · gross_profit -7% (bottoming) · net_income -17% (bottoming) · revenue -7% (bottoming)\nsignals:\n  [quality] shareholder returns 15.8B (dividends 8.1B + buybacks 7.7B) EXCEED free cash flow 10.4B — funded by debt/cash, not sustainable from operations\n  [ratio] fcf_conversion fell 1.54→0.79 (τ=-1.00) ⚠\n  [ratio] net_debt_ebitda rose 0.41→0.92 (τ=0.67) ⚠\n  [ratio] roic fell 16.2%→10.1% (τ=-0.67) ⚠\n  [trend] declining 263.3B→196.4B (34% of revenue, τ=-0.60)\n\n— BEFORE you compare or divide any figures — across companies OR across years — first read what each number MEANS accounting-wise, and confirm they are the SAME concept on the SAME basis. Check: (1) same line / definition; (2) gross vs net; (3) a value that is a SUBSTITUTE/proxy (see any `resolved_via_rule`) or reported under a DIFFERENT field name than another company's is a DIFFERENT metric — not directly comparable; (4) consolidated vs segment; (5) currency (see `currency`/`fx`); (6) fiscal-period alignment (fiscal-year ends differ). If the bases DIFFER, do NOT headline a magnitude ratio/multiple (e.g. 'X× larger') — put them on a common basis first, or state the comparison DIRECTIONALLY only and name the caveat. State no figure as more precise or comparable than its basis allows. Facts over a tidy number; never fabricate.\n"
+  },
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "eps_diluted": {
+      "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+     }
+    }
+   },
+   "capped": true,
+   "count": 20,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.52,
+       "market_cap_usd": 5128348.0995000005,
+       "net_margin": 22.6273291925466
+      }
+     },
+     "head_listing_id": 236900,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 0.090872
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Coro Energy PLC",
+     "score": 0.090872,
+     "ticker": "CORO.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2.51,
+       "market_cap_usd": 12462961.056000002,
+       "net_margin": 0.23396189003232
+      }
+     },
+     "head_listing_id": 50511,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 0.209163
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mongolia Energy Corp Ltd",
+     "score": 0.209163,
+     "ticker": "0276.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.24,
+       "market_cap_usd": 28726747.212800004,
+       "net_margin": 0.104724489795918
+      }
+     },
+     "head_listing_id": 51863,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 0.798219
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Chu Kong Petroleum and Natural Gas Steel Pipe Holdings Ltd",
+     "score": 0.798219,
+     "ticker": "1938.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1365.0,
+       "market_cap_usd": 43398294.7328,
+       "net_margin": 15.2523,
+       "normalized_pe": 1.30915242444055
+      }
+     },
+     "head_listing_id": 1420948,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.091575
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "EOFLOW Co.Ltd",
+     "score": 1.091575,
+     "ticker": "294090.KQ"
+    },
+    {
+     "also_known_as": [
+      "137080.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 5820.0,
+       "market_cap_usd": 48655300.1984,
+       "net_margin": 0.9199
+      }
+     },
+     "head_listing_id": 1420262,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.255562
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Narae Nanotech Corp.",
+     "score": 1.255562,
+     "ticker": "137080.KQ"
+    },
+    {
+     "also_known_as": [
+      "066360.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 506.0,
+       "market_cap_usd": 22489495.3472,
+       "net_margin": 0.0594,
+       "normalized_pe": 1.32117484449113
+      }
+     },
+     "head_listing_id": 1419046,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.324111
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Cherrybro co.Ltd",
+     "score": 1.324111,
+     "ticker": "066360.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1291.0,
+       "market_cap_usd": 38441175.449599996,
+       "net_margin": 0.1006,
+       "normalized_pe": 1.64718452878251
+      }
+     },
+     "head_listing_id": 1419808,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.692486
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Dongwoo Farm To Table Co.Ltd",
+     "score": 1.692486,
+     "ticker": "088910.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": -0.43,
+       "market_cap_usd": 173241488.0,
+       "net_margin": -3.7068
+      }
+     },
+     "head_listing_id": 38925,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.923675
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "XCF Global, Inc. Class A Common Stock",
+     "score": 1.923675,
+     "ticker": "SAFX.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1774.0,
+       "market_cap_usd": 39576844.6976,
+       "net_income_usd": 15601874.61,
+       "net_margin": 0.1825,
+       "normalized_pe": 2.54155275207706,
+       "revenue_usd": 85502533.466
+      }
+     },
+     "head_listing_id": 1417696,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.282976
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jin Yang Pharmaceutical Co. Ltd",
+     "score": 2.282976,
+     "ticker": "007370.KQ"
+    },
+    {
+     "also_known_as": [
+      "263700.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": -349.0,
+       "market_cap_usd": 25883453.030399997,
+       "net_income_usd": -4750368.672,
+       "net_margin": -0.0857,
+       "revenue_usd": 55416617.508
+      }
+     },
+     "head_listing_id": 1420893,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.285137
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Carelabs Co.Ltd",
+     "score": 2.285137,
+     "ticker": "263700.KQ"
+    },
+    {
+     "also_known_as": [
+      "DEC.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 6.09,
+       "market_cap_usd": 994875712.0,
+       "net_income_usd": 341115000.0,
+       "net_margin": 0.211681368700957,
+       "revenue_usd": 1611455000.0
+      }
+     },
+     "head_listing_id": 9743,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.36289
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Diversified Energy Company plc",
+     "score": 2.36289,
+     "ticker": "DEC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 54655.0,
+       "market_cap_usd": 160769145.24159998,
+       "net_income_usd": 57884127.427,
+       "net_margin": 0.2039,
+       "normalized_pe": 3.38965271589601,
+       "revenue_usd": 283885915.502
+      }
+     },
+     "head_listing_id": 1414654,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.696917
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mi Chang Oil",
+     "score": 2.696917,
+     "ticker": "003650.KO"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 0.0698,
+       "market_cap_usd": 30241861.972000003,
+       "net_income_usd": 10086792.6,
+       "net_margin": 1.81248457932396,
+       "revenue_usd": 5565174.3
+      }
+     },
+     "head_listing_id": 239103,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.936963
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Parkmead Group PLC",
+     "score": 2.936963,
+     "ticker": "PMG.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 2086.277249,
+       "market_cap_usd": 37504418.2016,
+       "net_income_usd": 12621536.263,
+       "net_margin": 0.1274,
+       "normalized_pe": 2.99948358229134,
+       "revenue_usd": 99101168.383
+      }
+     },
+     "head_listing_id": 1418851,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.971302
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "TAEYANG Corporation",
+     "score": 2.971302,
+     "ticker": "053620.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 3.9,
+       "market_cap_usd": 991880982.9376,
+       "net_income_usd": 283138733.6885,
+       "net_margin": 0.0407,
+       "normalized_pe": 3.67721334275917,
+       "revenue_usd": 6954015306.085
+      }
+     },
+     "head_listing_id": 50044,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.076923
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Star Petroleum Refining Co Ltd",
+     "score": 3.076923,
+     "ticker": "SPRC.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1.56,
+       "market_cap_usd": 228328976.0,
+       "net_income_usd": 66708349.0,
+       "net_margin": 0.3499,
+       "normalized_pe": 3.55532294919052,
+       "revenue_usd": 190626075.0
+      }
+     },
+     "head_listing_id": 22337,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.237179
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Imperial Petroleum Inc",
+     "score": 3.237179,
+     "ticker": "IMPP.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 14.91,
+       "market_cap_usd": 1453170377.5232,
+       "net_income_usd": 390112839.21,
+       "net_margin": 0.0237,
+       "normalized_pe": 2.04882943526712,
+       "revenue_usd": 16457182487.7
+      }
+     },
+     "head_listing_id": 49448,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.269618
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Bangchak Corporation Public Company Limited",
+     "score": 3.269618,
+     "ticker": "BCP.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "eps_diluted": 12.06,
+       "market_cap_usd": 214923143.1248,
+       "net_income_usd": 64364162.4,
+       "net_margin": 0.0447482177726998,
+       "revenue_usd": 1438362589.7
+      }
+     },
+     "head_listing_id": 242618,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.383085
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "HMS Bergbau AG",
+     "score": 3.383085,
+     "ticker": "HMU.XETRA"
+    },
+    {
+     "also_known_as": [
+      "900290.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1003.0,
+       "market_cap_usd": 235680628.73599997,
+       "net_income_usd": 53826404.1,
+       "net_margin": 0.0735,
+       "normalized_pe": 4.37853192455782,
+       "revenue_usd": 732404603.7
+      }
+     },
+     "head_listing_id": 3944724,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.614158
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Great Rich Technologies Limited",
+     "score": 3.614158,
+     "ticker": "900290.KQ"
+    },
+    {
+     "also_known_as": [
+      "330730.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "eps_diluted": 1379.0,
+       "market_cap_usd": 59787158.323199995,
+       "net_income_usd": 17017580.706,
+       "net_margin": 0.5792,
+       "normalized_pe": 3.51325839765934,
+       "revenue_usd": 29383376.057
+      }
+     },
+     "head_listing_id": 1421018,
+     "matched": {
+      "fundamental": {
+       "pe": {
+        "cohort_benchmark": 16.586411,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.676577
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "StoneBridge Ventures Inc.",
+     "score": 3.676577,
+     "ticker": "330730.KQ"
+    }
+   ],
+   "sort": "pe",
+   "universe": 829,
+   "_pagination": {
+    "intended_show": 5,
+    "returned": 20,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (5) as a look-ahead buffer so 'a few more' is served from these 20 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+   }
+  }
+ ],
+ "answer_to_user": "Short answer: five names is NOT enough to trust as a peer average — a 5-stock mean is a thin, easily-biased sample (one outlier swings it, and all five are integrated majors, so it tells you nothing about where the majors sit within energy). Benchmark them against the broader energy-sector cohort instead. I pulled both so you can see the difference.\n\nThe whole energy sector averages a P/E of ~16.6x (computed across an 829-name energy cohort) — that is the robust benchmark. Now your five, on a currency-consistent (USD) basis:\n- Shell (SHEL.LSE): P/E 10.1 · EV/EBITDA 4.4 — cheapest, and well BELOW the 16.6x sector average\n- TotalEnergies (TTE.PA): P/E 10.9 · EV/EBITDA 4.9 — also clearly below sector\n- Chevron (CVX.US): P/E 19.5 · EV/EBITDA 7.6 — ABOVE the sector average\n- BP (BP.LSE): P/E 20.6 · EV/EBITDA 3.7 — above on P/E but cheapest on EV/EBITDA (its debt load distorts P/E; EV/EBITDA is the fairer energy multiple)\n- ExxonMobil (XOM.US): P/E 21.3 · EV/EBITDA 9.4 — the most expensive\n\nWithin your five, Shell then Total look cheapest; but the key insight only shows up against the sector: your five majors AVERAGE about 16.5x P/E — essentially the SAME as the whole sector, so \"cheap vs my 5 peers\" would have flattered Chevron/BP/Exxon that are actually mid-to-expensive for energy. Note also BP is a case where P/E and EV/EBITDA disagree because of leverage — for energy I would lead with EV/EBITDA. Bottom line: rank the five by cheapness if you like, but judge each against the ~16.6x sector benchmark, not the 5-name average."
+}

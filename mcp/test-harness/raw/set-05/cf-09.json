@@ -1,0 +1,369 @@
+{
+  "id": "cf-09",
+  "question": "Which dividend growers in Europe — raising their payout and yielding over 3% — recently reclaimed their 50-day moving average after a dip?",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "dividend_yield",
+            "pattern": "above",
+            "threshold": 0.03
+          },
+          {
+            "concept": "dps",
+            "pattern": "improved_every_year",
+            "N": 3
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "close",
+                "b": "ema50"
+              }
+            ]
+          }
+        ],
+        "country": [
+          "GB",
+          "FR",
+          "DE",
+          "IT",
+          "ES",
+          "NL",
+          "SE",
+          "CH",
+          "BE",
+          "DK",
+          "FI",
+          "NO",
+          "AT",
+          "IE",
+          "PT"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 20,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "dividends_paid": {
+            "sign": "stored NEGATIVE = cash OUTFLOW (capex/dividends/buybacks/debt-repayment spend cash); a BIGGER outflow is MORE negative — do not read the minus as 'less'."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 0,
+      "currency": "USD",
+      "intersection_count": 0,
+      "legs": {
+        "fundamental": 1,
+        "ta": 359
+      },
+      "notes": [
+        "No stock matched ALL conditions (intersection=0). TA leg=359 match(es), fundamental leg=1 — the two are disjoint. The rows are PARTIAL near-misses: each matched ONLY the leg(s) in its `matched_legs`, NOT the full query — do NOT present them as full matches. Tightest leg: fundamental. To broaden: loosen the fundamental condition (smaller `n` / looser threshold) and/or widen the TA `window_bars` (currently 20)."
+      ],
+      "partial": true,
+      "results": [
+        {
+          "also_known_as": [
+            "47IE.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 53.1625,
+              "close_vs_ema200": 0.0092,
+              "rsi14": 53.8832
+            }
+          },
+          "head_listing_id": 239692,
+          "matched": {
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 65,
+                  "b": 3.2274
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "S&U plc",
+          "score": 1.0,
+          "ticker": "SUS.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 73.9579,
+              "close_vs_ema200": -0.1722,
+              "rsi14": 83.2775
+            }
+          },
+          "head_listing_id": 238758,
+          "matched": {
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 0.25,
+                  "b": 0.2236
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Milton Capital PLC",
+          "score": 1.0,
+          "ticker": "MII.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.8651,
+              "close_vs_ema200": 3.7336,
+              "rsi14": 99.949
+            }
+          },
+          "head_listing_id": 239168,
+          "matched": {
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 85.5,
+                  "b": 4.229
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Puma Alpha VCT Ord",
+          "score": 1.0,
+          "ticker": "PUAL.LSE"
+        },
+        {
+          "also_known_as": [
+            "BD82.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 45.5901,
+              "close_vs_ema200": -0.1427,
+              "rsi14": 44.2529
+            }
+          },
+          "head_listing_id": 236604,
+          "matched": {
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 75,
+                  "b": 9.1465
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Henry Boot PLC",
+          "score": 1.0,
+          "ticker": "BOOT.LSE"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 23.1294,
+              "close_vs_ema200": 0.2302,
+              "rsi14": 57.5982
+            }
+          },
+          "head_listing_id": 1752608,
+          "matched": {
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 0.38,
+                  "b": 0.2294
+                },
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Intrasense",
+          "score": 0.999,
+          "ticker": "ALINS.PA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "dividend_payout": 0.328825021132713,
+              "dividends_paid_usd": -51515270.0,
+              "free_cash_flow_usd": 480191180.0,
+              "market_cap_usd": 1297426658.5600002,
+              "net_margin": 0.0273039905832391,
+              "pe": 8.864078,
+              "revenue_usd": 5737794610.0
+            }
+          },
+          "head_listing_id": 237452,
+          "matched": {
+            "fundamental": {
+              "dividend_yield": {
+                "kind": "level",
+                "value": 0.03943
+              },
+              "dps": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.07,
+                  0.057,
+                  0.044
+                ],
+                "unit": "usd",
+                "value": 0.07,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "FirstGroup PLC",
+          "score": null,
+          "ticker": "FGP.LSE"
+        }
+      ],
+      "sort": "ta",
+      "universe": 2438,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 6,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 6 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "No European stock matched ALL conditions — the intersection was EMPTY (count=0). Of the universe, 359 names recently reclaimed their 50-day MA but only 1 European stock met BOTH dividend conditions (yield>3% AND per-share dividend rising every year for 3y), and that one is not among the MA-reclaim set, so nothing satisfies the full query. The rows returned are PARTIAL near-misses (each matched only the TA leg — matched_legs=['ta']), e.g. SUS.LSE, MII.LSE, PUAL.LSE; they should NOT be presented as full matches. The dividend-growth leg is the binding constraint."
+}

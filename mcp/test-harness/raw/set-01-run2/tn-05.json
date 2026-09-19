@@ -1,0 +1,34 @@
+{
+  "id": "tn-05",
+  "question": "Show me stocks that dropped a lot lately but the company is actually fine — like still growing revenue and not overpriced. Kinda looking for a dip to buy.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {"q": "revenue growth"},
+      "result_summary": "Resolved: concept='revenue' (Total Revenue, field type, income statement)."
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {"q": "growing revenue"},
+      "result_summary": "Pattern 'consecutive_growth_sharp' — revenue grew >10% every year for N years (default 3). Also found 'accelerating' for accelerating growth."
+    },
+    {
+      "tool": "find_fsconcept",
+      "args": {"q": "PE ratio valuation"},
+      "result_summary": "Resolved: concept='pe' (P/E ratio, valuation type)."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.10", "window_bars": 20}]}],
+        "fundamental": [
+          {"concept": "revenue", "pattern": "consecutive_growth_sharp"},
+          {"concept": "pe", "pattern": "below_average"}
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "result_summary": "60 results (capped). Stocks down >10% in last 20 days, with consecutively sharp revenue growth AND below-average P/E: ACMR.US ACM Research, AMSC.US American Superconductor, CLBT.US Cellebrite DI, COLL.US Collegium Pharmaceutical, ELMD.US Electromed, FSLR.US First Solar, HPAI.US Helport AI, IREN.US IREN Ltd, LIF.US Life360, LWAY.US Lifeway Foods, MPTI.US M-tron Industries, NEWT.US NewtekOne, NXT.US Nextpower, ONON.US On Holding, OPXS.US Optex Systems."
+    }
+  ]
+}

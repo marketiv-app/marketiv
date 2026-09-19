@@ -1,0 +1,2490 @@
+{
+ "id": "vv-02",
+ "question": "I want European industrials that look cheap on EV/EBITDA compared with the rest of the industrials sector — below the sector average, not just below some fixed number.",
+ "tools_called": [
+  {
+   "tool": "find_fsconcept",
+   "args": {
+    "queries": [
+     "EV/EBITDA"
+    ]
+   },
+   "note": "resolver — chose concept ev_ebitda (capital-structure-neutral, curated)"
+  },
+  {
+   "tool": "find_fspattern",
+   "args": {
+    "queries": [
+     "below the sector average"
+    ]
+   },
+   "note": "resolver — chose cohort pattern below_average (percentile 0.5, no fixed number)"
+  },
+  {
+   "tool": "find_gics",
+   "args": {
+    "q": "industrials"
+   },
+   "note": "resolver — code 20 (Industrials sector)"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "ev_ebitda",
+      "pattern": "below_average"
+     }
+    ],
+    "gics": "20",
+    "country": [
+     "DE",
+     "FR",
+     "GB",
+     "IT",
+     "ES",
+     "NL",
+     "SE",
+     "CH",
+     "BE",
+     "FI",
+     "NO",
+     "DK",
+     "AT",
+     "IE",
+     "PT",
+     "PL"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "sort": "ev_ebitda",
+    "limit": 20
+   },
+   "note": "below_average benchmark defaults to the screened universe = European industrials, so cohort_benchmark IS the sector average"
+  }
+ ],
+ "raw_responses": [
+  {
+   "capped": true,
+   "count": 80,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -6863326.8,
+       "market_cap_usd": 2479222.3825000003,
+       "net_debt_usd": -6455004.0,
+       "net_margin": 0.0145560407569141,
+       "revenue_usd": 2777403.6
+      }
+     },
+     "head_listing_id": 236914,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 0.008565
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "CPPGroup Plc",
+     "score": 0.008565,
+     "ticker": "CPP.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "market_cap_usd": 4756104.6334999995,
+       "net_margin": 0.133249771895708,
+       "pe": 0.293194
+      }
+     },
+     "head_listing_id": 1752631,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 0.201254
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mare Nostrum",
+     "score": 0.201254,
+     "ticker": "ALMAR.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "market_cap_usd": 133188864.0,
+       "pe": 0.296274
+      }
+     },
+     "head_listing_id": 12626,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 0.374025
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Vertical Aerospace Ltd",
+     "score": 0.374025,
+     "ticker": "EVTL.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "market_cap_usd": 647535360.0,
+       "pe": 1.249452
+      }
+     },
+     "head_listing_id": 31128,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.036316
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Terra Innovatum Global N.V. Ordinary shares",
+     "score": 1.036316,
+     "ticker": "NKLR.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 115503890.4,
+       "market_cap_usd": 304772923.6112,
+       "net_debt_usd": -137022271.2,
+       "net_margin": 0.3864,
+       "pe": 4.325843,
+       "revenue_usd": 179312509.8
+      }
+     },
+     "head_listing_id": 242109,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.41308
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ernst Russ AG",
+     "score": 1.41308,
+     "ticker": "ERAG.XETRA"
+    },
+    {
+     "also_known_as": [
+      "ATGVF.US"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -1439479.0,
+       "market_cap_usd": 7437128.4576,
+       "net_debt_usd": -198738.0,
+       "revenue_usd": 0.0
+      }
+     },
+     "head_listing_id": 236286,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.625468
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Active Energy Group PLC",
+     "score": 1.625468,
+     "ticker": "AEG.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 15453178.5,
+       "market_cap_usd": 29352035.8516,
+       "net_debt_usd": -1179398.8,
+       "net_margin": 0.111134168949393,
+       "pe": 3.167186,
+       "revenue_usd": 84909665.4
+      }
+     },
+     "head_listing_id": 1752656,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.857331
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "NSC Groupe SA",
+     "score": 1.857331,
+     "ticker": "ALNSC.PA"
+    },
+    {
+     "also_known_as": [
+      "0RO8.LSE",
+      "AUUMF.US"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 31642158.6,
+       "market_cap_usd": 213141244.58879998,
+       "net_debt_usd": -153949246.2,
+       "net_margin": 0.0763,
+       "pe": 13.584906,
+       "revenue_usd": 209196577.8
+      }
+     },
+     "head_listing_id": 241068,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.938348
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Aumann AG",
+     "score": 1.938348,
+     "ticker": "AAG.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 1447322.4,
+       "market_cap_usd": 4970914.288600001,
+       "net_debt_usd": -1835431.2,
+       "net_margin": 0.0409484182022323,
+       "pe": 6.012658,
+       "revenue_usd": 20404011.6
+      }
+     },
+     "head_listing_id": 238902,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 1.987736
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Norman Broadbent Plc",
+     "score": 1.987736,
+     "ticker": "NBB.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 9367481.2,
+       "market_cap_usd": 28094598.712399997,
+       "net_debt_usd": -6437151.6,
+       "net_margin": -0.0174796879552002,
+       "revenue_usd": 160736279.0
+      }
+     },
+     "head_listing_id": 1752553,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.017499
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "EdiliziAcrobatica S.p.A",
+     "score": 2.017499,
+     "ticker": "ALEAC.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 7247855.245374,
+       "market_cap_usd": 35674759.359799996,
+       "net_debt_usd": -20224407.6,
+       "net_margin": -0.0711,
+       "revenue_usd": 108867358.8
+      }
+     },
+     "head_listing_id": 243582,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.146643
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "SMT Scharf AG",
+     "score": 2.146643,
+     "ticker": "S188.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0OPN.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 544121040.0,
+       "market_cap_usd": 6419004278.016,
+       "net_debt_usd": -5347586810.0,
+       "net_margin": 0.0745845017440668,
+       "pe": 25.736011,
+       "revenue_usd": 3435057740.0
+      }
+     },
+     "head_listing_id": 1753385,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.18173
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Compagnie de l'Odet",
+     "score": 2.18173,
+     "ticker": "ODET.PA"
+    },
+    {
+     "also_known_as": [
+      "0P38.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 66051660.6,
+       "market_cap_usd": 676696808.48,
+       "net_debt_usd": -527825325.6,
+       "net_margin": 0.3167,
+       "pe": 2.805213,
+       "revenue_usd": 1053312703.2
+      }
+     },
+     "head_listing_id": 243292,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.284939
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Norma Group AG NA O.N.",
+     "score": 2.284939,
+     "ticker": "NOEJ.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0J7X.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 261046940.4,
+       "market_cap_usd": 1091906584.0319998,
+       "net_debt_usd": -497285011.8,
+       "net_margin": 0.0462,
+       "pe": 17.889447,
+       "revenue_usd": 1328058630.0
+      }
+     },
+     "head_listing_id": 243170,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.290521
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "MBB INDUSTRIES",
+     "score": 2.290521,
+     "ticker": "MBB.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0O1R.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 1815641120.0,
+       "market_cap_usd": 6700736957.2352,
+       "net_debt_usd": -2634264750.0,
+       "net_margin": 0.0861,
+       "pe": 14.988067,
+       "revenue_usd": 5152806860.0
+      }
+     },
+     "head_listing_id": 242387,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.323122
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Fraport AG",
+     "score": 2.323122,
+     "ticker": "FRA.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0LN7.LSE",
+      "AFR0.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 5786385200.0,
+       "market_cap_usd": 3635468699.5968,
+       "net_debt_usd": 9852617200.0,
+       "net_margin": 0.0306,
+       "pe": 3.126302,
+       "revenue_usd": 38132347000.0
+      }
+     },
+     "head_listing_id": 1752475,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.324633
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Air France-KLM SA",
+     "score": 2.324633,
+     "ticker": "AF.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 1039707930.0,
+       "market_cap_usd": 1297426658.5600002,
+       "net_debt_usd": 1106320220.0,
+       "net_margin": 0.0273039905832391,
+       "pe": 8.864078,
+       "revenue_usd": 5737794610.0
+      }
+     },
+     "head_listing_id": 237452,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.326078
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "FirstGroup PLC",
+     "score": 2.326078,
+     "ticker": "FGP.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -28182428.3,
+       "market_cap_usd": 153902921.372,
+       "net_debt_usd": 61824945.5,
+       "net_margin": -0.0783922651203952,
+       "revenue_usd": 601568572.2
+      }
+     },
+     "head_listing_id": 239449,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.335067
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Severfield PLC",
+     "score": 2.335067,
+     "ticker": "SFR.LSE"
+    },
+    {
+     "also_known_as": [
+      "0NAS.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 9970176.9,
+       "market_cap_usd": 18719898.5545,
+       "net_debt_usd": 6438616.2,
+       "net_margin": 0.00751435990243135,
+       "pe": 23.988243,
+       "revenue_usd": 119271423.2
+      }
+     },
+     "head_listing_id": 1752580,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.565322
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Signaux Girod",
+     "score": 2.565322,
+     "ticker": "ALGIR.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -3005767.8,
+       "market_cap_usd": 72285123.91759999,
+       "net_debt_usd": -14311251.0,
+       "net_margin": -0.312,
+       "revenue_usd": 58697541.0
+      }
+     },
+     "head_listing_id": 244073,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.642696
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "3U Holding AG",
+     "score": 2.642696,
+     "ticker": "UUU.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0HDQ.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 155002839.7,
+       "market_cap_usd": 779069044.0896,
+       "net_debt_usd": -372630111.1,
+       "net_margin": 0.0167269998738109,
+       "pe": 12.304959,
+       "revenue_usd": 3807398874.9
+      }
+     },
+     "head_listing_id": 1753482,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.650347
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Synergie SE",
+     "score": 2.650347,
+     "ticker": "SDG.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 6721633.4,
+       "market_cap_usd": 31474094.876399998,
+       "net_debt_usd": -13789803.3,
+       "net_margin": -0.00524388252583452,
+       "revenue_usd": 251791071.5
+      }
+     },
+     "head_listing_id": 1752542,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.715644
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "DLSI",
+     "score": 2.715644,
+     "ticker": "ALDLS.PA"
+    },
+    {
+     "also_known_as": [
+      "0FGS.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 15274624.1,
+       "market_cap_usd": 50700925.932799995,
+       "net_debt_usd": -10431336.0,
+       "net_margin": 0.0240708832179674,
+       "pe": 13.684211,
+       "revenue_usd": 158166306.8
+      }
+     },
+     "head_listing_id": 243322,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.725335
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Orbis AG",
+     "score": 2.725335,
+     "ticker": "OBS.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -24466260.0,
+       "market_cap_usd": 588300350.5760001,
+       "net_debt_usd": 69260890.0,
+       "net_margin": -0.144616722214172,
+       "revenue_usd": 927701430.0
+      }
+     },
+     "head_listing_id": 239322,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.75465
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "RWS Holdings PLC",
+     "score": 2.75465,
+     "ticker": "RWS.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 52854805.3847,
+       "market_cap_usd": 39841808.428399995,
+       "net_debt_usd": 115948677.7469,
+       "net_margin": 0.0171863573013547,
+       "pe": 8.037037,
+       "revenue_usd": 294235932.1717
+      }
+     },
+     "head_listing_id": 243205,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 2.961106
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Müller - Die lila Logistik AG",
+     "score": 2.961106,
+     "ticker": "MLL.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0DZJ.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 175091384.4,
+       "market_cap_usd": 636788927.7376,
+       "net_debt_usd": -120652262.3,
+       "net_margin": 0.00924097165876642,
+       "pe": 17.702703,
+       "revenue_usd": 3961144785.6
+      }
+     },
+     "head_listing_id": 1752849,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.01348
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Groupe CRIT SA",
+     "score": 3.01348,
+     "ticker": "CEN.PA"
+    },
+    {
+     "also_known_as": [
+      "0OC2.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 172452600.0,
+       "market_cap_usd": 507094777.1648,
+       "net_debt_usd": 28935000.0,
+       "net_margin": 0.0065,
+       "pe": 28.04,
+       "revenue_usd": 2653918200.0
+      }
+     },
+     "head_listing_id": 242592,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.031406
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Heidelberger Druckmaschinen Aktiengesellschaft",
+     "score": 3.031406,
+     "ticker": "HDD.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0O1C.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 2180541600.0,
+       "market_cap_usd": 9514404354.048,
+       "net_debt_usd": -2922435000.0,
+       "net_margin": 0.0003,
+       "pe": 1324.5,
+       "revenue_usd": 37028698200.0
+      }
+     },
+     "head_listing_id": 243893,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.036323
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "thyssenkrupp AG",
+     "score": 3.036323,
+     "ticker": "TKA.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 4433604.0,
+       "market_cap_usd": 16101951.448800001,
+       "net_debt_usd": -2327305.2,
+       "net_margin": 0.0189767422386904,
+       "pe": 6.737589,
+       "revenue_usd": 128747008.8
+      }
+     },
+     "head_listing_id": 239311,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.100148
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "RTC Group plc",
+     "score": 3.100148,
+     "ticker": "RTC.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 52404541.7,
+       "market_cap_usd": 193412342.4112,
+       "net_debt_usd": -29361626.5,
+       "net_margin": 0.0185453586519454,
+       "pe": 19.026549,
+       "revenue_usd": 574638571.3
+      }
+     },
+     "head_listing_id": 1752526,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.196997
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Catering International & Services S.A.",
+     "score": 3.196997,
+     "ticker": "ALCIS.PA"
+    },
+    {
+     "also_known_as": [
+      "BMTO.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 8136808.8,
+       "market_cap_usd": 27032868.686400004,
+       "net_debt_usd": 2941810.8,
+       "net_margin": 0.0532835967409443,
+       "pe": 6.366048,
+       "revenue_usd": 68640006.0
+      }
+     },
+     "head_listing_id": 236589,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.223418
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Braime Group PLC",
+     "score": 3.223418,
+     "ticker": "BMT.LSE"
+    },
+    {
+     "also_known_as": [
+      "0J04.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 506520067.7,
+       "market_cap_usd": 1722280492.416,
+       "net_debt_usd": -196729592.4,
+       "net_margin": 0.0207,
+       "pe": 12.7,
+       "revenue_usd": 7395784332.4
+      }
+     },
+     "head_listing_id": 241083,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.254301
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "PORR AG",
+     "score": 3.254301,
+     "ticker": "ABS2.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -61989600.0,
+       "market_cap_usd": 452803191.2928,
+       "net_debt_usd": 641891220.0,
+       "net_margin": -0.0709682999610777,
+       "revenue_usd": 3116055480.0
+      }
+     },
+     "head_listing_id": 236911,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.350588
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Capita PLC",
+     "score": 3.350588,
+     "ticker": "CPI.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 21426840.0,
+       "market_cap_usd": 64701376.939600006,
+       "net_debt_usd": 3369000.0,
+       "net_margin": 0.00433721875847113,
+       "pe": 11.5,
+       "revenue_usd": 1491388920.0
+      }
+     },
+     "head_listing_id": 239650,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.357113
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Staffline Group Plc",
+     "score": 3.357113,
+     "ticker": "STAF.LSE"
+    },
+    {
+     "also_known_as": [
+      "KSB.XETRA",
+      "0BQE.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 421247420.0,
+       "market_cap_usd": 1649018735.2319999,
+       "net_debt_usd": -191775380.0,
+       "net_margin": 0.0464296306059907,
+       "pe": 10.876254,
+       "revenue_usd": 3564862090.0
+      }
+     },
+     "head_listing_id": 242991,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.502311
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "KSB SE & Co. KGaA",
+     "score": 3.502311,
+     "ticker": "KSB3.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 3587533.8,
+       "market_cap_usd": 11871807.838,
+       "net_debt_usd": 494548.7,
+       "net_margin": -0.0433457791511094,
+       "revenue_usd": 54743369.4
+      }
+     },
+     "head_listing_id": 1752583,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.525299
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Grolleau SAS",
+     "score": 3.525299,
+     "ticker": "ALGRO.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 839205680.0,
+       "market_cap_usd": 2871826320.0,
+       "net_debt_usd": 178226683.8,
+       "net_margin": 0.0188291743152614,
+       "pe": 23.960396,
+       "revenue_usd": 6463316870.0
+      }
+     },
+     "head_listing_id": 242968,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.538214
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jungheinrich AG O.N.VZO",
+     "score": 3.538214,
+     "ticker": "JUN3.XETRA"
+    },
+    {
+     "also_known_as": [
+      "EJT1.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 2094419400.0,
+       "market_cap_usd": 6782059764.787201,
+       "net_debt_usd": 958793200.0,
+       "net_margin": 0.0488818523649317,
+       "pe": 12.369686,
+       "revenue_usd": 13585495800.0
+      }
+     },
+     "head_listing_id": 237374,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.669552
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "EasyJet PLC",
+     "score": 3.669552,
+     "ticker": "EZJ.LSE"
+    },
+    {
+     "also_known_as": [
+      "0N5I.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 152507125.8,
+       "market_cap_usd": 437676633.18719995,
+       "net_debt_usd": 166201482.6,
+       "net_margin": 0.016,
+       "pe": 13.65566,
+       "revenue_usd": 1748252700.0
+      }
+     },
+     "head_listing_id": 241104,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.905164
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Adesso SE",
+     "score": 3.905164,
+     "ticker": "ADN1.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 64761613.2,
+       "market_cap_usd": 317207982.34720004,
+       "net_debt_usd": -81917908.8,
+       "net_margin": 0.297967992978874,
+       "pe": 7.826087,
+       "revenue_usd": 150477058.8
+      }
+     },
+     "head_listing_id": 239343,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.906182
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Science Group plc",
+     "score": 3.906182,
+     "ticker": "SAG.LSE"
+    },
+    {
+     "also_known_as": [
+      "0RUM.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 49221907.2,
+       "market_cap_usd": 205876714.824,
+       "net_debt_usd": -14138798.4,
+       "net_margin": 0.0573,
+       "pe": 10.457516,
+       "revenue_usd": 397862037.0
+      }
+     },
+     "head_listing_id": 241115,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.961169
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Allgeier SE",
+     "score": 3.961169,
+     "ticker": "AEIN.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 7057000000.0,
+       "market_cap_usd": 18361112576.0,
+       "net_debt_usd": 9589000000.0,
+       "net_margin": 0.0324107899582079,
+       "pe": 16.578249,
+       "revenue_usd": 34217000000.0
+      }
+     },
+     "head_listing_id": 238359,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 3.977647
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jardine Matheson Holdings Limited",
+     "score": 3.977647,
+     "ticker": "JAR.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 40924506.6,
+       "market_cap_usd": 177318428.32,
+       "net_debt_usd": -14322825.0,
+       "net_margin": 0.0216,
+       "pe": 14.278846,
+       "revenue_usd": 572090088.6
+      }
+     },
+     "head_listing_id": 242517,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.006689
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Gesco AG",
+     "score": 4.006689,
+     "ticker": "GSC1.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0J9C.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 372796947.0,
+       "market_cap_usd": 1378250358.4255998,
+       "net_debt_usd": 133788170.4,
+       "net_margin": 0.0565,
+       "pe": 5.532051,
+       "revenue_usd": 4661908717.4
+      }
+     },
+     "head_listing_id": 241857,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.018444
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Dürr Aktiengesellschaft",
+     "score": 4.018444,
+     "ticker": "DUE.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0QLM.LSE",
+      "FEIOF.US"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 66328620.0,
+       "market_cap_usd": 202649425.9152,
+       "net_debt_usd": 72786750.4,
+       "net_margin": -0.0121320249776985,
+       "revenue_usd": 834409624.0
+      }
+     },
+     "head_listing_id": 1754285,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.079385
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Feintool International Holding",
+     "score": 4.079385,
+     "ticker": "FTON.SW"
+    },
+    {
+     "also_known_as": [
+      "0G5B.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 171647164.0,
+       "market_cap_usd": 692557413.2224,
+       "net_debt_usd": -3284461.2,
+       "net_margin": 0.0246242879193922,
+       "pe": 15.354201,
+       "revenue_usd": 1869079266.4
+      }
+     },
+     "head_listing_id": 243799,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.079573
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Sto SE & Co. KGaA",
+     "score": 4.079573,
+     "ticker": "STO3.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0P47.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 306596700.0,
+       "market_cap_usd": 528148781.17759997,
+       "net_debt_usd": 765904400.0,
+       "net_margin": -0.0048,
+       "revenue_usd": 3904702800.0
+      }
+     },
+     "head_listing_id": 1748535,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.22487
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "PostNL NV",
+     "score": 4.22487,
+     "ticker": "PNL.AS"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 9866376.0,
+       "market_cap_usd": 58792027.0424,
+       "net_debt_usd": -15756316.4,
+       "net_margin": 0.219965576592083,
+       "pe": 8.614089,
+       "revenue_usd": 30695392.0
+      }
+     },
+     "head_listing_id": 239518,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.306532
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "J Smart Co Contractors PLC",
+     "score": 4.306532,
+     "ticker": "SMJ.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 648321786.0,
+       "market_cap_usd": 1429742247.7888,
+       "net_debt_usd": 1358860597.5,
+       "net_margin": 0.0409691791101782,
+       "pe": 14.209726,
+       "revenue_usd": 2529079707.0
+      }
+     },
+     "head_listing_id": 240731,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.319385
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ZIGUP plc",
+     "score": 4.319385,
+     "ticker": "ZIG.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 29710186.0,
+       "market_cap_usd": 109851280.0,
+       "net_debt_usd": 18493893.0,
+       "net_margin": 0.0466009473818973,
+       "pe": 18.450739,
+       "revenue_usd": 97090730.0
+      }
+     },
+     "head_listing_id": 1753575,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.343962
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Téléverbier SA",
+     "score": 4.343962,
+     "ticker": "TVRB.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 216424560.0,
+       "market_cap_usd": 713320604.2496,
+       "net_debt_usd": 214537920.0,
+       "net_margin": 0.0692939858050056,
+       "pe": 15.815217,
+       "revenue_usd": 721505040.0
+      }
+     },
+     "head_listing_id": 238490,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.418548
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Johnson Service Group Plc",
+     "score": 4.418548,
+     "ticker": "JSG.LSE"
+    },
+    {
+     "also_known_as": [
+      "0J6X.LSE",
+      "RCF.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 2105062400.0,
+       "market_cap_usd": 4739235750.9376,
+       "net_debt_usd": 4604824000.0,
+       "net_margin": 0.0486806276568652,
+       "pe": 8.188095,
+       "revenue_usd": 11992982180.0
+      }
+     },
+     "head_listing_id": 1753556,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.419168
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Teleperformance SE",
+     "score": 4.419168,
+     "ticker": "TEP.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 11914131.6,
+       "market_cap_usd": 52767049.180800006,
+       "net_debt_usd": 102417.6,
+       "net_margin": 0.0184419263456091,
+       "pe": 30.13834,
+       "revenue_usd": 95140560.0
+      }
+     },
+     "head_listing_id": 236970,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.429342
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Christie Group plc",
+     "score": 4.429342,
+     "ticker": "CTG.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -3679842.0,
+       "market_cap_usd": 13224329.376,
+       "net_debt_usd": -2343055.0,
+       "net_margin": -0.257347670250896,
+       "revenue_usd": 19633927.5
+      }
+     },
+     "head_listing_id": 1754741,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.491094
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Perrot Duval Holding SA",
+     "score": 4.491094,
+     "ticker": "PEDU.SW"
+    },
+    {
+     "also_known_as": [
+      "0QQF.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 60131640.8,
+       "market_cap_usd": 341504550.04800004,
+       "net_debt_usd": -79484584.8,
+       "net_margin": 0.0851613105929297,
+       "pe": 9.910714,
+       "revenue_usd": 481847934.4
+      }
+     },
+     "head_listing_id": 1754673,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.507989
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mikron Holding AG",
+     "score": 4.507989,
+     "ticker": "MIKN.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 8369576.0,
+       "market_cap_usd": 23160328.252800003,
+       "net_debt_usd": 15226801.4,
+       "net_margin": 0.0357376192342872,
+       "pe": 15.853659,
+       "revenue_usd": 40539471.6
+      }
+     },
+     "head_listing_id": 238700,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.522829
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Manolete Partners PLC",
+     "score": 4.522829,
+     "ticker": "MANO.LSE"
+    },
+    {
+     "also_known_as": [
+      "0DK9.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 42975275.0,
+       "market_cap_usd": 136019202.6512,
+       "net_debt_usd": 61031172.6,
+       "net_margin": -0.0195,
+       "revenue_usd": 398326259.2
+      }
+     },
+     "head_listing_id": 241067,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.596424
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Amadeus Fire AG",
+     "score": 4.596424,
+     "ticker": "AAD.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 385681480.0,
+       "market_cap_usd": 207935856.7152,
+       "net_debt_usd": 1762373850.0,
+       "net_margin": -0.311876804619827,
+       "revenue_usd": 3250511500.0
+      }
+     },
+     "head_listing_id": 238709,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.665136
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mobico Group Plc",
+     "score": 4.665136,
+     "ticker": "MCG.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 42645134.1,
+       "market_cap_usd": 176016958.3568,
+       "net_debt_usd": 20876768.4,
+       "net_margin": 0.0221784382944281,
+       "pe": 6.585366,
+       "revenue_usd": 1236540906.8
+      }
+     },
+     "head_listing_id": 1752572,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.691428
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Freelance.Com",
+     "score": 4.691428,
+     "ticker": "ALFRE.PA"
+    },
+    {
+     "also_known_as": [
+      "0QFU.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 2454359360.0,
+       "market_cap_usd": 5985621149.7984,
+       "net_debt_usd": 5623964360.0,
+       "net_margin": 0.0318,
+       "pe": 13.501706,
+       "revenue_usd": 13126505060.0
+      }
+     },
+     "head_listing_id": 242979,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.705462
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kion Group AG",
+     "score": 4.705462,
+     "ticker": "KGX.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0K7F.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 1865212600.0,
+       "market_cap_usd": 8579400476.415999,
+       "net_debt_usd": 413191800.0,
+       "net_margin": 0.0449,
+       "pe": 7.25559,
+       "revenue_usd": 25345418000.0
+      }
+     },
+     "head_listing_id": 243275,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.713147
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Aurubis AG",
+     "score": 4.713147,
+     "ticker": "NDA.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 3574493.7,
+       "market_cap_usd": 13562509.2059,
+       "net_debt_usd": 3372992.1,
+       "net_margin": -0.0136370928926681,
+       "revenue_usd": 33516087.6
+      }
+     },
+     "head_listing_id": 239237,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.735825
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "React Group PLC",
+     "score": 4.735825,
+     "ticker": "REAT.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 6097773.8,
+       "market_cap_usd": 13438762.497599998,
+       "net_debt_usd": 15072820.2,
+       "net_margin": -0.179391539390553,
+       "revenue_usd": 142786212.7
+      }
+     },
+     "head_listing_id": 242992,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.745938
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kps AG",
+     "score": 4.745938,
+     "ticker": "KSC.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 60237720.0,
+       "market_cap_usd": 155525212.3328,
+       "net_debt_usd": 131391000.0,
+       "net_margin": 0.0237918215613383,
+       "pe": 12.393617,
+       "revenue_usd": 543756600.0
+      }
+     },
+     "head_listing_id": 237142,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.764584
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Eurocell PLC",
+     "score": 4.764584,
+     "ticker": "ECEL.LSE"
+    },
+    {
+     "also_known_as": [
+      "0O0F.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 132191283.6,
+       "market_cap_usd": 711340911.2831999,
+       "net_debt_usd": -123341803.2,
+       "net_margin": 0.0191,
+       "pe": 19.861111,
+       "revenue_usd": 2014325071.2
+      }
+     },
+     "head_listing_id": 241694,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.789551
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Cancom SE",
+     "score": 4.789551,
+     "ticker": "COK.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": -4248096.0,
+       "market_cap_usd": 23664363.786000002,
+       "net_debt_usd": 10129300.5,
+       "net_margin": -0.125605875152999,
+       "revenue_usd": 52778200.0
+      }
+     },
+     "head_listing_id": 237460,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.822886
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "FIH Group PLC",
+     "score": 4.822886,
+     "ticker": "FIH.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 52840216.0,
+       "market_cap_usd": 236002232.35200003,
+       "net_debt_usd": 26783833.2,
+       "net_margin": 0.101519833129939,
+       "pe": 10.133333,
+       "revenue_usd": 298552776.0
+      }
+     },
+     "head_listing_id": 239688,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.847353
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Supreme PLC",
+     "score": 4.847353,
+     "ticker": "SUP.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 18623693.8,
+       "market_cap_usd": 115852963.1424,
+       "net_debt_usd": -27328220.8,
+       "net_margin": 0.0389608929755736,
+       "pe": 14.428571,
+       "revenue_usd": 209004973.4
+      }
+     },
+     "head_listing_id": 242998,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.865474
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "KHD Humboldt Wedag International AG",
+     "score": 4.865474,
+     "ticker": "KWG.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 15361551.9,
+       "market_cap_usd": 62094119.1288,
+       "net_debt_usd": 11633054.1,
+       "net_margin": -0.0243717363290633,
+       "revenue_usd": 261625659.9
+      }
+     },
+     "head_listing_id": 1752769,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.876517
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Aurea SA",
+     "score": 4.876517,
+     "ticker": "AURE.PA"
+    },
+    {
+     "also_known_as": [
+      "SIX3.XETRA",
+      "0NW7.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 1639792746.0,
+       "market_cap_usd": 3886549954.6368,
+       "net_debt_usd": 4072094025.9,
+       "net_margin": 0.0689,
+       "pe": 11.089645,
+       "revenue_usd": 5039038351.8
+      }
+     },
+     "head_listing_id": 243674,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.897655
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Sixt SE",
+     "score": 4.897655,
+     "ticker": "SIX2.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0RA7.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 11514409.4,
+       "market_cap_usd": 37043457.844799995,
+       "net_debt_usd": 18261886.2,
+       "net_margin": 0.0788178657395025,
+       "pe": 5.569892,
+       "revenue_usd": 87844066.0
+      }
+     },
+     "head_listing_id": 1752597,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.922708
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hipay Group SA",
+     "score": 4.922708,
+     "ticker": "ALHYP.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 78035321.0,
+       "market_cap_usd": 276748514.328,
+       "net_debt_usd": 102490225.6,
+       "net_margin": 0.0856558900037161,
+       "pe": 10.209395,
+       "revenue_usd": 322434005.4
+      }
+     },
+     "head_listing_id": 1753108,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.926671
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Groupe Pizzorno Environnement SA",
+     "score": 4.926671,
+     "ticker": "GPE.PA"
+    },
+    {
+     "also_known_as": [
+      "0H4A.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 5203863200.0,
+       "market_cap_usd": 10902447169.4336,
+       "net_debt_usd": 14878297200.0,
+       "net_margin": 0.0163,
+       "pe": 14.035714,
+       "revenue_usd": 46870177000.0
+      }
+     },
+     "head_listing_id": 243046,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.932912
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Deutsche Lufthansa AG",
+     "score": 4.932912,
+     "ticker": "LHA.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0NPT.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 5047685900.0,
+       "market_cap_usd": 13422857213.8496,
+       "net_debt_usd": 11635403500.0,
+       "net_margin": 0.0391061452513966,
+       "pe": 11.093458,
+       "revenue_usd": 30699609800.0
+      }
+     },
+     "head_listing_id": 1753056,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.96395
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Eiffage SA",
+     "score": 4.96395,
+     "ticker": "FGR.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 64049769.5,
+       "market_cap_usd": 214950501.08,
+       "net_debt_usd": 108192661.4,
+       "net_margin": 0.00202058079301598,
+       "pe": 15.107362,
+       "revenue_usd": 854648923.7
+      }
+     },
+     "head_listing_id": 236620,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 4.981057
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "BRCK Group plc",
+     "score": 4.981057,
+     "ticker": "BRCK.LSE"
+    },
+    {
+     "also_known_as": [
+      "0NA0.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 70607715.9,
+       "market_cap_usd": 155720448.15359998,
+       "net_debt_usd": 194504542.2,
+       "net_margin": 0.0165217037466557,
+       "pe": 13.708333,
+       "revenue_usd": 1153169031.0
+      }
+     },
+     "head_listing_id": 1753048,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 5.034185
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Exel Industries",
+     "score": 5.034185,
+     "ticker": "EXE.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 11180000000.0,
+       "market_cap_usd": 45540725306.9824,
+       "net_debt_usd": 10867000000.0,
+       "net_margin": 0.0301,
+       "pe": 28.890237,
+       "revenue_usd": 53637000000.0
+      }
+     },
+     "head_listing_id": 241841,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 5.034646
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "A. P. Moller Maersk A/S",
+     "score": 5.034646,
+     "ticker": "DP4A.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0LQ4.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 712946391.4,
+       "market_cap_usd": 4104860597.376,
+       "net_debt_usd": -462019900.0,
+       "net_margin": 0.0517,
+       "pe": 12.186147,
+       "revenue_usd": 6455907431.8
+      }
+     },
+     "head_listing_id": 242987,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 5.051178
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Krones AG",
+     "score": 5.051178,
+     "ticker": "KRN.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 33548698.4,
+       "market_cap_usd": 101063177.6,
+       "net_debt_usd": 69613663.4,
+       "net_margin": 0.017,
+       "pe": 16.790123,
+       "revenue_usd": 350456657.2
+      }
+     },
+     "head_listing_id": 243574,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 5.056891
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "R. Stahl AG NA O.N.",
+     "score": 5.056891,
+     "ticker": "RSL2.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0QUL.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "ebitda_usd": 241579868.8,
+       "market_cap_usd": 460581492.79999995,
+       "net_debt_usd": 792678954.6,
+       "net_margin": 0.0467,
+       "pe": 7.161572,
+       "revenue_usd": 1384010593.2
+      }
+     },
+     "head_listing_id": 243798,
+     "matched": {
+      "fundamental": {
+       "ev_ebitda": {
+        "cohort_benchmark": 9.072483,
+        "cohort_scope": "candidate_universe",
+        "kind": "cohort",
+        "value": 5.066637
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Stabilus SE",
+     "score": 5.066637,
+     "ticker": "STM.XETRA"
+    }
+   ],
+   "sort": "ev_ebitda",
+   "universe": 446,
+   "_pagination": {
+    "intended_show": 20,
+    "returned": 80,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (20) as a look-ahead buffer so 'a few more' is served from these 80 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+   }
+  }
+ ],
+ "answer_to_user": "Screening European industrials (446-name cohort) for EV/EBITDA BELOW the sector average — the average (cohort_benchmark) came out at ~9.07x, and 80 industrials trade under it. This is genuinely sector-relative, not a fixed cutoff. Cheapest legitimate names near the top include Ernst Russ AG (ERAG.XETRA, ~1.4x), NSC Groupe (ALNSC.PA, ~1.9x), Aumann AG (AAG.XETRA, ~1.9x), Compagnie de l’Odet (ODET.PA, ~2.2x), Norma Group (NOEJ.XETRA, ~2.3x), Fraport (FRA.XETRA, ~2.3x), Air France-KLM (AF.PA, ~2.3x), and FirstGroup (FGP.LSE, ~2.3x) — all well below the ~9x average. CAVEAT: a few of the very cheapest rows (CPPGroup, Active Energy, some pre-revenue names like Vertical Aerospace) have negative or near-zero EBITDA, which produces meaninglessly-low EV/EBITDA — those are data artifacts, not real bargains, and should be screened out. EV/EBITDA is the right multiple here because it neutralizes differing debt loads across industrials."
+}

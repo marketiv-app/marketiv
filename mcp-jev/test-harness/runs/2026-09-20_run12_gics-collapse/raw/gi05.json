@@ -1,0 +1,23 @@
+{
+  "id": "gi05",
+  "question": "find me cheap retail stocks (low P/E)",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "gics": "retail",
+        "fundamental": [
+          {
+            "concept": "pe",
+            "pattern": "low"
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "sort": "pe",
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "Server resolved 'retail' to GICS 3010 (Consumer Staples Distribution & Retail), universe of 228 stocks, found 36 matches. Top cheapest by P/E (sorted ascending): 1) Hyundai C&F Inc (227840.KO, P/E 3.35, mcap $81m), 2) OUG Holdings (8041.JP, P/E 4.54, mcap $159m), 3) Chuo Gyorui (8030.JP, P/E 5.06, mcap $96m), 4) Shineroad International Holdings (1587.HK, P/E 5.58, mcap $48m), 5) Hyundai Green Food (005440.KO, P/E 5.62, mcap $1.3bn), 6) CJ Freshway (051500.KQ, P/E 5.98, mcap $203m), 7) K&K Superstore Southern (KK.BK, P/E 6.19, mcap $96m), 8) Echo Trading (7427.JP, P/E 6.48, mcap $33m), 9) Harima-Kyowa (7444.JP, P/E 7.02, mcap $67m), 10) YAMAE GROUP HOLDINGS (7130.JP, P/E 7.29, mcap $512m). Among these, the largest and most liquid names with still-cheap valuations: YAMAE GROUP (7130.JP, P/E 7.3), Hyundai Green Food (005440.KO, P/E 5.6, mcap $1.3bn), Arata Corporation (2733.JP, P/E 8.5, mcap $599m), Valor Holdings (9956.JP, P/E 10.3, mcap $1.2bn), Amsterdam Commodities (ACOMO.AS, P/E 9.47, mcap $826m — note: food ingredient distributor, classified retail). Most cheap retail names are Japanese food distributors and Korean grocery chains. Note: the gics resolver mapped 'retail' to Consumer Staples Distribution & Retail (3010); for discretionary retail (apparel/department stores) a separate screen with gics='25' would be needed.",
+  "friction": "gics 'retail' resolved to Consumer Staples Distribution & Retail (3010) — discretionary retail would require a different GICS scope. The sort param accepted 'pe' but the schema note says sort ranks the returned buffer (scored by pe ascending), which is what was desired."
+}

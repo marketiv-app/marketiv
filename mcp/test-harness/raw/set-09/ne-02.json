@@ -1,0 +1,435 @@
+{
+  "id": "ne-02",
+  "question": "Why is Nvidia down today? What's the news catalyst?",
+  "tools_called": [
+    {
+      "tool": "stock_impact",
+      "args": {
+        "ticker": "NVDA",
+        "direction": "neg",
+        "window": "7d",
+        "limit": 15
+      },
+      "note": "pull the negative-impact NVDA news items over the last week to find the catalyst"
+    }
+  ],
+  "raw_responses": [
+    [
+      {
+        "title": "KBRA: AI-7 Commitments Surge to $3.2 Trillion",
+        "brief_text": "KBRA released a report on the credit implications of AI infrastructure expansion among the AI-7 companies—Meta, Amazon, Alphabet, Microsoft, NVIDIA, Broadcom, and Oracle—finding that their gross disclosed contractual commitments and contingent support have surged to approximately $3.2 trillion from $575 billion at the end of 2024. The report highlights that these off-balance sheet commitments, including long-term leases, purchase and construction commitments, and cloud capacity agreements, are reshaping the companies' financial risk profiles and reducing future flexibility, despite generally strong balance sheets. Six of the AI-7 maintain traditional lease-adjusted leverage below 1.5x, but the rapid growth in commitments is a concern. KBRA emphasizes that commitments are not economically uniform and should be analyzed separately based on timing, utilization, demand, cancellability, and counterparty performance.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/kbra-releases-research-ai-credit-132400130.html",
+        "publisher": "Business Wire",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "KBRA report highlights $3.2T off-balance sheet commitments reducing financial flexibility for AI-7 including NVIDIA.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T13:24:00+00:00"
+      },
+      {
+        "title": "Nvidia's AI data center market share may drop to 70%",
+        "brief_text": "Moor Insights & Strategy founder Patrick Moorhead predicts Nvidia's AI data center market share could fall from 90% to roughly 70% over the next two years, as the market more than doubles annually. Moorhead identifies Google's TPU as the top taker of unit share, benefiting companies like Broadcom and Marvell, followed by Amazon's Trainium, which underpinned Anthropic's model development. He also expects AMD to gain unit share with its new scale-up architecture, which is more similar to Nvidia's than previous designs. Regarding Bloomberg's report that OpenAI's custom chips with Broadcom outperformed Nvidia's current lineup in testing, Moorhead says he is not surprised, noting the power and performance of non-GPU architectures, but he emphasizes that GPUs offer more flexibility and longevity, while custom designs require frequent updates and cost between 200 and 500 million dollars each. Despite these challenges, Moorhead believes Nvidia's revenue won't be significantly impacted because the market is growing so fast, and in the long term, it will remain primarily a GPU world with custom inference chips for those who roll their own software.",
+        "url": "https://finance.yahoo.com/video/nvidias-ai-data-center-dominance-120000341.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Moorhead predicts Nvidia's AI data center market share could drop from 90% to 70% due to competition from Google TPU, Amazon Trainium, and AMD.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T12:00:00+00:00"
+      },
+      {
+        "title": "Wall Street watches Nvidia's $200 billion credit exposure ahead of Q2 results",
+        "brief_text": "As Nvidia prepares to report second-quarter results after Wednesday's close, Wall Street is focusing on a potential $200 billion in off-balance-sheet credit exposure rather than the expected near-doubling of revenue. BofA analyst Vivek Arya says investors will be watching for disclosure of multi-year commitments to lock down supply, power, models, and demand, noting that quantifying these liabilities would let the market price properly into what he sees as a depressed valuation. Morgan Stanley initiated its first-ever credit coverage of Nvidia with a Neutral rating, warning that the chipmaker's balance-sheet-as-a-service approach introduces risks not captured by conventional leverage ratios, which currently stand at a benign 0.4x. Analyst Lindsay Tyler projected total AI-related credit exposure could approach $200 billion by end-2028, calling the tail too early-stage, opaque, and sizable to step in. This month, Nvidia helped arrange a $500 billion financing platform from six major U.S. financial institutions—Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs, and KKR—for customers building AI infrastructure, and separately agreed to guarantee up to $105 billion to help OpenAI lease a datacenter in Ohio for 20 years. The financing anxiety comes amid rising stress in AI credit markets, with AI hyperscaler debt issuance reaching $220 billion in 2026 through early August, roughly $207 billion higher than the comparable period in 2025, per BNP Paribas data cited by Reuters. On the earnings side, analysts expect Q2 revenue to nearly double year-over-year to $92.18 billion, with Q3 consensus at $104.20 billion, implying an 82.8% gain. Options traders are pricing a 5.4% swing in either direction, implying roughly a $280 billion market-cap move, below the 6.5% implied move heading into May earnings and the 7.4% historical average. Nvidia shares rose 2.2% on Tuesday, snapping a seven-session losing streak.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/forget-nvidia-q2-results-wall-095706023.html",
+        "publisher": "Investing.com",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Wall Street focuses on $200B off-balance-sheet credit exposure, with Morgan Stanley initiating Neutral on credit risks, despite strong earnings expectations.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "analyst_forecast",
+          "analyst_rating"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T09:57:06+00:00"
+      },
+      {
+        "title": "Oil Prices Fall Over 3% as Iran Returns to Talks with Oman",
+        "brief_text": "West Texas Intermediate (WTI) crude for October delivery closed at $82.36 per barrel, down $2.65, or 3.1%, while Brent crude settled at $88.58 per barrel, down $3.59, or 3.9%, hitting a one-week low. Investors overlooked the latest U.S. sanctions on Iran, assessing that economic pressure poses less risk to oil supply than an escalation of military confrontation. Iran stated it has resumed talks with Oman to discuss management of the Strait of Hormuz, with both countries agreeing to jointly conduct temporary mine clearance operations in shipping lanes. Meanwhile, the Chinese government signaled a challenge to Donald Trump regarding economic relations between China and Iran, warning through Lin Jian, spokesperson for China's Ministry of Foreign Affairs, that China will take all necessary measures to protect its national interests. Canadian Prime Minister Mark Carney announced a business aid package worth 7.5 billion Canadian dollars, while retaliating by raising tariffs on U.S. steel and aluminum imports to 50%, covering U.S. exports valued at approximately 20 billion Canadian dollars annually. U.S. Treasury Secretary Scott Bessent's plan to lower borrowing costs by expanding the bond buyback program is already taking effect, with the spread between 30-year government bonds and swaps narrowing to its tightest since February. Richmond Federal Reserve President Tom Barkin warned that the U.S. will face consequences from debt accumulation if public debt continues to rise. OpenAI revealed that its new Jalapeno chip outperforms Nvidia's chips in testing, with plans to begin deployment later this year. Nasscom data indicates that Indian tech companies have reduced their reliance on H-1B visas after increasing hiring in the U.S. Meanwhile, China's IPO market is picking up, but nearly one-third of stocks listed this quarter have fallen more than 50% from their post-listing highs. Barclays raised its price target for Moderna shares to $125 from $48, following encouraging Phase 3 trial results for its melanoma vaccine.",
+        "url": "https://efin.finance/th/stock/news/detail/ZZt0AA",
+        "publisher": "สำนักข่าวอีไฟแนนซ์ไทย",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "OpenAI's Jalapeno chip outperforms Nvidia's chips in testing, posing a competitive threat.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "macro_economic",
+          "geopolitics",
+          "commodity_supply"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-26T00:36:00+00:00"
+      },
+      {
+        "title": "Google May Be Sitting on a $200 Billion AI Opportunity",
+        "brief_text": "Morgan Stanley estimates Google could generate around $200 billion in income tied to its tensor processing units over the next several years. The bank's projection highlights the growing importance of Google's custom AI chips as demand for AI computing surges and companies seek alternatives to Nvidia's GPUs. If more workloads shift to Google's bespoke hardware, TPUs could become a major revenue engine linked to Google Cloud and AI infrastructure, beyond internal cost savings. This would give Alphabet another way to monetize AI growth outside search, advertising, and its Gemini AI. The key uncertainty is how quickly Google can expand TPU adoption beyond its own ecosystem and whether clients will move more workloads to custom chips.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/google-may-sitting-200-billion-195833515.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Google's TPUs are an alternative to Nvidia's GPUs, potentially taking workloads away.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T19:58:33+00:00"
+      },
+      {
+        "title": "Michael Burry Calls Etched Serious Competition for Nvidia",
+        "brief_text": "Michael Burry has called four-year-old AI chip startup Etched \"serious competition\" for Nvidia. Etched just raised $700 million in a Jane Street-led round that valued it at $21 billion, more than double its valuation less than a month earlier, and Reuters says the company has already secured more than $1 billion in customer contracts. Burry cited an industry source who believes Etched could deliver roughly 10 times the performance at lower cost, and about 15% of Etched's 400-plus employees previously worked at Nvidia. Nvidia's latest quarter produced $81.6 billion in revenue, up 85% year over year, including $75.2 billion from data centers, and BofA analyst Vivek Arya recently maintained a $350 target. Etched still has to prove it can manufacture and deploy its systems at Nvidia-like scale, and its performance claims have not yet been independently demonstrated across the enormous range of workloads Nvidia supports.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/michael-burry-says-21-billion-190332718.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Michael Burry calls Etched serious competition for Nvidia, with claims of 10x performance at lower cost.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "product_tech",
+          "analyst_rating"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T19:03:32+00:00"
+      },
+      {
+        "title": "Nvidia employee charged with smuggling advanced chips into China",
+        "brief_text": "An Nvidia employee has been charged in Taiwan with smuggling advanced AI chips into China in the first known indictment of a worker at the US chipmaker over illegal exports. Taiwan's Keelung District Prosecutors' Office charged nine people, including employees of server maker Super Micro Computer, with illegally selling high-end AI servers to Chinese customers. Prosecutors described a Taiwan-based senior manager at Nvidia surnamed Zhang as the central figure in a scheme involving 130 of the chipmaker's flagship B300 servers, of which 74 were ultimately shipped to Chinese customers either directly from Taiwan or routed through Indonesia or Japan, while the remaining 56 were stopped by Taiwan customs officials. They alleged that defendants falsely claimed the servers would be used in a data centre in Taiwan even though its electricity supply and network bandwidth were insufficient to operate them, and that Zhang deliberately concealed that the funds used to purchase the servers actually came from a Chinese company. Prosecutors have requested the statutory maximum sentence of five years in prison for Zhang and three other defendants, while the other five were recommended for shorter terms.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-employee-charged-with-smuggling-advanced-chips-into-china-053111460.html",
+        "publisher": "Financial Times",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "neg",
+              "reason": "Nvidia employee charged with smuggling advanced chips to China, violating export controls.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "regulatory_legal"
+        ],
+        "impact_score": 4,
+        "dup_count": 5,
+        "trend": "Defense & Geopolitical Fragmentation",
+        "trend_id": 22000000,
+        "published_at": "2026-08-25T05:31:11+00:00"
+      },
+      {
+        "title": "Warren Demands Nvidia CEO Testify on Russian Drone Tech",
+        "brief_text": "Senator Elizabeth Warren escalated pressure on Nvidia CEO Jensen Huang after a New York Times report said Nvidia Jetson Orin computers were found inside Russian drones allegedly being tested for autonomous targeting. Warren said if Huang has time for a $1 million-a-head Mar-a-Lago dinner and meetings with President Xi Jinping, he can find time to testify before Congress about reports that Nvidia technology is powering Russia's war machine. Ukrainian investigators found the consumer-grade Jetson Orin computers in wreckage of Russian drones used in attacks around Zaporizhzhia, and one drone equipped with the system reportedly killed three people on July 6. Nvidia said the Jetson line was not sold in Russia and was not designed for military applications, but acknowledged the computers are available through resale markets and it cannot track secondary sales. Nvidia closed at $208.48 on Monday, down 2.91%, and rose 0.20% to $208.90 in after-hours trading.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/elizabeth-warren-says-jensen-huang-042303771.html",
+        "publisher": "Benzinga",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "neg",
+              "reason": "Senator Warren demands Nvidia CEO testify over Russian drone use of Jetson Orin, escalating regulatory scrutiny.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "regulatory_legal",
+          "geopolitics"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T04:23:03+00:00"
+      },
+      {
+        "title": "Nvidia's cheap valuation may be an issue for the stock",
+        "brief_text": "Nvidia's forward price-to-earnings multiple has declined steadily since August 2024 and now stands at 24 times, not far above the S&P 500's 21 times, despite the company being one of the fastest-growing companies in corporate America. JPMorgan analyst Harlan Sur wrote in a note ahead of Nvidia's earnings on Wednesday that he does not expect upside to near-term numbers to serve as a material positive catalyst for the stock, noting revenue guidance has beaten Street consensus by an average of 4% over the past four quarters while the stock has traded down 3% to 5% on average over the subsequent 7 to 30 days. Sur outlined several ways Nvidia could get its stock price rerated, including maintaining market dominance in AI compute, highlighting long-term benefits from recently announced infrastructure funding agreements, and improving the outlook for its stalled China business, where shipments of H200 GPUs could represent an estimated $3 billion of incremental revenue per 100,000 units shipped.",
+        "url": "https://finance.yahoo.com/markets/stocks/article/nvidias-valuation-looks-surprisingly-cheap-heading-into-earnings-could-it-be-an-issue-for-the-stock-191738544.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Analyst notes limited upside catalyst and stock's valuation compression ahead of earnings.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T19:17:38+00:00"
+      },
+      {
+        "title": "Nvidia Faces Growing Competition in Trillion-Dollar AI Chip Market",
+        "brief_text": "Nvidia Corp. is facing increasing competition from rivals, startups, and its own biggest customers as the AI chip market is poised to cross $1 trillion in revenue. Amazon.com Inc. CEO Andy Jassy said in July that if Amazon's semiconductor operation were a standalone business, it would generate annual revenue of more than $25 billion, with sales growing by a percentage in the triple digits. Advanced Micro Devices Inc. saw its data center revenue more than double last quarter to $6.7 billion, while Broadcom Inc. expects to sell $56 billion of AI chips this year. Meanwhile, 150 companies are working on more than 200 different AI semiconductor designs, according to Jon Peddie Research, and AI labs like OpenAI and Anthropic are developing their own chips. Nvidia's earnings report on Wednesday is expected to show revenue nearly doubled last quarter to $92 billion, but some customers have been told that prices of servers containing its AI chips are going up more than 15%.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-trillion-dollar-chip-market-120003930.html",
+        "publisher": "Bloomberg",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Faces growing competition from rivals, startups, and customers developing own chips, while server prices rise over 15%.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "industry_thematic",
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T12:00:03+00:00"
+      },
+      {
+        "title": "World News Summary Today: Iran Tightens Control of the Strait of Hormuz, Uber Fined 825 Million Euros",
+        "brief_text": "Iran's Persian Gulf waterway authority announced that ships violating Iranian regulations while transiting the Strait of Hormuz will face future restrictions on passage. Meanwhile, Andy Burnham, the British Prime Minister, is scheduled to travel to Ukraine today, marking his first foreign visit as British Prime Minister to demonstrate that he will continue to support the diplomatic and military approach toward Ukraine. The latest opinion poll by the Angus Reid Institute shows that a majority of Canadians support the federal government's decision to withdraw from trade negotiations with the United States. The Philippine House of Representatives is drafting measures to completely ban children aged 13 and under from using social media platforms and online games, while also regulating use by young people aged 14 to 17, following a school shooting incident involving a student. New Zealand plans to ban children under 16 from using social media, saying that access to such platforms is damaging the country's younger generation. The Dutch data protection authority has fined Uber, the major US ride-hailing platform, 825 million euros following an investigation into complaints that Uber suspended drivers' accounts through an automated system without adequate advance notice and without human review. Taiwanese prosecutors have ordered charges against nine individuals, including employees of major technology companies such as Nvidia and Super Micro, for illegally smuggling artificial intelligence servers to China. Alibaba Group, the Chinese technology giant, announced a capital raising of 80 billion Hong Kong dollars through a new share issuance to investors outside the United States, with all the funds earmarked for investment in its artificial intelligence business, spanning chips, cloud infrastructure, and AI models. The China National Space Administration revealed that the Chang'e-7 spacecraft cannot be launched within the original timeframe this year because the required readiness conditions have not yet been met. And Vietnam has tightened regulations on contract workers employed abroad after the National Assembly passed an amended law.",
+        "url": "https://infoquest.co.th/2026/636100",
+        "publisher": "InfoQuest",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "neg",
+              "reason": "Taiwanese prosecutors ordered charges against employees of Nvidia for illegally smuggling AI servers to China, implicating the company in regulatory violation.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "geopolitics",
+          "regulatory_legal"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Defense & Geopolitical Fragmentation",
+        "trend_id": 22000000,
+        "published_at": "2026-08-24T09:47:55+00:00"
+      },
+      {
+        "title": "US market shifts away from AI, Moderna stock surges 2.3 times week-over-week",
+        "brief_text": "In the US market, the flow of funds from AI-related stocks to pharmaceutical stocks has strengthened, and shares of biopharmaceutical maker Moderna, which announced positive clinical trial results for a skin cancer vaccine, surged 2.3 times compared with the previous weekend. Merck, a major pharmaceutical company co-developing the cancer vaccine with Moderna, also rose 12.3 percent, with pharmaceutical stocks taking over the market's lead from AI stocks. Last week, stock prices fell sharply, led by AI stocks, due to concerns over rising global long-term interest rates and massive corporate bond issuance by AI companies. This week, Nvidia's earnings are scheduled for the 27th, and Federal Reserve Chair Warsh's speech at the Jackson Hole conference is scheduled for the 28th. Nvidia is expected to post rapid growth in both revenue and profit for the May-July 2026 quarter, nearly doubling year over year, but its stock price has continued to fall after earnings releases due to concerns over circular transactions involving massive loans to customers.",
+        "url": "https://media.rakuten-sec.net/articles/-/53282",
+        "publisher": "トウシル 楽天証券の投資情報メディア",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Concerns over circular transactions involving massive loans to customers; stock fell after earnings.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "earnings_results",
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Biotech & Genomic Medicine",
+        "trend_id": 18000000,
+        "published_at": "2026-08-24T06:00:00+00:00"
+      },
+      {
+        "title": "Hedge funds and mutual funds split on AI trade, Goldman says",
+        "brief_text": "Hedge funds and mutual funds took sharply different approaches to individual AI stocks during the second quarter, according to Goldman Sachs. Hedge funds bought Microsoft and Amazon while mutual funds reduced positions in both, and hedge funds cut exposure to Alphabet, Meta Platforms, Nvidia, Broadcom, Lam Research, Marvell Technology, Cisco Systems, Hewlett Packard Enterprise and Applied Materials. Mutual funds bought Advanced Micro Devices, Micron Technology and Sandisk while hedge funds reduced exposure to those stocks. Goldman identified 12 AI infrastructure stocks purchased by both groups, including American Electric Power, Bloom Energy, CoreWeave, Flex, NiSource, Seagate Technology, Talen Energy and Xcel Energy. The analysis covers 991 hedge funds with $5.4 trillion of gross equity positions and 504 large-cap active mutual funds with $4.6 trillion in equity assets.",
+        "url": "https://seekingalpha.com/news/4636064-hedge-funds-and-mutual-funds-split-on-the-ai-trade-goldman?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+        "publisher": "Seeking Alpha",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Hedge funds cut exposure to Nvidia during Q2.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-23T18:31:24+00:00"
+      },
+      {
+        "title": "Nvidia customers face over 15% server price hikes as memory costs soar",
+        "brief_text": "Nvidia customers are facing server price increases of more than 15% as memory chip costs surge, according to a Bloomberg News report citing people familiar with the matter. The higher prices are expected to apply to systems shipped early next year, including those equipped with Nvidia's flagship Vera Rubin and Grace Blackwell chips, with the size of the increase varying by chip generation and memory configuration. Contract server builders for major data center operators such as Microsoft, Alphabet's Google, and Oracle have recently notified customers of the upcoming price hikes. Memory chipmakers Samsung Electronics, SK Hynix, and Micron Technology have gained unprecedented leverage amid booming AI infrastructure demand, as they account for most of the world's DRAM production. The report also notes that major technology companies including Apple and Qualcomm have recently said they have been forced to raise prices because of chip shortages, while Nvidia has also raised prices for its gaming-oriented PC graphics cards.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-customers-face-over-15-211744754.html",
+        "publisher": "Investing.com",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "supply",
+              "direction": "neg",
+              "reason": "Nvidia customers face over 15% server price hikes due to memory cost surge, impacting Nvidia's systems.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech",
+          "commodity_supply"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-22T21:17:44+00:00"
+      },
+      {
+        "title": "Amazon's custom chip business crosses $25 billion annual run rate",
+        "brief_text": "Amazon's custom AI chip business has crossed a $25 billion annual run rate, driven by triple-digit growth in demand for its purpose-built processors. The company's Trainium2 chips offer about 30% better price-performance than GPUs, and Trainium3, which became available at the start of 2026, sold out a few months ago. Amazon also noted that a large chunk of capacity for its upcoming Trainium4 chips, launching in 2027 or 2028, has already been reserved. The strong demand positions Amazon Web Services as a go-to platform for building and training AI models.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/amazons-custom-chip-business-crossed-185300891.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Amazon's Trainium2 offers 30% better price-performance than GPUs, challenging NVIDIA's dominance.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-22T18:53:00+00:00"
+      }
+    ]
+  ],
+  "answer_to_user": "There isn't one single crash headline — NVIDIA has been under a cluster of overlapping negative catalysts in the days into its Q2 earnings (due Wed after the close). The most concrete recent negative items:\n\n- Valuation / positioning ahead of earnings (Aug 24): JPMorgan's Harlan Sur notes NVDA's forward P/E has compressed to ~24x and he doesn't expect near-term numbers to be a material positive catalyst; the stock has historically traded down 3-5% in the 7-30 days after beats. A separate Yahoo piece frames the 'cheap valuation' itself as an overhang.\n- Credit / financing worry (Aug 26): Wall Street is fixated on ~$200B of off-balance-sheet AI credit exposure; Morgan Stanley initiated credit coverage at Neutral, warning its 'balance-sheet-as-a-service' approach carries risks not captured by conventional leverage. A KBRA report flags $3.2T in AI-7 contractual commitments reducing flexibility.\n- Competition (Aug 24-26): Bloomberg and others report growing competition as the AI-chip market crosses $1T — Google TPUs (Morgan Stanley sees a ~$200B opportunity), Amazon Trainium ($25B run-rate), OpenAI's custom 'Jalapeno' chip reportedly outperforming NVDA in testing, and Michael Burry calling startup Etched 'serious competition.' Moor Insights projects NVDA data-center share falling from ~90% to ~70%.\n- Regulatory / geopolitical (Aug 25): an NVIDIA employee was charged in Taiwan with smuggling B300 servers into China; Sen. Warren demanded Jensen Huang testify over Jetson Orin chips found in Russian drones.\n- Supply/pricing (Aug 22): customers face >15% server price hikes on soaring memory costs.\n\nSo the 'why down' is a pre-earnings de-rating narrative — valuation-compression + circular-financing/credit anxiety + intensifying custom-silicon competition + regulatory noise — rather than a single event. Note one item shows NVDA actually rose 2.2% on Tuesday, snapping a seven-session losing streak, so the weakness is a multi-day drift, not necessarily a one-day plunge. (Sentiment framing is drawn entirely from these dated news items.)"
+}

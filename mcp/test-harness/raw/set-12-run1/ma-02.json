@@ -1,0 +1,23 @@
+{
+  "id": "ma-02",
+  "question": "Which cryptocurrencies just had a bullish MACD crossover?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["MACD bullish crossover MACD line crosses above signal"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}],
+        "timeframe": 1,
+        "window_bars": 10
+      }
+    }
+  ],
+  "result_summary": "count>=40 (capped floor), universe=2154 crypto assets. Signal label in response: 'macd_x_signal_up'. Top results: BNSD-USD.CC (crossover 2026-08-28, RSI 95), LQTY-USD.CC (2026-08-21, RSI 64), ATLAS-USD.CC, FLIX-USD.CC, GOAT33440-USD.CC, JAM-USD.CC, DMTR-USD.CC, ENA-USD.CC. All tickers are .CC crypto format.",
+  "verdict": "PASS",
+  "reason": "Returns crypto-only assets (.CC suffix confirmed), MACD crossover correctly mapped to macd_line crossing above macd_signal (bullish crossover_up). No stocks or forex contamination.",
+  "defects": []
+}

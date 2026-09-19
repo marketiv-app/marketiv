@@ -1,0 +1,35 @@
+{
+  "id": "tn-05",
+  "question": "Show me stocks that dropped a lot lately but the company is actually fine — like still growing revenue and not overpriced. Kinda looking for a dip to buy.",
+  "tool_calls": [
+    {
+      "tool": "find_fsconcept",
+      "args": {"queries": ["revenue growth", "pe ratio"]}
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {"q": "revenue growing"}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.15", "window_bars": 60}]}],
+        "fundamental": [
+          {"concept": "revenue", "pattern": "consecutive_growth", "N": 2},
+          {"concept": "pe", "pattern": "below_average"}
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 12
+      }
+    }
+  ],
+  "result_summary": "48 results. Top: ACIC.US (American Coastal Insurance, -16.5% drop, revenue grew 13%/12.4% 2 yrs, PE 4.68 vs sector avg 18.27). Combines price drop (>=15% over 60 days) + consecutive revenue growth 2yr + PE below sector average. Both legs confirmed in matched field. Required 2 tool calls to find correct pattern names first — 'revenue' and 'revenue_growth' as bare concepts rejected with helpful error message.",
+  "verdict": "PASS",
+  "reason": "Successfully returns stocks with meaningful price drops + fundamental health (revenue growth + cheap valuation). Both legs matched. Required resolver tools first but worked correctly.",
+  "defects": [
+    {
+      "desc": "First two attempts using 'revenue' and 'revenue_growth' as screener concept failed with error saying those fields cannot be screened directly. The error message IS helpful (suggests compound_growth pattern), but a naive client might not know to use concept='revenue' with pattern='consecutive_growth' vs concept='revenue_growth'. The distinction between screeenable growth-pattern vs raw line-item is not obvious from tool descriptions alone.",
+      "side": "server"
+    }
+  ]
+}

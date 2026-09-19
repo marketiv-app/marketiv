@@ -1,0 +1,23 @@
+{
+  "id": "gi01",
+  "question": "screen for biotech stocks with return on equity above 15%",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "gics": "biotech",
+        "fundamental": [
+          {
+            "concept": "return on equity",
+            "pattern": "above",
+            "threshold": 0.15
+          }
+        ],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    }
+  ],
+  "answer": "Found 60 biotech stocks with ROE above 15% (results capped at buffer). Top names by market cap: AbbVie (ABBV.US, ROE 153.7, mcap $465bn, P/E 71), Amgen (AMGN.US, ROE 74.8%, mcap $238bn, P/E 26), Novo Nordisk (NOV.XETRA / NVO.US, ROE 52.6%, mcap $212bn, P/E 11), Vertex Pharmaceuticals (VRTX.US, ROE 21.8%, mcap $139bn, P/E 31), Samsung Biologics (207940.KO, ROE 23.7%, mcap $52bn), Alnylam Pharmaceuticals (ALNY.US, ROE 59.7%, mcap $32bn), Incyte (INCY.US, ROE 25.4%, mcap $26bn), United Therapeutics (UTHR.US, ROE 20.5%, mcap $22bn), Neurocrine Biosciences (NBIX.US, ROE 19.1%, mcap $16bn). Server resolved 'biotech' to GICS 352010.",
+  "friction": "none"
+}

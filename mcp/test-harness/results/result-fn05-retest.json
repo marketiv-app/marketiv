@@ -1,0 +1,16 @@
+{
+  "tool": "screen_dividends",
+  "args_sent": {
+    "country": "TH",
+    "min_yield": 3,
+    "min_streak_years": 10,
+    "order_by": "streak",
+    "limit": 20
+  },
+  "min_streak_years_chosen": 10,
+  "why_that_streak": "The schema says min_streak_years caps at 10 (= a clean no-cut record across the whole tracked decade incl. the 2020 & 2022 stress) and that 'the stronger the safe / stable / hold-for-years intent, the closer to the cap you should set it' — the user's intent (mankong = stable, worth holding long-term) is exactly that strong intent, so I set it at the 10 cap.",
+  "count": 2,
+  "results_tickers": ["KTC.BK", "KTC-R.BK"],
+  "any_recent_cut": "No recent cut among the returned names — both KTC.BK and KTC-R.BK report last_cut_year=null (no cut in the tracked 10-year window, no_cut_streak_yrs=10). (For context, relaxing the streak to 8 surfaces AKR.BK and TTW.BK, whose last_cut_year=2017 — ~9 years ago, still not recent — plus HUMAN.BK with no cut; none within the last ~4 years.)",
+  "answer_to_user": "ถ้าเน้น 'มั่นคง ปันผลดี ถือยาว' แบบเข้มจริง ๆ หุ้นไทยที่ผ่านเกณฑ์เข้มสุด (ปันผล >3% + ไม่เคยตัดปันผลตลอด 10 ปีที่เก็บข้อมูล รวมช่วงวิกฤต 2020 และ 2022) มีจริงเพียงบริษัทเดียว: KTC — บมจ. บัตรกรุงไทย (KTC.BK; KTC-R.BK คือกระดานต่างชาติของตัวเดียวกัน). จุดเด่น: ปันผลปัจจุบัน (forward) ~5.4-5.5%, จ่ายต่อเนื่องไม่เคยตัดตลอดทั้งทศวรรษ (streak เต็มเพดาน 10 ปี), เงินปันผลยังโตต่อเนื่อง (CAGR 5 ปี ~8.4%, ปันผล TTM +34% YoY), PE ~11.9 เท่า, กระแสข่าวเป็นบวก (บริษัทตั้งเป้ากำไรทำสถิติปี 2026). ข้อควรรู้: เกณฑ์ streak 10 ปีนี้เข้มมากจนหุ้นไทยเหลือรอดน้อย — ถ้าผ่อนเกณฑ์ลงเป็น 'ไม่ตัดปันผลอย่างน้อย 8 ปี' จะเจอตัวเลือกเพิ่ม เช่น TTW (ปันผล ~6.4%, สาธารณูปโภคน้ำ), HUMAN (~6.9%), AKR (~7.3%) โดย TTW และ AKR เคยตัดปันผลครั้งสุดท้ายราวปี 2017 (นานพอควร ไม่ใช่ช่วง 4 ปีล่าสุด). สรุป: ตัวที่ 'มั่นคงสุด' ตามข้อมูลคือ KTC ส่วนถ้าอยากกระจายพอร์ตปันผลไทยเพิ่ม ให้พิจารณา TTW/HUMAN/AKR ประกอบ. (มุมมองเชิงข้อมูล ไม่ใช่คำแนะนำการลงทุน)"
+}

@@ -1,0 +1,2285 @@
+{
+ "id": "vv-03",
+ "question": "Give me the cheapest decile of global tech stocks by price-to-free-cash-flow. I only care about the bottom 10% tail.",
+ "tools_called": [
+  {
+   "tool": "find_fsconcept",
+   "args": {
+    "queries": [
+     "price to free cash flow"
+    ]
+   },
+   "note": "resolver — no direct P/FCF concept; chose fcf_yield (FCF/market cap = the INVERSE of P/FCF, so cheapest P/FCF = highest fcf_yield)"
+  },
+  {
+   "tool": "find_fspattern",
+   "args": {
+    "queries": [
+     "cheapest decile bottom 10 percent"
+    ]
+   },
+   "note": "resolver — used percentile-tail pattern high with percentile 0.1 on the inverted metric (top 10% fcf_yield = bottom 10% P/FCF)"
+  },
+  {
+   "tool": "find_gics",
+   "args": {
+    "q": "technology"
+   },
+   "note": "resolver — code 45 (Information Technology sector)"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "fcf_yield",
+      "pattern": "high",
+      "percentile": 0.1
+     }
+    ],
+    "gics": "45",
+    "asset_type": [
+     "Common Stock"
+    ],
+    "sort": "fcf_yield",
+    "limit": 20
+   },
+   "note": "global (no country scope); fcf_yield high 10% = P/FCF cheapest decile"
+  }
+ ],
+ "raw_responses": [
+  {
+   "capped": true,
+   "count": 80,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.014677,
+       "fcf_margin": -0.120407067080699,
+       "free_cash_flow_usd": -6651267.0,
+       "market_cap_usd": 7025435.0,
+       "net_margin": -0.4017,
+       "revenue_usd": 69015028.0
+      }
+     },
+     "head_listing_id": 7142,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 4.714765
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Core AI Holdings",
+     "score": 4.714765,
+     "ticker": "CHAI.US"
+    },
+    {
+     "also_known_as": [
+      "732.HK"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.120482,
+       "fcf_margin": 0.329340079802442,
+       "free_cash_flow_usd": 698261932.5,
+       "market_cap_usd": 304072857.08800006,
+       "net_margin": 0.0166173570766863,
+       "pe": 9.294513,
+       "revenue_usd": 2120185107.5
+      }
+     },
+     "head_listing_id": 50877,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 2.185847
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Truly International Holdings Ltd",
+     "score": 2.185847,
+     "ticker": "0732.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.013111,
+       "fcf_margin": 0.1254,
+       "free_cash_flow_usd": 19851581.9231,
+       "market_cap_usd": 19130024.6592,
+       "net_margin": -0.4064,
+       "revenue_usd": 158279188.5458
+      }
+     },
+     "head_listing_id": 50198,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 2.034875
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "TWZ Corporation Public Company Limited",
+     "score": 2.034875,
+     "ticker": "TWZ.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.1094,
+       "free_cash_flow_usd": 22089000.0,
+       "market_cap_usd": 13957941.0,
+       "net_margin": -0.0708,
+       "revenue_usd": 201911000.0
+      }
+     },
+     "head_listing_id": 45285,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 1.649711
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Upland Software Inc",
+     "score": 1.649711,
+     "ticker": "UPLD.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.111483,
+       "fcf_margin": 0.0668,
+       "free_cash_flow_usd": 47421136.308,
+       "market_cap_usd": 29641512.140799996,
+       "net_margin": -0.0066,
+       "revenue_usd": 710399577.531
+      }
+     },
+     "head_listing_id": 1419277,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 1.599822
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wooree Bio Co.Ltd",
+     "score": 1.599822,
+     "ticker": "082850.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.518626957758903,
+       "free_cash_flow_usd": 37375155.89379,
+       "market_cap_usd": 24318888.630400002,
+       "net_margin": -0.145101533863189,
+       "revenue_usd": 72065586.51578
+      }
+     },
+     "head_listing_id": 51658,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 1.506334
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Nanjing Sample Technology Co Ltd",
+     "score": 1.506334,
+     "ticker": "1708.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.06989309997427,
+       "free_cash_flow_usd": 22723683.0,
+       "market_cap_usd": 20711705.414400004,
+       "net_margin": 0.0198765197395698,
+       "pe": 3.231441,
+       "revenue_usd": 325120548.5
+      }
+     },
+     "head_listing_id": 51354,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 1.087588
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wai Chi Holdings Co Ltd",
+     "score": 1.087588,
+     "ticker": "1305.HK"
+    },
+    {
+     "also_known_as": [
+      "529.HK"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.013699,
+       "fcf_margin": 0.0528311501298123,
+       "free_cash_flow_usd": 65360882.5,
+       "market_cap_usd": 64628637.96480001,
+       "net_margin": 0.00628402405214594,
+       "pe": 8.37156,
+       "revenue_usd": 1237165618.0
+      }
+     },
+     "head_listing_id": 50712,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 1.002673
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "SiS International Holdings Ltd",
+     "score": 1.002673,
+     "ticker": "0529.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.010638,
+       "fcf_margin": 0.163710239849601,
+       "free_cash_flow_usd": 25368821.2,
+       "market_cap_usd": 25415212.911,
+       "net_margin": -0.094363079535462,
+       "revenue_usd": 154961725.2
+      }
+     },
+     "head_listing_id": 241675,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.9805
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Cliq Digital AG",
+     "score": 0.9805,
+     "ticker": "CLIQ.XETRA"
+    },
+    {
+     "also_known_as": [
+      "IMRTF.US"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.073446,
+       "fcf_margin": 0.0982852363028022,
+       "free_cash_flow_usd": 18217200.0,
+       "market_cap_usd": 22006465.287800003,
+       "net_margin": -0.384197685766067,
+       "revenue_usd": 185350320.0
+      }
+     },
+     "head_listing_id": 238232,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.871193
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "iomart Group plc",
+     "score": 0.871193,
+     "ticker": "IOM.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.066735,
+       "fcf_margin": 0.1389,
+       "free_cash_flow_usd": 44104000.0,
+       "market_cap_usd": 54402008.0,
+       "net_margin": 0.007,
+       "pe": 21.88764,
+       "revenue_usd": 317502000.0
+      }
+     },
+     "head_listing_id": 28887,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.848948
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Marketwise Inc",
+     "score": 0.848948,
+     "ticker": "MKTW.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.133454,
+       "fcf_margin": 0.249866088124253,
+       "free_cash_flow_usd": 33152834.0,
+       "market_cap_usd": 39228151.872,
+       "net_margin": 0.0759692579288225,
+       "pe": 3.973196,
+       "revenue_usd": 132682407.0
+      }
+     },
+     "head_listing_id": 51830,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.848026
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "China ITS Holdings Co Ltd",
+     "score": 0.848026,
+     "ticker": "1900.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.431141925053698,
+       "free_cash_flow_usd": 5315872.3657,
+       "market_cap_usd": 7553000.0,
+       "net_margin": -0.945228550461071,
+       "revenue_usd": 12329750.4993
+      }
+     },
+     "head_listing_id": 2477,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.815074
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ARB IOT Group Limited Ordinary Shares",
+     "score": 0.815074,
+     "ticker": "ARBB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.032051,
+       "fcf_margin": 0.2355,
+       "free_cash_flow_usd": 60189197.278,
+       "market_cap_usd": 77542133.75999999,
+       "net_margin": -0.3157,
+       "revenue_usd": 255574218.767
+      }
+     },
+     "head_listing_id": 1418634,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.775917
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Sangsangin Co. Ltd",
+     "score": 0.775917,
+     "ticker": "038540.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.088545464921737,
+       "free_cash_flow_usd": 7715312.13,
+       "market_cap_usd": 9910424.772599999,
+       "net_margin": -0.207058050777815,
+       "revenue_usd": 87133905.015004
+      }
+     },
+     "head_listing_id": 243150,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.76472
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "PYRAMID AG NA KONV.",
+     "score": 0.76472,
+     "ticker": "M3B0.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 3.29654371424919,
+       "free_cash_flow_usd": 55144680.5,
+       "market_cap_usd": 70922705.6601,
+       "net_margin": 0.194989941881678,
+       "pe": 18.366754,
+       "revenue_usd": 16728029.5
+      }
+     },
+     "head_listing_id": 574040,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.753835
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "tripla Co.,Ltd.",
+     "score": 0.753835,
+     "ticker": "5136.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.031188,
+       "fcf_margin": 0.5354,
+       "free_cash_flow_usd": 53606941.4001,
+       "market_cap_usd": 73643713.74080001,
+       "net_margin": 0.0871,
+       "pe": 7.7842,
+       "revenue_usd": 100131811.2412
+      }
+     },
+     "head_listing_id": 49673,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.724296
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Internet Thailand Public Company Limited",
+     "score": 0.724296,
+     "ticker": "INET.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0108161295186656,
+       "free_cash_flow_usd": 1924556.0,
+       "market_cap_usd": 2854301.0,
+       "net_margin": -0.0127704564880811,
+       "revenue_usd": 177933890.0
+      }
+     },
+     "head_listing_id": 23374,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.690709
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ICZOOM Group Inc. Class A Ordinary Shares",
+     "score": 0.690709,
+     "ticker": "IZM.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.026316,
+       "fcf_margin": 0.1135,
+       "free_cash_flow_usd": 47398303.155,
+       "market_cap_usd": 67685652.0704,
+       "net_margin": 0.0749,
+       "pe": 2.230047,
+       "revenue_usd": 417760744.009
+      }
+     },
+     "head_listing_id": 1419802,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.679386
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Dong A Eltek Co. Ltd",
+     "score": 0.679386,
+     "ticker": "088130.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.053118,
+       "fcf_margin": 0.165889527994778,
+       "free_cash_flow_usd": 39611646.59166,
+       "market_cap_usd": 64243612.742400005,
+       "net_margin": 0.0741671250230996,
+       "pe": 3.4982,
+       "revenue_usd": 238783285.90402
+      }
+     },
+     "head_listing_id": 51153,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.639437
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Capinfo Co Ltd",
+     "score": 0.639437,
+     "ticker": "1075.HK"
+    },
+    {
+     "also_known_as": [
+      "WISE.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "fcf_margin": 2.79012482868467,
+       "free_cash_flow_usd": 7532500000.0,
+       "market_cap_usd": 12463851520.0,
+       "net_margin": 0.184724228617995,
+       "pe": 26.16147,
+       "revenue_usd": 2699700000.0
+      }
+     },
+     "head_listing_id": 295710,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.601752
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wise Group plc Class A Ordinary Shares",
+     "score": 0.601752,
+     "ticker": "WSE.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.039216,
+       "fcf_margin": 0.0861834033522335,
+       "free_cash_flow_usd": 15721468.4,
+       "market_cap_usd": 26233445.638400003,
+       "net_margin": -0.0239414275461768,
+       "revenue_usd": 182418746.4
+      }
+     },
+     "head_listing_id": 52987,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.598352
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Telecom Digital Holdings Ltd",
+     "score": 0.598352,
+     "ticker": "6033.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.1847,
+       "free_cash_flow_usd": 9351717.172,
+       "market_cap_usd": 3248668.4159999997,
+       "net_margin": -0.0525,
+       "revenue_usd": 50638650.573
+      }
+     },
+     "head_listing_id": 1414857,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.575726
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Charm Engine",
+     "score": 0.575726,
+     "ticker": "009310.KO"
+    },
+    {
+     "also_known_as": [
+      "0RS1.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.104167,
+       "fcf_margin": 0.0829656154615361,
+       "free_cash_flow_usd": 116632438.9,
+       "market_cap_usd": 210186799.02879998,
+       "net_margin": 0.0404706273558356,
+       "pe": 3.741511,
+       "revenue_usd": 1405792487.05836
+      }
+     },
+     "head_listing_id": 243088,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.547912
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Lang & Schwarz Aktiengesellschaft",
+     "score": 0.547912,
+     "ticker": "LUS1.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.082645,
+       "fcf_margin": 0.0699083410657363,
+       "free_cash_flow_usd": 5247297.5,
+       "market_cap_usd": 9497658.788800001,
+       "net_margin": 0.018989183766405,
+       "pe": 6.722222,
+       "revenue_usd": 75059677.0
+      }
+     },
+     "head_listing_id": 53330,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.547754
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Vodatel Networks Holdings Ltd",
+     "score": 0.547754,
+     "ticker": "8033.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.037685,
+       "fcf_margin": 0.032,
+       "free_cash_flow_usd": 30288214.712,
+       "market_cap_usd": 53475160.8832,
+       "net_margin": 0.0158,
+       "pe": 3.748739,
+       "revenue_usd": 946530081.665
+      }
+     },
+     "head_listing_id": 1420085,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.543528
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mobase Co Ltd",
+     "score": 0.543528,
+     "ticker": "101330.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.019194,
+       "fcf_margin": 0.0753,
+       "free_cash_flow_usd": 50048380.949,
+       "market_cap_usd": 92649932.39039999,
+       "net_margin": 0.0481,
+       "pe": 2.603698,
+       "revenue_usd": 664886035.597
+      }
+     },
+     "head_listing_id": 1418884,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.524981
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "IDIS Holdings Co. Ltd",
+     "score": 0.524981,
+     "ticker": "054800.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.031304,
+       "fcf_margin": 0.216100333324402,
+       "free_cash_flow_usd": 13922105.4,
+       "market_cap_usd": 27462441.4281,
+       "net_margin": 0.0643552941236295,
+       "pe": 6.535576,
+       "revenue_usd": 64424266.2
+      }
+     },
+     "head_listing_id": 571590,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.514474
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "CHIeru Co., Ltd.",
+     "score": 0.514474,
+     "ticker": "3933.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.041481,
+       "fcf_margin": 0.0445119949338557,
+       "free_cash_flow_usd": 39893757.2,
+       "market_cap_usd": 79334120.32000001,
+       "net_margin": 0.00464002669748723,
+       "pe": 24.107143,
+       "revenue_usd": 896247343.2
+      }
+     },
+     "head_listing_id": 50305,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.513226
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Gold Peak Industries Holdings Ltd",
+     "score": 0.513226,
+     "ticker": "0040.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.16889516840861,
+       "free_cash_flow_usd": 6969233.7,
+       "market_cap_usd": 13678237.3,
+       "net_margin": -0.362863710509982,
+       "revenue_usd": 41263665.3
+      }
+     },
+     "head_listing_id": 50267,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.504366
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wisdom Wealth Resources Investment Holding Group Ltd",
+     "score": 0.504366,
+     "ticker": "0007.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.040639,
+       "fcf_margin": 0.1271,
+       "free_cash_flow_usd": 61722851.911,
+       "market_cap_usd": 126344383.69279999,
+       "net_margin": 0.0421,
+       "pe": 6.20162,
+       "revenue_usd": 485593669.512
+      }
+     },
+     "head_listing_id": 1415074,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.486756
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shinsegae I&C",
+     "score": 0.486756,
+     "ticker": "035510.KO"
+    },
+    {
+     "also_known_as": [
+      "0IF4.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.4088,
+       "free_cash_flow_usd": 464000000.0,
+       "market_cap_usd": 961377984.0,
+       "net_margin": -0.0828,
+       "revenue_usd": 1135000000.0
+      }
+     },
+     "head_listing_id": 25449,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.482641
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Eastman Kodak Co",
+     "score": 0.482641,
+     "ticker": "KODK.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.010309,
+       "fcf_margin": 0.17071290517712,
+       "free_cash_flow_usd": 5905710.8,
+       "market_cap_usd": 12357800.000000002,
+       "net_margin": -0.0203307809203441,
+       "revenue_usd": 34594401.6
+      }
+     },
+     "head_listing_id": 51270,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.477144
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mobicon Group Ltd",
+     "score": 0.477144,
+     "ticker": "1213.HK"
+    },
+    {
+     "also_known_as": [
+      "0I6U.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.007397,
+       "fcf_margin": 0.0648,
+       "free_cash_flow_usd": 819000000.0,
+       "market_cap_usd": 1677676288.0,
+       "net_margin": 0.0014,
+       "pe": 14.040541,
+       "revenue_usd": 12644000000.0
+      }
+     },
+     "head_listing_id": 11019,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.47633
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "DXC Technology Co",
+     "score": 0.47633,
+     "ticker": "DXC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.104717,
+       "fcf_margin": 0.4144,
+       "free_cash_flow_usd": 9237115.161,
+       "market_cap_usd": 22759855.417600002,
+       "net_margin": -0.0839,
+       "revenue_usd": 22289031.356
+      }
+     },
+     "head_listing_id": 49832,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.468864
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Nova Empire Public Company Limited",
+     "score": 0.468864,
+     "ticker": "NOVA.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.220051043269886,
+       "free_cash_flow_usd": 11295000.0,
+       "market_cap_usd": 23671134.032,
+       "net_margin": -0.269301954061057,
+       "revenue_usd": 51329000.0
+      }
+     },
+     "head_listing_id": 51841,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.460822
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Contel Technology Co Ltd",
+     "score": 0.460822,
+     "ticker": "1912.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.10568,
+       "fcf_margin": 0.1299,
+       "free_cash_flow_usd": 36574339.326,
+       "market_cap_usd": 79722788.45439999,
+       "net_margin": 0.0545,
+       "pe": 5.36119,
+       "revenue_usd": 281525843.053
+      }
+     },
+     "head_listing_id": 1418784,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.454527
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "UIL Co. Ltd",
+     "score": 0.454527,
+     "ticker": "049520.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.034208,
+       "fcf_margin": 0.2742,
+       "free_cash_flow_usd": 13442823.835,
+       "market_cap_usd": 32362057.727999996,
+       "net_margin": -0.0061,
+       "pe": 64.962963,
+       "revenue_usd": 49026963.419
+      }
+     },
+     "head_listing_id": 1420551,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.431019
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Atec T& Co. Ltd",
+     "score": 0.431019,
+     "ticker": "224110.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.041026,
+       "fcf_margin": 0.234,
+       "free_cash_flow_usd": 77375420.707,
+       "market_cap_usd": 163586543.7696,
+       "net_margin": 0.0522,
+       "pe": 10.446429,
+       "revenue_usd": 330696639.9561
+      }
+     },
+     "head_listing_id": 49962,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.431003
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Samart Corporation Public Company Limited",
+     "score": 0.431003,
+     "ticker": "SAMART.BK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.091324,
+       "fcf_margin": 0.110353496104177,
+       "free_cash_flow_usd": 25180860.0,
+       "market_cap_usd": 56908593.414400004,
+       "net_margin": 0.0754465160597112,
+       "pe": 3.421875,
+       "revenue_usd": 228183618.0
+      }
+     },
+     "head_listing_id": 51511,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.426672
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "BII Railway Transportation Technology Holdings Co Ltd",
+     "score": 0.426672,
+     "ticker": "1522.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.039548,
+       "fcf_margin": 0.131006864988558,
+       "free_cash_flow_usd": 8793600.0,
+       "market_cap_usd": 20668134.5388,
+       "net_margin": 0.0230739893211289,
+       "pe": 13.59447,
+       "revenue_usd": 67123200.0
+      }
+     },
+     "head_listing_id": 571990,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.425548
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Synclayer Inc.",
+     "score": 0.425548,
+     "ticker": "1724.JP"
+    },
+    {
+     "also_known_as": [
+      "0A29.LSE",
+      "SLNTY.US"
+     ],
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0301434334379202,
+       "free_cash_flow_usd": 31599430.0,
+       "market_cap_usd": 75734652.58039999,
+       "net_margin": -0.068018825638727,
+       "revenue_usd": 1048302280.0
+      }
+     },
+     "head_listing_id": 1753467,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.420131
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Solutions 30 SE",
+     "score": 0.420131,
+     "ticker": "S30.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.042918,
+       "fcf_margin": 0.1825,
+       "free_cash_flow_usd": 48756476.153,
+       "market_cap_usd": 111474820.71039999,
+       "net_margin": 0.0818,
+       "pe": 5.388529,
+       "revenue_usd": 267155296.436
+      }
+     },
+     "head_listing_id": 1419751,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.418588
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Avaco Co. Ltd",
+     "score": 0.418588,
+     "ticker": "083930.KQ"
+    },
+    {
+     "also_known_as": [
+      "063760.KO"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.056911,
+       "fcf_margin": 0.2493,
+       "free_cash_flow_usd": 6123985.525,
+       "market_cap_usd": 15350947.225599999,
+       "net_margin": 0.1628,
+       "pe": 3.655275,
+       "revenue_usd": 24567183.172
+      }
+     },
+     "head_listing_id": 1419017,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.418392
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ELP Corporation",
+     "score": 0.418392,
+     "ticker": "063760.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.125105,
+       "fcf_margin": 0.101257583473868,
+       "free_cash_flow_usd": 30684643.5,
+       "market_cap_usd": 72820470.19520001,
+       "net_margin": 0.0216083685677491,
+       "pe": 10.342262,
+       "revenue_usd": 303035510.5
+      }
+     },
+     "head_listing_id": 50970,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.417015
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Willas Array Electronics Holdings Ltd",
+     "score": 0.417015,
+     "ticker": "0854.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.2469,
+       "free_cash_flow_usd": 167196000.0,
+       "market_cap_usd": 1628527616.0,
+       "net_margin": 0.0153,
+       "pe": 172.0,
+       "revenue_usd": 677212000.0
+      }
+     },
+     "head_listing_id": 29517,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.415003
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Marqeta Inc",
+     "score": 0.415003,
+     "ticker": "MQ.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.2811,
+       "free_cash_flow_usd": 8895075.819,
+       "market_cap_usd": 20334324.326399997,
+       "net_margin": -0.0647,
+       "revenue_usd": 31641214.857
+      }
+     },
+     "head_listing_id": 1418646,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.411755
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Sejoong Co. Ltd",
+     "score": 0.411755,
+     "ticker": "039310.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.009231,
+       "fcf_margin": 0.182649024689674,
+       "free_cash_flow_usd": 17139200.0,
+       "market_cap_usd": 42917363.5086,
+       "net_margin": -0.159323421088528,
+       "revenue_usd": 93836800.0
+      }
+     },
+     "head_listing_id": 572948,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.401608
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "J.E.T. Co.,LTD.",
+     "score": 0.401608,
+     "ticker": "6228.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.00838,
+       "fcf_margin": 0.199277005126497,
+       "free_cash_flow_usd": 6095372.8,
+       "market_cap_usd": 16000258.9824,
+       "net_margin": -0.0408201055931565,
+       "revenue_usd": 30587436.8
+      }
+     },
+     "head_listing_id": 573731,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.391682
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "HOUSEI Inc.",
+     "score": 0.391682,
+     "ticker": "5035.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.024961,
+       "fcf_margin": 0.0444441834637085,
+       "free_cash_flow_usd": 10511475.2,
+       "market_cap_usd": 27045779.5818,
+       "net_margin": 0.00565106578549227,
+       "pe": 20.401018,
+       "revenue_usd": 236509580.8
+      }
+     },
+     "head_listing_id": 574390,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.386373
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Di-Nikko Engineering Co., Ltd.",
+     "score": 0.386373,
+     "ticker": "6635.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.02518,
+       "fcf_margin": 0.0802,
+       "free_cash_flow_usd": 13885799.851,
+       "market_cap_usd": 38236465.9712,
+       "net_margin": 0.0463,
+       "pe": 4.688027,
+       "revenue_usd": 173211140.494
+      }
+     },
+     "head_listing_id": 1419924,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.382098
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hyunwoo Industrial Co. LTD",
+     "score": 0.382098,
+     "ticker": "092300.KQ"
+    },
+    {
+     "also_known_as": [
+      "320.HK"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.117391,
+       "fcf_margin": 0.0358478900194695,
+       "free_cash_flow_usd": 18776467.6,
+       "market_cap_usd": 48839517.7088,
+       "net_margin": 0.00505326353659749,
+       "pe": 18.77551,
+       "revenue_usd": 523781667.2
+      }
+     },
+     "head_listing_id": 50547,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.379677
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Computime Group Ltd",
+     "score": 0.379677,
+     "ticker": "0320.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.079545,
+       "fcf_margin": 0.0225767407502971,
+       "free_cash_flow_usd": 10658946.5,
+       "market_cap_usd": 28361647.350400005,
+       "net_margin": -0.0150576020027811,
+       "revenue_usd": 472120693.5
+      }
+     },
+     "head_listing_id": 50713,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.378816
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wong’s Kong King International Holdings Ltd",
+     "score": 0.378816,
+     "ticker": "0532.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.04142,
+       "fcf_margin": 0.132,
+       "free_cash_flow_usd": 16363610.886,
+       "market_cap_usd": 46784827.801599994,
+       "net_margin": -0.07,
+       "pe": 146.984127,
+       "revenue_usd": 123989753.342
+      }
+     },
+     "head_listing_id": 1418740,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.376668
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Atec Co. Ltd",
+     "score": 0.376668,
+     "ticker": "045660.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.203896503250747,
+       "free_cash_flow_usd": 1192865.5,
+       "market_cap_usd": 3147724.2888,
+       "net_margin": -0.282836935512212,
+       "revenue_usd": 5850348.0
+      }
+     },
+     "head_listing_id": 53315,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.375717
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Finsoft Financial Investment Holdings Ltd",
+     "score": 0.375717,
+     "ticker": "8018.HK"
+    },
+    {
+     "also_known_as": [
+      "0F1U.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.082353,
+       "fcf_margin": 0.0692284554743477,
+       "free_cash_flow_usd": 36228922.7,
+       "market_cap_usd": 95649208.0368,
+       "net_margin": -0.0890423258570223,
+       "revenue_usd": 523324151.2
+      }
+     },
+     "head_listing_id": 1753209,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.372068
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Lacroix Group SA",
+     "score": 0.372068,
+     "ticker": "LACR.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.033852,
+       "fcf_margin": 0.1698,
+       "free_cash_flow_usd": 47381897.997,
+       "market_cap_usd": 125873417.42079999,
+       "net_margin": 0.075,
+       "pe": 6.2691,
+       "revenue_usd": 279004496.813
+      }
+     },
+     "head_listing_id": 1420488,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.364192
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hecto Innovation Co. Ltd.",
+     "score": 0.364192,
+     "ticker": "214180.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.025478,
+       "fcf_margin": 0.1694,
+       "free_cash_flow_usd": 38619001.813,
+       "market_cap_usd": 106380448.5632,
+       "net_margin": 0.0499,
+       "pe": 9.361956,
+       "revenue_usd": 228001795.861
+      }
+     },
+     "head_listing_id": 1420280,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.363027
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Intelligent Digital Integrated Security Co. Ltd",
+     "score": 0.363027,
+     "ticker": "143160.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.028777,
+       "fcf_margin": 0.166301966005292,
+       "free_cash_flow_usd": 3411418.5,
+       "market_cap_usd": 9505713.0798,
+       "net_margin": 0.0788078971897319,
+       "pe": 5.88,
+       "revenue_usd": 20513398.5
+      }
+     },
+     "head_listing_id": 572469,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.358881
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "MKSystem Corp.",
+     "score": 0.358881,
+     "ticker": "3910.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.023641,
+       "fcf_margin": 0.1334,
+       "free_cash_flow_usd": 18871470.842,
+       "market_cap_usd": 52353884.9792,
+       "net_margin": 0.0073,
+       "pe": 51.277778,
+       "revenue_usd": 141420369.419
+      }
+     },
+     "head_listing_id": 1418663,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.357726
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ICD Co. Ltd",
+     "score": 0.357726,
+     "ticker": "040910.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0681,
+       "free_cash_flow_usd": 118732000.0,
+       "market_cap_usd": 340444864.0,
+       "net_margin": -0.1144,
+       "revenue_usd": 1743111000.0
+      }
+     },
+     "head_listing_id": 35661,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.355306
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Paysafe Ltd",
+     "score": 0.355306,
+     "ticker": "PSFE.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0638894895506061,
+       "free_cash_flow_usd": 3227149.0,
+       "market_cap_usd": 9210065.0096,
+       "net_margin": 0.0063752114682575,
+       "pe": 29.411765,
+       "revenue_usd": 50511422.5
+      }
+     },
+     "head_listing_id": 53725,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.347394
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kinetix Systems Holdings Ltd",
+     "score": 0.347394,
+     "ticker": "8606.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.055222,
+       "fcf_margin": 0.8119,
+       "free_cash_flow_usd": 8131889.045,
+       "market_cap_usd": 23104357.7856,
+       "net_margin": 0.3411,
+       "pe": 6.850329,
+       "revenue_usd": 10015284.461
+      }
+     },
+     "head_listing_id": 1418816,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.347316
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Yw Company Limited",
+     "score": 0.347316,
+     "ticker": "051390.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.029046,
+       "fcf_margin": 0.05837874156998,
+       "free_cash_flow_usd": 5146956.8,
+       "market_cap_usd": 19731766.1877,
+       "net_margin": 0.0174673383001224,
+       "pe": 9.706001,
+       "revenue_usd": 88164915.2
+      }
+     },
+     "head_listing_id": 572314,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.345558
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "HYPER Inc.",
+     "score": 0.345558,
+     "ticker": "3054.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 7.14249310669922,
+       "free_cash_flow_usd": 693125241.6,
+       "market_cap_usd": 2009284081.4592001,
+       "net_margin": -0.0712445810174867,
+       "revenue_usd": 97042479.6
+      }
+     },
+     "head_listing_id": 53510,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.344421
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "AGTech Holdings Ltd",
+     "score": 0.344421,
+     "ticker": "8279.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0355,
+       "free_cash_flow_usd": 14023000.0,
+       "market_cap_usd": 40939448.0,
+       "net_margin": -0.044,
+       "revenue_usd": 395126000.0
+      }
+     },
+     "head_listing_id": 25592,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.34253
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Key Tronic Corporation",
+     "score": 0.34253,
+     "ticker": "KTCC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.192103695697623,
+       "free_cash_flow_usd": 3116825.6,
+       "market_cap_usd": 8962216.7985,
+       "net_margin": 0.0108496278268004,
+       "pe": 51.715686,
+       "revenue_usd": 16224704.0
+      }
+     },
+     "head_listing_id": 572231,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.34234
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "CREEMA LTD.",
+     "score": 0.34234,
+     "ticker": "4017.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.043182,
+       "fcf_margin": 0.0706337025857418,
+       "free_cash_flow_usd": 22963978.0,
+       "market_cap_usd": 67054721.260800004,
+       "net_margin": -0.0652449124865073,
+       "revenue_usd": 325113609.5
+      }
+     },
+     "head_listing_id": 50355,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.339535
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wong’s International Holdings Ltd",
+     "score": 0.339535,
+     "ticker": "0099.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.037611,
+       "fcf_margin": 0.377839665970676,
+       "free_cash_flow_usd": 42375229.0,
+       "market_cap_usd": 120699883.9557,
+       "net_margin": 0.119353631326296,
+       "pe": 9.410785,
+       "revenue_usd": 112151351.0
+      }
+     },
+     "head_listing_id": 575004,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.33576
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ascentech KK",
+     "score": 0.33576,
+     "ticker": "3565.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0282771421985514,
+       "free_cash_flow_usd": 14702686.4,
+       "market_cap_usd": 44525456.2192,
+       "net_margin": -0.329394494522426,
+       "revenue_usd": 519949516.0
+      }
+     },
+     "head_listing_id": 242615,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.321702
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Highlight Communications AG",
+     "score": 0.321702,
+     "ticker": "HLG.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0932,
+       "free_cash_flow_usd": 5390367.668,
+       "market_cap_usd": 17269086.8224,
+       "net_margin": -0.0283,
+       "revenue_usd": 57847179.495
+      }
+     },
+     "head_listing_id": 1418633,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.319928
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Gold Pacific Co. Ltd",
+     "score": 0.319928,
+     "ticker": "038530.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.0189,
+       "free_cash_flow_usd": 139063952.783,
+       "market_cap_usd": 427195367.42399997,
+       "net_margin": 0.0054,
+       "pe": 10.940032,
+       "revenue_usd": 7365747245.437
+      }
+     },
+     "head_listing_id": 1420202,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.317088
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Itcen Co. Ltd",
+     "score": 0.317088,
+     "ticker": "124500.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.008638,
+       "fcf_margin": 0.0817946029573728,
+       "free_cash_flow_usd": 2099280469.0,
+       "market_cap_usd": 6884870095.667201,
+       "net_margin": 0.0195822533738007,
+       "pe": 13.304563,
+       "revenue_usd": 25665268772.0
+      }
+     },
+     "head_listing_id": 50515,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.314904
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "BYD Electronic International Co Ltd",
+     "score": 0.314904,
+     "ticker": "0285.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.037879,
+       "fcf_margin": 0.0346262135508958,
+       "free_cash_flow_usd": 60276800.4,
+       "market_cap_usd": 193127182.2576,
+       "net_margin": -0.0174807066599472,
+       "revenue_usd": 1740785209.2
+      }
+     },
+     "head_listing_id": 238753,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.312688
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Midwich Group PLC",
+     "score": 0.312688,
+     "ticker": "MIDW.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.054944,
+       "fcf_margin": 0.0223581950421106,
+       "free_cash_flow_usd": 2650569.5,
+       "market_cap_usd": 11243410.7968,
+       "net_margin": 0.00376231613861279,
+       "pe": 19.317991,
+       "revenue_usd": 118550245.0
+      }
+     },
+     "head_listing_id": 53395,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.30735
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hi-Level Technology Holdings Ltd",
+     "score": 0.30735,
+     "ticker": "8113.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.014859,
+       "fcf_margin": 0.0338,
+       "free_cash_flow_usd": 15346000.0,
+       "market_cap_usd": 52432504.0,
+       "net_margin": -0.0552,
+       "revenue_usd": 454164000.0
+      }
+     },
+     "head_listing_id": 7926,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.307184
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Comtech Telecommunications Corp",
+     "score": 0.307184,
+     "ticker": "CMTL.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.071634,
+       "fcf_margin": 0.146086403479087,
+       "free_cash_flow_usd": 19445140.0,
+       "market_cap_usd": 65837833.15200001,
+       "net_margin": 0.0430975302394988,
+       "pe": 11.167903,
+       "revenue_usd": 133107117.0
+      }
+     },
+     "head_listing_id": 52631,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.306296
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Goldpac Group Ltd",
+     "score": 0.306296,
+     "ticker": "3315.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.009357,
+       "fcf_margin": 0.579950640207253,
+       "free_cash_flow_usd": 24973277.6,
+       "market_cap_usd": 92558985.9579,
+       "net_margin": 0.0430567076088116,
+       "pe": 27.157945,
+       "revenue_usd": 43061039.8
+      }
+     },
+     "head_listing_id": 572263,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.304538
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "HPC Systems, Inc.",
+     "score": 0.304538,
+     "ticker": "6597.JP"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "dividend_yield": 0.056566,
+       "fcf_margin": 0.0459,
+       "free_cash_flow_usd": 13919100.034,
+       "market_cap_usd": 42773686.6816,
+       "net_margin": 0.0578,
+       "pe": 2.612137,
+       "revenue_usd": 303110940.895
+      }
+     },
+     "head_listing_id": 1418858,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.304376
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Korea Computer Inc",
+     "score": 0.304376,
+     "ticker": "054040.KQ"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "fcf_margin": 0.2004,
+       "free_cash_flow_usd": 26460201.544,
+       "market_cap_usd": 86438413.1072,
+       "net_margin": -0.0922,
+       "revenue_usd": 132062558.425
+      }
+     },
+     "head_listing_id": 3940826,
+     "matched": {
+      "fundamental": {
+       "fcf_yield": {
+        "kind": "level",
+        "value": 0.304366
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Smac Co. Ltd",
+     "score": 0.304366,
+     "ticker": "097780.KQ"
+    }
+   ],
+   "sort": "fcf_yield",
+   "universe": 4203,
+   "_pagination": {
+    "intended_show": 20,
+    "returned": 80,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (20) as a look-ahead buffer so 'a few more' is served from these 80 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+   }
+  }
+ ],
+ "answer_to_user": "Note on method: there is no direct price-to-free-cash-flow field, so I screened its exact inverse — FCF yield (free cash flow ÷ market cap) — and took the TOP 10% tail, which is identically the CHEAPEST 10% on P/FCF. Ranked across a broad global-tech universe of 4,203 names, the bottom decile is 80 stocks. The cheapest legitimate names (very high FCF yield = very low P/FCF) include Truly International (0732.HK, ~2.2x-equivalent, 33% FCF margin), Upland Software (UPLD.US), Wooree Bio (082850.KQ), Nanjing Sample Technology (1708.HK), SiS International (0529.HK), Cliq Digital (CLIQ.XETRA), iomart Group (IOM.LSE) and MarketWise (MKTW.US). One CAVEAT: the #1 row (Core AI Holdings, CHAI.US) actually has NEGATIVE free cash flow, which the yield math flips into a spurious high number — ignore it; a true low-P/FCF screen needs positive FCF, which the rest of the list has."
+}

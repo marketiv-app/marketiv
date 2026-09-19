@@ -1,0 +1,93 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "question": "Find companies that spend between 10% and 20% of their revenue on R&D.",
+      "tool_calls": [
+        { "tool": "find_fsconcept", "args": { "q": "research and development expense" } },
+        { "tool": "find_fsconcept", "args": { "q": "total revenue" } },
+        { "tool": "screen_unified", "args": { "fundamental": [ { "metricA": "rnd", "relation": "ratio_between", "metricB": "revenue", "min": 0.10, "max": 0.20 } ], "asset_type": ["Common Stock"], "limit": 10 } }
+      ],
+      "result_summary": "40 matches (capped). Top: GOOG (R&D 68.97B / rev 445.87B = 15.5%), MSFT (35.56B/331.84B = 10.7%). Both inside 10-20%.",
+      "confusion_note": "OBVIOUS once schema read. The `multiple`/`relation` docstrings and the ScreenCondition RELATION form explicitly describe '% of revenue' as metricA=rnd + relation + metricB=revenue. ratio_between (min/max as fractions) was the clean fit. First call hit a transient 'Server error' 500 (not an input error) — succeeded verbatim on retry.",
+      "verdict": "PASS",
+      "reason": "Spot-checked matched values: R&D/revenue for returned heads lands inside 10-20%.",
+      "defects": [
+        { "desc": "First screen_unified call returned a bare 'Error executing tool screen_unified: Server error' 500 with NO detail; identical payload succeeded on immediate retry. Transient/flaky, but the opaque message gives a blind client no way to tell a transient failure from a bad-arg failure.", "side": "server" }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Which companies have capital expenditure of around 8% of revenue?",
+      "tool_calls": [
+        { "tool": "find_fsconcept", "args": { "q": "capital expenditure" } },
+        { "tool": "screen_unified", "args": { "fundamental": [ { "metricA": "capex", "relation": "ratio_near", "metricB": "revenue", "target": 0.08 } ], "asset_type": ["Common Stock"], "limit": 10 } }
+      ],
+      "result_summary": "40 matches (capped). Most heads cluster ~0.072-0.088 (XOM 0.0808, DIS 0.0880, HEIA 0.0835) but the roster extends to 0.0966 (STT), 0.0958 (VMC), 0.0913 (AMAT) and down to 0.0499 (ODFL) — wider than the schema-stated default band of target ±10% (0.072-0.088).",
+      "confusion_note": "OBVIOUS. The `target` docstring literally uses 'capex around 8% of revenue -> metricA=capex, ratio_near, metricB=revenue, target=0.08' as its example. capex is `is_inverted` (reported negative) but schema says the server sign-normalizes, so I did not negate. First call was the same transient 'Server error' 500; succeeded on retry.",
+      "verdict": "PARTIAL",
+      "reason": "Correct tool/params and the core cluster is right, but several returned heads fall outside the documented ±10% band (up to 0.097, one at 0.050), so the band enforcement looks looser/inconsistent than the schema advertises (possibly banding on native-currency revenue vs the USD context shown, or not strictly filtered before the mcap-sorted cap).",
+      "defects": [
+        { "desc": "ratio_near returned members outside the schema's stated default ±10% band (STT 0.0966, VMC 0.0958, ODFL 0.0499 vs advertised 0.072-0.088). Either the band is wider than documented or it is computed on a different (native-currency) revenue basis than the USD figure surfaced in context — a blind client can't reconcile the shown numbers with the claimed tolerance.", "side": "server" },
+        { "desc": "Transient 'Server error' 500 on first call (same as case 1).", "side": "server" }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "Find companies whose R&D is at least 15% of their revenue.",
+      "tool_calls": [
+        { "tool": "find_fsconcept", "args": { "q": "research and development expense" } },
+        { "tool": "find_fspattern", "args": { "q": "above a threshold value" } },
+        { "tool": "screen_unified", "args": { "fundamental": [ { "metricA": "rnd", "relation": "higher_than", "metricB": "revenue", "multiple": 0.15 } ], "asset_type": ["Common Stock"], "limit": 10 } }
+      ],
+      "result_summary": "40 matches (capped). GOOG (68.97B/445.87B=15.5%), META (71.63B/228.25B=31.4%), AVGO, LLY, SPCX. All >=15% of revenue.",
+      "confusion_note": "OBVIOUS. find_fspattern's `higher_than` pattern definition spells it out verbatim: 'A is at least X% of B (fraction, multiple<1: R&D at least 15% of revenue -> multiple=0.15)'. Zero ambiguity. No errors this time.",
+      "verdict": "PASS",
+      "reason": "Returned R&D/revenue ratios are all >=15%; matches the 'at least' intent.",
+      "defects": []
+    },
+    {
+      "id": 4,
+      "question": "Show me companies where free cash flow covers the dividend at least twice over.",
+      "tool_calls": [
+        { "tool": "find_fsconcept", "args": { "q": "free cash flow" } },
+        { "tool": "find_fsconcept", "args": { "q": "dividends paid" } },
+        { "tool": "screen_unified", "args": { "fundamental": [ { "metricA": "free_cash_flow", "relation": "higher_than", "metricB": "dividends_paid", "multiple": 2 } ], "asset_type": ["Common Stock"], "limit": 10 } }
+      ],
+      "result_summary": "40 matches (capped): NVDA, AAPL, GOOG, MSFT, TSMC, AVGO, META, big cash-generative payers. Intent-correct roster.",
+      "confusion_note": "OBVIOUS. higher_than doc: 'Handles BOTH A covers B (coverage, multiple>=1: FCF covers the dividend) AND A is at least X% of B'. 'covers at least twice over' -> multiple=2. First call was the transient 'Server error' 500; succeeded verbatim on retry.",
+      "verdict": "PARTIAL",
+      "reason": "Tool/params correct and the roster is clearly right, but the result only surfaces metricA (free_cash_flow) in `matched` — the dividends_paid value and the FCF/dividend coverage ratio are NOT returned, so a blind client cannot VERIFY the >=2x condition from the output. Correctness has to be taken on faith.",
+      "defects": [
+        { "desc": "RELATION-form results expose only metricA's value in `matched.financial`; metricB (dividends_paid) and the computed coverage ratio are absent, so the >=2x claim is unverifiable from the response. A relation screen should surface both operands (and ideally the ratio) it filtered on.", "side": "server" },
+        { "desc": "Transient 'Server error' 500 on first call (same as cases 1 & 2).", "side": "server" }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Find companies with a net profit margin above 20%.",
+      "tool_calls": [
+        { "tool": "find_fsconcept", "args": { "q": "net profit margin" } },
+        { "tool": "find_fspattern", "args": { "q": "above a threshold value" } },
+        { "tool": "screen_unified", "args": { "fundamental": [ { "concept": "net_margin", "pattern": "above", "threshold": 0.20 } ], "asset_type": ["Common Stock"], "limit": 10 } }
+      ],
+      "result_summary": "40 matches (capped): NVDA (net_margin 0.6297), AAPL (0.2762), GOOG (0.5477), MSFT (0.4031), TSMC (0.4992). All >20%.",
+      "confusion_note": "OBVIOUS. Plain absolute-level screen: concept=net_margin (a ratio, so threshold is a fraction -> 0.20 for 20%, per the threshold docstring SCALE note). No errors.",
+      "verdict": "PASS",
+      "reason": "All returned net_margin values exceed 0.20. Minor: the `context.financial.net_margin` field is null while the filtered value appears under matched.financial.net_margin.value — mild redundancy/inconsistency, not a correctness problem.",
+      "defects": [
+        { "desc": "context.financial.net_margin is null in the response even though net_margin is the screened metric (its value is present under matched.financial.net_margin.value). Cosmetic — the two blocks disagree on whether the metric is populated.", "side": "server" }
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 3,
+    "partial": 2,
+    "fail": 0,
+    "top_defects": [
+      "Transient 'Server error' 500 on screen_unified: hit 3 of 5 first-attempts (cases 1,2,4), each succeeded on identical-payload retry. Opaque message gives a blind client no signal that it is transient vs a bad-arg error — a real usability hazard (a naive client would 'fix' a correct payload).",
+      "RELATION-form results (higher_than / ratio_near / ratio_between) surface only metricA in `matched`; metricB and the computed ratio are omitted, so coverage/percent-of screens (cases 2 & 4) are unverifiable from the output.",
+      "ratio_near (case 2) returned members outside the schema-documented ±10% band (up to ~0.097, one at 0.050), suggesting the band is looser than advertised or applied on a native-currency revenue basis that differs from the USD context shown."
+    ]
+  }
+}

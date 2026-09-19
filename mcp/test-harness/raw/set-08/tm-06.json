@@ -1,0 +1,840 @@
+{
+  "id": "tm-06",
+  "question": "I'm hunting small-cap biotech in China — early-stage names, not the big pharma. What's out there?",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "biotechnology"
+      },
+      "note": ""
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "gics": "352010",
+        "country": [
+          "CN"
+        ],
+        "size": [
+          "small",
+          "micro"
+        ],
+        "limit": 15
+      },
+      "note": "errored: screen_unified requires a fundamental or TA leg; a plain universe+size list is not supported — server directs to screen_stocks"
+    },
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "gics": "352010",
+        "country": "CN",
+        "limit": 25
+      },
+      "note": "used as directed; screen_stocks has NO size-tier param, so small-caps were surfaced by filtering the returned market caps"
+    }
+  ],
+  "raw_responses": [
+    {
+      "query": "biotechnology",
+      "candidates": [
+        {
+          "code": "352010",
+          "name": "Biotechnology",
+          "level": "industry"
+        },
+        {
+          "code": "35201010",
+          "name": "Biotechnology",
+          "level": "sub_industry"
+        }
+      ]
+    },
+    {
+      "error": "screen_unified needs at least one of `fundamental` or `ta` — it returns the INTERSECTION of a financial screen and a technical screen within a scope. For a plain universe list (gics/country/size only, no financial or technical filter) use screen_stocks instead."
+    },
+    {
+      "scope": {
+        "gics": "352010",
+        "country": "CN"
+      },
+      "order_by": "news_count",
+      "direction": null,
+      "direction_split": {
+        "total": 25,
+        "net_positive": 18,
+        "net_negative": 6,
+        "ambiguous": 0
+      },
+      "stocks": [
+        {
+          "stock_id": 230230,
+          "symbol": "688235",
+          "ticker": "688235.CG",
+          "name": "BeiGene Ltd.",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 60541904879.616,
+          "impact": {
+            "ambiguous": 2,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-19 17:45:36.923722+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 29,
+            "pos": 27,
+            "top_reason": "Q2 global revenue up 30% YoY to $1.7B, raised full-year guidance to $6.6-6.8B.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 12.375773,
+            "pe_ratio": 101.31994,
+            "week52_high": 346.0,
+            "week52_low": 205.51
+          }
+        },
+        {
+          "stock_id": 230312,
+          "symbol": "688331",
+          "ticker": "688331.CG",
+          "name": "RemeGen Co. Ltd. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 9761955918.6432,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-25 02:15:44.453847+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 22,
+            "pos": 22,
+            "top_reason": "Expected net profit of ~4.7 billion yuan in H1, turning loss into profit YoY.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 20.856277,
+            "pe_ratio": 103.503876,
+            "week52_high": 157.8,
+            "week52_low": 75.03
+          }
+        },
+        {
+          "stock_id": 230383,
+          "symbol": "688428",
+          "ticker": "688428.CG",
+          "name": "InnoCare Pharma Ltd. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 7239528716.6976,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-25 02:15:44.453847+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 20,
+            "pos": 20,
+            "top_reason": "Phase III trial approval for mesutoclax combination is a key clinical milestone.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 7.243098,
+            "pe_ratio": 83.578947,
+            "week52_high": 33.33,
+            "week52_low": 19.36
+          }
+        },
+        {
+          "stock_id": 230200,
+          "symbol": "688202",
+          "ticker": "688202.CG",
+          "name": "Shanghai Medicilon Inc",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 2083125338.112,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply"
+            ],
+            "latest_at": "2026-08-25 15:25:46.965523+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 17,
+            "pos": 15,
+            "top_reason": "Recovery of global demand for innovative drug R&D drives revenue growth and profit turnaround.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 7.443717,
+            "pe_ratio": null,
+            "week52_high": 113.6,
+            "week52_low": 50.5
+          }
+        },
+        {
+          "stock_id": 230301,
+          "symbol": "688319",
+          "ticker": "688319.CG",
+          "name": "Chengdu Olymvax Biopharmaceuticals Inc. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1678238795.3664,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-08-18 09:44:29.292604+00",
+            "neg": 8,
+            "net_direction": "neg",
+            "news_count": 13,
+            "pos": 4,
+            "top_reason": "Net loss of 32.87 million yuan, swinging from profit to loss, with negative operating cash flow.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 12.519877,
+            "pe_ratio": 205.954089,
+            "week52_high": 44.9,
+            "week52_low": 20.41
+          }
+        },
+        {
+          "stock_id": 229614,
+          "symbol": "603392",
+          "ticker": "603392.CG",
+          "name": "Beijing Wantai Biological Pharmacy Enterprise Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 5245388921.2416,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-25 17:51:01.656069+00",
+            "neg": 9,
+            "net_direction": "neg",
+            "news_count": 12,
+            "pos": 2,
+            "top_reason": "General manager resigns for personal reasons, creating leadership uncertainty.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 3.080331,
+            "pe_ratio": null,
+            "week52_high": 62.0,
+            "week52_low": 25.58
+          }
+        },
+        {
+          "stock_id": 231039,
+          "symbol": "000990",
+          "ticker": "000990.CS",
+          "name": "Chengzhi Shareholding Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1615149957.12,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-13 01:45:31.254135+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 12,
+            "pos": 11,
+            "top_reason": "High goodwill of 6.694 billion yuan and swing to net loss in 2025 raise impairment risk, though Q1 2026 profit improved.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.630442,
+            "pe_ratio": null,
+            "week52_high": 9.5857,
+            "week52_low": 5.093
+          }
+        },
+        {
+          "stock_id": 230263,
+          "symbol": "688278",
+          "ticker": "688278.CG",
+          "name": "Xiamen Amoytop Biotech Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 3618197982.4128,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-08-19 09:50:34.779032+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 11,
+            "pos": 11,
+            "top_reason": "First-half 2026 net profit up 11.37% YoY and Q2 profit up 89% QoQ.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.04,
+            "pb_ratio": 6.764206,
+            "pe_ratio": 24.356275,
+            "week52_high": 89.65,
+            "week52_low": 50.0
+          }
+        },
+        {
+          "stock_id": 230081,
+          "symbol": "688068",
+          "ticker": "688068.CG",
+          "name": "Beijing Hotgen Biotech Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1362100858.0608,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-04 09:50:29.221829+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 10,
+            "pos": 9,
+            "top_reason": "Company completed a 50.02 million yuan share buyback, signaling confidence.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.23929,
+            "pe_ratio": null,
+            "week52_high": 235.0,
+            "week52_low": 73.44
+          }
+        },
+        {
+          "stock_id": 231790,
+          "symbol": "002675",
+          "ticker": "002675.CS",
+          "name": "Yantai Dongcheng Pharmaceutical Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1566877084.8768,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "regulation",
+              "supply",
+              "technology"
+            ],
+            "latest_at": "2026-08-22 09:43:59.058221+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 9,
+            "pos": 7,
+            "top_reason": "Company announced a 100 million yuan share buyback, signaling confidence and supporting stock price.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.63,
+            "pb_ratio": 2.510527,
+            "pe_ratio": 52.684699,
+            "week52_high": 17.4945,
+            "week52_low": 12.0473
+          }
+        },
+        {
+          "stock_id": 232829,
+          "symbol": "300759",
+          "ticker": "300759.CS",
+          "name": "Pharmaron Beijing Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 12553966780.416,
+          "impact": {
+            "ambiguous": 2,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-08-21 02:15:40.443153+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 6,
+            "top_reason": "Net profit up 6.96% and revenue up 17.92%, with strong new orders and positive guidance.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.45,
+            "pb_ratio": 5.593852,
+            "pe_ratio": 52.691903,
+            "week52_high": 53.57,
+            "week52_low": 20.8736
+          }
+        },
+        {
+          "stock_id": 230473,
+          "symbol": "688578",
+          "ticker": "688578.CG",
+          "name": "Shanghai Allist Pharmaceuticals Co. Ltd. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 7512242690.4576,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-20 02:15:34.001569+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 7,
+            "top_reason": "Company announces cash dividend, returning capital to shareholders.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.89,
+            "pb_ratio": 6.905909,
+            "pe_ratio": 22.171642,
+            "week52_high": 138.3,
+            "week52_low": 78.82
+          }
+        },
+        {
+          "stock_id": 232753,
+          "symbol": "300676",
+          "ticker": "300676.CS",
+          "name": "BGI Genomics Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 2524680924.3648,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-22 09:43:59.058221+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 7,
+            "top_reason": "First-half attributable net profit surged 718.24% year on year, with revenue up 9.59%.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.974604,
+            "pe_ratio": null,
+            "week52_high": 65.0,
+            "week52_low": 32.55
+          }
+        },
+        {
+          "stock_id": 232781,
+          "symbol": "300705",
+          "ticker": "300705.CS",
+          "name": "Hunan Jiudian Pharmaceutical Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 838231911.6288,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-24 09:50:30.06225+00",
+            "neg": 3,
+            "net_direction": "mixed",
+            "news_count": 7,
+            "pos": 3,
+            "top_reason": "Net profit fell 45.21% year-on-year, revenue down 14.89%, margins and ROE declined.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 3.66,
+            "pb_ratio": 2.27359,
+            "pe_ratio": 15.111111,
+            "week52_high": 18.6819,
+            "week52_low": 9.26
+          }
+        },
+        {
+          "stock_id": 230179,
+          "symbol": "688180",
+          "ticker": "688180.CG",
+          "name": "Shanghai Junshi Biosciences Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 5380913961.3696,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-08-19 12:15:28.009566+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 6,
+            "top_reason": "Junshi Biosciences receives upfront payment and milestone payments from licensing deal for roconkibart.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 6.633219,
+            "pe_ratio": null,
+            "week52_high": 51.4,
+            "week52_low": 28.1
+          }
+        },
+        {
+          "stock_id": 232908,
+          "symbol": "300841",
+          "ticker": "300841.CS",
+          "name": "Chengdu Kanghua Biological Products",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1038928551.936,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-20 11:10:24.78224+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 7,
+            "top_reason": "First-half net profit up 23.3% and revenue up 11.25%, with strong cash flow growth.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.94,
+            "pb_ratio": 1.775604,
+            "pe_ratio": 27.939658,
+            "week52_high": 85.5931,
+            "week52_low": 42.31
+          }
+        },
+        {
+          "stock_id": 230176,
+          "symbol": "688177",
+          "ticker": "688177.CG",
+          "name": "Bio-Thera Solutions Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1240312005.4272,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "regulation"
+            ],
+            "latest_at": "2026-08-25 17:51:01.656069+00",
+            "neg": 6,
+            "net_direction": "neg",
+            "news_count": 7,
+            "pos": 1,
+            "top_reason": "Company expects a net loss of 230-290 million yuan for first half of 2026.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 38.31832,
+            "pe_ratio": null,
+            "week52_high": 35.34,
+            "week52_low": 15.57
+          }
+        },
+        {
+          "stock_id": 230100,
+          "symbol": "688089",
+          "ticker": "688089.CG",
+          "name": "Cabio Biotech Wuhan Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 192836533.8624,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "regulation"
+            ],
+            "latest_at": "2026-07-24 18:21:25.288014+00",
+            "neg": 7,
+            "net_direction": "neg",
+            "news_count": 7,
+            "pos": 0,
+            "top_reason": "New EU regulations impose strict controls on ARA oil, severely disrupting production and sales, with revenue down 82% and net loss.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.80528,
+            "pe_ratio": 23.030303,
+            "week52_high": 30.39,
+            "week52_low": 6.91
+          }
+        },
+        {
+          "stock_id": 52406,
+          "symbol": "2696",
+          "ticker": "2696.HK",
+          "name": "Shanghai Henlius Biotech Inc",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 4671472961.1264,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-17 12:20:23.783251+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 7,
+            "top_reason": "HLX43 combination therapy approved for clinical trials, advancing its ADC pipeline.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 8.110834,
+            "pe_ratio": 39.141708,
+            "week52_high": 92.0,
+            "week52_low": 50.25
+          }
+        },
+        {
+          "stock_id": 231186,
+          "symbol": "002030",
+          "ticker": "002030.CS",
+          "name": "Da An Gene Co Ltd of Sun Yat-Sen University",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 1136050259.5584,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-08-06 18:11:45.814008+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 6,
+            "pos": 4,
+            "top_reason": "Company forecasts a net loss for first half of 2026, though narrower than prior year.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.140354,
+            "pe_ratio": null,
+            "week52_high": 8.2,
+            "week52_low": 4.8
+          }
+        },
+        {
+          "stock_id": 231178,
+          "symbol": "002022",
+          "ticker": "002022.CS",
+          "name": "Shanghai Kehua Bio-Engineering Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 427106034.8928,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-24 09:50:30.06225+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 6,
+            "pos": 6,
+            "top_reason": "Received medical device registration certificate for Complement C1q Assay Kit, enabling market access.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.127271,
+            "pe_ratio": null,
+            "week52_high": 7.54,
+            "week52_low": 4.47
+          }
+        },
+        {
+          "stock_id": 232232,
+          "symbol": "300122",
+          "ticker": "300122.CS",
+          "name": "Chongqing Zhifei Bio Products",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 4602051202.2528,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "technology"
+            ],
+            "latest_at": "2026-08-20 11:10:24.78224+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 6,
+            "pos": 5,
+            "top_reason": "Company announces share buyback plan of 150-300 million yuan, signaling confidence and supporting stock price.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 1.99696,
+            "pe_ratio": null,
+            "week52_high": 24.17,
+            "week52_low": 11.07
+          }
+        },
+        {
+          "stock_id": 230252,
+          "symbol": "688266",
+          "ticker": "688266.CG",
+          "name": "Suzhou Zelgen Biopharmaceuticals Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 4704965758.1568,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-25 23:35:40.093882+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 6,
+            "pos": 5,
+            "top_reason": "Reports strong interim profit of 640 million yuan and high margins, indicating solid financial performance.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 18.465869,
+            "pe_ratio": 57.701923,
+            "week52_high": 160.0,
+            "week52_low": 75.1
+          }
+        },
+        {
+          "stock_id": 230525,
+          "symbol": "688639",
+          "ticker": "688639.CG",
+          "name": "Anhui Huaheng Biotechnology Co. Ltd. A",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 598452820.3776,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "regulation"
+            ],
+            "latest_at": "2026-08-25 15:25:46.965523+00",
+            "neg": 6,
+            "net_direction": "neg",
+            "news_count": 6,
+            "pos": 0,
+            "top_reason": "Net profit fell 12.22% year-on-year, missing expectations.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.0,
+            "pb_ratio": 1.615182,
+            "pe_ratio": 34.72,
+            "week52_high": 43.3495,
+            "week52_low": 14.52
+          }
+        },
+        {
+          "stock_id": 230859,
+          "symbol": "000710",
+          "ticker": "000710.CS",
+          "name": "Berry Genomics Co Ltd",
+          "country": "China",
+          "gic_code": "35201010",
+          "market_cap_usd": 506050429.7472,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-24 09:50:30.06225+00",
+            "neg": 6,
+            "net_direction": "neg",
+            "news_count": 6,
+            "pos": 0,
+            "top_reason": "Net loss widened to 43.95 million yuan, with revenue down and operating cash outflow.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 2.204299,
+            "pe_ratio": null,
+            "week52_high": 16.5,
+            "week52_low": 7.2
+          }
+        }
+      ],
+      "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+    }
+  ],
+  "answer_to_user": "Scoping the Biotechnology GICS industry (352010) to China surfaces 25 covered names. The list spans big names (BeiGene ~$61B, Pharmaron ~$13B, RemeGen ~$10B, InnoCare ~$7B) down to genuinely small/early-stage plays. The smaller-cap China biotech names you're after include Cabio Biotech Wuhan (688089.CG, ~$0.19B), Shanghai Kehua Bio-Engineering (002022.CS, ~$0.43B), Berry Genomics (000710.CS, ~$0.51B), Anhui Huaheng Biotechnology (688639.CG, ~$0.60B), Hunan Jiudian Pharmaceutical (300705.CS, ~$0.84B), Chengdu Kanghua Biological (300841.CS, ~$1.04B), Da An Gene (002030.CS, ~$1.14B), Bio-Thera Solutions (688177.CG, ~$1.24B), Beijing Hotgen Biotech (688068.CG, ~$1.36B) and Chengdu Olymvax (688319.CG, ~$1.68B). One caveat on the tool: the unified screener wouldn't apply the 'small-cap' SIZE tier on its own (it needs a fundamental or technical filter alongside the size scope), and the plain-list screener (screen_stocks) has no size-tier control — so I resolved 'small-cap' by reading the returned market caps rather than as a native filter."
+}

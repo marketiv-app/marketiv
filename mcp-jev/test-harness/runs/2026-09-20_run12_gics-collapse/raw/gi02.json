@@ -1,0 +1,18 @@
+{
+  "id": "gi02",
+  "question": "find high-yield dividend stocks but exclude banks",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [{"concept": "dividend yield", "pattern": "high"}],
+        "exclude_gics": "banks",
+        "sort": "mcap",
+        "limit": 20,
+        "asset_type": ["Common Stock"]
+      }
+    }
+  ],
+  "answer": "80 matches found (capped), ranked by market cap. Top high-yield ex-banks names: China Mobile (600941.CG, yield 4.9%, mcap $317B), Verizon (VZ.US, yield 5.8%, mcap $209B), Pfizer (PFE.US, yield 6.3%, mcap $161B), Ping An Insurance (601318.CG, yield 5.3%, mcap $143B), Progressive (PGR.US, yield 6.7%, mcap $129B), British American Tobacco (BATS.LSE, yield 5.9%, mcap $121B), Altria (MO.US, yield 6.5%, mcap $115B), Enel (ENL.XETRA, yield 5.2%, mcap $109B), Sanofi (SAN.PA, yield 5.3%, mcap $108B), AXA (CS.PA, yield 5.2%, mcap $106B). Bank exclusion worked — no pure commercial banks in results. Dominated by telecom, pharma, tobacco, insurance, and utilities.",
+  "friction": "none"
+}

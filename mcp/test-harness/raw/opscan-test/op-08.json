@@ -1,0 +1,56 @@
+{
+  "id": "op-08",
+  "question": "Find me stocks with the steepest put skew right now, where downside protection is getting bid up hard.",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "put skew elevated, market pricing downside fear"
+        ]
+      },
+      "note": "first phrasing ('steepest put skew, downside protection bid up') resolved top to greed_euphoria (call-skew, opposite); re-queried with 'put skew elevated' to get the correct fear_building"
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "fear_building",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "put skew elevated, market pricing downside fear",
+          "candidates": [
+            {
+              "pattern": "fear_building",
+              "label": "Fear building (crash-pricing)",
+              "supported": "yes",
+              "description": "Put-skew unusually elevated vs own history — the market pricing downside fear."
+            },
+            {
+              "pattern": "iv_rich",
+              "label": "IV rich",
+              "supported": "yes",
+              "description": "Implied vol at the high end of its own history."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "fear_building",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "Steep put-skew / downside protection being bid up is the `fear_building` pattern (put-skew unusually elevated vs own history — the market pricing downside fear), which the MCP matched. But the scanner endpoint isn't built yet (POC stub), so I can't return the ranked list of names with the steepest put-skew right now. One honesty note: my first plain phrasing initially surfaced 'greed/euphoria' (call-skew, the opposite side) as the top hit; rephrasing to 'put skew elevated' resolved cleanly to fear_building."
+}

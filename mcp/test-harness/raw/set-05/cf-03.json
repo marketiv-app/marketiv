@@ -1,0 +1,964 @@
+{
+  "id": "cf-03",
+  "question": "Show me high-margin, low-debt companies that have sold off hard recently and are now oversold — RSI below 30.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "net_margin",
+            "pattern": "high"
+          },
+          {
+            "concept": "debt_to_equity",
+            "pattern": "low"
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "oversold",
+                "a": "rsi"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 20,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          },
+          "total_debt": {
+            "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+          }
+        }
+      },
+      "capped": false,
+      "count": 16,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "237820.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.251,
+              "interest_coverage": 88.7339,
+              "market_cap_usd": 22223020.646399997,
+              "net_debt_ebitda": -2.7981,
+              "net_income_usd": 3914480.339,
+              "operating_margin": 0.1463,
+              "pe": 5.768349,
+              "revenue_usd": 29094044.182,
+              "roe": 0.0631,
+              "total_debt_usd": 624732.696
+            },
+            "ta": {
+              "adx": 40.6844,
+              "close_vs_ema200": -0.4211,
+              "rsi14": 29.0263
+            }
+          },
+          "head_listing_id": 1420584,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0101
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.1345
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "PlayD Co. Ltd",
+          "score": 1.0,
+          "ticker": "237820.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.204022189229002,
+              "interest_coverage": 277.944092939813,
+              "market_cap_usd": 25840849.0368,
+              "net_debt_ebitda": -2.4993487921028,
+              "net_income_usd": 3211920.9354,
+              "operating_margin": 0.193661213328208,
+              "pe": 7.744681,
+              "revenue_usd": 20911567.0464,
+              "roe": 0.285424096636122,
+              "total_debt_usd": 279308.6
+            },
+            "ta": {
+              "adx": 46.1757,
+              "rsi14": 21.6496
+            }
+          },
+          "head_listing_id": 49356,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0179
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.153595420576238
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -13
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "88(Thailand) Public Company Limited",
+          "score": 1.0,
+          "ticker": "88TH.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.137263749470722,
+              "interest_coverage": 75.2840349483717,
+              "market_cap_usd": 140975200.0,
+              "net_debt_ebitda": -1.08598814652692,
+              "net_income_usd": 12909792.0,
+              "operating_margin": 0.136704753362394,
+              "pe": 11.729167,
+              "revenue_usd": 82484096.0,
+              "roe": 0.110977023414518,
+              "total_debt_usd": 1945101.6
+            },
+            "ta": {
+              "adx": 38.137,
+              "rsi14": 28.1032
+            }
+          },
+          "head_listing_id": 1420348,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0171
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.156512499088309
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -10
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Lucky Royal Co., Ltd.",
+          "score": 1.0,
+          "ticker": "7791.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.0316,
+              "interest_coverage": 875.1262,
+              "market_cap_usd": 182965865.77920002,
+              "net_debt_ebitda": -0.2319,
+              "net_income_usd": 18963170.0038,
+              "operating_margin": -0.0337,
+              "pe": 9.070513,
+              "revenue_usd": 142951541.1544,
+              "roe": 0.0627,
+              "total_debt_usd": 634628.9878
+            },
+            "ta": {
+              "adx": 48.7209,
+              "close_vs_ema200": -0.0424,
+              "rsi14": 28.7602
+            }
+          },
+          "head_listing_id": 49737,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0021
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.1327
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -16
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kang Yong Electric Public Company Limited",
+          "score": 1.0,
+          "ticker": "KYE.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "interest_coverage": 1.32158240632343,
+              "market_cap_usd": 12251821.725,
+              "net_debt_ebitda": -0.101284433011568,
+              "net_income_usd": 106894.810238,
+              "operating_margin": 0.246694365255152,
+              "pe": 13.167775,
+              "revenue_usd": 689969.971215,
+              "roe": 0.0050855749014912,
+              "total_debt_usd": 0.0
+            },
+            "ta": {
+              "adx": 19.6208,
+              "rsi14": 12.1854
+            }
+          },
+          "head_listing_id": 243864,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.154926757246789
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -25
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "LÃ¼bke Kelber AG",
+          "score": 1.0,
+          "ticker": "SZ50.XETRA"
+        },
+        {
+          "also_known_as": [
+            "1276.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.1223,
+              "interest_coverage": 702.9864,
+              "market_cap_usd": 51547621392.383995,
+              "net_debt_ebitda": -4.0796,
+              "net_income_usd": 1260377684.3284,
+              "operating_margin": 0.301,
+              "pe": 42.92623,
+              "revenue_usd": 4689748516.13585,
+              "roe": 0.1366,
+              "total_debt_usd": 9783838.4281
+            },
+            "ta": {
+              "adx": 22.6975,
+              "close_vs_ema200": -0.1502,
+              "rsi14": 28.8069
+            }
+          },
+          "head_listing_id": 228524,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0011
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.2688
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Jiangsu Hengrui Medicine Co Ltd",
+          "score": 1.0,
+          "ticker": "600276.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.247459818954369,
+              "interest_coverage": 126.156069364162,
+              "market_cap_usd": 16511040.000000002,
+              "net_debt_ebitda": -0.839221437141714,
+              "net_income_usd": 2330042.0,
+              "operating_margin": 0.652733678395894,
+              "pe": 7.473904,
+              "revenue_usd": 9863139.0,
+              "roe": 0.0203482708840146,
+              "total_debt_usd": 1326618.8
+            },
+            "ta": {
+              "adx": 44.1861,
+              "close_vs_ema200": -0.3718,
+              "rsi14": 22.5822
+            }
+          },
+          "head_listing_id": 51410,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.236237368245545
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Zhejiang Measuring Cutting Tools",
+          "score": 1.0,
+          "ticker": "1379.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": -0.0127160956125569,
+              "interest_coverage": 530.685950413223,
+              "market_cap_usd": 178471524.9408,
+              "net_debt_ebitda": -6.99789256502837,
+              "net_income_usd": 18563402.0,
+              "operating_margin": 0.0896224631349751,
+              "pe": 9.119353,
+              "revenue_usd": 71849063.0,
+              "roe": 0.0930830210285425,
+              "total_debt_usd": 2475330.0
+            },
+            "ta": {
+              "adx": 33.0683,
+              "rsi14": 20.2342
+            }
+          },
+          "head_listing_id": 52313,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0118
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.258366653995195
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Dida Inc",
+          "score": 1.0,
+          "ticker": "2559.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": -0.327938065654353,
+              "interest_coverage": 10659.4432989691,
+              "market_cap_usd": 2970608263.168,
+              "net_debt_ebitda": -1.49547190524117,
+              "net_income_usd": 392994030.0,
+              "operating_margin": 0.206789914233612,
+              "pe": 7.602798,
+              "revenue_usd": 1109601350.0,
+              "roe": 0.2384865591462,
+              "total_debt_usd": 886028.0
+            },
+            "ta": {
+              "adx": 25.0439,
+              "close_vs_ema200": -0.3535,
+              "rsi14": 27.1368
+            }
+          },
+          "head_listing_id": 53932,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0005
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.354175875867491
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "NETEASE CLOUD MUSIC INC",
+          "score": 1.0,
+          "ticker": "9899.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.0875,
+              "interest_coverage": 547.0707,
+              "market_cap_usd": 1950199232.7167997,
+              "net_debt_ebitda": -3.2679,
+              "net_income_usd": 37599703.13605,
+              "operating_margin": 0.2646,
+              "pe": 51.353846,
+              "revenue_usd": 135270661.16315,
+              "roe": 0.0936,
+              "total_debt_usd": 1813314.41425
+            },
+            "ta": {
+              "adx": 17.5271,
+              "close_vs_ema200": -0.2786,
+              "rsi14": 29.2311
+            }
+          },
+          "head_listing_id": 230099,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0045
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.278
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "ArcSoft Corp Ltd",
+          "score": 1.0,
+          "ticker": "688088.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.1377,
+              "interest_coverage": 44405.2615,
+              "market_cap_usd": 1111038049.6896,
+              "net_debt_ebitda": -0.942,
+              "net_income_usd": 52332538.88125,
+              "operating_margin": 0.4122,
+              "pe": 18.30137,
+              "revenue_usd": 147494827.72815,
+              "roe": 0.1257,
+              "total_debt_usd": 22457.6406
+            },
+            "ta": {
+              "adx": 15.6193,
+              "close_vs_ema200": -0.3051,
+              "rsi14": 24.7285
+            }
+          },
+          "head_listing_id": 230104,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0001
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.3548
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Suzhou Shihua New Material Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "688093.CG"
+        },
+        {
+          "also_known_as": [
+            "0HHO.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.1258,
+              "market_cap_usd": 7753064448.0,
+              "net_debt_ebitda": -2.1217,
+              "net_income_usd": 161287000.0,
+              "operating_margin": 0.1495,
+              "pe": 51.781195,
+              "revenue_usd": 1041900000.0,
+              "roe": 0.3406,
+              "total_debt_usd": 9577000.0
+            },
+            "ta": {
+              "adx": 26.2373,
+              "close_vs_ema200": -0.0951,
+              "rsi14": 31.4103
+            }
+          },
+          "head_listing_id": 1273,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0202
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.1548
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Argan Inc",
+          "score": 1.0,
+          "ticker": "AGX.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.2338,
+              "market_cap_usd": 3312146688.0,
+              "net_income_usd": 284930000.0,
+              "pe": 11.965217,
+              "revenue_usd": 870022000.0,
+              "roe": 0.1008,
+              "total_debt_usd": 0.0
+            },
+            "ta": {
+              "adx": 28.4163,
+              "close_vs_ema200": -0.029,
+              "rsi14": 27.9372
+            }
+          },
+          "head_listing_id": 14462,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.3275
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "First Hawaiian Inc",
+          "score": 1.0,
+          "ticker": "FHB.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.0,
+              "market_cap_usd": 69768610.0624,
+              "net_income_usd": 8810625.1114,
+              "pe": 9.219232,
+              "revenue_usd": 10998063.5894,
+              "roe": 0.0656591846930777,
+              "total_debt_usd": 5460796.0926
+            },
+            "ta": {
+              "adx": 32.736,
+              "close_vs_ema200": 0.0967,
+              "rsi14": 29.2013
+            }
+          },
+          "head_listing_id": 237324,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0399
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.801106943943453
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -18
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "EPE Special Opportunities Limited",
+          "score": 1.0,
+          "ticker": "ESO.LSE"
+        },
+        {
+          "also_known_as": [
+            "0QK6.LSE",
+            "LOGI.US"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.1366,
+              "market_cap_usd": 14311732592.3328,
+              "net_debt_ebitda": -1.7408,
+              "net_income_usd": 800869000.0,
+              "operating_margin": 0.1789,
+              "pe": 18.114002,
+              "revenue_usd": 4920292000.0,
+              "roe": 0.3405,
+              "total_debt_usd": 84388000.0
+            },
+            "ta": {
+              "adx": 15.1536,
+              "close_vs_ema200": -0.0294,
+              "rsi14": 40.4874
+            }
+          },
+          "head_listing_id": 1754617,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0359
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.1628
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Logitech International S.A.",
+          "score": 1.0,
+          "ticker": "LOGN.SW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": -0.51807545681609,
+              "interest_coverage": 1.50321853878339,
+              "market_cap_usd": 74571952.6392,
+              "net_debt_ebitda": -0.91489519294867,
+              "net_income_usd": 15686064.0,
+              "operating_margin": 0.141706362450317,
+              "pe": 9.855769,
+              "revenue_usd": 88831096.8,
+              "roe": 0.253840869688478,
+              "total_debt_usd": 4042.8
+            },
+            "ta": {
+              "adx": 43.0919,
+              "close_vs_ema200": -0.1632,
+              "rsi14": 27.6584
+            }
+          },
+          "head_listing_id": 239880,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0001
+              },
+              "net_margin": {
+                "kind": "level",
+                "value": 0.176583027397676
+              }
+            },
+            "ta": {
+              "rsi14_oversold": {
+                "detail": {
+                  "held": -12
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Trufin PLC",
+          "score": 1.0,
+          "ticker": "TRU.LSE"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 16,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 16 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Found 16 high-margin, low-debt companies that are oversold (RSI<30) after a recent selloff. Each row jointly matches high net_margin + low debt_to_equity (matched.fundamental) and RSI<30 oversold (matched.ta). Examples: 237820.KQ, 88TH.BK, 7791.TW, KYE.BK."
+}

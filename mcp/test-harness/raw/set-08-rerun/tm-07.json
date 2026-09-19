@@ -1,0 +1,325 @@
+{
+ "id": "tm-07",
+ "question": "Who are the uranium and nuclear-fuel players? I'm betting on the nuclear revival — miners and enrichment, wherever they trade.",
+ "tools_called": [
+  {
+   "tool": "find_megatrend",
+   "args": {
+    "terms": [
+     "uranium",
+     "nuclear fuel",
+     "nuclear power"
+    ]
+   },
+   "note": ""
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "30050000",
+    "country": "CA",
+    "limit": 25
+   },
+   "note": "node 30050000 Uranium & Nuclear Fuel Cycle; CA returned 0 (Canadian miners list on US exchange rows)"
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "30050000",
+    "country": "US",
+    "limit": 25
+   },
+   "note": "US surface is cross-market (Cameco/NexGen/Denison are CA-domiciled but appear here)"
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "30050000",
+    "country": "AU",
+    "limit": 25
+   },
+   "note": "AU returned 0"
+  }
+ ],
+ "raw_responses": [
+  {
+   "uranium": [
+    {
+     "id": 14030000,
+     "name": "Nuclear Fuel Cycle (Uranium & Enrichment)",
+     "tier": 2
+    },
+    {
+     "id": 14030100,
+     "name": "Uranium Mining & Development",
+     "tier": 3
+    },
+    {
+     "id": 30050000,
+     "name": "Uranium & Nuclear Fuel Cycle",
+     "tier": 2
+    },
+    {
+     "id": 30050100,
+     "name": "Uranium Mining",
+     "tier": 3
+    }
+   ],
+   "nuclear fuel": [
+    {
+     "id": 14030000,
+     "name": "Nuclear Fuel Cycle (Uranium & Enrichment)",
+     "tier": 2
+    },
+    {
+     "id": 30050000,
+     "name": "Uranium & Nuclear Fuel Cycle",
+     "tier": 2
+    },
+    {
+     "id": 30050300,
+     "name": "Nuclear Fuel Fabrication & Fuel Technology",
+     "tier": 3
+    }
+   ],
+   "nuclear power": [
+    {
+     "id": 14010000,
+     "name": "Nuclear Generation & Utilities",
+     "tier": 2
+    },
+    {
+     "id": 14020000,
+     "name": "Advanced Nuclear — SMR & Microreactor",
+     "tier": 2
+    },
+    {
+     "id": 14030000,
+     "name": "Nuclear Fuel Cycle (Uranium & Enrichment)",
+     "tier": 2
+    }
+   ]
+  },
+  {
+   "stocks": [],
+   "count": 0,
+   "total": 0
+  },
+  {
+   "stocks": [
+    {
+     "ticker": "CCJ.US",
+     "domicile": "CA",
+     "name": "Cameco Corp",
+     "market_cap_usd": 46584606720.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": null,
+      "exposure": "core",
+      "confidence": 0.8
+     }
+    },
+    {
+     "ticker": "BWXT.US",
+     "domicile": "US",
+     "name": "BWX Technologies Inc",
+     "market_cap_usd": 13718559744.0,
+     "megatrend": {
+      "node_name": "Nuclear Fuel Fabrication & Fuel Technology",
+      "role": null,
+      "exposure": "core",
+      "confidence": 0.9
+     }
+    },
+    {
+     "ticker": "NXE.US",
+     "domicile": "CA",
+     "name": "NexGen Energy Ltd.",
+     "market_cap_usd": 7420004864.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "UEC.US",
+     "domicile": "US",
+     "name": "Uranium Energy Corp",
+     "market_cap_usd": 6505229824.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "UUUU.US",
+     "domicile": "CA",
+     "name": "Energy Fuels Inc",
+     "market_cap_usd": 3991940864.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "LEU.US",
+     "domicile": "US",
+     "name": "Centrus Energy Corp.",
+     "market_cap_usd": 3858683136.0,
+     "megatrend": {
+      "node_name": "Conversion, Enrichment & Fuel",
+      "role": null,
+      "exposure": "core",
+      "confidence": 0.9
+     }
+    },
+    {
+     "ticker": "DNN.US",
+     "domicile": "CA",
+     "name": "Denison Mines Corp",
+     "market_cap_usd": 3367120640.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "UROY.US",
+     "domicile": "US",
+     "name": "Uranium Royalty Corp",
+     "market_cap_usd": 1688128256.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "beneficiary",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "URG.US",
+     "domicile": "CA",
+     "name": "Ur Energy Inc",
+     "market_cap_usd": 588838272.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "LTBR.US",
+     "domicile": "US",
+     "name": "Lightbridge Corp",
+     "market_cap_usd": 312025888.0,
+     "megatrend": {
+      "node_name": "Nuclear Fuel Fabrication & Fuel Technology",
+      "role": null,
+      "exposure": "core",
+      "confidence": 0.9
+     }
+    },
+    {
+     "ticker": "EU.US",
+     "domicile": "CA",
+     "name": "enCore Energy Corp. Common Shares",
+     "market_cap_usd": 267136336.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "NUCL.US",
+     "domicile": "US",
+     "name": "Eagle Nuclear Energy Corp. Common stock",
+     "market_cap_usd": 212974544.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 0.9
+     }
+    },
+    {
+     "ticker": "AEC.US",
+     "domicile": "CA",
+     "name": "Anfield Energy Inc.",
+     "market_cap_usd": 94961888.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "JAGU.US",
+     "domicile": "CA",
+     "name": "Jaguar Uranium Corp.",
+     "market_cap_usd": 33723604.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": "leader",
+      "exposure": "core",
+      "confidence": 1.0
+     }
+    },
+    {
+     "ticker": "BHP.US",
+     "domicile": "GB",
+     "name": "BHP Group Limited",
+     "market_cap_usd": 250818363392.0,
+     "megatrend": {
+      "node_name": "Uranium Mining",
+      "role": null,
+      "exposure": "secondary",
+      "confidence": 0.8
+     }
+    },
+    {
+     "ticker": "ASPI.US",
+     "domicile": "US",
+     "name": "ASP Isotopes Inc. Common Stock",
+     "market_cap_usd": 613237504.0,
+     "megatrend": {
+      "node_name": "Conversion, Enrichment & Fuel",
+      "role": null,
+      "exposure": "secondary",
+      "confidence": 0.8
+     }
+    },
+    {
+     "ticker": "ATCX.US",
+     "domicile": "MH",
+     "name": "Atlas Critical Minerals Corporation",
+     "market_cap_usd": 18782926.0,
+     "megatrend": {
+      "node_name": "Uranium & Nuclear Fuel Cycle",
+      "role": "beneficiary",
+      "exposure": "secondary",
+      "confidence": 0.9
+     }
+    }
+   ],
+   "count": 17,
+   "total": 17
+  },
+  {
+   "stocks": [],
+   "count": 0,
+   "total": 0
+  }
+ ],
+ "answer_to_user": "Under the Uranium & Nuclear Fuel Cycle megatrend, here's the cross-market player set (all surfaced on the US tape, though many are Canada-domiciled):\n\nUranium MINERS (core): Cameco (CCJ.US, ~$47bn, the big producer), NexGen Energy (NXE.US, ~$7.4bn, leader/developer), Denison Mines (DNN.US, ~$3.4bn), Energy Fuels (UUUU.US, ~$4bn), Uranium Energy Corp (UEC.US, ~$6.5bn), enCore Energy (EU.US), Ur-Energy (URG.US), plus smaller developers Eagle Nuclear (NUCL.US), Anfield (AEC.US) and Jaguar Uranium (JAGU.US). Uranium Royalty Corp (UROY.US) is the royalty/streaming beneficiary. BHP (BHP.US) shows up as a secondary/diversified-miner exposure.\n\nCONVERSION / ENRICHMENT & FUEL: Centrus Energy (LEU.US, ~$3.9bn, the US enrichment name) and ASP Isotopes (ASPI.US). FUEL FABRICATION & TECH: BWX Technologies (BWXT.US, ~$14bn) and Lightbridge (LTBR.US).\n\nSo the nuclear-revival trade spans three legs — mining (Cameco/NexGen/Denison...), enrichment (Centrus), and fuel fabrication (BWXT). Note: Kazatomprom did not appear in coverage; the miner leaders here are the North-American-listed cohort."
+}

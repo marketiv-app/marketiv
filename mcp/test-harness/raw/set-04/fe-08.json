@@ -1,0 +1,2904 @@
+{
+  "id": "fe-08",
+  "question": "ขอบริษัทในเอเชียที่มี ROIC เกิน 15% ต่อเนื่อง, อัตราส่วนหนี้สินต่อทุน (D/E) ต่ำกว่า 0.5 เท่า, และงบดุลแข็งแรง current ratio มากกว่า 2 — เน้นคุณภาพงบดุลและผลตอบแทนจากเงินทุน",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "roic",
+            "pattern": "sustained_above",
+            "threshold": 0.15,
+            "N": 3
+          },
+          {
+            "concept": "debt_to_equity",
+            "pattern": "below",
+            "threshold": 0.5
+          },
+          {
+            "concept": "current_ratio",
+            "pattern": "above",
+            "threshold": 2.0
+          }
+        ],
+        "country": [
+          "CN",
+          "JP",
+          "IN",
+          "KR",
+          "TW",
+          "HK",
+          "SG",
+          "TH",
+          "MY",
+          "ID",
+          "PH",
+          "VN"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "cash": {
+            "definition": "Cash & cash equivalents (IAS 7 / ASC 305: ≤3-month highly-liquid); EXCLUDES marketable / short-term investments (see short_term_investments, cash_and_st_investments). Validated exact vs SEC filings."
+          },
+          "total_debt": {
+            "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "0LCV.LSE",
+            "TSM.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 32.5775,
+              "cash_usd": 98414445200.0,
+              "interest_coverage": 166.043547500485,
+              "invested_capital_usd": 232829901000.0,
+              "market_cap_usd": 1931805975589.6833,
+              "net_debt_ebitda": -0.7006,
+              "net_margin": 0.4992,
+              "operating_income_usd": 78221098700.2,
+              "pe": 27.839513,
+              "quick_ratio": 2.2501,
+              "revenue_usd": 139431486699.8,
+              "roe": 0.3446,
+              "total_debt_usd": 30848835800.0
+            }
+          },
+          "head_listing_id": 1418323,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.4576
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1527
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.5005,
+                "requested_n": 3,
+                "value": 0.3209,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+          "score": 1931805975589.6833,
+          "ticker": "2330.TW"
+        },
+        {
+          "also_known_as": [
+            "MOUTAI80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 1223.8614,
+              "cash_usd": 7074070252.64475,
+              "interest_coverage": 2995.661,
+              "invested_capital_usd": 39279635173.0591,
+              "market_cap_usd": 248974893239.50076,
+              "net_debt_ebitda": -0.3861,
+              "net_margin": 0.4832,
+              "operating_income_usd": 18106910980.0825,
+              "pe": 19.953728,
+              "quick_ratio": 5.4825,
+              "revenue_usd": 27107308793.3083,
+              "roe": 0.3335,
+              "total_debt_usd": 35151125.72875
+            }
+          },
+          "head_listing_id": 228697,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 7.0607
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0009
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4645,
+                "requested_n": 3,
+                "value": 0.4645,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Kweichow Moutai Co Ltd",
+          "score": 248974893239.50076,
+          "ticker": "600519.CG"
+        },
+        {
+          "also_known_as": [
+            "0883.HK",
+            "80883.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": -115.545305526991,
+              "cash_usd": 11251097000.0,
+              "interest_coverage": 27.0662261831592,
+              "invested_capital_usd": 123393270000.0,
+              "market_cap_usd": 231831491143.2704,
+              "net_debt_ebitda": -0.0345127824400331,
+              "net_margin": 0.306569233087238,
+              "operating_income_usd": 24796486000.0,
+              "pe": 13.066148,
+              "quick_ratio": 3.1702,
+              "revenue_usd": 56945460000.0,
+              "roe": 0.157494881629209,
+              "total_debt_usd": 9981400000.0
+            }
+          },
+          "head_listing_id": 229031,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.237
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.087
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1634,
+                "requested_n": 3,
+                "value": 0.1634,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "CNOOC Limited",
+          "score": 231831491143.2704,
+          "ticker": "600938.CG"
+        },
+        {
+          "also_known_as": [
+            "ZJINNO80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 138.7897,
+              "cash_usd": 1770115781.39015,
+              "interest_coverage": 327.6611,
+              "invested_capital_usd": 5283250234.99255,
+              "market_cap_usd": 182256589524.17282,
+              "net_debt_ebitda": -0.5463,
+              "net_margin": 0.2819,
+              "operating_income_usd": 2538691332.05965,
+              "pe": 81.297929,
+              "quick_ratio": 1.5,
+              "revenue_usd": 6890488118.1095,
+              "roe": 0.3764,
+              "total_debt_usd": 249007066.02685
+            }
+          },
+          "head_listing_id": 5825309,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.4613
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0483
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.625,
+                "requested_n": 3,
+                "value": 0.1953,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ZHONGJI INNOLIGHT CO., LTD. - H SHARES",
+          "score": 182256589524.17282,
+          "ticker": "3308.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 138.7897,
+              "cash_usd": 1770115781.39015,
+              "interest_coverage": 327.6611,
+              "invested_capital_usd": 5283250234.99255,
+              "market_cap_usd": 171407332619.05917,
+              "net_debt_ebitda": -0.5463,
+              "net_margin": 0.2819,
+              "operating_income_usd": 2538691332.05965,
+              "pe": 74.592399,
+              "quick_ratio": 1.5,
+              "revenue_usd": 6890488118.1095,
+              "roe": 0.3764,
+              "total_debt_usd": 249007066.02685
+            }
+          },
+          "head_listing_id": 232407,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.4613
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0483
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.625,
+                "requested_n": 3,
+                "value": 0.1953,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shandong Zhongji Electrical Equipment Co Ltd",
+          "score": 171407332619.05917,
+          "ticker": "300308.CS"
+        },
+        {
+          "also_known_as": [
+            "ADVANT23.BK",
+            "ADVANT19.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 142.442181522048,
+              "cash_usd": 2141785800.0,
+              "interest_coverage": 188.625272331155,
+              "invested_capital_usd": 5013073800.0,
+              "market_cap_usd": 157593676070.4327,
+              "net_debt_ebitda": -0.586648712313286,
+              "net_margin": 0.332579899168003,
+              "operating_income_usd": 3144456000.0,
+              "pe": 69.610793,
+              "quick_ratio": 1.8308,
+              "revenue_usd": 7110243000.0,
+              "roe": 0.576461780052447,
+              "total_debt_usd": 127209600.0
+            }
+          },
+          "head_listing_id": 574376,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.5324
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0254
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.9278,
+                "requested_n": 3,
+                "value": 0.1754,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advantest Corp.",
+          "score": 157593676070.4327,
+          "ticker": "6857.JP"
+        },
+        {
+          "also_known_as": [
+            "6288.HK",
+            "UNIQLO80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 33.6696943143806,
+              "cash_usd": 6659232000.0,
+              "interest_coverage": 51.6914446002805,
+              "invested_capital_usd": 16847744000.0,
+              "market_cap_usd": 148530092815.062,
+              "net_debt_ebitda": -0.43157063302648,
+              "net_margin": 0.127335695899974,
+              "operating_income_usd": 3825414800.0,
+              "pe": 48.141659,
+              "quick_ratio": 2.673,
+              "revenue_usd": 23123665200.0,
+              "roe": 0.201885934749921,
+              "total_debt_usd": 3508787200.0
+            }
+          },
+          "head_listing_id": 571335,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.2154
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2083
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2931,
+                "requested_n": 3,
+                "value": 0.2931,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "FAST RETAILING CO., LTD.",
+          "score": 148530092815.062,
+          "ticker": "9983.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 454.3185,
+              "cash_usd": 1138571248.9877,
+              "interest_coverage": 55.9336,
+              "invested_capital_usd": 3863869703.8107,
+              "market_cap_usd": 99549172531.2,
+              "net_debt_ebitda": -1.1918,
+              "net_margin": 0.1718,
+              "operating_income_usd": 488685453.5527,
+              "pe": 237.355932,
+              "quick_ratio": 2.502,
+              "revenue_usd": 2085787573.9514,
+              "roe": 0.1052,
+              "total_debt_usd": 546248956.6597
+            }
+          },
+          "head_listing_id": 230059,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.5612
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1603
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2267,
+                "requested_n": 3,
+                "value": 0.209,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hygon Information Technology Co. Ltd. A",
+          "score": 99549172531.2,
+          "ticker": "688041.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 136.9811,
+              "cash_usd": 1147958197.43955,
+              "interest_coverage": 10848.523,
+              "invested_capital_usd": 2954908618.37875,
+              "market_cap_usd": 95572424726.93759,
+              "net_debt_ebitda": -0.6866,
+              "net_margin": 0.3662,
+              "operating_income_usd": 1738763283.11435,
+              "pe": 64.433137,
+              "quick_ratio": 1.8159,
+              "revenue_usd": 3931259710.5895,
+              "roe": 0.4871,
+              "total_debt_usd": 1988740.0992
+            }
+          },
+          "head_listing_id": 232585,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.9125
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0007
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 1.1561,
+                "requested_n": 3,
+                "value": 0.2285,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eoptolink Technology Inc Ltd",
+          "score": 95572424726.93759,
+          "ticker": "300502.CS"
+        },
+        {
+          "also_known_as": [
+            "NAURA23.BK",
+            "NAURA80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 280.3739,
+              "cash_usd": 2611075384.1451,
+              "interest_coverage": 21.0624,
+              "invested_capital_usd": 7735555567.6034,
+              "market_cap_usd": 82433469553.04959,
+              "net_debt_ebitda": -0.4148,
+              "net_margin": 0.1359,
+              "operating_income_usd": 887127778.6617,
+              "pe": 99.450792,
+              "quick_ratio": 1.2523,
+              "revenue_usd": 5584840714.19685,
+              "roe": 0.1332,
+              "total_debt_usd": 2251335353.5358
+            }
+          },
+          "head_listing_id": 231508,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.3912
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.3951
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1876,
+                "requested_n": 3,
+                "value": 0.1876,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NAURA Technology Group Co Ltd",
+          "score": 82433469553.04959,
+          "ticker": "002371.CS"
+        },
+        {
+          "also_known_as": [
+            "0K6G.LSE",
+            "NETEASE80.BK",
+            "NTES.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 18.5337,
+              "cash_usd": 7368205595.0,
+              "invested_capital_usd": 25473263165.0,
+              "market_cap_usd": 78386732662.78401,
+              "net_debt_ebitda": -0.9904,
+              "net_margin": 0.2984,
+              "operating_income_usd": 5517328445.0,
+              "pe": 15.736074,
+              "quick_ratio": 3.2751,
+              "revenue_usd": 16586338735.0,
+              "roe": 0.2072,
+              "total_debt_usd": 1588541700.0
+            }
+          },
+          "head_listing_id": 53988,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.2846
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0665
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2777,
+                "requested_n": 3,
+                "value": 0.2062,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NetEase Inc",
+          "score": 78386732662.78401,
+          "ticker": "9999.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 203.807753812943,
+              "cash_usd": 10458378000.0,
+              "interest_coverage": 262.821138211382,
+              "invested_capital_usd": 29658654900.0,
+              "market_cap_usd": 77610712775.7591,
+              "net_debt_ebitda": -1.48481869525984,
+              "net_margin": 0.184329725804779,
+              "operating_income_usd": 4001791500.0,
+              "pe": 24.721771,
+              "quick_ratio": 4.4298,
+              "revenue_usd": 16216004700.0,
+              "roe": 0.103969388065912,
+              "total_debt_usd": 1532758500.0
+            }
+          },
+          "head_listing_id": 573787,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 5.9431
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0545
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1689,
+                "requested_n": 3,
+                "value": 0.1689,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shin-Etsu Chemical Co., Ltd.",
+          "score": 77610712775.7591,
+          "ticker": "4063.JP"
+        },
+        {
+          "also_known_as": [
+            "2359.HK",
+            "WUXIAT80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 182.7773,
+              "cash_usd": 5265988145.61153,
+              "interest_coverage": 116.2213,
+              "invested_capital_usd": 13459724552.3469,
+              "market_cap_usd": 73949122776.2688,
+              "net_debt_ebitda": -0.98,
+              "net_margin": 0.4378,
+              "operating_income_usd": 3247680467.38238,
+              "pe": 22.653117,
+              "quick_ratio": 2.1539,
+              "revenue_usd": 7759373986.41816,
+              "roe": 0.2765,
+              "total_debt_usd": 1256823284.13816
+            }
+          },
+          "head_listing_id": 229507,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.5403
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1023
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3983,
+                "requested_n": 3,
+                "value": 0.2119,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "WuXi AppTec Co Ltd",
+          "score": 73949122776.2688,
+          "ticker": "603259.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 230.953490010597,
+              "cash_usd": 3616779600.0,
+              "interest_coverage": 165.574585635359,
+              "invested_capital_usd": 6695016300.0,
+              "market_cap_usd": 55329461360.8695,
+              "net_debt_ebitda": -1.37118467967938,
+              "net_margin": 0.254140206699041,
+              "operating_income_usd": 3472093800.0,
+              "pe": 35.344573,
+              "quick_ratio": 4.1481,
+              "revenue_usd": 6273817200.0,
+              "roe": 0.25378406333872,
+              "total_debt_usd": 266118300.0
+            }
+          },
+          "head_listing_id": 572738,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 4.8116
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0414
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.5238,
+                "requested_n": 3,
+                "value": 0.405,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "HOYA CORPORATION",
+          "score": 55329461360.8695,
+          "ticker": "7741.JP"
+        },
+        {
+          "also_known_as": [
+            "1276.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 102.7026,
+              "cash_usd": 5876398038.3031,
+              "interest_coverage": 702.9864,
+              "invested_capital_usd": 9225808330.7645,
+              "market_cap_usd": 51547621392.383995,
+              "net_debt_ebitda": -4.0796,
+              "net_margin": 0.2688,
+              "operating_income_usd": 1411783257.40565,
+              "pe": 42.92623,
+              "quick_ratio": 8.721,
+              "revenue_usd": 4689748516.13585,
+              "roe": 0.1366,
+              "total_debt_usd": 9783838.4281
+            }
+          },
+          "head_listing_id": 228524,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 9.2331
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0011
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3752,
+                "requested_n": 3,
+                "value": 0.1953,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Jiangsu Hengrui Medicine Co Ltd",
+          "score": 51547621392.383995,
+          "ticker": "600276.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 163.0822,
+              "cash_usd": 5579291490.32704,
+              "interest_coverage": 115.3318,
+              "invested_capital_usd": 12978400450.5351,
+              "market_cap_usd": 47692589344.3584,
+              "net_debt_ebitda": -1.5965,
+              "net_margin": 0.1692,
+              "operating_income_usd": 3075886362.36691,
+              "pe": 19.570552,
+              "quick_ratio": 1.8091,
+              "revenue_usd": 14276976486.2353,
+              "roe": 0.1943,
+              "total_debt_usd": 742044222.05947
+            }
+          },
+          "head_listing_id": 231551,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.5122
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0597
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3231,
+                "requested_n": 3,
+                "value": 0.2825,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hangzhou Hikvision Digital Technology Co Ltd",
+          "score": 47692589344.3584,
+          "ticker": "002415.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 82.878,
+              "cash_usd": 438921843.37215,
+              "interest_coverage": 2643.1543,
+              "invested_capital_usd": 867081198.36185,
+              "market_cap_usd": 46356626862.89919,
+              "net_debt_ebitda": -1.3373,
+              "net_margin": 0.3863,
+              "operating_income_usd": 335915036.90195,
+              "pe": 143.922542,
+              "quick_ratio": 4.8896,
+              "revenue_usd": 729522525.93435,
+              "roe": 0.325,
+              "total_debt_usd": 581748.7406
+            }
+          },
+          "head_listing_id": 232479,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 5.4471
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0007
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.8852,
+                "requested_n": 3,
+                "value": 0.4428,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Suzhou TFC Optical Communication Co Ltd",
+          "score": 46356626862.89919,
+          "ticker": "300394.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 199.9723,
+              "cash_usd": 849625202.4,
+              "interest_coverage": 397.5305,
+              "invested_capital_usd": 1011757593.6,
+              "market_cap_usd": 43951501842.841606,
+              "net_debt_ebitda": -1.9036,
+              "net_margin": 0.5449,
+              "operating_income_usd": 400357651.2,
+              "pe": 124.299403,
+              "quick_ratio": 5.2564,
+              "revenue_usd": 579751099.2,
+              "roe": 0.3212,
+              "total_debt_usd": 66818606.4
+            }
+          },
+          "head_listing_id": 1417809,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 5.4707
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0679
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 1.6229,
+                "requested_n": 3,
+                "value": 0.4523,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "King Slide Works Co Ltd",
+          "score": 43951501842.841606,
+          "ticker": "2059.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 384.1662,
+              "cash_usd": 18017555045.4792,
+              "interest_coverage": 606.941,
+              "invested_capital_usd": 18559517410.9464,
+              "market_cap_usd": 41768612977.0496,
+              "net_debt_ebitda": -7.3924,
+              "net_margin": 0.2723,
+              "operating_income_usd": 2049741320.771,
+              "pe": 22.349208,
+              "quick_ratio": 2.2619,
+              "revenue_usd": 6710711400.09975,
+              "roe": 0.0984,
+              "total_debt_usd": 63960212.2951
+            }
+          },
+          "head_listing_id": 230949,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.5596
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0034
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 1218.9284,
+                "requested_n": 3,
+                "value": 1.7374,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wuliangye Yibin Co Ltd",
+          "score": 41768612977.0496,
+          "ticker": "000858.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 292.6031,
+              "cash_usd": 1501499469.6,
+              "interest_coverage": 16812.6782511211,
+              "invested_capital_usd": 1956812145.6,
+              "market_cap_usd": 36747553105.5104,
+              "net_debt_ebitda": -2.9647,
+              "net_margin": 0.4076,
+              "operating_income_usd": 503080999.2,
+              "pe": 76.432002,
+              "quick_ratio": 3.5176,
+              "revenue_usd": 1023298099.2,
+              "roe": 0.2132,
+              "total_debt_usd": 2575684.8
+            }
+          },
+          "head_listing_id": 1420344,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 4.3984
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0013
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 1.8978,
+                "requested_n": 3,
+                "value": 0.6967,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hon. Precision, Inc.",
+          "score": 36747553105.5104,
+          "ticker": "7769.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 135.732654206178,
+              "cash_usd": 2833784100.0,
+              "interest_coverage": 33.9867267718507,
+              "invested_capital_usd": 12377358000.0,
+              "market_cap_usd": 30952300902.1002,
+              "net_debt_ebitda": -0.428017817116585,
+              "net_margin": 0.122406260818777,
+              "operating_income_usd": 1443260700.0,
+              "pe": 19.234879,
+              "quick_ratio": 1.6385,
+              "revenue_usd": 13375183500.0,
+              "roe": 0.158093682463929,
+              "total_debt_usd": 1893030300.0
+            }
+          },
+          "head_listing_id": 572410,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.4209
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1806
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.206,
+                "requested_n": 3,
+                "value": 0.18,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Daiichi Sankyo Company, Limited",
+          "score": 30952300902.1002,
+          "ticker": "4568.JP"
+        },
+        {
+          "also_known_as": [
+            "3288.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 9.1051,
+              "cash_usd": 3169156965.4155,
+              "interest_coverage": 504.1182,
+              "invested_capital_usd": 6127018285.23905,
+              "market_cap_usd": 30734285389.823997,
+              "net_debt_ebitda": -2.419,
+              "net_margin": 0.2563,
+              "operating_income_usd": 1333996152.07555,
+              "pe": 28.44,
+              "quick_ratio": 5.937,
+              "revenue_usd": 4568306274.4749,
+              "roe": 0.1921,
+              "total_debt_usd": 52727559.4566
+            }
+          },
+          "head_listing_id": 229531,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 6.3081
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0087
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.5403,
+                "requested_n": 3,
+                "value": 0.5403,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Foshan Haitian Flavouring and Food Co Ltd",
+          "score": 30734285389.823997,
+          "ticker": "603288.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 80.8834,
+              "cash_usd": 812561181.34175,
+              "interest_coverage": 477.7535,
+              "invested_capital_usd": 7833071743.91165,
+              "market_cap_usd": 28038716556.902397,
+              "net_debt_ebitda": -0.5904,
+              "net_margin": 0.1155,
+              "operating_income_usd": 1200044064.93515,
+              "pe": 22.634615,
+              "quick_ratio": 1.6168,
+              "revenue_usd": 8911686570.4364,
+              "roe": 0.1327,
+              "total_debt_usd": 93823377.39965
+            }
+          },
+          "head_listing_id": 228622,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.0568
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0121
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2044,
+                "requested_n": 3,
+                "value": 0.2044,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NARI Technology Co Ltd",
+          "score": 28038716556.902397,
+          "ticker": "600406.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 88.1375,
+              "cash_usd": 2579955589.36,
+              "interest_coverage": 365.8763,
+              "invested_capital_usd": 5816049962.275,
+              "market_cap_usd": 26907955945.471996,
+              "net_debt_ebitda": -1.8996,
+              "net_margin": 0.2447,
+              "operating_income_usd": 1385032647.05,
+              "pe": 23.14948,
+              "quick_ratio": 1.9412,
+              "revenue_usd": 4718774530.915,
+              "roe": 0.1986,
+              "total_debt_usd": 49729727.8
+            }
+          },
+          "head_listing_id": 232830,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.3886
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0086
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4209,
+                "requested_n": 3,
+                "value": 0.4209,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shenzhen Mindray Bio-Medical Electronics Co Ltd Class A",
+          "score": 26907955945.471996,
+          "ticker": "300760.CS"
+        },
+        {
+          "also_known_as": [
+            "HANSOH19.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 161.138432765111,
+              "cash_usd": 4511459524.0,
+              "interest_coverage": 2072.65749525617,
+              "invested_capital_usd": 5062908136.0,
+              "market_cap_usd": 25737051045.888004,
+              "net_debt_ebitda": -4.52636487709884,
+              "net_margin": 0.369666038608164,
+              "operating_income_usd": 793222430.0,
+              "pe": 30.427686,
+              "quick_ratio": 7.9515,
+              "revenue_usd": 2149050332.0,
+              "roe": 0.173487893899799,
+              "total_debt_usd": 15028299.0
+            }
+          },
+          "head_listing_id": 52742,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 8.0901
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.003
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 1.1009,
+                "requested_n": 3,
+                "value": 0.3907,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hansoh Pharmaceutical Group Co Ltd",
+          "score": 25737051045.888004,
+          "ticker": "3692.HK"
+        },
+        {
+          "also_known_as": [
+            "2050.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 13.6277,
+              "cash_usd": 2078758567.1986,
+              "interest_coverage": 35.9561,
+              "invested_capital_usd": 5025070595.64205,
+              "market_cap_usd": 24350370026.2912,
+              "net_debt_ebitda": -2.1791,
+              "net_margin": 0.1244,
+              "operating_income_usd": 739394068.9682,
+              "pe": 38.633663,
+              "quick_ratio": 1.905,
+              "revenue_usd": 4497722219.0815,
+              "roe": 0.1182,
+              "total_debt_usd": 583795528.6536
+            }
+          },
+          "head_listing_id": 231206,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.3061
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1234
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2144,
+                "requested_n": 3,
+                "value": 0.1923,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zhejiang Sanhua Co Ltd",
+          "score": 24350370026.2912,
+          "ticker": "002050.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 456.3514,
+              "cash_usd": 691280412.206076,
+              "interest_coverage": 44.2651,
+              "invested_capital_usd": 2454362280.01897,
+              "market_cap_usd": 24147410812.927998,
+              "net_debt_ebitda": -1.1947,
+              "net_margin": 0.2143,
+              "operating_income_usd": 240416266.287032,
+              "pe": 95.310734,
+              "quick_ratio": 2.5421,
+              "revenue_usd": 1078566067.40857,
+              "roe": 0.1074,
+              "total_debt_usd": 366441300.124328
+            }
+          },
+          "head_listing_id": 230094,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.6237
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1702
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1695,
+                "requested_n": 3,
+                "value": 0.1695,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ACM Research Shanghai Inc",
+          "score": 24147410812.927998,
+          "ticker": "688082.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 161.2321,
+              "cash_usd": 319920244.8,
+              "interest_coverage": 173.1849,
+              "invested_capital_usd": 661508390.4,
+              "market_cap_usd": 23728527972.7616,
+              "net_debt_ebitda": -1.3804,
+              "net_margin": 0.2547,
+              "operating_income_usd": 203696313.6,
+              "pe": 121.006118,
+              "quick_ratio": 1.8983,
+              "revenue_usd": 649848919.2,
+              "roe": 0.2504,
+              "total_debt_usd": 3290196.0
+            }
+          },
+          "head_listing_id": 1419129,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.4182
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.005
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4094,
+                "requested_n": 3,
+                "value": 0.2739,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Jentech Precision Industrial Co Ltd",
+          "score": 23728527972.7616,
+          "ticker": "3653.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": -76.7022,
+              "cash_usd": 4036939527.48685,
+              "interest_coverage": 382.428,
+              "invested_capital_usd": 6563873469.1312,
+              "market_cap_usd": 22121827762.176,
+              "net_debt_ebitda": -2.9244,
+              "net_margin": 0.5374,
+              "operating_income_usd": 1250633231.0613,
+              "pe": 14.385389,
+              "quick_ratio": 5.4001,
+              "revenue_usd": 2578761412.62655,
+              "roe": 0.2138,
+              "total_debt_usd": 194850975.28185
+            }
+          },
+          "head_listing_id": 230910,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 5.5881
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0301
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4038,
+                "requested_n": 3,
+                "value": 0.2492,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Qinghai Salt Lake Industry Co.Ltd",
+          "score": 22121827762.176,
+          "ticker": "000792.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 124.5344,
+              "cash_usd": 1304371580.38925,
+              "interest_coverage": 3774.72846950862,
+              "invested_capital_usd": 2598016748.75855,
+              "market_cap_usd": 21638176863.0272,
+              "net_debt_ebitda": -2.8391,
+              "net_margin": 0.2366,
+              "operating_income_usd": 441353681.5807,
+              "pe": 52.169082,
+              "quick_ratio": 3.367,
+              "revenue_usd": 1672175608.07195,
+              "roe": 0.1526,
+              "total_debt_usd": 6502974.935
+            }
+          },
+          "head_listing_id": 229109,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.9315
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0025
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3348,
+                "requested_n": 3,
+                "value": 0.3348,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Jiangsu Hengli Hydraulic Co Ltd",
+          "score": 21638176863.0272,
+          "ticker": "601100.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 303.0228,
+              "cash_usd": 1814470200.1063,
+              "interest_coverage": 1782.2713,
+              "invested_capital_usd": 6528346969.5354,
+              "market_cap_usd": 21605547787.8784,
+              "net_debt_ebitda": -0.6263,
+              "net_margin": 0.3297,
+              "operating_income_usd": 2856696247.4689,
+              "pe": 13.393641,
+              "quick_ratio": 2.1373,
+              "revenue_usd": 6478750619.78385,
+              "roe": 0.3272,
+              "total_debt_usd": 3460595.96225
+            }
+          },
+          "head_listing_id": 228938,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.8672
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0005
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4166,
+                "requested_n": 3,
+                "value": 0.4166,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Shanxi Xinghuacun Fen Wine Factory Co Ltd",
+          "score": 21605547787.8784,
+          "ticker": "600809.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 267.1134,
+              "cash_usd": 1184130079.50735,
+              "interest_coverage": 9.2243,
+              "invested_capital_usd": 3214110353.45505,
+              "market_cap_usd": 21040398308.147198,
+              "net_debt_ebitda": -0.2635,
+              "net_margin": 0.0852,
+              "operating_income_usd": 437994244.1043,
+              "pe": 73.956044,
+              "quick_ratio": 1.9158,
+              "revenue_usd": 2925647820.76105,
+              "roe": 0.101,
+              "total_debt_usd": 1057224771.03315
+            }
+          },
+          "head_listing_id": 231092,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.6113
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.4282
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1578,
+                "requested_n": 3,
+                "value": 0.1578,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China National Uranium Co Ltd",
+          "score": 21040398308.147198,
+          "ticker": "001280.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 125.4577,
+              "cash_usd": 3713520657.6,
+              "interest_coverage": 14240.7673,
+              "invested_capital_usd": 5758434770.4,
+              "market_cap_usd": 20756496606.822403,
+              "net_debt_ebitda": -3.6095,
+              "net_margin": 0.3443,
+              "operating_income_usd": 720906326.4,
+              "pe": 27.630934,
+              "quick_ratio": 3.8308,
+              "revenue_usd": 1841254740.0,
+              "roe": 0.1101,
+              "total_debt_usd": 4881770.4
+            }
+          },
+          "head_listing_id": 1418809,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 4.024
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0008
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3011,
+                "requested_n": 3,
+                "value": 0.3011,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "LARGAN Precision Co Ltd",
+          "score": 20756496606.822403,
+          "ticker": "3008.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 372.0446,
+              "cash_usd": 242206605.01445,
+              "interest_coverage": 116.0013,
+              "invested_capital_usd": 1153456904.841,
+              "market_cap_usd": 20419177552.281597,
+              "net_debt_ebitda": -0.9981,
+              "net_margin": 0.2269,
+              "operating_income_usd": 159421542.2545,
+              "pe": 129.952387,
+              "quick_ratio": 1.2673,
+              "revenue_usd": 667788955.91125,
+              "roe": 0.1354,
+              "total_debt_usd": 70771142.8875
+            }
+          },
+          "head_listing_id": 230129,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.1331
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0632
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2154,
+                "requested_n": 3,
+                "value": 0.2154,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hwatsing Technology Co. Ltd. A",
+          "score": 20419177552.281597,
+          "ticker": "688120.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 1359.134,
+              "cash_usd": 4333486448.4172,
+              "interest_coverage": 100.5468,
+              "invested_capital_usd": 8156401133.7349,
+              "market_cap_usd": 18907673124.864,
+              "net_debt_ebitda": -1.4859,
+              "net_margin": 0.4224,
+              "operating_income_usd": 2148695746.34015,
+              "pe": 12.792593,
+              "quick_ratio": 2.6164,
+              "revenue_usd": 3926956375.78725,
+              "roe": 0.2217,
+              "total_debt_usd": 969573637.38555
+            }
+          },
+          "head_listing_id": 230774,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.8225
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1296
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4178,
+                "requested_n": 3,
+                "value": 0.4178,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Luzhou Lao Jiao Co Ltd",
+          "score": 18907673124.864,
+          "ticker": "000568.CS"
+        },
+        {
+          "also_known_as": [
+            "KNM.LSE",
+            "KONAMI24.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 7.3121,
+              "cash_usd": 1959894400.0,
+              "interest_coverage": 711.8482,
+              "invested_capital_usd": 3842270200.0,
+              "market_cap_usd": 18395441838.2259,
+              "net_debt_ebitda": -1.4178,
+              "net_margin": 0.2143,
+              "operating_income_usd": 951352800.0,
+              "pe": 25.896271,
+              "quick_ratio": 3.7496,
+              "revenue_usd": 3262669400.0,
+              "roe": 0.1945,
+              "total_debt_usd": 247640400.0
+            }
+          },
+          "head_listing_id": 573808,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.9632
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0689
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3827,
+                "requested_n": 3,
+                "value": 0.2772,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "KONAMI Group Corporation",
+          "score": 18395441838.2259,
+          "ticker": "9766.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 7.5445,
+              "cash_usd": 417817103.279048,
+              "interest_coverage": 1798.1391,
+              "invested_capital_usd": 2534788747.90814,
+              "market_cap_usd": 18187819211.1616,
+              "net_debt_ebitda": -0.4287,
+              "net_margin": 1.3267,
+              "operating_income_usd": 306229975.77579,
+              "pe": 21.876033,
+              "quick_ratio": 3.2641,
+              "revenue_usd": 643574516.69313,
+              "roe": 0.3368,
+              "total_debt_usd": 34312604.123116
+            }
+          },
+          "head_listing_id": 230702,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.6257
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0135
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2794,
+                "requested_n": 3,
+                "value": 0.2108,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zangge Holding Co Ltd",
+          "score": 18187819211.1616,
+          "ticker": "000408.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": -165.193,
+              "cash_usd": 155704214.89795,
+              "interest_coverage": 1755.1373,
+              "invested_capital_usd": 2193809450.04385,
+              "market_cap_usd": 17502636575.129597,
+              "net_debt_ebitda": -0.2663,
+              "net_margin": 0.598,
+              "operating_income_usd": 226913455.767,
+              "pe": 33.111396,
+              "quick_ratio": 3.2258,
+              "revenue_usd": 873002190.5712,
+              "roe": 0.238,
+              "total_debt_usd": 5171033.25205
+            }
+          },
+          "head_listing_id": 230120,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.2259
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0024
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1603,
+                "requested_n": 3,
+                "value": 0.1603,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Beijing Kingsoft Office Software In",
+          "score": 17502636575.129597,
+          "ticker": "688111.CG"
+        },
+        {
+          "also_known_as": [
+            "DINRF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 173.532164893783,
+              "cash_usd": 928431000.0,
+              "interest_coverage": 1585.2875,
+              "invested_capital_usd": 3085828200.0,
+              "market_cap_usd": 16094688340.9662,
+              "net_debt_ebitda": -0.999158403937821,
+              "net_margin": 0.151883291401705,
+              "operating_income_usd": 771888600.0,
+              "pe": 28.142531,
+              "quick_ratio": 1.5701,
+              "revenue_usd": 3816212400.0,
+              "roe": 0.202826918222633,
+              "total_debt_usd": 38373300.0
+            }
+          },
+          "head_listing_id": 571387,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.2818
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0125
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2922,
+                "requested_n": 3,
+                "value": 0.2922,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SCREEN Holdings Co., Ltd",
+          "score": 16094688340.9662,
+          "ticker": "7735.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 310.3367,
+              "cash_usd": 122291223.054,
+              "interest_coverage": 595.6421,
+              "invested_capital_usd": 445108700.358,
+              "market_cap_usd": 15636517145.804798,
+              "net_debt_ebitda": -0.7038,
+              "net_margin": 0.3713,
+              "operating_income_usd": 133149926.105,
+              "pe": 122.263748,
+              "quick_ratio": 2.4737,
+              "revenue_usd": 336136436.727,
+              "roe": 0.2804,
+              "total_debt_usd": 1576341.508
+            }
+          },
+          "head_listing_id": 1415091,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 4.1369
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0035
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.5005,
+                "requested_n": 3,
+                "value": 0.3666,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hanmi Semicon",
+          "score": 15636517145.804798,
+          "ticker": "042700.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 106.191334562368,
+              "cash_usd": 2266771500.0,
+              "interest_coverage": 91.4528117359413,
+              "invested_capital_usd": 7232570100.0,
+              "market_cap_usd": 14088155635.1088,
+              "net_debt_ebitda": -1.92387485897306,
+              "net_margin": 0.129840269760575,
+              "operating_income_usd": 1156780800.0,
+              "pe": 17.573943,
+              "quick_ratio": 2.8297,
+              "revenue_usd": 6477477300.0,
+              "roe": 0.121798632367901,
+              "total_debt_usd": 0.0
+            }
+          },
+          "head_listing_id": 573046,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.5283
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1838,
+                "requested_n": 3,
+                "value": 0.1722,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Nitto Denko Corp.",
+          "score": 14088155635.1088,
+          "ticker": "6988.JP"
+        },
+        {
+          "also_known_as": [
+            "316.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 11.6353939349022,
+              "cash_usd": 6243182000.0,
+              "interest_coverage": 84.6706577005084,
+              "invested_capital_usd": 13408568000.0,
+              "market_cap_usd": 13873293259.571201,
+              "net_debt_ebitda": -1.95204184923798,
+              "net_margin": 0.155668185549922,
+              "operating_income_usd": 1160390000.0,
+              "pe": 8.840114,
+              "quick_ratio": 2.8088,
+              "revenue_usd": 9722494000.0,
+              "roe": 0.113564665692558,
+              "total_debt_usd": 1279448000.0
+            }
+          },
+          "head_listing_id": 50544,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.8882
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0954
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2023,
+                "requested_n": 3,
+                "value": 0.2023,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Orient Overseas International Ltd",
+          "score": 13873293259.571201,
+          "ticker": "0316.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 14.5274,
+              "cash_usd": 1306310584.2951,
+              "interest_coverage": 141.967,
+              "invested_capital_usd": 5432617966.72065,
+              "market_cap_usd": 13736901381.324799,
+              "net_debt_ebitda": -0.5913,
+              "net_margin": 0.1306,
+              "operating_income_usd": 1634933272.7508,
+              "pe": 10.654168,
+              "quick_ratio": 2.7015,
+              "revenue_usd": 8907727047.40485,
+              "roe": 0.2251,
+              "total_debt_usd": 343934376.1924
+            }
+          },
+          "head_listing_id": 230921,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.4086
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0665
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2814,
+                "requested_n": 3,
+                "value": 0.191,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Yunnan Aluminium Co Ltd",
+          "score": 13736901381.324799,
+          "ticker": "000807.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 82.1705,
+              "cash_usd": 1337268356.36005,
+              "interest_coverage": 284.7796,
+              "invested_capital_usd": 6120142717.9633,
+              "market_cap_usd": 13177386485.350399,
+              "net_debt_ebitda": -1.2631,
+              "net_margin": 0.1393,
+              "operating_income_usd": 875380046.8153,
+              "pe": 16.881356,
+              "quick_ratio": 2.2722,
+              "revenue_usd": 6291910277.5125,
+              "roe": 0.1436,
+              "total_debt_usd": 46882084.4058
+            }
+          },
+          "head_listing_id": 230749,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.7421
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0077
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1735,
+                "requested_n": 3,
+                "value": 0.1505,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Yunnan Baiyao Group Co Ltd",
+          "score": 13177386485.350399,
+          "ticker": "000538.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 524.3828,
+              "cash_usd": 280991069.7628,
+              "interest_coverage": 561.5207,
+              "invested_capital_usd": 607401858.34735,
+              "market_cap_usd": 12868430765.2608,
+              "net_debt_ebitda": -4.0795,
+              "net_margin": 0.3619,
+              "operating_income_usd": 57982635.94115,
+              "pe": 155.045951,
+              "quick_ratio": 11.449,
+              "revenue_usd": 175936954.8862,
+              "roe": 0.1048,
+              "total_debt_usd": 3218982.4202
+            }
+          },
+          "head_listing_id": 230198,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 12.9477
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0053
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3041,
+                "requested_n": 3,
+                "value": 0.2028,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Beijing Huafeng Test & Control Technology Co Ltd",
+          "score": 12868430765.2608,
+          "ticker": "688200.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 382.8955,
+              "cash_usd": 283739382.1714,
+              "interest_coverage": 82.6936,
+              "invested_capital_usd": 2335406619.35125,
+              "market_cap_usd": 11520405803.827198,
+              "net_debt_ebitda": -0.3333,
+              "net_margin": 0.2289,
+              "operating_income_usd": 376045974.96645,
+              "pe": 40.87619,
+              "quick_ratio": 2.2634,
+              "revenue_usd": 1403435205.69475,
+              "roe": 0.1456,
+              "total_debt_usd": 154863697.60295
+            }
+          },
+          "head_listing_id": 228640,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 5.022
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0702
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1535,
+                "requested_n": 3,
+                "value": 0.1535,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Zhangzhou Pientzehuang Pharmaceutical Co Ltd",
+          "score": 11520405803.827198,
+          "ticker": "600436.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 10.7514152981936,
+              "cash_usd": 216061846.0,
+              "interest_coverage": 103.341092580588,
+              "invested_capital_usd": 1654149497.0,
+              "market_cap_usd": 11269235367.936,
+              "net_debt_ebitda": -0.332294547981101,
+              "net_margin": 0.249063758307405,
+              "operating_income_usd": 238914247.0,
+              "pe": 49.818358,
+              "quick_ratio": 2.6981,
+              "revenue_usd": 850027035.0,
+              "roe": 0.170515258075915,
+              "total_debt_usd": 125717592.0
+            }
+          },
+          "head_listing_id": 52103,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.7453
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.082
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1954,
+                "requested_n": 3,
+                "value": 0.1954,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "WuXi XDC Cayman Inc",
+          "score": 11269235367.936,
+          "ticker": "2268.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": -25.0587,
+              "cash_usd": 1050265868.49755,
+              "interest_coverage": 85.1801,
+              "invested_capital_usd": 2574980973.9214,
+              "market_cap_usd": 11068583378.1248,
+              "net_debt_ebitda": -1.0672,
+              "net_margin": 0.2026,
+              "operating_income_usd": 767347849.6707,
+              "pe": 20.349233,
+              "quick_ratio": 2.5782,
+              "revenue_usd": 2506539908.26565,
+              "roe": 0.2156,
+              "total_debt_usd": 252658922.15835
+            }
+          },
+          "head_listing_id": 231029,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.9128
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1073
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2956,
+                "requested_n": 3,
+                "value": 0.1687,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Yintai Resources Co Ltd",
+          "score": 11068583378.1248,
+          "ticker": "000975.CS"
+        },
+        {
+          "also_known_as": [
+            "MIXUE80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 15.3770369174481,
+              "cash_usd": 1062361300.0,
+              "interest_coverage": 1532.16284729264,
+              "invested_capital_usd": 3500240029.0,
+              "market_cap_usd": 10862427868.364801,
+              "net_debt_ebitda": -0.894138410092014,
+              "net_margin": 0.175408745723284,
+              "operating_income_usd": 1043100201.0,
+              "pe": 12.537474,
+              "quick_ratio": 3.1785,
+              "revenue_usd": 4799068989.0,
+              "roe": 0.298782912310952,
+              "total_debt_usd": 26778466.0
+            }
+          },
+          "head_listing_id": 51962,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.832
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0077
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4249,
+                "requested_n": 3,
+                "value": 0.4249,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "MIXUE Group",
+          "score": 10862427868.364801,
+          "ticker": "2097.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 294.057411198201,
+              "cash_usd": 932412600.0,
+              "interest_coverage": 1275.72413793103,
+              "invested_capital_usd": 1686510000.0,
+              "market_cap_usd": 10816187230.5921,
+              "net_debt_ebitda": -1.80453833720578,
+              "net_margin": 0.279410334502086,
+              "operating_income_usd": 474364800.0,
+              "pe": 31.463172,
+              "quick_ratio": 3.4951,
+              "revenue_usd": 1230799500.0,
+              "roe": 0.220998657902887,
+              "total_debt_usd": 32111100.0
+            }
+          },
+          "head_listing_id": 572372,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 4.585
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.019
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.5571,
+                "requested_n": 3,
+                "value": 0.5571,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Capcom Co., Ltd.",
+          "score": 10816187230.5921,
+          "ticker": "9697.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 7.1511,
+              "cash_usd": 776157575.15095,
+              "interest_coverage": 278.6543,
+              "invested_capital_usd": 2872053192.1909,
+              "market_cap_usd": 10809437475.635199,
+              "net_debt_ebitda": -1.27,
+              "net_margin": 0.2241,
+              "operating_income_usd": 577100758.9619,
+              "pe": 21.534795,
+              "quick_ratio": 5.6369,
+              "revenue_usd": 2039557232.86455,
+              "roe": 0.1591,
+              "total_debt_usd": 17743656.1364
+            }
+          },
+          "head_listing_id": 229280,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 5.9141
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0062
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2956,
+                "requested_n": 3,
+                "value": 0.2882,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Jinduicheng Molybdenum Co Ltd",
+          "score": 10809437475.635199,
+          "ticker": "601958.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 86.2514,
+              "cash_usd": 561227855.4242,
+              "interest_coverage": 37.1708,
+              "invested_capital_usd": 2271643506.02595,
+              "market_cap_usd": 10623220435.3536,
+              "net_debt_ebitda": -0.2554,
+              "net_margin": 0.2595,
+              "operating_income_usd": 825003250.8023,
+              "pe": 19.855596,
+              "quick_ratio": 3.0075,
+              "revenue_usd": 1766025659.46135,
+              "roe": 0.2046,
+              "total_debt_usd": 411986127.29105
+            }
+          },
+          "head_listing_id": 231183,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.009
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.184
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1985,
+                "requested_n": 3,
+                "value": 0.1985,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Focus Media Information Technology Co Ltd",
+          "score": 10623220435.3536,
+          "ticker": "002027.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": -8.2927,
+              "cash_usd": 660190322.1844,
+              "interest_coverage": 375.6377,
+              "invested_capital_usd": 2732014616.18635,
+              "market_cap_usd": 10561642137.1904,
+              "net_debt_ebitda": -0.6915,
+              "net_margin": 0.2622,
+              "operating_income_usd": 672688779.95835,
+              "pe": 17.034632,
+              "quick_ratio": 3.0323,
+              "revenue_usd": 2328232948.04145,
+              "roe": 0.2363,
+              "total_debt_usd": 151649418.2534
+            }
+          },
+          "head_listing_id": 229460,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.301
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0587
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.3326,
+                "requested_n": 3,
+                "value": 0.3326,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Gongniu Group Co Ltd",
+          "score": 10561642137.1904,
+          "ticker": "603195.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 104.725844704673,
+              "cash_usd": 107486393.595,
+              "interest_coverage": 142.8778,
+              "invested_capital_usd": 354606202.776,
+              "market_cap_usd": 10286133673.984,
+              "net_debt_ebitda": -0.1106,
+              "net_margin": 0.1925,
+              "operating_income_usd": 324256926.427,
+              "pe": 40.907186,
+              "quick_ratio": 1.3403,
+              "revenue_usd": 1298267490.093,
+              "roe": 0.7047,
+              "total_debt_usd": 68996497.402
+            }
+          },
+          "head_listing_id": 1415821,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.0286
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1946
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.7962,
+                "requested_n": 3,
+                "value": 0.5071,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "APR LTD",
+          "score": 10286133673.984,
+          "ticker": "278470.KO"
+        },
+        {
+          "also_known_as": [
+            "0668.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 91.8052,
+              "cash_usd": 522180827.3337,
+              "interest_coverage": 52.1608,
+              "invested_capital_usd": 1969714463.5159,
+              "market_cap_usd": 10141471420.8256,
+              "net_debt_ebitda": -0.2275,
+              "net_margin": 0.0751,
+              "operating_income_usd": 438818448.4701,
+              "pe": 25.377877,
+              "quick_ratio": 1.6799,
+              "revenue_usd": 4345588866.0744,
+              "roe": 0.2015,
+              "total_debt_usd": 424635573.95795
+            }
+          },
+          "head_listing_id": 232933,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 2.5635
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2622
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.2984,
+                "requested_n": 3,
+                "value": 0.2485,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Anker Innovations Technology Co Ltd",
+          "score": 10141471420.8256,
+          "ticker": "300866.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 217.007,
+              "cash_usd": 908916496.8,
+              "interest_coverage": 657.0638,
+              "invested_capital_usd": 1346367859.2,
+              "market_cap_usd": 9648316838.707201,
+              "net_debt_ebitda": -3.0055,
+              "net_margin": 0.2259,
+              "operating_income_usd": 157564804.8,
+              "pe": 60.551827,
+              "quick_ratio": 2.8541,
+              "revenue_usd": 768396470.4,
+              "roe": 0.1289,
+              "total_debt_usd": 10190200.8
+            }
+          },
+          "head_listing_id": 1419130,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.4481
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0076
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.5306,
+                "requested_n": 3,
+                "value": 0.405,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alchip Technologies Ltd",
+          "score": 9648316838.707201,
+          "ticker": "3661.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 65.988,
+              "cash_usd": 1526289554.4,
+              "interest_coverage": 2044.8876,
+              "invested_capital_usd": 2244147828.0,
+              "market_cap_usd": 9618445120.307201,
+              "net_debt_ebitda": -2.3113,
+              "net_margin": 0.1659,
+              "operating_income_usd": 574321207.2,
+              "pe": 20.869209,
+              "quick_ratio": 3.1395,
+              "revenue_usd": 3096125042.4,
+              "roe": 0.2288,
+              "total_debt_usd": 17741443.2
+            }
+          },
+          "head_listing_id": 1418896,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.6374
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0079
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.7192,
+                "requested_n": 3,
+                "value": 0.7192,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Novatek Microelectronics Corp",
+          "score": 9618445120.307201,
+          "ticker": "3034.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 29.0809,
+              "cash_usd": 545557431.9629,
+              "interest_coverage": 1184.7456,
+              "invested_capital_usd": 958286473.0977,
+              "market_cap_usd": 9606236381.184,
+              "net_debt_ebitda": -5.037,
+              "net_margin": 0.1828,
+              "operating_income_usd": 104453094.17005,
+              "pe": 101.48227,
+              "quick_ratio": 3.4569,
+              "revenue_usd": 468610448.79555,
+              "roe": 0.0894,
+              "total_debt_usd": 4935683.6607
+            }
+          },
+          "head_listing_id": 232110,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 4.0287
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0052
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.1881,
+                "requested_n": 3,
+                "value": 0.1881,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hebei Sinopack Electronic Technolog",
+          "score": 9606236381.184,
+          "ticker": "003031.CS"
+        },
+        {
+          "also_known_as": [
+            "SANRIO23.BK",
+            "SANRIO80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 85.1221025085866,
+              "cash_usd": 790227900.0,
+              "interest_coverage": 429.318918918919,
+              "invested_capital_usd": 1069229700.0,
+              "market_cap_usd": 9542194435.3302,
+              "net_debt_ebitda": -1.29311266647225,
+              "net_margin": 0.281356910267508,
+              "operating_income_usd": 490555800.0,
+              "pe": 26.687528,
+              "quick_ratio": 3.05,
+              "revenue_usd": 1222754400.0,
+              "roe": 0.415568602531858,
+              "total_debt_usd": 119794500.0
+            }
+          },
+          "head_listing_id": 572941,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.28
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1221
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 1.3305,
+                "requested_n": 3,
+                "value": 0.6327,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sanrio Co. Ltd.",
+          "score": 9542194435.3302,
+          "ticker": "8136.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "cash_conversion_cycle": 37.0625,
+              "cash_usd": 180893803.68505,
+              "interest_coverage": 70.8489,
+              "invested_capital_usd": 329059202.30935,
+              "market_cap_usd": 9437739487.231998,
+              "net_debt_ebitda": -1.2981,
+              "net_margin": 0.1468,
+              "operating_income_usd": 117183198.7472,
+              "pe": 172.440945,
+              "quick_ratio": 2.7606,
+              "revenue_usd": 378389684.24705,
+              "roe": 0.1833,
+              "total_debt_usd": 42161186.02465
+            }
+          },
+          "head_listing_id": 232628,
+          "matched": {
+            "fundamental": {
+              "current_ratio": {
+                "kind": "level",
+                "value": 3.2467
+              },
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1391
+              },
+              "roic": {
+                "kind": "growth",
+                "latest": 0.4893,
+                "requested_n": 3,
+                "value": 0.1543,
+                "window": "min_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Broadex Technologies Co Ltd",
+          "score": 9437739487.231998,
+          "ticker": "300548.CS"
+        }
+      ],
+      "sort": "ta",
+      "universe": 16783,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "กรองหุ้นเอเชีย (จีน ญี่ปุ่น อินเดีย เกาหลี ไต้หวัน ฮ่องกง สิงคโปร์ ไทย มาเลเซีย อินโดฯ ฟิลิปปินส์ เวียดนาม): ROIC เกิน 15% ต่อเนื่อง (sustained_above, N=3), D/E ต่ำกว่า 0.5 เท่า และ current ratio มากกว่า 2 — ครบทั้งสามเงื่อนไข พบ 60 บริษัท อันดับต้นเช่น TSMC (2330.TW), Kweichow Moutai (600519), 3308.HK, 6857.JP, Fast Retailing (9983.JP). ใช้ ROIC จริง (ไม่ใช่ ROE), และ D/E กับ current ratio เป็นอัตราส่วน ไม่ต้องแปลงค่าเงิน — เน้นคุณภาพงบดุลและผลตอบแทนจากเงินลงทุนตามที่ขอ"
+}

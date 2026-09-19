@@ -1,0 +1,704 @@
+{
+  "id": "ne-01",
+  "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "semiconductors"
+      },
+      "note": "resolve GICS code for the semiconductor screen scope"
+    },
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "gics": "453010",
+        "direction": "pos",
+        "window": "7d",
+        "order_by": "news_count",
+        "limit": 10
+      },
+      "note": ""
+    },
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "gics": "453010",
+        "direction": "neg",
+        "window": "7d",
+        "order_by": "news_count",
+        "limit": 10
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "query": "semiconductors",
+      "candidates": [
+        {
+          "code": "4530",
+          "name": "Semiconductors & Semiconductor Equipment",
+          "level": "group"
+        },
+        {
+          "code": "45301020",
+          "name": "Semiconductors",
+          "level": "sub_industry"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "gics": "453010"
+      },
+      "order_by": "news_count",
+      "direction": "pos",
+      "direction_split": {
+        "total": 10,
+        "net_positive": 10,
+        "net_negative": 0,
+        "ambiguous": 0
+      },
+      "stocks": [
+        {
+          "stock_id": 31809,
+          "symbol": "NVDA",
+          "ticker": "NVDA.US",
+          "name": "NVIDIA Corporation",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 5160284192768.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "pricing",
+              "tariff",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 17:20:19.300338+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 165,
+            "pos": 165,
+            "top_reason": "Citi raised EPS estimates and maintains buy rating with $300 PT ahead of earnings",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.48,
+            "pb_ratio": 27.227244,
+            "pe_ratio": 33.650842,
+            "week52_high": 236.2647,
+            "week52_low": 163.8517
+          }
+        },
+        {
+          "stock_id": 29651,
+          "symbol": "MRVL",
+          "ticker": "MRVL.US",
+          "name": "Marvell Technology Group Ltd",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 216030625792.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 17:10:15.588586+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 43,
+            "pos": 43,
+            "top_reason": "Analyst estimates multi-billion-dollar AI opportunities in CXL, DPU, MPU, and Trainium programs, boosting Marvell's growth prospects.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.1,
+            "pb_ratio": 10.382167,
+            "pe_ratio": 74.226804,
+            "week52_high": 329.7986,
+            "week52_low": 61.3094
+          }
+        },
+        {
+          "stock_id": 1414474,
+          "symbol": "000660",
+          "ticker": "000660.KO",
+          "name": "SK Hynix Inc",
+          "country": "Korea",
+          "gic_code": "45301020",
+          "market_cap_usd": 833795597428.36,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 17:20:19.300338+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 37,
+            "pos": 37,
+            "top_reason": "JPMorgan notes SK Hynix may return at least $130B more to shareholders through 2027 via buybacks, supporting the stock.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.09,
+            "pb_ratio": 7.091977,
+            "pe_ratio": 15.572195,
+            "week52_high": 2987000.0,
+            "week52_low": 252311.0969
+          }
+        },
+        {
+          "stock_id": 30067,
+          "symbol": "MU",
+          "ticker": "MU.US",
+          "name": "Micron Technology Inc",
+          "country": "USA",
+          "gic_code": "45301010",
+          "market_cap_usd": 1091874717696.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "supply",
+              "tariff",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 16:20:14.902155+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 29,
+            "pos": 29,
+            "top_reason": "Micron announces $10B investment in new U.S. memory and AI research facility.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.06,
+            "pb_ratio": 10.548508,
+            "pe_ratio": 21.264919,
+            "week52_high": 1254.807,
+            "week52_low": 114.0669
+          }
+        },
+        {
+          "stock_id": 1418323,
+          "symbol": "2330",
+          "ticker": "2330.TW",
+          "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+          "country": "Taiwan",
+          "gic_code": "45301020",
+          "market_cap_usd": 1954263384824.22,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 16:10:21.40349+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 27,
+            "pos": 27,
+            "top_reason": "Reports strong revenue growth driven by surging AI infrastructure demand and advanced node adoption.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.18,
+            "pb_ratio": 9.594849,
+            "pe_ratio": 27.839513,
+            "week52_high": 2535.0,
+            "week52_low": 1129.9384
+          }
+        },
+        {
+          "stock_id": 3311,
+          "symbol": "AVGO",
+          "ticker": "AVGO.US",
+          "name": "Broadcom Inc",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 1697219084288.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 13:30:29.74575+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 22,
+            "pos": 22,
+            "top_reason": "Broadcom's Q2 revenue soared 48% to $22.2B and AI semiconductor revenue surged 143% to $10.8B, with AI revenue expected to reach $16B next quarter.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.72,
+            "pb_ratio": 21.292743,
+            "pe_ratio": 65.296173,
+            "week52_high": 494.1795,
+            "week52_low": 285.0591
+          }
+        },
+        {
+          "stock_id": 1884,
+          "symbol": "AMD",
+          "ticker": "AMD.US",
+          "name": "Advanced Micro Devices Inc",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 782249361408.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 17:30:16.957556+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 16,
+            "pos": 16,
+            "top_reason": "AMD's data center revenue surged 107% YoY and partnerships with Anthropic and Microsoft expand deployment.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 12.284184,
+            "pe_ratio": 129.74359,
+            "week52_high": 584.73,
+            "week52_low": 149.22
+          }
+        },
+        {
+          "stock_id": 22519,
+          "symbol": "INTC",
+          "ticker": "INTC.US",
+          "name": "Intel Corporation",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 462428504064.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "pricing",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 17:30:16.957556+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 15,
+            "pos": 15,
+            "top_reason": "Strong cash flow and revenue growth, improved profitability.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 5.569697,
+            "pe_ratio": null,
+            "week52_high": 142.35,
+            "week52_low": 23.68
+          }
+        },
+        {
+          "stock_id": 40693,
+          "symbol": "SMTC",
+          "ticker": "SMTC.US",
+          "name": "Semtech Corporation",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 11878636544.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 17:10:15.588586+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 13,
+            "pos": 13,
+            "top_reason": "Q2 earnings and revenue beat estimates, EPS $0.71, revenue up 32.7% to $341.9M.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 21.966538,
+            "pe_ratio": null,
+            "week52_high": 177.35,
+            "week52_low": 55.18
+          }
+        },
+        {
+          "stock_id": 230034,
+          "symbol": "688012",
+          "ticker": "688012.CG",
+          "name": "Advanced Micro Fabrication Inc",
+          "country": "China",
+          "gic_code": "45301010",
+          "market_cap_usd": 50632696214.3232,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "supply",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 07:15:27.271527+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 8,
+            "top_reason": "Interim net profit up 300.22% year on year, revenue up 34.89%, and operating cash flow up 237.39%.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.1,
+            "pb_ratio": 15.306207,
+            "pe_ratio": 137.069689,
+            "week52_high": 533.33,
+            "week52_low": 191.88
+          }
+        }
+      ],
+      "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+    },
+    {
+      "scope": {
+        "gics": "453010"
+      },
+      "order_by": "news_count",
+      "direction": "neg",
+      "direction_split": {
+        "total": 10,
+        "net_positive": 0,
+        "net_negative": 10,
+        "ambiguous": 0
+      },
+      "stocks": [
+        {
+          "stock_id": 31809,
+          "symbol": "NVDA",
+          "ticker": "NVDA.US",
+          "name": "NVIDIA Corporation",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 5160284192768.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "pricing",
+              "regulation",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 13:45:35.849577+00",
+            "neg": 36,
+            "net_direction": "neg",
+            "news_count": 36,
+            "pos": 0,
+            "top_reason": "Analyst notes limited upside catalyst and stock's valuation compression ahead of earnings.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.48,
+            "pb_ratio": 27.227244,
+            "pe_ratio": 33.650842,
+            "week52_high": 236.2647,
+            "week52_low": 163.8517
+          }
+        },
+        {
+          "stock_id": 3311,
+          "symbol": "AVGO",
+          "ticker": "AVGO.US",
+          "name": "Broadcom Inc",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 1697219084288.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 13:45:35.849577+00",
+            "neg": 18,
+            "net_direction": "neg",
+            "news_count": 18,
+            "pos": 0,
+            "top_reason": "Critical VMware security vulnerability exploited, causing share drop",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.72,
+            "pb_ratio": 21.292743,
+            "pe_ratio": 65.296173,
+            "week52_high": 494.1795,
+            "week52_low": 285.0591
+          }
+        },
+        {
+          "stock_id": 1884,
+          "symbol": "AMD",
+          "ticker": "AMD.US",
+          "name": "Advanced Micro Devices Inc",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 782249361408.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition"
+            ],
+            "latest_at": "2026-08-25 23:10:33.812848+00",
+            "neg": 8,
+            "net_direction": "neg",
+            "news_count": 8,
+            "pos": 0,
+            "top_reason": "Warrants could dilute nearly 20% of shares and reduce profitability of GPU business.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 12.284184,
+            "pe_ratio": 129.74359,
+            "week52_high": 584.73,
+            "week52_low": 149.22
+          }
+        },
+        {
+          "stock_id": 30067,
+          "symbol": "MU",
+          "ticker": "MU.US",
+          "name": "Micron Technology Inc",
+          "country": "USA",
+          "gic_code": "45301010",
+          "market_cap_usd": 1091874717696.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 04:35:40.181036+00",
+            "neg": 7,
+            "net_direction": "neg",
+            "news_count": 7,
+            "pos": 0,
+            "top_reason": "Report that Apple may buy Chinese memory chips threatens Micron's China business.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.06,
+            "pb_ratio": 10.548508,
+            "pe_ratio": 21.264919,
+            "week52_high": 1254.807,
+            "week52_low": 114.0669
+          }
+        },
+        {
+          "stock_id": 47947,
+          "symbol": "WOLF",
+          "ticker": "WOLF.US",
+          "name": "Wolfspeed, Inc.",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 1314374400.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-20 16:55:25.970557+00",
+            "neg": 6,
+            "net_direction": "neg",
+            "news_count": 6,
+            "pos": 0,
+            "top_reason": "Wider-than-expected FQ4 adjusted loss",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": null,
+            "pe_ratio": null,
+            "week52_high": 80.82,
+            "week52_low": 8.05
+          }
+        },
+        {
+          "stock_id": 232851,
+          "symbol": "300782",
+          "ticker": "300782.CS",
+          "name": "Maxscend Microelectronics Co Ltd",
+          "country": "China",
+          "gic_code": "45301020",
+          "market_cap_usd": 6380920661.6064,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-26 04:15:40.22349+00",
+            "neg": 5,
+            "net_direction": "neg",
+            "news_count": 5,
+            "pos": 0,
+            "top_reason": "Net loss widened year-on-year with lower gross margin and negative ROE.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 4.54058,
+            "pe_ratio": null,
+            "week52_high": 144.9,
+            "week52_low": 64.55
+          }
+        },
+        {
+          "stock_id": 1414474,
+          "symbol": "000660",
+          "ticker": "000660.KO",
+          "name": "SK Hynix Inc",
+          "country": "Korea",
+          "gic_code": "45301020",
+          "market_cap_usd": 833795597428.36,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition"
+            ],
+            "latest_at": "2026-08-26 06:30:35.609028+00",
+            "neg": 5,
+            "net_direction": "neg",
+            "news_count": 5,
+            "pos": 0,
+            "top_reason": "Union rejection of wage deal raises labor cost uncertainty and potential strike risk, weighing on shares.",
+            "top_relevance": 0.9
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.09,
+            "pb_ratio": 7.091977,
+            "pe_ratio": 15.572195,
+            "week52_high": 2987000.0,
+            "week52_low": 252311.0969
+          }
+        },
+        {
+          "stock_id": 36368,
+          "symbol": "QCOM",
+          "ticker": "QCOM.US",
+          "name": "Qualcomm Incorporated",
+          "country": "USA",
+          "gic_code": "45301020",
+          "market_cap_usd": 168625553408.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand"
+            ],
+            "latest_at": "2026-08-24 08:25:37.361091+00",
+            "neg": 4,
+            "net_direction": "neg",
+            "news_count": 4,
+            "pos": 0,
+            "top_reason": "Handset weakness and Apple's modem cause revenue decline and margin pressure.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 2.32,
+            "pb_ratio": 6.121948,
+            "pe_ratio": 18.307429,
+            "week52_high": 258.9635,
+            "week52_low": 121.5411
+          }
+        },
+        {
+          "stock_id": 228847,
+          "symbol": "600703",
+          "ticker": "600703.CG",
+          "name": "Sanan Optoelectronics Co Ltd",
+          "country": "China",
+          "gic_code": "45301020",
+          "market_cap_usd": 9814078449.2544,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-26 04:15:40.22349+00",
+            "neg": 4,
+            "net_direction": "neg",
+            "news_count": 4,
+            "pos": 0,
+            "top_reason": "First-half net loss of 97.9 million yuan, revenue down 28% year on year.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 2.11997,
+            "pe_ratio": null,
+            "week52_high": 23.18,
+            "week52_low": 10.84
+          }
+        },
+        {
+          "stock_id": 229976,
+          "symbol": "605258",
+          "ticker": "605258.CG",
+          "name": "Jiangsu Xiehe Electronic Co.Ltd.",
+          "country": "China",
+          "gic_code": "45301010",
+          "market_cap_usd": 363631507.0464,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital"
+            ],
+            "latest_at": "2026-08-24 09:50:30.06225+00",
+            "neg": 4,
+            "net_direction": "neg",
+            "news_count": 4,
+            "pos": 0,
+            "top_reason": "First-half 2026 net profit and revenue declined year on year.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 1.8,
+            "pb_ratio": 2.00363,
+            "pe_ratio": 40.794118,
+            "week52_high": 39.1328,
+            "week52_low": 20.81
+          }
+        }
+      ],
+      "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+    }
+  ],
+  "answer_to_user": "Over the past week (7d window) in Semiconductors & Semiconductor Equipment (GICS 453010), ranked by news attention:\n\nWINNERS (net-positive news):\n- NVIDIA (NVDA) — by far the most-covered name, 165 net-positive items. Driver: Citi raised EPS estimates and kept a Buy with a $300 PT ahead of Wednesday's earnings; channels span demand, pricing and technology.\n- Marvell (MRVL) — 43 positive items on multi-billion-dollar AI opportunities (CXL, DPU, Trainium).\n- SK Hynix (000660.KO) — 37 positive; JPMorgan flags up to $130B more shareholder returns through 2027.\n- Micron (MU) — 29 positive on a $10B U.S. memory/AI research facility.\n- TSMC (2330.TW) — 27 positive on strong AI-driven revenue; Broadcom (AVGO) 22 on a 48% revenue jump / AI revenue +143%; AMD 16 (data-center +107%, Anthropic/Microsoft deals); Intel (INTC) 15 (cash flow/revenue growth).\n\nLOSERS / AT-RISK (net-negative news):\n- NVIDIA also tops the negative list (36 items) — a genuinely CONTESTED name: analysts flag limited near-term upside catalyst and valuation compression into earnings, plus competition and China-regulation angles.\n- Broadcom (AVGO) — 18 negative on a critical VMware security vulnerability exploited.\n- AMD — 8 negative: warrants could dilute ~20% of shares.\n- Micron — 7 negative on a report Apple may buy Chinese memory chips, threatening its China business.\n- Also net-negative: Wolfspeed (WOLF, wider FQ4 loss), SK Hynix on union/strike risk, Qualcomm (QCOM, handset weakness + Apple modem), and several small China names on H1 losses.\n\nNet read: the group's attention is overwhelmingly bullish and AI-memory-led (NVDA, MRVL, SK Hynix, MU, TSMC), but NVIDIA is the standout two-sided story into its earnings. The window is well-populated (not thin)."
+}

@@ -1,0 +1,1342 @@
+{
+  "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+      "capex": {
+        "sign": "stored NEGATIVE = cash OUTFLOW (capex/dividends/buybacks/debt-repayment spend cash); a BIGGER outflow is MORE negative — do not read the minus as 'less'."
+      }
+    }
+  },
+  "capped": true,
+  "count": 40,
+  "currency": "USD",
+  "results": [
+    {
+      "also_known_as": [
+        "0R1M.LSE",
+        "XONA.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0808,
+          "depreciation_amortization_usd": 29650000000.0,
+          "free_cash_flow_usd": 30553000000.0,
+          "market_cap_usd": 680768110592.0,
+          "net_margin": 0.0907,
+          "operating_cash_flow_usd": 59727000000.0,
+          "pe": 21.307593,
+          "revenue_usd": 361060000000.0
+        }
+      },
+      "head_listing_id": 48736,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -29174000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Exxon Mobil Corp",
+      "score": 680768110592.0,
+      "ticker": "XOM.US"
+    },
+    {
+      "also_known_as": [
+        "AMAT01.BK",
+        "AMAT23.BK",
+        "AP2.XETRA",
+        "0R1A.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0913,
+          "depreciation_amortization_usd": 489000000.0,
+          "free_cash_flow_usd": 5343000000.0,
+          "market_cap_usd": 408357175296.0,
+          "net_margin": 0.2931,
+          "operating_cash_flow_usd": 7993000000.0,
+          "pe": 50.35842,
+          "revenue_usd": 29024000000.0
+        }
+      },
+      "head_listing_id": 1854,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -2650000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Applied Materials Inc",
+      "score": 408357175296.0,
+      "ticker": "AMAT.US"
+    },
+    {
+      "also_known_as": [
+        "3988.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0780199580631123,
+          "depreciation_amortization_usd": 4008862000.0,
+          "free_cash_flow_usd": 143657880000.0,
+          "market_cap_usd": 281926191742.97595,
+          "net_margin": 0.3654,
+          "operating_cash_flow_usd": 152061645000.0,
+          "pe": 8.148649,
+          "revenue_usd": 97332700000.0
+        }
+      },
+      "head_listing_id": 229288,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -8403765000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Bank of China Limited",
+      "score": 281926191742.97595,
+      "ticker": "601988.CG"
+    },
+    {
+      "also_known_as": [
+        "0R01.LSE",
+        "TRVC.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0765141469024679,
+          "depreciation_amortization_usd": 4488000000.0,
+          "free_cash_flow_usd": -24511000000.0,
+          "market_cap_usd": 230899171328.0,
+          "net_margin": 0.1956,
+          "operating_cash_flow_usd": -18297000000.0,
+          "pe": 14.925647,
+          "revenue_usd": 91193000000.0
+        }
+      },
+      "head_listing_id": 5979,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -6214000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Citigroup Inc.",
+      "score": 230899171328.0,
+      "ticker": "C.US"
+    },
+    {
+      "also_known_as": [
+        "CRWD06.BK",
+        "CRWD80.BK",
+        "0A3N.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0761,
+          "depreciation_amortization_usd": 305321000.0,
+          "free_cash_flow_usd": 1431313000.0,
+          "market_cap_usd": 216807768064.0,
+          "net_margin": -0.0048,
+          "operating_cash_flow_usd": 1819179000.0,
+          "revenue_usd": 5094200000.0
+        }
+      },
+      "head_listing_id": 8752,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -387866000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Crowdstrike Holdings Inc",
+      "score": 216807768064.0,
+      "ticker": "CRWD.US"
+    },
+    {
+      "also_known_as": [
+        "0HV2.LSE",
+        "HERMES80.BK",
+        "HMI.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0725579651271795,
+          "depreciation_amortization_usd": 1087772200.0,
+          "free_cash_flow_usd": 4949011100.0,
+          "market_cap_usd": 188604268937.216,
+          "net_margin": 0.282732329229423,
+          "operating_cash_flow_usd": 6312837800.0,
+          "pe": 36.290698,
+          "revenue_usd": 18796374700.0
+        }
+      },
+      "head_listing_id": 1753459,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1363826700.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Hermes International SCA",
+      "score": 188604268937.216,
+      "ticker": "RMS.PA"
+    },
+    {
+      "also_known_as": [
+        "ZJINNO80.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0848,
+          "depreciation_amortization_usd": 121527962.0841,
+          "free_cash_flow_usd": 1159849798.8123,
+          "market_cap_usd": 182256589524.17282,
+          "net_margin": 0.2819,
+          "operating_cash_flow_usd": 1558146040.88429,
+          "pe": 81.297929,
+          "revenue_usd": 6890488118.1095
+        }
+      },
+      "head_listing_id": 5825309,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -584114776.1831
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "ZHONGJI INNOLIGHT CO., LTD. - H SHARES",
+      "score": 182256589524.17282,
+      "ticker": "3308.HK"
+    },
+    {
+      "also_known_as": [
+        "DISNEY19.BK",
+        "0QZO.LSE",
+        "WDP.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.088,
+          "depreciation_amortization_usd": 5529000000.0,
+          "free_cash_flow_usd": 8293000000.0,
+          "market_cap_usd": 179489095680.0,
+          "net_margin": 0.087,
+          "operating_cash_flow_usd": 16989000000.0,
+          "pe": 21.340206,
+          "revenue_usd": 98861000000.0
+        }
+      },
+      "head_listing_id": 10183,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -8696000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Walt Disney Company",
+      "score": 179489095680.0,
+      "ticker": "DIS.US"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0848,
+          "depreciation_amortization_usd": 121527962.0841,
+          "free_cash_flow_usd": 1159849798.8123,
+          "market_cap_usd": 171407332619.05917,
+          "net_margin": 0.2819,
+          "operating_cash_flow_usd": 1558146040.88429,
+          "pe": 74.592399,
+          "revenue_usd": 6890488118.1095
+        }
+      },
+      "head_listing_id": 232407,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -584114776.1831
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Shandong Zhongji Electrical Equipment Co Ltd",
+      "score": 171407332619.05917,
+      "ticker": "300308.CS"
+    },
+    {
+      "also_known_as": [
+        "SMFG.US",
+        "SMFG19.BK",
+        "0LAF.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0824509722159631,
+          "depreciation_amortization_usd": 1833829200.0,
+          "free_cash_flow_usd": -67792151700.0,
+          "market_cap_usd": 165988189182.1293,
+          "net_margin": 0.2733,
+          "operating_cash_flow_usd": -64783775700.0,
+          "pe": 16.752452,
+          "revenue_usd": 36486846900.0
+        }
+      },
+      "head_listing_id": 574395,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -3008376000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Sumitomo Mitsui Financial Group, Inc.",
+      "score": 165988189182.1293,
+      "ticker": "8316.JP"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.085,
+          "depreciation_amortization_usd": 868088083.2,
+          "free_cash_flow_usd": 1676697703.2,
+          "market_cap_usd": 147971658114.6624,
+          "net_margin": 0.11,
+          "operating_cash_flow_usd": 3172473720.0,
+          "pe": 60.105034,
+          "revenue_usd": 17594311581.6
+        }
+      },
+      "head_listing_id": 1417914,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1495776016.8
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Delta Electronics Inc",
+      "score": 147971658114.6624,
+      "ticker": "2308.TW"
+    },
+    {
+      "also_known_as": [
+        "CMBANK23.BK",
+        "3968.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0847469877341075,
+          "depreciation_amortization_usd": 2201056000.0,
+          "free_cash_flow_usd": 74034970000.0,
+          "market_cap_usd": 142310925238.27197,
+          "net_margin": 0.4442,
+          "operating_cash_flow_usd": 77666785000.0,
+          "pe": 6.705779,
+          "revenue_usd": 48702020000.0
+        }
+      },
+      "head_listing_id": 228347,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -3631815000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "China Merchants Bank Co Ltd",
+      "score": 142310925238.27197,
+      "ticker": "600036.CG"
+    },
+    {
+      "also_known_as": [
+        "GLW.SW",
+        "0R2X.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0896,
+          "depreciation_amortization_usd": 1436000000.0,
+          "free_cash_flow_usd": 2395000000.0,
+          "market_cap_usd": 137456074752.0,
+          "net_margin": 0.112,
+          "operating_cash_flow_usd": 3915000000.0,
+          "pe": 73.686636,
+          "revenue_usd": 16964000000.0
+        }
+      },
+      "head_listing_id": 18766,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1520000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Corning Incorporated",
+      "score": 137456074752.0,
+      "ticker": "GLW.US"
+    },
+    {
+      "also_known_as": [
+        "MFG.US"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0738839436181221,
+          "depreciation_amortization_usd": 1520177400.0,
+          "free_cash_flow_usd": -32492149200.0,
+          "market_cap_usd": 131057494164.8406,
+          "net_margin": 0.2892,
+          "operating_cash_flow_usd": -30482757900.0,
+          "pe": 16.962936,
+          "revenue_usd": 27196589700.0
+        }
+      },
+      "head_listing_id": 573670,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -2009391300.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Mizuho Financial Group, Inc.",
+      "score": 131057494164.8406,
+      "ticker": "8411.JP"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0719,
+          "depreciation_amortization_usd": 279223656.96,
+          "free_cash_flow_usd": 426925996.5,
+          "market_cap_usd": 122025102409.728,
+          "net_margin": 0.1182,
+          "operating_cash_flow_usd": 920558373.21,
+          "pe": 112.5,
+          "revenue_usd": 6863760437.49
+        }
+      },
+      "head_listing_id": 49564,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -493632376.71
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Delta Electronics (Thailand) Public Company Limited",
+      "score": 122025102409.728,
+      "ticker": "DELTA.BK"
+    },
+    {
+      "also_known_as": [
+        "0HLQ.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.078597094994686,
+          "depreciation_amortization_usd": 1821000000.0,
+          "free_cash_flow_usd": 1455000000.0,
+          "market_cap_usd": 111227174912.0,
+          "net_margin": 0.2921,
+          "operating_cash_flow_usd": 3305000000.0,
+          "pe": 19.168028,
+          "revenue_usd": 20408000000.0
+        }
+      },
+      "head_listing_id": 5063,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1850000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "The Bank of New York Mellon Corporation",
+      "score": 111227174912.0,
+      "ticker": "BNY.US"
+    },
+    {
+      "also_known_as": [
+        "CAMBRI80.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0794,
+          "depreciation_amortization_usd": 38276650.85387,
+          "free_cash_flow_usd": 204248409.130656,
+          "market_cap_usd": 108316925021.3888,
+          "net_margin": 0.3571,
+          "operating_cash_flow_usd": -71270933.59243,
+          "pe": 221.210816,
+          "revenue_usd": 1423086565.84081
+        }
+      },
+      "head_listing_id": 230244,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -113064044.71582
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Cambricon Technologies Corp Ltd",
+      "score": 108316925021.3888,
+      "ticker": "688256.CG"
+    },
+    {
+      "also_known_as": [
+        "SANOFI80.BK",
+        "SNY.US",
+        "0A2V.LSE",
+        "SNW.XETRA",
+        "0O59.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0757342238205326,
+          "depreciation_amortization_usd": 2382629200.0,
+          "free_cash_flow_usd": 9621892800.0,
+          "market_cap_usd": 107375002476.54399,
+          "net_margin": 0.0809,
+          "operating_cash_flow_usd": 13521363600.0,
+          "pe": 23.752294,
+          "revenue_usd": 55875281800.0
+        }
+      },
+      "head_listing_id": 1753476,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -4156088600.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Sanofi SA",
+      "score": 107375002476.54399,
+      "ticker": "SAN.PA"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0813799652168022,
+          "depreciation_amortization_usd": 247875456.36139,
+          "free_cash_flow_usd": 179916936.53615,
+          "market_cap_usd": 99549172531.2,
+          "net_margin": 0.1718,
+          "operating_cash_flow_usd": 299862286.07621,
+          "pe": 237.355932,
+          "revenue_usd": 2085787573.9514
+        }
+      },
+      "head_listing_id": 230059,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -167308679.47508
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Hygon Information Technology Co. Ltd. A",
+      "score": 99549172531.2,
+      "ticker": "688041.CG"
+    },
+    {
+      "also_known_as": [
+        "7011.JP",
+        "MITSU19.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.079198386420737,
+          "depreciation_amortization_usd": 2099462400.0,
+          "free_cash_flow_usd": -979568100.0,
+          "market_cap_usd": 86345492425.0506,
+          "net_margin": 0.0595896942542248,
+          "operating_cash_flow_usd": 6003345600.0,
+          "pe": 16.753765,
+          "revenue_usd": 88169898600.0
+        }
+      },
+      "head_listing_id": 571570,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -6982913700.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Mitsui & Co.,Ltd",
+      "score": 86345492425.0506,
+      "ticker": "8031.JP"
+    },
+    {
+      "also_known_as": [
+        "0R2M.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0712,
+          "depreciation_amortization_usd": 528600000.0,
+          "free_cash_flow_usd": 3575200000.0,
+          "market_cap_usd": 83418251264.0,
+          "net_margin": 0.2786,
+          "operating_cash_flow_usd": 4681300000.0,
+          "pe": 20.050483,
+          "revenue_usd": 15534700000.0
+        }
+      },
+      "head_listing_id": 37244,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1106100000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Regeneron Pharmaceuticals Inc",
+      "score": 83418251264.0,
+      "ticker": "REGN.US"
+    },
+    {
+      "also_known_as": [
+        "NWG.US",
+        "RYSD.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0771870672526943,
+          "depreciation_amortization_usd": 1540114800.0,
+          "free_cash_flow_usd": 7802604000.0,
+          "market_cap_usd": 76091367103.2832,
+          "net_margin": 0.3627,
+          "operating_cash_flow_usd": 9530227200.0,
+          "pe": 9.292225,
+          "revenue_usd": 23171968200.0
+        }
+      },
+      "head_listing_id": 238963,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1727623200.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "NatWest Group PLC",
+      "score": 76091367103.2832,
+      "ticker": "NWG.LSE"
+    },
+    {
+      "also_known_as": [
+        "0NI1.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0884,
+          "depreciation_amortization_usd": 612219200.0,
+          "free_cash_flow_usd": 446600200.0,
+          "market_cap_usd": 65363470386.7904,
+          "net_margin": 0.0686,
+          "operating_cash_flow_usd": 1499708600.0,
+          "pe": 78.664938,
+          "revenue_usd": 11909719400.0
+        }
+      },
+      "head_listing_id": 243555,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1053108400.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Rheinmetall AG",
+      "score": 65363470386.7904,
+      "ticker": "RHM.XETRA"
+    },
+    {
+      "also_known_as": [
+        "80388.HK",
+        "HKEX23.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0729837860602232,
+          "depreciation_amortization_usd": 201488000.0,
+          "free_cash_flow_usd": 3070379000.0,
+          "market_cap_usd": 65220212758.93761,
+          "net_margin": 0.747694251421352,
+          "operating_cash_flow_usd": 3293069500.0,
+          "pe": 27.298387,
+          "revenue_usd": 3051232500.0
+        }
+      },
+      "head_listing_id": 50610,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -222690500.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Hong Kong Exchange and Clearing Ltd",
+      "score": 65220212758.93761,
+      "ticker": "0388.HK"
+    },
+    {
+      "also_known_as": [
+        "0L9G.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0966,
+          "depreciation_amortization_usd": 766000000.0,
+          "free_cash_flow_usd": 2019000000.0,
+          "market_cap_usd": 52707024896.0,
+          "net_margin": 0.2295,
+          "operating_cash_flow_usd": 3474000000.0,
+          "pe": 16.934687,
+          "revenue_usd": 15056000000.0
+        }
+      },
+      "head_listing_id": 41887,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1455000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "State Street Corp",
+      "score": 52707024896.0,
+      "ticker": "STT.US"
+    },
+    {
+      "also_known_as": [
+        "FITB-PA.US",
+        "0IM1.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0803763745607074,
+          "depreciation_amortization_usd": 618000000.0,
+          "free_cash_flow_usd": 1437000000.0,
+          "market_cap_usd": 51955875840.0,
+          "net_margin": 0.2291,
+          "operating_cash_flow_usd": 2175000000.0,
+          "pe": 19.393939,
+          "revenue_usd": 9483000000.0
+        }
+      },
+      "head_listing_id": 14902,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -738000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Fifth Third Bancorp",
+      "score": 51955875840.0,
+      "ticker": "FITB.US"
+    },
+    {
+      "also_known_as": [
+        "GUI.XETRA",
+        "DGED.LSE",
+        "DEO.US"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0796245986663374,
+          "depreciation_amortization_usd": 1718000000.0,
+          "free_cash_flow_usd": 2685000000.0,
+          "market_cap_usd": 50675144361.1648,
+          "net_margin": 0.116275623610768,
+          "operating_cash_flow_usd": 4297000000.0,
+          "pe": 29.255055,
+          "revenue_usd": 20245000000.0
+        }
+      },
+      "head_listing_id": 237050,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1612000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Diageo PLC",
+      "score": 50675144361.1648,
+      "ticker": "DGE.LSE"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.087,
+          "depreciation_amortization_usd": 131632769.47964,
+          "free_cash_flow_usd": 307856383.27905,
+          "market_cap_usd": 50218447624.60159,
+          "net_margin": 0.1214,
+          "operating_cash_flow_usd": 754129563.23848,
+          "pe": 64.84186,
+          "revenue_usd": 4152645709.0293
+        }
+      },
+      "head_listing_id": 228455,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -361089125.2137
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Shengyi Technology Co Ltd",
+      "score": 50218447624.60159,
+      "ticker": "600183.CG"
+    },
+    {
+      "also_known_as": [
+        "0NXX.LSE",
+        "MBG.SW"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0756,
+          "depreciation_amortization_usd": 8149597000.0,
+          "free_cash_flow_usd": 4068516400.0,
+          "market_cap_usd": 49781649065.984,
+          "net_margin": 0.0366,
+          "operating_cash_flow_usd": 15330608400.0,
+          "pe": 8.535038,
+          "revenue_usd": 149063953200.0
+        }
+      },
+      "head_listing_id": 243171,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -11262092000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Mercedes-Benz Group AG",
+      "score": 49781649065.984,
+      "ticker": "MBG.XETRA"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0869,
+          "depreciation_amortization_usd": 24987722.98451,
+          "free_cash_flow_usd": 127204202.1391,
+          "market_cap_usd": 46356626862.89919,
+          "net_margin": 0.3863,
+          "operating_cash_flow_usd": 267153095.62799,
+          "pe": 143.922542,
+          "revenue_usd": 729522525.93435
+        }
+      },
+      "head_listing_id": 232479,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -63394891.7703
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Suzhou TFC Optical Communication Co Ltd",
+      "score": 46356626862.89919,
+      "ticker": "300394.CS"
+    },
+    {
+      "also_known_as": [
+        "0O26.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.083539108962543,
+          "depreciation_amortization_usd": 3015454900.0,
+          "free_cash_flow_usd": 3065967000.0,
+          "market_cap_usd": 46279088968.4992,
+          "net_margin": 0.065558376517233,
+          "operating_cash_flow_usd": 5887596400.0,
+          "pe": 21.372781,
+          "revenue_usd": 33776149100.0
+        }
+      },
+      "head_listing_id": 1748383,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -2821629400.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Heineken",
+      "score": 46279088968.4992,
+      "ticker": "HEIA.AS"
+    },
+    {
+      "also_known_as": [
+        "0Q89.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0834,
+          "depreciation_amortization_usd": 972000000.0,
+          "free_cash_flow_usd": 2232000000.0,
+          "market_cap_usd": 43708026880.0,
+          "net_margin": 0.2122,
+          "operating_cash_flow_usd": 2885000000.0,
+          "pe": 26.674803,
+          "revenue_usd": 7832000000.0
+        }
+      },
+      "head_listing_id": 44139,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -653000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Thomson Reuters Corporation Common Shares",
+      "score": 43708026880.0,
+      "ticker": "TRI.US"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0499,
+          "depreciation_amortization_usd": 368908000.0,
+          "free_cash_flow_usd": 1114770000.0,
+          "market_cap_usd": 43257405440.0,
+          "net_margin": 0.1944,
+          "operating_cash_flow_usd": 1394102000.0,
+          "pe": 40.0,
+          "revenue_usd": 5602507000.0
+        }
+      },
+      "head_listing_id": 32286,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -279332000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Old Dominion Freight Line Inc",
+      "score": 43257405440.0,
+      "ticker": "ODFL.US"
+    },
+    {
+      "also_known_as": [
+        "0P6N.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0737,
+          "depreciation_amortization_usd": 41216287000.0,
+          "free_cash_flow_usd": -14371160400.0,
+          "market_cap_usd": 43036280955.2896,
+          "net_margin": 0.0262,
+          "operating_cash_flow_usd": 12730961200.0,
+          "pe": 7.133269,
+          "revenue_usd": 367962014400.0
+        }
+      },
+      "head_listing_id": 244186,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -27102121600.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Volkswagen AG",
+      "score": 43036280955.2896,
+      "ticker": "VOW.XETRA"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0737,
+          "depreciation_amortization_usd": 41216287000.0,
+          "free_cash_flow_usd": -14371160400.0,
+          "market_cap_usd": 42677643665.8176,
+          "net_margin": 0.0262,
+          "operating_cash_flow_usd": 12730961200.0,
+          "pe": 6.999041,
+          "revenue_usd": 367962014400.0
+        }
+      },
+      "head_listing_id": 244187,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -27102121600.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Volkswagen AG VZO O.N.",
+      "score": 42677643665.8176,
+      "ticker": "VOW3.XETRA"
+    },
+    {
+      "also_known_as": [
+        "DISCO24.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0806314647427607,
+          "depreciation_amortization_usd": 93372300.0,
+          "free_cash_flow_usd": 619390800.0,
+          "market_cap_usd": 42608125236.852,
+          "net_margin": 0.310195495881105,
+          "operating_cash_flow_usd": 841320900.0,
+          "pe": 50.044145,
+          "revenue_usd": 2752400700.0
+        }
+      },
+      "head_listing_id": 574717,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -221930100.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Disco Corporation",
+      "score": 42608125236.852,
+      "ticker": "6146.JP"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.075,
+          "depreciation_amortization_usd": 631890527.1,
+          "free_cash_flow_usd": 336146986.0,
+          "market_cap_usd": 40840046680.473595,
+          "net_margin": 0.0586,
+          "operating_cash_flow_usd": 1752103277.4,
+          "pe": 35.972208,
+          "revenue_usd": 18878792895.9
+        }
+      },
+      "head_listing_id": 1414919,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -1415956291.4
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Hanwha Aerospace Co Ltd",
+      "score": 40840046680.473595,
+      "ticker": "012450.KO"
+    },
+    {
+      "also_known_as": [
+        "0O0V.LSE",
+        "BMW3.XETRA",
+        "0O0U.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.071,
+          "depreciation_amortization_usd": 10529941800.0,
+          "free_cash_flow_usd": -4879478400.0,
+          "market_cap_usd": 40167371694.4896,
+          "net_margin": 0.0492,
+          "operating_cash_flow_usd": 5633330400.0,
+          "pe": 5.578441,
+          "revenue_usd": 148082803400.0
+        }
+      },
+      "head_listing_id": 241435,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -10512808800.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Bayerische Motoren Werke Aktiengesellschaft",
+      "score": 40167371694.4896,
+      "ticker": "BMW.XETRA"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0661,
+          "depreciation_amortization_usd": 154243000.0,
+          "free_cash_flow_usd": 515901000.0,
+          "market_cap_usd": 38888050688.0,
+          "net_margin": 0.0575,
+          "operating_cash_flow_usd": 776313000.0,
+          "pe": 177.363636,
+          "revenue_usd": 3937254000.0
+        }
+      },
+      "head_listing_id": 280280,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -260412000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Everpure, Inc.",
+      "score": 38888050688.0,
+      "ticker": "P.US"
+    },
+    {
+      "also_known_as": [
+        "0LRK.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_to_revenue": 0.0958,
+          "depreciation_amortization_usd": 641600000.0,
+          "free_cash_flow_usd": 1027200000.0,
+          "market_cap_usd": 35200061440.0,
+          "net_margin": 0.1375,
+          "operating_cash_flow_usd": 1804400000.0,
+          "pe": 32.072019,
+          "revenue_usd": 8115800000.0
+        }
+      },
+      "head_listing_id": 46276,
+      "matched": {
+        "financial": {
+          "capex": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": -777200000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Vulcan Materials Company",
+      "score": 35200061440.0,
+      "ticker": "VMC.US"
+    }
+  ],
+  "sort": "ta",
+  "universe": 24046,
+  "_pagination": {
+    "intended_show": 10,
+    "returned": 40,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+  }
+}

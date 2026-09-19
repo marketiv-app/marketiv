@@ -1,0 +1,22 @@
+{
+  "id": "tn-07",
+  "question": "any crypto near its 52 week low right now?",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["near 52 week high"]},
+      "duration_ms": 1367,
+      "result_summary": "Resolved: pattern='near_low' for 52-week low proximity (within 3% of 52-week low by default). Confirmed by at_new_low and near_low descriptions in supported signals."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "near_low"}]}],
+        "asset_type": ["Crypto"],
+        "limit": 15
+      },
+      "duration_ms": 2300,
+      "result_summary": "Returned 60 (capped) crypto assets near 52-week lows. Results are all .CC exchange tickers (genuine crypto). First hits: ACE22307-USD.CC (ACEToken, RSI 0, ema200 -100%), ACES-USD.CC (Aces, RSI 0, ema200 -30%). Many small-cap cryptos at multi-month lows. Larger names also present in the set."
+    }
+  ]
+}

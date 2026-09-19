@@ -1,0 +1,773 @@
+{
+  "id": "tn-08",
+  "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      }
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "price rose strongly over the past month with rising volume"
+        ]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "net_change_up",
+                "b": "0.15",
+                "window_bars": 21
+              }
+            ],
+            "quals": [
+              {
+                "any": [
+                  {
+                    "pattern": "rising_volume"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "gics": "45",
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "atr_pct": {
+            "definition": "Average True Range ÷ price — volatility as a fraction of price."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 21,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "0J1G.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 34.6113,
+              "atr_pct": 0.0422,
+              "close_vs_ema200": 0.2001,
+              "rsi14": 71.0083
+            }
+          },
+          "head_listing_id": 19887,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.197
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Guidewire Software Inc",
+          "score": 1.0,
+          "ticker": "GWRE.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 15.7632,
+              "atr_pct": 0.0964,
+              "close_vs_ema200": 0.0224,
+              "rsi14": 49.5252
+            }
+          },
+          "head_listing_id": 50396,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.2119
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Kingboard Holdings Ltd",
+          "score": 1.0,
+          "ticker": "0148.HK"
+        },
+        {
+          "also_known_as": [
+            "6869.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 17.7386,
+              "atr_pct": 0.0772,
+              "close_vs_ema200": 0.3445,
+              "rsi14": 57.8406
+            }
+          },
+          "head_listing_id": 229254,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.5388
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Yangtze Optical Fibre and Cable Joint Stock Ltd Co",
+          "score": 1.0,
+          "ticker": "601869.CG"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 27.2686,
+              "atr_pct": 0.0435,
+              "close_vs_ema200": -0.032,
+              "rsi14": 73.9376
+            }
+          },
+          "head_listing_id": 231174,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.209
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Eastcompeace Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "002017.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 27.76,
+              "atr_pct": 0.0523,
+              "close_vs_ema200": 0.2319,
+              "rsi14": 68.3222
+            }
+          },
+          "head_listing_id": 231525,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.3382
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shenzhen Sunyes Electronic Manufacturing Holding Co Ltd",
+          "score": 1.0,
+          "ticker": "002388.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 33.3751,
+              "atr_pct": 0.054,
+              "close_vs_ema200": 0.4174,
+              "rsi14": 73.1553
+            }
+          },
+          "head_listing_id": 231649,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.2234
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shenzhen Infinova Ltd",
+          "score": 1.0,
+          "ticker": "002528.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 48.2081,
+              "atr_pct": 0.0627,
+              "close_vs_ema200": -0.063,
+              "rsi14": 63.029
+            }
+          },
+          "head_listing_id": 232626,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.1712
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shenzhen Emperor Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "300546.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 23.5135,
+              "atr_pct": 0.068,
+              "close_vs_ema200": 0.2589,
+              "rsi14": 63.2956
+            }
+          },
+          "head_listing_id": 232681,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.3326
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shenzhen FRD Science & Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "300602.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 17.0025,
+              "atr_pct": 0.0508,
+              "close_vs_ema200": 0.01,
+              "rsi14": 56.5629
+            }
+          },
+          "head_listing_id": 232955,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.1521
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shenzhen Exc Led Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "300889.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 26.8379,
+              "atr_pct": 0.0544,
+              "close_vs_ema200": -0.1125,
+              "rsi14": 57.6518
+            }
+          },
+          "head_listing_id": 233188,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.159
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ZheJiang ZhongKe Magnetic Co. Ltd. A",
+          "score": 1.0,
+          "ticker": "301141.CS"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 15.3813,
+              "atr_pct": 0.0829,
+              "close_vs_ema200": 0.4693,
+              "rsi14": 60.2322
+            }
+          },
+          "head_listing_id": 233337,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.2741
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Highbroad Advanced Material (Hefei) Co. Ltd. A",
+          "score": 1.0,
+          "ticker": "301321.CS"
+        },
+        {
+          "also_known_as": [
+            "0A7O.LSE"
+          ],
+          "context": {
+            "ta": {
+              "adx": 18.2005,
+              "atr_pct": 0.0564,
+              "close_vs_ema200": -0.2134,
+              "rsi14": 67.963
+            }
+          },
+          "head_listing_id": 29899,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.3871
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "MicroStrategy Incorporated",
+          "score": 1.0,
+          "ticker": "MSTR.US"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 29.15,
+              "atr_pct": 0.0614,
+              "close_vs_ema200": 0.5222,
+              "rsi14": 68.9725
+            }
+          },
+          "head_listing_id": 1417903,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.1854
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Lite-On Technology Corp",
+          "score": 1.0,
+          "ticker": "2301.TW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 20.6676,
+              "atr_pct": 0.0923,
+              "close_vs_ema200": -0.1501,
+              "rsi14": 51.9621
+            }
+          },
+          "head_listing_id": 1418571,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.1732
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ABCO Electronics Co. Ltd",
+          "score": 1.0,
+          "ticker": "036010.KQ"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 21.8806,
+              "atr_pct": 0.0651,
+              "close_vs_ema200": 0.496,
+              "rsi14": 58.5283
+            }
+          },
+          "head_listing_id": 1418807,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.2414
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Elite Semiconductor Memory Technology Inc",
+          "score": 1.0,
+          "ticker": "3006.TW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 23.5521,
+              "atr_pct": 0.0465,
+              "close_vs_ema200": 0.2305,
+              "rsi14": 70.5656
+            }
+          },
+          "head_listing_id": 1418927,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.3235
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "HannsTouch Solution Inc",
+          "score": 1.0,
+          "ticker": "3049.TW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.2242,
+              "atr_pct": 0.0604,
+              "close_vs_ema200": -0.0786,
+              "rsi14": 67.0279
+            }
+          },
+          "head_listing_id": 1419018,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.1849
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Homecast Co.Ltd",
+          "score": 1.0,
+          "ticker": "064240.KQ"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.0039,
+              "atr_pct": 0.1291,
+              "close_vs_ema200": -0.0617,
+              "rsi14": 51.0427
+            }
+          },
+          "head_listing_id": 1420314,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.2634
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Microfriend Inc",
+          "score": 1.0,
+          "ticker": "147760.KQ"
+        },
+        {
+          "also_known_as": [
+            "159010.KO"
+          ],
+          "context": {
+            "ta": {
+              "adx": 18.9888,
+              "atr_pct": 0.108,
+              "close_vs_ema200": 0.7494,
+              "rsi14": 57.5348
+            }
+          },
+          "head_listing_id": 1420333,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.4133
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Asflow Co. Ltd.",
+          "score": 1.0,
+          "ticker": "159010.KQ"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 27.7735,
+              "atr_pct": 0.0722,
+              "rsi14": 59.8767
+            }
+          },
+          "head_listing_id": 1420349,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.3182
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Eternal Precision Mechanics Co., Ltd.",
+          "score": 1.0,
+          "ticker": "7795.TW"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 23.5185,
+              "atr_pct": 0.0461,
+              "close_vs_ema200": 0.0389,
+              "rsi14": 71.2567
+            }
+          },
+          "head_listing_id": 1752735,
+          "matched": {
+            "ta": {
+              "net_change_up": {
+                "detail": {
+                  "ret": 0.2762
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              },
+              "rising_volume": {
+                "kind": "signal"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Virtualware 2007 S.A.",
+          "score": 1.0,
+          "ticker": "ALVIR.PA"
+        }
+      ],
+      "sort": "ta",
+      "universe": 4203,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 21,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 21 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Tech-sector (GICS 45) stocks that rose strongly over the past month WITH rising volume behind the move: GWRE.US (Guidewire Software), 0148.HK (Kingboard Holdings), 601869.CG (Yangtze Optical Fi), 002017.CS (Eastcompeace Techn), 002388.CS (Shenzhen Sunyes El), 002528.CS (Shenzhen Infinova ), 300546.CS (Shenzhen Emperor T), 300602.CS (Shenzhen FRD Scien), 300889.CS (Shenzhen Exc Led T), 301141.CS (ZheJiang ZhongKe M). 21 tech names matched both the ~1-month price gain and the rising-volume confirmation."
+}

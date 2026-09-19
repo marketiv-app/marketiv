@@ -1,0 +1,16 @@
+{
+  "id": "gi03",
+  "question": "how are European banks doing lately? give me a briefing",
+  "tool_calls": [
+    {
+      "tool": "brief",
+      "args": {
+        "gics": "banks",
+        "country": "GB,DE,FR,IT,ES,NL,CH,SE",
+        "window": "30d"
+      }
+    }
+  ],
+  "answer": "European banks (past 30 days, 171 stories across 212 entities): Sentiment is broadly POSITIVE — 70.2% positive news vs 16.4% negative, net direction positive across all five weekly buckets. The pulse strengthened from late August into mid-September before a slight dip in the week of Sep 7 (pos_share 61.9% amid more mixed macro headlines). TOP DRIVERS by aspect: Capital flows dominate (110 stories, net positive — earnings, capital raises, UBS AI capex commentary); Demand (39 stories, strongly positive); Monetary (30 stories, mixed — Fed/BoE rate-hike expectations add upside for NIM but uncertainty on loan demand). Competition is the one net-negative channel (15 neg vs 10 pos). KEY WINNERS (most-covered, net positive): UBS Group (UBSG.SW, 45 hits, pos 23/neg 7 — leading AI capex forecasting narrative + Fed commentary), HSBC Holdings (HSBA.LSE, 25 hits, net pos), Deutsche Bank (DBK.XETRA, 23 hits, net pos), Barclays (BARC.LSE, 21 hits, net pos), Standard Chartered (STAN.LSE, 14 hits, all positive), BNP Paribas (BNP.PA), Commerzbank (CBK.XETRA), Banco Santander (BNC.LSE). LOSERS: ING Groep (INGA.AS, net neg, 3 neg vs 2 pos), Intesa Sanpaolo (IES.XETRA, net neg), Banco BPM (0RLA.LSE, 1 neg). TOP MACRO STORIES: (1) Fed raised rates to 3.75-4% (Chair Warsh hawkish, UBS: more sensitive to financial conditions — positive NIM read for banks); (2) Barclays + JPMorgan expect BoE to hike +25bp in November (inflation >4% projection); (3) UBS raised AI capex forecast to ~$1tn in 2026 (generates significant advisory/financing pipeline). Overall: European banks riding a rate-repricing tailwind with capital and demand aspects firmly positive; main risk is competition pressure and any Middle East-driven energy cost feed-through.",
+  "friction": "none"
+}

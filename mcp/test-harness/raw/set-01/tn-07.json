@@ -1,0 +1,1656 @@
+{
+  "id": "tn-07",
+  "question": "any crypto near its 52 week low right now?",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "near 52-week low"
+        ]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "near_low"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Crypto"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "atr_pct": {
+            "definition": "Average True Range ÷ price — volatility as a fraction of price."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "close_vs_ema200": -1.0,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55662,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ACEToken",
+          "score": 1.0,
+          "ticker": "ACE22307-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 83.9669,
+              "atr_pct": 0.0075,
+              "close_vs_ema200": -0.3094,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55664,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Aces",
+          "score": 1.0,
+          "ticker": "ACES-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.6147,
+              "atr_pct": 0.0004,
+              "close_vs_ema200": -0.2135,
+              "rsi14": 0.0498
+            }
+          },
+          "head_listing_id": 55667,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Acoin",
+          "score": 1.0,
+          "ticker": "ACOIN-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 94.8419,
+              "atr_pct": 0.0248,
+              "close_vs_ema200": -0.6887,
+              "rsi14": 3.0916
+            }
+          },
+          "head_listing_id": 55669,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Achain",
+          "score": 1.0,
+          "ticker": "ACT-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 82.7326,
+              "atr_pct": 0.0079,
+              "close_vs_ema200": -0.3086,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55674,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "AudioCoin",
+          "score": 1.0,
+          "ticker": "ADC-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 70.4288,
+              "rsi14": 7.992
+            }
+          },
+          "head_listing_id": 55677,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Arbidoge",
+          "score": 1.0,
+          "ticker": "ADOGE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 94.4759,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0064,
+              "rsi14": 96.5979
+            }
+          },
+          "head_listing_id": 55681,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Adzcoin",
+          "score": 1.0,
+          "ticker": "ADZ-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55699,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ArbDoge AI",
+          "score": 1.0,
+          "ticker": "AIDOGE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.1735,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0169,
+              "rsi14": 62.3621
+            }
+          },
+          "head_listing_id": 55731,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Aureus Nummus Gold",
+          "score": 1.0,
+          "ticker": "ANG-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "atr_pct": 0.0027,
+              "close_vs_ema200": -0.2287,
+              "rsi14": 0.0024
+            }
+          },
+          "head_listing_id": 55755,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ARbit",
+          "score": 1.0,
+          "ticker": "ARB-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 5.0571,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0006,
+              "rsi14": 51.4181
+            }
+          },
+          "head_listing_id": 55764,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Argus",
+          "score": 1.0,
+          "ticker": "ARGUS-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 71.1727,
+              "atr_pct": 0.1449,
+              "close_vs_ema200": -0.4452,
+              "rsi14": 38.2737
+            }
+          },
+          "head_listing_id": 55773,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ARCS",
+          "score": 1.0,
+          "ticker": "ARX-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.204,
+              "rsi14": 1.9739
+            }
+          },
+          "head_listing_id": 55774,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "AllSafe",
+          "score": 1.0,
+          "ticker": "ASAFE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 6.9259,
+              "atr_pct": 0.0035,
+              "close_vs_ema200": -0.1241,
+              "rsi14": 54.2346
+            }
+          },
+          "head_listing_id": 55777,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ASPO World",
+          "score": 1.0,
+          "ticker": "ASPO-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.9978,
+              "atr_pct": 0.0003,
+              "close_vs_ema200": -0.1212,
+              "rsi14": 0.0154
+            }
+          },
+          "head_listing_id": 55783,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ATBCoin",
+          "score": 1.0,
+          "ticker": "ATB-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 77.7204,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0121,
+              "rsi14": 10.8631
+            }
+          },
+          "head_listing_id": 55785,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ATLANT",
+          "score": 1.0,
+          "ticker": "ATL-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.9242,
+              "atr_pct": 0.0007,
+              "close_vs_ema200": -0.4577,
+              "rsi14": 0.0298
+            }
+          },
+          "head_listing_id": 55799,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "AvatarCoin",
+          "score": 1.0,
+          "ticker": "AV-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55823,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BabyDoge ETH",
+          "score": 1.0,
+          "ticker": "BABYDOGE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.5624,
+              "atr_pct": 0.0377,
+              "close_vs_ema200": -0.3549,
+              "rsi14": 12.5671
+            }
+          },
+          "head_listing_id": 55824,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BitAlphaCoin",
+          "score": 1.0,
+          "ticker": "BAC-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55825,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bad Idea AI",
+          "score": 1.0,
+          "ticker": "BAD-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55830,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Shambala",
+          "score": 1.0,
+          "ticker": "BALA-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.3103,
+              "rsi14": 0.6895
+            }
+          },
+          "head_listing_id": 55836,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Capybara Nation",
+          "score": 1.0,
+          "ticker": "BARA34141-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55858,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bento USD",
+          "score": 1.0,
+          "ticker": "BENTO-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 82.7326,
+              "atr_pct": 0.0079,
+              "close_vs_ema200": -0.3086,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55861,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BERNcash",
+          "score": 1.0,
+          "ticker": "BERN-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55864,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bezoge Earth",
+          "score": 1.0,
+          "ticker": "BEZOGE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "atr_pct": 0.0006,
+              "close_vs_ema200": -0.1402,
+              "rsi14": 0.0085
+            }
+          },
+          "head_listing_id": 55865,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bitforex",
+          "score": 1.0,
+          "ticker": "BF-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 98.3396,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0229,
+              "rsi14": 0.8302
+            }
+          },
+          "head_listing_id": 55891,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BIZZCOIN",
+          "score": 1.0,
+          "ticker": "BIZZ-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 5.06,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0006,
+              "rsi14": 51.4181
+            }
+          },
+          "head_listing_id": 55894,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BlazerCoin",
+          "score": 1.0,
+          "ticker": "BLAZR-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 74.9866,
+              "atr_pct": 0.011,
+              "close_vs_ema200": -0.2992,
+              "rsi14": 2.1691
+            }
+          },
+          "head_listing_id": 55901,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BlueCoin",
+          "score": 1.0,
+          "ticker": "BLU-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55910,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BNBTiger",
+          "score": 1.0,
+          "ticker": "BNBTIGER-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55933,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bitgert USD",
+          "score": 1.0,
+          "ticker": "BRISE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55939,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Magic beasties",
+          "score": 1.0,
+          "ticker": "BSTS-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 13.3809,
+              "close_vs_ema200": -1.0,
+              "rsi14": 38.6728
+            }
+          },
+          "head_listing_id": 55959,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BitTorrent",
+          "score": 1.0,
+          "ticker": "BTT-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "atr_pct": 0.0032,
+              "close_vs_ema200": -0.2659,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55961,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bubble",
+          "score": 1.0,
+          "ticker": "BUB-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.3191,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0006,
+              "rsi14": 49.2052
+            }
+          },
+          "head_listing_id": 55963,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BunnyToken",
+          "score": 1.0,
+          "ticker": "BUNNY-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 37.0127,
+              "atr_pct": 0.0034,
+              "close_vs_ema200": 0.0015,
+              "rsi14": 61.3163
+            }
+          },
+          "head_listing_id": 55965,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Binance USD",
+          "score": 1.0,
+          "ticker": "BUSD-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 74.6485,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0014,
+              "rsi14": 80.293
+            }
+          },
+          "head_listing_id": 55967,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BUZZCoin",
+          "score": 1.0,
+          "ticker": "BUZZ-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 5.0543,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0006,
+              "rsi14": 51.4205
+            }
+          },
+          "head_listing_id": 55972,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Coin2.1",
+          "score": 1.0,
+          "ticker": "C2-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 27.5365,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.001,
+              "rsi14": 42.942
+            }
+          },
+          "head_listing_id": 55973,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CRYPTO20",
+          "score": 1.0,
+          "ticker": "C20-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 95.0745,
+              "atr_pct": 0.0014,
+              "close_vs_ema200": -0.1741,
+              "rsi14": 15.0168
+            }
+          },
+          "head_listing_id": 55976,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cabbage",
+          "score": 1.0,
+          "ticker": "CAB-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 39.5568,
+              "atr_pct": 0.002,
+              "close_vs_ema200": -0.1503,
+              "rsi14": 27.3808
+            }
+          },
+          "head_listing_id": 55977,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Crypto Asset Governance Alliance",
+          "score": 1.0,
+          "ticker": "CAGA-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55979,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Candylad",
+          "score": 1.0,
+          "ticker": "CANDYLAD-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 100.0,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0048,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55982,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Carboncoin",
+          "score": 1.0,
+          "ticker": "CARBON-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 55984,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Catgirl",
+          "score": 1.0,
+          "ticker": "CATGIRL-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.979,
+              "atr_pct": 0.0346,
+              "close_vs_ema200": -0.6751,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55998,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Californium",
+          "score": 1.0,
+          "ticker": "CF-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 56005,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ChainCade",
+          "score": 1.0,
+          "ticker": "CHAINCADE-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 14.0376,
+              "atr_pct": 0.0195,
+              "close_vs_ema200": -0.4005,
+              "rsi14": 44.6911
+            }
+          },
+          "head_listing_id": 56007,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cheelee USD",
+          "score": 1.0,
+          "ticker": "CHEEL-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 5.0571,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0006,
+              "rsi14": 51.418
+            }
+          },
+          "head_listing_id": 56022,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cryptojacks",
+          "score": 1.0,
+          "ticker": "CJ-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.83,
+              "atr_pct": 0.0006,
+              "close_vs_ema200": -0.0003,
+              "rsi14": 53.0373
+            }
+          },
+          "head_listing_id": 56029,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cexlt",
+          "score": 1.0,
+          "ticker": "CLT-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.8928,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0399,
+              "rsi14": 0.1125
+            }
+          },
+          "head_listing_id": 56033,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Coinsbit Token",
+          "score": 1.0,
+          "ticker": "CNB-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 5.0571,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0006,
+              "rsi14": 51.4181
+            }
+          },
+          "head_listing_id": 56037,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Centurion",
+          "score": 1.0,
+          "ticker": "CNT-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 95.7859,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0967,
+              "rsi14": 3.3061
+            }
+          },
+          "head_listing_id": 56039,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "ColossusXT",
+          "score": 1.0,
+          "ticker": "COLX-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 5.2478,
+              "atr_pct": 0.0,
+              "close_vs_ema200": 0.0006,
+              "rsi14": 51.3187
+            }
+          },
+          "head_listing_id": 56044,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Concoin",
+          "score": 1.0,
+          "ticker": "CONX-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.8888,
+              "atr_pct": 0.0237,
+              "rsi14": 28.1595
+            }
+          },
+          "head_listing_id": 56045,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "mETH Protocol",
+          "score": 1.0,
+          "ticker": "COOK33720-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 1.9405,
+              "close_vs_ema200": -1.0,
+              "rsi14": 43.484
+            }
+          },
+          "head_listing_id": 56046,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Coq Inu",
+          "score": 1.0,
+          "ticker": "COQ-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 56050,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "The Corgi of PolkaBridge",
+          "score": 1.0,
+          "ticker": "CORGIB-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 0.0,
+              "rsi14": 100.0
+            }
+          },
+          "head_listing_id": 56058,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Cockapoo",
+          "score": 1.0,
+          "ticker": "CPOO-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.9999,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0607,
+              "rsi14": 0.3325
+            }
+          },
+          "head_listing_id": 56067,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Crypterium",
+          "score": 1.0,
+          "ticker": "CRPT-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 33.314,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0078,
+              "rsi14": 33.0767
+            }
+          },
+          "head_listing_id": 56072,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Crown",
+          "score": 1.0,
+          "ticker": "CRW-USD.CC"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 99.9998,
+              "atr_pct": 0.0,
+              "close_vs_ema200": -0.0814,
+              "rsi14": 0.0
+            }
+          },
+          "head_listing_id": 55646,
+          "matched": {
+            "ta": {
+              "near_low": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "2GIVE",
+          "score": 1.0,
+          "ticker": "2GIVE-USD.CC"
+        }
+      ],
+      "sort": "ta",
+      "universe": 2154,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Cryptocurrencies trading near their 52-week low right now: ACE22307, ACES, ACOIN, ACT, ADC, ADOGE, ADZ, AIDOGE, ANG, ARB, ARGUS, ARX. These are all crypto (.CC) sitting at/near their yearly low (RSI near 0, price well below the 200-day). ~60 coins are near a 52-week low — near a low can mean deep value or a broken trend, so check each one's story."
+}

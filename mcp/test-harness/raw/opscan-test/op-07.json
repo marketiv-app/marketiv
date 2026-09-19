@@ -1,0 +1,68 @@
+{
+  "id": "op-07",
+  "question": "Which crowded, one-sided names look most vulnerable to a squeeze or unwind?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "crowded one-sided names vulnerable to squeeze or unwind"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "crowded_one_sided",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "crowded one-sided names vulnerable to squeeze or unwind",
+          "candidates": [
+            {
+              "pattern": "crowded_one_sided",
+              "label": "Crowded / one-sided",
+              "supported": "yes",
+              "description": "Extreme one-sided positioning either way — unwind/squeeze risk."
+            },
+            {
+              "pattern": "short_gamma_unstable",
+              "label": "Short-gamma / unstable",
+              "supported": "yes",
+              "description": "Dealers net short gamma → moves get amplified."
+            },
+            {
+              "pattern": "fear_building",
+              "label": "Fear building (crash-pricing)",
+              "supported": "yes",
+              "description": "Put-skew unusually elevated vs own history — the market pricing downside fear."
+            },
+            {
+              "pattern": "pinned_max_pain",
+              "label": "Pinned to max-pain",
+              "supported": "yes",
+              "description": "Spot near max-pain → pinning into expiry."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "crowded_one_sided",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "There's a purpose-built pattern for this — `crowded_one_sided` (extreme one-sided positioning → unwind/squeeze risk), which the MCP matched exactly. But the scanner that returns the actual vulnerable names isn't built yet (POC stub), so I can't produce the list. The concept is supported; the data endpoint isn't live."
+}

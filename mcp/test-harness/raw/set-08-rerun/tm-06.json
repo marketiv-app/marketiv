@@ -1,0 +1,1153 @@
+{
+ "id": "tm-06",
+ "question": "I'm hunting small-cap biotech in China — early-stage names, not the big pharma. What's out there?",
+ "tools_called": [
+  {
+   "tool": "find_gics",
+   "args": {
+    "q": "biotechnology"
+   },
+   "note": "picked industry code 352010 (Biotechnology)"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "gics": "352010",
+    "country": [
+     "CN"
+    ],
+    "size": [
+     "small",
+     "micro"
+    ],
+    "limit": 20
+   },
+   "note": "400 error: 'needs at least one of fundamental or ta'; retried with a fundamental leg"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "revenue",
+      "pattern": "low"
+     }
+    ],
+    "gics": "352010",
+    "country": [
+     "CN"
+    ],
+    "size": [
+     "small",
+     "micro"
+    ],
+    "limit": 25
+   },
+   "note": "revenue 'low' expresses early-stage; scoped biotech GICS 352010 + China + small/micro size tiers (excludes mega-cap pharma)"
+  }
+ ],
+ "raw_responses": [
+  {
+   "query": "biotechnology",
+   "candidates": [
+    {
+     "code": "352010",
+     "name": "Biotechnology",
+     "level": "industry"
+    },
+    {
+     "code": "35201010",
+     "name": "Biotechnology",
+     "level": "sub_industry"
+    }
+   ]
+  },
+  {
+   "error": "screen_unified needs at least one of `fundamental` or `ta` — it returns the INTERSECTION of a financial screen and a technical screen within a scope. For a plain universe list (gics/country/size only, no financial or technical filter) use screen_stocks instead."
+  },
+  {
+   "capped": false,
+   "count": 39,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -36678823.02755,
+       "gross_margin": 0.9257,
+       "market_cap_usd": 1865190882.304,
+       "net_income_usd": -43395650.04385,
+       "net_margin": -4.3946,
+       "operating_margin": -4.4447
+      }
+     },
+     "head_listing_id": 230355,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 9874848.7743
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "InventisBio Co. Ltd. A",
+     "score": 1865190882.304,
+     "ticker": "688382.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -66630855.3174,
+       "gross_margin": 0.8514,
+       "market_cap_usd": 1443209244.9792,
+       "net_income_usd": -93053528.701,
+       "net_margin": -4.7253,
+       "operating_margin": -4.785
+      }
+     },
+     "head_listing_id": 230389,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 19692439.16125
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Chongqing Genrix Biopharmaceutical Co. Ltd. A",
+     "score": 1443209244.9792,
+     "ticker": "688443.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -59880964.0,
+       "gross_margin": 0.259861932938856,
+       "market_cap_usd": 1400538914.6112,
+       "net_income_usd": -51462840.0,
+       "net_margin": -177.455621301775,
+       "operating_margin": -220.165680473373
+      }
+     },
+     "head_listing_id": 51632,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 290004.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ascletis Pharma Inc",
+     "score": 1400538914.6112,
+     "ticker": "1672.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -12533664.0,
+       "market_cap_usd": 1266674023.0144002,
+       "net_income_usd": -21913892.0
+      }
+     },
+     "head_listing_id": 2933167,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "TENNOR THERAP-B",
+     "score": 1266674023.0144002,
+     "ticker": "6872.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -34753004.0,
+       "gross_margin": 0.636214607439003,
+       "market_cap_usd": 1067169977.0368001,
+       "net_income_usd": -13994123.0,
+       "net_margin": -0.778763667616304,
+       "operating_margin": -1.81682608903248
+      }
+     },
+     "head_listing_id": 52026,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 17969666.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "CARsgen Therapeutics Holdings Ltd",
+     "score": 1067169977.0368001,
+     "ticker": "2171.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -17997244.80215,
+       "gross_margin": 0.9927,
+       "market_cap_usd": 822654391.7055999,
+       "net_income_usd": -13561793.1832,
+       "net_margin": -2.5507,
+       "operating_margin": -3.0108
+      }
+     },
+     "head_listing_id": 230195,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 5316798.3228
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shouyao Holdings (Beijing) Co. Ltd. A",
+     "score": 822654391.7055999,
+     "ticker": "688197.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -36110932.0,
+       "gross_margin": 0.644537587885343,
+       "market_cap_usd": 812294442.0864,
+       "net_income_usd": -35107787.0,
+       "net_margin": -4.74211929228154,
+       "operating_margin": -4.1921308815576
+      }
+     },
+     "head_listing_id": 52326,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 7403396.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Xuanzhu Biopharm Co Ltd",
+     "score": 812294442.0864,
+     "ticker": "2575.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -15929889.805,
+       "gross_margin": 0.6839,
+       "market_cap_usd": 709534169.9072,
+       "net_income_usd": -12144048.93635,
+       "net_margin": -0.5819,
+       "operating_margin": -0.4548
+      }
+     },
+     "head_listing_id": 230144,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 20869255.1636
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Suzhou Novoprotein Scientific Co. Ltd. A",
+     "score": 709534169.9072,
+     "ticker": "688137.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -47678059.0,
+       "gross_margin": 0.890043941736512,
+       "market_cap_usd": 684081495.552,
+       "net_income_usd": -56528186.0,
+       "net_margin": -8.04178533647978,
+       "operating_margin": -7.43109691594109
+      }
+     },
+     "head_listing_id": 311436,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 7029308.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shanghai Bao Pharmaceuticals Co., Ltd.",
+     "score": 684081495.552,
+     "ticker": "2659.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -23640017.97295,
+       "gross_margin": 0.992,
+       "market_cap_usd": 560195149.2608,
+       "net_income_usd": -18826892.1678,
+       "net_margin": -3.5758,
+       "operating_margin": -3.9988
+      }
+     },
+     "head_listing_id": 230285,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 5265049.77885
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hinova Pharmaceuticals Inc. A",
+     "score": 560195149.2608,
+     "ticker": "688302.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -11610595.2486,
+       "gross_margin": 0.7624,
+       "market_cap_usd": 555296285.3632,
+       "net_income_usd": 3062494.42835,
+       "net_margin": 0.1418,
+       "operating_margin": 0.1392,
+       "pe": 76.673913
+      }
+     },
+     "head_listing_id": 230164,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 21602132.97445
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shanghai Serum Bio-Technology Co. Ltd. A",
+     "score": 555296285.3632,
+     "ticker": "688163.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -36275525.0,
+       "market_cap_usd": 531742959.82080007,
+       "net_income_usd": -42322852.0
+      }
+     },
+     "head_listing_id": 52362,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "TransThera Sciences (Nanjing)",
+     "score": 531742959.82080007,
+     "ticker": "2617.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -30417816.0,
+       "gross_margin": 0.988921064922933,
+       "market_cap_usd": 526149394.53440005,
+       "net_income_usd": -20875283.0,
+       "net_margin": -2.7273423633816,
+       "operating_margin": -3.10578234469874
+      }
+     },
+     "head_listing_id": 51232,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 7654075.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jacobio Pharmaceuticals Group Co Lt",
+     "score": 526149394.53440005,
+     "ticker": "1167.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -86014500.0,
+       "gross_margin": 0.882759704541883,
+       "market_cap_usd": 407185239.55200005,
+       "net_income_usd": -87285770.0,
+       "net_margin": -47.964010686783,
+       "operating_margin": -46.0822725129656
+      }
+     },
+     "head_listing_id": 52033,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 1819818.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jiangsu Recbio Technology Co Ltd",
+     "score": 407185239.55200005,
+     "ticker": "2179.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -13425269.0,
+       "gross_margin": 0.809780826282105,
+       "market_cap_usd": 398229716.6848,
+       "net_income_usd": -32792474.0,
+       "net_margin": -2.14880199402168,
+       "operating_margin": -2.472680591085
+      }
+     },
+     "head_listing_id": 51971,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 15260817.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Laekna Inc",
+     "score": 398229716.6848,
+     "ticker": "2105.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -27864837.0,
+       "gross_margin": 0.781740370898716,
+       "market_cap_usd": 382772252.26240003,
+       "net_income_usd": -29328156.0,
+       "net_margin": -58.514122681883,
+       "operating_margin": -61.9303851640514
+      }
+     },
+     "head_listing_id": 52050,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 501215.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Clover Biopharmaceuticals Ltd",
+     "score": 382772252.26240003,
+     "ticker": "2197.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -36490883.0,
+       "market_cap_usd": 345237350.34880006,
+       "net_income_usd": -42866824.0
+      }
+     },
+     "head_listing_id": 52211,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "TYK Medicines Inc",
+     "score": 345237350.34880006,
+     "ticker": "2410.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -25577123.0,
+       "gross_margin": 0.835728796825457,
+       "market_cap_usd": 337444759.1424,
+       "net_income_usd": -34195590.0,
+       "net_margin": -2.27012094400881,
+       "operating_margin": -1.99928800622757
+      }
+     },
+     "head_listing_id": 53217,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 15063334.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Antengene Corp Ltd",
+     "score": 337444759.1424,
+     "ticker": "6996.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -27225341.0,
+       "market_cap_usd": 329440109.1072,
+       "net_income_usd": -21500765.0
+      }
+     },
+     "head_listing_id": 52253,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Beijing Luzhu Biotech Co Ltd",
+     "score": 329440109.1072,
+     "ticker": "2480.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -14382320.55055,
+       "gross_margin": 0.4561,
+       "market_cap_usd": 318975466.0352,
+       "net_income_usd": -14864428.7958,
+       "net_margin": -0.5124,
+       "operating_margin": -0.5487
+      }
+     },
+     "head_listing_id": 230382,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 29008918.515
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jiangsu Cowin Biotech Co. Ltd. A",
+     "score": 318975466.0352,
+     "ticker": "688426.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -22246224.0,
+       "market_cap_usd": 299199482.98240006,
+       "net_income_usd": -29795766.0
+      }
+     },
+     "head_listing_id": 52319,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "PegBio Co Ltd",
+     "score": 299199482.98240006,
+     "ticker": "2565.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -145146.22525,
+       "gross_margin": 0.7788,
+       "market_cap_usd": 294562884.76159996,
+       "net_income_usd": 1465520.00685,
+       "net_margin": 0.0608,
+       "operating_margin": -0.0448,
+       "pe": 137.628571
+      }
+     },
+     "head_listing_id": 230192,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 24085817.3975
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shanghai Rendu Biotechnology Co. Ltd. A",
+     "score": 294562884.76159996,
+     "ticker": "688193.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -28792957.2724,
+       "gross_margin": 0.6217,
+       "market_cap_usd": 289588376.0,
+       "net_income_usd": -22335011.2696,
+       "net_margin": -3.6117,
+       "operating_margin": -3.4255
+      }
+     },
+     "head_listing_id": 230544,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 6184029.24475
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Jiangsu GDK Biotechnology Co Ltd",
+     "score": 289588376.0,
+     "ticker": "688670.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -45412510.0,
+       "gross_margin": 0.890106380551901,
+       "market_cap_usd": 258111617.2544,
+       "net_income_usd": -48814909.0,
+       "net_margin": -2.5957386946901,
+       "operating_margin": -2.60641477009178
+      }
+     },
+     "head_listing_id": 52341,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 18805787.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Guangzhou Innogen Pharm Grp Co",
+     "score": 258111617.2544,
+     "ticker": "2591.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -23878140.0,
+       "market_cap_usd": 257308226.73920003,
+       "net_income_usd": -33190443.0
+      }
+     },
+     "head_listing_id": 52279,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "HighTide Therapeutics Inc",
+     "score": 257308226.73920003,
+     "ticker": "2511.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -1308593.0,
+       "gross_margin": 0.250172419641141,
+       "market_cap_usd": 255373279.61600003,
+       "net_income_usd": -4249388.0,
+       "net_margin": -0.3359752167965,
+       "operating_margin": -0.173550261738668
+      }
+     },
+     "head_listing_id": 52223,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 12647921.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Guanze Medical Information Industry (Holding) Co. Ltd.",
+     "score": 255373279.61600003,
+     "ticker": "2427.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -2946372.0,
+       "market_cap_usd": 218575664.0,
+       "net_income_usd": -6616467.0
+      }
+     },
+     "head_listing_id": 30611,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "NovaBridge Biosciences",
+     "score": 218575664.0,
+     "ticker": "NBP.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -13696254.0,
+       "market_cap_usd": 212872558.08,
+       "net_income_usd": -15012855.0
+      }
+     },
+     "head_listing_id": 52735,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "SinoMab BioScience Ltd",
+     "score": 212872558.08,
+     "ticker": "3681.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": 1793976.57625,
+       "gross_margin": 0.78,
+       "market_cap_usd": 204600716.40319997,
+       "net_income_usd": -6696870.16315,
+       "net_margin": -0.2649,
+       "operating_margin": -0.0253
+      }
+     },
+     "head_listing_id": 230213,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 25279993.53645
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shanghai Rightongene Biotechnology Co. Ltd. A",
+     "score": 204600716.40319997,
+     "ticker": "688217.CG"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -29157128.0,
+       "gross_margin": 0.99280594190312,
+       "market_cap_usd": 193175433.65120003,
+       "net_income_usd": -31256940.0,
+       "net_margin": -1.4166461430775,
+       "operating_margin": -1.38188782454276
+      }
+     },
+     "head_listing_id": 51525,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 22064042.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ImmuneOnco Biopharms",
+     "score": 193175433.65120003,
+     "ticker": "1541.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -37900720.0,
+       "gross_margin": 0.502064177143929,
+       "market_cap_usd": 179804214.5536,
+       "net_income_usd": -29884426.0,
+       "net_margin": -6.53599799837368,
+       "operating_margin": -8.61562519547132
+      }
+     },
+     "head_listing_id": 53095,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 4572282.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Zhaoke Ophthalmology Limited",
+     "score": 179804214.5536,
+     "ticker": "6622.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -22442043.95004,
+       "gross_margin": 0.92186359463518,
+       "market_cap_usd": 163542430.10560003,
+       "net_income_usd": -18795220.52408,
+       "net_margin": -3.93939822875966,
+       "operating_margin": -3.49386132804455
+      }
+     },
+     "head_listing_id": 52318,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 4771089.24578
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Beijing Biostar Pharms Co Ltd",
+     "score": 163542430.10560003,
+     "ticker": "2563.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -24378497.0,
+       "gross_margin": 0.245976378434612,
+       "market_cap_usd": 101555216.08960001,
+       "net_income_usd": -28615301.0,
+       "net_margin": -6.12285049874549,
+       "operating_margin": -5.30267425494156
+      }
+     },
+     "head_listing_id": 53957,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 4673526.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kintor Pharmaceutical Ltd",
+     "score": 101555216.08960001,
+     "ticker": "9939.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -3212352.0,
+       "gross_margin": 0.160564180801101,
+       "market_cap_usd": 92057731.584,
+       "net_income_usd": -12116676.0,
+       "net_margin": -1.2673427263753,
+       "operating_margin": -1.20515121601005
+      }
+     },
+     "head_listing_id": 52263,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 9560694.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Wuhan YZY Biopharma Co Ltd",
+     "score": 92057731.584,
+     "ticker": "2496.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -66608828.0,
+       "market_cap_usd": 90959180.74880001,
+       "net_income_usd": -31835232.0,
+       "net_margin": -11.9658156409567,
+       "operating_margin": -15.4152647137866
+      }
+     },
+     "head_listing_id": 51996,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 2660515.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Brii Biosciences Ltd",
+     "score": 90959180.74880001,
+     "ticker": "2137.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -10768186.0,
+       "gross_margin": 0.400961452862103,
+       "market_cap_usd": 67604722.3488,
+       "net_income_usd": -10017579.0,
+       "net_margin": -1.5590892904834,
+       "operating_margin": -1.53783495059201
+      }
+     },
+     "head_listing_id": 52038,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 6425276.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Shanghai Bio-heart Biological",
+     "score": 67604722.3488,
+     "ticker": "2185.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -4663373.0,
+       "gross_margin": 0.384831597853395,
+       "market_cap_usd": 58994219.06560001,
+       "net_income_usd": -7313306.0,
+       "net_margin": -0.27750676918569,
+       "operating_margin": -0.291772251493562
+      }
+     },
+     "head_listing_id": 53495,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 26353613.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Biosino Bio-Technology and Science Incorporation",
+     "score": 58994219.06560001,
+     "ticker": "8247.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -20445139.0,
+       "gross_margin": 0.23147276395427,
+       "market_cap_usd": 58641192.646400005,
+       "net_income_usd": -29132675.0,
+       "net_margin": -27.4008069939475,
+       "operating_margin": -24.614122394082
+      }
+     },
+     "head_listing_id": 53098,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 1063205.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Transcenta Holding Limited",
+     "score": 58641192.646400005,
+     "ticker": "6628.HK"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "free_cash_flow_usd": -16004703.0,
+       "market_cap_usd": 30681142.710400004,
+       "net_income_usd": -33002255.0
+      }
+     },
+     "head_listing_id": 53209,
+     "matched": {
+      "fundamental": {
+       "revenue": {
+        "kind": "level",
+        "unit": "usd",
+        "value": 0.0
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Immunotech Biopharm Ltd",
+     "score": 30681142.710400004,
+     "ticker": "6978.HK"
+    }
+   ],
+   "sort": "ta",
+   "universe": 134,
+   "_pagination": {
+    "intended_show": 25,
+    "returned": 39,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (25) as a look-ahead buffer so 'a few more' is served from these 39 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "I screened the Biotechnology sector (GICS 352010) in China, restricted to small/micro-cap size tiers and low-revenue (early-stage) — which cleanly excludes the mega-cap pharma (e.g. BeiGene, ~$60bn, is filtered out). 39 names matched, mostly pre-revenue clinical-stage biotechs listed in Hong Kong (.HK) and on the STAR/ChiNext boards (.CG). The larger of the small-caps:\n\n• InventisBio (688382.CG, ~$1.9bn) · Chongqing Genrix Biopharmaceutical (688443.CG, ~$1.4bn) · Ascletis Pharma (1672.HK, ~$1.4bn) · Tennor Therapeutics (6872.HK, ~$1.3bn) · CARsgen Therapeutics (2171.HK, ~$1.1bn)\n\nSmaller / earlier-stage: Shouyao Holdings (688197.CG), Xuanzhu Biopharm (2575.HK), Hinova Pharmaceuticals (688302.CG), TransThera Sciences (2617.HK), Jacobio Pharmaceuticals (1167.HK), Laekna (2105.HK), Clover Biopharmaceuticals (2197.HK), Antengene (6996.HK), TYK Medicines (2410.HK), Jiangsu Recbio (2179.HK).\n\nThese are genuine early-stage Chinese biotechs (most show no reported revenue yet / negative free cash flow — typical of clinical-stage names), not big pharma. Hong Kong's 18A-style listings dominate the list."
+}

@@ -1,0 +1,1433 @@
+{
+  "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+      "capex": {
+        "sign": "stored NEGATIVE = cash OUTFLOW (capex/dividends/buybacks/debt-repayment spend cash); a BIGGER outflow is MORE negative — do not read the minus as 'less'."
+      }
+    }
+  },
+  "capped": true,
+  "count": 40,
+  "currency": "USD",
+  "results": [
+    {
+      "also_known_as": [
+        "NVDA.SW",
+        "0R1I.LSE",
+        "NVDA01.BK",
+        "NVDA03.BK",
+        "NVDA06.BK",
+        "NVDA19.BK",
+        "NVDA23.BK",
+        "NVDA80.BK",
+        "NVD.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -6572000000.0,
+          "fcf_margin": 0.4697,
+          "market_cap_usd": 5322322739200.0,
+          "net_income_usd": 159613000000.0,
+          "net_margin": 0.6297,
+          "operating_cash_flow_usd": 125648000000.0,
+          "pe": 33.650842,
+          "revenue_usd": 253491000000.0
+        }
+      },
+      "head_listing_id": 31809,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 119076000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "NVIDIA Corporation",
+      "score": 5322322739200.0,
+      "ticker": "NVDA.US"
+    },
+    {
+      "also_known_as": [
+        "0R2V.LSE",
+        "AAPL01.BK",
+        "AAPL03.BK",
+        "AAPL19.BK",
+        "AAPL80.BK",
+        "APC.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -10041000000.0,
+          "fcf_margin": 0.2928,
+          "market_cap_usd": 4524633751552.0,
+          "net_income_usd": 128930000000.0,
+          "net_margin": 0.2762,
+          "operating_cash_flow_usd": 146724000000.0,
+          "pe": 35.083716,
+          "revenue_usd": 466823000000.0
+        }
+      },
+      "head_listing_id": 231,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 136683000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Apple Inc.",
+      "score": 4524633751552.0,
+      "ticker": "AAPL.US"
+    },
+    {
+      "also_known_as": [
+        "GOOGL01.BK",
+        "GOOGL03.BK",
+        "GOOG80.BK",
+        "ABEA.XETRA",
+        "ABEC.XETRA",
+        "GOOG23.BK",
+        "0RIH.LSE",
+        "GOOGL.US",
+        "0HD6.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -132402000000.0,
+          "fcf_margin": 0.1195,
+          "market_cap_usd": 4173832126464.0,
+          "net_income_usd": 244205000000.0,
+          "net_margin": 0.5477,
+          "operating_cash_flow_usd": 185675000000.0,
+          "pe": 17.123934,
+          "revenue_usd": 445867000000.0
+        }
+      },
+      "head_listing_id": 19071,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 53273000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Alphabet Inc Class C",
+      "score": 4173832126464.0,
+      "ticker": "GOOG.US"
+    },
+    {
+      "also_known_as": [
+        "MSFT01.BK",
+        "MSFT03.BK",
+        "MSFT06.BK",
+        "MSFT19.BK",
+        "MSFT23.BK",
+        "MSFT80.BK",
+        "MSF.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -115948000000.0,
+          "fcf_margin": 0.2019,
+          "market_cap_usd": 3576365580288.0,
+          "net_income_usd": 133749000000.0,
+          "net_margin": 0.4031,
+          "operating_cash_flow_usd": 182935000000.0,
+          "pe": 28.685527,
+          "revenue_usd": 331839000000.0
+        }
+      },
+      "head_listing_id": 29766,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 66987000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Microsoft Corporation",
+      "score": 3576365580288.0,
+      "ticker": "MSFT.US"
+    },
+    {
+      "also_known_as": [
+        "0LCV.LSE",
+        "TSM.US"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -47025238641.0,
+          "fcf_margin": 0.2561,
+          "market_cap_usd": 1931805975589.6833,
+          "net_income_usd": 69607787590.8,
+          "net_margin": 0.4992,
+          "operating_cash_flow_usd": 82728923991.2,
+          "pe": 27.839513,
+          "revenue_usd": 139431486699.8
+        }
+      },
+      "head_listing_id": 1418323,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 35703685350.2
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+      "score": 1931805975589.6833,
+      "ticker": "2330.TW"
+    },
+    {
+      "also_known_as": [
+        "1YD.XETRA",
+        "AVGO.SW",
+        "0YXG.LSE",
+        "AVGO23.BK",
+        "AVGO80.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -860000000.0,
+          "fcf_margin": 0.4341,
+          "market_cap_usd": 1807880552448.0,
+          "net_income_usd": 29317000000.0,
+          "net_margin": 0.3885,
+          "operating_cash_flow_usd": 33622000000.0,
+          "pe": 65.296173,
+          "revenue_usd": 75465000000.0
+        }
+      },
+      "head_listing_id": 3311,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 32762000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Broadcom Inc",
+      "score": 1807880552448.0,
+      "ticker": "AVGO.US"
+    },
+    {
+      "also_known_as": [
+        "META01.BK",
+        "META06.BK",
+        "META23.BK",
+        "META80.BK",
+        "0QZI.LSE",
+        "FB2A.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -89325000000.0,
+          "fcf_margin": 0.1795,
+          "market_cap_usd": 1385002696704.0,
+          "net_income_usd": 68098000000.0,
+          "net_margin": 0.2984,
+          "operating_cash_flow_usd": 130301000000.0,
+          "pe": 20.477213,
+          "revenue_usd": 228247000000.0
+        }
+      },
+      "head_listing_id": 28230,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 40976000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Meta Platforms Inc.",
+      "score": 1385002696704.0,
+      "ticker": "META.US"
+    },
+    {
+      "also_known_as": [
+        "SMSD.LSE",
+        "BC94.LSE",
+        "SMSN.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -39861238200.0,
+          "fcf_margin": 0.1341,
+          "market_cap_usd": 1234185534989.96,
+          "net_income_usd": 58333617300.0,
+          "net_margin": 0.2146,
+          "operating_cash_flow_usd": 76305871600.0,
+          "pe": 22.018128,
+          "revenue_usd": 271837215300.0
+        }
+      },
+      "head_listing_id": 1414771,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 36444633400.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Samsung Electronics Co Ltd",
+      "score": 1234185534989.96,
+      "ticker": "005930.KO"
+    },
+    {
+      "also_known_as": [
+        "MICRON01.BK",
+        "MICRON03.BK",
+        "MICRON19.BK",
+        "MICRON23.BK",
+        "MICRON80.BK",
+        "0R2T.LSE",
+        "MTE.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -25260000000.0,
+          "fcf_margin": 0.2899,
+          "market_cap_usd": 1029204672512.0,
+          "net_income_usd": 50469000000.0,
+          "net_margin": 0.5591,
+          "operating_cash_flow_usd": 51432000000.0,
+          "pe": 21.264919,
+          "revenue_usd": 90274000000.0
+        }
+      },
+      "head_listing_id": 30067,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 26172000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Micron Technology Inc",
+      "score": 1029204672512.0,
+      "ticker": "MU.US"
+    },
+    {
+      "also_known_as": [
+        "SKHYV.US",
+        "SKHY.US",
+        "HXSCL.US"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -20993015400.0,
+          "fcf_margin": 0.3081,
+          "market_cap_usd": 825845250575.59,
+          "net_income_usd": 52599667400.0,
+          "net_margin": 0.5689,
+          "operating_cash_flow_usd": 49475701800.0,
+          "pe": 15.572195,
+          "revenue_usd": 92458674700.0
+        }
+      },
+      "head_listing_id": 1414474,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 28482686400.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "SK Hynix Inc",
+      "score": 825845250575.59,
+      "ticker": "000660.KO"
+    },
+    {
+      "also_known_as": [
+        "ASML01.BK",
+        "ASML.US",
+        "0M42.LSE",
+        "ASML.SW",
+        "ASME.XETRA",
+        "0QB8.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1894663800.0,
+          "fcf_margin": 0.337563863557747,
+          "market_cap_usd": 683345789865.1648,
+          "net_income_usd": 12151180480.0,
+          "net_margin": 0.3011,
+          "operating_cash_flow_usd": 12189158100.0,
+          "pe": 63.801653,
+          "revenue_usd": 40351070500.0
+        }
+      },
+      "head_listing_id": 1748238,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 10294494300.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "ASML Holding N.V.",
+      "score": 683345789865.1648,
+      "ticker": "ASML.AS"
+    },
+    {
+      "also_known_as": [
+        "0QZ0.LSE",
+        "VISA06.BK",
+        "VISA80.BK",
+        "3V64.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1567000000.0,
+          "fcf_margin": 0.4723,
+          "market_cap_usd": 680071987200.0,
+          "net_income_usd": 22592000000.0,
+          "net_margin": 0.5078,
+          "operating_cash_flow_usd": 22580000000.0,
+          "pe": 31.0,
+          "revenue_usd": 44488000000.0
+        }
+      },
+      "head_listing_id": 45629,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 21013000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Visa Inc. Class A",
+      "score": 680071987200.0,
+      "ticker": "V.US"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_usd": -298877623.2,
+          "fcf_margin": 0.0253,
+          "market_cap_usd": 592470272000.0,
+          "net_income_usd": 181142769.6,
+          "net_margin": 0.0076,
+          "operating_cash_flow_usd": 899109806.4,
+          "pe": 15.006293,
+          "revenue_usd": 23703220600.8
+        }
+      },
+      "head_listing_id": 236753,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 600232183.2
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Compal Electronics Inc. GDR Reg S",
+      "score": 592470272000.0,
+      "ticker": "CEIR.LSE"
+    },
+    {
+      "context": {
+        "financial": {
+          "capex_usd": -16141983000.0,
+          "fcf_margin": 0.252965683470654,
+          "market_cap_usd": 586532273600.0001,
+          "net_income_usd": 32152406000.0,
+          "net_margin": 0.299085087646954,
+          "operating_cash_flow_usd": 43336436000.0,
+          "pe": 14.909106,
+          "revenue_usd": 107502538000.0
+        }
+      },
+      "head_listing_id": 53221,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 27194453000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Tencent Holdings Ltd",
+      "score": 586532273600.0001,
+      "ticker": "700.HK"
+    },
+    {
+      "also_known_as": [
+        "700.HK",
+        "TENCENT01.BK",
+        "TENCENT06.BK",
+        "TENCENT13.BK",
+        "TENCENT19.BK",
+        "TENCENT23.BK",
+        "TENCENT80.BK",
+        "80700.HK",
+        "0LEA.LSE",
+        "0Z4S.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -16141983000.0,
+          "fcf_margin": 0.252965683470654,
+          "market_cap_usd": 505188134787.4816,
+          "net_income_usd": 32152406000.0,
+          "net_margin": 0.299085087646954,
+          "operating_cash_flow_usd": 43336436000.0,
+          "pe": 15.735202,
+          "revenue_usd": 107502538000.0
+        }
+      },
+      "head_listing_id": 50851,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 27194453000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Tencent Holdings Ltd",
+      "score": 505188134787.4816,
+      "ticker": "0700.HK"
+    },
+    {
+      "also_known_as": [
+        "MA80.BK",
+        "M4I.XETRA",
+        "0R2Z.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1462000000.0,
+          "fcf_margin": 0.4553,
+          "market_cap_usd": 503101259776.0,
+          "net_income_usd": 16257000000.0,
+          "net_margin": 0.4634,
+          "operating_cash_flow_usd": 17437000000.0,
+          "pe": 31.590209,
+          "revenue_usd": 35083000000.0
+        }
+      },
+      "head_listing_id": 27402,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 15975000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Mastercard Inc",
+      "score": 503101259776.0,
+      "ticker": "MA.US"
+    },
+    {
+      "also_known_as": [
+        "4333.HK",
+        "CSCO06.BK",
+        "CIS.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1237000000.0,
+          "fcf_margin": 0.1941,
+          "market_cap_usd": 439903518720.0,
+          "net_income_usd": 11958000000.0,
+          "net_margin": 0.1969,
+          "operating_cash_flow_usd": 13025000000.0,
+          "pe": 37.633333,
+          "revenue_usd": 60746000000.0
+        }
+      },
+      "head_listing_id": 8801,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 11788000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Cisco Systems Inc",
+      "score": 439903518720.0,
+      "ticker": "CSCO.US"
+    },
+    {
+      "also_known_as": [
+        "COSTCO19.BK",
+        "0I47.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -6194000000.0,
+          "fcf_margin": 0.03,
+          "market_cap_usd": 426338353152.0,
+          "net_income_usd": 8838000000.0,
+          "net_margin": 0.0301,
+          "operating_cash_flow_usd": 15000000000.0,
+          "pe": 47.962777,
+          "revenue_usd": 293587000000.0
+        }
+      },
+      "head_listing_id": 8336,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 8806000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Costco Wholesale Corp",
+      "score": 426338353152.0,
+      "ticker": "COST.US"
+    },
+    {
+      "also_known_as": [
+        "LRCX01.BK",
+        "LRCX23.BK",
+        "0JT5.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -966405000.0,
+          "fcf_margin": 0.2105,
+          "market_cap_usd": 410333184000.0,
+          "net_income_usd": 7265396000.0,
+          "net_margin": 0.3127,
+          "operating_cash_flow_usd": 5857657000.0,
+          "pe": 56.930556,
+          "revenue_usd": 23232690000.0
+        }
+      },
+      "head_listing_id": 26959,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 4891252000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Lam Research Corp",
+      "score": 410333184000.0,
+      "ticker": "LRCX.US"
+    },
+    {
+      "also_known_as": [
+        "AMAT01.BK",
+        "AMAT23.BK",
+        "AP2.XETRA",
+        "0R1A.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -2650000000.0,
+          "fcf_margin": 0.1841,
+          "market_cap_usd": 408357175296.0,
+          "net_income_usd": 8508000000.0,
+          "net_margin": 0.2931,
+          "operating_cash_flow_usd": 7993000000.0,
+          "pe": 50.35842,
+          "revenue_usd": 29024000000.0
+        }
+      },
+      "head_listing_id": 1854,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 5343000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Applied Materials Inc",
+      "score": 408357175296.0,
+      "ticker": "AMAT.US"
+    },
+    {
+      "also_known_as": [
+        "0939.HK",
+        "00939.TW"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -2793135000.0,
+          "fcf_margin": 2.73122452225741,
+          "market_cap_usd": 404635364700.9792,
+          "net_income_usd": 47837385000.0,
+          "net_margin": 0.4161,
+          "operating_cash_flow_usd": 309561805000.0,
+          "pe": 8.023077,
+          "revenue_usd": 114957450000.0
+        }
+      },
+      "head_listing_id": 229276,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 306768670000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "China Construction Bank Co",
+      "score": 404635364700.9792,
+      "ticker": "601939.CG"
+    },
+    {
+      "also_known_as": [
+        "ICBC06.BK",
+        "ICBC19.BK",
+        "1398.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -4425690000.0,
+          "fcf_margin": 2.22231540403313,
+          "market_cap_usd": 402226921524.4288,
+          "net_income_usd": 51286210000.0,
+          "net_margin": 0.4158,
+          "operating_cash_flow_usd": 368867820000.0,
+          "pe": 7.594059,
+          "revenue_usd": 123350920000.0
+        }
+      },
+      "head_listing_id": 229179,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 364442130000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Industrial and Commercial Bank of China Ltd",
+      "score": 402226921524.4288,
+      "ticker": "601398.CG"
+    },
+    {
+      "also_known_as": [
+        "GCP.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1404000000.0,
+          "fcf_margin": 0.1658,
+          "market_cap_usd": 389179310080.0,
+          "net_income_usd": 8972000000.0,
+          "net_margin": 0.1772,
+          "operating_cash_flow_usd": 9800000000.0,
+          "pe": 43.564858,
+          "revenue_usd": 50638000000.0
+        }
+      },
+      "head_listing_id": 18116,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 8396000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "GE Aerospace",
+      "score": 389179310080.0,
+      "ticker": "GE.US"
+    },
+    {
+      "also_known_as": [
+        "CAT1.XETRA",
+        "0Q18.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -4575000000.0,
+          "fcf_margin": 0.1204,
+          "market_cap_usd": 386526806016.0,
+          "net_income_usd": 10844000000.0,
+          "net_margin": 0.1451,
+          "operating_cash_flow_usd": 13569000000.0,
+          "pe": 43.906873,
+          "revenue_usd": 74729000000.0
+        }
+      },
+      "head_listing_id": 6219,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 8994000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Caterpillar Inc",
+      "score": 386526806016.0,
+      "ticker": "CAT.US"
+    },
+    {
+      "also_known_as": [
+        "HSBC.US",
+        "HBC1.XETRA",
+        "5.HK",
+        "0005.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -4661000000.0,
+          "fcf_margin": 0.353491974091805,
+          "market_cap_usd": 353687712515.6864,
+          "net_income_usd": 22306000000.0,
+          "net_margin": 0.3081,
+          "operating_cash_flow_usd": 29766000000.0,
+          "pe": 14.606153,
+          "revenue_usd": 72405000000.0
+        }
+      },
+      "head_listing_id": 237936,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 25105000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "HSBC Holdings PLC",
+      "score": 353687712515.6864,
+      "ticker": "HSBA.LSE"
+    },
+    {
+      "also_known_as": [
+        "UNH19.BK",
+        "UNH.XETRA",
+        "0R0O.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -3487000000.0,
+          "fcf_margin": 0.0437,
+          "market_cap_usd": 353589526528.0,
+          "net_income_usd": 12044000000.0,
+          "net_margin": 0.0268,
+          "operating_cash_flow_usd": 23153000000.0,
+          "pe": 25.316838,
+          "revenue_usd": 449713000000.0
+        }
+      },
+      "head_listing_id": 45221,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 19666000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "UnitedHealth Group Incorporated",
+      "score": 353589526528.0,
+      "ticker": "UNH.US"
+    },
+    {
+      "also_known_as": [
+        "1288.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -4226750000.0,
+          "fcf_margin": 2.8799301269039,
+          "market_cap_usd": 335290068605.3376,
+          "net_income_usd": 42672775000.0,
+          "net_margin": 0.3957,
+          "operating_cash_flow_usd": 589653230000.0,
+          "pe": 8.35443,
+          "revenue_usd": 107852450000.0
+        }
+      },
+      "head_listing_id": 229160,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 585426480000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Agricultural Bank of China Ltd Class A",
+      "score": 335290068605.3376,
+      "ticker": "601288.CG"
+    },
+    {
+      "also_known_as": [
+        "5UR.XETRA",
+        "0R2N.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -3221000000.0,
+          "fcf_margin": 0.1175,
+          "market_cap_usd": 303905964032.0,
+          "net_income_usd": 7738000000.0,
+          "net_margin": 0.0828,
+          "operating_cash_flow_usd": 14206000000.0,
+          "pe": 39.698944,
+          "revenue_usd": 93500000000.0
+        }
+      },
+      "head_listing_id": 38491,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 10985000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "RTX Corporation",
+      "score": 303905964032.0,
+      "ticker": "RTX.US"
+    },
+    {
+      "also_known_as": [
+        "DELL19.BK",
+        "12DA.XETRA",
+        "0A7D.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -3028000000.0,
+          "fcf_margin": 0.0705,
+          "market_cap_usd": 302814625792.0,
+          "net_income_usd": 8409000000.0,
+          "net_margin": 0.0628,
+          "operating_cash_flow_usd": 12470000000.0,
+          "pe": 38.231873,
+          "revenue_usd": 134002000000.0
+        }
+      },
+      "head_listing_id": 9779,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 9442000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Dell Technologies Inc",
+      "score": 302814625792.0,
+      "ticker": "DELL.US"
+    },
+    {
+      "also_known_as": [
+        "0QKU.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1572000500.0,
+          "fcf_margin": 0.79626345217339,
+          "market_cap_usd": 295984201728.0,
+          "net_income_usd": 16300209400.0,
+          "net_margin": 0.3185,
+          "operating_cash_flow_usd": 54037057000.0,
+          "pe": 19.274189,
+          "revenue_usd": 51178740400.0
+        }
+      },
+      "head_listing_id": 38626,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 52465056500.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Royal Bank of Canada",
+      "score": 295984201728.0,
+      "ticker": "RY.US"
+    },
+    {
+      "also_known_as": [
+        "3988.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -8403765000.0,
+          "fcf_margin": 1.15761178858696,
+          "market_cap_usd": 281926191742.97595,
+          "net_income_usd": 35566760000.0,
+          "net_margin": 0.3654,
+          "operating_cash_flow_usd": 152061645000.0,
+          "pe": 8.148649,
+          "revenue_usd": 97332700000.0
+        }
+      },
+      "head_listing_id": 229288,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 143657880000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Bank of China Limited",
+      "score": 281926191742.97595,
+      "ticker": "601988.CG"
+    },
+    {
+      "also_known_as": [
+        "CATL01.BK",
+        "CATL23.BK",
+        "CATL80.BK",
+        "3750.HK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -6957259806.2,
+          "fcf_margin": 0.1786,
+          "market_cap_usd": 271351854176.6656,
+          "net_income_usd": 12230331634.4,
+          "net_margin": 0.1621,
+          "operating_cash_flow_usd": 19050457426.0,
+          "pe": 21.355045,
+          "revenue_usd": 75428720613.4
+        }
+      },
+      "head_listing_id": 232821,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 13471674442.6
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Contemporary Amperex Technology Co Ltd Class A",
+      "score": 271351854176.6656,
+      "ticker": "300750.CS"
+    },
+    {
+      "also_known_as": [
+        "GEV80.BK",
+        "GEV23.BK"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -1701000000.0,
+          "fcf_margin": 0.3007,
+          "market_cap_usd": 267540086784.0,
+          "net_income_usd": 9529000000.0,
+          "net_margin": 0.2304,
+          "operating_cash_flow_usd": 14139000000.0,
+          "pe": 30.934633,
+          "revenue_usd": 41367000000.0
+        }
+      },
+      "head_listing_id": 18244,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 12438000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "GE Vernova LLC",
+      "score": 267540086784.0,
+      "ticker": "GEV.US"
+    },
+    {
+      "context": {
+        "financial": {
+          "fcf_margin": 0.145,
+          "market_cap_usd": 264182656000.0,
+          "net_income_usd": 99327165.075,
+          "net_margin": 0.9254,
+          "revenue_usd": 107331238.575
+        }
+      },
+      "head_listing_id": 237510,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 15567943.275
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Fondul Proprietatea S.A. GDR",
+      "score": 264182656000.0,
+      "ticker": "FP.LSE"
+    },
+    {
+      "also_known_as": [
+        "0HAU.LSE",
+        "LVMH01.BK",
+        "MOH.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -5485849000.0,
+          "fcf_margin": 0.1757892261809,
+          "market_cap_usd": 254694788045.2096,
+          "net_income_usd": 12778386600.0,
+          "net_margin": 0.13461705050305,
+          "operating_cash_flow_usd": 22172462500.0,
+          "pe": 20.407931,
+          "revenue_usd": 94923982900.0
+        }
+      },
+      "head_listing_id": 1753248,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 16686613500.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "LVMH Moët Hennessy - Louis Vuitton",
+      "score": 254694788045.2096,
+      "ticker": "MC.PA"
+    },
+    {
+      "also_known_as": [
+        "KLAC23.BK",
+        "KLAC01.BK",
+        "0JPO.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -375945000.0,
+          "fcf_margin": 0.2774,
+          "market_cap_usd": 254502240256.0,
+          "net_income_usd": 4830771000.0,
+          "net_margin": 0.3557,
+          "operating_cash_flow_usd": 4143079000.0,
+          "pe": 53.221311,
+          "revenue_usd": 13579476000.0
+        }
+      },
+      "head_listing_id": 25302,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 3767134000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "KLA Corporation",
+      "score": 254502240256.0,
+      "ticker": "KLAC.US"
+    },
+    {
+      "also_known_as": [
+        "SHELL.AS",
+        "R6C0.XETRA",
+        "SHEL.US"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -17594000000.0,
+          "fcf_margin": 0.1064,
+          "market_cap_usd": 252396782916.40323,
+          "net_income_usd": 25971000000.0,
+          "net_margin": 0.0876,
+          "operating_cash_flow_usd": 49139000000.0,
+          "pe": 10.119776,
+          "revenue_usd": 296601000000.0
+        }
+      },
+      "head_listing_id": 239474,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 31545000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Shell plc",
+      "score": 252396782916.40323,
+      "ticker": "SHEL.LSE"
+    },
+    {
+      "also_known_as": [
+        "0P6M.LSE"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -2845220200.0,
+          "fcf_margin": 0.1461,
+          "market_cap_usd": 251673065647.30878,
+          "net_income_usd": 9075921200.0,
+          "net_margin": 0.098,
+          "operating_cash_flow_usd": 16378005800.0,
+          "pe": 27.279921,
+          "revenue_usd": 92650695200.0
+        }
+      },
+      "head_listing_id": 243669,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 13532785600.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Siemens Aktiengesellschaft",
+      "score": 251673065647.30878,
+      "ticker": "SIE.XETRA"
+    },
+    {
+      "also_known_as": [
+        "0A2W.LSE",
+        "0NW4.LSE",
+        "SAP.US"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -839517000.0,
+          "fcf_margin": 0.2286,
+          "market_cap_usd": 243060136861.69598,
+          "net_income_usd": 8904591200.0,
+          "net_margin": 0.2041,
+          "operating_cash_flow_usd": 10810923000.0,
+          "pe": 27.320359,
+          "revenue_usd": 43624044600.0
+        }
+      },
+      "head_listing_id": 243596,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 9971406000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "SAP SE",
+      "score": 243060136861.69598,
+      "ticker": "SAP.XETRA"
+    },
+    {
+      "also_known_as": [
+        "AXP06.BK",
+        "0R3C.LSE",
+        "AEC1.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "capex_usd": -3423000000.0,
+          "fcf_margin": 0.1982,
+          "market_cap_usd": 228605870080.0,
+          "net_income_usd": 11445000000.0,
+          "net_margin": 0.1507,
+          "operating_cash_flow_usd": 18475000000.0,
+          "pe": 20.401092,
+          "revenue_usd": 75952000000.0
+        }
+      },
+      "head_listing_id": 3472,
+      "matched": {
+        "financial": {
+          "free_cash_flow": {
+            "kind": "relation",
+            "unit": "usd",
+            "value": 15052000000.0
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "American Express Company",
+      "score": 228605870080.0,
+      "ticker": "AXP.US"
+    }
+  ],
+  "sort": "ta",
+  "universe": 24046,
+  "_pagination": {
+    "intended_show": 10,
+    "returned": 40,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+  }
+}

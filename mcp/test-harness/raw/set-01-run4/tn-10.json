@@ -1,0 +1,34 @@
+{
+  "id": "tn-10",
+  "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+  "tool_calls": [
+    {
+      "tool": "macro_pulse",
+      "args": {"scope": "economy"}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "below", "a": "close", "b": "ema200"}]}],
+        "asset_type": ["Common Stock"],
+        "size": ["large"],
+        "country": ["US"],
+        "sort": "mcap",
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "Economy: GDP growth 1.484% at 23rd percentile (falling), CPI 3.304% rising at 71st percentile, industrial production rising. Large US caps below 200-day MA: WMT.US (Walmart, close_vs_ema200=-10.17%, RSI 33.2, held -8 bars), BA.US (Boeing, -4.04%, RSI 37.3), plus CEG and others. 23 large US names total below their 200-day MA.",
+  "verdict": "PASS",
+  "reason": "Provides both a macro-level market read (GDP slowing at 23rd percentile, inflation elevated, mixed signals) AND specific large-cap names with confirmed technical weakness (below 200-day MA) including well-known names Walmart and Boeing.",
+  "defects": [
+    {
+      "desc": "macro_pulse scope 'us_market' does not exist — got an error on first attempt. Valid scopes are economy/inflation/labor/consumer/housing/recession-risk. A client asking generically 'are markets toppy?' has no obvious single scope to pick; needs to pick 'economy' by inference. The tool description in the list view does not enumerate valid scopes.",
+      "side": "server"
+    },
+    {
+      "desc": "No dedicated 'market valuation' or 'equity market sentiment' scope in macro_pulse — SPX PE/breadth/fear-greed not available. Client has to proxy 'toppy' from macro indicators rather than equity-market-level signals.",
+      "side": "server"
+    }
+  ]
+}

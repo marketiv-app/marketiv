@@ -1,0 +1,68 @@
+{
+  "id": "op-11",
+  "question": "Which stocks show the biggest gap between implied and realized volatility right now?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "biggest gap between implied and realized volatility"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "iv_vs_realized",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": "chose the exact-match candidate to confirm behaviour, though it is flagged supported:'no'"
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "biggest gap between implied and realized volatility",
+          "candidates": [
+            {
+              "pattern": "iv_cheap",
+              "label": "IV cheap",
+              "supported": "yes",
+              "description": "Implied vol at the low end of its own history."
+            },
+            {
+              "pattern": "iv_rich",
+              "label": "IV rich",
+              "supported": "yes",
+              "description": "Implied vol at the high end of its own history."
+            },
+            {
+              "pattern": "iv_vs_realized",
+              "label": "IV vs realized vol",
+              "supported": "no",
+              "description": "IV relative to realized vol — NOT supported (opana has no realized vol)."
+            },
+            {
+              "pattern": "greed_euphoria",
+              "label": "Greed / euphoria",
+              "supported": "yes",
+              "description": "Call-skew rich — traders paying up for upside."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "iv_vs_realized",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "This one honestly isn't supported. The exact pattern — implied-vs-realized vol gap (`iv_vs_realized`) — is explicitly flagged NOT supported: the options engine has no realized-volatility series, so it can't compute an IV-vs-RV spread. I won't fabricate a list. The closest supported proxies are `iv_rich` / `iv_cheap` (IV vs its OWN history), but that's a different measure — it doesn't compare against realized vol. (Separately, the scan endpoint is also still a POC stub.)"
+}

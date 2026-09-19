@@ -1,0 +1,1169 @@
+{
+  "id": "cf-07",
+  "question": "Find healthcare companies with over $1 billion in revenue and expanding margins that just made a bullish MACD crossover.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "above",
+            "threshold": 1000000000
+          },
+          {
+            "concept": "net_margin",
+            "pattern": "improved_every_year",
+            "N": 3
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "macd_line",
+                "b": "macd_signal"
+              }
+            ]
+          }
+        ],
+        "gics": "35",
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 15,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 17,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "LLY23.BK",
+            "LLY80.BK",
+            "LLY.SW",
+            "LLY.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.2049,
+              "free_cash_flow_usd": 13560000000.0,
+              "gross_margin": 0.834,
+              "market_cap_usd": 1093034115072.0,
+              "net_income_usd": 26711200000.0,
+              "operating_margin": 0.4972,
+              "pe": 41.145686
+            },
+            "ta": {
+              "adx": 21.8133,
+              "close_vs_ema200": 0.1898,
+              "rsi14": 57.8204
+            }
+          },
+          "head_listing_id": 26596,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3167,
+                  0.2351,
+                  0.1536
+                ],
+                "value": 0.3167,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 79665800000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 6.8262,
+                  "b": 5.6661
+                },
+                "kind": "signal",
+                "strength": 0.842,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Eli Lilly and Company",
+          "score": 0.842,
+          "ticker": "LLY.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.138132230574763,
+              "free_cash_flow_usd": 1148288400.0,
+              "gross_margin": 0.834991404447273,
+              "market_cap_usd": 15686679754.3554,
+              "net_income_usd": 1292501700.0,
+              "operating_margin": 0.333665547943972,
+              "pe": 11.744939
+            },
+            "ta": {
+              "adx": 12.6516,
+              "close_vs_ema200": 0.0051,
+              "rsi14": 56.7635
+            }
+          },
+          "head_listing_id": 572821,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.4106,
+                  0.3889,
+                  0.3724
+                ],
+                "value": 0.4106,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 3147965100.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -2.8179,
+                  "b": -8.0509
+                },
+                "kind": "signal",
+                "strength": 0.739,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shionogi & Co., Ltd.",
+          "score": 0.739,
+          "ticker": "4507.JP"
+        },
+        {
+          "also_known_as": [
+            "AZN.US",
+            "ZEG.XETRA",
+            "AZNCF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.1695,
+              "free_cash_flow_usd": 6044000000.0,
+              "gross_margin": 0.8188,
+              "market_cap_usd": 247200033814.93762,
+              "net_income_usd": 10446000000.0,
+              "operating_margin": 0.2277,
+              "pe": 23.364006
+            },
+            "ta": {
+              "adx": 47.272,
+              "close_vs_ema200": -0.0733,
+              "rsi14": 49.6439
+            }
+          },
+          "head_listing_id": 236491,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1741,
+                  0.1301,
+                  0.13
+                ],
+                "value": 0.1741,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 61366000000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -347.8603,
+                  "b": -379.2184
+                },
+                "kind": "signal",
+                "strength": 0.725,
+                "value": "2026-08-19"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "AstraZeneca PLC",
+          "score": 0.725,
+          "ticker": "AZN.LSE"
+        },
+        {
+          "also_known_as": [
+            "2196.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.183,
+              "free_cash_flow_usd": 96986601.4923,
+              "gross_margin": 0.5039,
+              "market_cap_usd": 9508552647.0656,
+              "net_income_usd": 495908904.45725,
+              "operating_margin": 0.0776,
+              "pe": 18.343511
+            },
+            "ta": {
+              "adx": 14.3621,
+              "close_vs_ema200": -0.0737,
+              "rsi14": 45.0319
+            }
+          },
+          "head_listing_id": 228466,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0809,
+                  0.0674,
+                  0.0576
+                ],
+                "value": 0.0809,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 6069102993.5097
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0649,
+                  "b": 0.025
+                },
+                "kind": "signal",
+                "strength": 0.724,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shanghai Fosun Pharmaceutical Group Co Ltd",
+          "score": 0.724,
+          "ticker": "600196.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.2294,
+              "free_cash_flow_usd": 146534000.0,
+              "gross_margin": 0.3949,
+              "market_cap_usd": 3573930240.0,
+              "net_income_usd": 140264000.0,
+              "operating_margin": 0.0928,
+              "pe": 26.311236
+            },
+            "ta": {
+              "adx": 19.6073,
+              "close_vs_ema200": 0.279,
+              "rsi14": 54.7271
+            }
+          },
+          "head_listing_id": 30994,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0791,
+                  0.0785,
+                  0.0585
+                ],
+                "value": 0.0791,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1559020000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 3.3147,
+                  "b": 2.9749
+                },
+                "kind": "signal",
+                "strength": 0.702,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "National HealthCare Corporation",
+          "score": 0.702,
+          "ticker": "NHC.US"
+        },
+        {
+          "also_known_as": [
+            "0QAH.LSE",
+            "6MK.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.4672,
+              "free_cash_flow_usd": 16063000000.0,
+              "gross_margin": 0.7297,
+              "market_cap_usd": 333487570944.0,
+              "net_income_usd": 3173000000.0,
+              "operating_margin": 0.1049,
+              "pe": 108.136
+            },
+            "ta": {
+              "adx": 35.6064,
+              "close_vs_ema200": 0.294,
+              "rsi14": 73.6282
+            }
+          },
+          "head_listing_id": 29600,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.2808,
+                  0.2668,
+                  0.0061
+                ],
+                "value": 0.2808,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 66569000000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 1.3084,
+                  "b": 1.2637
+                },
+                "kind": "signal",
+                "strength": 0.701,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Merck & Company Inc",
+          "score": 0.701,
+          "ticker": "MRK.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.208275367817546,
+              "free_cash_flow_usd": 408949200.0,
+              "gross_margin": 0.582061147230681,
+              "market_cap_usd": 3885187079.4408,
+              "net_income_usd": 235424700.0,
+              "operating_margin": 0.163902833785971,
+              "pe": 16.836555
+            },
+            "ta": {
+              "adx": 24.5162,
+              "close_vs_ema200": 0.0271,
+              "rsi14": 41.0679
+            }
+          },
+          "head_listing_id": 573654,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1281,
+                  0.1209,
+                  0.0882
+                ],
+                "value": 0.1281,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1837231200.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -30.7003,
+                  "b": -33.0289
+                },
+                "kind": "signal",
+                "strength": 0.697,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Santen Pharmaceutical Co., Ltd.",
+          "score": 0.697,
+          "ticker": "4536.JP"
+        },
+        {
+          "also_known_as": [
+            "0HD2.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": -0.0105,
+              "free_cash_flow_usd": 819866000.0,
+              "gross_margin": 0.7965,
+              "market_cap_usd": 30590103552.0,
+              "net_income_usd": 807988000.0,
+              "operating_margin": 0.2081,
+              "pe": 39.12892
+            },
+            "ta": {
+              "adx": 18.1822,
+              "close_vs_ema200": -0.2352,
+              "rsi14": 46.5625
+            }
+          },
+          "head_listing_id": 1752,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0845,
+                  -0.1237,
+                  -0.2408
+                ],
+                "value": 0.0845,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 4804182000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -16.5095,
+                  "b": -17.1743
+                },
+                "kind": "signal",
+                "strength": 0.694,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Alnylam Pharmaceuticals Inc",
+          "score": 0.694,
+          "ticker": "ALNY.US"
+        },
+        {
+          "also_known_as": [
+            "HLN.US"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.219330855018587,
+              "free_cash_flow_usd": 2993019600.0,
+              "gross_margin": 0.641885766092475,
+              "market_cap_usd": 42233067650.8672,
+              "net_income_usd": 2246449200.0,
+              "operating_margin": 0.218676337262013,
+              "pe": 19.221622
+            },
+            "ta": {
+              "adx": 15.2308,
+              "close_vs_ema200": 0.025,
+              "rsi14": 57.638
+            }
+          },
+          "head_listing_id": 237876,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.1511,
+                  0.1284,
+                  0.0928
+                ],
+                "value": 0.1511,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 14864028000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.7163,
+                  "b": 0.2958
+                },
+                "kind": "signal",
+                "strength": 0.688,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Haleon PLC",
+          "score": 0.688,
+          "ticker": "HLN.LSE"
+        },
+        {
+          "also_known_as": [
+            "ESF0.XETRA",
+            "0MV5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.276868980278245,
+              "free_cash_flow_usd": 662648270.0,
+              "gross_margin": 0.681199544962377,
+              "market_cap_usd": 13855084152.729599,
+              "net_income_usd": 557747560.0,
+              "operating_margin": 0.112155809267965,
+              "pe": 27.317647
+            },
+            "ta": {
+              "adx": 16.3343,
+              "close_vs_ema200": 0.1378,
+              "rsi14": 72.7937
+            }
+          },
+          "head_listing_id": 1753021,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0651,
+                  0.0585,
+                  0.0476
+                ],
+                "value": 0.0651,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 8570728670.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.6593,
+                  "b": 0.6302
+                },
+                "kind": "signal",
+                "strength": 0.677,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Eurofins Scientific SE",
+          "score": 0.677,
+          "ticker": "ERF.PA"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": -0.0499,
+              "free_cash_flow_usd": 177514000.0,
+              "gross_margin": 0.1255,
+              "market_cap_usd": 2744366848.0,
+              "net_income_usd": 40699000.0,
+              "operating_margin": 0.012,
+              "pe": 70.842105
+            },
+            "ta": {
+              "adx": 33.1371,
+              "close_vs_ema200": -0.2563,
+              "rsi14": 35.7238
+            }
+          },
+          "head_listing_id": 1697,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  -0.0002,
+                  -0.0474,
+                  -0.0812
+                ],
+                "value": -0.0002,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 4577329000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -1.6496,
+                  "b": -1.7036
+                },
+                "kind": "signal",
+                "strength": 0.664,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Alignment Healthcare LLC",
+          "score": 0.664,
+          "ticker": "ALHC.US"
+        },
+        {
+          "also_known_as": [
+            "0IJO.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.1689,
+              "free_cash_flow_usd": 1158185000.0,
+              "gross_margin": 0.9648,
+              "market_cap_usd": 13162163200.0,
+              "net_income_usd": 860623000.0,
+              "operating_margin": 0.4072,
+              "pe": 16.45283
+            },
+            "ta": {
+              "adx": 20.8767,
+              "close_vs_ema200": 0.1382,
+              "rsi14": 53.2361
+            }
+          },
+          "head_listing_id": 12703,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3373,
+                  0.2404,
+                  0.1135
+                ],
+                "value": 0.3373,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2435920000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -0.4642,
+                  "b": -0.4836
+                },
+                "kind": "signal",
+                "strength": 0.645,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Exelixis Inc",
+          "score": 0.645,
+          "ticker": "EXEL.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.2447,
+              "free_cash_flow_usd": 173905000.0,
+              "gross_margin": 0.3356,
+              "market_cap_usd": 4722207232.0,
+              "net_income_usd": 50600000.0,
+              "operating_margin": 0.0495,
+              "pe": 95.076923
+            },
+            "ta": {
+              "adx": 40.4302,
+              "close_vs_ema200": 0.441,
+              "rsi14": 58.6326
+            }
+          },
+          "head_listing_id": 26213,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0068,
+                  -0.0459,
+                  -0.1764
+                ],
+                "value": 0.0068,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1584834000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.2571,
+                  "b": 0.2555
+                },
+                "kind": "signal",
+                "strength": 0.637,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Lifestance Health Group Inc",
+          "score": 0.637,
+          "ticker": "LFST.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.29746007772641,
+              "free_cash_flow_usd": 99023400.0,
+              "gross_margin": 0.0774231324349616,
+              "market_cap_usd": 1801690169.6115,
+              "net_income_usd": 240256800.0,
+              "operating_margin": 0.0146281317774497,
+              "pe": 9.234887
+            },
+            "ta": {
+              "adx": 15.8405,
+              "close_vs_ema200": -0.0675,
+              "rsi14": 52.8011
+            }
+          },
+          "head_listing_id": 574702,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0153,
+                  0.0144,
+                  0.0122
+                ],
+                "value": 0.0153,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 15665876100.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -30.0801,
+                  "b": -32.4961
+                },
+                "kind": "signal",
+                "strength": 0.626,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Suzuken Co., Ltd.",
+          "score": 0.626,
+          "ticker": "9987.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.4278,
+              "free_cash_flow_usd": -332556000.0,
+              "gross_margin": 0.9299,
+              "market_cap_usd": 6061757440.0,
+              "net_income_usd": -38382000.0,
+              "operating_margin": 0.1157,
+              "pe": 7.898601
+            },
+            "ta": {
+              "adx": 19.3982,
+              "close_vs_ema200": 0.0025,
+              "rsi14": 42.6146
+            }
+          },
+          "head_listing_id": 35848,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3944,
+                  -0.4503,
+                  -0.6681
+                ],
+                "value": 0.3944,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1008754000.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": -1.8068,
+                  "b": -1.8643
+                },
+                "kind": "signal",
+                "strength": 0.57,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "PTC Therapeutics Inc",
+          "score": 0.57,
+          "ticker": "PTCT.US"
+        },
+        {
+          "also_known_as": [
+            "HANSOH19.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.151913242504749,
+              "free_cash_flow_usd": 893576255.0,
+              "gross_margin": 0.900330402778114,
+              "market_cap_usd": 25737051045.888004,
+              "net_income_usd": 794430923.0,
+              "operating_margin": 0.369103700452559,
+              "pe": 30.427686
+            },
+            "ta": {
+              "adx": 18.4761,
+              "close_vs_ema200": -0.0587,
+              "rsi14": 43.9833
+            }
+          },
+          "head_listing_id": 52742,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.3697,
+                  0.3566,
+                  0.3244
+                ],
+                "value": 0.3697,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2149050332.0
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.252,
+                  "b": 0.1594
+                },
+                "kind": "signal",
+                "strength": 0.303,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hansoh Pharmaceutical Group Co Ltd",
+          "score": 0.303,
+          "ticker": "3692.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "effective_tax_rate": 0.2651,
+              "free_cash_flow_usd": 93500642.98845,
+              "gross_margin": 0.3116,
+              "market_cap_usd": 1310380584.3456,
+              "net_income_usd": 26610744.00815,
+              "operating_margin": 0.0761,
+              "pe": 54.893617
+            },
+            "ta": {
+              "adx": 21.7075,
+              "close_vs_ema200": -0.0747,
+              "rsi14": 47.2298
+            }
+          },
+          "head_listing_id": 228940,
+          "matched": {
+            "fundamental": {
+              "net_margin": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  0.0198,
+                  0.0129,
+                  0.0005
+                ],
+                "value": 0.0198,
+                "window": "latest_value",
+                "years_checked": 3
+              },
+              "revenue": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 1331829347.65825
+              }
+            },
+            "ta": {
+              "macd_x_signal_up": {
+                "detail": {
+                  "a": 0.0692,
+                  "b": 0.06
+                },
+                "kind": "signal",
+                "strength": 0.204,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "North China Pharmaceutical Co Ltd",
+          "score": 0.204,
+          "ticker": "600812.CG"
+        }
+      ],
+      "sort": "ta",
+      "universe": 2540,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 17,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 17 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Found 17 healthcare companies (GICS 35) with revenue above $1B and margins that improved every year (3y) that just made a bullish MACD crossover (macd_line above macd_signal). All conditions jointly matched per row. Examples: LLY.US, 4507.JP, AZN.LSE, 600196.CG."
+}

@@ -1,0 +1,2023 @@
+{
+  "id": "fn-04",
+  "question": "Show me companies that make more money every year — like their profits keep going up.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "net_income",
+            "pattern": "improved_every_year",
+            "params": {
+              "N": 3
+            }
+          }
+        ],
+        "size": [
+          "large"
+        ],
+        "sort": "mcap",
+        "limit": 12
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "capped": true,
+      "count": 48,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NVDA.SW",
+            "0R1I.LSE",
+            "NVDA01.BK",
+            "NVDA03.BK",
+            "NVDA06.BK",
+            "NVDA19.BK",
+            "NVDA23.BK",
+            "NVDA80.BK",
+            "NVD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 5322322739200.0,
+              "net_margin": 0.6297,
+              "operating_cash_flow_usd": 125648000000.0,
+              "pe": 33.650842,
+              "revenue_usd": 253491000000.0,
+              "roe": 0.8165
+            }
+          },
+          "head_listing_id": 31809,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  120067000000.0,
+                  72880000000.0,
+                  29760000000.0
+                ],
+                "unit": "usd",
+                "value": 120067000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NVIDIA Corporation",
+          "score": 5322322739200.0,
+          "ticker": "NVDA.US"
+        },
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 4173832126464.0,
+              "net_margin": 0.5477,
+              "operating_cash_flow_usd": 185675000000.0,
+              "pe": 17.123934,
+              "revenue_usd": 445867000000.0,
+              "roe": 0.3813
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  132170000000.0,
+                  100118000000.0,
+                  73795000000.0
+                ],
+                "unit": "usd",
+                "value": 132170000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "MSFT01.BK",
+            "MSFT03.BK",
+            "MSFT06.BK",
+            "MSFT19.BK",
+            "MSFT23.BK",
+            "MSFT80.BK",
+            "MSF.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 3576365580288.0,
+              "net_margin": 0.4031,
+              "operating_cash_flow_usd": 182935000000.0,
+              "pe": 28.685527,
+              "revenue_usd": 331839000000.0,
+              "roe": 0.3023
+            }
+          },
+          "head_listing_id": 29766,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  133749000000.0,
+                  101832000000.0,
+                  88136000000.0
+                ],
+                "unit": "usd",
+                "value": 133749000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Microsoft Corporation",
+          "score": 3576365580288.0,
+          "ticker": "MSFT.US"
+        },
+        {
+          "also_known_as": [
+            "AMZN01.BK",
+            "AMZN03.BK",
+            "AMZN06.BK",
+            "AMZN80.BK",
+            "AMZN23.BK",
+            "AMZ.XETRA",
+            "0R1O.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 2798509096960.0,
+              "net_margin": 0.1222,
+              "operating_cash_flow_usd": 148531000000.0,
+              "pe": 21.022526,
+              "revenue_usd": 742776000000.0,
+              "roe": 0.2055
+            }
+          },
+          "head_listing_id": 2048,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  77670000000.0,
+                  59248000000.0,
+                  30425000000.0
+                ],
+                "unit": "usd",
+                "value": 77670000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amazon.com Inc",
+          "score": 2798509096960.0,
+          "ticker": "AMZN.US"
+        },
+        {
+          "also_known_as": [
+            "0LCV.LSE",
+            "TSM.US"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 1931805975589.6833,
+              "net_margin": 0.4992,
+              "operating_cash_flow_usd": 82728923991.2,
+              "pe": 27.839513,
+              "revenue_usd": 139431486699.8,
+              "roe": 0.3446
+            }
+          },
+          "head_listing_id": 1418323,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  1697604000000.0,
+                  1158380200000.0,
+                  851740000000.0
+                ],
+                "unit": "usd",
+                "value": 1697604000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+          "score": 1931805975589.6833,
+          "ticker": "2330.TW"
+        },
+        {
+          "also_known_as": [
+            "SMSD.LSE",
+            "BC94.LSE",
+            "SMSN.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 1234185534989.96,
+              "net_margin": 0.2146,
+              "operating_cash_flow_usd": 76305871600.0,
+              "pe": 22.018128,
+              "revenue_usd": 271837215300.0,
+              "roe": 0.1758
+            }
+          },
+          "head_listing_id": 1414771,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  44260956000000.0,
+                  33621363000000.0,
+                  14473401000000.0
+                ],
+                "unit": "usd",
+                "value": 44260956000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Samsung Electronics Co Ltd",
+          "score": 1234185534989.96,
+          "ticker": "005930.KO"
+        },
+        {
+          "also_known_as": [
+            "LLY23.BK",
+            "LLY80.BK",
+            "LLY.SW",
+            "LLY.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 1093034115072.0,
+              "net_margin": 0.3353,
+              "operating_cash_flow_usd": 28083000000.0,
+              "pe": 41.145686,
+              "revenue_usd": 79665800000.0,
+              "roe": 0.7884
+            }
+          },
+          "head_listing_id": 26596,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  20640000000.0,
+                  10590000000.0,
+                  5240000000.0
+                ],
+                "unit": "usd",
+                "value": 20640000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eli Lilly and Company",
+          "score": 1093034115072.0,
+          "ticker": "LLY.US"
+        },
+        {
+          "also_known_as": [
+            "MICRON01.BK",
+            "MICRON03.BK",
+            "MICRON19.BK",
+            "MICRON23.BK",
+            "MICRON80.BK",
+            "0R2T.LSE",
+            "MTE.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 1029204672512.0,
+              "net_margin": 0.5591,
+              "operating_cash_flow_usd": 51432000000.0,
+              "pe": 21.264919,
+              "revenue_usd": 90274000000.0,
+              "roe": 0.5011
+            }
+          },
+          "head_listing_id": 30067,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  8539000000.0,
+                  778000000.0,
+                  -5833000000.0
+                ],
+                "unit": "usd",
+                "value": 8539000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Micron Technology Inc",
+          "score": 1029204672512.0,
+          "ticker": "MU.US"
+        },
+        {
+          "also_known_as": [
+            "WMT06.BK",
+            "0R1W.LSE",
+            "WMT.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 916770652160.0,
+              "net_margin": 0.0313,
+              "operating_cash_flow_usd": 40892000000.0,
+              "pe": 40.56338,
+              "revenue_usd": 725305000000.0,
+              "roe": 0.241
+            }
+          },
+          "head_listing_id": 47900,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  21893000000.0,
+                  19436000000.0,
+                  15511000000.0
+                ],
+                "unit": "usd",
+                "value": 21893000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Walmart Inc.",
+          "score": 916770652160.0,
+          "ticker": "WMT.US"
+        },
+        {
+          "also_known_as": [
+            "SKHYV.US",
+            "SKHY.US",
+            "HXSCL.US"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 825845250575.59,
+              "net_margin": 0.5689,
+              "operating_cash_flow_usd": 49475701800.0,
+              "pe": 15.572195,
+              "revenue_usd": 92458674700.0,
+              "roe": 0.4574
+            }
+          },
+          "head_listing_id": 1414474,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  42919287000000.0,
+                  19788681000000.0,
+                  -9112428000000.0
+                ],
+                "unit": "usd",
+                "value": 42919287000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SK Hynix Inc",
+          "score": 825845250575.59,
+          "ticker": "000660.KO"
+        },
+        {
+          "also_known_as": [
+            "AMD03.BK",
+            "AMD23.BK",
+            "0QZD.LSE",
+            "AMD.XETRA",
+            "AMD80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 790754623488.0,
+              "net_margin": 0.1558,
+              "operating_cash_flow_usd": 10080000000.0,
+              "pe": 129.74359,
+              "revenue_usd": 41305000000.0,
+              "roe": 0.0957
+            }
+          },
+          "head_listing_id": 1884,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  4335000000.0,
+                  1641000000.0,
+                  854000000.0
+                ],
+                "unit": "usd",
+                "value": 4335000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advanced Micro Devices Inc",
+          "score": 790754623488.0,
+          "ticker": "AMD.US"
+        },
+        {
+          "also_known_as": [
+            "0QZ0.LSE",
+            "VISA06.BK",
+            "VISA80.BK",
+            "3V64.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 680071987200.0,
+              "net_margin": 0.5078,
+              "operating_cash_flow_usd": 22580000000.0,
+              "pe": 31.0,
+              "revenue_usd": 44488000000.0,
+              "roe": 0.6422
+            }
+          },
+          "head_listing_id": 45629,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  20058000000.0,
+                  19743000000.0,
+                  17273000000.0
+                ],
+                "unit": "usd",
+                "value": 20058000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Visa Inc. Class A",
+          "score": 680071987200.0,
+          "ticker": "V.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 586532273600.0001,
+              "net_margin": 0.299085087646954,
+              "operating_cash_flow_usd": 43336436000.0,
+              "pe": 14.909106,
+              "revenue_usd": 107502538000.0,
+              "roe": 0.211347464398176
+            }
+          },
+          "head_listing_id": 53221,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  224842000000.0,
+                  194073000000.0,
+                  115216000000.0
+                ],
+                "unit": "usd",
+                "value": 224842000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Tencent Holdings Ltd",
+          "score": 586532273600.0001,
+          "ticker": "700.HK"
+        },
+        {
+          "also_known_as": [
+            "700.HK",
+            "TENCENT01.BK",
+            "TENCENT06.BK",
+            "TENCENT13.BK",
+            "TENCENT19.BK",
+            "TENCENT23.BK",
+            "TENCENT80.BK",
+            "80700.HK",
+            "0LEA.LSE",
+            "0Z4S.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 505188134787.4816,
+              "net_margin": 0.299085087646954,
+              "operating_cash_flow_usd": 43336436000.0,
+              "pe": 15.735202,
+              "revenue_usd": 107502538000.0,
+              "roe": 0.211347464398176
+            }
+          },
+          "head_listing_id": 50851,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  224842000000.0,
+                  194073000000.0,
+                  115216000000.0
+                ],
+                "unit": "usd",
+                "value": 224842000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Tencent Holdings Ltd",
+          "score": 505188134787.4816,
+          "ticker": "0700.HK"
+        },
+        {
+          "also_known_as": [
+            "MA80.BK",
+            "M4I.XETRA",
+            "0R2Z.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 503101259776.0,
+              "net_margin": 0.4634,
+              "operating_cash_flow_usd": 17437000000.0,
+              "pe": 31.590209,
+              "revenue_usd": 35083000000.0,
+              "roe": 2.8973
+            }
+          },
+          "head_listing_id": 27402,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  14968000000.0,
+                  12874000000.0,
+                  11195000000.0
+                ],
+                "unit": "usd",
+                "value": 14968000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Mastercard Inc",
+          "score": 503101259776.0,
+          "ticker": "MA.US"
+        },
+        {
+          "also_known_as": [
+            "BAC03.BK",
+            "NCB.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 449144258560.0,
+              "net_margin": 0.2732,
+              "operating_cash_flow_usd": 56567000000.0,
+              "pe": 14.755196,
+              "revenue_usd": 116003000000.0,
+              "roe": 0.1054
+            }
+          },
+          "head_listing_id": 3570,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  30509000000.0,
+                  26973000000.0,
+                  26305000000.0
+                ],
+                "unit": "usd",
+                "value": 30509000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Bank of America Corp",
+          "score": 449144258560.0,
+          "ticker": "BAC.US"
+        },
+        {
+          "also_known_as": [
+            "COSTCO19.BK",
+            "0I47.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 426338353152.0,
+              "net_margin": 0.0301,
+              "operating_cash_flow_usd": 15000000000.0,
+              "pe": 47.962777,
+              "revenue_usd": 293587000000.0,
+              "roe": 0.2638
+            }
+          },
+          "head_listing_id": 8336,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  8099000000.0,
+                  7367000000.0,
+                  6292000000.0
+                ],
+                "unit": "usd",
+                "value": 8099000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Costco Wholesale Corp",
+          "score": 426338353152.0,
+          "ticker": "COST.US"
+        },
+        {
+          "also_known_as": [
+            "PLTR01.BK",
+            "PLTR03.BK",
+            "PLTR06.BK",
+            "PLTR23.BK",
+            "PTX.XETRA",
+            "0A7R.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 412220620800.0,
+              "net_margin": 0.49,
+              "operating_cash_flow_usd": 3400291000.0,
+              "pe": 146.615385,
+              "revenue_usd": 6155941000.0,
+              "roe": 0.3086
+            }
+          },
+          "head_listing_id": 34742,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  1625033000.0,
+                  462190000.0,
+                  209825000.0
+                ],
+                "unit": "usd",
+                "value": 1625033000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Palantir Technologies Inc.",
+          "score": 412220620800.0,
+          "ticker": "PLTR.US"
+        },
+        {
+          "also_known_as": [
+            "ORCL01.BK",
+            "ORCL06.BK",
+            "ORCL19.BK",
+            "ORC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 411302428672.0,
+              "net_margin": 0.2537,
+              "operating_cash_flow_usd": 31977000000.0,
+              "pe": 24.492281,
+              "revenue_usd": 67358000000.0,
+              "roe": 0.402
+            }
+          },
+          "head_listing_id": 32732,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  17087000000.0,
+                  12443000000.0,
+                  10467000000.0
+                ],
+                "unit": "usd",
+                "value": 17087000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Oracle Corporation",
+          "score": 411302428672.0,
+          "ticker": "ORCL.US"
+        },
+        {
+          "also_known_as": [
+            "LRCX01.BK",
+            "LRCX23.BK",
+            "0JT5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 410333184000.0,
+              "net_margin": 0.3127,
+              "operating_cash_flow_usd": 5857657000.0,
+              "pe": 56.930556,
+              "revenue_usd": 23232690000.0,
+              "roe": 0.5826
+            }
+          },
+          "head_listing_id": 26959,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  7265396000.0,
+                  5358217000.0,
+                  3827772000.0
+                ],
+                "unit": "usd",
+                "value": 7265396000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lam Research Corp",
+          "score": 410333184000.0,
+          "ticker": "LRCX.US"
+        },
+        {
+          "also_known_as": [
+            "0939.HK",
+            "00939.TW"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 404635364700.9792,
+              "net_margin": 0.4161,
+              "operating_cash_flow_usd": 309561805000.0,
+              "pe": 8.023077,
+              "revenue_usd": 114957450000.0,
+              "roe": 0.088
+            }
+          },
+          "head_listing_id": 229276,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  338906000000.0,
+                  335577000000.0,
+                  332653000000.0
+                ],
+                "unit": "usd",
+                "value": 338906000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China Construction Bank Co",
+          "score": 404635364700.9792,
+          "ticker": "601939.CG"
+        },
+        {
+          "also_known_as": [
+            "ICBC06.BK",
+            "ICBC19.BK",
+            "1398.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 402226921524.4288,
+              "net_margin": 0.4158,
+              "operating_cash_flow_usd": 368867820000.0,
+              "pe": 7.594059,
+              "revenue_usd": 123350920000.0,
+              "roe": 0.0817
+            }
+          },
+          "head_listing_id": 229179,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  368562000000.0,
+                  365863000000.0,
+                  363993000000.0
+                ],
+                "unit": "usd",
+                "value": 368562000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Industrial and Commercial Bank of China Ltd",
+          "score": 402226921524.4288,
+          "ticker": "601398.CG"
+        },
+        {
+          "also_known_as": [
+            "MS06.BK",
+            "0QYU.LSE",
+            "MS-PQ.US",
+            "DWD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 343026139136.0,
+              "net_margin": 0.2759,
+              "operating_cash_flow_usd": -15587000000.0,
+              "pe": 17.572698,
+              "revenue_usd": 73053000000.0,
+              "roe": 0.1733
+            }
+          },
+          "head_listing_id": 29658,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  16861000000.0,
+                  13390000000.0,
+                  9087000000.0
+                ],
+                "unit": "usd",
+                "value": 16861000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Morgan Stanley",
+          "score": 343026139136.0,
+          "ticker": "MS.US"
+        },
+        {
+          "also_known_as": [
+            "1288.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 335290068605.3376,
+              "net_margin": 0.3957,
+              "operating_cash_flow_usd": 589653230000.0,
+              "pe": 8.35443,
+              "revenue_usd": 107852450000.0,
+              "roe": 0.0893
+            }
+          },
+          "head_listing_id": 229160,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  291041000000.0,
+                  282083000000.0,
+                  269356000000.0
+                ],
+                "unit": "usd",
+                "value": 291041000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Agricultural Bank of China Ltd Class A",
+          "score": 335290068605.3376,
+          "ticker": "601288.CG"
+        },
+        {
+          "also_known_as": [
+            "PRG.XETRA",
+            "0NOF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 334037516288.0,
+              "net_margin": 0.1844,
+              "operating_cash_flow_usd": 19556000000.0,
+              "pe": 21.669184,
+              "revenue_usd": 87033000000.0,
+              "roe": 0.2967
+            }
+          },
+          "head_listing_id": 34076,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  16046000000.0,
+                  15974000000.0,
+                  14879000000.0
+                ],
+                "unit": "usd",
+                "value": 16046000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Procter & Gamble Company",
+          "score": 334037516288.0,
+          "ticker": "PG.US"
+        },
+        {
+          "also_known_as": [
+            "0QAH.LSE",
+            "6MK.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 333487570944.0,
+              "net_margin": 0.0477,
+              "operating_cash_flow_usd": 19967000000.0,
+              "pe": 108.136,
+              "revenue_usd": 66569000000.0,
+              "roe": 0.0757
+            }
+          },
+          "head_listing_id": 29600,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  18254000000.0,
+                  17117000000.0,
+                  365000000.0
+                ],
+                "unit": "usd",
+                "value": 18254000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Merck & Company Inc",
+          "score": 333487570944.0,
+          "ticker": "MRK.US"
+        },
+        {
+          "also_known_as": [
+            "NFLX06.BK",
+            "NFLX80.BK",
+            "0QYI.LSE",
+            "NFC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 316542681088.0,
+              "net_margin": 0.2822,
+              "operating_cash_flow_usd": 11970833000.0,
+              "pe": 24.455975,
+              "revenue_usd": 48370764000.0,
+              "roe": 0.4527
+            }
+          },
+          "head_listing_id": 30925,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  10981201000.0,
+                  8711631000.0,
+                  5407990000.0
+                ],
+                "unit": "usd",
+                "value": 10981201000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Netflix Inc",
+          "score": 316542681088.0,
+          "ticker": "NFLX.US"
+        },
+        {
+          "also_known_as": [
+            "5UR.XETRA",
+            "0R2N.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 303905964032.0,
+              "net_margin": 0.0828,
+              "operating_cash_flow_usd": 14206000000.0,
+              "pe": 39.698944,
+              "revenue_usd": 93500000000.0,
+              "roe": 0.1166
+            }
+          },
+          "head_listing_id": 38491,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  6732000000.0,
+                  4774000000.0,
+                  3195000000.0
+                ],
+                "unit": "usd",
+                "value": 6732000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "RTX Corporation",
+          "score": 303905964032.0,
+          "ticker": "RTX.US"
+        },
+        {
+          "also_known_as": [
+            "0R3G.LSE",
+            "GSUS06.BK",
+            "GOS.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 302955102208.0,
+              "net_margin": 0.2989,
+              "operating_cash_flow_usd": -39792000000.0,
+              "pe": 16.066553,
+              "revenue_usd": 60448000000.0,
+              "roe": 0.1472
+            }
+          },
+          "head_listing_id": 19383,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  17176000000.0,
+                  14276000000.0,
+                  8516000000.0
+                ],
+                "unit": "usd",
+                "value": 17176000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Goldman Sachs Group Inc",
+          "score": 302955102208.0,
+          "ticker": "GS.US"
+        },
+        {
+          "also_known_as": [
+            "DELL19.BK",
+            "12DA.XETRA",
+            "0A7D.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 302814625792.0,
+              "net_margin": 0.0628,
+              "operating_cash_flow_usd": 12470000000.0,
+              "pe": 38.231873,
+              "revenue_usd": 134002000000.0
+            }
+          },
+          "head_listing_id": 9779,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  5936000000.0,
+                  4592000000.0,
+                  3388000000.0
+                ],
+                "unit": "usd",
+                "value": 5936000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dell Technologies Inc",
+          "score": 302814625792.0,
+          "ticker": "DELL.US"
+        },
+        {
+          "also_known_as": [
+            "0QKU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 295984201728.0,
+              "net_margin": 0.3185,
+              "operating_cash_flow_usd": 54037057000.0,
+              "pe": 19.274189,
+              "revenue_usd": 51178740400.0,
+              "roe": 0.1573
+            }
+          },
+          "head_listing_id": 38626,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  20362000000.0,
+                  16230000000.0,
+                  14605000000.0
+                ],
+                "unit": "usd",
+                "value": 20362000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Royal Bank of Canada",
+          "score": 295984201728.0,
+          "ticker": "RY.US"
+        },
+        {
+          "also_known_as": [
+            "3988.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 281926191742.97595,
+              "net_margin": 0.3654,
+              "operating_cash_flow_usd": 152061645000.0,
+              "pe": 8.148649,
+              "revenue_usd": 97332700000.0,
+              "roe": 0.079
+            }
+          },
+          "head_listing_id": 229288,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  243021000000.0,
+                  237841000000.0,
+                  231904000000.0
+                ],
+                "unit": "usd",
+                "value": 243021000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Bank of China Limited",
+          "score": 281926191742.97595,
+          "ticker": "601988.CG"
+        },
+        {
+          "also_known_as": [
+            "CATL01.BK",
+            "CATL23.BK",
+            "CATL80.BK",
+            "3750.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 271351854176.6656,
+              "net_margin": 0.1621,
+              "operating_cash_flow_usd": 19050457426.0,
+              "pe": 21.355045,
+              "revenue_usd": 75428720613.4,
+              "roe": 0.2187
+            }
+          },
+          "head_listing_id": 232821,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  72201282000.0,
+                  50744682000.0,
+                  44121248000.0
+                ],
+                "unit": "usd",
+                "value": 72201282000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Contemporary Amperex Technology Co Ltd Class A",
+          "score": 271351854176.6656,
+          "ticker": "300750.CS"
+        },
+        {
+          "also_known_as": [
+            "0ADF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 270545403904.0,
+              "net_margin": 0.2025,
+              "operating_cash_flow_usd": 2094000000.0,
+              "pe": 276.969388,
+              "revenue_usd": 5156000000.0,
+              "roe": 0.121
+            }
+          },
+          "head_listing_id": 2624,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  904000000.0,
+                  792000000.0,
+                  306000000.0
+                ],
+                "unit": "usd",
+                "value": 904000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Arm Holdings plc American Depositary Shares",
+          "score": 270545403904.0,
+          "ticker": "ARM.US"
+        },
+        {
+          "also_known_as": [
+            "GEV80.BK",
+            "GEV23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 267540086784.0,
+              "net_margin": 0.2304,
+              "operating_cash_flow_usd": 14139000000.0,
+              "pe": 30.934633,
+              "revenue_usd": 41367000000.0,
+              "roe": 0.7969
+            }
+          },
+          "head_listing_id": 18244,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  4884000000.0,
+                  1552000000.0,
+                  -438000000.0
+                ],
+                "unit": "usd",
+                "value": 4884000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GE Vernova LLC",
+          "score": 267540086784.0,
+          "ticker": "GEV.US"
+        },
+        {
+          "also_known_as": [
+            "NWT.XETRA",
+            "0R2F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 264297529344.0,
+              "net_margin": 0.2605,
+              "operating_cash_flow_usd": 19170000000.0,
+              "pe": 12.703488,
+              "revenue_usd": 86796000000.0,
+              "roe": 0.1255
+            }
+          },
+          "head_listing_id": 47495,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  21338000000.0,
+                  19722000000.0,
+                  19142000000.0
+                ],
+                "unit": "usd",
+                "value": 21338000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wells Fargo & Company",
+          "score": 264297529344.0,
+          "ticker": "WFC.US"
+        },
+        {
+          "also_known_as": [
+            "MUFG19.BK",
+            "MUFG23.BK",
+            "MUFG.US",
+            "0K1Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 257411876400.0,
+              "net_margin": 0.3227,
+              "operating_cash_flow_usd": -145305846000.0,
+              "pe": 17.208251,
+              "revenue_usd": 47383087500.0,
+              "roe": 0.109
+            }
+          },
+          "head_listing_id": 572833,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  2427229000000.0,
+                  1862946000000.0,
+                  1490781000000.0
+                ],
+                "unit": "usd",
+                "value": 2427229000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Mitsubishi UFJ Financial Group, Inc.",
+          "score": 257411876400.0,
+          "ticker": "8306.JP"
+        },
+        {
+          "also_known_as": [
+            "KLAC23.BK",
+            "KLAC01.BK",
+            "0JPO.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 254502240256.0,
+              "net_margin": 0.3557,
+              "operating_cash_flow_usd": 4143079000.0,
+              "pe": 53.221311,
+              "revenue_usd": 13579476000.0,
+              "roe": 0.7608
+            }
+          },
+          "head_listing_id": 25302,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  4830771000.0,
+                  4061643000.0,
+                  2761896000.0
+                ],
+                "unit": "usd",
+                "value": 4830771000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "KLA Corporation",
+          "score": 254502240256.0,
+          "ticker": "KLAC.US"
+        },
+        {
+          "also_known_as": [
+            "0P6M.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 251673065647.30878,
+              "net_margin": 0.098,
+              "operating_cash_flow_usd": 16378005800.0,
+              "pe": 27.279921,
+              "revenue_usd": 92650695200.0,
+              "roe": 0.1164
+            }
+          },
+          "head_listing_id": 243669,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  9620000000.0,
+                  8301000000.0,
+                  7949000000.0
+                ],
+                "unit": "usd",
+                "value": 9620000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Siemens Aktiengesellschaft",
+          "score": 251673065647.30878,
+          "ticker": "SIE.XETRA"
+        },
+        {
+          "also_known_as": [
+            "AZN.US",
+            "ZEG.XETRA",
+            "AZNCF.US"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 247200033814.93762,
+              "net_margin": 0.1702,
+              "operating_cash_flow_usd": 13700000000.0,
+              "pe": 23.364006,
+              "revenue_usd": 61366000000.0,
+              "roe": 0.2077
+            }
+          },
+          "head_listing_id": 236491,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  10225000000.0,
+                  7035000000.0,
+                  5955000000.0
+                ],
+                "unit": "usd",
+                "value": 10225000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "AstraZeneca PLC",
+          "score": 247200033814.93762,
+          "ticker": "AZN.LSE"
+        },
+        {
+          "also_known_as": [
+            "ANET23.BK",
+            "ANET80.BK",
+            "0HHR.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 243643383808.0,
+              "net_margin": 0.3837,
+              "operating_cash_flow_usd": 5306600000.0,
+              "pe": 63.860759,
+              "revenue_usd": 10540800000.0,
+              "roe": 0.2733
+            }
+          },
+          "head_listing_id": 2085,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  3511400000.0,
+                  2852100000.0,
+                  2087300000.0
+                ],
+                "unit": "usd",
+                "value": 3511400000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Arista Networks",
+          "score": 243643383808.0,
+          "ticker": "ANET.US"
+        },
+        {
+          "also_known_as": [
+            "0R01.LSE",
+            "TRVC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 230899171328.0,
+              "net_margin": 0.1956,
+              "operating_cash_flow_usd": -18297000000.0,
+              "pe": 14.925647,
+              "revenue_usd": 91193000000.0,
+              "roe": 0.0841
+            }
+          },
+          "head_listing_id": 5979,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  14306000000.0,
+                  12682000000.0,
+                  9228000000.0
+                ],
+                "unit": "usd",
+                "value": 14306000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Citigroup Inc.",
+          "score": 230899171328.0,
+          "ticker": "C.US"
+        },
+        {
+          "also_known_as": [
+            "AXP06.BK",
+            "0R3C.LSE",
+            "AEC1.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 228605870080.0,
+              "net_margin": 0.1507,
+              "operating_cash_flow_usd": 18475000000.0,
+              "pe": 20.401092,
+              "revenue_usd": 75952000000.0,
+              "roe": 0.3339
+            }
+          },
+          "head_listing_id": 3472,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  10833000000.0,
+                  10129000000.0,
+                  8374000000.0
+                ],
+                "unit": "usd",
+                "value": 10833000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "American Express Company",
+          "score": 228605870080.0,
+          "ticker": "AXP.US"
+        },
+        {
+          "also_known_as": [
+            "0M2B.LSE",
+            "LIN.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 220673507328.0,
+              "net_margin": 0.2043,
+              "operating_cash_flow_usd": 10489000000.0,
+              "pe": 30.884194,
+              "revenue_usd": 35449000000.0,
+              "roe": 0.1854
+            }
+          },
+          "head_listing_id": 26458,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  6898000000.0,
+                  6565000000.0,
+                  6199000000.0
+                ],
+                "unit": "usd",
+                "value": 6898000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Linde plc Ordinary Shares",
+          "score": 220673507328.0,
+          "ticker": "LIN.US"
+        },
+        {
+          "also_known_as": [
+            "0R0H.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 217795936256.0,
+              "net_margin": 0.1504,
+              "operating_cash_flow_usd": 9013000000.0,
+              "pe": 31.702906,
+              "revenue_usd": 46336000000.0,
+              "roe": 0.1323
+            }
+          },
+          "head_listing_id": 43728,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  6704000000.0,
+                  6335000000.0,
+                  5995000000.0
+                ],
+                "unit": "usd",
+                "value": 6704000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Thermo Fisher Scientific Inc",
+          "score": 217795936256.0,
+          "ticker": "TMO.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 209922473984.0,
+              "net_margin": 0.0751,
+              "operating_cash_flow_usd": 20556091000.0,
+              "pe": 23.714665,
+              "revenue_usd": 117878784000.0,
+              "roe": 0.0924606376950945
+            }
+          },
+          "head_listing_id": 239263,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  807750000000.0,
+                  696480000000.0,
+                  696210000000.0
+                ],
+                "unit": "usd",
+                "value": 807750000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Reliance Industries Limited",
+          "score": 209922473984.0,
+          "ticker": "RIGD.LSE"
+        },
+        {
+          "also_known_as": [
+            "SOFTBANK23.BK",
+            "SOFTBANK80.BK",
+            "0R15.LSE",
+            "0L7L.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 209667657906.7371,
+              "net_margin": 0.641427811223737,
+              "operating_cash_flow_usd": -2701641600.0,
+              "pe": 6.682178,
+              "revenue_usd": 49131495000.0,
+              "roe": 0.342816612916866
+            }
+          },
+          "head_listing_id": 573309,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  5002271000000.0,
+                  1153332000000.0,
+                  -227646000000.0
+                ],
+                "unit": "usd",
+                "value": 5002271000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SoftBank Group Corp.",
+          "score": 209667657906.7371,
+          "ticker": "9984.JP"
+        },
+        {
+          "also_known_as": [
+            "BSD2.XETRA",
+            "0HLE.LSE",
+            "SAN.US"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 207788296876.85123,
+              "net_margin": 0.2702,
+              "operating_cash_flow_usd": -17426674500.0,
+              "pe": 11.900898,
+              "revenue_usd": 68666779600.0,
+              "roe": 0.1485
+            }
+          },
+          "head_listing_id": 236593,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "growth",
+                "requested_n": 3,
+                "series": [
+                  14101000000.0,
+                  12574000000.0,
+                  11076000000.0
+                ],
+                "unit": "usd",
+                "value": 14101000000.0,
+                "window": "latest_value",
+                "years_checked": 3
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Banco Santander S.A.",
+          "score": 207788296876.85123,
+          "ticker": "BNC.LSE"
+        }
+      ],
+      "sort": "mcap",
+      "universe": 1139,
+      "_pagination": {
+        "intended_show": 12,
+        "returned": 48,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (12) as a look-ahead buffer so 'a few more' is served from these 48 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Here are large companies whose bottom-line profit (net income) has risen in each of the last several years — i.e. they keep making more money year after year. \"Making more money every year\" here means the annual profit figure went UP every year, not just on average — so it filters out one-off spikes followed by a drop. The list is full of recognizable names: Nvidia (NVDA), Alphabet/Google (GOOG), Microsoft (MSFT), Amazon (AMZN), TSMC (2330), Samsung Electronics (005930), Eli Lilly (LLY), Walmart (WMT), Visa (V) and AMD. A rising profit trend is a good sign of a healthy, growing business, but note some of these (like Nvidia) grew from a chip/AI boom that may not repeat at the same pace, so past growth isn't a promise of future growth. Informational only — not advice to buy."
+}

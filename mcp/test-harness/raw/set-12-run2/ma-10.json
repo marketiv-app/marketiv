@@ -1,0 +1,39 @@
+{
+  "id": "ma-10",
+  "question": "Give me a picture of momentum across all markets — what asset types are strongest right now based on technical signals?",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {"asset_type": ["Common Stock"], "ta": [{"anchor": [{"pattern": "overbought"}]}], "sort": "rsi", "limit": 5}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {"asset_type": ["Crypto"], "ta": [{"anchor": [{"pattern": "overbought"}]}], "sort": "rsi", "limit": 5}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {"asset_type": ["Currency"], "ta": [{"anchor": [{"pattern": "overbought"}]}], "sort": "rsi", "limit": 5}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {"asset_type": ["Common Stock"], "ta": [{"anchor": [{"pattern": "at_new_high"}]}], "limit": 100}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {"asset_type": ["Crypto"], "ta": [{"anchor": [{"pattern": "at_new_high"}]}], "limit": 100}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {"asset_type": ["Currency"], "ta": [{"anchor": [{"pattern": "at_new_high"}]}], "limit": 100}
+    }
+  ],
+  "result_summary": "Cross-asset momentum snapshot: STOCKS overbought=40, top RSI: AMR.US(84.4), BANL.US(82.7), ARCT.US(81.8); at 52-week high=99 uncapped. CRYPTO overbought=60+ capped (RSI all 100.0 for top tier — many micro-cap stagnant tokens); at 52-week high=100+ capped. FOREX overbought=40 (many peg/fixed pairs skew to RSI=100); at 52-week high=100+ capped. Meaningful momentum picture: Stocks show genuine momentum breadth with 40 overbought names and 99 at new highs. Crypto has many stagnant micro-cap tokens with RSI=100 (low-volume stale) masking true momentum. Forex signal quality is mixed due to pegged pairs. For a clean momentum comparison, stocks are the most signal-trustworthy asset class at current data quality.",
+  "verdict": "PASS",
+  "reason": "Multiple parallel screens covering all asset types return real data with RSI/52wk-high signals. Results cover multiple asset types with relative strength comparison possible. Commentary addresses data quality differences across asset classes (crypto micro-cap noise, forex pegged-pair RSI=100 inflation).",
+  "defects": [
+    {
+      "desc": "No native 'cross-asset momentum summary' tool exists — must run 3-6 separate screen_unified calls to compare asset classes. A single tool call that returns per-asset-type momentum breadth statistics (overbought count, at_new_high count, avg RSI) would serve this multi-asset momentum summary use case directly.",
+      "side": "server"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "set": "new-ta-signals-2026-08-24",
+  "cases": [
+    {
+      "id": "ns-01",
+      "question": "Find US stocks where the Bollinger bands are squeezing tightly together right now — the bands compressing before a possible breakout.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["Bollinger bands squeezing tightly together, bands compressing before a breakout"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "bb_squeeze"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "40 US names matched bb_sqz (band-width squeeze), e.g. MSPR (bb_width 0.0). Resolver top pick = bb_squeeze (0.787), clearly distinct from ttm/Keltner variant.",
+      "verdict": "PASS",
+      "reason": "Resolved to the plain Bollinger BAND-WIDTH squeeze (bb_squeeze), not ttm/Keltner, not an MA squeeze; real US tickers returned.",
+      "defects": []
+    },
+    {
+      "id": "ns-02",
+      "question": "Which stocks are coming out of a volatility squeeze — the coil just released and price is breaking out?",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["coming out of a volatility squeeze, the coil just released and price breaking out"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "squeeze_fired"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "40 names with dated squeeze-fired transitions (ttm_sqz_fired_up / _dn), e.g. CRAQ 2026-08-21. Resolver top pick = squeeze_fired (0.809).",
+      "verdict": "PASS",
+      "reason": "Resolved to the squeeze-fired / coming-out-of-squeeze dated transition; dated breakout names returned.",
+      "defects": [
+        {"desc": "squeeze_fired returns BOTH up- and down-fires (ttm_sqz_fired_dn appears first); the user said 'breaking out' (implying up). Resolver/pattern exposes no direction-scoped squeeze_fired_up for the plain 'coming out' phrase, so an upside-only intent can't be expressed here.", "side": "resolver-vocab"}
+      ]
+    },
+    {
+      "id": "ns-03",
+      "question": "Show me stocks where the Ichimoku cloud is getting very thin — kumo compressing, often before a trend change.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["Ichimoku cloud getting very thin, kumo compressing"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "squeeze", "a": "senkou_a", "b": "senkou_b"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "40 names matched kumo_sqz (senkou_a vs senkou_b converging), e.g. DAVE, UI (Ubiquiti), GAP. Resolver returned generic 'squeeze' top; operands a=senkou_a b=senkou_b came from the indicators axis + the pattern description.",
+      "verdict": "PASS",
+      "reason": "Resolved to the Ichimoku kumo squeeze (senkou_a/senkou_b) via squeeze+operands, not a generic squeeze; real names.",
+      "defects": [
+        {"desc": "Resolver's top signal for the Ichimoku phrase was the generic operand-required 'squeeze' (0.707), NOT a dedicated kumo_squeeze pattern; the correct senkou_a/senkou_b operands had to be assembled from the schema description + indicators axis. A dumb client could easily submit 'squeeze' with no/other operands. Borderline guidance gap (mitigated by good schema text).", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ns-04",
+      "question": "Find large-cap stocks that have pulled back to their 200-day moving average — price sitting right near the ema200.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["price pulled back to its 200-day moving average, sitting right near the ema200"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "converge", "a": "close", "b": "ema200"}]}], "country": ["US"], "asset_type": ["Common Stock"], "size": ["large"], "limit": 10}}
+      ],
+      "result_summary": "40 large-caps matched near_close_ema200 (close_vs_ema200 ~0.3-2.8%), e.g. CME, Uber, Adobe, Salesforce, Progressive.",
+      "verdict": "PASS",
+      "reason": "Resolved to price-vs-ema200 converge (pullback/near-MA), large-cap scoped; names trading within ~1-3% of their 200-day, not merely 'below'.",
+      "defects": [
+        {"desc": "Resolver top for the pullback phrase was 'converge' (0.696); the ema200 operand came from the schema (a=close, b=ema200). Same generic-pattern-needs-operands assembly as ns-03 — fine for an informed client, riskier for a blind one.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ns-05",
+      "question": "Which quality stocks are down at least 30% from their 52-week high right now?",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["down at least 30% from its 52-week high"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "roe", "pattern": "above"}], "ta": [{"anchor": [{"pattern": "off_high_by", "b": "0.30"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "off_high_by", "b": "0.30"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "off_high_by b=0.30 → 40 names in real drawdowns (AAP, AAON: close_vs_ema200 -0.21, RSI ~28). Resolver top = off_high_by (0.738), correctly above net_change_down. Quality (roe) filter dropped: 'above' rejects with no threshold and the user named no ROE number.",
+      "verdict": "PASS",
+      "reason": "Resolved to off_high_by drawdown (peak→now), b=0.30 — NOT net_change; names in genuine drawdowns. 'Quality' is a vague adjective with no stated metric/number, so no fundamental threshold was invented.",
+      "defects": [
+        {"desc": "Pattern 'above' ERRORS ('needs a threshold param') when no threshold is supplied, but the ScreenCondition schema explicitly tells the client to OMIT the threshold and let 'the server applies the pattern's default'. The vague 'quality' filter therefore could not be applied and had to be dropped. Schema promises a default that the server does not provide for 'above'.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ns-06",
+      "question": "Find stocks making a new 52-week high this week.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["making a new 52-week high"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "at_new_high"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "40 names at a fresh 52-week high (at_new_high), e.g. AstroNova (RSI 78, close_vs_ema200 0.62), Apogee Tx, AtriCure. Resolver top = at_new_high (0.793).",
+      "verdict": "PASS",
+      "reason": "Resolved to at_new_high (52-week range); names at fresh yearly highs. 'This week' recency left to the default recent-bar window (at_new_high is an as-of-now state).",
+      "defects": []
+    },
+    {
+      "id": "ns-07",
+      "question": "Show me stocks where trading volume has been rising for several days in a row (building volume / accumulation).",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["trading volume rising for several days in a row, building volume accumulation"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "rising_volume"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "40 names matched 'volume rising 3 bars' (rising_volume), e.g. ProFrac, Accel, Addus, AES. Resolver top = rising_volume (0.807), above volume_spike (0.736).",
+      "verdict": "PASS",
+      "reason": "Resolved to rising_volume (N consecutive bars), NOT a one-bar volume_spike; names with climbing multi-day volume.",
+      "defects": []
+    },
+    {
+      "id": "ns-08",
+      "question": "Find stocks that were in a Bollinger squeeze and then broke out to the upside — coiled, then released up.",
+      "tool_calls": [
+        {"tool": "find_tasignal", "args": {"q": ["broke out to the upside after a Bollinger squeeze"]}},
+        {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "bb_squeeze"}]}, {"anchor": [{"pattern": "squeeze_fired"}]}], "country": ["US"], "asset_type": ["Common Stock"], "limit": 10}}
+      ],
+      "result_summary": "THEN chain step0 bb_sqz → step1 squeeze_fired. 40 names coiled-then-released, e.g. CAPN (bb_sqz + ttm_sqz_fired_up), Nakamoto (fired_up), Equinor (fired_up); some fired_dn also present (CRAQ, AFLAC).",
+      "verdict": "PARTIAL",
+      "reason": "THEN chain built correctly (bb_squeeze THEN squeeze_fired) and returns coiled-then-broke-out names; but squeeze_fired is direction-agnostic so DOWN-breakouts (ttm_sqz_fired_dn) leak in — the 'to the UPSIDE' constraint could not be enforced.",
+      "defects": [
+        {"desc": "No upside-only squeeze release is expressible: the resolver/pattern set exposes only direction-agnostic 'squeeze_fired' (and the schema lists no squeeze_fired_up), yet the compute layer clearly tags fired_up vs fired_dn (both appear in results). The user's explicit 'to the upside' constraint cannot be passed, so down-fires pollute the result.", "side": "resolver-vocab"}
+      ]
+    }
+  ],
+  "set_summary": {
+    "pass": 7,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "No direction-scoped squeeze release (squeeze_fired_up) — 'coming out of squeeze to the upside' (ns-02, ns-08) cannot exclude down-fires though compute tags _up/_dn.",
+      "Pattern 'above' errors 'needs a threshold' when omitted, contradicting the ScreenCondition schema which says to omit and let the server apply the pattern's default (blocks the vague 'quality' filter in ns-05).",
+      "Ichimoku-kumo and price-vs-ema200 pullback resolve to the GENERIC operand-required 'squeeze'/'converge' rather than dedicated patterns — correct operands (senkou_a/b, close/ema200) must be assembled from schema text, a trap for a blind client."
+    ]
+  }
+}

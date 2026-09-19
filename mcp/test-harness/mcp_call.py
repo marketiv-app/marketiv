@@ -21,7 +21,8 @@ HEADERS = {"Authorization": f"Bearer {BEARER}"} if BEARER else {}
 
 
 async def _run(cmd, args):
-    async with streamablehttp_client(URL, headers=HEADERS) as (r, w, _):
+    import datetime as _dt
+    async with streamablehttp_client(URL, headers=HEADERS, timeout=_dt.timedelta(seconds=120), sse_read_timeout=_dt.timedelta(seconds=120)) as (r, w, _):
         async with ClientSession(r, w) as s:
             await s.initialize()
             if cmd == "list":

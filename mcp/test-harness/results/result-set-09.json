@@ -1,0 +1,143 @@
+{
+  "set": "news-event-driven",
+  "cases": [
+    {
+      "id": "ne-01",
+      "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "energy"}, "_note": "gics for semis known as 4530; used directly"},
+        {"tool": "screen_stocks", "args": {"gics": "4530", "window": "7d", "order_by": "news_count", "limit": 25}}
+      ],
+      "result_summary": "25 semi names, 7d window, direction_split net_positive 18 / net_negative 6. Winners: NVDA (137 stories, OpenAI Ohio $150-200B), SK Hynix ($28.6B buyback), MRVL, MU, TSMC. Losers/contested: AVGO (net neg), INTC ($20B dilutive offering, UBS cut), Wolfspeed (loss), National Silicon (net loss). Each row carries top_reason + aspects + pos/neg counts.",
+      "verdict": "PASS",
+      "reason": "7d-scoped, explicit winners-vs-losers split grounded in dated real news reasons.",
+      "defects": []
+    },
+    {
+      "id": "ne-02",
+      "question": "Why is Nvidia down today? What's the news catalyst?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "NVDA", "window": "7d", "limit": 15}}
+      ],
+      "result_summary": "15 dated NVDA items. Net-negative catalysts available: hedge funds cut NVDA exposure (Goldman, Aug23), Amazon custom-chip competition undercuts GPUs (neg), Rubin Ultra HBM cut on memory shortage (neg). Also many pos/neutral (Poolside $6B deal, Citi/Jefferies raise, Q2 earnings Aug26 anticipation). Mixed but concrete + dated.",
+      "verdict": "PASS",
+      "reason": "Returns concrete dated items incl real negative catalysts; not empty, not fabricated. Sentiment/impact drawn from news.",
+      "defects": [
+        {"desc": "Tool is news-only: has no price/return field to confirm the stock is actually 'down today', so the 'why down' framing rests on negative-impact items rather than a verified price move. Client must not assert direction of the price from news alone.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-03",
+      "question": "Give me a quick pulse on the AI theme over the last 30 days — big storylines and which names are most talked about.",
+      "tool_calls": [
+        {"tool": "theme_summary", "args": {"theme": "AI", "window": "30d"}}
+      ],
+      "result_summary": "30d aspect_heatmap (demand pos 1858/neg 130 dominant; competition net-neg; regulation net-neg) + winners (top agg_relevance 317.9) + losers (Meta 253 stories net-neg, Apple 101 net-neg, Baidu). Most-talked-about names ranked by agg_relevance/story_count.",
+      "verdict": "PASS",
+      "reason": "30d window honored, most-talked names by attention, storylines via aspect heatmap, theme-level not stock noise.",
+      "defects": []
+    },
+    {
+      "id": "ne-04",
+      "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+      "tool_calls": [
+        {"tool": "find_gics", "args": {"q": "energy"}},
+        {"tool": "screen_stocks", "args": {"gics": "10", "country": "TH", "window": "7d", "order_by": "news_count", "limit": 20}}
+      ],
+      "result_summary": "13 Thai energy names, 7d, net_positive 10 / net_negative 2. Pos: PTT (26, Mideast-tension oil support), OR, SPRC (Q2 profit +362% margins), PTTEP, TOP (MS target up), BCP. Neg: IRPC, BANPU. Data ready for a Thai-language positive/negative split.",
+      "verdict": "PASS",
+      "reason": "Thai energy scoped, 7d, pos/neg split grounded in news; client renders in Thai. Coverage not sparse.",
+      "defects": []
+    },
+    {
+      "id": "ne-05",
+      "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "TSLA", "window": "30d", "limit": 12}}
+      ],
+      "result_summary": "12 dated TSLA items, clearly MIXED. Bullish: Cybercab scaling (JPMorgan), robotaxi permits Las Vegas/Austin, Einride 500-Semi order, FSD/Optimus. Bearish: China recall ~3M vehicles, $243M Autopilot-crash-data lawsuit. Net leans positive but conflicting.",
+      "verdict": "PASS",
+      "reason": "Sentiment backed by specific dated items, window noted, mixed nature surfaced.",
+      "defects": []
+    },
+    {
+      "id": "ne-06",
+      "question": "Where is options positioning most extreme right now — names with stretched put/call or crowded positioning?",
+      "tool_calls": [
+        {"tool": "positioning_extremes", "args": {"limit": 15}},
+        {"tool": "options_sentiment", "args": {}}
+      ],
+      "result_summary": "positioning_extremes returns 15 real 3y-percentile COT/futures extremes (EURUSD pctl 2, KC wheat 99, SOFR, UST-2Y 100, copper 99, cotton, AUD) framed vs 3y range. options_sentiment with no ticker → error asking for ticker/tickers: there is NO market-wide scan for stretched equity put/call across NAMES.",
+      "verdict": "PARTIAL",
+      "reason": "COT extremes are real, current, and framed vs a 3y norm — but the user asked specifically about equity-options put/call across NAMES, which no tool can scan (options_sentiment needs an explicit ticker).",
+      "defects": [
+        {"desc": "options_sentiment has no market-wide 'which names have extreme put/call right now' scan mode — it requires the caller to already name the tickers. positioning_extremes only covers futures/COT (fx/commodity/rates/equity_index), not single-name equity options. The 'stretched put/call across names' ask is unanswerable with current tools.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-07",
+      "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+      "tool_calls": [
+        {"tool": "find_megatrend", "args": {"terms": ["electric vehicles", "EV", "electrification of transport", "e-mobility"]}},
+        {"tool": "screen_stocks", "args": {"megatrend": "16000000", "window": "14d", "order_by": "news_count", "limit": 15}}
+      ],
+      "result_summary": "14d, tier-1 'Electrification & Mobility' node (16000000). 15 names ranked by attention with per-name sentiment: TSLA 51 (pos), GM 15 (mixed, exits battery JV $6B charge), BYD 14 (mixed), EA 13 (pos), VW 7 (mixed), Ford 7, Toyota 7 (neg, margin cut), LGES/Samsung SDI (pos), Xpeng (neg). High attention not conflated with positive.",
+      "verdict": "PASS",
+      "reason": "14d honored, ranked by attention, each name paired with grounded sentiment.",
+      "defects": [
+        {"desc": "find_megatrend('electric vehicles') resolved ONLY to a narrow tier-2 'Commercial & Heavy-Duty EV' node (buses/trucks, ~7 names, no Tesla) — the broad theme required guessing the alias 'EV' to reach the tier-1 'Electrification & Mobility'. A dumb client taking the first candidate would badly under-scope the EV theme.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-08",
+      "question": "Brief me on Japanese markets around the week of the last BOJ meeting — which sectors and names reacted most?",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "Bank of Japan BOJ policy meeting rate decision", "window": "90d", "limit": 10}},
+        {"tool": "screen_stocks", "args": {"country": "JP", "from_": "2026-07-28", "to": "2026-08-02", "order_by": "news_count", "limit": 20}}
+      ],
+      "result_summary": "Anchored last BOJ decision to 2026-07-30/31 (held rate at 1%). JP-scoped Jul28-Aug2: 20 names, net_pos 9 / net_neg 9. Reactors by sector via gic_code: semis (Kioxia neg despite beat, Advantest+, Renesas+), autos (Toyota/Honda neg on earthquake supply halts, Nissan), banks (Mizuho+ raised forecast), SoftBank, Sony (mixed). BOJ outcome real, not invented.",
+      "verdict": "PASS",
+      "reason": "Anchored to the specific past BOJ-meeting week via news, JP-scoped, sectors+names with grounded reactions.",
+      "defects": [
+        {"desc": "No BOJ/meeting-date resolver — the client must first fish the decision date out of search_news, then hand-build the from_/to window. A calendar/event anchor would remove a manual, error-prone step.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-09",
+      "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "AMD", "window": "7d", "limit": 8}},
+        {"tool": "stock_impact", "args": {"ticker": "INTC", "window": "7d", "limit": 8}},
+        {"tool": "stock_impact", "args": {"ticker": "MU", "window": "7d", "limit": 8}}
+      ],
+      "result_summary": "All three covered, 7d, dated. MU net-positive (memory-price tailwind, $10B Boise lab; minor neg CEO share sale). AMD contested (record sales + $10B Taiwan invest, but lost SpaceX deal to Nvidia + Google-Marvell hit). INTC net-negative ($20B dilutive equity raise, -6.58%, plummeted on Google-Marvell deal). Enables MU > AMD > INTC ranking.",
+      "verdict": "PASS",
+      "reason": "All three named tickers, 1wk, concrete per-name news supports a relative head-to-head ranking.",
+      "defects": [
+        {"desc": "Requires one stock_impact call per ticker; no batch/compare form for stock_impact (options_sentiment and stock_prices have batch modes, stock_impact does not), so a head-to-head is 3 round-trips.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-10",
+      "question": "Find news suggesting a company might be an acquisition target or facing a regulatory investigation recently — catalyst-driven stuff.",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "company is an acquisition target, takeover bid, buyout offer", "window": "14d", "limit": 8}},
+        {"tool": "search_news", "args": {"q": "regulatory investigation antitrust probe SEC lawsuit against company", "window": "14d", "limit": 8}}
+      ],
+      "result_summary": "M&A leg: ACV Auctions (takeover interest, exploring alternatives), Silver Lake/Workday talks, Kailera Therapeutics obesity takeover target, week's key deals. Regulatory leg: Alibaba securities-fraud lawsuits, Alphabet 3000+ youth-addiction suits, Meta child-safety trial ($1.4T penalties), Paramount CNN-sale lawsuit. All recent + dated, semantically on-intent.",
+      "verdict": "PASS",
+      "reason": "Semantic search returned genuine, dated M&A-target and regulatory/legal catalysts; not keyword-forced, not fabricated.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 9,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "ne-06: no market-wide scan for stretched equity put/call across NAMES — options_sentiment requires the caller to already name tickers; positioning_extremes only covers futures/COT, not single-name equity options.",
+      "ne-07: find_megatrend('electric vehicles') resolves only to a narrow tier-2 (commercial EV, no Tesla); reaching the broad tier-1 'Electrification & Mobility' required guessing the alias 'EV' — first-candidate clients under-scope the theme.",
+      "ne-02: stock_impact is news-only with no price/return field, so 'why is X down today' rests on negative-impact items rather than a verified price move; and stock_impact (ne-09) has no batch form for head-to-head compares."
+    ]
+  }
+}

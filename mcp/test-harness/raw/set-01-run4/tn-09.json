@@ -1,0 +1,24 @@
+{
+  "id": "tn-09",
+  "question": "What does it mean when a stock has a MACD crossover, and can you show me a couple that just had a bullish one?",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}],
+        "asset_type": ["Common Stock"],
+        "window_bars": 10,
+        "limit": 10
+      }
+    }
+  ],
+  "result_summary": "39 results. Signal macd_x_signal_up matched on 2026-08-27/28. Examples: 6886.TWO (Far East Bio-Tec, cross 2026-08-28), 7731.TWO (MARX Biotech), EOAN.XETRA (E.ON SE, cross 2026-08-28), BASF.XETRA (BAS), MBG.XETRA (Mercedes-Benz, cross 2026-08-28, detail shows a=-0.1546 above b=-0.1843). Tool correctly implements MACD line crossing above signal line. Explanation part is client-side responsibility.",
+  "verdict": "PASS",
+  "reason": "Returns specific stocks with confirmed bullish MACD crossover (macd_line crossing above macd_signal). Signal direction is correct (bullish, not bearish). Well-known names like E.ON, BASF, Mercedes validate results.",
+  "defects": [
+    {
+      "desc": "No explanation text for MACD concept is returned by the tool — a blind MCP client must generate the explanation itself. The tool returns data only. For a novice user, the response chain requires the client to add the 'What does MACD mean' explanation without a server-side concept description hook.",
+      "side": "client"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "tn-07",
+  "question": "any crypto near its 52 week low right now?",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "near_low"}]}],
+        "asset_type": ["Crypto"],
+        "sort": "mcap",
+        "limit": 15
+      },
+      "result_summary": "60 results (capped) — crypto assets near their 52-week low. Results returned alphabetically despite sort=mcap request (likely sort not effective for crypto universe). Top results include: ACE22307-USD.CC ACEToken (RSI 0.0, adx 100 = extreme downtrend), ACES-USD.CC Aces (RSI 0.0), ACOIN-USD.CC Acoin (RSI 0.05), ACT-USD.CC Achain (RSI 3.1, down 68% from ema200), ADAPAD-USD.CC ADAPad, ADC-USD.CC AudioCoin (RSI 0.0), ADOGE-USD.CC Arbidoge (RSI 7.99), ANG-USD.CC Aureus Nummus Gold, ARB-USD.CC ARbit (RSI 0.0), ARX-USD.CC ARCS (RSI 38.96, down 43% from ema200), ASAFE-USD.CC AllSafe (RSI 0.0), ASPO-USD.CC ASPO World. Note: results are heavily weighted toward small/obscure tokens; major cryptos (BTC, ETH) not appearing in near_low — they are not near their yearly lows."
+    }
+  ]
+}

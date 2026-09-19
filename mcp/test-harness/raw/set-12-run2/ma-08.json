@@ -1,0 +1,27 @@
+{
+  "id": "ma-08",
+  "question": "Show me the top crypto tokens that are at a 52-week high right now.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["52-week high"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Crypto"],
+        "ta": [{"anchor": [{"pattern": "at_new_high"}]}],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "Returned 60 results (capped=true). All tickers are .CC crypto format (ADOGE-USD.CC, ADZ-USD.CC, AIDOGE-USD.CC, AMB-USD.CC, etc.), confirming crypto-only universe. Signal matched as 'at_new_high' with strength=1.0, value=2026-08-30 for most. Notable: ADOGE-USD.CC shows RSI=7.99 while firing at_new_high — this is an inconsistency (deeply oversold RSI but claimed to be at 52-week high), suggesting possible stale/thin price data for some micro-cap tokens. Major tokens (ADZ, AIDOGE, BABYDOGE) have RSI values of 96-100 which are consistent with new highs.",
+  "verdict": "PASS",
+  "reason": "Crypto-only universe confirmed (.CC tickers), at_new_high pattern correctly applied, results span crypto tokens. Accepts minor data quality issues on thin micro-cap tokens.",
+  "defects": [
+    {
+      "desc": "Some crypto tokens fire 'at_new_high' with very low RSI (e.g. ADOGE-USD.CC RSI=7.99) suggesting thin/stale price series where a single outlier bar triggers the 52-week high signal without momentum confirmation. No warning is surfaced to the client about data quality on micro-cap tokens.",
+      "side": "server"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "tn-10",
+  "question": "I've got some cash and I'm nervous. Are the markets looking toppy right now, and are there any big-name stocks that already broke below their support / moving averages that I should stay away from?",
+  "tools_called": [
+    {
+      "tool": "macro_pulse",
+      "args": {"scope": "economy", "country": "US"},
+      "duration_ms": 1520,
+      "result_summary": "US macro regime as of Aug 2026: GDP growth 1.48% (23rd percentile, falling), industrial production rising (62nd pct), CPI inflation 3.3% (71st pct, rising), core PCE 3.34% (74th pct, rising), unemployment 4.1% (55th pct, falling), nonfarm payrolls -23k (7th pct, falling = very weak jobs). Fed funds 3.63% (65th pct, falling). Regime: STAGFLATION-leaning / slowdown — inflation re-accelerating while growth is weak and payrolls just went negative. Elevated risk for 'toppy' equities: poor macro backdrop."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "crossover_down", "a": "close", "b": "ema200"}]}],
+        "asset_type": ["Common Stock"],
+        "size": ["large"],
+        "limit": 15
+      },
+      "duration_ms": 2400,
+      "result_summary": "Returned 50 large-cap stocks that recently broke below the 200-day EMA (key support). Top names by signal strength: 4901.JP (FUJIFILM Holdings, broke below 2026-08-07, now -1% below ema200), Mercedes-Benz (MBG, -6.3% below ema200, broke 2026-07-30). All confirmed as cross_close_ema200_dn signal with strength near 1.0."
+    }
+  ]
+}

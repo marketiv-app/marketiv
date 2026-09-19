@@ -1,0 +1,22 @@
+{
+  "id": "ma-04",
+  "question": "Are there any assets — doesn't matter if it's stocks, crypto, or forex — that just had a golden cross (50-day crossing above 200-day)?",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["golden cross 50-day above 200-day"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}],
+        "limit": 20
+      }
+    }
+  ],
+  "result_summary": "Returned 80 results (capped=true, count=80). Signal correctly maps to 'cross_ema50_ema200_up'. Top 20 results include 13 crypto (.CC) and 7 stocks (e.g. PUAL.LSE, MLVIE.PA, 8067.HK, 067390.KQ, GAME.US). No forex (.FOREX) in top 20 despite being included in asset_type. Two distinct asset types (crypto + stocks) confirmed in results. Signal fires are recent (within last 30 days). Golden cross correctly maps to ema50 crossing above ema200 (bullish), not death cross.",
+  "verdict": "PASS",
+  "reason": "Returns results from at least two asset types (stocks + crypto confirmed in top 20). Golden cross correctly mapped to ema50/ema200 bullish crossover. No confusion with death cross. Forex absent from top results but included in universe.",
+  "defects": []
+}

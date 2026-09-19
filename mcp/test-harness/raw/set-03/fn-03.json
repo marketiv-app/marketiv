@@ -1,0 +1,786 @@
+{
+  "id": "fn-03",
+  "question": "Is Apple expensive right now?",
+  "tools_called": [
+    {
+      "tool": "find_stock",
+      "args": {
+        "q": "Apple"
+      }
+    },
+    {
+      "tool": "financials",
+      "args": {
+        "tickers": "AAPL.US",
+        "period": "5y"
+      }
+    },
+    {
+      "tool": "asset_pulse",
+      "args": {
+        "ticker": "AAPL.US",
+        "window": "90d"
+      }
+    }
+  ],
+  "raw_responses": [
+    "{\n  \"ticker\": \"APPLE.COMM\",\n  \"symbol\": \"APPLE\",\n  \"name\": \"Apple (Fuji)\",\n  \"type\": \"commodity\",\n  \"country\": null,\n  \"domicile\": null,\n  \"region\": \"China (onshore)\",\n  \"region_iso2\": \"CN\",\n  \"exchange\": \"COMM\",\n  \"market_cap_usd\": 0.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"symbol\"\n}\n{\n  \"ticker\": \"AAPL.US\",\n  \"symbol\": \"AAPL\",\n  \"name\": \"Apple Inc.\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 4529157832704.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"603020.CG\",\n  \"symbol\": \"603020\",\n  \"name\": \"Apple Flavor&Fragrance Grp\",\n  \"type\": \"stock\",\n  \"country\": \"China\",\n  \"domicile\": \"CN\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"CG\",\n  \"market_cap_usd\": 562302715.0848,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"SPVI.BK\",\n  \"symbol\": \"SPVI\",\n  \"name\": \"S P V I Public Company Limited\",\n  \"type\": \"stock\",\n  \"country\": \"Thailand\",\n  \"domicile\": \"TH\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"BK\",\n  \"market_cap_usd\": 37454400.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"2788.JP\",\n  \"symbol\": \"2788\",\n  \"name\": \"Apple International Co., Ltd.\",\n  \"type\": \"stock\",\n  \"country\": \"Japan\",\n  \"domicile\": \"JP\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"JP\",\n  \"market_cap_usd\": 36279333.4554,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"DIN.US\",\n  \"symbol\": \"DIN\",\n  \"name\": \"Dine Brands Global Inc\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 457248480.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"MLP.US\",\n  \"symbol\": \"MLP\",\n  \"name\": \"Maui Land & Pineapple Company Inc\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"US\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 312980288.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}\n{\n  \"ticker\": \"PAPL.US\",\n  \"symbol\": \"PAPL\",\n  \"name\": \"Pineapple Financial Inc.\",\n  \"type\": \"stock\",\n  \"country\": \"USA\",\n  \"domicile\": \"CA\",\n  \"region\": null,\n  \"region_iso2\": null,\n  \"exchange\": \"US\",\n  \"market_cap_usd\": 29061874.0,\n  \"similarity\": 1.0,\n  \"match_type\": \"name\"\n}",
+    {
+      "count": 1,
+      "format": "text",
+      "text": "period: last 5 years\n\n### AAPL.US  [USD]  as-of 2026-06-30\nRevenue 416.2B, net margin 28%, FCF 98.8B, debt/equity 0.8x\nvaluation: pe 35.08 · pb 41.79 · ev_ebitda 27.02 · dividend_yield 0.4% · fcf_yield 3.0%\nmetrics: accruals_ocf_ni 1.14 · asset_turnover 1.22 · buybacks -90711000000.00 · bvps 7.32 · capex_to_da 0.77 · capex_to_revenue 0.02 · cash 35934000000.00 · cash_conversion_cycle -56.81 · current_assets 147957000000.00 · current_liabilities 165631000000.00 · current_ratio 1.00 · debt_to_ebitda 0.50 · debt_to_equity 0.78 · dio 16.89 · dividend_cagr_5y_pct 5.00 · dividend_payout 12.1% · dividends_paid -15421000000.00 · dpo 98.25 · dso 24.55 · ebitda_margin 36.0% · effective_tax_rate 17.3% · eps_basic 8.76 · eps_diluted 8.72 · fcf_conversion 1.06 · fcf_margin 29.3% · free_cash_flow 98767000000.00 · gross_margin 48.6% · gross_profit 195201000000.00 · net_debt_ebitda 0.27 · net_income 112010000000.00 · net_margin 27.6% · net_stock_issuance -90711000000.00 · no_cut_streak_yrs 10.00 · operating_cash_flow 111482000000.00 · operating_income 133050000000.00 · operating_margin 33.2% · quick_ratio 0.93 · revenue 416161000000.00 · roa 33.6% · roe 119.9% · roic 84.1% · total_assets 359241000000.00 · total_borrowings 98657000000.00 · total_debt 98657000000.00 · total_equity 73733000000.00\ngrowth: eps_diluted +23% (accelerating) · free_cash_flow -9% (decline_accel) · gross_profit +8% (accelerating) · net_income +20% (accelerating) · revenue +6% (accelerating)\nrevenue_by_region: NA 43% · EUROPE 27% · GREATER_CHINA 16%\n\n— BEFORE you compare or divide any figures — across companies OR across years — first read what each number MEANS accounting-wise, and confirm they are the SAME concept on the SAME basis. Check: (1) same line / definition; (2) gross vs net; (3) a value that is a SUBSTITUTE/proxy (see any `resolved_via_rule`) or reported under a DIFFERENT field name than another company's is a DIFFERENT metric — not directly comparable; (4) consolidated vs segment; (5) currency (see `currency`/`fx`); (6) fiscal-period alignment (fiscal-year ends differ). If the bases DIFFER, do NOT headline a magnitude ratio/multiple (e.g. 'X× larger') — put them on a common basis first, or state the comparison DIRECTIONALLY only and name the caveat. State no figure as more precise or comparable than its basis allows. Facts over a tidy number; never fabricate.\n"
+    },
+    {
+      "ticker": "AAPL.US",
+      "window": "90d",
+      "price": {
+        "as_of": "2026-08-24",
+        "atr_pct_14d": 1.94,
+        "close_vs_sma200_pct": 10.35,
+        "close_vs_sma50_pct": 0.02,
+        "country": "USA",
+        "country_iso2": "US",
+        "country_iso2_b": null,
+        "currency": "USD",
+        "currency_exposures": [
+          {
+            "channel": "fx_revenue",
+            "direction": "+",
+            "effect_if_strengthens": "good",
+            "foreign_ccy": "EUR",
+            "pair": "EURUSD.FOREX",
+            "reason": "Books ~26.7% of revenue in Europe (FY2025); a stronger EUR vs USD lifts the USD-value of that foreign revenue (translation exposure).",
+            "strength": "high"
+          },
+          {
+            "channel": "fx_revenue",
+            "direction": "-",
+            "effect_if_strengthens": "good",
+            "foreign_ccy": "CNY",
+            "pair": "USDCNY.FOREX",
+            "reason": "Books ~15.5% of revenue in Greater China (FY2025); a stronger CNY vs USD lifts the USD-value of that foreign revenue (translation exposure).",
+            "strength": "medium"
+          }
+        ],
+        "description": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple Vision Pro, Apple TV, Apple Watch, Beats products, and HomePod, as well as Apple branded and third-party accessories. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allows customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV, which offers original content and live sports; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers and resellers. The company was formerly known as Apple Computer, Inc. and changed its name to Apple Inc. in January 2007. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.",
+        "drawdown_from_52w_high_pct": -9.86,
+        "gics": "Technology Hardware, Storage & Peripherals",
+        "gics_code": "45202030",
+        "high_52w": 344.27,
+        "high_52w_date": "2026-07-29",
+        "highest_volume_day": {
+          "date": "2026-06-26",
+          "volume": 261775500.0
+        },
+        "last_close": 310.34,
+        "logo_url": "https://storage.googleapis.com/ava-advisor-26c7b.firebasestorage.app/logos/2b686f48-767d-4c51-a973-a9389efd16e5.png",
+        "low_52w": 223.86,
+        "low_52w_date": "2025-08-26",
+        "max_drawdown_1y_pct": -13.8,
+        "megatrends": [
+          {
+            "exposure": "core",
+            "name": "Edge & On-device AI Silicon",
+            "node_id": 10010700
+          },
+          {
+            "exposure": "secondary",
+            "name": "VR / MR Headset OEMs",
+            "node_id": 48010000
+          },
+          {
+            "exposure": "secondary",
+            "name": "Hearing (aids & cochlear implants)",
+            "node_id": 20050100
+          },
+          {
+            "exposure": "secondary",
+            "name": "XR Content, Engines & Platforms",
+            "node_id": 48050000
+          },
+          {
+            "exposure": "secondary",
+            "name": "XR Silicon & Processors",
+            "node_id": 48030000
+          }
+        ],
+        "metric_kind": "return",
+        "n_bars": 300,
+        "name": "Apple Inc.",
+        "range_position_52w_pct": 71.82,
+        "range_read": "upper half of the 52-week range",
+        "realized_vol_30d_annual_pct": 32.29,
+        "realized_vol_90d_annual_pct": 29.51,
+        "realized_vol_percentile_1y": 87.7,
+        "region": null,
+        "region_iso2": null,
+        "related_assets": [],
+        "revenue_by_region": [
+          {
+            "geo": "NA",
+            "is_home": true,
+            "level": "bloc",
+            "magnitude": null,
+            "share_pct": 42.9
+          },
+          {
+            "geo": "EUROPE",
+            "is_home": false,
+            "level": "bloc",
+            "magnitude": null,
+            "share_pct": 26.7
+          },
+          {
+            "geo": "GREATER_CHINA",
+            "is_home": false,
+            "level": "bloc",
+            "magnitude": null,
+            "share_pct": 15.5
+          }
+        ],
+        "rvol": 0.65,
+        "rvol_read": "normal volume",
+        "ticker": "AAPL.US",
+        "trend_read": "uptrend — above both the 50-day and 200-day average",
+        "unmet_demand": [
+          {
+            "asset_class": "commodity",
+            "built_ticker": null,
+            "definition": "Commodity DRAM contract price, USD per GB or per module, TrendForce/DRAMeXchange monthly contract assessments covering PC DDR5 and mobile LPDDR5/5X, global market. The volatile standard-memory benchmark embedded in consumer-device and server bills of materials; distinct from the TSV-stacked, AI-allocated HBM series and from non-volatile NAND flash.",
+            "is_price_series": true,
+            "key": "DRAM_CONTRACT",
+            "status": "open",
+            "why": "Mobile LPDDR contract prices rose roughly 90-95% QoQ in Q1 CY2026, lifting 12GB of iPhone DRAM from about $39 to about $145 per unit; memory is now cited at 30-40% of smartphone BOM versus 10-15% historically, a direct and material hardware gross-margin driver. No in-universe or gap-catalog memory series exists."
+          },
+          {
+            "asset_class": "commodity",
+            "built_ticker": null,
+            "definition": "NAND flash memory contract price, USD per GB for 3D-TLC/QLC wafers and for eMMC/UFS/SSD modules, TrendForce/DRAMeXchange global monthly contract assessment. Non-volatile storage priced on its own capex and supply cycle, distinct from volatile DRAM contract prices and from stacked HBM; sets the storage-tier cost of every device SKU.",
+            "is_price_series": true,
+            "key": "NAND_FLASH",
+            "status": "open",
+            "why": "NAND contract prices rose about 33-38% in Q1 CY2026, taking 256GB of iPhone storage from roughly $13 to roughly $51 per unit; Apple reportedly pre-locked NAND supply through 2026, confirming it as a named, material component-cost driver separate from DRAM."
+          }
+        ],
+        "up_down_volume_ratio_1mo": 0.87,
+        "vol_trend_read": "volatility steady",
+        "volume_conviction_read": "balanced up/down volume",
+        "volume_trend_read": "volume steady",
+        "volume_vs_1y_avg_pct": 4.28,
+        "windows": {
+          "1mo": {
+            "change_abs": -26.28,
+            "change_pct": -7.81,
+            "high": 344.27,
+            "high_date": "2026-07-29",
+            "low": 299.74,
+            "low_date": "2026-07-31"
+          },
+          "1w": {
+            "change_abs": 4.75,
+            "change_pct": 1.55,
+            "high": 320.28,
+            "high_date": "2026-08-20",
+            "low": 302.94,
+            "low_date": "2026-08-17"
+          },
+          "1y": {
+            "change_abs": 84.02,
+            "change_pct": 37.12,
+            "high": 344.27,
+            "high_date": "2026-07-29",
+            "low": 223.86,
+            "low_date": "2025-08-26"
+          },
+          "3mo": {
+            "change_abs": 2.28,
+            "change_pct": 0.74,
+            "high": 344.27,
+            "high_date": "2026-07-29",
+            "low": 273.51,
+            "low_date": "2026-06-25"
+          },
+          "ytd": {
+            "change_abs": 39.22,
+            "change_pct": 14.47,
+            "high": 344.27,
+            "high_date": "2026-07-29",
+            "low": 242.76,
+            "low_date": "2026-01-20"
+          }
+        }
+      },
+      "impact": {
+        "articles": [
+          {
+            "title": "Apple Unveils Next-Gen AI Mac Models",
+            "brief_text": "Apple introduced refreshed Mac mini and Mac Studio computers built around newer processors aimed at artificial intelligence workloads. The Mac mini will be offered with either the M6 or M5 Pro chip, with pricing starting at $899 for the M6 model and $1,699 for the M5 Pro, and both versions are available for preorder and scheduled to ship Sept. 22. Apple says the M6 configuration delivers up to four times the prior AI performance, along with faster graphics and storage, and includes 16GB of memory as standard with support for configurations of up to 32GB. The company also refreshed Mac Studio with M5 Max and M5 Ultra processors, with prices beginning at $2,499 and $5,499 respectively, and memory capacity reaching 512GB on the higher-end model. The updates come as demand for Mac mini and Mac Studio has contributed to supply constraints, and Apple had previously indicated that balancing availability with demand could take several months.",
+            "url": "https://finance.yahoo.com/technology/ai/articles/apple-stock-focus-unleashes-next-175508096.html",
+            "publisher": "GuruFocus",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "technology",
+                  "direction": "pos",
+                  "reason": "Apple launches new AI-focused Mac models with improved performance and features.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "product_tech"
+            ],
+            "impact_score": 3,
+            "dup_count": 5,
+            "trend": "Artificial Intelligence",
+            "trend_id": 10000000,
+            "published_at": "2026-08-25T17:55:08+00:00"
+          },
+          {
+            "title": "Dick's Sporting Goods Slumps on Lowered Outlook; Apple Readies Mac Mini Revamp",
+            "brief_text": "Dick's Sporting Goods shares are plummeting after the retailer lowered its full-year outlook amid weakness at its recently acquired Foot Locker unit. Apple shares are slightly lower as the tech giant prepares to launch a new version of its Mac mini desktop computer for the first time in almost two years, according to people familiar with the matter. SpaceX shares are higher in the premarket after Elon Musk said the company's first AI satellites, powered by Nvidia chips, will initially launch in the fourth quarter of next year and hit significant scale in 2028.",
+            "url": "https://finance.yahoo.com/video/apple-mac-mini-revamp-dicks-151938550.html",
+            "publisher": "Yahoo Finance",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "technology",
+                  "direction": "neg",
+                  "reason": "Apple preparing to launch new Mac mini, but shares slightly lower on the news.",
+                  "relevance": 0.3
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "neg",
+              "relevance": 0.3
+            },
+            "news_types": [
+              "earnings_results"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": null,
+            "trend_id": null,
+            "published_at": "2026-08-25T15:19:38+00:00"
+          },
+          {
+            "title": "ADVICE expects strong second-half growth on IT high season and iPhone 18 launch",
+            "brief_text": "Advice IT Infinite Public Company Limited, or ADVICE, expects its business trend in the second half of 2026 to improve clearly from the first half, as the IT and smartphone industry enters its high season. The company will be supported by new product launches, including Samsung Galaxy in late July, RTX Spark in the middle of the third quarter, and the iPhone 18 in September. The company maintains its 2026 revenue growth target of about 15 percent from 2025, aiming for third-quarter revenue growth of 17 percent and fourth-quarter growth of up to 22 percent, after first-quarter and second-quarter revenue exceeded targets. Meanwhile, it plans to open seven more Advice iStore branches in the second half to expand its revenue base from high-margin products and the Apple ecosystem, targeting a total of 29 branches by the end of 2026, up from 22 in the first half.",
+            "url": "https://hoonvision.com/hoonset/advice-7/",
+            "publisher": "HoonVision",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "iPhone 18 launch expected to drive sales in second half, benefiting Apple.",
+                  "relevance": 0.3
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.3
+            },
+            "news_types": [
+              "earnings_results"
+            ],
+            "impact_score": 2,
+            "dup_count": 1,
+            "trend": null,
+            "trend_id": null,
+            "published_at": "2026-08-25T07:22:19+00:00"
+          },
+          {
+            "title": "Apple set to unveil new Mac mini for first time in two years",
+            "brief_text": "Apple is preparing to launch a new Mac mini for the first time in nearly two years, possibly within days, ahead of its major September event where the company will introduce new iPhones, according to a Bloomberg report citing sources involved in the plans. The sources said Apple has tested new Mac mini models using both M5 and M6 chips, with the upgrade coming after the current Mac mini gained popularity, particularly for on-device artificial intelligence processing. Meanwhile, memory chip shortages have made it difficult for Apple to keep enough inventory to meet demand. The new Mac mini will be part of a large slate of products Apple plans to release in the second half of this year. The company is expected to send invitations for its iPhone launch event this week, with the event likely to be held on September 9, where the key highlights are expected to be the company's first foldable iPhone along with the iPhone 18 Pro. Apple is also preparing to launch new Apple Watch models, AirPods 5, its first smart home device with a screen, an iPad mini with an OLED display, and its first touchscreen MacBook Pro. The new Mac mini could be the last new product launched under Tim Cook's leadership before he hands over the CEO role to John Ternus on September 1.",
+            "url": "https://moneyandbanking.co.th/2026/265105/",
+            "publisher": "Money & Banking",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "technology",
+                  "direction": "pos",
+                  "reason": "New Mac mini launch with M5/M6 chips, part of product slate",
+                  "relevance": 0.9
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.9
+            },
+            "news_types": [
+              "product_tech"
+            ],
+            "impact_score": 3,
+            "dup_count": 3,
+            "trend": "Artificial Intelligence",
+            "trend_id": 10000000,
+            "published_at": "2026-08-25T02:55:01+00:00"
+          },
+          {
+            "title": "Apple's Foldable Phone Approaches as Consumer Electronics Sector Surges Against the Market",
+            "brief_text": "The consumer electronics sector moved sharply higher in intraday trading on August 25, led by the foldable phone theme. Jierong Technology hit its daily limit up in a straight line, Hengmingda sealed limit up, and Xingxing Technology and Lvliang Technology rose more than 10%. On the news front, Apple is expected to hold a special autumn event on September 9, launching only three high-end models: the iPhone 18 Pro, iPhone 18 Pro Max, and its first foldable iPhone, while the standard iPhone 18 will be delayed until spring 2027. Analysts at Rothschild & Co. expect Apple's push into the ultra-high-end foldable phone segment could lift the iPhone average selling price by 11% before June 2027, with iPhone Ultra foldable phone sales reaching 14 million units in fiscal 2027. National Bureau of Statistics data show that from January to July 2026, retail sales of wearable smart devices by enterprises above designated size more than doubled year on year, while retail sales of communication equipment rose 15.1%. Furi Electronics' 2026 interim report shows first-half revenue of 7.923 billion yuan, up 48.57% year on year, with net profit attributable to the parent of 83.3497 million yuan, up 277.41% year on year. A research note from CITIC Securities points out that in the third quarter of 2026, the quarter-on-quarter increase in consumer-grade storage contract prices will narrow significantly, and shipments of traditional hardware such as phones and PCs are expected to bottom out and recover in the second half of 2026, making targets with high exposure to the Apple supply chain and premium Android business worth close attention.",
+            "url": "http://finance.eastmoney.com/a/202608253852619587.html",
+            "publisher": "21世纪经济",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "Apple's foldable iPhone launch expected to boost ASP and sales",
+                  "relevance": 0.9
+                },
+                {
+                  "aspect": "technology",
+                  "direction": "pos",
+                  "reason": "Apple's upcoming foldable iPhone launch is a key product development expected to boost ASP and sales.",
+                  "relevance": 0.9
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.9
+            },
+            "news_types": [
+              "industry_thematic",
+              "product_tech"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Semiconductors",
+            "trend_id": 56000000,
+            "published_at": "2026-08-25T00:00:00+00:00"
+          },
+          {
+            "title": "Apple, EMCOR, Johnson & Johnson post record Q2 results",
+            "brief_text": "Apple, EMCOR Group, and Johnson & Johnson each reported record-breaking results in their latest quarterly reports. Apple posted its strongest June-quarter ever with revenue of $109.4 billion, up 16% year-over-year, and adjusted EPS of $2.02, up 29%. EMCOR Group delivered record revenues of $5.2 billion, up nearly 20%, and adjusted EPS of $9.06, up 35%, while also reporting record remaining performance obligations of $17.1 billion. Johnson & Johnson achieved a new quarterly sales record of $25.3 billion, up 6.6%, and raised its full-year guidance, putting it on track to surpass $100 billion in annual revenue for the first time.",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/q2-earnings-season-winds-down-210300828.html",
+            "publisher": "Zacks Investment Research",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "capital",
+                  "direction": "pos",
+                  "reason": "Record Q2 revenue and EPS beat expectations.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "earnings_results"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": null,
+            "trend_id": null,
+            "published_at": "2026-08-24T21:03:00+00:00"
+          }
+        ]
+      },
+      "options": {
+        "as_of": "2026-08-24 19:48:44.414883+00",
+        "available_from": "2026-07-17 14:42:13.153668+00",
+        "available_to": "2026-08-24 19:48:44.414883+00",
+        "requested_as_of": null,
+        "sentiment": {
+          "_guide": {
+            "audience": "Write for a GENERAL, non-expert reader. Explain in plain everyday language — do NOT use raw options jargon (gamma, skew, put/call ratio, max pain, O/S, IV, delta). If a concept is needed, say what it MEANS in one simple phrase (e.g. instead of 'dealers are short gamma' say 'the way market-makers hedge will tend to make today's price swings bigger'). Keep a number only when it helps a layperson.",
+            "baseline": "read = 'baseline_pending' or 'level' means NO own-history baseline yet → do NOT infer 'unusual'/'extreme'. Only an own-history percentile read (driver ends '_percentile_90d' / '_rank_90d') can flag something as unusual for this asset.",
+            "cross_asset": "O/S ratio and IV levels are NOT comparable across assets (index ETFs vs single stocks live on different scales). Judge 'unusual' only via a signal's own-history percentile.",
+            "how": "Each signal is precomputed. Narrate from its `read` + `because`; do not recompute or re-derive numbers.",
+            "key_dates": "A date is a catalyst only when read = 'event_premium' (options price it via IV premium). 'routine_0dte_concentration' / 'expiry_concentration' are mechanical, NOT events.",
+            "scales": {
+              "positioning_score": "[-1, +1]; + = bullish positioning, - = bearish"
+            },
+            "scope": "These are interpretation ingredients. The verdict / recommendation is YOURS to synthesize — opana stops at interpretation."
+          },
+          "flow": {
+            "os_ratio": 3.6581058900087937,
+            "signals": [
+              {
+                "because": "option/stock volume ratio in 83th percentile of this asset's own 90d (normal for it)",
+                "dimension": "options_activity",
+                "driver": "os_ratio_percentile_90d",
+                "read": "typical_for_asset",
+                "value": 3.6581
+              }
+            ]
+          },
+          "horizons": {
+            "long_term": {
+              "dte_range": [
+                91,
+                365
+              ],
+              "metrics": {
+                "atm_iv": 27.587242719777116,
+                "gex_dealer_net": 3638675.8289764337,
+                "max_pain_distance_pct": -0.0668640195636784,
+                "pcr_oi_notional": 0.39173180574395494,
+                "skew_25d_rr": 2.8460501827236584,
+                "skew_norm": 0.10316544540652275
+              },
+              "n_contracts": 121,
+              "positioning_score": 0.1442,
+              "signals": [
+                {
+                  "because": "$-notional put/call ratio 0.39 (calls heavier)",
+                  "dimension": "direction",
+                  "driver": "pcr_oi_notional",
+                  "read": "bullish_lean",
+                  "value": 0.392
+                },
+                {
+                  "because": "normalized put-skew in 48th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "fear_greed",
+                  "driver": "skew_norm_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.48
+                },
+                {
+                  "because": "ATM IV 27.6% = 40th percentile of this asset's own 90d",
+                  "dimension": "implied_volatility",
+                  "driver": "iv_rank_90d",
+                  "read": "mid_range",
+                  "value": 0.4
+                },
+                {
+                  "because": "dealers net long gamma → dampen moves",
+                  "dimension": "stability",
+                  "driver": "gex_dealer_net",
+                  "read": "pinned_suppressing",
+                  "value": 3639000.0
+                }
+              ]
+            },
+            "medium_term": {
+              "dte_range": [
+                8,
+                90
+              ],
+              "metrics": {
+                "atm_iv": 26.306962846801177,
+                "gex_dealer_net": 45113175.06988615,
+                "max_pain_distance_pct": -0.033603435993470245,
+                "pcr_oi_notional": 0.26554604059978343,
+                "skew_25d_rr": 1.8892061538331857,
+                "skew_norm": 0.07181392108374479
+              },
+              "n_contracts": 222,
+              "positioning_score": 0.2638,
+              "signals": [
+                {
+                  "because": "$-notional put/call ratio 0.27 (calls heavier)",
+                  "dimension": "direction",
+                  "driver": "pcr_oi_notional",
+                  "read": "bullish_lean",
+                  "value": 0.266
+                },
+                {
+                  "because": "normalized put-skew in 48th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "fear_greed",
+                  "driver": "skew_norm_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.48
+                },
+                {
+                  "because": "ATM IV 26.3% = 52th percentile of this asset's own 90d",
+                  "dimension": "implied_volatility",
+                  "driver": "iv_rank_90d",
+                  "read": "mid_range",
+                  "value": 0.52
+                },
+                {
+                  "because": "dealers net long gamma → dampen moves",
+                  "dimension": "stability",
+                  "driver": "gex_dealer_net",
+                  "read": "pinned_suppressing",
+                  "value": 45110000.0
+                }
+              ]
+            },
+            "short_term": {
+              "dte_range": [
+                0,
+                7
+              ],
+              "metrics": {
+                "atm_iv": 22.629424515195936,
+                "gex_dealer_net": 6546742.354132171,
+                "max_pain_distance_pct": -0.0025098140163458808,
+                "pcr_oi_notional": 0.3002810338120102,
+                "skew_25d_rr": -0.8964390808281273,
+                "skew_norm": -0.03961386999594963
+              },
+              "n_contracts": 148,
+              "positioning_score": 0.6121,
+              "signals": [
+                {
+                  "because": "$-notional put/call ratio 0.30 (calls heavier)",
+                  "dimension": "direction",
+                  "driver": "pcr_oi_notional",
+                  "read": "bullish_lean",
+                  "value": 0.3
+                },
+                {
+                  "because": "normalized put-skew in 20th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "fear_greed",
+                  "driver": "skew_norm_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.2
+                },
+                {
+                  "because": "ATM IV 22.6% = 16th percentile of this asset's own 90d",
+                  "dimension": "implied_volatility",
+                  "driver": "iv_rank_90d",
+                  "read": "compressed",
+                  "value": 0.16
+                },
+                {
+                  "because": "dealers net long gamma → dampen moves",
+                  "dimension": "stability",
+                  "driver": "gex_dealer_net",
+                  "read": "pinned_suppressing",
+                  "value": 6547000.0
+                },
+                {
+                  "because": "spot within -0.3% of max-pain 310.0 (gravitational pull)",
+                  "dimension": "pinning",
+                  "driver": "max_pain_distance_pct",
+                  "read": "pin_candidate",
+                  "value": -0.0025
+                }
+              ]
+            }
+          },
+          "key_dates": [
+            {
+              "atm_iv": null,
+              "because": "95% of today's volume → standard 0DTE expiry flow (mechanical); no IV premium vs neighbours, so NOT evidence of a catalyst",
+              "dte": 0,
+              "expiry": "2026-08-24",
+              "implied_event_premium_pct": null,
+              "oi_share": 0.145,
+              "rationale_tags": [
+                "high_volume"
+              ],
+              "read": "routine_0dte_concentration",
+              "volume_share": 0.9482
+            },
+            {
+              "atm_iv": 26.838447183811756,
+              "because": "55% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)",
+              "dte": 88,
+              "expiry": "2026-11-20",
+              "implied_event_premium_pct": 0.0329,
+              "oi_share": 0.5544,
+              "rationale_tags": [
+                "high_oi"
+              ],
+              "read": "expiry_concentration",
+              "volume_share": 0.0215
+            }
+          ],
+          "n_buckets": 4,
+          "per_bucket": {
+            "long": {
+              "atm_iv": 26.306962846801177,
+              "dte_range": [
+                31,
+                90
+              ],
+              "gex_dealer_net": 45113175.06988615,
+              "gex_flip": 110.0,
+              "gex_net": 173622185.07352948,
+              "interpretation": "นักลงทุนเชื่อมั่นขาขึ้นแรง • dealers อยู่ฝั่ง long gamma (vol ถูกกด)",
+              "max_pain": 300.3367241619493,
+              "max_pain_distance_pct": -0.033603435993470245,
+              "n_contracts": 222,
+              "pcr_oi_label": "bullish_strong",
+              "pcr_oi_notional": 0.26554604059978343,
+              "pcr_volume_notional": 0.265067708113316,
+              "regime_tags": [
+                "positioning:bullish_strong",
+                "skew_neutral",
+                "dealers_long_gamma"
+              ],
+              "skew_25d_bf": 0.20766348266724763,
+              "skew_25d_rr": 1.8892061538331857
+            },
+            "medium": null,
+            "short": {
+              "atm_iv": 22.629424515195936,
+              "dte_range": [
+                2,
+                7
+              ],
+              "gex_dealer_net": 6546742.354132171,
+              "gex_flip": 235.0,
+              "gex_net": 20889801.71618359,
+              "interpretation": "นักลงทุนเชื่อมั่นขาขึ้นแรง • dealers อยู่ฝั่ง long gamma (vol ถูกกด) • มี pinning candidate",
+              "max_pain": 310.0,
+              "max_pain_distance_pct": -0.0025098140163458808,
+              "n_contracts": 68,
+              "pcr_oi_label": "bullish_strong",
+              "pcr_oi_notional": 0.411214039330038,
+              "pcr_volume_notional": 0.24266039080260973,
+              "regime_tags": [
+                "positioning:bullish_strong",
+                "skew_neutral",
+                "dealers_long_gamma",
+                "max_pain_pin_candidate"
+              ],
+              "skew_25d_bf": 0.4669057787795836,
+              "skew_25d_rr": -0.8964390808281273
+            },
+            "tail": null,
+            "very_long": {
+              "atm_iv": 27.587242719777116,
+              "dte_range": [
+                91,
+                180
+              ],
+              "gex_dealer_net": 3638675.8289764337,
+              "gex_flip": 20.0,
+              "gex_net": 31178163.883380014,
+              "interpretation": "นักลงทุนเชื่อมั่นขาขึ้นแรง • ยอมจ่ายแพงเพื่อ hedge ขาลง • dealers อยู่ฝั่ง long gamma (vol ถูกกด)",
+              "max_pain": 290.0,
+              "max_pain_distance_pct": -0.0668640195636784,
+              "n_contracts": 121,
+              "pcr_oi_label": "bullish_strong",
+              "pcr_oi_notional": 0.39173180574395494,
+              "pcr_volume_notional": 0.11342221156423776,
+              "regime_tags": [
+                "positioning:bullish_strong",
+                "fear_premium",
+                "dealers_long_gamma"
+              ],
+              "skew_25d_bf": 0.08595927116760294,
+              "skew_25d_rr": 2.8460501827236584
+            },
+            "very_short": null,
+            "zero_dte": {
+              "atm_iv": null,
+              "dte_range": [
+                0,
+                0
+              ],
+              "gex_dealer_net": null,
+              "gex_flip": null,
+              "gex_net": null,
+              "interpretation": "นักลงทุนเชื่อมั่นขาขึ้นแรง • มี pinning candidate",
+              "max_pain": 310.0,
+              "max_pain_distance_pct": -0.0025098140163458808,
+              "n_contracts": 80,
+              "pcr_oi_label": "bullish_strong",
+              "pcr_oi_notional": 0.20598797912168657,
+              "pcr_volume_notional": 1.2630513799214629,
+              "regime_tags": [
+                "positioning:bullish_strong",
+                "max_pain_pin_candidate"
+              ],
+              "skew_25d_bf": null,
+              "skew_25d_rr": null
+            }
+          },
+          "positioning_score": 0.4025,
+          "spot": 310.78
+        },
+        "snapshot_count": 27,
+        "stale": false,
+        "style": "plain",
+        "symbol": "AAPL"
+      },
+      "relationships": {
+        "competitors": [
+          {
+            "name": "Samsung Electronics Co Ltd",
+            "symbol": "005930",
+            "exchange": "KO",
+            "country": "Korea"
+          },
+          {
+            "name": "Micron Technology Inc",
+            "symbol": "MU",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Alphabet Inc Class C",
+            "symbol": "GOOG",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Qualcomm Incorporated",
+            "symbol": "QCOM",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Meta Platforms Inc.",
+            "symbol": "META",
+            "exchange": "US",
+            "country": "USA"
+          }
+        ],
+        "peers": [
+          {
+            "name": "Samsung Electronics Co Ltd",
+            "symbol": "005930",
+            "exchange": "KO",
+            "country": "Korea"
+          },
+          {
+            "name": "Compal Electronics Inc. GDR Reg S",
+            "symbol": "CEIR",
+            "exchange": "LSE",
+            "country": "UK"
+          },
+          {
+            "name": "Dell Technologies Inc",
+            "symbol": "DELL",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Sandisk Corp",
+            "symbol": "SNDK",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Seagate Technology PLC",
+            "symbol": "STX",
+            "exchange": "US",
+            "country": "USA"
+          }
+        ]
+      },
+      "fundamentals": {
+        "revenue": 416161000000.0,
+        "revenue_growth_yoy": null,
+        "net_margin": 0.2762,
+        "gross_margin": 0.4865,
+        "operating_margin": 0.3317,
+        "net_income": 112010000000.0,
+        "net_income_growth_yoy": null,
+        "free_cash_flow": 98767000000.0,
+        "operating_cash_flow": 111482000000.0,
+        "total_assets": 359241000000.0,
+        "currency": "USD",
+        "as_of": "2026-06-30",
+        "source": "db",
+        "read": "Revenue 416.2B, net margin 28%, FCF 98.8B, debt/equity 0.8x"
+      },
+      "_guide": "Synthesize a MULTI-LENS read — do NOT answer from one lens. `price` = the LEVEL + how it's moving (windowed changes, how far below the 52w peak = `drawdown_from_52w_high_pct`, is today's vol high vs its OWN year = `realized_vol_percentile_1y`, accumulation vs distribution = `up_down_volume_ratio_1mo`); `impact` = what the news did (+ why); `options` = how the options market is positioned; `relationships` = is the move SECTOR-WIDE (peers/rivals moving too) or IDIOSYNCRATIC? 💰 `fundamentals` (EQUITY only — null for an ETF/index/crypto is EXPECTED, don't flag it) = the company's compact financial health (revenue + YoY growth, margins, free cash flow); QUOTE its `read`, and tie quality/valuation to the price+news picture (the sharp insight is often a DIVERGENCE — strong price but shrinking margins, or a selloff despite growing FCF). `fundamentals.signals` = auto-detected abnormality/pattern flags (multi-year trends, outlier jumps, accounting CONTRADICTIONS like receivables outpacing revenue) — LEAD with `signals.headline` if present and narrate the top flags in plain words (they're high-recall — judge which actually matter). It's already here — do NOT make a separate `financials` call unless the user wants a deep/compare or full statements. Lead with where the lenses AGREE or DIVERGE (divergence is the insight — e.g. strong news but price −14% from the peak). QUOTE price `*_read` labels directly (pre-computed, don't re-derive). 🔴 EXPLAIN `options` FOR A NON-EXPERT (follow the options payload's own `_guide.audience`) — translate EVERY options term (put/call, IV, gamma, skew, max-pain, O/S) into plain everyday words, keep a number only if it helps a layperson; do NOT dump jargon. If `options.covered` is false, answer from `impact`+`price`; `price.note` present → say price isn't available; never fabricate. 🔵 If `price.metric_kind` == 'yield' (a `.GB` bond yield or `.MM` rate): narrate the move in BASIS POINTS (`change_bps`), NOT % (a % of a yield is sign-inverted); use `price_proxy_pct`/`mod_duration` for a bond-PRICE estimate (label it an estimate); yield↑ ⇒ bond price↓. A yield has NO options/PE/market-cap, so `options.covered=false` here is EXPECTED — don't flag it as a gap, just read price + news. If an `impact` article carries `scope:'curve_macro'`, it was BORROWED from the country's benchmark 10Y (`macro_source`) because this specific tenor/rate has no news of its own — narrate it as curve-wide central-bank/macro context, NOT specific to this tenor. 🌐 TRADE LENS: `price` also carries `related_assets` (materiality-weighted COMM/FX links — `channel` = the angle: output_price=its product, input_cost=a cost, demand=a backdrop; not listed = not material, don't invent a supply chain), `revenue_by_region` (where it sells — the WHERE for trade + the cross-border gate) and `currency_exposures`. For a GOODS/exporter or a policy/tariff-exposed name, you MAY deepen with the trade tools (find_hs→search_trade/top_traders/trade_balance): enumerate the firm's material product lines from `description`, resolve each via find_hs, and pull flows for the regions in `revenue_by_region`. 🔴 But GATE it: Comtrade is cross-border EXIM only (no domestic consumption) — a DOMESTIC-demand business (revenue_by_region home-only) has NO trade angle; say so, don't force one. Empty `related_assets`/`revenue_by_region` = no idiosyncratic driver (normal) OR not-yet-mapped — don't fabricate."
+    }
+  ],
+  "answer_to_user": "On the numbers, Apple looks fully-priced to somewhat expensive right now, not cheap. The simplest gauge is the P/E ratio — how many years of current earnings you're paying for the stock. Apple trades at about 35x earnings. That's high both versus the broad market (~mid-teens to low-20s is more typical) and richer than most of its megacap peers; several large tech names trade closer to 17-25x. Why some investors still accept that price: Apple is extremely profitable and high-quality — net margin ~28%, huge free cash flow (~$99bn), return on equity that's exceptional, low debt, and earnings still growing (net income up ~20%, EPS up ~23%). So you're paying a premium for a top-tier, steady business. Bottom line: by the price-vs-earnings yardstick Apple is on the expensive side of fair, justified partly by its quality — cheap it is not. This is an informational read, not a buy or sell call, and the figures are Apple's real reported numbers as of mid-2026."
+}

@@ -1,0 +1,609 @@
+{
+  "id": "fn-06",
+  "question": "I keep hearing 'don't buy companies with too much debt.' Can you find me some solid companies that don't have much debt?",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "debt_to_equity",
+            "pattern": "below",
+            "params": {
+              "threshold": 0.3
+            }
+          },
+          {
+            "concept": "roe",
+            "pattern": "above_average"
+          }
+        ],
+        "size": [
+          "large"
+        ],
+        "country": [
+          "US"
+        ],
+        "sort": "mcap",
+        "limit": 12
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "total_debt": {
+            "definition": "Short + long-term borrowings + finance leases (operating leases excluded) — the Bloomberg/CapIQ 'Total Debt' basis. Borrowings-only = current_debt + long_term_debt."
+          }
+        }
+      },
+      "capped": false,
+      "count": 13,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "NVDA.SW",
+            "0R1I.LSE",
+            "NVDA01.BK",
+            "NVDA03.BK",
+            "NVDA06.BK",
+            "NVDA19.BK",
+            "NVDA23.BK",
+            "NVDA80.BK",
+            "NVD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 636.7148,
+              "market_cap_usd": 5322322739200.0,
+              "net_debt_ebitda": -0.0046,
+              "net_income_usd": 159613000000.0,
+              "net_margin": 0.6297,
+              "pe": 33.650842,
+              "revenue_usd": 253491000000.0,
+              "roa": 0.6151,
+              "total_debt_usd": 12348000000.0
+            }
+          },
+          "head_listing_id": 31809,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0632
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.8165
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NVIDIA Corporation",
+          "score": 5322322739200.0,
+          "ticker": "NVDA.US"
+        },
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 133.8903,
+              "market_cap_usd": 4173832126464.0,
+              "net_debt_ebitda": 0.174,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "pe": 17.123934,
+              "revenue_usd": 445867000000.0,
+              "roa": 0.2649,
+              "total_debt_usd": 112756000000.0
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.176
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3813
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "MSFT01.BK",
+            "MSFT03.BK",
+            "MSFT06.BK",
+            "MSFT19.BK",
+            "MSFT23.BK",
+            "MSFT80.BK",
+            "MSF.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 55.3868,
+              "market_cap_usd": 3576365580288.0,
+              "net_debt_ebitda": 0.169,
+              "net_income_usd": 133749000000.0,
+              "net_margin": 0.4031,
+              "pe": 28.685527,
+              "revenue_usd": 331839000000.0,
+              "roa": 0.1764,
+              "total_debt_usd": 56826000000.0
+            }
+          },
+          "head_listing_id": 29766,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1285
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3023
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Microsoft Corporation",
+          "score": 3576365580288.0,
+          "ticker": "MSFT.US"
+        },
+        {
+          "also_known_as": [
+            "MICRON01.BK",
+            "MICRON03.BK",
+            "MICRON19.BK",
+            "MICRON23.BK",
+            "MICRON80.BK",
+            "0R2T.LSE",
+            "MTE.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 257.8,
+              "market_cap_usd": 1029204672512.0,
+              "net_debt_ebitda": -0.2726,
+              "net_income_usd": 50469000000.0,
+              "net_margin": 0.5591,
+              "pe": 21.264919,
+              "revenue_usd": 90274000000.0,
+              "roa": 0.3763,
+              "total_debt_usd": 6376000000.0
+            }
+          },
+          "head_listing_id": 30067,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0633
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.5011
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Micron Technology Inc",
+          "score": 1029204672512.0,
+          "ticker": "MU.US"
+        },
+        {
+          "also_known_as": [
+            "COSTCO19.BK",
+            "0I47.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 81.4932,
+              "market_cap_usd": 426338353152.0,
+              "net_debt_ebitda": -0.7474,
+              "net_income_usd": 8838000000.0,
+              "net_margin": 0.0301,
+              "pe": 47.962777,
+              "revenue_usd": 293587000000.0,
+              "roa": 0.1023,
+              "total_debt_usd": 8136000000.0
+            }
+          },
+          "head_listing_id": 8336,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2428
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2638
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Costco Wholesale Corp",
+          "score": 426338353152.0,
+          "ticker": "COST.US"
+        },
+        {
+          "also_known_as": [
+            "PLTR01.BK",
+            "PLTR03.BK",
+            "PLTR06.BK",
+            "PLTR23.BK",
+            "PTX.XETRA",
+            "0A7R.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 407.49711815562,
+              "market_cap_usd": 412220620800.0,
+              "net_debt_ebitda": -0.683,
+              "net_income_usd": 3016692000.0,
+              "net_margin": 0.49,
+              "pe": 146.615385,
+              "revenue_usd": 6155941000.0,
+              "roa": 0.2583,
+              "total_debt_usd": 211400000.0
+            }
+          },
+          "head_listing_id": 34742,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0216
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3086
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Palantir Technologies Inc.",
+          "score": 412220620800.0,
+          "ticker": "PLTR.US"
+        },
+        {
+          "also_known_as": [
+            "LRCX01.BK",
+            "LRCX23.BK",
+            "0JT5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 53.6661,
+              "market_cap_usd": 410333184000.0,
+              "net_debt_ebitda": -0.2082,
+              "net_income_usd": 7265396000.0,
+              "net_margin": 0.3127,
+              "pe": 56.930556,
+              "revenue_usd": 23232690000.0,
+              "roa": 0.3088,
+              "total_debt_usd": 3734563000.0
+            }
+          },
+          "head_listing_id": 26959,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2995
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.5826
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lam Research Corp",
+          "score": 410333184000.0,
+          "ticker": "LRCX.US"
+        },
+        {
+          "also_known_as": [
+            "GEV80.BK",
+            "GEV23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 14.1734693877551,
+              "market_cap_usd": 267540086784.0,
+              "net_debt_ebitda": -3.4363,
+              "net_income_usd": 9529000000.0,
+              "net_margin": 0.2304,
+              "pe": 30.934633,
+              "revenue_usd": 41367000000.0,
+              "roa": 0.1179,
+              "total_debt_usd": 2794000000.0
+            }
+          },
+          "head_listing_id": 18244,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.2337
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.7969
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GE Vernova LLC",
+          "score": 267540086784.0,
+          "ticker": "GEV.US"
+        },
+        {
+          "also_known_as": [
+            "ANET23.BK",
+            "ANET80.BK",
+            "0HHR.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "market_cap_usd": 243643383808.0,
+              "net_debt_ebitda": -0.488694988164024,
+              "net_income_usd": 4044600000.0,
+              "net_margin": 0.3837,
+              "pe": 63.860759,
+              "revenue_usd": 10540800000.0,
+              "roa": 0.1705,
+              "total_debt_usd": 43964000.0
+            }
+          },
+          "head_listing_id": 2085,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.00355393880603048
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2733
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Arista Networks",
+          "score": 243643383808.0,
+          "ticker": "ANET.US"
+        },
+        {
+          "also_known_as": [
+            "SNDK03.BK",
+            "SNDK23.BK",
+            "SNDK80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 46.9821,
+              "market_cap_usd": 238045102080.0,
+              "net_debt_ebitda": -0.6567,
+              "net_income_usd": 4507000000.0,
+              "net_margin": 0.3419,
+              "pe": 22.041486,
+              "revenue_usd": 13184000000.0,
+              "roa": 0.264,
+              "total_debt_usd": 182000000.0
+            }
+          },
+          "head_listing_id": 40758,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.0132
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3271
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sandisk Corp",
+          "score": 238045102080.0,
+          "ticker": "SNDK.US"
+        },
+        {
+          "also_known_as": [
+            "0QZF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 32.1333,
+              "market_cap_usd": 178885984256.0,
+              "net_debt_ebitda": -0.0618,
+              "net_income_usd": 6486000000.0,
+              "net_margin": 0.5507,
+              "pe": 20.437651,
+              "revenue_usd": 11777000000.0,
+              "roa": 0.4311,
+              "total_debt_usd": 1581000000.0
+            }
+          },
+          "head_listing_id": 47377,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1633
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.67
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Western Digital Corporation",
+          "score": 178885984256.0,
+          "ticker": "WDC.US"
+        },
+        {
+          "also_known_as": [
+            "NEM06.BK",
+            "NEM23.BK",
+            "0R28.LSE",
+            "NMM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 84.8679,
+              "market_cap_usd": 122207232000.0,
+              "net_debt_ebitda": -0.2127,
+              "net_income_usd": 8597000000.0,
+              "net_margin": 0.3336,
+              "pe": 14.625473,
+              "revenue_usd": 25767000000.0,
+              "roa": 0.1491,
+              "total_debt_usd": 5598000000.0
+            }
+          },
+          "head_listing_id": 30817,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.1588
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.2439
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Newmont Goldcorp Corp",
+          "score": 122207232000.0,
+          "ticker": "NEM.US"
+        },
+        {
+          "also_known_as": [
+            "0KOC.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "interest_coverage": 52.1618705035971,
+              "market_cap_usd": 120477671424.0,
+              "net_income_usd": 11695000000.0,
+              "net_margin": 0.1285,
+              "pe": 10.397893,
+              "revenue_usd": 91019000000.0,
+              "roa": 0.0936,
+              "total_debt_usd": 8387000000.0
+            }
+          },
+          "head_listing_id": 34190,
+          "matched": {
+            "fundamental": {
+              "debt_to_equity": {
+                "kind": "level",
+                "value": 0.227451109718695
+              },
+              "roe": {
+                "cohort_benchmark": 0.22135,
+                "cohort_scope": "candidate_universe",
+                "kind": "cohort",
+                "value": 0.3406
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Progressive Corp",
+          "score": 120477671424.0,
+          "ticker": "PGR.US"
+        }
+      ],
+      "sort": "mcap",
+      "universe": 130,
+      "_pagination": {
+        "intended_show": 12,
+        "returned": 13,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (12) as a look-ahead buffer so 'a few more' is served from these 13 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Here are big, strong companies that carry very little debt. \"Low debt\" here means a low debt-to-equity ratio — the company owes far less than the value of what its shareholders own. I also required above-average profitability so these are solid, not just debt-light. Examples: Nvidia (NVDA, debt/equity ~0.06), Microsoft (MSFT, ~0.13), Alphabet/Google (GOOG, ~0.18), Palantir (PLTR, ~0.02), Micron (MU, ~0.06), Costco (COST, ~0.24), Lam Research (LRCX) and Arista Networks (ANET). Why low debt matters for safety: a company with little debt has smaller fixed interest bills, so it's far less likely to run into trouble in a downturn or when interest rates rise — it isn't relying on borrowed money to stay afloat. That said, low debt does NOT equal guaranteed safety — the business can still stumble, and the stock can still fall. This is for research, not a purchase recommendation."
+}

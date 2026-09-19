@@ -1,0 +1,540 @@
+{
+  "id": "ne-07",
+  "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+  "tools_called": [
+    {
+      "tool": "find_megatrend",
+      "args": {
+        "terms": [
+          "electric vehicles",
+          "EV"
+        ]
+      },
+      "note": "resolve EV to a megatrend node id"
+    },
+    {
+      "tool": "screen_stocks",
+      "args": {
+        "megatrend": "16000000",
+        "window": "14d",
+        "order_by": "news_count",
+        "limit": 15
+      },
+      "note": "EV = Electrification & Mobility (tier-1, id 16000000); rank members by news attention over 14 days"
+    }
+  ],
+  "raw_responses": [
+    {
+      "electric vehicles": [
+        {
+          "id": 16020000,
+          "name": "Commercial & Heavy-Duty Electric Vehicles",
+          "tier": 2
+        }
+      ],
+      "EV": [
+        {
+          "id": 16000000,
+          "name": "Electrification & Mobility",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "scope": {
+        "megatrend": "16000000"
+      },
+      "order_by": "news_count",
+      "direction": null,
+      "direction_split": {
+        "total": 15,
+        "net_positive": 13,
+        "net_negative": 2,
+        "ambiguous": 0
+      },
+      "stocks": [
+        {
+          "stock_id": 44487,
+          "symbol": "TSLA",
+          "ticker": "TSLA.US",
+          "name": "Tesla Inc",
+          "country": "USA",
+          "gic_code": "25102010",
+          "market_cap_usd": 1383329038336.0,
+          "impact": {
+            "ambiguous": 2,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "pricing",
+              "regulation",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 06:40:40.539542+00",
+            "neg": 16,
+            "net_direction": "pos",
+            "news_count": 64,
+            "pos": 47,
+            "top_reason": "Tesla recalls nearly 3 million vehicles in China over safety issues, facing regulatory scrutiny.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 15.315799,
+            "pe_ratio": 311.916667,
+            "week52_high": 498.83,
+            "week52_low": 297.38
+          }
+        },
+        {
+          "stock_id": 49582,
+          "symbol": "EA",
+          "ticker": "EA.BK",
+          "name": "Energy Absolute Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "10102030",
+          "market_cap_usd": 659054304.4608,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 02:45:27.689958+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 15,
+            "pos": 15,
+            "top_reason": "EA arranges 9.8B baht credit facilities to fund electric bus project, supporting working capital and project execution.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": null,
+            "pb_ratio": 0.652736,
+            "pe_ratio": null,
+            "week52_high": 3.88,
+            "week52_low": 2.04
+          }
+        },
+        {
+          "stock_id": 1414746,
+          "symbol": "005380",
+          "ticker": "005380.KO",
+          "name": "Hyundai Motor Co. Ltd.",
+          "country": "Korea",
+          "gic_code": "25102010",
+          "market_cap_usd": 75971157399.963,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation",
+              "supply",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 14:45:40.103998+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 13,
+            "pos": 12,
+            "top_reason": "Hyundai unveils its largest product offensive with over 100 models and new tech.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 2.42,
+            "pb_ratio": 0.767865,
+            "pe_ratio": 13.765231,
+            "week52_high": 783000.0,
+            "week52_low": 208288.0583
+          }
+        },
+        {
+          "stock_id": 53912,
+          "symbol": "9868",
+          "ticker": "9868.HK",
+          "name": "Xpeng Inc",
+          "country": "Hong Kong",
+          "gic_code": "25102010",
+          "market_cap_usd": 10562227752.96,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-08-26 06:55:50.756909+00",
+            "neg": 4,
+            "net_direction": "pos",
+            "news_count": 10,
+            "pos": 7,
+            "top_reason": "Q3 revenue guidance missed consensus by ~15%, causing stock to sink 7%.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 2.727114,
+            "pe_ratio": null,
+            "week52_high": 110.8,
+            "week52_low": 42.66
+          }
+        },
+        {
+          "stock_id": 231715,
+          "symbol": "002594",
+          "ticker": "002594.CS",
+          "name": "BYD Co Ltd Class A",
+          "country": "China",
+          "gic_code": "25102010",
+          "market_cap_usd": 122450235673.805,
+          "impact": {
+            "ambiguous": 2,
+            "aspects": [
+              "competition",
+              "demand",
+              "regulation"
+            ],
+            "latest_at": "2026-08-26 07:15:27.271527+00",
+            "neg": 3,
+            "net_direction": "pos",
+            "news_count": 10,
+            "pos": 5,
+            "top_reason": "July production and sales rose year on year, indicating stronger demand for BYD vehicles.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.39,
+            "pb_ratio": 3.278907,
+            "pe_ratio": 30.071264,
+            "week52_high": 116.1561,
+            "week52_low": 77.3112
+          }
+        },
+        {
+          "stock_id": 574634,
+          "symbol": "7203",
+          "ticker": "7203.JP",
+          "name": "Toyota Motor Corp.",
+          "country": "Japan",
+          "gic_code": "25102010",
+          "market_cap_usd": 229928153741.017,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "geopolitics",
+              "monetary",
+              "supply",
+              "tariff"
+            ],
+            "latest_at": "2026-08-26 07:15:27.271527+00",
+            "neg": 7,
+            "net_direction": "neg",
+            "news_count": 10,
+            "pos": 2,
+            "top_reason": "New CEO expects operating margin to drop to 6.3% by FY2027 from 10% in FY2025, indicating profitability concerns.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 3.04,
+            "pb_ratio": 0.959184,
+            "pe_ratio": 8.600376,
+            "week52_high": 4000.0,
+            "week52_low": 2686.0
+          }
+        },
+        {
+          "stock_id": 49826,
+          "symbol": "NEX",
+          "ticker": "NEX.BK",
+          "name": "Nex Point Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "45203015",
+          "market_cap_usd": 183275610.624,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 02:45:27.689958+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 10,
+            "pos": 10,
+            "top_reason": "NEX receives 1,052.64M baht credit line and is appointed manufacturer for 1,520 electric buses, securing project funding.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": null,
+            "pb_ratio": 1.42126,
+            "pe_ratio": null,
+            "week52_high": 1.54,
+            "week52_low": 0.68
+          }
+        },
+        {
+          "stock_id": 571958,
+          "symbol": "7267",
+          "ticker": "7267.JP",
+          "name": "Honda Motor Co., Ltd.",
+          "country": "Japan",
+          "gic_code": "25102010",
+          "market_cap_usd": 41591134413.2844,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "monetary",
+              "tariff",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 06:55:50.756909+00",
+            "neg": 4,
+            "net_direction": "pos",
+            "news_count": 9,
+            "pos": 5,
+            "top_reason": "Record Q1 operating profit and raised full-year guidance",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 4.0069,
+            "pb_ratio": 0.539478,
+            "pe_ratio": null,
+            "week52_high": 1762.5,
+            "week52_low": 1238.0
+          }
+        },
+        {
+          "stock_id": 12770,
+          "symbol": "F",
+          "ticker": "F.US",
+          "name": "Ford Motor Company",
+          "country": "USA",
+          "gic_code": "25102010",
+          "market_cap_usd": 55626960896.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply",
+              "tariff",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 16:45:15.642551+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 9,
+            "pos": 8,
+            "top_reason": "Fair value estimate raised to $15.73 with improved revenue growth and margin assumptions.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 4.31,
+            "pb_ratio": 1.576535,
+            "pe_ratio": null,
+            "week52_high": 17.5895,
+            "week52_low": 10.8062
+          }
+        },
+        {
+          "stock_id": 18773,
+          "symbol": "GM",
+          "ticker": "GM.US",
+          "name": "General Motors Company",
+          "country": "USA",
+          "gic_code": "25102010",
+          "market_cap_usd": 77610983424.0,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply",
+              "tariff"
+            ],
+            "latest_at": "2026-08-26 04:25:36.691013+00",
+            "neg": 3,
+            "net_direction": "pos",
+            "news_count": 8,
+            "pos": 5,
+            "top_reason": "GM restarts EV battery production at Ohio plant, resuming operations after demand-driven shutdown.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.83,
+            "pb_ratio": 1.184701,
+            "pe_ratio": 37.370536,
+            "week52_high": 91.85,
+            "week52_low": 53.9766
+          }
+        },
+        {
+          "stock_id": 232821,
+          "symbol": "300750",
+          "ticker": "300750.CS",
+          "name": "Contemporary Amperex Technology Co Ltd Class A",
+          "country": "China",
+          "gic_code": "20104010",
+          "market_cap_usd": 261643984227.533,
+          "impact": {
+            "ambiguous": 1,
+            "aspects": [
+              "capital",
+              "demand",
+              "tariff"
+            ],
+            "latest_at": "2026-08-26 05:25:26.841695+00",
+            "neg": 0,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 6,
+            "top_reason": "Reported 41.98% net profit growth and increased global market share, reinforcing its dominant position.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.62,
+            "pb_ratio": 4.878212,
+            "pe_ratio": 21.355045,
+            "week52_high": 467.0457,
+            "week52_low": 267.505
+          }
+        },
+        {
+          "stock_id": 1416209,
+          "symbol": "373220",
+          "ticker": "373220.KO",
+          "name": "LG Energy Solution Ltd",
+          "country": "Korea",
+          "gic_code": "20106020",
+          "market_cap_usd": 57248098077.9008,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "supply"
+            ],
+            "latest_at": "2026-08-26 06:40:40.539542+00",
+            "neg": 1,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 6,
+            "top_reason": "LGES starts production at Lansing plant, adding 35GWh capacity and expanding North American footprint.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 3.900936,
+            "pe_ratio": null,
+            "week52_high": 527000.0,
+            "week52_low": 290500.0
+          }
+        },
+        {
+          "stock_id": 49426,
+          "symbol": "ATP30",
+          "ticker": "ATP30.BK",
+          "name": "ATP 30 Public Company Limited",
+          "country": "Thailand",
+          "gic_code": "20304010",
+          "market_cap_usd": 17746885.6704,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand"
+            ],
+            "latest_at": "2026-08-26 07:15:27.271527+00",
+            "neg": 3,
+            "net_direction": "pos",
+            "news_count": 7,
+            "pos": 4,
+            "top_reason": "Company reports Q2 2026 revenue and plans expansion, indicating financial growth and future revenue streams.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 4.71,
+            "pb_ratio": 0.923718,
+            "pe_ratio": 9.625,
+            "week52_high": 0.9506,
+            "week52_low": 0.7605
+          }
+        },
+        {
+          "stock_id": 41772,
+          "symbol": "STLA",
+          "ticker": "STLA.US",
+          "name": "Stellantis NV",
+          "country": "Netherlands",
+          "gic_code": "25102010",
+          "market_cap_usd": 19816124416.0,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "competition",
+              "demand",
+              "supply",
+              "tariff",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 16:45:15.642551+00",
+            "neg": 4,
+            "net_direction": "neg",
+            "news_count": 6,
+            "pos": 2,
+            "top_reason": "Next-gen Cherokee debuts new STLA One platform, a key part of Stellantis' strategy, with increased investment in Belvidere plant.",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 0.0,
+            "pb_ratio": 0.269057,
+            "pe_ratio": 2.030097,
+            "week52_high": 12.22,
+            "week52_low": 5.05
+          }
+        },
+        {
+          "stock_id": 244186,
+          "symbol": "VOW",
+          "ticker": "VOW.XETRA",
+          "name": "Volkswagen AG",
+          "country": "Germany",
+          "gic_code": "25102010",
+          "market_cap_usd": 43671113256.96,
+          "impact": {
+            "ambiguous": 0,
+            "aspects": [
+              "capital",
+              "demand",
+              "technology"
+            ],
+            "latest_at": "2026-08-26 04:05:43.204116+00",
+            "neg": 2,
+            "net_direction": "pos",
+            "news_count": 5,
+            "pos": 3,
+            "top_reason": "CEO warns deeper cost cuts needed, margins insufficient for investment",
+            "top_relevance": 1.0
+          },
+          "fundamentals": {
+            "dividend_yield_pct": 6.93,
+            "pb_ratio": 0.198679,
+            "pe_ratio": 7.133269,
+            "week52_high": 103.5017,
+            "week52_low": 71.0
+          }
+        }
+      ],
+      "_guide": "LEAD with the winners-vs-losers split (`direction_split` + each row's `impact.net_direction` with its pos/neg counts), NOT a flat ranked dump. Surface any net-NEGATIVE standouts SEPARATELY — they're the contrarian / at-risk names. For each name explain WHY it's interesting from its `impact.top_reason` + `aspects` (the channels), not just that it ranks high. If a name has high news_count but a large neg count too, call it CONTESTED. Each row also carries `fundamentals` (dividend_yield_pct, pe_ratio, pb_ratio, 52w range) — a MATRIX: weave the facet that fits the group (income yield for retail/utilities/banks, valuation for value plays; ignore for pure-growth/AI names that don't pay). For a dedicated income rank use `screen_dividends`. Research-analyst voice — observations, not advice."
+    }
+  ],
+  "answer_to_user": "EV / Electrification & Mobility theme, last two weeks (14d), ranked by news attention — with each name's sentiment:\n\n- Tesla (TSLA) — by far the most-covered, 64 items, net-POSITIVE but heavily contested (47 pos / 16 neg): robotaxi momentum offset by a ~3M-vehicle China recall.\n- Energy Absolute (EA.BK) — 15 items, all POSITIVE: arranged 9.8B baht credit to fund an electric-bus project.\n- Hyundai (005380.KO) — 13, POSITIVE: 100+ model product offensive.\n- XPeng (9868.HK) — 10, POSITIVE on balance but with a notable NEG driver (Q3 revenue guide missed consensus by ~15%, stock sank 7%).\n- BYD (002594.CS) — 10, net-positive (July production/sales up YoY) but mixed.\n- Toyota (7203.JP) — 10, net-NEGATIVE: new CEO guides operating margin down to 6.3% by FY2027 — a clear case where high attention is NOT positive.\n- NEX (NEX.BK) 10 pos; Isuzu (7267.JP) 9 pos (record Q1 op profit); Ford (F) 9 pos (fair-value raised); GM 8 pos (restarted Ohio battery output); CATL (300750.CS) 7 pos (+42% profit); LG Energy Solution (373220.KO) 7 pos (Lansing plant); ATP30 (ATP30.BK) 7 pos.\n- Stellantis (STLA.US) — 6, net-NEGATIVE (new Cherokee/STLA One platform read negatively).\n- Volkswagen (VOW.XETRA) — 5, net-positive but CEO warns on margins.\n\nOverall split: 13 of 15 net-positive, 2 net-negative (Toyota, Stellantis). Key nuance: attention volume ≠ sentiment — Tesla and XPeng carry meaningful negative counts, and Toyota is the biggest name whose heavy coverage is actually negative (margin guide-down)."
+}

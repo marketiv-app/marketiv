@@ -1,0 +1,15 @@
+{
+  "id": "tn-06",
+  "question": "Which stocks are like coiling up / getting really quiet before a big move? I think it's called a squeeze?",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "bb_squeeze", "window_bars": 3}]}],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "result_summary": "59 results. Stocks in a Bollinger Band squeeze (tight low-volatility coil, currently consolidating): DNM.LSE Dianomi PLC, 0374.HK Four Seas Mercantile Holdings, ORNT.LSE Orient Telecoms, 0266.HK Tian Teck Land, 1488.HK Best Food Holding, MLCFD.PA Compagnie de Chemins de Fer Départementaux, MLHIN.PA Société Hôtelière et Immobilière de Nice, MLCMG.PA CMG Cleantech, PPGN.SW PolyPeptide Group, MKTX.US MarketAxess Holdings, CISS.US C3is Inc, FBRX.US Forte Biosciences, SORN.US Soren Acquisition Corp, 0760.HK Talent Property Group, 0859.HK Zhongchang International Holdings. These are stocks with Bollinger Bands at their tightest in recent bars — coiling before a potential breakout."
+    }
+  ]
+}

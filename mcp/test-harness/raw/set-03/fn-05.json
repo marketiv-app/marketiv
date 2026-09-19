@@ -1,0 +1,98 @@
+{
+  "id": "fn-05",
+  "question": "หุ้นไทยตัวไหนที่มั่นคง ปันผลดี น่าถือยาว บ้าง",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "country": "TH",
+        "min_yield": 3,
+        "max_yield": 10,
+        "min_streak_years": 3,
+        "max_payout": 0.85,
+        "min_market_cap_usd": 1000000000,
+        "order_by": "streak",
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 2,
+      "has_more": false,
+      "limit": 15,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": 21.0,
+            "ffo_payout": 0.2491,
+            "last_cut_year": 2021,
+            "no_cut_streak_yrs": 4,
+            "payout_ratio": 0.3595,
+            "payout_ratio_eff": 0.2491,
+            "ttm_div_yoy_pct": 37.5,
+            "yield_pct": 4.0,
+            "yield_trailing_pct": 4.0
+          },
+          "eps": 3.22,
+          "exchange": "BK",
+          "gic_code": "60201030",
+          "market_cap_usd": 1020510019.584,
+          "name": "Amata Corporation Public Company Limited",
+          "news": {
+            "neg": 1,
+            "net_direction": "pos",
+            "pos": 68,
+            "top_reason": "Core profit beat expectations, margins at three-year high, and interim dividend announced."
+          },
+          "pb_ratio": 1.478731,
+          "pe_ratio": 10.015528,
+          "stock_id": 49397,
+          "symbol": "AMATA",
+          "ticker": "AMATA.BK",
+          "week52_high": 30.0,
+          "week52_low": 13.467
+        },
+        {
+          "country": "Thailand",
+          "dividend": {
+            "cagr_5y_pct": 0.0,
+            "ffo_payout": 0.3296,
+            "last_cut_year": 2022,
+            "no_cut_streak_yrs": 3,
+            "payout_ratio": null,
+            "payout_ratio_eff": 0.3296,
+            "ttm_div_yoy_pct": 14.3,
+            "yield_pct": 3.6,
+            "yield_trailing_pct": 3.6
+          },
+          "eps": 4.37,
+          "exchange": "BK",
+          "gic_code": "60201020",
+          "market_cap_usd": 9235630404.4032,
+          "name": "Central Pattana Public Company Limited",
+          "news": {
+            "neg": 1,
+            "net_direction": "pos",
+            "pos": 37,
+            "top_reason": "Central Pattana is co-investing THB 6 billion in Megabangna expansion as part of a THB 70 billion masterplan, directly increasing its capital expenditure and development pipeline."
+          },
+          "pb_ratio": 2.601137,
+          "pe_ratio": 14.876957,
+          "stock_id": 49544,
+          "symbol": "CPN",
+          "ticker": "CPN.BK",
+          "week52_high": 67.9069,
+          "week52_low": 44.7897
+        }
+      ],
+      "total": 2
+    }
+  ],
+  "answer_to_user": "หุ้นไทยที่ผ่านเกณฑ์ \"มั่นคง + ปันผลดี + เหมาะถือยาว\" (บริษัทใหญ่ ปันผลราว 3% ขึ้นไป จ่ายต่อเนื่องหลายปี และอัตราการจ่ายไม่ตึงเกินไป) ที่พบคือ:\n• CPN (เซ็นทรัลพัฒนา) — บริษัทอสังหาฯ/ห้างค้าปลีกรายใหญ่ ปันผลราว 3.6% จ่ายต่อเนื่อง จ่ายจากกำไรเพียงประมาณ 1 ใน 3 (ยังมีเหลือลงทุนต่อ)\n• AMATA (อมตะ คอร์ปอเรชัน) — เจ้าของนิคมอุตสาหกรรม ปันผลราว 4.0% เงินปันผลโตต่อเนื่อง จ่ายจากกำไรราว 1 ใน 3 เช่นกัน\nเงินปันผล = เงินสดที่บริษัทแบ่งจากกำไรมาจ่ายผู้ถือหุ้นเป็นประจำ ทั้งสองตัวเป็นบริษัทใหญ่ที่รู้จักกันดีและจ่ายปันผลสม่ำเสมอ ข้อควรระวัง: ไม่มีหุ้นตัวไหน \"ปลอดภัย 100%\" — ราคายังผันผวนได้และปันผลอาจถูกลด/งดในบางปี รายชื่อนี้เป็นข้อมูลไว้ศึกษาต่อ ไม่ใช่คำแนะนำให้ซื้อ (หมายเหตุ: เกณฑ์ที่ค่อนข้างเข้ม—บริษัทใหญ่+จ่ายต่อเนื่อง—ทำให้เหลือชื่อไม่มาก ถ้าอยากได้ตัวเลือกกว้างขึ้นสามารถผ่อนเกณฑ์ขนาดหรือจำนวนปีที่จ่ายต่อเนื่องได้)"
+}

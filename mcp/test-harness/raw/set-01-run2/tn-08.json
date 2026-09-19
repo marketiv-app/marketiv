@@ -1,0 +1,21 @@
+{
+  "id": "tn-08",
+  "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วยหน่อยได้ไหม",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {"q": "technology"},
+      "result_summary": "Resolved: GICS code '45' = Information Technology sector."
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.10", "window_bars": 21}], "quals": [{"any": [{"pattern": "rising_volume"}]}]}],
+        "gics": "45",
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      },
+      "result_summary": "59 tech stocks up >10% in past month (21 trading days) with rising volume confirmation. Top results: CMRC.US Commerce.com, NOW.US ServiceNow, PD.US PagerDuty, RMNI.US Rimini Street, RSKD.US Riskified, WK.US Workiva, KCE.BK KCE Electronics (Thailand), 1162.HK Lumina Group, 2166.HK Smart-Core Holdings, 2556.HK Marketingforce Management, CYAB.US Cyabra, 605258.CG Jiangsu Xiehe Electronic, 688138.CG Shenzhen Qingyi Photomask, 688183.CG Shengyi Electronics, 688195.CG Optowide Technologies."
+    }
+  ]
+}

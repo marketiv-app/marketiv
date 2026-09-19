@@ -1,0 +1,19 @@
+{
+  "id": "tn-01",
+  "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "overbought"}]}],
+        "asset_type": ["Common Stock"],
+        "sort": "rsi",
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "60 results (capped). Top overbought stocks: CRNX.US (Crinetics Pharmaceuticals, RSI 89.5, held 41 bars), CYCU.US (Cycurion RSI 86.8, held 1 bar). Signal is rsi14_overbought with strength 1.0. RSI values well above 70 threshold confirmed.",
+  "verdict": "PASS",
+  "reason": "Returns real list of overbought stocks with actual RSI values (89.5, 86.8, etc.) clearly above 70. Signal held bars also provided.",
+  "defects": []
+}

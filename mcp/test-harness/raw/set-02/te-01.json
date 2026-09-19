@@ -1,0 +1,812 @@
+{
+ "id": "te-01",
+ "question": "Screen the whole US market for stocks where the 50-day SMA just crossed above the 200-day SMA (a golden cross) in the last 5 trading days, and the crossover is confirmed by price closing above both averages. I only want names above $2B market cap.",
+ "tools_called": [
+  {
+   "tool": "screen_unified",
+   "args": {
+    "ta": [
+     {
+      "anchor": [
+       {
+        "pattern": "crossover_up",
+        "a": "sma50",
+        "b": "sma200",
+        "window_bars": 5
+       }
+      ],
+      "quals": [
+       {
+        "any": [
+         {
+          "pattern": "above",
+          "a": "close",
+          "b": "sma50"
+         }
+        ],
+        "within": 0
+       },
+       {
+        "any": [
+         {
+          "pattern": "above",
+          "a": "close",
+          "b": "sma200"
+         }
+        ],
+        "within": 0
+       }
+      ]
+     }
+    ],
+    "country": [
+     "US"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "min_market_cap_usd": 2000000000,
+    "timeframe": 1,
+    "window_bars": 5,
+    "limit": 15
+   }
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "adx": {
+      "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+     },
+     "close_vs_ema200": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "rsi14": {
+      "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+     },
+     "strength": {
+      "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+     }
+    }
+   },
+   "capped": false,
+   "count": 17,
+   "currency": "USD",
+   "results": [
+    {
+     "also_known_as": [
+      "0HQI.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 52.7701,
+       "close_vs_ema200": 0.2701,
+       "rsi14": 76.9072
+      }
+     },
+     "head_listing_id": 6433,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 35
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 41.862,
+         "b": 41.8399
+        },
+        "kind": "signal",
+        "strength": 0.969,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "CBIZ Inc",
+     "score": 0.969,
+     "ticker": "CBZ.US"
+    },
+    {
+     "also_known_as": [
+      "0R9U.LSE",
+      "PYPL06.BK",
+      "2PP.XETRA"
+     ],
+     "context": {
+      "ta": {
+       "adx": 51.8967,
+       "close_vs_ema200": 0.1521,
+       "rsi14": 69.4608
+      }
+     },
+     "head_listing_id": 36231,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 29
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 33
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 51.6064,
+         "b": 51.4801
+        },
+        "kind": "signal",
+        "strength": 0.909,
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "PayPal Holdings Inc",
+     "score": 0.909,
+     "ticker": "PYPL.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 30.7612,
+       "close_vs_ema200": 0.2509,
+       "rsi14": 68.0395
+      }
+     },
+     "head_listing_id": 19488,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 43
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 56.2407,
+         "b": 55.5938
+        },
+        "kind": "signal",
+        "strength": 0.868,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Goosehead Insurance Inc",
+     "score": 0.868,
+     "ticker": "GSHD.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 49.8096,
+       "close_vs_ema200": 0.168,
+       "rsi14": 68.3022
+      }
+     },
+     "head_listing_id": 29140,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 46
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 76.84,
+         "b": 76.4661
+        },
+        "kind": "signal",
+        "strength": 0.853,
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Merit Medical Systems Inc",
+     "score": 0.853,
+     "ticker": "MMSI.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 32.7559,
+       "close_vs_ema200": 0.1873,
+       "rsi14": 70.2992
+      }
+     },
+     "head_listing_id": 43916,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 41
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 30.336,
+         "b": 30.2108
+        },
+        "kind": "signal",
+        "strength": 0.849,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Toast Inc",
+     "score": 0.849,
+     "ticker": "TOST.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 44.5931,
+       "close_vs_ema200": 0.1468,
+       "rsi14": 71.6101
+      }
+     },
+     "head_listing_id": 23378,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 42
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 133.2458,
+         "b": 132.9474
+        },
+        "kind": "signal",
+        "strength": 0.798,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Jacobs Solutions Inc.",
+     "score": 0.798,
+     "ticker": "J.US"
+    },
+    {
+     "also_known_as": [
+      "0HT4.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 18.9931,
+       "close_vs_ema200": 0.0596,
+       "rsi14": 51.7642
+      }
+     },
+     "head_listing_id": 8197,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 20
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 49
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 207.8896,
+         "b": 207.6014
+        },
+        "kind": "signal",
+        "strength": 0.791,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Capital One Financial Corporation",
+     "score": 0.791,
+     "ticker": "COF.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 34.7671,
+       "close_vs_ema200": 0.1716,
+       "rsi14": 65.0903
+      }
+     },
+     "head_listing_id": 33621,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 38
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 125.3279,
+         "b": 124.7228
+        },
+        "kind": "signal",
+        "strength": 0.765,
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Paylocity Holding Corporation",
+     "score": 0.765,
+     "ticker": "PCTY.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 21.6334,
+       "close_vs_ema200": 0.2479,
+       "rsi14": 67.3688
+      }
+     },
+     "head_listing_id": 5452,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 20
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 24.6664,
+         "b": 24.5008
+        },
+        "kind": "signal",
+        "strength": 0.742,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Braze Inc",
+     "score": 0.742,
+     "ticker": "BRZE.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 31.5603,
+       "rsi14": 66.0522
+      }
+     },
+     "head_listing_id": 44617,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 19
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 78.5644,
+         "b": 78.249
+        },
+        "kind": "signal",
+        "strength": 0.741,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "ServiceTitan, Inc. Class A Common Stock",
+     "score": 0.741,
+     "ticker": "TTAN.US"
+    },
+    {
+     "also_known_as": [
+      "MA80.BK",
+      "M4I.XETRA",
+      "0R2Z.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 34.992,
+       "close_vs_ema200": 0.1277,
+       "rsi14": 73.326
+      }
+     },
+     "head_listing_id": 27402,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 20
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 37
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 529.5291,
+         "b": 528.5421
+        },
+        "kind": "signal",
+        "strength": 0.739,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Mastercard Inc",
+     "score": 0.739,
+     "ticker": "MA.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 35.9545,
+       "close_vs_ema200": 0.056,
+       "rsi14": 57.8699
+      }
+     },
+     "head_listing_id": 39297,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 37
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 79.8658,
+         "b": 79.7057
+        },
+        "kind": "signal",
+        "strength": 0.729,
+        "value": "2026-08-24"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Service Corporation International",
+     "score": 0.729,
+     "ticker": "SCI.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 11.8883,
+       "close_vs_ema200": 0.0277,
+       "rsi14": 46.7085
+      }
+     },
+     "head_listing_id": 32748,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 41.5496,
+         "b": 41.5317
+        },
+        "kind": "signal",
+        "strength": 0.704,
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Old Republic International Corp",
+     "score": 0.704,
+     "ticker": "ORI.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 21.6898,
+       "close_vs_ema200": 0.0439,
+       "rsi14": 45.2179
+      }
+     },
+     "head_listing_id": 9626,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 25
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 43
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 91.2366,
+         "b": 91.1479
+        },
+        "kind": "signal",
+        "strength": 0.697,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Donaldson Company Inc",
+     "score": 0.697,
+     "ticker": "DCI.US"
+    },
+    {
+     "also_known_as": [
+      "NDAQ06.BK",
+      "0K4T.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 28.6903,
+       "close_vs_ema200": 0.1051,
+       "rsi14": 68.4018
+      }
+     },
+     "head_listing_id": 30725,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 29
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 32
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 89.7954,
+         "b": 89.7602
+        },
+        "kind": "signal",
+        "strength": 0.694,
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Nasdaq Inc",
+     "score": 0.694,
+     "ticker": "NDAQ.US"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 28.7396,
+       "close_vs_ema200": 0.0617,
+       "rsi14": 64.06
+      }
+     },
+     "head_listing_id": 5531,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 9
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 14.2558,
+         "b": 14.2543
+        },
+        "kind": "signal",
+        "strength": 0.658,
+        "value": "2026-08-20"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Black Stone Minerals LP",
+     "score": 0.658,
+     "ticker": "BSM.US"
+    },
+    {
+     "also_known_as": [
+      "0HQ3.LSE",
+      "BF-A.US"
+     ],
+     "context": {
+      "ta": {
+       "adx": 16.3282,
+       "close_vs_ema200": 0.0363,
+       "rsi14": 58.3644
+      }
+     },
+     "head_listing_id": 4183,
+     "matched": {
+      "ta": {
+       "close_above_sma200": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal"
+       },
+       "cross_sma50_sma200_up": {
+        "detail": {
+         "a": 27.5888,
+         "b": 27.5629
+        },
+        "kind": "signal",
+        "strength": 0.616,
+        "value": "2026-08-21"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Brown-Forman Corporation",
+     "score": 0.616,
+     "ticker": "BF-B.US"
+    }
+   ],
+   "sort": "ta",
+   "universe": 1635,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 17,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 17 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "I screened US-listed common stocks (>$2B market cap) for a FRESH 50-day/200-day SMA golden cross in the last ~5 sessions, confirmed by the close being above BOTH the 50- and 200-day SMA. Found 17 names (e.g. CBZ.US, PYPL.US, GSHD.US, MMSI.US, TOST.US)."
+}

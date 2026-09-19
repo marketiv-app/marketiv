@@ -1,0 +1,2005 @@
+{
+  "id": "fe-05",
+  "question": "I want accelerating growth: companies whose revenue growth rate this year is higher than last year's, and last year's was higher than the year before. So growth is speeding up, not just positive.",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "revenue",
+            "pattern": "accelerating",
+            "N": 2
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "0R2V.LSE",
+            "AAPL01.BK",
+            "AAPL03.BK",
+            "AAPL19.BK",
+            "AAPL80.BK",
+            "APC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 136683000000.0,
+              "gross_margin": 0.4865,
+              "market_cap_usd": 4524633751552.0,
+              "net_income_usd": 128930000000.0,
+              "net_margin": 0.2762,
+              "operating_margin": 0.3317,
+              "pe": 35.083716
+            }
+          },
+          "head_listing_id": 231,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1636,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Apple Inc.",
+          "score": 4524633751552.0,
+          "ticker": "AAPL.US"
+        },
+        {
+          "also_known_as": [
+            "GOOGL01.BK",
+            "GOOGL03.BK",
+            "GOOG80.BK",
+            "ABEA.XETRA",
+            "ABEC.XETRA",
+            "GOOG23.BK",
+            "0RIH.LSE",
+            "GOOGL.US",
+            "0HD6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 53273000000.0,
+              "gross_margin": 0.609,
+              "market_cap_usd": 4173832126464.0,
+              "net_income_usd": 244205000000.0,
+              "net_margin": 0.5477,
+              "operating_margin": 0.3311,
+              "pe": 17.123934
+            }
+          },
+          "head_listing_id": 19071,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2423,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Alphabet Inc Class C",
+          "score": 4173832126464.0,
+          "ticker": "GOOG.US"
+        },
+        {
+          "also_known_as": [
+            "META01.BK",
+            "META06.BK",
+            "META23.BK",
+            "META80.BK",
+            "0QZI.LSE",
+            "FB2A.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 40976000000.0,
+              "gross_margin": 0.8175,
+              "market_cap_usd": 1385002696704.0,
+              "net_income_usd": 68098000000.0,
+              "net_margin": 0.2984,
+              "operating_margin": 0.3808,
+              "pe": 20.477213
+            }
+          },
+          "head_listing_id": 28230,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2796,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Meta Platforms Inc.",
+          "score": 1385002696704.0,
+          "ticker": "META.US"
+        },
+        {
+          "also_known_as": [
+            "LLY23.BK",
+            "LLY80.BK",
+            "LLY.SW",
+            "LLY.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 13560000000.0,
+              "gross_margin": 0.834,
+              "market_cap_usd": 1093034115072.0,
+              "net_income_usd": 26711200000.0,
+              "net_margin": 0.3353,
+              "operating_margin": 0.4972,
+              "pe": 41.145686
+            }
+          },
+          "head_listing_id": 26596,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.4767,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eli Lilly and Company",
+          "score": 1093034115072.0,
+          "ticker": "LLY.US"
+        },
+        {
+          "also_known_as": [
+            "AMD03.BK",
+            "AMD23.BK",
+            "0QZD.LSE",
+            "AMD.XETRA",
+            "AMD80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 8403000000.0,
+              "gross_margin": 0.532,
+              "market_cap_usd": 790754623488.0,
+              "net_income_usd": 6434000000.0,
+              "net_margin": 0.1558,
+              "operating_margin": 0.1571,
+              "pe": 129.74359
+            }
+          },
+          "head_listing_id": 1884,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.5011,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advanced Micro Devices Inc",
+          "score": 790754623488.0,
+          "ticker": "AMD.US"
+        },
+        {
+          "also_known_as": [
+            "ABBV19.BK",
+            "ABBV80.BK",
+            "0QCV.LSE",
+            "4AB.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 18210000000.0,
+              "gross_margin": 0.7148,
+              "market_cap_usd": 457542041600.0,
+              "net_income_usd": 6310000000.0,
+              "net_margin": 0.098,
+              "operating_margin": 0.3394,
+              "pe": 70.714689
+            }
+          },
+          "head_listing_id": 289,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1016,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "AbbVie Inc",
+          "score": 457542041600.0,
+          "ticker": "ABBV.US"
+        },
+        {
+          "also_known_as": [
+            "PLTR01.BK",
+            "PLTR03.BK",
+            "PLTR06.BK",
+            "PLTR23.BK",
+            "PTX.XETRA",
+            "0A7R.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3358272000.0,
+              "gross_margin": 0.848,
+              "market_cap_usd": 412220620800.0,
+              "net_income_usd": 3016692000.0,
+              "net_margin": 0.49,
+              "operating_margin": 0.428,
+              "pe": 146.615385
+            }
+          },
+          "head_listing_id": 34742,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.9283,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Palantir Technologies Inc.",
+          "score": 412220620800.0,
+          "ticker": "PLTR.US"
+        },
+        {
+          "also_known_as": [
+            "ORCL01.BK",
+            "ORCL06.BK",
+            "ORCL19.BK",
+            "ORC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -23686000000.0,
+              "gross_margin": 0.6582,
+              "market_cap_usd": 411302428672.0,
+              "net_income_usd": 17087000000.0,
+              "net_margin": 0.2537,
+              "operating_margin": 0.3332,
+              "pe": 24.492281
+            }
+          },
+          "head_listing_id": 32732,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2063,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Oracle Corporation",
+          "score": 411302428672.0,
+          "ticker": "ORCL.US"
+        },
+        {
+          "also_known_as": [
+            "LRCX01.BK",
+            "LRCX23.BK",
+            "0JT5.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4891252000.0,
+              "gross_margin": 0.5047,
+              "market_cap_usd": 410333184000.0,
+              "net_income_usd": 7265396000.0,
+              "net_margin": 0.3127,
+              "operating_margin": 0.3529,
+              "pe": 56.930556
+            }
+          },
+          "head_listing_id": 26959,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2999,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lam Research Corp",
+          "score": 410333184000.0,
+          "ticker": "LRCX.US"
+        },
+        {
+          "also_known_as": [
+            "MS06.BK",
+            "0QYU.LSE",
+            "MS-PQ.US",
+            "DWD.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -18582000000.0,
+              "market_cap_usd": 343026139136.0,
+              "net_income_usd": 20155000000.0,
+              "net_margin": 0.2759,
+              "pe": 17.572698
+            }
+          },
+          "head_listing_id": 29658,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2743,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Morgan Stanley",
+          "score": 343026139136.0,
+          "ticker": "MS.US"
+        },
+        {
+          "also_known_as": [
+            "NFLX06.BK",
+            "NFLX80.BK",
+            "0QYI.LSE",
+            "NFC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 11152005000.0,
+              "gross_margin": 0.4912,
+              "market_cap_usd": 316542681088.0,
+              "net_income_usd": 13649642000.0,
+              "net_margin": 0.2822,
+              "operating_margin": 0.2968,
+              "pe": 24.455975
+            }
+          },
+          "head_listing_id": 30925,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1337,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Netflix Inc",
+          "score": 316542681088.0,
+          "ticker": "NFLX.US"
+        },
+        {
+          "also_known_as": [
+            "DELL19.BK",
+            "12DA.XETRA",
+            "0A7D.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 9442000000.0,
+              "gross_margin": 0.1907,
+              "market_cap_usd": 302814625792.0,
+              "net_income_usd": 8409000000.0,
+              "net_margin": 0.0628,
+              "operating_margin": 0.081,
+              "pe": 38.231873
+            }
+          },
+          "head_listing_id": 9779,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.8754,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dell Technologies Inc",
+          "score": 302814625792.0,
+          "ticker": "DELL.US"
+        },
+        {
+          "also_known_as": [
+            "0QKU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 52465056500.0,
+              "market_cap_usd": 295984201728.0,
+              "net_income_usd": 16300209400.0,
+              "net_margin": 0.3185,
+              "pe": 19.274189
+            }
+          },
+          "head_listing_id": 38626,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1132,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Royal Bank of Canada",
+          "score": 295984201728.0,
+          "ticker": "RY.US"
+        },
+        {
+          "also_known_as": [
+            "0R2H.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 5355000000.0,
+              "gross_margin": 0.5833,
+              "market_cap_usd": 248622546944.0,
+              "net_income_usd": 6052000000.0,
+              "net_margin": 0.3111,
+              "operating_margin": 0.3807,
+              "pe": 41.37386
+            }
+          },
+          "head_listing_id": 44873,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2282,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Texas Instruments Incorporated",
+          "score": 248622546944.0,
+          "ticker": "TXN.US"
+        },
+        {
+          "also_known_as": [
+            "SNDK03.BK",
+            "SNDK23.BK",
+            "SNDK80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4460000000.0,
+              "gross_margin": 0.5604,
+              "market_cap_usd": 238045102080.0,
+              "net_income_usd": 4507000000.0,
+              "net_margin": 0.3419,
+              "operating_margin": 0.4158,
+              "pe": 22.041486
+            }
+          },
+          "head_listing_id": 40758,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 2.5103,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sandisk Corp",
+          "score": 238045102080.0,
+          "ticker": "SNDK.US"
+        },
+        {
+          "also_known_as": [
+            "0R0H.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7318000000.0,
+              "gross_margin": 0.408,
+              "market_cap_usd": 217795936256.0,
+              "net_income_usd": 6967000000.0,
+              "net_margin": 0.1504,
+              "operating_margin": 0.1829,
+              "pe": 31.702906
+            }
+          },
+          "head_listing_id": 43728,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.105,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Thermo Fisher Scientific Inc",
+          "score": 217795936256.0,
+          "ticker": "TMO.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7404079000.0,
+              "gross_margin": 0.2851,
+              "market_cap_usd": 209922473984.0,
+              "net_income_usd": 8856936000.0,
+              "net_margin": 0.0751,
+              "operating_margin": 0.1099,
+              "pe": 23.714665
+            }
+          },
+          "head_listing_id": 239263,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1839,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Reliance Industries Limited",
+          "score": 209922473984.0,
+          "ticker": "RIGD.LSE"
+        },
+        {
+          "also_known_as": [
+            "SOFTBANK23.BK",
+            "SOFTBANK80.BK",
+            "0R15.LSE",
+            "0L7L.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -13624770600.0,
+              "gross_margin": 0.514978746321479,
+              "market_cap_usd": 209667657906.7371,
+              "net_income_usd": 31514307300.0,
+              "net_margin": 0.641427811223737,
+              "operating_margin": -0.000614080642162426,
+              "pe": 6.682178
+            }
+          },
+          "head_listing_id": 573309,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 49131495000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SoftBank Group Corp.",
+          "score": 209667657906.7371,
+          "ticker": "9984.JP"
+        },
+        {
+          "also_known_as": [
+            "0HFB.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4631700000.0,
+              "gross_margin": 0.3735,
+              "market_cap_usd": 196747182080.0,
+              "net_income_usd": 4465500000.0,
+              "net_margin": 0.1724,
+              "operating_margin": 0.2645,
+              "pe": 42.7175
+            }
+          },
+          "head_listing_id": 2305,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.5839,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Amphenol Corporation",
+          "score": 196747182080.0,
+          "ticker": "APH.US"
+        },
+        {
+          "also_known_as": [
+            "0Q15.LSE",
+            "ABL.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7378000000.0,
+              "gross_margin": 0.5626,
+              "market_cap_usd": 196267507712.0,
+              "net_income_usd": 6276000000.0,
+              "net_margin": 0.1391,
+              "operating_margin": 0.1707,
+              "pe": 35.718447
+            }
+          },
+          "head_listing_id": 406,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.0778,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Abbott Laboratories",
+          "score": 196267507712.0,
+          "ticker": "ABT.US"
+        },
+        {
+          "also_known_as": [
+            "TM5.XETRA",
+            "0R2L.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 16236000000.0,
+              "gross_margin": 0.6219,
+              "market_cap_usd": 196030742528.0,
+              "net_income_usd": 10560000000.0,
+              "net_margin": 0.1145,
+              "operating_margin": 0.201,
+              "pe": 19.116109
+            }
+          },
+          "head_listing_id": 43753,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.0785,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "T-Mobile US Inc",
+          "score": 196030742528.0,
+          "ticker": "TMUS.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 2675748945.0,
+              "gross_margin": 0.0707,
+              "market_cap_usd": 194524277925.4784,
+              "net_income_usd": 5148516015.0,
+              "net_margin": 0.039,
+              "operating_margin": 0.0501,
+              "pe": 32.292683
+            }
+          },
+          "head_listing_id": 229127,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.4533,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Foxconn Industrial Internet Co Ltd",
+          "score": 194524277925.4784,
+          "ticker": "601138.CG"
+        },
+        {
+          "also_known_as": [
+            "MRVL06.BK",
+            "MRVL23.BK",
+            "MRVL80.BK",
+            "0ACJ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 1661500000.0,
+              "gross_margin": 0.515,
+              "market_cap_usd": 193869594624.0,
+              "net_income_usd": 2526700000.0,
+              "net_margin": 0.2899,
+              "operating_margin": 0.1641,
+              "pe": 74.226804
+            }
+          },
+          "head_listing_id": 29651,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2757,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Marvell Technology Group Ltd",
+          "score": 193869594624.0,
+          "ticker": "MRVL.US"
+        },
+        {
+          "also_known_as": [
+            "0L3I.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10789000000.0,
+              "market_cap_usd": 193132216320.0,
+              "net_income_usd": 10096000000.0,
+              "net_margin": 0.3879,
+              "pe": 20.342441
+            }
+          },
+          "head_listing_id": 39287,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2087,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Charles Schwab Corp",
+          "score": 193132216320.0,
+          "ticker": "SCHW.US"
+        },
+        {
+          "also_known_as": [
+            "BLK06.BK",
+            "UU2.XETRA",
+            "0QZZ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3515000000.0,
+              "gross_margin": 0.4715,
+              "market_cap_usd": 187554381824.0,
+              "net_income_usd": 6576000000.0,
+              "net_margin": 0.2409,
+              "operating_margin": 0.3299,
+              "pe": 27.488857
+            }
+          },
+          "head_listing_id": 4789,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.3063,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "BlackRock Inc",
+          "score": 187554381824.0,
+          "ticker": "BLK.US"
+        },
+        {
+          "also_known_as": [
+            "0LUS.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 2922002000.0,
+              "gross_margin": 0.3887,
+              "market_cap_usd": 169651486720.0,
+              "net_income_usd": 1407560000.0,
+              "net_margin": 0.1215,
+              "operating_margin": 0.0462,
+              "pe": 108.497696
+            }
+          },
+          "head_listing_id": 47451,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.384,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Welltower Inc",
+          "score": 169651486720.0,
+          "ticker": "WELL.US"
+        },
+        {
+          "also_known_as": [
+            "QCOM06.BK",
+            "0QZ3.LSE",
+            "QCI.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10416000000.0,
+              "gross_margin": 0.5423,
+              "market_cap_usd": 168236974080.0,
+              "net_income_usd": 9259000000.0,
+              "net_margin": 0.2101,
+              "operating_margin": 0.2328,
+              "pe": 18.307429
+            }
+          },
+          "head_listing_id": 36368,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": -0.0403,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Qualcomm Incorporated",
+          "score": 168236974080.0,
+          "ticker": "QCOM.US"
+        },
+        {
+          "also_known_as": [
+            "0SEA.LSE",
+            "SMNEY.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 8898880200.0,
+              "gross_margin": 0.2076,
+              "market_cap_usd": 159836094632.7552,
+              "net_income_usd": 3077086800.0,
+              "net_margin": 0.0644,
+              "operating_margin": 0.0881,
+              "pe": 49.928803
+            }
+          },
+          "head_listing_id": 242094,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1747,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Siemens Energy AG",
+          "score": 159836094632.7552,
+          "ticker": "ENR.XETRA"
+        },
+        {
+          "also_known_as": [
+            "0L8B.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 5100400000.0,
+              "gross_margin": 0.5815,
+              "market_cap_usd": 158567743488.0,
+              "net_income_usd": 5662400000.0,
+              "net_margin": 0.3587,
+              "operating_margin": 0.569,
+              "pe": 27.845361
+            }
+          },
+          "head_listing_id": 39214,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.4058,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Southern Copper Corporation",
+          "score": 158567743488.0,
+          "ticker": "SCCO.US"
+        },
+        {
+          "also_known_as": [
+            "HITACHI24.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7372461600.0,
+              "gross_margin": 0.300330100339282,
+              "market_cap_usd": 157091364699.6078,
+              "net_income_usd": 5054918400.0,
+              "net_margin": 0.0757896097028927,
+              "operating_margin": 0.113280420176822,
+              "pe": 31.2178
+            }
+          },
+          "head_listing_id": 571502,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 66696720300.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hitachi, Ltd.",
+          "score": 157091364699.6078,
+          "ticker": "6501.JP"
+        },
+        {
+          "also_known_as": [
+            "YCP.XETRA",
+            "0QZA.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10064000000.0,
+              "gross_margin": 0.2768,
+              "market_cap_usd": 155837497344.0,
+              "net_income_usd": 9282000000.0,
+              "net_margin": 0.1465,
+              "operating_margin": 0.2192,
+              "pe": 16.873016
+            }
+          },
+          "head_listing_id": 8289,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.3683,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ConocoPhillips",
+          "score": 155837497344.0,
+          "ticker": "COP.US"
+        },
+        {
+          "also_known_as": [
+            "0KWZ.LSE",
+            "RIO1.XETRA",
+            "RIO.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4497000000.0,
+              "gross_margin": 0.574291266178563,
+              "market_cap_usd": 154961829471.02722,
+              "net_income_usd": 9966000000.0,
+              "net_margin": 0.172906762899476,
+              "operating_margin": 0.268017627259794,
+              "pe": 13.019997
+            }
+          },
+          "head_listing_id": 239265,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 57638000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Rio Tinto PLC",
+          "score": 154961829471.02722,
+          "ticker": "RIO.LSE"
+        },
+        {
+          "also_known_as": [
+            "2628.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 77180455000.0,
+              "market_cap_usd": 153875676358.2464,
+              "net_income_usd": 6772950000.0,
+              "net_margin": 0.131,
+              "pe": 7.216797
+            }
+          },
+          "head_listing_id": 229209,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.649,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "China Life Insurance Co Ltd A",
+          "score": 153875676358.2464,
+          "ticker": "601628.CG"
+        },
+        {
+          "also_known_as": [
+            "UBER06.BK",
+            "0A1U.LSE",
+            "UT8.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10116000000.0,
+              "gross_margin": 0.4231,
+              "market_cap_usd": 152497553408.0,
+              "net_income_usd": 9579000000.0,
+              "net_margin": 0.1734,
+              "operating_margin": 0.1213,
+              "pe": 16.372807
+            }
+          },
+          "head_listing_id": 44957,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1217,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Uber Technologies Inc",
+          "score": 152497553408.0,
+          "ticker": "UBER.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 1676697703.2,
+              "gross_margin": 0.3488,
+              "market_cap_usd": 147971658114.6624,
+              "net_income_usd": 1936217899.2,
+              "net_margin": 0.11,
+              "operating_margin": 0.156,
+              "pe": 60.105034
+            }
+          },
+          "head_listing_id": 1417914,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.3954,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Delta Electronics Inc",
+          "score": 147971658114.6624,
+          "ticker": "2308.TW"
+        },
+        {
+          "also_known_as": [
+            "ISRG01.BK",
+            "ISRG06.BK",
+            "ISRG19.BK",
+            "IUI1.XETRA",
+            "0R29.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3222600000.0,
+              "gross_margin": 0.6668,
+              "market_cap_usd": 140151209984.0,
+              "net_income_usd": 3138800000.0,
+              "net_margin": 0.2845,
+              "operating_margin": 0.3128,
+              "pe": 44.860092
+            }
+          },
+          "head_listing_id": 23002,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1854,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intuitive Surgical Inc",
+          "score": 140151209984.0,
+          "ticker": "ISRG.US"
+        },
+        {
+          "also_known_as": [
+            "LOM.XETRA",
+            "0R3E.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 8729000000.0,
+              "gross_margin": 0.118,
+              "market_cap_usd": 140129222656.0,
+              "net_income_usd": 6287000000.0,
+              "net_margin": 0.0816,
+              "operating_margin": 0.1188,
+              "pe": 22.388274
+            }
+          },
+          "head_listing_id": 26697,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1051,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lockheed Martin Corporation",
+          "score": 140129222656.0,
+          "ticker": "LMT.US"
+        },
+        {
+          "also_known_as": [
+            "GLW.SW",
+            "0R2X.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 2395000000.0,
+              "gross_margin": 0.3638,
+              "market_cap_usd": 137456074752.0,
+              "net_income_usd": 1900000000.0,
+              "net_margin": 0.112,
+              "operating_margin": 0.1531,
+              "pe": 73.686636
+            }
+          },
+          "head_listing_id": 18766,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1665,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Corning Incorporated",
+          "score": 137456074752.0,
+          "ticker": "GLW.US"
+        },
+        {
+          "also_known_as": [
+            "0QMU.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4398120000.0,
+              "gross_margin": 0.643978590544157,
+              "market_cap_usd": 135169329888.4608,
+              "net_income_usd": 4032381600.0,
+              "net_margin": 0.155396966993756,
+              "operating_margin": 0.206735057983943,
+              "pe": 33.718075
+            }
+          },
+          "head_listing_id": 1753973,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 25948908000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Compagnie Financière Richemont SA",
+          "score": 135169329888.4608,
+          "ticker": "CFR.SW"
+        },
+        {
+          "also_known_as": [
+            "KEYENCE23.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 2534546700.0,
+              "gross_margin": 0.830194246247078,
+              "market_cap_usd": 128543550260.5611,
+              "net_income_usd": 2804665500.0,
+              "net_margin": 0.380731367523341,
+              "operating_margin": 0.509505348977028,
+              "pe": 45.831676
+            }
+          },
+          "head_listing_id": 573803,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 7366520700.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Keyence Corporation",
+          "score": 128543550260.5611,
+          "ticker": "6861.JP"
+        },
+        {
+          "also_known_as": [
+            "0QP1.LSE",
+            "0QKN.LSE",
+            "LISP.SW"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 239577840.0,
+              "gross_margin": 0.625663477467122,
+              "market_cap_usd": 126427920973.824,
+              "net_income_usd": 917435520.0,
+              "net_margin": 0.122925048176071,
+              "operating_margin": 0.164136718617938,
+              "pe": 30.190003
+            }
+          },
+          "head_listing_id": 1754609,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 7463373280.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chocoladefabriken Lindt & Spruengli AG N",
+          "score": 126427920973.824,
+          "ticker": "LISN.SW"
+        },
+        {
+          "also_known_as": [
+            "0JVQ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7619000000.0,
+              "gross_margin": 0.3329,
+              "market_cap_usd": 120974041088.0,
+              "net_income_usd": 6642000000.0,
+              "net_margin": 0.0751,
+              "operating_margin": 0.1155,
+              "pe": 18.228233
+            }
+          },
+          "head_listing_id": 26840,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1026,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Lowe's Companies Inc",
+          "score": 120974041088.0,
+          "ticker": "LOW.US"
+        },
+        {
+          "also_known_as": [
+            "0UKI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 20299791000.0,
+              "market_cap_usd": 111562924032.0,
+              "net_income_usd": 7030192400.0,
+              "net_margin": 0.2486,
+              "pe": 17.536534
+            }
+          },
+          "head_listing_id": 5049,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.0767,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Bank of Nova Scotia",
+          "score": 111562924032.0,
+          "ticker": "BNS.US"
+        },
+        {
+          "also_known_as": [
+            "0UNI.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 10601247400.0,
+              "market_cap_usd": 111033073664.0,
+              "net_income_usd": 7228993400.0,
+              "net_margin": 0.3161,
+              "pe": 17.045266
+            }
+          },
+          "head_listing_id": 7710,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1401,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Canadian Imperial Bank Of Commerce",
+          "score": 111033073664.0,
+          "ticker": "CM.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -260256016.8,
+              "gross_margin": 0.08,
+              "market_cap_usd": 110286847921.35681,
+              "net_income_usd": 1729703102.4,
+              "net_margin": 0.0525,
+              "operating_margin": 0.0654,
+              "pe": 22.23303
+            }
+          },
+          "head_listing_id": 1420049,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.6203,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Wiwynn Corp",
+          "score": 110286847921.35681,
+          "ticker": "6669.TW"
+        },
+        {
+          "also_known_as": [
+            "HHPG.LSE",
+            "HHPD.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3547374355.2,
+              "gross_margin": 0.0616,
+              "market_cap_usd": 109311966314.496,
+              "net_income_usd": 6151555706.4,
+              "net_margin": 0.023,
+              "operating_margin": 0.0336,
+              "pe": 18.292683
+            }
+          },
+          "head_listing_id": 1418313,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.289,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hon Hai Precision Industry Co Ltd",
+          "score": 109311966314.496,
+          "ticker": "2317.TW"
+        },
+        {
+          "also_known_as": [
+            "CAMBRI80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 204248409.130656,
+              "gross_margin": 0.5528,
+              "market_cap_usd": 108316925021.3888,
+              "net_income_usd": 508251738.636708,
+              "net_margin": 0.3571,
+              "operating_margin": 0.3993,
+              "pe": 221.210816
+            }
+          },
+          "head_listing_id": 230244,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 1.7991,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cambricon Technologies Corp Ltd",
+          "score": 108316925021.3888,
+          "ticker": "688256.CG"
+        },
+        {
+          "also_known_as": [
+            "0L8A.LSE",
+            "SOMN.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -3269000000.0,
+              "gross_margin": 0.4829,
+              "market_cap_usd": 105913925632.0,
+              "net_income_usd": 4657000000.0,
+              "net_margin": 0.1543,
+              "operating_margin": 0.2421,
+              "pe": 22.185542
+            }
+          },
+          "head_listing_id": 40892,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.0006,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Southern Company",
+          "score": 105913925632.0,
+          "ticker": "SO.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 6904804500.0,
+              "gross_margin": 0.2629,
+              "market_cap_usd": 102229786624.0,
+              "net_income_usd": 8280693000.0,
+              "net_margin": 0.2287,
+              "operating_margin": 0.2315,
+              "pe": 12.201676
+            }
+          },
+          "head_listing_id": 8077,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.7792,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Canadian Natural Resources Ltd",
+          "score": 102229786624.0,
+          "ticker": "CNQ.US"
+        },
+        {
+          "also_known_as": [
+            "GSK.US",
+            "GS71.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7065707400.0,
+              "gross_margin": 0.7273,
+              "market_cap_usd": 102102580168.2944,
+              "net_income_usd": 6389753400.0,
+              "net_margin": 0.1452,
+              "operating_margin": 0.207,
+              "pe": 16.027165
+            }
+          },
+          "head_listing_id": 237763,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.053,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GSK plc",
+          "score": 102102580168.2944,
+          "ticker": "GSK.LSE"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 179916936.53615,
+              "gross_margin": 0.5659,
+              "market_cap_usd": 99549172531.2,
+              "net_income_usd": 358438643.3742,
+              "net_margin": 0.1718,
+              "operating_margin": 0.2343,
+              "pe": 237.355932
+            }
+          },
+          "head_listing_id": 230059,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.3332,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hygon Information Technology Co. Ltd. A",
+          "score": 99549172531.2,
+          "ticker": "688041.CG"
+        },
+        {
+          "also_known_as": [
+            "ASX.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -1374384813.8,
+              "gross_margin": 0.1949,
+              "market_cap_usd": 98608617304.88321,
+              "net_income_usd": 1888907568.8,
+              "net_margin": 0.0846,
+              "operating_margin": 0.0989,
+              "pe": 47.126437
+            }
+          },
+          "head_listing_id": 1419167,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.2674,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ASE Industrial Holding Co Ltd",
+          "score": 98608617304.88321,
+          "ticker": "3711.TW"
+        },
+        {
+          "also_known_as": [
+            "0A79.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 929000000.0,
+              "gross_margin": 0.1937,
+              "market_cap_usd": 96724697088.0,
+              "net_income_usd": 1568000000.0,
+              "net_margin": 0.0626,
+              "operating_margin": 0.0893,
+              "pe": 37.084656
+            }
+          },
+          "head_listing_id": 9222,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.524,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Carvana Co",
+          "score": 96724697088.0,
+          "ticker": "CVNA.US"
+        },
+        {
+          "also_known_as": [
+            "0ID1.LSE",
+            "DUKB.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -3299000000.0,
+              "gross_margin": 0.5036,
+              "market_cap_usd": 96675274752.0,
+              "net_income_usd": 5139000000.0,
+              "net_margin": 0.1549,
+              "operating_margin": 0.2587,
+              "pe": 18.555556
+            }
+          },
+          "head_listing_id": 10868,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1126,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Duke Energy Corporation",
+          "score": 96675274752.0,
+          "ticker": "DUK.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 7715000000.0,
+              "gross_margin": 0.7996,
+              "market_cap_usd": 95850094592.0,
+              "net_income_usd": 4584000000.0,
+              "net_margin": 0.2191,
+              "operating_margin": 0.2747,
+              "pe": 21.3795
+            }
+          },
+          "head_listing_id": 22534,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1037,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Intuit Inc",
+          "score": 95850094592.0,
+          "ticker": "INTU.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 450717851.5722,
+              "gross_margin": 0.4842,
+              "market_cap_usd": 95572424726.93759,
+              "net_income_usd": 1439465380.38485,
+              "net_margin": 0.3662,
+              "operating_margin": 0.4423,
+              "pe": 64.433137
+            }
+          },
+          "head_listing_id": 232585,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 1.3712,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Eoptolink Technology Inc Ltd",
+          "score": 95572424726.93759,
+          "ticker": "300502.CS"
+        },
+        {
+          "also_known_as": [
+            "0R2J.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4548557000.0,
+              "gross_margin": 0.6291,
+              "market_cap_usd": 94659846144.0,
+              "net_income_usd": 5873933000.0,
+              "net_margin": 0.4044,
+              "operating_margin": 0.5834,
+              "pe": 16.162671
+            }
+          },
+          "head_listing_id": 924,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.3504,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Agnico Eagle Mines Limited",
+          "score": 94659846144.0,
+          "ticker": "AEM.US"
+        },
+        {
+          "also_known_as": [
+            "MIDEA80.BK",
+            "0300.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 5555726330.0,
+              "gross_margin": 0.2647,
+              "market_cap_usd": 94556421075.7632,
+              "net_income_usd": 6488789730.0,
+              "net_margin": 0.0937,
+              "operating_margin": 0.1015,
+              "pe": 14.194158
+            }
+          },
+          "head_listing_id": 230694,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.4829,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Midea Group Co Ltd",
+          "score": 94556421075.7632,
+          "ticker": "000333.CS"
+        },
+        {
+          "also_known_as": [
+            "BCY.XETRA",
+            "BCS.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 22747488000.0,
+              "market_cap_usd": 91465070291.76321,
+              "net_income_usd": 10395112200.0,
+              "net_margin": 0.2551,
+              "pe": 10.670807
+            }
+          },
+          "head_listing_id": 236511,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "value": 0.1602,
+                "window": "latest_yoy"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Barclays PLC",
+          "score": 91465070291.76321,
+          "ticker": "BARC.LSE"
+        },
+        {
+          "also_known_as": [
+            "1TY.XETRA",
+            "0A28.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 1401000000.0,
+              "gross_margin": 0.464399793920659,
+              "market_cap_usd": 90873253821.64479,
+              "net_income_usd": 11638000000.0,
+              "net_margin": 1.19917568263782,
+              "operating_margin": 0.0313240597630088,
+              "pe": 8.154521
+            }
+          },
+          "head_listing_id": 1748538,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "unit": "usd",
+                "value": 9705000000.0
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Prosus N.V.",
+          "score": 90873253821.64479,
+          "ticker": "PRX.AS"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Accelerating revenue growth — the growth RATE rising across consecutive periods (pattern 'accelerating', N=2 consecutive speed-ups on revenue), a second-derivative test, not merely high or positive growth. 60 companies matched. Top: Apple, Alphabet, Meta, Eli Lilly, AMD, AbbVie, Palantir, Oracle. Each carries its accel streak in 'matched.fundamental'. This is genuine acceleration (g_t > g_t-1 > ...), so a company with high-but-slowing growth is excluded."
+}

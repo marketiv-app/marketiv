@@ -1,0 +1,715 @@
+{
+  "id": "ne-05",
+  "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+  "tools_called": [
+    {
+      "tool": "stock_impact",
+      "args": {
+        "ticker": "TSLA",
+        "window": "14d",
+        "limit": 25
+      },
+      "note": "recent ~2-week news-impact items on TSLA to read net sentiment"
+    }
+  ],
+  "raw_responses": [
+    [
+      {
+        "title": "Calacanis Predicts Tesla Optimus to Eclipse iPhone, 1 Billion Robots by 2036",
+        "brief_text": "Venture capitalist Jason Calacanis predicts Tesla's Optimus humanoid robot will become a product bigger than Apple's iPhone, forecasting 1 billion Optimus robots worldwide by 2036. Speaking on the This Week in Startups podcast after watching the World Humanoid Robot Games in Beijing, Calacanis said he had recently seen an Optimus demonstration that has not been publicly shown, calling it \"the greatest product ever made by humanity.\" He argued Tesla's hardware is roughly \"one and a half generations\" ahead of competing robots and predicted Optimus would win 35 of the competition's 51 events. Reuters reported that more than 2,000 robots from 666 teams competed at this year's Games, highlighting China's rapid progress despite robots still struggling with practical tasks. Calacanis guaranteed that in 10 years there will be 1 billion Optimus robots, a scale far beyond the million-unit production targets Tesla has set for its Fremont line, which is being converted from Model S and Model X production. Tesla has committed more than $20 billion to capital spending in 2026, and CEO Elon Musk has cautioned that Optimus will be Tesla's \"hardest product to scale manufacturing\" due to the need for an entirely new supply chain. Skeptics like investor Ross Gerber and Unitree founder Wang Xingxing question Optimus's near-term prospects, suggesting humanoids may still be years from their \"ChatGPT moment.\"",
+        "url": "https://finance.yahoo.com/technology/ai/articles/jason-calacanis-says-tslas-optimus-092100231.html",
+        "publisher": "Benzinga",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Calacanis predicts Optimus will be the greatest product ever, with Tesla's hardware ahead of competitors.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-26T09:21:00+00:00"
+      },
+      {
+        "title": "Tesla Rises Despite China's 2.98 Million-Car Recall",
+        "brief_text": "Tesla shares climbed about 0.6% to $350.983 Tuesday morning even as the company faces China's largest automotive recall affecting roughly 2.98 million locally produced and imported vehicles over emergency door-release risks. The recall equals about 6.2 quarters of Tesla's latest vehicle deliveries, after the company delivered more than 480,000 vehicles in the second quarter and produced over 450,000. Investors appear to be betting the fix can be handled through a software update, which would keep the direct financial impact manageable, though tougher regulators, shaken customer confidence, and costly design changes remain bigger threats. The stock sits only 5.28% above the $333.39 GF Value estimate, suggesting valuation is not wildly overheated.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-rises-2-98-million-194544517.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "neg",
+              "reason": "China's largest automotive recall over door-release risks, though software fix may limit financial impact.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "regulatory_legal",
+          "price_action_technical"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-25T19:45:44+00:00"
+      },
+      {
+        "title": "Polymarket Odds for Tesla Optimus 2026 Launch Fall to 9%",
+        "brief_text": "Cryptocurrency bettors have significantly lowered the odds that Tesla will commercially launch its Optimus humanoid robot in 2026, with Polymarket now pricing a 9% chance of release by December 31, down 2% in a week and 15% in a month. The odds peaked at 33% a month ago. Tesla CEO Elon Musk reiterated his ambitious vision for the robot earlier this month, saying it could perform tasks from cooking and lawn mowing to babysitting and elder care. Tesla plans to spend more than $25 billion in 2026 on AI computing, robotaxis and Optimus, and is converting part of its Fremont facility into an Optimus factory targeting 1 million robots annually. Shay Boloor, Futurum Equities' chief market strategist, cited a Citizens Bank analysis projecting Optimus could target a $1.7 trillion U.S. labor market over the long term, with $300 billion serviceable in the near term, giving Tesla a massive advantage as the first customer.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/elon-musks-tesla-massive-advantage-173116519.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "neg",
+              "reason": "Polymarket odds for Optimus 2026 launch fell to 9%, indicating reduced market confidence in near-term commercial demand.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "analyst_forecast",
+          "crypto_related"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-25T17:31:16+00:00"
+      },
+      {
+        "title": "SpaceX, Tesla, Intel Break Ground on $16.8 Billion Texas Chip Fab",
+        "brief_text": "SpaceX, Tesla, and Intel have broken ground on the Terafab, the world's largest vertically integrated chipmaking factory in Grimes County, Texas. The initial phase will cost $16.8 billion, with total costs across all phases potentially surpassing $119 billion. The 100-million-square-foot facility is expected to meet SpaceX and Tesla's projected computing demand of more than 1 terawatt per year. SpaceX and Tesla will fund construction, while Intel will support development with its licensed chipmaking process and foundry operations. Approximately 75% of the chips will go to SpaceX's orbital data centers and satellite constellations, with the remaining 25% powering Tesla's Optimus robots, self-driving vehicles, and Cybercabs. Texas is supporting the project with a $30 million grant and tax abatements. SpaceX's capex surged more than sixfold year over year in the second quarter of 2026, from $2.8 billion to $18.4 billion, with $15.8 billion allocated to expanding its AI business.",
+        "url": "https://finance.yahoo.com/technology/articles/spacex-building-16-8-billion-162500056.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Tesla will use 25% of the fab's chips for Optimus robots, self-driving vehicles, and Cybercabs, meeting its computing demand.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "ma_partnership",
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-25T16:25:00+00:00"
+      },
+      {
+        "title": "Tesla FSD Attach Rate Hits 55% of Q2 North American Deliveries",
+        "brief_text": "Tesla's Full Self-Driving attach rate reached 55% of Q2 North American deliveries, with paid FSD customers hitting nearly 1.5 million globally, according to 24/7 Wall St. The firm set a $377.78 price target on Tesla, implying 4.11% upside from $362.86, and rated the stock a hold with 90% confidence. Tesla trades at 185 times forward earnings, while General Motors trades at 29 times earnings and Rivian posted a negative 66.5% operating margin in Q1 2026. Tesla's Q2 2026 revenue rose 25.5% to $28.24 billion on record deliveries of 480,126 vehicles, but non-GAAP EPS of $0.33 missed estimates by 38.51% and operating margin collapsed to 1.4%.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/forget-ev-sales-number-could-130044921.html",
+        "publisher": "24/7 Wall St.",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "EPS miss and margin collapse overshadow FSD attach rate.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "earnings_results",
+          "analyst_rating"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T13:00:44+00:00"
+      },
+      {
+        "title": "JPMorgan sees humanoid robot demand surging in U.S. manufacturing",
+        "brief_text": "JPMorgan expects demand for humanoid robots to surge in U.S. manufacturing as the cost of deploying a robot falls below $10 per hour, undercutting the roughly $30 hourly cost of a warehouse worker. The bank's research note, cited by MarketWatch, identifies U.S. manufacturing as a sector with substantial unfilled job openings that humanoid robots are expected to absorb in large numbers. The forecast comes as the Federal Communications Commission added foreign-made humanoid and quadruped robots to its Covered List, blocking new imports on national security grounds, a move targeting China, which holds roughly 85% of the global humanoid robot market. Chinese firms Unitree and AGIBOT each shipped more than 5,000 humanoid units in 2025, while American competitors such as Tesla and Figure AI shipped only a few hundred units apiece, according to CNN citing technology research firm Omdia. Unitree went public on Shanghai's STAR Market earlier this month, closing 460% above its IPO price on its first trading day and valuing the company at roughly $50 billion, after raising approximately 6.1 billion yuan, or $905 million, in the listing.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/jpmorgan-predicts-booming-humanoid-robot-122504354.html",
+        "publisher": "MarketWatch",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "JPMorgan expects surging demand for humanoid robots in U.S. manufacturing, benefiting Tesla's robot segment.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "industry_thematic",
+          "regulatory_legal"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-25T12:25:04+00:00"
+      },
+      {
+        "title": "Tesla Raises Cybertruck Prices by $5,000",
+        "brief_text": "Tesla has raised prices on two Cybertruck versions in the U.S., adding $5,000 to each model. The Dual Motor all-wheel-drive model now starts at $74,990, up from $69,990, while the Premium all-wheel-drive version rises to $84,990 from $79,990. The increases amount to roughly 7.1% and 6.2%, respectively. Tesla did not provide a reason for the changes, and the top-end Cyberbeast remains priced at $99,990. The move comes amid a difficult sales environment for the electric pickup and could affect purchase demand while changing the economics of higher-priced configurations.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/huge-news-tesla-stock-fans-121446775.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "pricing",
+              "direction": "neg",
+              "reason": "Tesla raised Cybertruck prices by $5,000, which could dampen demand in a difficult sales environment.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-25T12:14:46+00:00"
+      },
+      {
+        "title": "Tesla Stops Selling Solar Roof Tiles, Shifts to Traditional Panels",
+        "brief_text": "Tesla has stopped selling its premium Solar Roof tiles on its website, nearly a decade after Elon Musk introduced them as a more attractive alternative to conventional solar panels. The company's solar strategy has now shifted to a traditional solar-panel offering, with Reuters noting that Tesla had once targeted 1,000 Solar Roof installations per week in 2021 but actual installations were far below that level. The move marks a retreat from a product central to Tesla's original vision of integrating solar generation directly into homes, following its 2016 acquisition of SolarCity for about $2.6 billion and manufacturing problems at its Buffalo, New York facility. Tesla is not abandoning solar altogether, as it continues to produce traditional panels at the Buffalo factory and has filed plans this month for a proposed $10.1 billion solar-cell factory outside Houston, Texas, that could create 9,712 permanent jobs. Wall Street expects Tesla's energy-storage division to generate around $18.3 billion in revenue in 2026, up from $12.8 billion in 2025, a roughly 43% increase.",
+        "url": "https://finance.yahoo.com/energy/articles/tesla-tsla-solar-roof-shutdown-014101772.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "neg",
+              "reason": "Tesla discontinues its premium Solar Roof tiles, a retreat from a key product, despite continuing traditional panels.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 3,
+        "trend": "Energy Transition & Power Demand",
+        "trend_id": 14000000,
+        "published_at": "2026-08-25T01:41:01+00:00"
+      },
+      {
+        "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
+        "brief_text": "Tesla will unveil its production Cybercab at a launch event in Austin on September 3rd, with the company expecting to roll out 2,500 robotaxis in 2026. The Cybercab has no pedals or steering wheel, seats two people, and features scissor-like doors. Tesla's chief cybercab officer said during a Nevada public hearing that he expects to have around 2,500 vehicles within the year, and that 5,000 has always been a ceiling for the company. Nevada approved an expansion of robotaxi testing up to 8,000 vehicles in Clark County, with Tesla receiving the largest share of 5,000 robotaxis.",
+        "url": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Tesla to launch Cybercabs in Austin, with plans for 2,500 robotaxis in 2026, indicating strong product demand.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 11,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-24T20:50:04+00:00"
+      },
+      {
+        "title": "Tesla Loses Senior AI Hardware Engineer to DensityAI",
+        "brief_text": "Tesla has lost another senior artificial-intelligence hardware engineer to DensityAI, adding fresh execution risk to Elon Musk's push to make custom silicon a critical part of Tesla's autonomous-driving and robotics strategy. Shishuang Sun, most recently Tesla's senior director of AI hardware design, has joined the startup built largely by former members of Tesla's Dojo team. Sun worked on hardware for both Dojo and Autopilot and specializes in advanced packaging and system integration, an increasingly important bottleneck as AI chips consume more power and generate more heat. His departure is particularly notable because DensityAI was founded by former Dojo chief Ganesh Venkataramanan and other Tesla veterans, and roughly 20 Dojo employees left for the startup before Tesla dismantled the original Dojo organization in August 2025. Tesla subsequently shifted its chip strategy toward AI5 and AI6, which are intended to support autonomy and potentially broader training workloads, with AI5 production planned for 2027 and AI6 for 2028.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/tesla-just-took-blow-ai-183148664.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "neg",
+              "reason": "Loses senior AI hardware engineer to DensityAI, adding execution risk to custom silicon strategy.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "management_governance"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T18:31:48+00:00"
+      },
+      {
+        "title": "Tesla Gains on Robotaxi Approvals and 500 Semi Deal",
+        "brief_text": "Tesla shares rose 6.9% after Einride AB announced plans to deploy 500 Tesla Semis on its Saga AI freight platform over the next 24 months across major U.S. freight corridors, and regulators in Nevada and Texas approved Tesla to operate thousands of Cybercab robotaxis following its recently scheduled September 3 Austin launch event. Nevada's decision lets Tesla operate up to 5,000 robotaxis within a year, reinforcing the idea that Cybercab scaling could accelerate Tesla's shift toward higher margin, recurring software and ride-hailing revenues. The company's narrative projects $149.5 billion revenue and $13.1 billion earnings by 2029, with a $420.55 fair value implying 16% upside. Some analysts modeling revenue near $214.1 billion and earnings of $17.5 billion by 2029 see the same autonomy and AI milestones as reasons for far greater upside.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/why-tesla-tsla-6-9-181537600.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Einride's order for 500 Tesla Semis boosts demand for Tesla's trucking products.",
+              "relevance": 0.9
+            },
+            {
+              "aspect": "regulation",
+              "direction": "pos",
+              "reason": "Nevada and Texas approvals allow Tesla to operate thousands of Cybercab robotaxis, enabling scaling.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech",
+          "ma_partnership"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-24T18:15:37+00:00"
+      },
+      {
+        "title": "EV Charging Station Market to Reach USD 120.85 Billion by 2033",
+        "brief_text": "MarketsandMarkets projects the EV charging station market will grow from USD 38.55 billion in 2026 to USD 120.85 billion by 2033 at a CAGR of 17.7%. The expansion is driven by OEM-led investments from Tesla, Rivian, and Hyundai, along with public and private capital from players such as ChargePoint and BP Pulse. Advancements in ultra-fast DC charging of 150 to 350 kilowatts are aligning with OEM migration toward 800-volt and 1,000-volt vehicle platforms. Asia Pacific is expected to be the largest region in 2026, with China projected to hold the largest share globally. Key players include ABB, BYD, ChargePoint, Tesla, and Siemens.",
+        "url": "https://finance.yahoo.com/energy/articles/ev-charging-station-market-grow-120000442.html",
+        "publisher": "MarketsandMarkets",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Tesla's investments in charging infrastructure are highlighted as a key driver.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-24T12:00:00+00:00"
+      },
+      {
+        "title": "Tesla set to unveil Cybercab, a robotaxi without steering wheel, on September 3",
+        "brief_text": "Tesla is preparing to unveil the Cybercab, a fully autonomous robotaxi without a steering wheel or pedals, on September 3 in Austin, Texas, according to Teslarati, a media outlet that tracks Tesla news. The company has not officially confirmed the date. Previously, Elon Musk, Tesla's CEO, revealed plans to sell the Cybercab to general customers at a price below 30,000 US dollars, or around 980,000 baht per vehicle. Tesla first showed this model in October 2024, and it is central to the company's robotaxi market push. It is expected to be deployed alongside the Model Y, which has been used for autonomous passenger transport on public roads for more than a year. The Information, a technology media outlet, reported that in the initial phase Tesla plans to test the Cybercab by transporting employees on public roads before integrating it into the company's commercial robotaxi service.",
+        "url": "https://businesstoday.co/business/24/08/2026/130722/",
+        "publisher": "Business Today",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Tesla's planned unveiling of the Cybercab robotaxi on September 3 highlights its autonomous vehicle technology and robotaxi market push.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-24T05:23:58+00:00"
+      },
+      {
+        "title": "Tesla Holds 50.5% of U.S. EV Market in Q2 Despite Sales Drop",
+        "brief_text": "Tesla maintained its majority share of the U.S. electric vehicle market in the second quarter, accounting for 50.5% of unit sales according to Cox Automotive, down from 54.2% in the first quarter. Total U.S. EV sales fell 20% during the quarter, while Tesla's U.S. unit sales declined 13% year over year to 124,800 vehicles. The company's global deliveries rose 25% to 480,126 units, but Tesla lost market share in Europe and China to competitors including BYD, Geely, Changan, and Volkswagen. CEO Elon Musk has suggested the company's AI-powered humanoid robots could begin commercial production before the end of next year.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-maintained-majority-u-ev-215600710.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "ambiguous",
+              "reason": "Tesla retains majority U.S. EV market share but sales drop and share declines in Europe/China.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-23T21:56:00+00:00"
+      },
+      {
+        "title": "Jim Cramer Says NVIDIA Doesn't Need Anyone But Elon Musk",
+        "brief_text": "Jim Cramer said NVIDIA doesn't need any customer other than Elon Musk, predicting the Tesla and SpaceX CEO will be the biggest buyer of its chips. The CNBC host argued that CEO Jensen Huang doesn't need to invest in AI startups right now because Musk's demand alone could absorb the entire Vera Rubin platform. Cramer's comments come amid debate over the sustainability of AI spending, with UBS forecasting hyperscaler capex growth slowing to 25% in 2027 and 6% in 2028. NVIDIA's data center revenue jumped 92% annually to $75 billion in its fiscal Q1 2027, and the company guided Q2 revenue to $91 billion, beating analyst estimates of $86.84 billion.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-said-nvidia-corp-002234481.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Musk's companies are highlighted as major buyers of NVIDIA chips, implying strong demand for Tesla's AI initiatives.",
+              "relevance": 0.5
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.5
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-23T00:22:34+00:00"
+      },
+      {
+        "title": "JPMorgan Says Tesla Confident of Scaling Cybercab Operations",
+        "brief_text": "JPMorgan Chase & Co. said Tesla Inc. appears to be prioritizing the Cybercab over further scaling its Model Y robotaxi fleet, following a meeting with the EV giant's management at its Fremont, California facility. The investment bank said Tesla expressed confidence in its ability to scale Cybercab in the near-term, and management reiterated that the Cybercab is just the initial form factor, with additional vehicle types expected to follow as the platform evolves, pointing to the Obovan concept. JPMorgan also said Tesla touted the Full Self-Driving V15, which will be a step-change in performance, and that the system would encompass seven core technologies, with about 40% of those currently being tested in the robotaxi fleet, where initial feedback has been encouraging. Tesla reaffirmed that the HW4 hardware was capable of running FSD V15 and unsupervised FSD, but the AI4.5 compute system is designed to future-proof against rising compute, about 10% higher FLOPS, and memory, about 2x higher demands, as robotaxi models scale and context windows expand. On the Optimus front, the note said that commercial sales of the Optimus Gen 3 robot could begin by the second half of 2027, while the reveal of the robot would be closer to the start of its production at Fremont to protect competitive advantage.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/jpmorgan-says-tesla-confident-scaling-213147223.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Tesla confident in scaling Cybercab, FSD V15 step-change, and Optimus Gen 3 timeline.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-22T21:31:47+00:00"
+      },
+      {
+        "title": "Tesla Recalls Nearly 3 Million Vehicles in China",
+        "brief_text": "Tesla is recalling nearly 3 million vehicles in China due to potential safety issues with emergency door releases, marking the company's largest recall in the country to date. The recall affects vehicles already on Chinese roads and could influence how regulators, consumers, and investors view Tesla's broader business model. Separately, Tesla has introduced a new Powerwall home battery leasing plan as competition in residential energy storage increases. The recall and the Powerwall shift pull in opposite directions for Tesla's narrative, with safety concerns and potential regulatory follow-up in a key market leaning into existing risks around execution, high capex, and tighter scrutiny on autonomy and vehicles, while a cheaper access route to home storage aligns with the narrative's focus on energy generation and storage as a growing contributor to margins and earnings.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-tsla-recalling-nearly-3-170809617.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "neg",
+              "reason": "Recall of nearly 3 million vehicles in China due to safety issues with emergency door releases, largest in the country, raising regulatory and safety concerns.",
+              "relevance": 0.9
+            },
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "New Powerwall home battery leasing plan could increase adoption of energy storage products, aligning with growth in energy generation and storage.",
+              "relevance": 0.5
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "corporate_action"
+        ],
+        "impact_score": 4,
+        "dup_count": 9,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-22T17:08:09+00:00"
+      },
+      {
+        "title": "Second World Humanoid Robot Games opens in Beijing with 2,056 robots",
+        "brief_text": "The second World Humanoid Robot Games begin this weekend at Beijing's National Speed Skating Oval, hosting 2,056 robots from 666 teams representing 16 countries and regions across six continents. The five-day event features sports contests including the 100-meter sprint, 400-meter race, long jump, weightlifting, tug-of-war, football, table tennis, gymnastics, martial arts, and street dance, alongside scenario-based tasks in factory, hotel, home, and logistics settings. Notable participants include Unitree, Booster Robotics, X-Humanoid, Fourier Intelligence, and Tencent-backed Agibot, with Unitree entering fresh off its IPO on the STAR Market of the Shanghai Stock Exchange. Analysts view the games as another step toward demonstrating real-world use cases for humanoid robots, where Chinese firms such as Unitree, UBTech, AgiBot, Fourier, and EngineAI currently hold an edge in commercial availability, lower-cost hardware, and deployment volume over U.S. contenders Tesla Optimus and Figure AI.",
+        "url": "https://seekingalpha.com/news/4635625-fast-track-to-the-future-chinas-humanoid-robot-games-goes-mainstream?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+        "publisher": "Seeking Alpha",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Article highlights Chinese firms' edge in commercial availability and deployment over Tesla Optimus.",
+              "relevance": 0.4
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.4
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-22T11:00:56+00:00"
+      },
+      {
+        "title": "Alphabet Rises as Waymo Secures Another Robotaxi Market",
+        "brief_text": "Alphabet shares jumped about 1.1% to $344.42 Friday morning after Waymo joined Tesla and Uber in securing permits for robotaxi operations in Las Vegas. The move adds another proving ground for Waymo's technology as Alphabet works to turn it into a scalable transportation business. Alphabet's second-quarter revenue surged 24% to $119.8 billion, while Cloud revenue rocketed 82% to $24.8 billion and backlog swelled to $514 billion. The stock trades near 17 times trailing earnings, roughly half Apple's multiple, but stands 36.2% above the $252.87 GF Value estimate.",
+        "url": "https://finance.yahoo.com/technology/articles/alphabet-rises-waymo-secures-another-200045385.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "pos",
+              "reason": "Tesla also secured permits, but article focuses on Waymo; Tesla's mention is contextual.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T20:00:45+00:00"
+      },
+      {
+        "title": "Einride Reports 26% Revenue Growth, Guides 60-73% Second-Half Acceleration",
+        "brief_text": "Einride AB reported first-half constant-currency revenue growth of 26% to $27 million and guided second-half growth of 60% to 73% as signed capacity moves into deployment. The company expects Amazon's 75-truck rollout and the initial 500-truck Tesla Semi program to expand its fleet from about 250 vehicles to just under 400 by year end 2026. Contribution margin held at 20.7% in the first half and is guided to improve to 21% to 23% in the second half, while adjusted EBITDA loss widened to $34.6 million from $21.0 million a year earlier. Management targets an $85 million to $95 million December 2026 annualized revenue run-rate and approximately 1,500 to 2,000 deployed vehicles to reach cash flow breakeven in 2028. The company also disclosed more than 5,400 driverless hours in contracted customer operations and the Flipturn acquisition adding over 5,000 charging ports and more than 250 megawatts of software-managed capacity.",
+        "url": "https://finance.yahoo.com/technology/articles/einride-ab-reports-growth-acceleration-164314486.html",
+        "publisher": "ExecEdge",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Tesla's 500-truck Semi program is a customer order for Einride, expanding its fleet.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "earnings_results",
+          "ma_partnership"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-21T16:43:14+00:00"
+      },
+      {
+        "title": "Tesla Rallies 4% on Europe Semi Launch and Las Vegas Robotaxi Permits",
+        "brief_text": "Tesla stock rallied 4% to $357.91 in Friday morning trading on two forward-looking catalysts: a Europe launch event for its all-electric Semi truck and Nevada regulators' approval of Las Vegas robotaxi permits for Tesla, Uber, and Alphabet's Waymo. Uber gained 2% to $79.79 on the same Nevada approval, while Alphabet rose 0.3% to $343.07 and the Global X Autonomous & Electric Vehicles ETF added 1% to $34.9, showing the rally is narrowly concentrated in Tesla rather than the broader autonomy theme. The gains came even as Tesla disclosed its largest-ever recall in China, covering 2.98 million vehicles built between 2018 and 2026 due to emergency door release failures linked to at least 15 deaths, and as Tesla's July retail sales in China fell 32% year over year while the country's battery-EV market grew 6%. Tesla's active Full Self-Driving subscriptions reached 1.48 million in Q2 2026, up 56% year over year, and the company says its Semi factory in Nevada is commissioning with production on track for 2026.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-rallies-4-europe-semi-152735738.html",
+        "publisher": "24/7 Wall St.",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Europe Semi launch and Las Vegas robotaxi permits are forward-looking catalysts for Tesla.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech",
+          "regulatory_legal"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-21T15:48:24.18921+00:00"
+      },
+      {
+        "title": "Hyundai considers expanding Georgia Metaplant to 800,000 units",
+        "brief_text": "Hyundai Motor is considering expanding production capacity at its Georgia assembly plant from 500,000 vehicles annually to between 700,000 and 800,000 units by 2028, CEO José Muñoz told CNBC on Thursday. The South Korean automaker said following publication of the interview that the plans are under consideration but not yet confirmed. At the upper end of that range, the Georgia Metaplant would leapfrog rivals including Tesla and Toyota Motor to claim the top spot among U.S. vehicle assembly plants measured by capacity. Muñoz said President Donald Trump's tariffs, including a 15% levy on imports from South Korea, have accelerated the company's localization plans. Any such expansion would be funded through Hyundai's already-announced $26 billion U.S. investment commitment running to 2028. Hyundai has targeted a domestic production share of at least 80% of the vehicles it moves in the U.S. market by 2030, compared with roughly 40% in 2024. The $7.6 billion Metaplant, which Hyundai first announced in 2022, is currently turning out the all-electric Ioniq 5 and Ioniq 9 models alongside the Kia Sportage hybrid. Under the existing 500,000-unit framework, the Georgia campus would employ upward of 8,500 people directly, with a further 6,900 positions supported at supplier facilities nearby. Hyundai is also evaluating additional investment for body-on-frame vehicles such as trucks and SUVs at a location separate from the Georgia plant, though Muñoz declined to provide further details.",
+        "url": "https://finance.yahoo.com/economy/policy/articles/hyundai-considers-georgia-metaplant-expansion-112106415.html",
+        "publisher": "CNBC",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Hyundai's expansion could surpass Tesla's U.S. plant capacity.",
+              "relevance": 0.4
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.4
+        },
+        "news_types": [
+          "corporate_action"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-21T13:12:38.18391+00:00"
+      },
+      {
+        "title": "Tesla paid $243 million after hacker proved fatal Autopilot crash data existed",
+        "brief_text": "Tesla was ordered to pay $243 million in damages after a bug bounty hacker proved the company did have access to fatal Autopilot crash data it claimed did not exist. The lawsuit stemmed from a March 2024 crash in which a self-driving Tesla struck a parked car, killing Naibel Benavides Leon and seriously injuring Dillon Angulo. A jury found Tesla partially at fault in August 2025, and a judge denied the company's appeal in February 2026. The hacker, known as @greentheonly, recovered the crash data while working through Tesla's Bug Bounty program, which paid him $15,000 for reporting software vulnerabilities. Tesla has since changed the names of its Autopilot and Full Self-Driving features to clarify that drivers must remain attentive.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/tesla-said-fatal-autopilot-crash-113000478.html",
+        "publisher": "Moneywise.com under the title",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "neg",
+              "reason": "Court ordered Tesla to pay $243M after evidence showed it had fatal Autopilot crash data it denied, and it lost appeal.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "regulatory_legal"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-21T11:48:32.213411+00:00"
+      },
+      {
+        "title": "Tesla integrates Chinese AI model Doubao into vehicle cabin system",
+        "brief_text": "Tesla, the US automaker, has integrated the Doubao large language model developed by ByteDance into electric vehicles sold in mainland China. The in-cabin intelligent voice command system supports general conversation, singing, interpreting debates, storytelling, English conversation practice, and character role-play, allowing users to switch between four voice tones and five operating modes. Tesla China said the in-cabin infotainment system uses Doubao's real-time conversational model together with an end-to-end voice interaction system to move beyond traditional question-and-answer communication toward a more natural, fluid, and proactive interactive experience, activated simply by pressing and holding the voice command button on the steering wheel. Meanwhile, Mercedes-Benz, the German automaker, has expanded its cooperation with ByteDance to integrate the Doubao large language model into Mercedes-Benz electric vehicles starting in September 2025. Chinese technology groups have made significant progress in developing artificial intelligence models, such as Alibaba launching Qwen 3.8-Max, a large language model, on August 3, a major upgrade of the Qwen family of AI models with advanced capabilities in coding, real-world tasks, and research. MoonShot AI, an artificial intelligence startup, launched Kimi K3 in July, which has 2.8 trillion parameters and is the world's largest open-source AI model by parameter count. Experts believe the growing number of large open-source models from China is shifting from individual breakthroughs to collective progress, offering new approaches to global artificial intelligence development.",
+        "url": "https://infoquest.co.th/2026/635482",
+        "publisher": "InfoQuest",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Tesla integrates ByteDance's Doubao AI model into its China vehicles, enhancing in-cabin voice interaction.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T04:52:04+00:00"
+      },
+      {
+        "title": "Nevada approves Tesla, Uber, Waymo robotaxi permits",
+        "brief_text": "The Nevada Transportation Authority unanimously approved three permits Thursday allowing Tesla, Uber, and Waymo to operate commercial robotaxi services in Clark County, home to Las Vegas. Together, the permits would deploy up to 8,000 robotaxis across the county over the next 12 months, with Tesla allowed up to 5,000 vehicles, Waymo up to 1,000, and Uber up to 1,000 through partnerships with Hyundai subsidiary Motional and Zoox. Tesla's Cybercab chief engineer Eric Early said the 5,000 figure is a ceiling and the company would be happy to reach 2,500 vehicles in the next year. Representatives from the Livery Operators Association and local taxi companies opposed the permits, citing concerns about oversaturation and roadway overcrowding.",
+        "url": "https://finance.yahoo.com/technology/articles/tesla-uber-waymo-ok-operate-002336015.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "regulation",
+              "direction": "pos",
+              "reason": "Nevada approves Tesla's robotaxi permit, allowing up to 5,000 vehicles in Clark County.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "regulatory_legal"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-21T00:23:36+00:00"
+      }
+    ]
+  ],
+  "answer_to_user": "Sentiment on Tesla over roughly the last two weeks (14d window) reads mixed-to-modestly-bullish — the flow is genuinely two-sided: of the 25 recent scored items, 14 net-positive vs 10 net-negative (and 1 ambiguous).\n\nBullish drivers (the bigger, higher-impact catalysts):\n- Robotaxi / autonomy momentum: Cybercab unveiling and Austin launch set for Sept 3; robotaxi permits approved in Nevada and Las Vegas; JPMorgan says Tesla is confident scaling Cybercab; stock rallied 4% on the Europe Semi launch + Vegas permits.\n- Product/expansion: SpaceX/Tesla/Intel broke ground on a $16.8B Texas chip fab; a 500-unit Semi deal; integration of a Chinese AI model (Doubao) into the cabin.\n- Optimus optimism (Calacanis '1 billion robots by 2036'; JPMorgan sees humanoid demand surging).\n\nBearish drivers:\n- A recall of nearly 3 million vehicles in China (impact-4).\n- Tesla paid $243M after a hacker proved fatal Autopilot crash data existed (impact-4).\n- Cybertruck price hike (+$5,000), stopping Solar Roof tile sales, losing a senior AI hardware engineer, and Polymarket odds for an Optimus 2026 launch falling to 9%.\n- U.S. EV market share holding ~50.5% but on a sales drop (ambiguous).\n\nNet read: bullish tilt driven by the robotaxi/autonomy catalyst calendar, but with real negative overhangs (China recall, Autopilot legal, product pricing). Call it 'cautiously bullish, but contested' — not a clean one-directional sentiment. This is based on the trailing ~14 days of coverage."
+}

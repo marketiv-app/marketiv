@@ -1,0 +1,2502 @@
+{
+ "id": "te-08",
+ "question": "Multi-timeframe trend alignment: I want stocks where price is above the 50-week SMA on the weekly AND above the 20-day EMA on the daily, with the daily MACD histogram positive. Japan and Korea, any cap. This is my trend-continuation long list.",
+ "tools_called": [
+  {
+   "tool": "screen_unified",
+   "args": {
+    "ta": [
+     {
+      "anchor": [
+       {
+        "pattern": "above",
+        "a": "macd_line",
+        "b": "macd_signal"
+       }
+      ],
+      "quals": [
+       {
+        "any": [
+         {
+          "pattern": "above",
+          "a": "close",
+          "b": "sma50",
+          "timeframe": 2
+         }
+        ],
+        "within": 0
+       },
+       {
+        "any": [
+         {
+          "pattern": "above",
+          "a": "close",
+          "b": "ema20",
+          "timeframe": 1
+         }
+        ],
+        "within": 0
+       }
+      ]
+     }
+    ],
+    "country": [
+     "JP",
+     "KR"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "timeframe": 1,
+    "limit": 15
+   }
+  }
+ ],
+ "raw_responses": [
+  {
+   "_conventions": {
+    "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+    "fields": {
+     "adx": {
+      "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+     },
+     "close_vs_ema200": {
+      "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+     },
+     "rsi14": {
+      "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+     },
+     "strength": {
+      "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+     }
+    }
+   },
+   "capped": false,
+   "count": 58,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "ta": {
+       "adx": 23.7543,
+       "close_vs_ema200": 0.0272,
+       "rsi14": 59.6638
+      }
+     },
+     "head_listing_id": 1414930,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kyeryong Const",
+     "score": 1.0,
+     "ticker": "013580.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 13.391,
+       "close_vs_ema200": 0.0085,
+       "rsi14": 49.6343
+      }
+     },
+     "head_listing_id": 1414948,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 13
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sungmoon Elect",
+     "score": 1.0,
+     "ticker": "014910.KO"
+    },
+    {
+     "also_known_as": [
+      "LGLD.LSE",
+      "066570.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 19.1025,
+       "close_vs_ema200": 0.2894,
+       "rsi14": 54.7153
+      }
+     },
+     "head_listing_id": 1415138,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 5
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 32
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "LG Electronics Inc",
+     "score": 1.0,
+     "ticker": "066570.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 25.9033,
+       "close_vs_ema200": 0.2135,
+       "rsi14": 71.8517
+      }
+     },
+     "head_listing_id": 1414456,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hanwha General",
+     "score": 1.0,
+     "ticker": "000370.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 20.7899,
+       "close_vs_ema200": 0.0318,
+       "rsi14": 63.4984
+      }
+     },
+     "head_listing_id": 1414459,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 12
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Daewonkangup",
+     "score": 1.0,
+     "ticker": "000430.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 23.4856,
+       "close_vs_ema200": 0.0174,
+       "rsi14": 62.0736
+      }
+     },
+     "head_listing_id": 1414938,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Youngbo Chem",
+     "score": 1.0,
+     "ticker": "014440.KO"
+    },
+    {
+     "also_known_as": [
+      "000725.KO",
+      "000720.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 12.7716,
+       "close_vs_ema200": 0.0746,
+       "rsi14": 58.9691
+      }
+     },
+     "head_listing_id": 1414478,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hyundai Engineering & Construction",
+     "score": 1.0,
+     "ticker": "000720.KO"
+    },
+    {
+     "also_known_as": [
+      "000810.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 11.9823,
+       "close_vs_ema200": 0.1759,
+       "rsi14": 53.6013
+      }
+     },
+     "head_listing_id": 1414484,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Samsung Fire & Marine Insurance",
+     "score": 1.0,
+     "ticker": "000810.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 25.8489,
+       "close_vs_ema200": 0.0504,
+       "rsi14": 58.029
+      }
+     },
+     "head_listing_id": 1414486,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hwacheon Mac",
+     "score": 1.0,
+     "ticker": "000850.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 8.0832,
+       "close_vs_ema200": -0.0021,
+       "rsi14": 51.7399
+      }
+     },
+     "head_listing_id": 1414509,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Eugene Inv&Sec",
+     "score": 1.0,
+     "ticker": "001200.KO"
+    },
+    {
+     "also_known_as": [
+      "001210.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 33.5497,
+       "close_vs_ema200": 0.9705,
+       "rsi14": 68.9292
+      }
+     },
+     "head_listing_id": 1414510,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 9
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 8
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kumho Electric",
+     "score": 1.0,
+     "ticker": "001210.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 18.5559,
+       "close_vs_ema200": 0.1609,
+       "rsi14": 63.8843
+      }
+     },
+     "head_listing_id": 1414511,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 13
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 23
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Dongkuk Steel Mill Co Ltd",
+     "score": 1.0,
+     "ticker": "001230.KO"
+    },
+    {
+     "also_known_as": [
+      "SKHYV.US",
+      "SKHY.US",
+      "HXSCL.US"
+     ],
+     "context": {
+      "ta": {
+       "adx": 21.8666,
+       "close_vs_ema200": 0.2213,
+       "rsi14": 49.2062
+      }
+     },
+     "head_listing_id": 1414474,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 68
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 9
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "SK Hynix Inc",
+     "score": 1.0,
+     "ticker": "000660.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 35.1494,
+       "close_vs_ema200": 0.4799,
+       "rsi14": 72.8112
+      }
+     },
+     "head_listing_id": 1414526,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 13
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 56
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hyundai Mar&Fi",
+     "score": 1.0,
+     "ticker": "001450.KO"
+    },
+    {
+     "also_known_as": [
+      "001465.KO"
+     ],
+     "context": {
+      "ta": {
+       "adx": 22.9532,
+       "close_vs_ema200": -0.048,
+       "rsi14": 59.8858
+      }
+     },
+     "head_listing_id": 1414527,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "BYC Co. Ltd",
+     "score": 1.0,
+     "ticker": "001460.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 21.8747,
+       "close_vs_ema200": 0.0588,
+       "rsi14": 56.8437
+      }
+     },
+     "head_listing_id": 1414530,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sk Securities",
+     "score": 1.0,
+     "ticker": "001510.KO"
+    },
+    {
+     "also_known_as": [
+      "001790.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 18.1603,
+       "close_vs_ema200": 0.0336,
+       "rsi14": 62.9888
+      }
+     },
+     "head_listing_id": 1414553,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "TS Corporation",
+     "score": 1.0,
+     "ticker": "001790.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 16.2374,
+       "close_vs_ema200": 0.43,
+       "rsi14": 58.0387
+      }
+     },
+     "head_listing_id": 1414557,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 10
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 33
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sam Hwa Capaci",
+     "score": 1.0,
+     "ticker": "001820.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 15.2137,
+       "close_vs_ema200": 0.0574,
+       "rsi14": 68.9549
+      }
+     },
+     "head_listing_id": 1414578,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Asia Paper",
+     "score": 1.0,
+     "ticker": "002310.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 22.6787,
+       "close_vs_ema200": 0.0712,
+       "rsi14": 56.0472
+      }
+     },
+     "head_listing_id": 1414612,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "TYM Corporation",
+     "score": 1.0,
+     "ticker": "002900.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 36.0008,
+       "close_vs_ema200": 1.2727,
+       "rsi14": 61.9969
+      }
+     },
+     "head_listing_id": 1414615,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 10
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 10
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 9
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kumho Ind",
+     "score": 1.0,
+     "ticker": "002990.KO"
+    },
+    {
+     "also_known_as": [
+      "003010.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 51.5753,
+       "close_vs_ema200": 0.8298,
+       "rsi14": 70.5961
+      }
+     },
+     "head_listing_id": 1414618,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 38
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hae In",
+     "score": 1.0,
+     "ticker": "003010.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 28.38,
+       "close_vs_ema200": 0.0339,
+       "rsi14": 58.5936
+      }
+     },
+     "head_listing_id": 1414621,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 13
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kolon Globalco",
+     "score": 1.0,
+     "ticker": "003070.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 32.283,
+       "close_vs_ema200": 0.2389,
+       "rsi14": 66.3597
+      }
+     },
+     "head_listing_id": 1414629,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 24
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sam Yang Foods",
+     "score": 1.0,
+     "ticker": "003230.KO"
+    },
+    {
+     "also_known_as": [
+      "003300.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 19.3954,
+       "close_vs_ema200": 0.0804,
+       "rsi14": 63.1656
+      }
+     },
+     "head_listing_id": 1414632,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hanil Cement Co Ltd",
+     "score": 1.0,
+     "ticker": "003300.KO"
+    },
+    {
+     "also_known_as": [
+      "003350.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 36.2416,
+       "close_vs_ema200": 0.5186,
+       "rsi14": 80.1673
+      }
+     },
+     "head_listing_id": 1414633,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hankook Cosmetics Manufacturing Co Ltd",
+     "score": 1.0,
+     "ticker": "003350.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 9.6739,
+       "close_vs_ema200": 0.0308,
+       "rsi14": 54.8191
+      }
+     },
+     "head_listing_id": 1414636,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Yuanta Sec Kor",
+     "score": 1.0,
+     "ticker": "003470.KO"
+    },
+    {
+     "also_known_as": [
+      "003495.KO",
+      "003490.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 10.1316,
+       "close_vs_ema200": 0.0443,
+       "rsi14": 51.2983
+      }
+     },
+     "head_listing_id": 1414639,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 21
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Korean Air Lines Co",
+     "score": 1.0,
+     "ticker": "003490.KO"
+    },
+    {
+     "also_known_as": [
+      "003550.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 14.5422,
+       "close_vs_ema200": 0.1566,
+       "rsi14": 56.9376
+      }
+     },
+     "head_listing_id": 1414647,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 46
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "LG Corp",
+     "score": 1.0,
+     "ticker": "003550.KO"
+    },
+    {
+     "also_known_as": [
+      "004080.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 31.819,
+       "close_vs_ema200": 0.0123,
+       "rsi14": 67.3375
+      }
+     },
+     "head_listing_id": 1414672,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 52
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 10
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Shinhung",
+     "score": 1.0,
+     "ticker": "004080.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 12.5509,
+       "close_vs_ema200": 0.0083,
+       "rsi14": 64.6094
+      }
+     },
+     "head_listing_id": 1414677,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Taeyang Metal",
+     "score": 1.0,
+     "ticker": "004100.KO"
+    },
+    {
+     "also_known_as": [
+      "004150.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 15.48,
+       "close_vs_ema200": 0.0405,
+       "rsi14": 58.8579
+      }
+     },
+     "head_listing_id": 1414680,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 29
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hansol Holdings Co Ltd",
+     "score": 1.0,
+     "ticker": "004150.KO"
+    },
+    {
+     "also_known_as": [
+      "004365.KO"
+     ],
+     "context": {
+      "ta": {
+       "adx": 15.5721,
+       "close_vs_ema200": -0.0305,
+       "rsi14": 58.7673
+      }
+     },
+     "head_listing_id": 1414688,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 10
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sebang",
+     "score": 1.0,
+     "ticker": "004360.KO"
+    },
+    {
+     "also_known_as": [
+      "004370.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 41.5619,
+       "close_vs_ema200": 0.153,
+       "rsi14": 68.9791
+      }
+     },
+     "head_listing_id": 1414690,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 23
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 37
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Nongshim",
+     "score": 1.0,
+     "ticker": "004370.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 19.2586,
+       "close_vs_ema200": 0.0717,
+       "rsi14": 64.5434
+      }
+     },
+     "head_listing_id": 1414708,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 5
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sunny Elec",
+     "score": 1.0,
+     "ticker": "004770.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 25.5255,
+       "close_vs_ema200": 0.4704,
+       "rsi14": 65.2961
+      }
+     },
+     "head_listing_id": 1414733,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 30
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 25
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "SGC Energy Co Ltd",
+     "score": 1.0,
+     "ticker": "005090.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 46.5379,
+       "close_vs_ema200": 0.234,
+       "rsi14": 73.8515
+      }
+     },
+     "head_listing_id": 1414735,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 38
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Binggrae",
+     "score": 1.0,
+     "ticker": "005180.KO"
+    },
+    {
+     "also_known_as": [
+      "005820.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 37.1143,
+       "close_vs_ema200": 0.0197,
+       "rsi14": 60.9993
+      }
+     },
+     "head_listing_id": 1414766,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 3
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Wonlim Corp.",
+     "score": 1.0,
+     "ticker": "005820.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 25.61,
+       "close_vs_ema200": 0.1996,
+       "rsi14": 63.6367
+      }
+     },
+     "head_listing_id": 1414767,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 8
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 9
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 8
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "DB Insurance Co Ltd",
+     "score": 1.0,
+     "ticker": "005830.KO"
+    },
+    {
+     "also_known_as": [
+      "005880.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 16.2133,
+       "close_vs_ema200": 0.0489,
+       "rsi14": 63.2438
+      }
+     },
+     "head_listing_id": 1414770,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Korea Line",
+     "score": 1.0,
+     "ticker": "005880.KO"
+    },
+    {
+     "also_known_as": [
+      "005965.KO"
+     ],
+     "context": {
+      "ta": {
+       "adx": 25.7568,
+       "close_vs_ema200": 0.0841,
+       "rsi14": 56.0793
+      }
+     },
+     "head_listing_id": 1414776,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Dongbu",
+     "score": 1.0,
+     "ticker": "005960.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 18.6848,
+       "close_vs_ema200": 0.0451,
+       "rsi14": 72.1518
+      }
+     },
+     "head_listing_id": 1414780,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 22
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 17
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sajo Oyang",
+     "score": 1.0,
+     "ticker": "006090.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 33.9013,
+       "close_vs_ema200": 0.3794,
+       "rsi14": 64.023
+      }
+     },
+     "head_listing_id": 1414781,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 31
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Sam-A Aluminiu",
+     "score": 1.0,
+     "ticker": "006110.KO"
+    },
+    {
+     "also_known_as": [
+      "006360.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 20.1845,
+       "close_vs_ema200": 0.2925,
+       "rsi14": 58.4089
+      }
+     },
+     "head_listing_id": 1414790,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "GS Engineering & Construction",
+     "score": 1.0,
+     "ticker": "006360.KO"
+    },
+    {
+     "also_known_as": [
+      "0L2T.LSE"
+     ],
+     "context": {
+      "ta": {
+       "adx": 19.5386,
+       "close_vs_ema200": 0.1989,
+       "rsi14": 59.9007
+      }
+     },
+     "head_listing_id": 1414792,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 46
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Samsung SDI",
+     "score": 1.0,
+     "ticker": "006400.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 29.5297,
+       "close_vs_ema200": 0.0796,
+       "rsi14": 58.4814
+      }
+     },
+     "head_listing_id": 1414798,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 11
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 8
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Samsung Climat",
+     "score": 1.0,
+     "ticker": "006660.KO"
+    },
+    {
+     "also_known_as": [
+      "007815.KO",
+      "00781K.KO"
+     ],
+     "context": {
+      "ta": {
+       "adx": 15.9714,
+       "close_vs_ema200": -0.1178,
+       "rsi14": 45.2048
+      }
+     },
+     "head_listing_id": 1414822,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Korea Circuit Co. Ltd.",
+     "score": 1.0,
+     "ticker": "007810.KO"
+    },
+    {
+     "also_known_as": [
+      "00806K.KO"
+     ],
+     "context": {
+      "ta": {
+       "adx": 16.5338,
+       "close_vs_ema200": 0.1338,
+       "rsi14": 54.7406
+      }
+     },
+     "head_listing_id": 1414828,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 95
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Daeduck Co. Ltd.",
+     "score": 1.0,
+     "ticker": "008060.KO"
+    },
+    {
+     "also_known_as": [
+      "008930.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 34.4993,
+       "close_vs_ema200": 0.2488,
+       "rsi14": 57.9144
+      }
+     },
+     "head_listing_id": 1414844,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 40
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 40
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hanmi Science",
+     "score": 1.0,
+     "ticker": "008930.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 15.5314,
+       "close_vs_ema200": -0.0071,
+       "rsi14": 51.2885
+      }
+     },
+     "head_listing_id": 1414847,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Kyung In Elect",
+     "score": 1.0,
+     "ticker": "009140.KO"
+    },
+    {
+     "also_known_as": [
+      "009150.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 20.2541,
+       "close_vs_ema200": 0.4197,
+       "rsi14": 49.5091
+      }
+     },
+     "head_listing_id": 1414848,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 63
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Samsung Electro-Mechanics",
+     "score": 1.0,
+     "ticker": "009150.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 21.6102,
+       "close_vs_ema200": 0.2212,
+       "rsi14": 58.0457
+      }
+     },
+     "head_listing_id": 1414859,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 4
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hanall Biopharma",
+     "score": 1.0,
+     "ticker": "009420.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 19.7607,
+       "close_vs_ema200": 0.3386,
+       "rsi14": 57.0899
+      }
+     },
+     "head_listing_id": 1414874,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 65
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 28
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "OCI Co Ltd",
+     "score": 1.0,
+     "ticker": "010060.KO"
+    },
+    {
+     "also_known_as": [
+      "010130.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 27.7428,
+       "close_vs_ema200": 0.1301,
+       "rsi14": 68.4984
+      }
+     },
+     "head_listing_id": 1414877,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 24
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Korea Zinc Inc",
+     "score": 1.0,
+     "ticker": "010130.KO"
+    },
+    {
+     "also_known_as": [
+      "011070.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 16.0822,
+       "close_vs_ema200": 0.1041,
+       "rsi14": 47.9144
+      }
+     },
+     "head_listing_id": 1414890,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 53
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 14
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "LG Innotek Co Ltd",
+     "score": 1.0,
+     "ticker": "011070.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 31.6,
+       "close_vs_ema200": 0.1012,
+       "rsi14": 60.9894
+      }
+     },
+     "head_listing_id": 1414895,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 19
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 6
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 2
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "HMM Co Ltd",
+     "score": 1.0,
+     "ticker": "011200.KO"
+    },
+    {
+     "context": {
+      "ta": {
+       "adx": 41.5824,
+       "close_vs_ema200": 0.0444,
+       "rsi14": 62.9458
+      }
+     },
+     "head_listing_id": 1414925,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 15
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 1
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 16
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "S-1 Corp",
+     "score": 1.0,
+     "ticker": "012750.KO"
+    },
+    {
+     "also_known_as": [
+      "016450.KQ"
+     ],
+     "context": {
+      "ta": {
+       "adx": 20.5921,
+       "close_vs_ema200": 0.0462,
+       "rsi14": 60.0406
+      }
+     },
+     "head_listing_id": 1414961,
+     "matched": {
+      "ta": {
+       "close_above_ema20": {
+        "detail": {
+         "held": 7
+        },
+        "kind": "signal"
+       },
+       "close_above_sma50": {
+        "detail": {
+         "held": 7
+        },
+        "kind": "signal"
+       },
+       "macd_line_above_macd_signal": {
+        "detail": {
+         "held": 13
+        },
+        "kind": "signal",
+        "strength": 1.0,
+        "value": "2026-08-25"
+       }
+      }
+     },
+     "matched_legs": [
+      "ta"
+     ],
+     "name": "Hansae Yes24",
+     "score": 1.0,
+     "ticker": "016450.KO"
+    }
+   ],
+   "sort": "ta",
+   "universe": 6249,
+   "_pagination": {
+    "intended_show": 15,
+    "returned": 58,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 58 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "Japan + South Korea multi-timeframe trend alignment (ALL ANDed): price above the 50-week SMA on the weekly, above the 20-day EMA on the daily, and daily MACD histogram positive (MACD line above signal). Found 58 (e.g. 013580.KO, 014910.KO, 066570.KO, 000370.KO, 000430.KO)."
+}

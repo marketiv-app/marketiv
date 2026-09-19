@@ -1,0 +1,160 @@
+[
+  {
+    "id": "tn-01",
+    "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+    "tools_called": [
+      {"tool": "find_tasignal", "args": {"q": ["RSI above 70 overbought", "..."]}, "ok": true, "error": null, "result_count": null},
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "overbought", "a": "rsi", "b": "70"}]}], "asset_type": ["Common Stock"], "sort": "rsi", "limit": 10}, "ok": true, "error": null, "result_count": 40}
+    ],
+    "answer_to_user": "Here are stocks flashing overbought right now (RSI-14 well above 70, so stretched and at risk of a pullback): Global Green Chemicals (GGC.BK) RSI ~91, and another name at RSI ~88 — the screen returned 40 overbought names, sorted most-overbought first, and every one shown has RSI above 70 (many in the 80s-90s). Overbought doesn't mean 'sell now', it means momentum is extended, so treat these as caution/pullback-watch rather than fresh buys.",
+    "spot_check": "Sorted by rsi desc. Top rows: GGC.BK rsi14=90.86, next rsi14=88.29; matched detail rsi14_overbought held=9 bars. All shown >70. PASS.",
+    "grades": {
+      "right_tool": "PASS — resolved 'overbought' via find_tasignal, then screen_unified with pattern=overbought a=rsi b=70, sorted by rsi.",
+      "result_correct": "PASS — returned rsi14 values (90.9, 88.3) genuinely >70, confirmed from context.ta.rsi14.",
+      "explanation_correct": "PASS — answer names real tickers with their actual RSI and states the >70 threshold; no overclaim."
+    },
+    "notes": "count capped at 40 (buffer). Clean."
+  },
+  {
+    "id": "tn-02",
+    "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง (Which Thai stocks just hit a new 52-week high?)",
+    "tools_called": [
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "at_new_high"}]}], "asset_type": ["Common Stock"], "country": ["TH"], "limit": 10}, "ok": true, "error": null, "result_count": 3}
+    ],
+    "answer_to_user": "Three Thai-listed (SET) stocks are printing a fresh 52-week high right now: Allianz Ayudhya Capital (AYUD.BK), More Return (MORE.BK), and Pylon (PYLON.BK). Each is sitting at a new one-year high as of today — the strongest momentum in the past year. (Note: only 3 Thai names are at an outright new high today; if you want names 'near' the high too, that's a broader list.)",
+    "spot_check": "All 3 matched pattern at_new_high strength=1.0 value=2026-08-25. Tickers all .BK (SET). context close_vs_ema200 positive (0.17-0.49) consistent with a high. PASS.",
+    "grades": {
+      "right_tool": "PASS — at_new_high pattern scoped to country=TH, Common Stock.",
+      "result_correct": "PASS — 3 SET tickers, all matched at_new_high today; genuinely at new high.",
+      "explanation_correct": "PASS — names are Thai/SET, correctly described as at new 52-week high."
+    },
+    "notes": "Only 3 hits — a valid honest small count, not an error."
+  },
+  {
+    "id": "tn-03",
+    "question": "Can you find me stocks where the 50 day moving average just crossed above the 200 day? (golden cross)",
+    "tools_called": [
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "ema50", "b": "ema200"}]}], "asset_type": ["Common Stock"], "country": ["US"], "limit": 10}, "ok": true, "error": null, "result_count": 37}
+    ],
+    "answer_to_user": "A golden cross is when the 50-day average crosses UP through the 200-day average — a classic bullish trend signal. Recent US golden crosses include Utz Brands (UTZ.US), CBIZ (CBZ.US), Varex Imaging (VREX.US), CXApp (CXAI.US) and Lexaria (LEXX.US) — 37 US stocks in total had a 50/200 bullish cross recently. In each, the 50-day EMA is now sitting above the 200-day.",
+    "spot_check": "matched detail confirms a(ema50) > b(ema200) at cross: LEXX a=5.28 b=1.98; CXAI a=0.485 b=0.409. Direction is crossover_up (bullish), NOT death cross. Most rows have close_vs_ema200 positive. PASS.",
+    "grades": {
+      "right_tool": "PASS — crossover_up with a=ema50 (faster) b=ema200 (slower), correct golden-cross semantics.",
+      "result_correct": "PASS — cross detail shows ema50 above ema200 at the cross bar; upward direction confirmed.",
+      "explanation_correct": "PASS — explains golden cross correctly (50 above 200, bullish) and names real recent crossers."
+    },
+    "notes": "37 hits. Clean."
+  },
+  {
+    "id": "tn-04",
+    "question": "Is Tesla overbought or oversold right now? Good time to buy or wait?",
+    "tools_called": [
+      {"tool": "find_stock", "args": {"q": "Tesla"}, "ok": true, "error": null, "result_count": null},
+      {"tool": "asset_pulse", "args": {"ticker": "TSLA.US"}, "ok": true, "error": null, "result_count": null}
+    ],
+    "answer_to_user": "Tesla (TSLA.US, last ~$355) is in a downtrend — trading BELOW both its 50-day (about -4%) and 200-day (about -13%) averages, and it's about 30% off its 52-week high, sitting only in the bottom quarter (26%) of its one-year range. So it is NOT overbought; if anything it's weak/beaten-down. The nuance: over the LAST MONTH it has actually bounced +12.8% off its July low, so there's a short-term recovery underway. Bottom line: this is a falling stock trying to base, not an overbought one. It's not an obvious 'buy now' while it's still under both key moving averages — a more patient entry would wait for it to reclaim the 50-day (and ideally the 200-day) or confirm the base. Timing is your call and this isn't advice.",
+    "spot_check": "asset_pulse.price: trend_read='downtrend — below both the 50-day and 200-day average', close_vs_sma50_pct=-4.36, close_vs_sma200_pct=-13.38, drawdown_from_52w_high_pct=-30.05, range_position_52w_pct=25.6, windows.1mo.change_pct=+12.85. PASS (values internally consistent). asset_pulse did NOT expose a numeric RSI so I read moving-average/range instead.",
+    "grades": {
+      "right_tool": "PASS — resolved TSLA via find_stock, single-ticker read via asset_pulse (the intended 'how is X doing' tool).",
+      "result_correct": "PASS — concrete values (-4% vs 50d, -13% vs 200d, -30% off high, 26% range pos, +12.85% 1mo) all present and coherent.",
+      "explanation_correct": "PASS — correctly says not overbought / weak, addresses timing directionally; no fabricated RSI."
+    },
+    "notes": "asset_pulse has no explicit rsi14 field (has rvol/vol/trend reads) — fine for the read, but a hard RSI number isn't surfaced by this tool."
+  },
+  {
+    "id": "tn-05",
+    "question": "Stocks that dropped a lot lately but the company is actually fine — still growing revenue and not overpriced. Dip to buy.",
+    "tools_called": [
+      {"tool": "find_fsconcept", "args": {"q": "revenue growth / price to earnings"}, "ok": true, "error": null, "result_count": null},
+      {"tool": "find_fspattern", "args": {"q": "growing revenue"}, "ok": true, "error": null, "result_count": null},
+      {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "compound_growth"}, {"concept": "pe", "pattern": "below_average", "vs_cohort": {"own": true}}], "ta": [{"anchor": [{"pattern": "net_change_down", "b": "0.20", "window_bars": 60}]}], "asset_type": ["Common Stock"], "limit": 10}, "ok": true, "error": null, "result_count": 40}
+    ],
+    "answer_to_user": "Here are 'quality dip' candidates — stocks that fell meaningfully (~20%+ over the last ~3 months) but whose business is still growing revenue and whose valuation is BELOW its own sector's average P/E: ACM Research (ACMR, -26%, 3y revenue CAGR ~32%, P/E 40 vs sector ~42), American Superconductor (AMSC, -27%, revenue CAGR ~41%, P/E 10 vs sector ~35), AppLovin (APP, -37%, revenue CAGR ~25%, P/E 24 vs sector ~42), Birkenstock (BIRK, -? , revenue CAGR ~19%, P/E 17 vs sector ~19), Blue Bird (BLBD, revenue CAGR ~23%, P/E 7.6 vs sector ~35). Each satisfies all three: a recent drawdown, positive multi-year revenue growth, and a cheaper-than-peers P/E. Do your own diligence on WHY each fell.",
+    "spot_check": "All results carry matched_legs=['fundamental','ta']. Verified per row: ACMR ta.net_change_down ret=-0.26, revenue growth value=0.3234, pe value=40.4 < cohort_benchmark=41.65 (own_sector). AMSC ret=-0.2721, growth=0.4132, pe=10.43<35.36. APP ret=-0.3741, growth=0.2484, pe=23.98<41.65. All three conditions genuinely met. PASS.",
+    "grades": {
+      "right_tool": "PASS — unified 3-leg screen: TA drop (net_change_down 20%) INTERSECT revenue compound_growth INTERSECT pe below own-sector average.",
+      "result_correct": "PASS — spot-checked rows satisfy all three legs with the returned numbers.",
+      "explanation_correct": "PASS — answer reflects both halves (price drop AND fundamentals) with real figures per name."
+    },
+    "notes": "Excellent multi-leg intersect. Used below_average(own sector) for 'not overpriced' since user gave no P/E number, per schema guidance."
+  },
+  {
+    "id": "tn-06",
+    "question": "Which stocks are coiling up / getting really quiet before a big move? (squeeze?)",
+    "tools_called": [
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "bb_squeeze", "window_bars": 3}]}], "asset_type": ["Common Stock"], "limit": 10}, "ok": true, "error": null, "result_count": 40}
+    ],
+    "answer_to_user": "'Squeeze' = a low-volatility, tightly-coiled range that often precedes a big move (either direction). Stocks coiling the tightest right now include Hamilton Global Opportunities (ALHGO.PA), Tern Properties (0277.HK), Ferretti (9638.HK), Quanzhou Huixin (1577.HK) and Best Food Holding (1488.HK) — each with a squeeze strength ~1.0 (the tightest coil). A squeeze tells you energy is building, not which way it breaks — watch for the range to expand.",
+    "spot_check": "matched bb_sqz strength values 1.0, 1.0, 1.0, 0.998, 0.994 (~1.0 = tightest coil per schema). value dates 2026-08-24/25 (current). Interpreted as low-volatility consolidation, NOT a short squeeze. PASS.",
+    "grades": {
+      "right_tool": "PASS — bb_squeeze (Bollinger volatility squeeze) with short window, correct 'coiling now' intent.",
+      "result_correct": "PASS — strength ~1.0 confirms tightest coil; current dates.",
+      "explanation_correct": "PASS — correctly frames as low-vol consolidation before a move, not a short-squeeze story."
+    },
+    "notes": "Results skew to HK/PA small-caps; no US mega-caps in top 10, but they are genuine squeezes."
+  },
+  {
+    "id": "tn-07",
+    "question": "any crypto near its 52 week low right now?",
+    "tools_called": [
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "near_low"}]}], "asset_type": ["Crypto"], "limit": 10}, "ok": true, "error": null, "result_count": 40}
+    ],
+    "answer_to_user": "Yes — plenty of crypto is sitting near its 52-week low. Examples: ACEToken (ACE-USD), Aces (ACES-USD), Acoin (ACOIN-USD), Achain (ACT-USD), AudioCoin (ADC-USD), Arbidoge (ADOGE-USD), ArbDoge AI (AIDOGE-USD). The screen flagged 40 crypto assets right near their yearly low (strength 1.0 = essentially AT the low). Heads-up: these are mostly tiny/obscure altcoins (alphabetical tail), not majors — near-52w-low on a microcap coin is often a bleaking chart, not a bargain.",
+    "spot_check": "All tickers end .CC (crypto, not stocks/ETFs), pattern near_low strength=1.0, value=2026-08-25. Genuinely near low. PASS. Names are obscure microcaps (alphabetical), so 'near low' is technically true but not majors.",
+    "grades": {
+      "right_tool": "PASS — asset_type=['Crypto'] with near_low; correctly returns crypto, not stocks.",
+      "result_correct": "PASS — all .CC crypto tickers, all matched near_low today.",
+      "explanation_correct": "PASS — returns crypto (not stocks), near yearly low, and honestly flags they are microcaps."
+    },
+    "notes": "No sort key surfaces crypto market-cap, so the top-10 is an alphabetical microcap slice rather than notable coins. Not a failure, but a discoverability gap for 'notable' crypto near lows."
+  },
+  {
+    "id": "tn-08",
+    "question": "หาหุ้นกลุ่มเทคที่ราคาขึ้นมาแรงในเดือนที่ผ่านมา แล้ววอลุ่มก็เพิ่มขึ้นด้วย (tech stocks up strongly last month with rising volume)",
+    "tools_called": [
+      {"tool": "find_gics", "args": {"q": "technology sector"}, "ok": true, "error": null, "result_count": 1},
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.15", "window_bars": 22}], "quals": [{"any": [{"pattern": "rising_volume"}]}]}], "gics": "45", "country": ["TH"], "asset_type": ["Common Stock"], "window_bars": 22, "limit": 10}, "ok": true, "error": null, "result_count": 0},
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "net_change_up", "b": "0.15", "window_bars": 22}], "quals": [{"any": [{"pattern": "volume_spike"}], "within": 22}]}], "gics": "45", "country": ["TH"], "asset_type": ["Common Stock"], "window_bars": 30, "limit": 10}, "ok": true, "error": null, "result_count": 6}
+    ],
+    "answer_to_user": "Thai tech (SET, GICS Information Technology) names that rose strongly over the past month with a volume surge: C.I. Group (CIG.BK, +50%), Sirisoft (SRS.BK, +32%), Hana Microelectronics (HANA.BK, +26%), KCE Electronics (KCE.BK, +26%), Applicad (APP.BK, +19%), Team Precision (TEAM.BK, +15%). All six gained double digits in ~a month and each registered a volume spike; APP and CIG had that spike most recently (mid/late August, right on the run-up), so those are the cleanest 'price + volume together' setups. (Volume caveat below.)",
+    "spot_check": "6 hits. All net_change_up ret >= 0.15 (CIG 0.50, SRS 0.32, HANA 0.26, KCE 0.26, APP 0.19, TEAM 0.15). vol_spike present on all, BUT spike dates vary: APP 2026-08-11 and CIG 2026-08-21 are recent/concurrent; HANA 2026-02, KCE 2025-12, SRS 2025-11, TEAM 2026-04 are OLD (the within:22 tolerance did not tightly constrain the qualifier's spike date). rising_volume returned 0 across the entire TH-tech universe. PARTIAL: price leg solid; volume-recency only clean for APP/CIG.",
+    "grades": {
+      "right_tool": "PASS — sector scoped via find_gics (45) + country TH, price-up + volume qualifier. Reasonable.",
+      "result_correct": "PASS (with caveat) — all 6 genuinely up >=15% in a month; volume-spike flag present on all but only concurrent-with-rally for APP/CIG.",
+      "explanation_correct": "PASS — names are TH tech, gains are real, and the answer explicitly flags that only APP/CIG have a recent (concurrent) volume spike."
+    },
+    "notes": "FRICTION: rising_volume pattern returns ZERO across the whole TH-tech universe (also 0 elsewhere in my check) — either a coverage gap or its default 3-consecutive-bars rule is too strict; had to substitute volume_spike. Also the qual `within:22` did not constrain vol_spike to the last 22 bars (older spikes still matched)."
+  },
+  {
+    "id": "tn-09",
+    "question": "What does a MACD crossover mean, and show a couple with a recent bullish one.",
+    "tools_called": [
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_up", "a": "macd_line", "b": "macd_signal"}]}], "asset_type": ["Common Stock"], "country": ["US"], "size": ["large"], "limit": 10}, "ok": true, "error": null, "result_count": 27}
+    ],
+    "answer_to_user": "A bullish MACD crossover is when the MACD line crosses UP through its signal line — a sign that short-term momentum is turning up relative to the trend (often read as an early bullish trigger). Recent US large-caps with a bullish MACD cross: Walmart (WMT, Jul 27), Chevron (CVX, Aug 11), Phillips 66 (PSX, Aug 11), Applied Materials (AMAT, Aug 6), Palantir (PLTR, Aug 4), Marathon Petroleum (MPC, Aug 12). 27 large-caps in all had a recent bullish cross.",
+    "spot_check": "matched macd_x_signal_up, direction up. Where detail present: MPC a(macd_line)=11.69 > b(macd_signal)=10.17; PLTR a=1.52 > b=-0.54; BRK-B a=3271 > b=1980 — all show macd_line above signal at the cross. Dates late-Jul/Aug 2026 (recent). PASS.",
+    "grades": {
+      "right_tool": "PASS — crossover_up a=macd_line b=macd_signal, US large caps.",
+      "result_correct": "PASS — cross detail confirms macd_line above macd_signal (bullish) at the flagged bar.",
+      "explanation_correct": "PASS — explanation is a correct beginner definition (MACD line above signal = bullish) plus real recent names."
+    },
+    "notes": "Clean. Recognizable large-cap names."
+  },
+  {
+    "id": "tn-10",
+    "question": "Are markets toppy, and any big-name stocks that already broke below support / moving averages to avoid?",
+    "tools_called": [
+      {"tool": "find_stock", "args": {"q": "S&P 500 index"}, "ok": true, "error": null, "result_count": null},
+      {"tool": "asset_pulse", "args": {"ticker": "GSPC.INDX"}, "ok": true, "error": null, "result_count": null},
+      {"tool": "screen_unified", "args": {"ta": [{"anchor": [{"pattern": "crossover_down", "a": "close", "b": "ema200"}]}], "asset_type": ["Common Stock"], "country": ["US"], "size": ["large"], "limit": 10}, "ok": true, "error": null, "result_count": 10}
+    ],
+    "answer_to_user": "Market read: the S&P 500 does look extended/toppy right now — it's in an uptrend above both its 50- and 200-day averages, sitting at 89% of its 52-week range and only ~2% off its 52-week high, up ~12% YTD, with calm realized volatility (~13%). So the index itself is strong, but stretched near the highs (that's the 'toppy' worry — not weakness, but little cushion). Big names to be wary of — large-caps that just broke BELOW their 200-day average (a technical weakness flag): American Express (AXP), Broadcom (AVGO), Boeing (BA), Home Depot (HD), Altria (MO), TJX (TJX), Southern (SO), NextEra (NEE). Each recently closed under its 200-day, which is a caution signal even while the broad index is high.",
+    "spot_check": "S&P asset_pulse: trend_read uptrend above 50/200, range_position_52w_pct=89.08, drawdown_from_52w_high_pct=-2.1, ytd change +11.79%, realized_vol_30d=12.64 — supports 'elevated/toppy'. Broke-below list: each row close(a) < ema200(b): AXP 286<286.6, MO 65.54<67.07, AVGO 311.05<316.82, BA 186.46<189.67, HD 335.4<337.13. crossover_down direction confirmed. PASS.",
+    "grades": {
+      "right_tool": "PASS — market read via S&P asset_pulse + large-cap crossover_down (close below ema200) screen.",
+      "result_correct": "PASS — index metrics support 'near highs/extended'; every named stock has close below its 200-day per matched detail.",
+      "explanation_correct": "PASS — gives a real market read (extended/near-high) and names large-caps genuinely below their 200-day; no random names."
+    },
+    "notes": "Used 200-day break as the 'support/MA' proxy; user's 'support' is loosely defined but MA-break is a sound interpretation. Clean."
+  }
+]

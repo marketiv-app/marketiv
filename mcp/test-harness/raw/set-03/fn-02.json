@@ -1,0 +1,514 @@
+{
+  "id": "fn-02",
+  "question": "Which companies pay a good dividend but are also safe and stable? I don't want anything risky.",
+  "tools_called": [
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "country": "US",
+        "min_yield": 3,
+        "max_yield": 8,
+        "min_streak_years": 5,
+        "max_payout": 0.75,
+        "min_market_cap_usd": 20000000000,
+        "order_by": "streak",
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 15,
+      "has_more": true,
+      "limit": 15,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 3.6,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.5639,
+            "payout_ratio_eff": 0.5639,
+            "ttm_div_yoy_pct": 0.6,
+            "yield_pct": 6.13,
+            "yield_trailing_pct": 6.13
+          },
+          "eps": 0.76,
+          "exchange": "US",
+          "gic_code": "35202010",
+          "market_cap_usd": 159419858944.0,
+          "name": "Pfizer Inc",
+          "news": {
+            "neg": 64,
+            "net_direction": "pos",
+            "pos": 99,
+            "top_reason": "FDA approved label expansion for Pfizer's Ibrance, expanding its indication in breast cancer."
+          },
+          "pb_ratio": 1.8231,
+          "pe_ratio": 35.855263,
+          "stock_id": 33957,
+          "symbol": "PFE",
+          "ticker": "PFE.US",
+          "week52_high": 28.44,
+          "week52_low": 22.0346
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 4.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6873,
+            "payout_ratio_eff": 0.6873,
+            "ttm_div_yoy_pct": 1.2,
+            "yield_pct": 6.1,
+            "yield_trailing_pct": 6.1
+          },
+          "eps": -0.16,
+          "exchange": "US",
+          "gic_code": "30202030",
+          "market_cap_usd": 21877037056.0,
+          "name": "General Mills Inc",
+          "news": {
+            "neg": 16,
+            "net_direction": "pos",
+            "pos": 32,
+            "top_reason": "EPS beat consensus by 16.48% and revenue slightly exceeded estimates, indicating strong financial performance."
+          },
+          "pb_ratio": 2.75083,
+          "pe_ratio": null,
+          "stock_id": 18559,
+          "symbol": "GIS",
+          "ticker": "GIS.US",
+          "week52_high": 48.3234,
+          "week52_low": 31.2098
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 3.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.7475,
+            "payout_ratio_eff": 0.7475,
+            "ttm_div_yoy_pct": 3.0,
+            "yield_pct": 5.8,
+            "yield_trailing_pct": 5.8
+          },
+          "eps": 2.92,
+          "exchange": "US",
+          "gic_code": "10102040",
+          "market_cap_usd": 82837544960.0,
+          "name": "Enterprise Products Partners LP",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 41,
+            "top_reason": "Article highlights its 6.1% forward distribution yield, 27-year distribution growth streak, and $5.3B in capital projects, making it a recommended dividend stock."
+          },
+          "pb_ratio": null,
+          "pe_ratio": 13.359862,
+          "stock_id": 12079,
+          "symbol": "EPD",
+          "ticker": "EPD.US",
+          "week52_high": 39.5799,
+          "week52_low": 28.1849
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 2.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.573,
+            "payout_ratio_eff": 0.573,
+            "ttm_div_yoy_pct": 3.1,
+            "yield_pct": 5.72,
+            "yield_trailing_pct": 5.65
+          },
+          "eps": 3.9,
+          "exchange": "US",
+          "gic_code": "50101020",
+          "market_cap_usd": 208361979904.0,
+          "name": "Verizon Communications Inc",
+          "news": {
+            "neg": 83,
+            "net_direction": "pos",
+            "pos": 102,
+            "top_reason": "Verizon was removed from the Dow due to persistently low share price."
+          },
+          "pb_ratio": 1.940654,
+          "pe_ratio": 12.640625,
+          "stock_id": 47096,
+          "symbol": "VZ",
+          "ticker": "VZ.US",
+          "week52_high": 50.28,
+          "week52_low": 36.553
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 3.3,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6846,
+            "payout_ratio_eff": 0.6846,
+            "ttm_div_yoy_pct": 2.4,
+            "yield_pct": 4.68,
+            "yield_trailing_pct": 4.65
+          },
+          "eps": 5.06,
+          "exchange": "US",
+          "gic_code": "30301010",
+          "market_cap_usd": 36968198144.0,
+          "name": "Kimberly-Clark Corporation",
+          "news": {
+            "neg": 5,
+            "net_direction": "pos",
+            "pos": 25,
+            "top_reason": "Acquired Kenvue, creating a high-margin powerhouse with steady cash flow; stock near low multiple with high dividend yield."
+          },
+          "pb_ratio": 20.470493,
+          "pe_ratio": 18.350937,
+          "stock_id": 25351,
+          "symbol": "KMB",
+          "ticker": "KMB.US",
+          "week52_high": 126.6259,
+          "week52_low": 91.1677
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 4.2,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.37,
+            "payout_ratio_eff": 0.37,
+            "ttm_div_yoy_pct": -22.4,
+            "yield_pct": 4.62,
+            "yield_trailing_pct": 4.54
+          },
+          "eps": 11.16,
+          "exchange": "US",
+          "gic_code": "40301020",
+          "market_cap_usd": 42321149952.0,
+          "name": "Prudential Financial, Inc.",
+          "news": {
+            "neg": 7,
+            "net_direction": "pos",
+            "pos": 17,
+            "top_reason": "Stock trades at discount (P/E below industry) and has Value Score A, but earnings expected to decline in 2026; mixed signals"
+          },
+          "pb_ratio": 1.361522,
+          "pe_ratio": 11.291024,
+          "stock_id": 35525,
+          "symbol": "PRU",
+          "ticker": "PRU.US",
+          "week52_high": 126.2623,
+          "week52_low": 89.6019
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 2.0,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.7223,
+            "payout_ratio_eff": 0.7223,
+            "ttm_div_yoy_pct": 3.9,
+            "yield_pct": 4.59,
+            "yield_trailing_pct": 4.54
+          },
+          "eps": 5.77,
+          "exchange": "US",
+          "gic_code": "10102040",
+          "market_cap_usd": 58636984320.0,
+          "name": "ONEOK Inc",
+          "news": {
+            "neg": 0,
+            "net_direction": "pos",
+            "pos": 12,
+            "top_reason": "Raised 2026 guidance and reported strong Q2 results, though stock offering adds dilution."
+          },
+          "pb_ratio": 2.667711,
+          "pe_ratio": 16.765112,
+          "stock_id": 32466,
+          "symbol": "OKE",
+          "ticker": "OKE.US",
+          "week52_high": 97.9,
+          "week52_low": 61.6718
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 5.8,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6273,
+            "payout_ratio_eff": 0.6273,
+            "ttm_div_yoy_pct": 4.9,
+            "yield_pct": 4.49,
+            "yield_trailing_pct": 4.39
+          },
+          "eps": 3.9,
+          "exchange": "US",
+          "gic_code": "55101010",
+          "market_cap_usd": 26838075392.0,
+          "name": "Eversource Energy",
+          "news": {
+            "neg": 5,
+            "net_direction": "pos",
+            "pos": 6,
+            "top_reason": "Zacks Consensus Estimate shows earnings decline of 8.33% year-over-year, with negative Earnings ESP and Sell rank"
+          },
+          "pb_ratio": 1.635498,
+          "pe_ratio": 15.398287,
+          "stock_id": 12250,
+          "symbol": "ES",
+          "ticker": "ES.US",
+          "week52_high": 76.57,
+          "week52_low": 59.7173
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 2.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.4643,
+            "payout_ratio_eff": 0.4643,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 4.13,
+            "yield_trailing_pct": 4.13
+          },
+          "eps": 4.38,
+          "exchange": "US",
+          "gic_code": "40101015",
+          "market_cap_usd": 62070829056.0,
+          "name": "Truist Financial Corp",
+          "news": {
+            "neg": 9,
+            "net_direction": "pos",
+            "pos": 27,
+            "top_reason": "Stephens resumed coverage with Overweight rating and $59 price target, citing improved operating leverage and expected capital return."
+          },
+          "pb_ratio": 1.016858,
+          "pe_ratio": 12.048276,
+          "stock_id": 42967,
+          "symbol": "TFC",
+          "ticker": "TFC.US",
+          "week52_high": 54.5168,
+          "week52_low": 39.1048
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 6.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.6945,
+            "payout_ratio_eff": 0.6945,
+            "ttm_div_yoy_pct": 4.8,
+            "yield_pct": 4.13,
+            "yield_trailing_pct": 4.01
+          },
+          "eps": 7.7,
+          "exchange": "US",
+          "gic_code": "30201030",
+          "market_cap_usd": 197619220480.0,
+          "name": "PepsiCo Inc",
+          "news": {
+            "neg": 75,
+            "net_direction": "neg",
+            "pos": 58,
+            "top_reason": "PepsiCo's participation in RegenLend pilot supports farmers adopting strip-till equipment, potentially increasing demand for its agricultural supply chain services and strengthening farmer relationships."
+          },
+          "pb_ratio": 8.655184,
+          "pe_ratio": 18.365662,
+          "stock_id": 33895,
+          "symbol": "PEP",
+          "ticker": "PEP.US",
+          "week52_high": 168.1919,
+          "week52_low": 133.4021
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 2.4,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.7082,
+            "payout_ratio_eff": 0.7082,
+            "ttm_div_yoy_pct": 4.6,
+            "yield_pct": 4.05,
+            "yield_trailing_pct": 3.92
+          },
+          "eps": 0.48,
+          "exchange": "US",
+          "gic_code": "55101010",
+          "market_cap_usd": 26937538560.0,
+          "name": "FirstEnergy Corporation",
+          "news": {
+            "neg": 2,
+            "net_direction": "pos",
+            "pos": 11,
+            "top_reason": "Earnings beat and reaffirmed guidance with strong capital investment plan."
+          },
+          "pb_ratio": 2.121307,
+          "pe_ratio": 101.433155,
+          "stock_id": 13822,
+          "symbol": "FE",
+          "ticker": "FE.US",
+          "week52_high": 51.2971,
+          "week52_low": 41.2142
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 10.1,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.3582,
+            "payout_ratio_eff": 0.3582,
+            "ttm_div_yoy_pct": 4.0,
+            "yield_pct": 4.04,
+            "yield_trailing_pct": 3.96
+          },
+          "eps": 2.7,
+          "exchange": "US",
+          "gic_code": "45202030",
+          "market_cap_usd": 26886967296.0,
+          "name": "HP Inc",
+          "news": {
+            "neg": 15,
+            "net_direction": "neg",
+            "pos": 12,
+            "top_reason": "HP narrowed its full-year non-GAAP earnings guidance and set Q3 guidance below expectations, despite a Q2 beat."
+          },
+          "pb_ratio": null,
+          "pe_ratio": 11.096296,
+          "stock_id": 20993,
+          "symbol": "HPQ",
+          "ticker": "HPQ.US",
+          "week52_high": 32.19,
+          "week52_low": 17.0718
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 8.5,
+            "ffo_payout": 0.6432,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.8596,
+            "payout_ratio_eff": 0.6432,
+            "ttm_div_yoy_pct": 5.1,
+            "yield_pct": 3.97,
+            "yield_trailing_pct": 3.97
+          },
+          "eps": 7.39,
+          "exchange": "US",
+          "gic_code": "60108030",
+          "market_cap_usd": 83122618368.0,
+          "name": "American Tower Corp",
+          "news": {
+            "neg": 1,
+            "net_direction": "pos",
+            "pos": 13,
+            "top_reason": "5G densification driving new colocation applications and record data center leasing from AI/hybrid cloud demand."
+          },
+          "pb_ratio": 22.783558,
+          "pe_ratio": 27.779032,
+          "stock_id": 2014,
+          "symbol": "AMT",
+          "ticker": "AMT.US",
+          "week52_high": 200.2928,
+          "week52_low": 160.06
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 1.9,
+            "ffo_payout": 0.5101,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.3913,
+            "payout_ratio_eff": 0.5101,
+            "ttm_div_yoy_pct": 2.3,
+            "yield_pct": 3.87,
+            "yield_trailing_pct": 3.84
+          },
+          "eps": 7.29,
+          "exchange": "US",
+          "gic_code": "60106010",
+          "market_cap_usd": 26283393024.0,
+          "name": "AvalonBay Communities Inc",
+          "news": {
+            "neg": 6,
+            "net_direction": "mixed",
+            "pos": 6,
+            "top_reason": "Core FFO beat and raised same-store NOI outlook, plus merger creates value"
+          },
+          "pb_ratio": 2.172078,
+          "pe_ratio": 25.282967,
+          "stock_id": 3271,
+          "symbol": "AVB",
+          "ticker": "AVB.US",
+          "week52_high": 71.1171,
+          "week52_low": 56.2542
+        },
+        {
+          "country": "USA",
+          "dividend": {
+            "cagr_5y_pct": 7.9,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": 0.595,
+            "payout_ratio_eff": 0.595,
+            "ttm_div_yoy_pct": -21.5,
+            "yield_pct": 3.79,
+            "yield_trailing_pct": 3.75
+          },
+          "eps": 2.75,
+          "exchange": "US",
+          "gic_code": "55101010",
+          "market_cap_usd": 45681459200.0,
+          "name": "Exelon Corporation",
+          "news": {
+            "neg": 3,
+            "net_direction": "pos",
+            "pos": 6,
+            "top_reason": "Adjusted EPS beat and reaffirmed guidance with strong rate base growth and capex plan."
+          },
+          "pb_ratio": 1.58087,
+          "pe_ratio": 16.753676,
+          "stock_id": 12686,
+          "symbol": "EXC",
+          "ticker": "EXC.US",
+          "week52_high": 50.1781,
+          "week52_low": 41.4631
+        }
+      ],
+      "total": 42
+    }
+  ],
+  "answer_to_user": "These are large, established US companies that pay a solid, sustainable dividend. A dividend is a regular cash payment the company sends to shareholders out of its profits. I screened for a meaningful (not sky-high) yield of 3-8%, a 10-year track record of never cutting the payout, and a payout ratio under ~75% so the dividend isn't stretched beyond what the company earns. Names that came up include PepsiCo (PEP, ~4.1%), Kimberly-Clark (KMB, ~4.7%), Verizon (VZ, ~5.7%), General Mills (GIS, ~6.1%), Pfizer (PFE, ~6.1%), Prudential (PRU, ~4.6%), American Tower (AMT, ~4.0%) and Exelon (EXC, ~3.8%) — all with a 10-year no-cut streak. I deliberately capped the yield to avoid \"yield traps\" (unusually high yields that often signal trouble). Important: no stock is truly risk-free — 'safe' is relative, dividends can still be cut, and prices move. This is for research, not a buy recommendation."
+}

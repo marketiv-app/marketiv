@@ -1,0 +1,172 @@
+{
+  "id": "ne-06",
+  "question": "Where is options positioning most extreme right now — any names with unusually stretched put/call or crowded positioning I should know about?",
+  "tools_called": [
+    {
+      "tool": "positioning_extremes",
+      "args": {
+        "limit": 15
+      },
+      "note": "scan for markets at a 3-year positioning extreme right now (CFTC/COT lens)"
+    }
+  ],
+  "raw_responses": [
+    {
+      "_guide": "Markets where the speculative crowd sits at a 3-year positioning extreme (≥90th or ≤10th percentile) RIGHT NOW — a contrarian-RISK scan, not buy/sell signals. An extreme can persist; it flags where a crowded trade could unwind hard on a shock. Explain each in plain language.",
+      "count": 15,
+      "extremes": [
+        {
+          "asset": "EURUSD.FOREX",
+          "asset_class": "fx",
+          "market": "EURO FX - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": -7.2,
+          "percentile_3y": 2,
+          "read": "near the BOTTOM of its 3-year range — about as bearish (net short) as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -2.4
+        },
+        {
+          "asset": "KCWHEAT.COMM",
+          "asset_class": "commodity",
+          "market": "WHEAT-HRW - CHICAGO BOARD OF TRADE",
+          "net_pct_oi": 10.9,
+          "percentile_3y": 99,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 2.25
+        },
+        {
+          "asset": "SOFR.MM",
+          "asset_class": "rates",
+          "market": "SOFR-3M - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": -18.8,
+          "percentile_3y": 5,
+          "read": "near the BOTTOM of its 3-year range — about as positioned for HIGHER yields as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -2.12
+        },
+        {
+          "asset": "US-2Y.GB",
+          "asset_class": "rates",
+          "market": "UST 2Y NOTE - CHICAGO BOARD OF TRADE",
+          "net_pct_oi": -28.0,
+          "percentile_3y": 100,
+          "read": "near the TOP of its 3-year range — about as positioned for LOWER yields as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 2.05
+        },
+        {
+          "asset": "COTTON.COMM",
+          "asset_class": "commodity",
+          "market": "COTTON NO. 2 - ICE FUTURES U.S.",
+          "net_pct_oi": 20.1,
+          "percentile_3y": 96,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 1.88
+        },
+        {
+          "asset": "AUDUSD.FOREX",
+          "asset_class": "fx",
+          "market": "AUSTRALIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": 18.1,
+          "percentile_3y": 93,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 1.82
+        },
+        {
+          "asset": "LEANHOG.COMM",
+          "asset_class": "commodity",
+          "market": "LEAN HOGS - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": -10.5,
+          "percentile_3y": 3,
+          "read": "near the BOTTOM of its 3-year range — about as bearish (net short) as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -1.72
+        },
+        {
+          "asset": "COPPER.COMM",
+          "asset_class": "commodity",
+          "market": "COPPER- #1 - COMMODITY EXCHANGE INC.",
+          "net_pct_oi": 27.9,
+          "percentile_3y": 99,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 1.71
+        },
+        {
+          "asset": "IWM.US",
+          "asset_class": "equity_index",
+          "market": "RUSSELL E-MINI - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": -23.5,
+          "percentile_3y": 5,
+          "read": "near the BOTTOM of its 3-year range — about as bearish (net short) as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -1.7
+        },
+        {
+          "asset": "BRLUSD.FOREX",
+          "asset_class": "fx",
+          "market": "BRAZILIAN REAL - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": 12.3,
+          "percentile_3y": 95,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 1.6
+        },
+        {
+          "asset": "CADUSD.FOREX",
+          "asset_class": "fx",
+          "market": "CANADIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": -24.7,
+          "percentile_3y": 9,
+          "read": "near the BOTTOM of its 3-year range — about as bearish (net short) as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -1.51
+        },
+        {
+          "asset": "ORANGE.COMM",
+          "asset_class": "commodity",
+          "market": "FRZN CONCENTRATED ORANGE JUICE - ICE FUTURES U.S.",
+          "net_pct_oi": -17.0,
+          "percentile_3y": 8,
+          "read": "near the BOTTOM of its 3-year range — about as bearish (net short) as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -1.51
+        },
+        {
+          "asset": "MXNUSD.FOREX",
+          "asset_class": "fx",
+          "market": "MEXICAN PESO - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": 23.0,
+          "percentile_3y": 96,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 1.5
+        },
+        {
+          "asset": "QQQ.US",
+          "asset_class": "equity_index",
+          "market": "NASDAQ MINI - CHICAGO MERCANTILE EXCHANGE",
+          "net_pct_oi": -20.7,
+          "percentile_3y": 5,
+          "read": "near the BOTTOM of its 3-year range — about as bearish (net short) as this crowd gets, a crowded bet the other way (squeeze risk)",
+          "state": "crowded",
+          "z_3y": -1.45
+        },
+        {
+          "asset": "SUGAR.COMM",
+          "asset_class": "commodity",
+          "market": "SUGAR NO. 11 - ICE FUTURES U.S.",
+          "net_pct_oi": 11.8,
+          "percentile_3y": 91,
+          "read": "near the TOP of its 3-year range — about as bullish (net long) as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns",
+          "state": "crowded",
+          "z_3y": 1.34
+        }
+      ]
+    }
+  ],
+  "answer_to_user": "Quick scope note first: MarketDX has a 'scan everything for a positioning extreme' tool only for the FUTURES/COT (Commitment of Traders) universe — commodities, FX, rates and equity-index futures — not a market-wide scan of single-stock options put/call. (For a specific optionable NAME's put/call, I'd need you to name the ticker; then options_sentiment gives its stretch vs its own 90-day norm.) Here's where the speculative crowd sits at a 3-year extreme RIGHT NOW (≥90th or ≤10th percentile), which is the closest read to 'crowded positioning to know about':\n\nEQUITY INDEX (most relevant to a stock investor):\n- Russell 2000 (IWM) e-mini — net -23.5% of OI, 5th percentile (z -1.7): about as net-short as this crowd gets in 3 years (squeeze risk if it turns).\n- Nasdaq-100 (QQQ) mini — net -20.7%, 5th percentile (z -1.45): similarly crowded-short.\n\nRATES:\n- 2Y UST — net -28%, 100th percentile (z +2.05): about as positioned for LOWER yields as ever.\n- SOFR-3M — 5th percentile (z -2.12): crowded the other way (positioned for higher yields).\n\nFX: EUR/USD at the 2nd percentile (crowded short, z -2.4, the single most stretched); AUD (93rd), MXN (96th), BRL (95th) crowded long; CAD (9th) crowded short.\n\nCOMMODITIES: Copper (99th, z +1.71), KC wheat (99th), cotton (96th), sugar (91st) crowded LONG; lean hogs (3rd) and orange juice (8th) crowded SHORT.\n\nRead these as contrarian-RISK flags (a crowded trade that could unwind hard on a shock), not buy/sell signals — an extreme can persist. The standouts for an equity investor: small-caps (IWM) and Nasdaq (QQQ) both sit crowded-SHORT near 3-year lows."
+}

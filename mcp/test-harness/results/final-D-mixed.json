@@ -1,0 +1,140 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "question": "companies with gross margin above 60%",
+      "tool_calls": ["find_fsconcept(queries:[gross margin,...])", "find_fspattern(queries:[above a threshold,...])", "screen_unified(fundamental:[{concept:gross_margin,pattern:above,threshold:0.60}],asset_type:[Common Stock])"],
+      "result_summary": "40 hits (capped). NVDA gross_margin 0.7415, GOOG 0.609, MSFT etc. Ranked by mcap.",
+      "evidence_check": "matched.fundamental.gross_margin.value present per row (0.7415, 0.609). matched_legs=[fundamental].",
+      "confusion_note": "Obvious. gross_margin ratio at rank #3 (gross_profit field is #1) — top-k, client picks the ratio.",
+      "verdict": "PASS",
+      "reason": "Level screen on a ratio; threshold sent as fraction 0.60; correct plausibly-high-margin cohort with per-row evidence.",
+      "defects": []
+    },
+    {
+      "id": 2,
+      "question": "companies with more than 1 billion dollars of revenue (absolute USD, cross-market)",
+      "tool_calls": ["find_fsconcept -> revenue", "screen_unified(fundamental:[{concept:revenue,pattern:above,threshold:1000000000}],asset_type:[Common Stock])"],
+      "result_summary": "40 hits. NVDA revenue 253.5B, AAPL 466.8B — large-cap cross-market names.",
+      "evidence_check": "matched.fundamental.revenue.unit='usd', value in USD (253491000000). Confirms absolute-USD screen, not native currency.",
+      "confusion_note": "Obvious. The $1B resolved as an absolute USD level screen (unit:usd) and returned plausibly-large companies.",
+      "verdict": "PASS",
+      "reason": "Absolute-dollar screening works and is USD-normalized cross-market as intended.",
+      "defects": []
+    },
+    {
+      "id": 3,
+      "question": "companies with net debt below zero (net cash)",
+      "tool_calls": ["find_fsconcept -> net_debt", "find_fspattern -> is_negative", "screen_unified(fundamental:[{concept:net_debt,pattern:is_negative}])"],
+      "result_summary": "40 hits. NVDA net_debt -889M, TSMC -67.6B (net cash).",
+      "evidence_check": "matched.fundamental.net_debt.unit=usd, value negative per row. is_negative is the curated 'below zero' pattern (no threshold needed).",
+      "confusion_note": "Obvious. find_fspattern surfaced is_negative as the top curated pattern for 'below zero'.",
+      "verdict": "PASS",
+      "reason": "Signed net-cash screen works; negative-value evidence per row.",
+      "defects": []
+    },
+    {
+      "id": 4,
+      "question": "profitable companies whose revenue is still growing (cross-metric)",
+      "tool_calls": ["find_fsconcept -> net_income", "find_fspattern -> is_positive, consecutive_growth", "screen_unified(fundamental:[{net_income,is_positive},{revenue,consecutive_growth}])"],
+      "result_summary": "40 hits. NVDA/GOOG/MSFT/AMZN/AVGO/META — each matched BOTH net_income and revenue.",
+      "evidence_check": "Each row matched.fundamental has both net_income and revenue keys => AND intersection honored.",
+      "confusion_note": "Obvious. 'profitable' -> net_income is_positive; 'still growing' -> revenue consecutive_growth.",
+      "verdict": "PASS",
+      "reason": "Two AND-ed fund conditions (profitability + growth) intersected correctly.",
+      "defects": []
+    },
+    {
+      "id": 5,
+      "question": "companies with a dividend yield above 4%",
+      "tool_calls": ["screen_dividends(min_yield:4)"],
+      "result_summary": "Yield-ranked payers returned (total 900+; forward yield_pct). Rich per-stock dividend block (payout_ratio, no_cut_streak, cagr, ffo_payout).",
+      "evidence_check": "dividend.yield_pct per stock; _guide warns to decompose yield (special-div, payout>1, price-drop trap).",
+      "confusion_note": "Obvious. Dedicated income screener with min_yield in percent (4=4%).",
+      "verdict": "PASS",
+      "reason": "Dividend yield screen is a first-class tool param.",
+      "defects": []
+    },
+    {
+      "id": 6,
+      "question": "dividend payers whose payout ratio is under 60% and that haven't cut the dividend (dividend safety)",
+      "tool_calls": ["screen_dividends(max_payout:0.60,min_streak_years:5)"],
+      "result_summary": "total 931. Rows all payout_ratio_eff <0.60 and no_cut_streak_yrs >=5 (SSTK 0.55/5, PFLT 0.33/10 lastcut None).",
+      "evidence_check": "payout_ratio_eff, no_cut_streak_yrs, last_cut_year all present per row => both safety conditions evidenced.",
+      "confusion_note": "Obvious. max_payout accepts fraction or percent; min_streak_years = no-cut streak. Dedicated params, no guessing.",
+      "verdict": "PASS",
+      "reason": "Payout ceiling + no-cut streak are dedicated screen_dividends params with per-row evidence.",
+      "defects": []
+    },
+    {
+      "id": 7,
+      "question": "REITs with a high FFO payout (REIT-specific metric)",
+      "tool_calls": ["find_gics -> 6010 (REITs)", "find_fsconcept -> ffo_payout", "find_fspattern -> high", "screen_unified(fundamental:[{ffo_payout,high}],gics:6010,asset_type:[REIT,Common Stock])"],
+      "result_summary": "32 REITs (CCI, MAC, HR, SLG, GFC.PA...) matched ffo_payout via the 'high' top-tail cohort pattern.",
+      "evidence_check": "matched.fundamental.ffo_payout present but value NOT surfaced ({kind:level} with no numeric value). Leg fired but the FFO-payout number is not echoed as evidence.",
+      "confusion_note": "Obvious tool path. 'high' (vague, no number) correctly routed to the cohort top-tail pattern, not above/threshold. ffo_payout is a real REIT-specific concept.",
+      "verdict": "PASS",
+      "reason": "REIT-specific FFO-payout concept exists, resolves, and screens on REIT universe. Minor: matched value not echoed.",
+      "defects": [
+        {"desc": "For the 'high'/top-tail cohort pattern on ffo_payout, matched.fundamental.ffo_payout returns {kind:'level'} with NO numeric value or benchmark — thin evidence vs the below_average case which echoes value+cohort_benchmark.", "side": "server"}
+      ]
+    },
+    {
+      "id": 8,
+      "question": "stocks that dropped >15% recently BUT fundamentally fine (growing revenue, not overvalued) — TA cond INTERSECT fund cond in ONE screen",
+      "tool_calls": ["find_tasignal -> net_change_down", "find_fspattern -> consecutive_growth, below_average", "screen_unified(fundamental:[{revenue,consecutive_growth},{pe,below_average}],ta:[{net_change_down,a:close,b:0.15,window_bars:60}])"],
+      "result_summary": "32 hits, ALL tagged matched_legs=[fundamental,ta]. AMSC -28.2%, BIRK -20.7%, BLBD -25.5% drops; each with revenue-growth series and pe below cohort (e.g. pe 10.4 vs benchmark 19.4).",
+      "evidence_check": "BOTH legs' evidence present per row: ta.'price net drop >=15%'.detail.ret (actual %) + trigger date + strength; fundamental.revenue.series[] + pe.value vs cohort_benchmark. Genuine intersection.",
+      "confusion_note": "Obvious once axes understood: find_tasignal gives net_change_down (b=fraction 0.15), fund leg AND-ed. 'not overvalued' with no number -> pe below_average cohort (needs no threshold).",
+      "verdict": "PASS",
+      "reason": "Multi-leg TA-INTERSECT-fund worked end to end: rows carry BOTH legs, each leg's numeric evidence present, intersection is real (not a union/OR).",
+      "defects": []
+    },
+    {
+      "id": 9,
+      "question": "companies growing revenue over 20% AND net margin over 25% (two fund conditions AND-ed)",
+      "tool_calls": ["find_fspattern -> compound_growth", "screen_unified(fundamental:[{revenue,compound_growth,threshold:0.20},{net_margin,above,threshold:0.25}])"],
+      "result_summary": "32 hits. NVDA/AVGO/LLY/PLTR/ANET/000660.KO — each matched both revenue and net_margin.",
+      "evidence_check": "Each row matched.fundamental has both revenue and net_margin keys. Thresholds as fractions (0.20, 0.25).",
+      "confusion_note": "Obvious. Growth-rate>20% -> revenue compound_growth threshold 0.20; margin>25% -> net_margin above 0.25.",
+      "verdict": "PASS",
+      "reason": "Two AND-ed fund conditions with fractional thresholds intersected correctly.",
+      "defects": []
+    },
+    {
+      "id": 10,
+      "question": "companies whose inventory turnover improved — AND probe an UNSUPPORTED concept (auditor changed)",
+      "tool_calls": ["find_fsconcept -> dio (no inventory_turnover ratio)", "find_fspattern -> improved_every_year", "screen_unified(fundamental:[{dio,improved_every_year,N:3}])", "find_fsconcept('auditor changed')", "screen_unified(fundamental:[{concept:auditor_changed,...}]) -> hard error"],
+      "result_summary": "Supported half: 24 hits with dio series evidence. Unsupported half: find_fsconcept returns only weak drift candidates (diluted_accounting_change sim0.66, change_in_dividend_payable) with NO 'no-match' flag; but screen_unified with a bogus concept returns a CLEAR capability error: \"unknown concept 'auditor_changed' — not a known field/ratio/valuation metric\".",
+      "evidence_check": "dio matched with series[]. Bogus-concept path = explicit error string, not silent-empty, not crash.",
+      "confusion_note": "No true inventory_turnover RATIO exists — best proxy is dio (Days Inventory Outstanding, inverse). For 'auditor changed' the RESOLVER gives no confident-match signal (would mislead a blind client into picking a drift candidate).",
+      "verdict": "PARTIAL",
+      "reason": "Unsupported concept DOES get a clear capability error at the SCREEN layer (execution rejects unknown concept). But the find_fsconcept RESOLVER silently returns low-confidence drift candidates with no 'no confident match' flag — a blind client could pick a wrong field. Also no dedicated inventory_turnover ratio (dio proxy only).",
+      "defects": [
+        {"desc": "find_fsconcept('auditor changed') returns only weak-similarity drift candidates (top sim ~0.66) with NO explicit 'no confident match / unsupported concept' signal — a blind client is nudged toward a wrong field (e.g. diluted_accounting_change). The hard capability error only appears later at screen_unified execution.", "side": "server"},
+        {"desc": "No inventory_turnover ratio concept; only dio (Days Inventory Outstanding) as an inverse proxy — client must know to invert 'improved'.", "side": "server"}
+      ]
+    },
+    {
+      "id": 11,
+      "question": "resolve five at once: gross margin, interest coverage, quick ratio, tangible book value, effective tax rate (batch)",
+      "tool_calls": ["find_fsconcept(queries:[gross margin,interest coverage,quick ratio,tangible book value,effective tax rate])"],
+      "result_summary": "5 blocks in input order. #1: gross_profit, interest_coverage, quick_ratio, tangible_book_value, effective_tax_rate.",
+      "evidence_check": "results[] length 5, one block per query, each with top-k candidates.",
+      "confusion_note": "Obvious via the `queries` batch param. 'gross margin' top-1 is gross_profit field (ratio gross_margin lower in list) — top-k design, not a defect.",
+      "verdict": "PASS",
+      "reason": "Batch concept-resolution handled all five in one call, correct order, clean top candidates.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 10,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "find_fsconcept has no 'no-confident-match / unsupported concept' signal: a genuinely unsupported concept ('auditor changed') returns only weak drift candidates, so a blind client is nudged to a wrong field. The clear capability error only fires later at screen_unified execution (unknown concept). Resolver should flag low-confidence/no-match.",
+      "screen_unified 'high'/top-tail cohort pattern on ffo_payout returns matched value as {kind:'level'} with NO numeric value/benchmark echoed — thinner evidence than the below_average path (which echoes value + cohort_benchmark).",
+      "No dedicated inventory_turnover ratio concept (only dio / Days Inventory Outstanding as an inverse proxy)."
+    ]
+  }
+}

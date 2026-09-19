@@ -1,0 +1,22 @@
+{
+  "id": "ma-06",
+  "question": "I want to find assets across all markets that have been quietly consolidating — low volatility squeeze — and might be about to make a big move.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["volatility squeeze low volatility"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [{"anchor": [{"pattern": "bb_squeeze", "window_bars": 5}]}],
+        "limit": 20
+      }
+    }
+  ],
+  "result_summary": "Returned 79 results (capped=false). Top 20 include 10 crypto (.CC), 1 forex (.FOREX: XAUEUR.FOREX was in buffer), and 9 stocks (0374.HK, DNM.LSE, ORNT.LSE, TLRY.US, etc.). Context shows bb_width values near 0.0 confirming tight Bollinger band compression. Signal correctly mapped to Bollinger squeeze (bands tightening), NOT short squeeze as red-flagged. Multiple asset types confirmed.",
+  "verdict": "PASS",
+  "reason": "Returns results from multiple asset types (crypto + stocks + forex confirmed). bb_squeeze correctly maps the volatility squeeze concept. bb_width near 0 confirms actual compression. No misidentification as short squeeze.",
+  "defects": []
+}

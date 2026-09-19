@@ -1,0 +1,1094 @@
+{
+  "id": "tn-04",
+  "question": "Is Tesla overbought or oversold right now? Just tell me if it's a good time to buy or if I should wait.",
+  "tools_called": [
+    {
+      "tool": "find_stock",
+      "args": {
+        "q": "Tesla"
+      }
+    },
+    {
+      "tool": "asset_pulse",
+      "args": {
+        "ticker": "TSLA.US",
+        "window": "30d",
+        "style": "technical"
+      }
+    }
+  ],
+  "raw_responses": [
+    [
+      {
+        "ticker": "TSLA.US",
+        "symbol": "TSLA",
+        "name": "Tesla Inc",
+        "type": "stock",
+        "country": "USA",
+        "domicile": "US",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "US",
+        "market_cap_usd": 1378194685952.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "447770.KO",
+        "symbol": "447770",
+        "name": "TIGER TESLA Balanced",
+        "type": "etf",
+        "country": "Korea",
+        "domicile": "KR",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "KO",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "3TSE.XETRA",
+        "symbol": "3TSE",
+        "name": "Leverage Shares 3x Tesla ETP Securities",
+        "type": "etf",
+        "country": "Germany",
+        "domicile": "XS",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "XETRA",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "475080.KO",
+        "symbol": "475080",
+        "name": "Samsung KODEX Tesla Covered Call Balanced Active ETF",
+        "type": "etf",
+        "country": "Korea",
+        "domicile": "KR",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "KO",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "0047P0.KO",
+        "symbol": "0047P0",
+        "name": "Kb Rise Tesla Fixed Tech100 Etf",
+        "type": "etf",
+        "country": "Korea",
+        "domicile": "KR",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "KO",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "0132K0.KO",
+        "symbol": "0132K0",
+        "name": "Hanwha Plus Tesla Weekly Covered Call Balanced Etf",
+        "type": "etf",
+        "country": "Korea",
+        "domicile": "KR",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "KO",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "459560.KO",
+        "symbol": "459560",
+        "name": "Samsung Kodex Tesla Value Chain Factset Etf",
+        "type": "etf",
+        "country": "Korea",
+        "domicile": "KR",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "KO",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      },
+      {
+        "ticker": "TSLP.US",
+        "symbol": "TSLP",
+        "name": "Kurv Yield Premium Strategy Tesla TSLA ETF",
+        "type": "etf",
+        "country": "USA",
+        "domicile": "US",
+        "region": null,
+        "region_iso2": null,
+        "exchange": "US",
+        "market_cap_usd": 0.0,
+        "similarity": 1.0,
+        "match_type": "name"
+      }
+    ],
+    {
+      "ticker": "TSLA.US",
+      "window": "30d",
+      "price": {
+        "as_of": "2026-08-24",
+        "atr_pct_14d": 3.42,
+        "close_vs_sma200_pct": -13.38,
+        "close_vs_sma50_pct": -4.36,
+        "country": "USA",
+        "country_iso2": "US",
+        "country_iso2_b": null,
+        "currency": "USD",
+        "currency_exposures": [
+          {
+            "channel": "fx_revenue",
+            "direction": "-",
+            "effect_if_strengthens": "good",
+            "foreign_ccy": "CNY",
+            "pair": "USDCNY.FOREX",
+            "reason": "Books ~22.1% of revenue in China (FY2025); a stronger CNY vs USD lifts the USD-value of that foreign revenue (translation exposure).",
+            "strength": "medium"
+          }
+        ],
+        "description": "Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive; and Energy Generation and Storage. The company offers electric vehicles, as well as sells automotive regulatory credits; and non-warranty maintenance services and collision, automotive insurance services, as well as part sales and retail merchandise sale. It also provides sedans and sport utility vehicles through direct and used vehicle sales, a network of Tesla Superchargers, and in-app upgrades; purchase financing and leasing services; services for electric vehicles through its company-owned service locations and Tesla mobile service technicians; and vehicle limited warranties and extended service plans. In addition, the company engages in the design, manufacture, installation, sale, and leasing of solar energy generation and energy storage products, and related services to residential, commercial, and industrial customers and utilities through its website, stores, and galleries, as well as through a network of channel partners. Further, it provides services and repairs to its energy product customers, including under warranty and extended service plans; and various financing options to its residential customers; lithium-ion battery energy storage products, such as Powerwall and Megapack; energy generation products, including solar panels and solar roof; self-driving development and artificial intelligence software, vehicle control and infotainment software, and battery and powertrain. The company was formerly known as Tesla Motors, Inc. and changed its name to Tesla, Inc. in February 2017. Tesla, Inc. was incorporated in 2003 and is headquartered in Austin, Texas.",
+        "drawdown_from_52w_high_pct": -30.05,
+        "gics": "Automobile Manufacturers",
+        "gics_code": "25102010",
+        "high_52w": 498.83,
+        "high_52w_date": "2025-12-22",
+        "highest_volume_day": {
+          "date": "2025-09-12",
+          "volume": 168156400.0
+        },
+        "last_close": 348.95,
+        "logo_url": "https://storage.googleapis.com/ava-advisor-26c7b.firebasestorage.app/logos/a08841ec-f116-45cb-9923-eac72f6c3d25.png",
+        "low_52w": 297.38,
+        "low_52w_date": "2026-07-29",
+        "max_drawdown_1y_pct": -39.1,
+        "megatrends": [
+          {
+            "exposure": "core",
+            "name": "Western / Legacy & Pure-play OEMs",
+            "node_id": 16010200
+          },
+          {
+            "exposure": "core",
+            "name": "Energy Storage & Grid Flexibility",
+            "node_id": 14070000
+          },
+          {
+            "exposure": "core",
+            "name": "Autonomous Vehicles & Robotaxi",
+            "node_id": 12030000
+          },
+          {
+            "exposure": "core",
+            "name": "Humanoid Robots",
+            "node_id": 12020000
+          },
+          {
+            "exposure": "core",
+            "name": "AI Applications & Copilots",
+            "node_id": 10080000
+          },
+          {
+            "exposure": "secondary",
+            "name": "Solar",
+            "node_id": 14040000
+          },
+          {
+            "exposure": "secondary",
+            "name": "Robotaxi Operators & Platforms",
+            "node_id": 12030100
+          },
+          {
+            "exposure": "secondary",
+            "name": "Charging Infrastructure & Networks",
+            "node_id": 16030000
+          },
+          {
+            "exposure": "secondary",
+            "name": "E-motors, Inverters & Drivetrain",
+            "node_id": 16060200
+          },
+          {
+            "exposure": "secondary",
+            "name": "Robotics AI & Embodiment Software",
+            "node_id": 12080000
+          }
+        ],
+        "metric_kind": "return",
+        "n_bars": 300,
+        "name": "Tesla Inc",
+        "range_position_52w_pct": 25.6,
+        "range_read": "lower half of the 52-week range",
+        "realized_vol_30d_annual_pct": 57.94,
+        "realized_vol_90d_annual_pct": 52.13,
+        "realized_vol_percentile_1y": 92.06,
+        "region": null,
+        "region_iso2": null,
+        "related_assets": [
+          {
+            "as_of": "2026-08-06T07:15:52.815673+00:00",
+            "asset_class": "commodity",
+            "channel": "input_cost",
+            "direction": "-",
+            "is_proxy": false,
+            "listing_id": 3929979,
+            "name": "Lithium Carbonate Futures (GFEX)",
+            "reason": "Battery cells are the single largest vehicle BOM item and lithium is the irreplaceable cathode/electrolyte metal in both Tesla's NCA/NCM and its LFP packs; Tesla names lithium as a key raw material and cited lower raw-material costs as a 2025 cost-per-vehicle tailwind. This ticker is the China-domestic lithium-carbonate benchmark, the de-facto pricing reference for the LFP cells Tesla buys from CATL/BYD and for Shanghai output, but Tesla is a US issuer buying globally, so note the China-benchmark caveat (benchmark_decoupled risk for its US/Nevada and Korean/Japanese cell supply).",
+            "strength": "medium",
+            "ticker": "LITHIUM.COMM"
+          },
+          {
+            "as_of": "2026-08-06T07:15:52.815673+00:00",
+            "asset_class": "commodity",
+            "channel": "input_cost",
+            "direction": "-",
+            "is_proxy": false,
+            "listing_id": 3929977,
+            "name": "Aluminum (CME)",
+            "reason": "Tesla is unusually aluminum-intensive versus a typical steel-bodied OEM: single-piece Giga-castings for the front/rear underbody, aluminum-intensive body structures and battery enclosures. Aluminum is a named raw material in Tesla's cost/risk disclosure. Idiosyncratic only at the margin (all OEMs use some aluminum), so capped at low.",
+            "strength": "low",
+            "ticker": "ALUMINUM.COMM"
+          },
+          {
+            "as_of": "2026-08-06T07:15:52.815673+00:00",
+            "asset_class": "crypto",
+            "channel": "balance_sheet",
+            "direction": "+",
+            "is_proxy": false,
+            "listing_id": 55945,
+            "name": "Bitcoin",
+            "reason": "Tesla holds a legacy bitcoin position on its balance sheet, now carried at fair value with unrealized gains/losses flowing straight through net income under ASU 2023-08, so BTC moves reported GAAP earnings in a way no other auto manufacturer's balance sheet does - genuinely idiosyncratic. Immaterial versus total assets and market cap, so strength low.",
+            "strength": "low",
+            "ticker": "BTC-USD.CC"
+          },
+          {
+            "as_of": "2026-08-06T07:15:52.815673+00:00",
+            "asset_class": "commodity",
+            "channel": "input_cost",
+            "direction": "-",
+            "is_proxy": false,
+            "listing_id": 3854034,
+            "name": "Copper Futures",
+            "reason": "A battery-electric vehicle uses roughly 2-4x the copper of an ICE car (traction motors, busbars, high-voltage harnesses), and Tesla additionally consumes copper in Supercharger build-out and Megapack systems, so copper is more material to Tesla than to the average auto manufacturer. Still a small share of total COGS, hence low.",
+            "strength": "low",
+            "ticker": "COPPER.COMM"
+          }
+        ],
+        "revenue_by_region": [
+          {
+            "geo": "US",
+            "is_home": true,
+            "level": "country",
+            "magnitude": null,
+            "share_pct": 48.9
+          },
+          {
+            "geo": "FOREIGN_REST",
+            "is_home": false,
+            "level": "foreign_rest",
+            "magnitude": null,
+            "share_pct": 27.7
+          },
+          {
+            "geo": "CN",
+            "is_home": false,
+            "level": "country",
+            "magnitude": null,
+            "share_pct": 22.1
+          }
+        ],
+        "rvol": 1.13,
+        "rvol_read": "normal volume",
+        "ticker": "TSLA.US",
+        "trend_read": "downtrend — below both the 50-day and 200-day average",
+        "unmet_demand": [
+          {
+            "asset_class": "commodity",
+            "built_ticker": null,
+            "definition": "Cobalt metal / cobalt hydroxide spot price, USD per lb (or USD/tonne), a Fastmarkets/LME battery-and-superalloy metal produced largely as a nickel/copper MINING BY-PRODUCT from DRC — distinct from tungsten and molybdenum: cobalt's price is driven by EV-battery cathode and aerospace superalloy demand, not steel alloying.",
+            "is_price_series": true,
+            "key": "COBALT",
+            "status": "open",
+            "why": "Cobalt remains a named battery raw material for Tesla's NCA/NCM chemistries (though deliberately minimized and absent from its LFP packs), with no in-universe ticker for cobalt metal/hydroxide."
+          },
+          {
+            "asset_class": "credit",
+            "built_ticker": null,
+            "definition": "California Low Carbon Fuel Standard credit price, USD per metric-tonne CO2e credit (CARB program) — a state-administered carbon-intensity credit generated by low-CI fuels (renewable diesel, biomethane, EV charging), a California-only market distinct from the federal RIN and from EU/compliance-carbon allowances.",
+            "is_price_series": true,
+            "key": "LCFS",
+            "status": "open",
+            "why": "Tesla generates and sells California LCFS credits from Supercharger and residential EV charging, a component of the regulatory-credit revenue line; the CARB LCFS credit price has no in-universe ticker. Smaller than the ZEV/GHG credit component."
+          },
+          {
+            "asset_class": "commodity",
+            "built_ticker": null,
+            "definition": "LME primary (Class-1) nickel cash/3-month settlement, USD per tonne — the global exchange benchmark for refined nickel used in stainless steel and EV batteries, distinct from China-domestic nickel and from Indonesian NPI/nickel-pig-iron, and priced independently of its by-product cobalt.",
+            "is_price_series": true,
+            "key": "LME_NICKEL",
+            "status": "open",
+            "why": "High-nickel NCA/NCM cathodes in Model S/X, long-range Model 3/Y and 4680 cells make refined Class-1 nickel a named battery raw material. The correct benchmark is the USD LME primary-nickel price for a US buyer; the in-universe NICKEL.COMM is the China-domestic series and is a poor match, so this is excluded from related_assets purely for lack of an in-universe ticker."
+          },
+          {
+            "asset_class": "credit",
+            "built_ticker": null,
+            "definition": "Zero-emission-vehicle regulatory compliance credit price, USD per credit - bilaterally traded credits generated under California's CARB ZEV mandate and Section-177 state programs, with analogous EU CO2-pooling and China NEV dual-credit markets, sold by EV-only producers to deficit OEMs. Distinct from the fuel-carbon-intensity LCFS credit and the federal RIN blending credit.",
+            "is_price_series": true,
+            "key": "ZEV_CREDIT",
+            "status": "open",
+            "why": "Automotive regulatory credits were roughly $2.0B of 2025 revenue (down 28% from $2.76B in 2024) at effectively 100% gross margin, a decisive swing factor in Tesla's operating income and one being actively repealed/restricted by 2025 US regulatory action. No in-universe ticker exists for ZEV/GHG compliance credit prices."
+          }
+        ],
+        "up_down_volume_ratio_1mo": 1.24,
+        "vol_trend_read": "volatility steady",
+        "volume_conviction_read": "balanced up/down volume",
+        "volume_trend_read": "volume fading",
+        "volume_vs_1y_avg_pct": -47.47,
+        "windows": {
+          "1mo": {
+            "change_abs": 39.73,
+            "change_pct": 12.85,
+            "high": 366.5,
+            "high_date": "2026-08-21",
+            "low": 297.38,
+            "low_date": "2026-07-29"
+          },
+          "1w": {
+            "change_abs": 9.65,
+            "change_pct": 2.84,
+            "high": 366.5,
+            "high_date": "2026-08-21",
+            "low": 331.12,
+            "low_date": "2026-08-18"
+          },
+          "1y": {
+            "change_abs": 2.35,
+            "change_pct": 0.68,
+            "high": 498.83,
+            "high_date": "2025-12-22",
+            "low": 297.38,
+            "low_date": "2026-07-29"
+          },
+          "3mo": {
+            "change_abs": -84.64,
+            "change_pct": -19.52,
+            "high": 445.6,
+            "high_date": "2026-05-27",
+            "low": 297.38,
+            "low_date": "2026-07-29"
+          },
+          "ytd": {
+            "change_abs": -100.77,
+            "change_pct": -22.41,
+            "high": 458.34,
+            "high_date": "2026-01-02",
+            "low": 297.38,
+            "low_date": "2026-07-29"
+          }
+        }
+      },
+      "impact": {
+        "articles": [
+          {
+            "title": "SpaceX, Tesla, Intel Break Ground on $16.8 Billion Texas Chip Fab",
+            "brief_text": "SpaceX, Tesla, and Intel have broken ground on the Terafab, the world's largest vertically integrated chipmaking factory in Grimes County, Texas. The initial phase will cost $16.8 billion, with total costs across all phases potentially surpassing $119 billion. The 100-million-square-foot facility is expected to meet SpaceX and Tesla's projected computing demand of more than 1 terawatt per year. SpaceX and Tesla will fund construction, while Intel will support development with its licensed chipmaking process and foundry operations. Approximately 75% of the chips will go to SpaceX's orbital data centers and satellite constellations, with the remaining 25% powering Tesla's Optimus robots, self-driving vehicles, and Cybercabs. Texas is supporting the project with a $30 million grant and tax abatements. SpaceX's capex surged more than sixfold year over year in the second quarter of 2026, from $2.8 billion to $18.4 billion, with $15.8 billion allocated to expanding its AI business.",
+            "url": "https://finance.yahoo.com/technology/articles/spacex-building-16-8-billion-162500056.html",
+            "publisher": "The Motley Fool",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "Tesla will use 25% of the fab's chips for Optimus robots, self-driving vehicles, and Cybercabs, meeting its computing demand.",
+                  "relevance": 0.9
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.9
+            },
+            "news_types": [
+              "ma_partnership",
+              "product_tech"
+            ],
+            "impact_score": 4,
+            "dup_count": 1,
+            "trend": "Robotics & Physical AI",
+            "trend_id": 12000000,
+            "published_at": "2026-08-25T16:25:00+00:00"
+          },
+          {
+            "title": "Tesla FSD Attach Rate Hits 55% of Q2 North American Deliveries",
+            "brief_text": "Tesla's Full Self-Driving attach rate reached 55% of Q2 North American deliveries, with paid FSD customers hitting nearly 1.5 million globally, according to 24/7 Wall St. The firm set a $377.78 price target on Tesla, implying 4.11% upside from $362.86, and rated the stock a hold with 90% confidence. Tesla trades at 185 times forward earnings, while General Motors trades at 29 times earnings and Rivian posted a negative 66.5% operating margin in Q1 2026. Tesla's Q2 2026 revenue rose 25.5% to $28.24 billion on record deliveries of 480,126 vehicles, but non-GAAP EPS of $0.33 missed estimates by 38.51% and operating margin collapsed to 1.4%.",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/forget-ev-sales-number-could-130044921.html",
+            "publisher": "24/7 Wall St.",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "capital",
+                  "direction": "neg",
+                  "reason": "EPS miss and margin collapse overshadow FSD attach rate.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "neg",
+              "relevance": 1
+            },
+            "news_types": [
+              "earnings_results",
+              "analyst_rating"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Artificial Intelligence",
+            "trend_id": 10000000,
+            "published_at": "2026-08-25T13:00:44+00:00"
+          },
+          {
+            "title": "JPMorgan sees humanoid robot demand surging in U.S. manufacturing",
+            "brief_text": "JPMorgan expects demand for humanoid robots to surge in U.S. manufacturing as the cost of deploying a robot falls below $10 per hour, undercutting the roughly $30 hourly cost of a warehouse worker. The bank's research note, cited by MarketWatch, identifies U.S. manufacturing as a sector with substantial unfilled job openings that humanoid robots are expected to absorb in large numbers. The forecast comes as the Federal Communications Commission added foreign-made humanoid and quadruped robots to its Covered List, blocking new imports on national security grounds, a move targeting China, which holds roughly 85% of the global humanoid robot market. Chinese firms Unitree and AGIBOT each shipped more than 5,000 humanoid units in 2025, while American competitors such as Tesla and Figure AI shipped only a few hundred units apiece, according to CNN citing technology research firm Omdia. Unitree went public on Shanghai's STAR Market earlier this month, closing 460% above its IPO price on its first trading day and valuing the company at roughly $50 billion, after raising approximately 6.1 billion yuan, or $905 million, in the listing.",
+            "url": "https://finance.yahoo.com/technology/ai/articles/jpmorgan-predicts-booming-humanoid-robot-122504354.html",
+            "publisher": "MarketWatch",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "JPMorgan expects surging demand for humanoid robots in U.S. manufacturing, benefiting Tesla's robot segment.",
+                  "relevance": 0.6
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 0.6
+            },
+            "news_types": [
+              "industry_thematic",
+              "regulatory_legal"
+            ],
+            "impact_score": 3,
+            "dup_count": 1,
+            "trend": "Robotics & Physical AI",
+            "trend_id": 12000000,
+            "published_at": "2026-08-25T12:25:04+00:00"
+          },
+          {
+            "title": "Tesla Raises Cybertruck Prices by $5,000",
+            "brief_text": "Tesla has raised prices on two Cybertruck versions in the U.S., adding $5,000 to each model. The Dual Motor all-wheel-drive model now starts at $74,990, up from $69,990, while the Premium all-wheel-drive version rises to $84,990 from $79,990. The increases amount to roughly 7.1% and 6.2%, respectively. Tesla did not provide a reason for the changes, and the top-end Cyberbeast remains priced at $99,990. The move comes amid a difficult sales environment for the electric pickup and could affect purchase demand while changing the economics of higher-priced configurations.",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/huge-news-tesla-stock-fans-121446775.html",
+            "publisher": "GuruFocus",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "pricing",
+                  "direction": "neg",
+                  "reason": "Tesla raised Cybertruck prices by $5,000, which could dampen demand in a difficult sales environment.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "neg",
+              "relevance": 1
+            },
+            "news_types": [
+              "product_tech"
+            ],
+            "impact_score": 3,
+            "dup_count": 2,
+            "trend": "Electrification & Mobility",
+            "trend_id": 16000000,
+            "published_at": "2026-08-25T12:14:46+00:00"
+          },
+          {
+            "title": "Tesla Stops Selling Solar Roof Tiles, Shifts to Traditional Panels",
+            "brief_text": "Tesla has stopped selling its premium Solar Roof tiles on its website, nearly a decade after Elon Musk introduced them as a more attractive alternative to conventional solar panels. The company's solar strategy has now shifted to a traditional solar-panel offering, with Reuters noting that Tesla had once targeted 1,000 Solar Roof installations per week in 2021 but actual installations were far below that level. The move marks a retreat from a product central to Tesla's original vision of integrating solar generation directly into homes, following its 2016 acquisition of SolarCity for about $2.6 billion and manufacturing problems at its Buffalo, New York facility. Tesla is not abandoning solar altogether, as it continues to produce traditional panels at the Buffalo factory and has filed plans this month for a proposed $10.1 billion solar-cell factory outside Houston, Texas, that could create 9,712 permanent jobs. Wall Street expects Tesla's energy-storage division to generate around $18.3 billion in revenue in 2026, up from $12.8 billion in 2025, a roughly 43% increase.",
+            "url": "https://finance.yahoo.com/energy/articles/tesla-tsla-solar-roof-shutdown-014101772.html",
+            "publisher": "Insider Monkey",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "technology",
+                  "direction": "neg",
+                  "reason": "Tesla discontinues its premium Solar Roof tiles, a retreat from a key product, despite continuing traditional panels.",
+                  "relevance": 0.9
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "neg",
+              "relevance": 0.9
+            },
+            "news_types": [
+              "product_tech"
+            ],
+            "impact_score": 3,
+            "dup_count": 3,
+            "trend": "Energy Transition & Power Demand",
+            "trend_id": 14000000,
+            "published_at": "2026-08-25T01:41:01+00:00"
+          },
+          {
+            "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
+            "brief_text": "Tesla will unveil its production Cybercab at a launch event in Austin on September 3rd, with the company expecting to roll out 2,500 robotaxis in 2026. The Cybercab has no pedals or steering wheel, seats two people, and features scissor-like doors. Tesla's chief cybercab officer said during a Nevada public hearing that he expects to have around 2,500 vehicles within the year, and that 5,000 has always been a ceiling for the company. Nevada approved an expansion of robotaxi testing up to 8,000 vehicles in Clark County, with Tesla receiving the largest share of 5,000 robotaxis.",
+            "url": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
+            "publisher": "Yahoo Finance",
+            "impact": {
+              "aspects": [
+                {
+                  "aspect": "demand",
+                  "direction": "pos",
+                  "reason": "Tesla to launch Cybercabs in Austin, with plans for 2,500 robotaxis in 2026, indicating strong product demand.",
+                  "relevance": 1
+                }
+              ],
+              "label_version": "1.0",
+              "net_direction": "pos",
+              "relevance": 1
+            },
+            "news_types": [
+              "product_tech"
+            ],
+            "impact_score": 4,
+            "dup_count": 9,
+            "trend": "Robotics & Physical AI",
+            "trend_id": 12000000,
+            "published_at": "2026-08-24T20:50:04+00:00"
+          }
+        ]
+      },
+      "options": {
+        "as_of": "2026-08-24 19:48:44.414883+00",
+        "available_from": "2026-07-17 14:42:13.153668+00",
+        "available_to": "2026-08-24 19:48:44.414883+00",
+        "requested_as_of": null,
+        "sentiment": {
+          "_guide": {
+            "baseline": "read = 'baseline_pending' or 'level' means NO own-history baseline yet → do NOT infer 'unusual'/'extreme'. Only an own-history percentile read (driver ends '_percentile_90d' / '_rank_90d') can flag something as unusual for this asset.",
+            "cross_asset": "O/S ratio and IV levels are NOT comparable across assets (index ETFs vs single stocks live on different scales). Judge 'unusual' only via a signal's own-history percentile.",
+            "how": "Each signal is precomputed. Narrate from its `read` + `because`; do not recompute or re-derive numbers.",
+            "key_dates": "A date is a catalyst only when read = 'event_premium' (options price it via IV premium). 'routine_0dte_concentration' / 'expiry_concentration' are mechanical, NOT events.",
+            "scales": {
+              "positioning_score": "[-1, +1]; + = bullish positioning, - = bearish"
+            },
+            "scope": "These are interpretation ingredients. The verdict / recommendation is YOURS to synthesize — opana stops at interpretation."
+          },
+          "flow": {
+            "os_ratio": 5.880185914119986,
+            "signals": [
+              {
+                "because": "option/stock volume ratio in 67th percentile of this asset's own 90d (normal for it)",
+                "dimension": "options_activity",
+                "driver": "os_ratio_percentile_90d",
+                "read": "typical_for_asset",
+                "value": 5.8802
+              }
+            ]
+          },
+          "horizons": {
+            "long_term": {
+              "dte_range": [
+                91,
+                365
+              ],
+              "metrics": {
+                "atm_iv": 46.47930510595832,
+                "gex_dealer_net": 1830624.940454797,
+                "max_pain_distance_pct": -0.02592751754762931,
+                "pcr_oi_notional": 0.6342198148806186,
+                "skew_25d_rr": -2.257990748348675,
+                "skew_norm": -0.048580561675807335
+              },
+              "n_contracts": 173,
+              "positioning_score": 0.7395,
+              "signals": [
+                {
+                  "because": "$-notional put/call ratio 0.63 (calls heavier)",
+                  "dimension": "direction",
+                  "driver": "pcr_oi_notional",
+                  "read": "bullish_lean",
+                  "value": 0.634
+                },
+                {
+                  "because": "normalized put-skew in 4th percentile of this asset's own 90d (unusually flat)",
+                  "dimension": "fear_greed",
+                  "driver": "skew_norm_percentile_90d",
+                  "read": "put_skew_compressed",
+                  "value": 0.04
+                },
+                {
+                  "because": "ATM IV 46.5% = 36th percentile of this asset's own 90d",
+                  "dimension": "implied_volatility",
+                  "driver": "iv_rank_90d",
+                  "read": "mid_range",
+                  "value": 0.36
+                },
+                {
+                  "because": "dealers net long gamma → dampen moves",
+                  "dimension": "stability",
+                  "driver": "gex_dealer_net",
+                  "read": "pinned_suppressing",
+                  "value": 1831000.0
+                },
+                {
+                  "because": "spot within -2.6% of max-pain 340.0 (gravitational pull)",
+                  "dimension": "pinning",
+                  "driver": "max_pain_distance_pct",
+                  "read": "pin_candidate",
+                  "value": -0.0259
+                }
+              ]
+            },
+            "medium_term": {
+              "dte_range": [
+                8,
+                90
+              ],
+              "metrics": {
+                "atm_iv": 43.07667899961497,
+                "gex_dealer_net": -6962877.035328783,
+                "max_pain_distance_pct": 0.02552094404644248,
+                "pcr_oi_notional": 1.2921251234756643,
+                "skew_25d_rr": -2.208098012081582,
+                "skew_norm": -0.05125970857923654
+              },
+              "n_contracts": 424,
+              "positioning_score": -0.0891,
+              "signals": [
+                {
+                  "because": "$-notional put/call ratio 1.29 (puts heavier)",
+                  "dimension": "direction",
+                  "driver": "pcr_oi_notional",
+                  "read": "bearish_lean",
+                  "value": 1.292
+                },
+                {
+                  "because": "normalized put-skew in 36th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "fear_greed",
+                  "driver": "skew_norm_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.36
+                },
+                {
+                  "because": "ATM IV 43.1% = 48th percentile of this asset's own 90d",
+                  "dimension": "implied_volatility",
+                  "driver": "iv_rank_90d",
+                  "read": "mid_range",
+                  "value": 0.48
+                },
+                {
+                  "because": "dealers net short gamma → amplify moves",
+                  "dimension": "stability",
+                  "driver": "gex_dealer_net",
+                  "read": "unstable_amplifying",
+                  "value": -6963000.0
+                },
+                {
+                  "because": "spot within +2.6% of max-pain 357.95808551941076 (gravitational pull)",
+                  "dimension": "pinning",
+                  "driver": "max_pain_distance_pct",
+                  "read": "pin_candidate",
+                  "value": 0.0255
+                }
+              ]
+            },
+            "short_term": {
+              "dte_range": [
+                0,
+                7
+              ],
+              "metrics": {
+                "atm_iv": 39.734405710028376,
+                "gex_dealer_net": 9775263.342910375,
+                "max_pain_distance_pct": 0.017046268442916453,
+                "pcr_oi_notional": 1.2231723194260944,
+                "skew_25d_rr": -5.508368223165988,
+                "skew_norm": -0.13862968691075092
+              },
+              "n_contracts": 321,
+              "positioning_score": 0.221,
+              "signals": [
+                {
+                  "because": "$-notional put/call ratio 1.22 (puts heavier)",
+                  "dimension": "direction",
+                  "driver": "pcr_oi_notional",
+                  "read": "bearish_lean",
+                  "value": 1.223
+                },
+                {
+                  "because": "normalized put-skew in 24th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "fear_greed",
+                  "driver": "skew_norm_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.24
+                },
+                {
+                  "because": "ATM IV 39.7% = 24th percentile of this asset's own 90d",
+                  "dimension": "implied_volatility",
+                  "driver": "iv_rank_90d",
+                  "read": "mid_range",
+                  "value": 0.24
+                },
+                {
+                  "because": "dealers net long gamma → dampen moves",
+                  "dimension": "stability",
+                  "driver": "gex_dealer_net",
+                  "read": "pinned_suppressing",
+                  "value": 9775000.0
+                },
+                {
+                  "because": "spot within +1.7% of max-pain 355.0 (gravitational pull)",
+                  "dimension": "pinning",
+                  "driver": "max_pain_distance_pct",
+                  "read": "pin_candidate",
+                  "value": 0.017
+                }
+              ]
+            }
+          },
+          "key_dates": [
+            {
+              "atm_iv": null,
+              "because": "28% of total open interest sits here; 95% of today's volume → standard 0DTE expiry flow (mechanical); no IV premium vs neighbours, so NOT evidence of a catalyst",
+              "dte": 0,
+              "expiry": "2026-08-24",
+              "implied_event_premium_pct": null,
+              "oi_share": 0.276,
+              "rationale_tags": [
+                "high_oi",
+                "high_volume"
+              ],
+              "read": "routine_0dte_concentration",
+              "volume_share": 0.9466
+            },
+            {
+              "atm_iv": 45.38771329494699,
+              "because": "48% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)",
+              "dte": 88,
+              "expiry": "2026-11-20",
+              "implied_event_premium_pct": 0.031,
+              "oi_share": 0.477,
+              "rationale_tags": [
+                "high_oi"
+              ],
+              "read": "expiry_concentration",
+              "volume_share": 0.0099
+            }
+          ],
+          "n_buckets": 4,
+          "per_bucket": {
+            "long": {
+              "atm_iv": 43.07667899961497,
+              "dte_range": [
+                31,
+                90
+              ],
+              "gex_dealer_net": -6962877.035328783,
+              "gex_flip": null,
+              "gex_net": 119052211.49539286,
+              "interpretation": "เอนข้างลง • call แพงกว่า put เล็กน้อย • dealers short gamma (พร้อมเร่ง vol) • มี pinning candidate",
+              "max_pain": 357.95808551941076,
+              "max_pain_distance_pct": 0.02552094404644248,
+              "n_contracts": 424,
+              "pcr_oi_label": "bearish",
+              "pcr_oi_notional": 1.2921251234756643,
+              "pcr_volume_notional": 1.201705232790977,
+              "regime_tags": [
+                "positioning:bearish",
+                "greed_premium",
+                "dealers_short_gamma",
+                "max_pain_pin_candidate"
+              ],
+              "skew_25d_bf": 0.5648339634943548,
+              "skew_25d_rr": -2.208098012081582
+            },
+            "medium": null,
+            "short": {
+              "atm_iv": 39.734405710028376,
+              "dte_range": [
+                2,
+                7
+              ],
+              "gex_dealer_net": 9775263.342910375,
+              "gex_flip": 360.0,
+              "gex_net": 33512799.497134477,
+              "interpretation": "เอนข้างขึ้น • ตลาดเก็งกำไรขาขึ้นชัดเจน (call แพงกว่า put มาก) • dealers อยู่ฝั่ง long gamma (vol ถูกกด) • flip strike ใกล้สปอต (+3.1%) • มี pinning candidate",
+              "max_pain": 350.0,
+              "max_pain_distance_pct": 0.0027216731127345326,
+              "n_contracts": 151,
+              "pcr_oi_label": "bullish",
+              "pcr_oi_notional": 0.5770083328208597,
+              "pcr_volume_notional": 0.6066898939863957,
+              "regime_tags": [
+                "positioning:bullish",
+                "greed_premium_extreme",
+                "dealers_long_gamma",
+                "gex_flip_in_play",
+                "max_pain_pin_candidate"
+              ],
+              "skew_25d_bf": 0.31310312874704493,
+              "skew_25d_rr": -5.508368223165988
+            },
+            "tail": null,
+            "very_long": {
+              "atm_iv": 46.47930510595832,
+              "dte_range": [
+                91,
+                180
+              ],
+              "gex_dealer_net": 1830624.940454797,
+              "gex_flip": 495.0,
+              "gex_net": 12798915.480469665,
+              "interpretation": "เอนข้างขึ้น • call แพงกว่า put เล็กน้อย • dealers อยู่ฝั่ง long gamma (vol ถูกกด) • มี pinning candidate",
+              "max_pain": 340.0,
+              "max_pain_distance_pct": -0.02592751754762931,
+              "n_contracts": 173,
+              "pcr_oi_label": "bullish",
+              "pcr_oi_notional": 0.6342198148806186,
+              "pcr_volume_notional": 0.6324163456121101,
+              "regime_tags": [
+                "positioning:bullish",
+                "greed_premium",
+                "dealers_long_gamma",
+                "max_pain_pin_candidate"
+              ],
+              "skew_25d_bf": 0.764522283772223,
+              "skew_25d_rr": -2.257990748348675
+            },
+            "very_short": null,
+            "zero_dte": {
+              "atm_iv": null,
+              "dte_range": [
+                0,
+                0
+              ],
+              "gex_dealer_net": null,
+              "gex_flip": null,
+              "gex_net": null,
+              "interpretation": "เอนข้างลง • มี pinning candidate",
+              "max_pain": 355.0,
+              "max_pain_distance_pct": 0.017046268442916453,
+              "n_contracts": 170,
+              "pcr_oi_label": "bearish",
+              "pcr_oi_notional": 1.7971179781166264,
+              "pcr_volume_notional": 6.077887917081531,
+              "regime_tags": [
+                "positioning:bearish",
+                "max_pain_pin_candidate"
+              ],
+              "skew_25d_bf": null,
+              "skew_25d_rr": null
+            }
+          },
+          "positioning_score": 0.0775,
+          "spot": 349.05
+        },
+        "snapshot_count": 27,
+        "stale": false,
+        "style": "technical",
+        "symbol": "TSLA"
+      },
+      "relationships": {
+        "competitors": [
+          {
+            "name": "BYD Co Ltd Class A",
+            "symbol": "002594",
+            "exchange": "CS",
+            "country": "China"
+          },
+          {
+            "name": "Alphabet Inc Class C",
+            "symbol": "GOOG",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Rivian Automotive Inc",
+            "symbol": "RIVN",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "NVIDIA Corporation",
+            "symbol": "NVDA",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Space Exploration Technologies Corp. Class A Common Stock",
+            "symbol": "SPCX",
+            "exchange": "US",
+            "country": "USA"
+          }
+        ],
+        "peers": [
+          {
+            "name": "Alphabet Inc Class C",
+            "symbol": "GOOG",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "NVIDIA Corporation",
+            "symbol": "NVDA",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Amazon.com Inc",
+            "symbol": "AMZN",
+            "exchange": "US",
+            "country": "USA"
+          },
+          {
+            "name": "Toyota Motor Corp.",
+            "symbol": "7203",
+            "exchange": "JP",
+            "country": "Japan"
+          },
+          {
+            "name": "Contemporary Amperex Technology Co Ltd Class A",
+            "symbol": "300750",
+            "exchange": "CS",
+            "country": "China"
+          }
+        ]
+      },
+      "fundamentals": {
+        "revenue": 94827000000.0,
+        "revenue_growth_yoy": null,
+        "net_margin": 0.0367,
+        "gross_margin": 0.1885,
+        "operating_margin": 0.0461,
+        "net_income": 3794000000.0,
+        "net_income_growth_yoy": null,
+        "free_cash_flow": 6220000000.0,
+        "operating_cash_flow": 14747000000.0,
+        "total_assets": 137806000000.0,
+        "currency": "USD",
+        "as_of": "2026-06-30",
+        "source": "db",
+        "read": "Revenue 94.8B, net margin 4%, FCF 6.2B, debt/equity 0.2x · 4 signal(s)",
+        "signals": {
+          "headline": null,
+          "top": [
+            {
+              "message": "net_debt_ebitda rose -0.59→-0.15 (τ=1.00) ⚠",
+              "metric": "net_debt_ebitda",
+              "mode": "trend",
+              "period": "2022→2025",
+              "series": [
+                {
+                  "p": "2022",
+                  "v": -0.5949
+                },
+                {
+                  "p": "2023",
+                  "v": -0.4613
+                },
+                {
+                  "p": "2024",
+                  "v": -0.1711
+                },
+                {
+                  "p": "2025",
+                  "v": -0.1525
+                }
+              ],
+              "type": "ratio"
+            },
+            {
+              "message": "operating_margin fell 17.0%→5.1% (τ=-1.00) ⚠",
+              "metric": "operating_margin",
+              "mode": "trend",
+              "period": "2022→2025",
+              "series": [
+                {
+                  "p": "2022",
+                  "v": 0.1698
+                },
+                {
+                  "p": "2023",
+                  "v": 0.0919
+                },
+                {
+                  "p": "2024",
+                  "v": 0.0794
+                },
+                {
+                  "p": "2025",
+                  "v": 0.0511
+                }
+              ],
+              "type": "ratio"
+            },
+            {
+              "message": "roe fell 28.1%→4.9% (τ=-1.00) ⚠",
+              "metric": "roe",
+              "mode": "trend",
+              "period": "2022→2025",
+              "series": [
+                {
+                  "p": "2022",
+                  "v": 0.2815
+                },
+                {
+                  "p": "2023",
+                  "v": 0.2795
+                },
+                {
+                  "p": "2024",
+                  "v": 0.1052
+                },
+                {
+                  "p": "2025",
+                  "v": 0.0489
+                }
+              ],
+              "type": "ratio"
+            },
+            {
+              "message": "rising 16.9B→71.3B (52% of revenue, τ=0.80)",
+              "metric": "EndCashPosition",
+              "mode": null,
+              "period": "2022→TTM",
+              "series": [
+                {
+                  "p": "2022",
+                  "v": 16924000000.0
+                },
+                {
+                  "p": "2023",
+                  "v": 17189000000.0
+                },
+                {
+                  "p": "2024",
+                  "v": 17037000000.0
+                },
+                {
+                  "p": "2025",
+                  "v": 17616000000.0
+                },
+                {
+                  "p": "TTM",
+                  "v": 71280000000.0
+                }
+              ],
+              "type": "trend"
+            }
+          ],
+          "count": 4
+        }
+      },
+      "_guide": "Synthesize a MULTI-LENS read — do NOT answer from one lens. `price` = the LEVEL + how it's moving (windowed changes, how far below the 52w peak = `drawdown_from_52w_high_pct`, is today's vol high vs its OWN year = `realized_vol_percentile_1y`, accumulation vs distribution = `up_down_volume_ratio_1mo`); `impact` = what the news did (+ why); `options` = how the options market is positioned; `relationships` = is the move SECTOR-WIDE (peers/rivals moving too) or IDIOSYNCRATIC? 💰 `fundamentals` (EQUITY only — null for an ETF/index/crypto is EXPECTED, don't flag it) = the company's compact financial health (revenue + YoY growth, margins, free cash flow); QUOTE its `read`, and tie quality/valuation to the price+news picture (the sharp insight is often a DIVERGENCE — strong price but shrinking margins, or a selloff despite growing FCF). `fundamentals.signals` = auto-detected abnormality/pattern flags (multi-year trends, outlier jumps, accounting CONTRADICTIONS like receivables outpacing revenue) — LEAD with `signals.headline` if present and narrate the top flags in plain words (they're high-recall — judge which actually matter). It's already here — do NOT make a separate `financials` call unless the user wants a deep/compare or full statements. Lead with where the lenses AGREE or DIVERGE (divergence is the insight — e.g. strong news but price −14% from the peak). QUOTE price `*_read` labels directly (pre-computed, don't re-derive). 🔴 EXPLAIN `options` FOR A NON-EXPERT (follow the options payload's own `_guide.audience`) — translate EVERY options term (put/call, IV, gamma, skew, max-pain, O/S) into plain everyday words, keep a number only if it helps a layperson; do NOT dump jargon. If `options.covered` is false, answer from `impact`+`price`; `price.note` present → say price isn't available; never fabricate. 🔵 If `price.metric_kind` == 'yield' (a `.GB` bond yield or `.MM` rate): narrate the move in BASIS POINTS (`change_bps`), NOT % (a % of a yield is sign-inverted); use `price_proxy_pct`/`mod_duration` for a bond-PRICE estimate (label it an estimate); yield↑ ⇒ bond price↓. A yield has NO options/PE/market-cap, so `options.covered=false` here is EXPECTED — don't flag it as a gap, just read price + news. If an `impact` article carries `scope:'curve_macro'`, it was BORROWED from the country's benchmark 10Y (`macro_source`) because this specific tenor/rate has no news of its own — narrate it as curve-wide central-bank/macro context, NOT specific to this tenor. 🌐 TRADE LENS: `price` also carries `related_assets` (materiality-weighted COMM/FX links — `channel` = the angle: output_price=its product, input_cost=a cost, demand=a backdrop; not listed = not material, don't invent a supply chain), `revenue_by_region` (where it sells — the WHERE for trade + the cross-border gate) and `currency_exposures`. For a GOODS/exporter or a policy/tariff-exposed name, you MAY deepen with the trade tools (find_hs→search_trade/top_traders/trade_balance): enumerate the firm's material product lines from `description`, resolve each via find_hs, and pull flows for the regions in `revenue_by_region`. 🔴 But GATE it: Comtrade is cross-border EXIM only (no domestic consumption) — a DOMESTIC-demand business (revenue_by_region home-only) has NO trade angle; say so, don't force one. Empty `related_assets`/`revenue_by_region` = no idiosyncratic driver (normal) OR not-yet-mapped — don't fabricate."
+    }
+  ],
+  "answer_to_user": "Tesla (TSLA) is technically WEAK right now, not overbought — the opposite of a hot momentum name. It's in a downtrend, trading BELOW both its 50-day (-4.4%) and 200-day (-13.4%) moving averages, and sits about 30% below its 52-week high of $498.83 (last ~$348.95, only ~26% up its 52-week range). It has bounced +12.9% over the past month but is still -19.5% over 3 months and -22.4% year-to-date, on FADING volume (~47% below its 1-year average) — so the rebound lacks conviction. Read: it's closer to oversold/beaten-down than overbought, but the primary trend is still down and volume isn't confirming the bounce. Not a clear 'good time to buy' on the technicals — a patient approach (wait for it to reclaim the 50-day and for volume to pick up) is reasonable rather than chasing here. Not financial advice."
+}

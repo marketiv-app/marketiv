@@ -1,0 +1,154 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "question": "R&D is at least 15% of revenue",
+      "tool_calls": [
+        "find_fsconcept(batch) -> rnd, revenue",
+        "screen_unified fundamental:[{metricA:rnd, relation:higher_than, metricB:revenue, multiple:0.15}]"
+      ],
+      "result_summary": "count 20. Alphabet, SpaceX, etc.",
+      "evidence_check": "matched.fundamental.rnd = {value_a:61.087B, value_b(revenue):402.836B, ratio:0.15164, metric_b:revenue, relation:higher_than, basis:annual}. Ratio 0.15164 >= 0.15 CORRECT. Full operands+ratio+basis present.",
+      "confusion_note": "None. Relation form obvious from schema (metricA/relation/metricB/multiple; percent-of = fraction 0.15).",
+      "verdict": "PASS",
+      "reason": "Correct filter and complete verifiable evidence.",
+      "defects": []
+    },
+    {
+      "id": 2,
+      "question": "capex is less than 5% of revenue",
+      "tool_calls": [
+        "find_fsconcept -> capex (is_inverted, stored negative)",
+        "screen_unified fundamental:[{metricA:capex, relation:lower_than, metricB:revenue, multiple:0.05}]"
+      ],
+      "result_summary": "count 20. NVDA (capex_to_revenue 0.0259), AAPL (0.0215).",
+      "evidence_check": "matched.fundamental.capex = {kind:relation, unit:usd, value:-6.572B} ONLY -- NO value_b, NO ratio, NO metric_b, NO relation. Cannot verify the 5% band from the matched block. context.capex_to_revenue (0.0259) confirms <5% out-of-band. _conventions note explains capex negative-sign. Diagnostic (reverse relation) proves the underlying filter is magnitude-normalized, so the RESULT is correct.",
+      "confusion_note": "None on input. Output evidence degraded for lower_than.",
+      "verdict": "PARTIAL",
+      "reason": "Filter correct but matched-evidence for lower_than omits value_b/ratio/metric_b/relation -- caller cannot verify the ratio from the row (must fall back to context.capex_to_revenue).",
+      "defects": [
+        {"desc": "lower_than matched evidence collapses to a single {value} with no value_b/ratio/metric_b/relation -- not self-verifiable", "side": "server"}
+      ]
+    },
+    {
+      "id": 3,
+      "question": "free cash flow covers the dividend at least 2x",
+      "tool_calls": [
+        "find_fsconcept -> free_cash_flow, dividends_paid (is_inverted, negative)",
+        "screen_unified fundamental:[{metricA:free_cash_flow, relation:higher_than, metricB:dividends_paid, multiple:2}]"
+      ],
+      "result_summary": "count 20. NVDA, AAPL, GOOG...",
+      "evidence_check": "matched shows {value_a(FCF):96.676B, value_b(dividends_paid):-0.974B, ratio:-99.25667, relation:higher_than}. RATIO IS A NONSENSE NEGATIVE (-99.26) -- FCF/negative-dividend. Because metric_b is a negative outflow, higher_than (A >= 2xB) is satisfied trivially (2 x negative = large negative < any positive FCF), so the '2x cover' magnitude test is NOT reflected in the displayed ratio. The returned set is plausibly the big-coverage names, but a company with FCF barely covering dividends would also pass the literal signed comparison.",
+      "confusion_note": "None on input. The displayed ratio is misleading/signed.",
+      "verdict": "PARTIAL",
+      "reason": "higher_than against a negative-stored metric_b emits a signed ratio (-99.26) that does not represent the intended magnitude coverage; ratio field is present but wrong-signed (inconsistent with ratio_near which normalizes).",
+      "defects": [
+        {"desc": "higher_than/lower_than ratio for a negative (outflow) metric_b is raw-signed (e.g. -99.26) not magnitude-normalized; inconsistent with ratio_near/ratio_between which return a positive ratio", "side": "server"}
+      ]
+    },
+    {
+      "id": 4,
+      "question": "R&D is between 10% and 25% of revenue",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:rnd, relation:ratio_between, metricB:revenue, min:0.10, max:0.25}]"
+      ],
+      "result_summary": "count 20.",
+      "evidence_check": "matched.rnd = {value_a:61.087B, value_b:402.836B, ratio:0.15164, relation:ratio_between}; second row ratio 0.10717. Both within [0.10,0.25], positive ratio. CORRECT and fully verifiable.",
+      "confusion_note": "None. ratio_between + min/max obvious.",
+      "verdict": "PASS",
+      "reason": "In-band, positive ratio, full operands.",
+      "defects": []
+    },
+    {
+      "id": 5,
+      "question": "capex is around 8% of revenue",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:capex, relation:ratio_near, metricB:revenue, target:0.08}]"
+      ],
+      "result_summary": "count 20.",
+      "evidence_check": "matched.capex = {value_a:-28.358B (negative), value_b:323.905B, ratio:0.08755, relation:ratio_near}. Ratio is POSITIVE 0.08755 ~ 0.08 despite negative capex -> ratio_near CORRECTLY magnitude-normalizes. Within default +-10% band. CORRECT.",
+      "confusion_note": "None. ratio_near + target obvious.",
+      "verdict": "PASS",
+      "reason": "Sign-normalized positive ratio near target; full evidence. This is the correct handling that higher/lower_than lacks.",
+      "defects": []
+    },
+    {
+      "id": 6,
+      "question": "net income grew faster than revenue over the last 3 years",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:net_income, relation:growth_faster_than, metricB:revenue, N:3}]"
+      ],
+      "result_summary": "count 20.",
+      "evidence_check": "matched.net_income = {cagr_a:2.018, cagr_b:1.0005, window:cagr_3y, metric_b:revenue, relation:growth_faster_than}. cagr_a > cagr_b CORRECT. N:3 -> window cagr_3y. Full growth evidence (both CAGRs + window).",
+      "confusion_note": "None. growth_faster_than takes no scale param; N goes on condition.",
+      "verdict": "PASS",
+      "reason": "cagr_a vs cagr_b shown and correctly ordered.",
+      "defects": []
+    },
+    {
+      "id": 7,
+      "question": "revenue grew faster than net income (operating deleverage / loser case)",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:revenue, relation:growth_faster_than, metricB:net_income}]"
+      ],
+      "result_summary": "count 20.",
+      "evidence_check": "matched.revenue = {cagr_a(rev):0.0519, cagr_b(NI):-0.3294, window:cagr_3y}. Revenue CAGR > NI CAGR (NI shrinking) CORRECT -- captures operating deleverage. Window defaulted to cagr_3y even without N (fine).",
+      "confusion_note": "None. Symmetric to Q6 with metrics swapped.",
+      "verdict": "PASS",
+      "reason": "Correct loser-case surfacing; both CAGRs shown, NI negative growth handled fine.",
+      "defects": []
+    },
+    {
+      "id": 8,
+      "question": "dividends paid are less than half of free cash flow (dividends are an OUTFLOW, stored negative -- ratio must be by magnitude)",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:dividends_paid, relation:lower_than, metricB:free_cash_flow, multiple:0.5}]",
+        "DIAGNOSTIC: reverse relation dividends_paid higher_than 0.5xFCF"
+      ],
+      "result_summary": "count 20 (NVDA, AAPL, GOOG, MSFT...). Reverse diag count 32 = J&J, Coca-Cola, P&G, Verizon, Exxon, Chevron (classic high-payout names).",
+      "evidence_check": "matched.dividends_paid = {kind:relation, unit:usd, value:-0.973B} ONLY -- NO value_b(FCF), NO ratio, NO metric_b, NO relation. _conventions note explains the negative-sign. CANNOT verify magnitude ratio from the row. BUT the diagnostic reverse relation returns exactly the big-payout names -- proving the underlying FILTER IS magnitude-normalized (sign-correct partition): the outflow filter itself is NOT a nonsense negative comparison. So the result SET is correct; only the displayed evidence is missing.",
+      "confusion_note": "None on input. 'less than half' = lower_than + multiple 0.5, obvious.",
+      "verdict": "PARTIAL",
+      "reason": "Filter is magnitude-correct (verified by complementary diagnostic partition), but the matched.fundamental block for lower_than omits value_b/ratio/metric_b/relation, so the outflow magnitude handling is NOT self-verifiable from the row. This is the same evidence gap as Q2, worse here because it is the sign-sensitive case.",
+      "defects": [
+        {"desc": "outflow lower_than: matched evidence has no ratio/value_b -> caller cannot confirm the by-magnitude interpretation; only _conventions sign note + trust", "side": "server"}
+      ]
+    },
+    {
+      "id": 9,
+      "question": "cash is at least 2x total debt",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:cash, relation:higher_than, metricB:total_debt, multiple:2}]"
+      ],
+      "result_summary": "count 20.",
+      "evidence_check": "matched.cash = {value_a:2.7679T, value_b:1.0646T, ratio:2.59994, relation:higher_than, metric_b:total_debt}. Ratio 2.5999 >= 2 CORRECT. Full operands. (Both metrics positive so higher_than ratio is clean.)",
+      "confusion_note": "None. _conventions gives cash & total_debt definitions.",
+      "verdict": "PASS",
+      "reason": "Correct and fully verifiable; positive-metric higher_than shows a proper positive ratio.",
+      "defects": []
+    },
+    {
+      "id": 10,
+      "question": "SG&A is between 15% and 30% of revenue",
+      "tool_calls": [
+        "screen_unified fundamental:[{metricA:sga, relation:ratio_between, metricB:revenue, min:0.15, max:0.30}]"
+      ],
+      "result_summary": "count 20.",
+      "evidence_check": "matched.sga row1 = {value_a:11.094B, value_b:65.179B, ratio:0.17021}; row2 ratio 0.19615. Both within [0.15,0.30]. CORRECT, fully verifiable.",
+      "confusion_note": "None.",
+      "verdict": "PASS",
+      "reason": "In-band positive ratios, full operands.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 7,
+    "partial": 3,
+    "fail": 0,
+    "top_defects": [
+      "higher_than/lower_than matched-evidence is DEGRADED vs ratio_between/ratio_near: it omits value_b, ratio, metric_b and relation (collapses to a single signed {value}). Seen in Q2 and Q8 (the outflow case) -- caller cannot verify the ratio/band or the by-magnitude handling from the row.",
+      "When higher_than DOES emit a ratio against a negative (outflow) metric_b (Q3 FCF vs dividends_paid), it is a raw SIGNED nonsense value (ratio:-99.26) rather than a magnitude-normalized positive -- inconsistent with ratio_near (Q5), which correctly returns a positive ratio despite negative capex.",
+      "Mitigating: the underlying FILTER for outflow relations is magnitude-correct (verified by complementary diagnostic: reverse relation returns exactly the high-payout names). The bug is in the EVIDENCE surface, not the screen logic. Input params were OBVIOUS for all 10 (relation form well-documented in schema); no unknown-param, no guessing."
+    ]
+  }
+}

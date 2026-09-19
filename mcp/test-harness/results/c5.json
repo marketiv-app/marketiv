@@ -1,0 +1,1311 @@
+{
+  "capped": true,
+  "count": 40,
+  "currency": "USD",
+  "results": [
+    {
+      "also_known_as": [
+        "NVDA.SW",
+        "0R1I.LSE",
+        "NVDA01.BK",
+        "NVDA03.BK",
+        "NVDA06.BK",
+        "NVDA19.BK",
+        "NVDA23.BK",
+        "NVDA80.BK",
+        "NVD.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1575,
+          "market_cap_usd": 5322322739200.0,
+          "net_income_usd": 159613000000.0,
+          "operating_margin": 0.6402,
+          "pe": 33.650842,
+          "revenue_usd": 253491000000.0
+        }
+      },
+      "head_listing_id": 31809,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.6297
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "NVIDIA Corporation",
+      "score": 5322322739200.0,
+      "ticker": "NVDA.US"
+    },
+    {
+      "also_known_as": [
+        "0R2V.LSE",
+        "AAPL01.BK",
+        "AAPL03.BK",
+        "AAPL19.BK",
+        "AAPL80.BK",
+        "APC.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.173,
+          "market_cap_usd": 4524633751552.0,
+          "net_income_usd": 128930000000.0,
+          "operating_margin": 0.3317,
+          "pe": 35.083716,
+          "revenue_usd": 466823000000.0
+        }
+      },
+      "head_listing_id": 231,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2762
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Apple Inc.",
+      "score": 4524633751552.0,
+      "ticker": "AAPL.US"
+    },
+    {
+      "also_known_as": [
+        "GOOGL01.BK",
+        "GOOGL03.BK",
+        "GOOG80.BK",
+        "ABEA.XETRA",
+        "ABEC.XETRA",
+        "GOOG23.BK",
+        "0RIH.LSE",
+        "GOOGL.US",
+        "0HD6.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.184,
+          "market_cap_usd": 4173832126464.0,
+          "net_income_usd": 244205000000.0,
+          "operating_margin": 0.3311,
+          "pe": 17.123934,
+          "revenue_usd": 445867000000.0
+        }
+      },
+      "head_listing_id": 19071,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.5477
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Alphabet Inc Class C",
+      "score": 4173832126464.0,
+      "ticker": "GOOG.US"
+    },
+    {
+      "also_known_as": [
+        "MSFT01.BK",
+        "MSFT03.BK",
+        "MSFT06.BK",
+        "MSFT19.BK",
+        "MSFT23.BK",
+        "MSFT80.BK",
+        "MSF.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.194,
+          "market_cap_usd": 3576365580288.0,
+          "net_income_usd": 133749000000.0,
+          "operating_margin": 0.4678,
+          "pe": 28.685527,
+          "revenue_usd": 331839000000.0
+        }
+      },
+      "head_listing_id": 29766,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.4031
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Microsoft Corporation",
+      "score": 3576365580288.0,
+      "ticker": "MSFT.US"
+    },
+    {
+      "also_known_as": [
+        "0LCV.LSE",
+        "TSM.US"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1692,
+          "market_cap_usd": 1931805975589.6833,
+          "net_income_usd": 69607787590.8,
+          "operating_margin": 0.561,
+          "pe": 27.839513,
+          "revenue_usd": 139431486699.8
+        }
+      },
+      "head_listing_id": 1418323,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.4992
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+      "score": 1931805975589.6833,
+      "ticker": "2330.TW"
+    },
+    {
+      "also_known_as": [
+        "1YD.XETRA",
+        "AVGO.SW",
+        "0YXG.LSE",
+        "AVGO23.BK",
+        "AVGO80.BK"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.0381,
+          "market_cap_usd": 1807880552448.0,
+          "net_income_usd": 29317000000.0,
+          "operating_margin": 0.4406,
+          "pe": 65.296173,
+          "revenue_usd": 75465000000.0
+        }
+      },
+      "head_listing_id": 3311,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3885
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Broadcom Inc",
+      "score": 1807880552448.0,
+      "ticker": "AVGO.US"
+    },
+    {
+      "also_known_as": [
+        "META01.BK",
+        "META06.BK",
+        "META23.BK",
+        "META80.BK",
+        "0QZI.LSE",
+        "FB2A.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.222,
+          "market_cap_usd": 1385002696704.0,
+          "net_income_usd": 68098000000.0,
+          "operating_margin": 0.3808,
+          "pe": 20.477213,
+          "revenue_usd": 228247000000.0
+        }
+      },
+      "head_listing_id": 28230,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2984
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Meta Platforms Inc.",
+      "score": 1385002696704.0,
+      "ticker": "META.US"
+    },
+    {
+      "also_known_as": [
+        "SMSD.LSE",
+        "BC94.LSE",
+        "SMSN.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1508,
+          "market_cap_usd": 1234185534989.96,
+          "net_income_usd": 58333617300.0,
+          "operating_margin": 0.2424,
+          "pe": 22.018128,
+          "revenue_usd": 271837215300.0
+        }
+      },
+      "head_listing_id": 1414771,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2146
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Samsung Electronics Co Ltd",
+      "score": 1234185534989.96,
+      "ticker": "005930.KO"
+    },
+    {
+      "also_known_as": [
+        "LLY23.BK",
+        "LLY80.BK",
+        "LLY.SW",
+        "LLY.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2049,
+          "market_cap_usd": 1093034115072.0,
+          "net_income_usd": 26711200000.0,
+          "operating_margin": 0.4972,
+          "pe": 41.145686,
+          "revenue_usd": 79665800000.0
+        }
+      },
+      "head_listing_id": 26596,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3353
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Eli Lilly and Company",
+      "score": 1093034115072.0,
+      "ticker": "LLY.US"
+    },
+    {
+      "also_known_as": [
+        "MICRON01.BK",
+        "MICRON03.BK",
+        "MICRON19.BK",
+        "MICRON23.BK",
+        "MICRON80.BK",
+        "0R2T.LSE",
+        "MTE.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1457,
+          "market_cap_usd": 1029204672512.0,
+          "net_income_usd": 50469000000.0,
+          "operating_margin": 0.6567,
+          "pe": 21.264919,
+          "revenue_usd": 90274000000.0
+        }
+      },
+      "head_listing_id": 30067,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.5591
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Micron Technology Inc",
+      "score": 1029204672512.0,
+      "ticker": "MU.US"
+    },
+    {
+      "also_known_as": [
+        "JPMUS06.BK",
+        "JPMUS19.BK",
+        "CMC.XETRA",
+        "0Q1F.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2245,
+          "market_cap_usd": 965586124800.0,
+          "net_income_usd": 65067000000.0,
+          "pe": 15.56341,
+          "revenue_usd": 194911000000.0
+        }
+      },
+      "head_listing_id": 24608,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3338
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "JPMorgan Chase & Co",
+      "score": 965586124800.0,
+      "ticker": "JPM.US"
+    },
+    {
+      "also_known_as": [
+        "SKHYV.US",
+        "SKHY.US",
+        "HXSCL.US"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1897,
+          "market_cap_usd": 825845250575.59,
+          "net_income_usd": 52599667400.0,
+          "operating_margin": 0.5858,
+          "pe": 15.572195,
+          "revenue_usd": 92458674700.0
+        }
+      },
+      "head_listing_id": 1414474,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.5689
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "SK Hynix Inc",
+      "score": 825845250575.59,
+      "ticker": "000660.KO"
+    },
+    {
+      "also_known_as": [
+        "ASML01.BK",
+        "ASML.US",
+        "0M42.LSE",
+        "ASML.SW",
+        "ASME.XETRA",
+        "0QB8.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1758,
+          "market_cap_usd": 683345789865.1648,
+          "net_income_usd": 12151180480.0,
+          "operating_margin": 0.3542,
+          "pe": 63.801653,
+          "revenue_usd": 40351070500.0
+        }
+      },
+      "head_listing_id": 1748238,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3011
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "ASML Holding N.V.",
+      "score": 683345789865.1648,
+      "ticker": "ASML.AS"
+    },
+    {
+      "also_known_as": [
+        "0QZ0.LSE",
+        "VISA06.BK",
+        "VISA80.BK",
+        "3V64.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1619,
+          "market_cap_usd": 680071987200.0,
+          "net_income_usd": 22592000000.0,
+          "operating_margin": 0.6561,
+          "pe": 31.0,
+          "revenue_usd": 44488000000.0
+        }
+      },
+      "head_listing_id": 45629,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.5078
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Visa Inc. Class A",
+      "score": 680071987200.0,
+      "ticker": "V.US"
+    },
+    {
+      "also_known_as": [
+        "JNJ03.BK",
+        "JNJ.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1651,
+          "market_cap_usd": 653347520512.0,
+          "net_income_usd": 21037000000.0,
+          "operating_margin": 0.2681,
+          "pe": 31.451276,
+          "revenue_usd": 97929000000.0
+        }
+      },
+      "head_listing_id": 24500,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2148
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Johnson & Johnson",
+      "score": 653347520512.0,
+      "ticker": "JNJ.US"
+    },
+    {
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.171138579399745,
+          "market_cap_usd": 586532273600.0001,
+          "net_income_usd": 32152406000.0,
+          "operating_margin": 0.330910150232918,
+          "pe": 14.909106,
+          "revenue_usd": 107502538000.0
+        }
+      },
+      "head_listing_id": 53221,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.299085087646954
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Tencent Holdings Ltd",
+      "score": 586532273600.0001,
+      "ticker": "700.HK"
+    },
+    {
+      "also_known_as": [
+        "700.HK",
+        "TENCENT01.BK",
+        "TENCENT06.BK",
+        "TENCENT13.BK",
+        "TENCENT19.BK",
+        "TENCENT23.BK",
+        "TENCENT80.BK",
+        "80700.HK",
+        "0LEA.LSE",
+        "0Z4S.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.171138579399745,
+          "market_cap_usd": 505188134787.4816,
+          "net_income_usd": 32152406000.0,
+          "operating_margin": 0.330910150232918,
+          "pe": 15.735202,
+          "revenue_usd": 107502538000.0
+        }
+      },
+      "head_listing_id": 50851,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.299085087646954
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Tencent Holdings Ltd",
+      "score": 505188134787.4816,
+      "ticker": "0700.HK"
+    },
+    {
+      "also_known_as": [
+        "MA80.BK",
+        "M4I.XETRA",
+        "0R2Z.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1941,
+          "market_cap_usd": 503101259776.0,
+          "net_income_usd": 16257000000.0,
+          "operating_margin": 0.5984,
+          "pe": 31.590209,
+          "revenue_usd": 35083000000.0
+        }
+      },
+      "head_listing_id": 27402,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.4634
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Mastercard Inc",
+      "score": 503101259776.0,
+      "ticker": "MA.US"
+    },
+    {
+      "also_known_as": [
+        "BAC03.BK",
+        "NCB.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2072,
+          "market_cap_usd": 449144258560.0,
+          "net_income_usd": 31697000000.0,
+          "pe": 14.755196,
+          "revenue_usd": 116003000000.0
+        }
+      },
+      "head_listing_id": 3570,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2732
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Bank of America Corp",
+      "score": 449144258560.0,
+      "ticker": "BAC.US"
+    },
+    {
+      "also_known_as": [
+        "PLTR01.BK",
+        "PLTR03.BK",
+        "PLTR06.BK",
+        "PLTR23.BK",
+        "PTX.XETRA",
+        "0A7R.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.0134,
+          "market_cap_usd": 412220620800.0,
+          "net_income_usd": 3016692000.0,
+          "operating_margin": 0.428,
+          "pe": 146.615385,
+          "revenue_usd": 6155941000.0
+        }
+      },
+      "head_listing_id": 34742,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.49
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Palantir Technologies Inc.",
+      "score": 412220620800.0,
+      "ticker": "PLTR.US"
+    },
+    {
+      "also_known_as": [
+        "ORCL01.BK",
+        "ORCL06.BK",
+        "ORCL19.BK",
+        "ORC.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1262,
+          "market_cap_usd": 411302428672.0,
+          "net_income_usd": 17087000000.0,
+          "operating_margin": 0.3332,
+          "pe": 24.492281,
+          "revenue_usd": 67358000000.0
+        }
+      },
+      "head_listing_id": 32732,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2537
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Oracle Corporation",
+      "score": 411302428672.0,
+      "ticker": "ORCL.US"
+    },
+    {
+      "also_known_as": [
+        "LRCX01.BK",
+        "LRCX23.BK",
+        "0JT5.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1207,
+          "market_cap_usd": 410333184000.0,
+          "net_income_usd": 7265396000.0,
+          "operating_margin": 0.3529,
+          "pe": 56.930556,
+          "revenue_usd": 23232690000.0
+        }
+      },
+      "head_listing_id": 26959,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3127
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Lam Research Corp",
+      "score": 410333184000.0,
+      "ticker": "LRCX.US"
+    },
+    {
+      "also_known_as": [
+        "AMAT01.BK",
+        "AMAT23.BK",
+        "AP2.XETRA",
+        "0R1A.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1806,
+          "market_cap_usd": 408357175296.0,
+          "net_income_usd": 8508000000.0,
+          "operating_margin": 0.3013,
+          "pe": 50.35842,
+          "revenue_usd": 29024000000.0
+        }
+      },
+      "head_listing_id": 1854,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2931
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Applied Materials Inc",
+      "score": 408357175296.0,
+      "ticker": "AMAT.US"
+    },
+    {
+      "also_known_as": [
+        "0939.HK",
+        "00939.TW"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1124,
+          "market_cap_usd": 404635364700.9792,
+          "net_income_usd": 47837385000.0,
+          "pe": 8.023077,
+          "revenue_usd": 114957450000.0
+        }
+      },
+      "head_listing_id": 229276,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.4161
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "China Construction Bank Co",
+      "score": 404635364700.9792,
+      "ticker": "601939.CG"
+    },
+    {
+      "also_known_as": [
+        "ICBC06.BK",
+        "ICBC19.BK",
+        "1398.HK"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1255,
+          "market_cap_usd": 402226921524.4288,
+          "net_income_usd": 51286210000.0,
+          "pe": 7.594059,
+          "revenue_usd": 123350920000.0
+        }
+      },
+      "head_listing_id": 229179,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.4158
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Industrial and Commercial Bank of China Ltd",
+      "score": 402226921524.4288,
+      "ticker": "601398.CG"
+    },
+    {
+      "also_known_as": [
+        "KO80.BK",
+        "0QZK.LSE",
+        "CCC3.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1641,
+          "market_cap_usd": 382152409088.0,
+          "net_income_usd": 14316000000.0,
+          "operating_margin": 0.318,
+          "pe": 26.672673,
+          "revenue_usd": 50129000000.0
+        }
+      },
+      "head_listing_id": 25444,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2856
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "The Coca-Cola Company",
+      "score": 382152409088.0,
+      "ticker": "KO.US"
+    },
+    {
+      "also_known_as": [
+        "HSBC.US",
+        "HBC1.XETRA",
+        "5.HK",
+        "0005.HK"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2297,
+          "market_cap_usd": 353687712515.6864,
+          "net_income_usd": 22306000000.0,
+          "pe": 14.606153,
+          "revenue_usd": 72405000000.0
+        }
+      },
+      "head_listing_id": 237936,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3081
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "HSBC Holdings PLC",
+      "score": 353687712515.6864,
+      "ticker": "HSBA.LSE"
+    },
+    {
+      "also_known_as": [
+        "RO.SW",
+        "0QOK.LSE",
+        "0TDF.LSE",
+        "0QQ6.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.187002886938078,
+          "market_cap_usd": 352255996615.0656,
+          "net_income_usd": 16249408000.0,
+          "operating_margin": 0.291621945829914,
+          "pe": 22.5,
+          "revenue_usd": 79929929600.0
+        }
+      },
+      "head_listing_id": 1754790,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.203295662604962
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Roche Holding AG",
+      "score": 352255996615.0656,
+      "ticker": "ROP.SW"
+    },
+    {
+      "also_known_as": [
+        "MS06.BK",
+        "0QYU.LSE",
+        "MS-PQ.US",
+        "DWD.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2209,
+          "market_cap_usd": 343026139136.0,
+          "net_income_usd": 20155000000.0,
+          "pe": 17.572698,
+          "revenue_usd": 73053000000.0
+        }
+      },
+      "head_listing_id": 29658,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2759
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Morgan Stanley",
+      "score": 343026139136.0,
+      "ticker": "MS.US"
+    },
+    {
+      "also_known_as": [
+        "1288.HK"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.0901,
+          "market_cap_usd": 335290068605.3376,
+          "net_income_usd": 42672775000.0,
+          "pe": 8.35443,
+          "revenue_usd": 107852450000.0
+        }
+      },
+      "head_listing_id": 229160,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3957
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Agricultural Bank of China Ltd Class A",
+      "score": 335290068605.3376,
+      "ticker": "601288.CG"
+    },
+    {
+      "also_known_as": [
+        "NFLX06.BK",
+        "NFLX80.BK",
+        "0QYI.LSE",
+        "NFC.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1724,
+          "market_cap_usd": 316542681088.0,
+          "net_income_usd": 13649642000.0,
+          "operating_margin": 0.2968,
+          "pe": 24.455975,
+          "revenue_usd": 48370764000.0
+        }
+      },
+      "head_listing_id": 30925,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2822
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Netflix Inc",
+      "score": 316542681088.0,
+      "ticker": "NFLX.US"
+    },
+    {
+      "also_known_as": [
+        "0R3G.LSE",
+        "GSUS06.BK",
+        "GOS.XETRA"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2037,
+          "market_cap_usd": 302955102208.0,
+          "net_income_usd": 18068000000.0,
+          "pe": 16.066553,
+          "revenue_usd": 60448000000.0
+        }
+      },
+      "head_listing_id": 19383,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2989
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Goldman Sachs Group Inc",
+      "score": 302955102208.0,
+      "ticker": "GS.US"
+    },
+    {
+      "also_known_as": [
+        "0QKU.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2151,
+          "market_cap_usd": 295984201728.0,
+          "net_income_usd": 16300209400.0,
+          "pe": 19.274189,
+          "revenue_usd": 51178740400.0
+        }
+      },
+      "head_listing_id": 38626,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3185
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Royal Bank of Canada",
+      "score": 295984201728.0,
+      "ticker": "RY.US"
+    },
+    {
+      "also_known_as": [
+        "0K9E.LSE",
+        "NVS.US",
+        "0QLR.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1788,
+          "market_cap_usd": 293329325717.91364,
+          "net_income_usd": 12757000000.0,
+          "operating_margin": 0.3017,
+          "pe": 23.312054,
+          "revenue_usd": 56693000000.0
+        }
+      },
+      "head_listing_id": 1754717,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.225
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Novartis AG",
+      "score": 293329325717.91364,
+      "ticker": "NOVN.SW"
+    },
+    {
+      "also_known_as": [
+        "4I1.XETRA",
+        "0M8V.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2022,
+          "market_cap_usd": 292427038720.0,
+          "net_income_usd": 10874000000.0,
+          "operating_margin": 0.3775,
+          "pe": 26.995683,
+          "revenue_usd": 42545000000.0
+        }
+      },
+      "head_listing_id": 34777,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2556
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Philip Morris International Inc",
+      "score": 292427038720.0,
+      "ticker": "PM.US"
+    },
+    {
+      "also_known_as": [
+        "3988.HK"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1402,
+          "market_cap_usd": 281926191742.97595,
+          "net_income_usd": 35566760000.0,
+          "pe": 8.148649,
+          "revenue_usd": 97332700000.0
+        }
+      },
+      "head_listing_id": 229288,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3654
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Bank of China Limited",
+      "score": 281926191742.97595,
+      "ticker": "601988.CG"
+    },
+    {
+      "also_known_as": [
+        "GEV80.BK",
+        "GEV23.BK"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": -0.2084,
+          "market_cap_usd": 267540086784.0,
+          "net_income_usd": 9529000000.0,
+          "operating_margin": 0.0436,
+          "pe": 30.934633,
+          "revenue_usd": 41367000000.0
+        }
+      },
+      "head_listing_id": 18244,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2304
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "GE Vernova LLC",
+      "score": 267540086784.0,
+      "ticker": "GEV.US"
+    },
+    {
+      "also_known_as": [
+        "NWT.XETRA",
+        "0R2F.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.1637,
+          "market_cap_usd": 264297529344.0,
+          "net_income_usd": 22610000000.0,
+          "pe": 12.703488,
+          "revenue_usd": 86796000000.0
+        }
+      },
+      "head_listing_id": 47495,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.2605
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Wells Fargo & Company",
+      "score": 264297529344.0,
+      "ticker": "WFC.US"
+    },
+    {
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.0023,
+          "market_cap_usd": 264182656000.0,
+          "net_income_usd": 99327165.075,
+          "revenue_usd": 107331238.575
+        }
+      },
+      "head_listing_id": 237510,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.9254
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Fondul Proprietatea S.A. GDR",
+      "score": 264182656000.0,
+      "ticker": "FP.LSE"
+    },
+    {
+      "also_known_as": [
+        "MUFG19.BK",
+        "MUFG23.BK",
+        "MUFG.US",
+        "0K1Y.LSE"
+      ],
+      "context": {
+        "financial": {
+          "effective_tax_rate": 0.2293,
+          "market_cap_usd": 257411876400.0,
+          "net_income_usd": 15291542700.0,
+          "pe": 17.208251,
+          "revenue_usd": 47383087500.0
+        }
+      },
+      "head_listing_id": 572833,
+      "matched": {
+        "financial": {
+          "net_margin": {
+            "kind": "level",
+            "value": 0.3227
+          }
+        }
+      },
+      "matched_legs": [
+        "fundamental"
+      ],
+      "name": "Mitsubishi UFJ Financial Group, Inc.",
+      "score": 257411876400.0,
+      "ticker": "8306.JP"
+    }
+  ],
+  "sort": "ta",
+  "universe": 24046,
+  "_pagination": {
+    "intended_show": 10,
+    "returned": 40,
+    "buffer_maxed": false,
+    "capped": true,
+    "count_is_floor": true,
+    "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "id": "tn-02",
+  "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง",
+  "tools_called": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "at_new_high"
+              }
+            ]
+          }
+        ],
+        "country": [
+          "TH"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "atr_pct": {
+            "definition": "Average True Range ÷ price — volatility as a fraction of price."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 3,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 55.4754,
+              "atr_pct": 0.0182,
+              "close_vs_ema200": 0.1726,
+              "rsi14": 66.3129
+            }
+          },
+          "head_listing_id": 49432,
+          "matched": {
+            "ta": {
+              "at_new_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Allianz Ayudhya Capital Public Company Limited",
+          "score": 1.0,
+          "ticker": "AYUD.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 43.395,
+              "atr_pct": 0.1552,
+              "close_vs_ema200": 0.4933,
+              "rsi14": 59.0034
+            }
+          },
+          "head_listing_id": 49800,
+          "matched": {
+            "ta": {
+              "at_new_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "More Return Public Company Limited",
+          "score": 1.0,
+          "ticker": "MORE.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 30.7384,
+              "atr_pct": 0.0216,
+              "close_vs_ema200": 0.2839,
+              "rsi14": 70.0374
+            }
+          },
+          "head_listing_id": 49924,
+          "matched": {
+            "ta": {
+              "at_new_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Pylon Public Company Limited",
+          "score": 1.0,
+          "ticker": "PYLON.BK"
+        }
+      ],
+      "sort": "ta",
+      "universe": 826,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 3,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 3 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Thai (SET) stocks that just printed a fresh 52-week high: AYUD.BK (Allianz Ayudhya Capital ), MORE.BK (More Return Public Compa), PYLON.BK (Pylon Public Company Lim). Only 3 names are at a brand-new 52-week high right now (out of ~826 Thai listings screened)."
+}

@@ -1,0 +1,1611 @@
+{
+ "id": "tm-05",
+ "question": "Gold has been ripping — how are the gold miners doing versus the metal itself? Give me a read on gold and the main mining names.",
+ "tools_called": [
+  {
+   "tool": "commodity_pulse",
+   "args": {
+    "q": "gold"
+   },
+   "note": "the metal (GOLD.COMM)"
+  },
+  {
+   "tool": "find_megatrend",
+   "args": {
+    "terms": [
+     "gold mining",
+     "gold miners",
+     "precious metals mining"
+    ]
+   },
+   "note": "resolved gold theme node 30060200"
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "30060200",
+    "country": "US",
+    "limit": 20
+   },
+   "note": "gold-miner cohort (cross-market via US tape)"
+  },
+  {
+   "tool": "stock_prices_batch",
+   "args": {
+    "tickers": [
+     "GOLD.COMM",
+     "NEM.US",
+     "AEM.US",
+     "B.US",
+     "KGC.US",
+     "WPM.US"
+    ]
+   },
+   "note": "metal vs top miners return comparison"
+  }
+ ],
+ "raw_responses": [
+  {
+   "ticker": "GOLD.COMM",
+   "name": "Gold Futures",
+   "region": "Global",
+   "currency": "USD",
+   "description": "Gold futures (COMEX/CME, USD) — the primary global gold price benchmark and a core safe-haven and monetary-hedge asset.",
+   "price": {
+    "last_close": 4715.9,
+    "metric_kind": "return",
+    "windows": {
+     "1mo": {
+      "change_pct": 16.84
+     },
+     "1w": {
+      "change_pct": 8.01
+     },
+     "1y": {
+      "change_pct": 39.17
+     },
+     "3mo": {
+      "change_pct": 4.79
+     },
+     "ytd": {
+      "change_pct": 9.02
+     }
+    },
+    "range_read": "upper half of the 52-week range",
+    "trend_read": "uptrend — above both the 50-day and 200-day average",
+    "drawdown_from_52w_high_pct": -15.58,
+    "realized_vol_percentile_1y": 36.11,
+    "volume_conviction_read": "accumulation — heavier volume on up days"
+   },
+   "impact": {
+    "articles": [
+     {
+      "title": "Finance Ministry to Discuss Gold Trading Tax Tomorrow, Insists Low Rate to Curb Illicit Funds",
+      "brief_text": "The Ministry of Finance is set to meet with the Gold Traders Association on the afternoon of August 27 to discuss measures to regulate online gold trading transactions, particularly those without physical delivery, as well as the collection of gold trading taxes. The Permanent Secretary of the Ministry of Finance, Lavaron Sangsnit, will chair the discussion, as assigned by Deputy Prime Minister and Finance Minister Akkharat Nikitthaprapha. It is confirmed that the tax rate will be low and is not aimed at generating revenue, but rather to enable the government to track transactions transparently in line with international standards. This follows the Data Bureau working group's findings of signs that gold trading channels may be used by criminal or gray capital groups. Meanwhile, monitoring will be expanded to digital assets, in cooperation with the Securities and Exchange Commission and the Bank of Thailand, to close loopholes without affecting the competitiveness of the Thai gold industry.",
+      "url": "https://kaohoon.com/news/local/857907",
+      "publisher": "Kaohoon",
+      "impact": {
+       "aspects": [
+        {
+         "aspect": "regulation",
+         "direction": "ambiguous",
+         "reason": "Tax on gold trading discussed; low rate but aimed at tracking, may affect trading volumes.",
+         "relevance": 0.8
+        }
+       ],
+       "label_version": "1.0",
+       "net_direction": "ambiguous",
+       "relevance": 0.8
+      },
+      "news_types": [
+       "regulatory_legal",
+       "commodity_supply"
+      ],
+      "impact_score": 2,
+      "dup_count": 2,
+      "trend": "Critical Materials & Supply Chain",
+      "trend_id": 30000000,
+      "published_at": "2026-08-26T12:04:13+00:00"
+     },
+     {
+      "title": "Krungthai CIO Recommends Gradually Accumulating Tech Stocks and Gold",
+      "brief_text": "Krungthai Bank's investment strategy team (Krungthai CIO) recommends disciplined continuous investment, gradually accumulating technology and semiconductor stocks, as well as holding gold for diversification. They note that corporate earnings remain strong despite the US stock market's consolidation, with the S&P 500 down 1.4% and the Nasdaq down 2.1%. Meanwhile, the 10-year US Treasury yield rose 4.2 basis points to 4.73%, and Brent crude oil prices increased 6.6% to $94.4 per barrel. Gold prices rose over 5% due to a weaker dollar and safe-haven demand. For Thai property funds and REITs, they recommend shifting to a Neutral stance as the dividend yield gap has returned to near its long-term average. For gold, they maintain a 6-12 month target of $4,915 and $5,315 per ounce. Factors to monitor include announcements on Iran sanctions, NVIDIA's earnings, US inflation data, the Bank of Thailand's meeting on August 26, and the Fed's Jackson Hole symposium.",
+      "url": "https://hoonsmart.com/archives/435384",
+      "publisher": "HoonSmart",
+      "impact": {
+       "aspects": [
+        {
+         "aspect": "monetary",
+         "direction": "pos",
+         "reason": "Gold prices rose over 5% due to weaker dollar and safe-haven demand; target maintained at $4,915-$5,315.",
+         "relevance": 0.8
+        }
+       ],
+       "label_version": "1.0",
+       "net_direction": "pos",
+       "relevance": 0.8
+      },
+      "news_types": [
+       "analyst_forecast"
+      ],
+      "impact_score": 2,
+      "dup_count": 1,
+      "trend": null,
+      "trend_id": null,
+      "published_at": "2026-08-26T07:50:42+00:00"
+     },
+     {
+      "title": "Gold Opens Up 250 Baht, Ornaments Reach 72,900 Baht",
+      "brief_text": "Domestic gold prices opened today (Aug. 26) up 250 baht per baht-weight, with gold ornaments selling at 72,900.00 baht and gold bars at 72,100.00 baht. Meanwhile, Gold Spot stood at 4,657.00 dollars per ounce. Global gold prices remain near their highest level in over three months, supported by a weaker dollar and the U.S. Treasury's bond buyback plan. Investors are also watching remarks by Kevin Warsh, Chairman of the U.S. Federal Reserve, at the Jackson Hole Symposium, which could influence interest rate direction and gold prices.",
+      "url": "https://moneyandbanking.co.th/2026/265412/",
+      "publisher": "Money & Banking",
+      "impact": {
+       "aspects": [
+        {
+         "aspect": "monetary",
+         "direction": "pos",
+         "reason": "Gold prices supported by weaker dollar and Fed rate cut expectations, boosting gold futures.",
+         "relevance": 1
+        }
+       ],
+       "label_version": "1.0",
+       "net_direction": "pos",
+       "relevance": 1
+      },
+      "news_types": [
+       "commodity_supply",
+       "forex_related"
+      ],
+      "impact_score": 2,
+      "dup_count": 1,
+      "trend": null,
+      "trend_id": null,
+      "published_at": "2026-08-26T02:22:21+00:00"
+     },
+     {
+      "title": "Baht Opens at 32.69, All Eyes on MPC Meeting Expected to Hold Rate at 1%",
+      "brief_text": "The baht opened this morning at 32.69 per dollar, slightly stronger from the previous close of 32.74 per dollar. The market is focused on today's Monetary Policy Committee (MPC) meeting, which is expected to unanimously hold the policy rate at 1.00%, according to strategists from Krungthai GLOBAL MARKETS. Despite Thailand's economy expanding better than expected in the second quarter, it remains below potential and uneven. Meanwhile, the baht is moving within a range of 32.67-32.76 per dollar, reacting to news that the US and Iran might return to ceasefire negotiations, which pressured Brent crude oil prices down to $86 per barrel and supported gold prices up to the $4,650 per ounce zone. Analysts expect US PCE inflation to slow to +3.6% year-on-year, with Core PCE steady at 3.3%. The market is also awaiting remarks from the Fed Chair at the Jackson Hole Symposium and Nvidia's earnings after the market close on Wednesday.",
+      "url": "https://moneyandbanking.co.th/2026/265391/",
+      "publisher": "Money & Banking",
+      "impact": {
+       "aspects": [
+        {
+         "aspect": "geopolitics",
+         "direction": "pos",
+         "reason": "US-Iran ceasefire talks support gold prices up to $4,650/oz",
+         "relevance": 0.7
+        }
+       ],
+       "label_version": "1.0",
+       "net_direction": "pos",
+       "relevance": 0.7
+      },
+      "news_types": [
+       "macro_economic",
+       "forex_related"
+      ],
+      "impact_score": 2,
+      "dup_count": 1,
+      "trend": null,
+      "trend_id": null,
+      "published_at": "2026-08-26T01:19:13+00:00"
+     },
+     {
+      "title": "Lao Feng Xiang first-half net profit attributable to parent falls 41.3% to 716 million yuan",
+      "brief_text": "Lao Feng Xiang released its 2026 interim report, showing first-half net profit attributable to the parent of 716 million yuan, down 41.3% year on year. Operating revenue was 19.99 billion yuan, down 40.1% year on year. Net profit attributable to the parent excluding non-recurring items was 822 million yuan, down 22.0% year on year. Net operating cash flow was negative 208 million yuan, down 104.4% year on year. In the second quarter, operating revenue was 6.24 billion yuan, down 60.6% year on year, and net profit attributable to the parent was 169 million yuan, down 72.2% year on year. The company said the decline was mainly affected by the macroeconomic environment and deep industry adjustment. The new gold tax policy caused a significant drop in sales of investment-oriented gold products in the wholesale business, while sales of gold jewellery products increased slightly and gross margin improved. The company has adjusted its operating strategy, integrated its internal structure, and optimised its regional operating model to respond to market changes.",
+      "url": "http://finance.eastmoney.com/a/202608263854607888.html",
+      "publisher": "财中社",
+      "impact": {
+       "aspects": [
+        {
+         "aspect": "demand",
+         "direction": "neg",
+         "reason": "New gold tax policy caused significant drop in investment gold sales, affecting gold demand.",
+         "relevance": 0.3
+        }
+       ],
+       "label_version": "1.0",
+       "net_direction": "neg",
+       "relevance": 0.3
+      },
+      "news_types": [
+       "earnings_results"
+      ],
+      "impact_score": 3,
+      "dup_count": 1,
+      "trend": null,
+      "trend_id": null,
+      "published_at": "2026-08-26T00:00:00+00:00"
+     },
+     {
+      "title": "YLG Advises Profit-Taking on Gold if It Fails to Break $4,700-$4,773",
+      "brief_text": "YLG recommends an investment strategy of taking profits on long gold positions if prices fail to break resistance at $4,700-$4,773 per ounce. Today, gold prices are fluctuating within a range of $4,620-$4,696 per ounce. Meanwhile, domestic 96.5% gold bars are selling at 71,800 baht per baht-weight, down 50 baht from the previous day. Pressuring factors include the U.S. announcing a new round of sanctions on Iran under the name Operation Economic Outcast, covering five sectors including gold, and the dollar index strengthening to 99.03 points. Supporting factors include the U.S. Treasury's bond buyback plan, which may use about $950 billion from the Treasury General Account, and expanding long-term bond buybacks to at least $4 billion. Additionally, gold ETF funds increased holdings by 46.7 tonnes, valued at $6.4 billion, over the past week, the highest in 10 months. YLG advises moving the trailing stop to $4,625 to lock in profits and reopening long positions if prices do not break below this support. However, if it breaks, delay buying at $4,556-$4,500 and cut losses if it falls below $4,500.",
+      "url": "https://thunhoon.com/ylg-gold-26082026",
+      "publisher": "thunhoon.com",
+      "impact": {
+       "aspects": [
+        {
+         "aspect": "geopolitics",
+         "direction": "ambiguous",
+         "reason": "Sanctions on Iran and dollar strength pressure gold, but ETF inflows and Treasury buybacks support; YLG advises profit-taking if resistance holds.",
+         "relevance": 0.8
+        }
+       ],
+       "label_version": "1.0",
+       "net_direction": "ambiguous",
+       "relevance": 0.8
+      },
+      "news_types": [
+       "commodity_supply",
+       "geopolitics"
+      ],
+      "impact_score": 3,
+      "dup_count": 2,
+      "trend": null,
+      "trend_id": null,
+      "published_at": "2026-08-25T23:50:00+00:00"
+     }
+    ]
+   },
+   "positioning": {
+    "score": 70,
+    "crowding": "neutral",
+    "read": "The speculators in GOLD.COMM are around the middle of its normal 3-year range — no crowd extreme. commercial hedgers are in their normal range — no strong smart-money tell either way. speculators ADDED to the position this week (building conviction). On fragility, concentration data unavailable. Vs price: price is UP ~17% and the crowd is ADDING — the trend is confirmed by positioning (just watch the crowding). On the news: the news (positive) and the crowd are aligned but not at an extreme — a trend still backed by positioning."
+   },
+   "variants": [],
+   "_guide": "Lead with the PRICE level + trend (quote the `*_read` labels). Explain the WHY from `impact` — supply/demand, geopolitics, inventories. 🎯 The embedded `positioning` block is the FUTURES crowd's stance (crowded = a contrarian RISK; whether the good news is already priced-in) — weave its plain `read` into the answer; for the full breakdown call the `positioning` tool. If `variants` exist (onshore vs offshore, e.g. LME vs Shanghai; USD vs CNY/MYR), COMPARE them — an onshore-offshore divergence is the insight (different currency → convert before comparing levels). A commodity has NO options / PE / competitors — do not mention or flag them as missing. `impact` empty = no news in coverage (2026-01-01+), say so plainly; price still stands. 🌐 TRADE LENS: a commodity IS a traded good → for the PHYSICAL supply/demand behind the price you MAY deepen with the trade tools: find_hs(this commodity) → `top_traders` (who produces/exports the most, or whose exports are growing/streaking), `top_partners` / `search_trade` on the swing buyer (China imports rising/falling), `trade_balance`. Adds the flow substrate news+price can't (e.g. 'global import demand +X%, China −2 quarters, Chile exports +5y CAGR 14%'). BYOK — relay the connect CTA if no key."
+  },
+  {
+   "gold mining": [
+    {
+     "id": 30060200,
+     "name": "Gold",
+     "tier": 3
+    }
+   ],
+   "gold miners": [],
+   "precious metals mining": [
+    {
+     "id": 30060000,
+     "name": "Precious Metals",
+     "tier": 2
+    }
+   ]
+  },
+  {
+   "stocks": [
+    {
+     "stock_id": 30817,
+     "symbol": "NEM",
+     "ticker": "NEM.US",
+     "type": null,
+     "name": "Newmont Goldcorp Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 142395981824.0,
+     "market_cap_local": 142395981824.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 142395981824.0,
+      "market_cap_usd": 142395981824.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Newmont Goldcorp Corp",
+      "stock_id": 30817,
+      "symbol": "NEM",
+      "ticker": "NEM.US"
+     }
+    },
+    {
+     "stock_id": 924,
+     "symbol": "AEM",
+     "ticker": "AEM.US",
+     "type": null,
+     "name": "Agnico Eagle Mines Limited",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 113481433088.0,
+     "market_cap_local": 113481433088.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 113481433088.0,
+      "market_cap_usd": 113481433088.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Agnico Eagle Mines Limited",
+      "stock_id": 924,
+      "symbol": "AEM",
+      "ticker": "AEM.US"
+     }
+    },
+    {
+     "stock_id": 3554,
+     "symbol": "B",
+     "ticker": "B.US",
+     "type": null,
+     "name": "Barrick Mining Corporation",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 80434372608.0,
+     "market_cap_local": 80434372608.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 80434372608.0,
+      "market_cap_usd": 80434372608.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Barrick Mining Corporation",
+      "stock_id": 3554,
+      "symbol": "B",
+      "ticker": "B.US"
+     }
+    },
+    {
+     "stock_id": 47985,
+     "symbol": "WPM",
+     "ticker": "WPM.US",
+     "type": null,
+     "name": "Wheaton Precious Metals Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104045",
+     "market_cap_usd": 74355073024.0,
+     "market_cap_local": 74355073024.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104045",
+      "market_cap_local": 74355073024.0,
+      "market_cap_usd": 74355073024.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Wheaton Precious Metals Corp",
+      "stock_id": 47985,
+      "symbol": "WPM",
+      "ticker": "WPM.US"
+     }
+    },
+    {
+     "stock_id": 15836,
+     "symbol": "FNV",
+     "ticker": "FNV.US",
+     "type": null,
+     "name": "Franco-Nevada Corporation",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 52101001216.0,
+     "market_cap_local": 52101001216.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 52101001216.0,
+      "market_cap_usd": 52101001216.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Franco-Nevada Corporation",
+      "stock_id": 15836,
+      "symbol": "FNV",
+      "ticker": "FNV.US"
+     }
+    },
+    {
+     "stock_id": 25201,
+     "symbol": "KGC",
+     "ticker": "KGC.US",
+     "type": null,
+     "name": "Kinross Gold Corporation",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 39715340288.0,
+     "market_cap_local": 39715340288.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 39715340288.0,
+      "market_cap_usd": 39715340288.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Kinross Gold Corporation",
+      "stock_id": 25201,
+      "symbol": "KGC",
+      "ticker": "KGC.US"
+     }
+    },
+    {
+     "stock_id": 37491,
+     "symbol": "RGLD",
+     "ticker": "RGLD.US",
+     "type": null,
+     "name": "Royal Gold Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 22686732288.0,
+     "market_cap_local": 22686732288.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 22686732288.0,
+      "market_cap_usd": 22686732288.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Royal Gold Inc",
+      "stock_id": 37491,
+      "symbol": "RGLD",
+      "ticker": "RGLD.US"
+     }
+    },
+    {
+     "stock_id": 1165,
+     "symbol": "AGI",
+     "ticker": "AGI.US",
+     "type": null,
+     "name": "Alamos Gold Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 16333946880.0,
+     "market_cap_local": 16333946880.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 16333946880.0,
+      "market_cap_usd": 16333946880.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Alamos Gold Inc",
+      "stock_id": 1165,
+      "symbol": "AGI",
+      "ticker": "AGI.US"
+     }
+    },
+    {
+     "stock_id": 21511,
+     "symbol": "IAG",
+     "ticker": "IAG.US",
+     "type": null,
+     "name": "IAMGold Corporation",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 12659069952.0,
+     "market_cap_local": 12659069952.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 12659069952.0,
+      "market_cap_usd": 12659069952.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "IAMGold Corporation",
+      "stock_id": 21511,
+      "symbol": "IAG",
+      "ticker": "IAG.US"
+     }
+    },
+    {
+     "stock_id": 11511,
+     "symbol": "EGO",
+     "ticker": "EGO.US",
+     "type": null,
+     "name": "Eldorado Gold Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 12555409408.0,
+     "market_cap_local": 12555409408.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 12555409408.0,
+      "market_cap_usd": 12555409408.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Eldorado Gold Corp",
+      "stock_id": 11511,
+      "symbol": "EGO",
+      "ticker": "EGO.US"
+     }
+    },
+    {
+     "stock_id": 41606,
+     "symbol": "SSRM",
+     "ticker": "SSRM.US",
+     "type": null,
+     "name": "SSR Mining Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 8011230208.0,
+     "market_cap_local": 8011230208.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 8011230208.0,
+      "market_cap_usd": 8011230208.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "SSR Mining Inc",
+      "stock_id": 41606,
+      "symbol": "SSRM",
+      "ticker": "SSRM.US"
+     }
+    },
+    {
+     "stock_id": 5633,
+     "symbol": "BTG",
+     "ticker": "BTG.US",
+     "type": null,
+     "name": "B2Gold Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 7754684928.0,
+     "market_cap_local": 7754684928.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 7754684928.0,
+      "market_cap_usd": 7754684928.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "B2Gold Corp",
+      "stock_id": 5633,
+      "symbol": "BTG",
+      "ticker": "BTG.US"
+     }
+    },
+    {
+     "stock_id": 3183,
+     "symbol": "AUGO",
+     "ticker": "AUGO.US",
+     "type": null,
+     "name": "Aura Minerals Inc. Common Shares",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "VG",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 7584718848.0,
+     "market_cap_local": 7584718848.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "VG",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 7584718848.0,
+      "market_cap_usd": 7584718848.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Aura Minerals Inc. Common Shares",
+      "stock_id": 3183,
+      "symbol": "AUGO",
+      "ticker": "AUGO.US"
+     }
+    },
+    {
+     "stock_id": 32722,
+     "symbol": "OR",
+     "ticker": "OR.US",
+     "type": null,
+     "name": "Osisko Gold Ro",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 7297338880.0,
+     "market_cap_local": 7297338880.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 7297338880.0,
+      "market_cap_usd": 7297338880.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Osisko Gold Ro",
+      "stock_id": 32722,
+      "symbol": "OR",
+      "ticker": "OR.US"
+     }
+    },
+    {
+     "stock_id": 279591,
+     "symbol": "OGC",
+     "ticker": "OGC.US",
+     "type": null,
+     "name": "OceanaGold Corporation",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 6967056384.0,
+     "market_cap_local": 6967056384.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 6967056384.0,
+      "market_cap_usd": 6967056384.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "OceanaGold Corporation",
+      "stock_id": 279591,
+      "symbol": "OGC",
+      "ticker": "OGC.US"
+     }
+    },
+    {
+     "stock_id": 6975,
+     "symbol": "CGAU",
+     "ticker": "CGAU.US",
+     "type": null,
+     "name": "Centerra Gold Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104020",
+     "market_cap_usd": 4729790464.0,
+     "market_cap_local": 4729790464.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104020",
+      "market_cap_local": 4729790464.0,
+      "market_cap_usd": 4729790464.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Centerra Gold Inc",
+      "stock_id": 6975,
+      "symbol": "CGAU",
+      "ticker": "CGAU.US"
+     }
+    },
+    {
+     "stock_id": 40287,
+     "symbol": "SKE",
+     "ticker": "SKE.US",
+     "type": null,
+     "name": "Skeena Resources Ltd",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104020",
+     "market_cap_usd": 4398722560.0,
+     "market_cap_local": 4398722560.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104020",
+      "market_cap_local": 4398722560.0,
+      "market_cap_usd": 4398722560.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Skeena Resources Ltd",
+      "stock_id": 40287,
+      "symbol": "SKE",
+      "ticker": "SKE.US"
+     }
+    },
+    {
+     "stock_id": 179927,
+     "symbol": "ARIS",
+     "ticker": "ARIS.US",
+     "type": null,
+     "name": "Aris Mining Corporation",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 4372201984.0,
+     "market_cap_local": 4372201984.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 4372201984.0,
+      "market_cap_usd": 4372201984.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Aris Mining Corporation",
+      "stock_id": 179927,
+      "symbol": "ARIS",
+      "ticker": "ARIS.US"
+     }
+    },
+    {
+     "stock_id": 38880,
+     "symbol": "SA",
+     "ticker": "SA.US",
+     "type": null,
+     "name": "Seabridge Gold Inc.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104030",
+     "market_cap_usd": 3778728448.0,
+     "market_cap_local": 3778728448.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104030",
+      "market_cap_local": 3778728448.0,
+      "market_cap_usd": 3778728448.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Seabridge Gold Inc.",
+      "stock_id": 38880,
+      "symbol": "SA",
+      "ticker": "SA.US"
+     }
+    },
+    {
+     "stock_id": 32762,
+     "symbol": "ORLA",
+     "ticker": "ORLA.US",
+     "type": null,
+     "name": "Orla Mining Ltd",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "15104020",
+     "market_cap_usd": 3542952192.0,
+     "market_cap_local": 3542952192.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "core",
+      "node_id": 30060200,
+      "node_name": "Gold",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104020",
+      "market_cap_local": 3542952192.0,
+      "market_cap_usd": 3542952192.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "core",
+       "node_id": 30060200,
+       "node_name": "Gold",
+       "role": null
+      },
+      "name": "Orla Mining Ltd",
+      "stock_id": 32762,
+      "symbol": "ORLA",
+      "ticker": "ORLA.US"
+     }
+    }
+   ],
+   "count": 20,
+   "total": 68,
+   "note": "showing 20 of 68 — this is a curated top slice, not the full list; tell the user more exist, and raise `limit` or narrow the scope to see them"
+  },
+  {
+   "results": [
+    {
+     "as_of": "2026-08-25",
+     "atr_pct_14d": 1.8,
+     "close_vs_sma200_pct": 4.66,
+     "close_vs_sma50_pct": 12.36,
+     "currency": "USD",
+     "drawdown_from_52w_high_pct": -15.58,
+     "high_52w": 5586.2,
+     "high_52w_date": "2026-01-29",
+     "highest_volume_day": {
+      "date": "2026-08-25",
+      "volume": 173786.0
+     },
+     "last_close": 4715.9,
+     "low_52w": 3371.1,
+     "low_52w_date": "2025-08-26",
+     "max_drawdown_1y_pct": -25.06,
+     "metric_kind": "return",
+     "n_bars": 300,
+     "name": "Gold Futures",
+     "range_position_52w_pct": 60.71,
+     "range_read": "upper half of the 52-week range",
+     "realized_vol_30d_annual_pct": 21.22,
+     "realized_vol_90d_annual_pct": 23.85,
+     "realized_vol_percentile_1y": 36.11,
+     "rvol": 28.3,
+     "rvol_read": "very heavy — 2×+ normal volume",
+     "ticker": "GOLD",
+     "trend_read": "uptrend — above both the 50-day and 200-day average",
+     "up_down_volume_ratio_1mo": 2.04,
+     "vol_trend_read": "volatility steady",
+     "volume_conviction_read": "accumulation — heavier volume on up days",
+     "volume_trend_read": "volume rising",
+     "volume_vs_1y_avg_pct": 268.69,
+     "windows": {
+      "1mo": {
+       "change_abs": 679.6,
+       "change_pct": 16.84,
+       "high": 4755.0,
+       "high_date": "2026-08-25",
+       "low": 4017.9,
+       "low_date": "2026-07-29"
+      },
+      "1w": {
+       "change_abs": 349.9,
+       "change_pct": 8.01,
+       "high": 4755.0,
+       "high_date": "2026-08-25",
+       "low": 4327.6,
+       "low_date": "2026-08-19"
+      },
+      "1y": {
+       "change_abs": 1327.3,
+       "change_pct": 39.17,
+       "high": 5586.2,
+       "high_date": "2026-01-29",
+       "low": 3371.1,
+       "low_date": "2025-08-26"
+      },
+      "3mo": {
+       "change_abs": 215.5,
+       "change_pct": 4.79,
+       "high": 4755.0,
+       "high_date": "2026-08-25",
+       "low": 3962.5,
+       "low_date": "2026-06-30"
+      },
+      "ytd": {
+       "change_abs": 390.3,
+       "change_pct": 9.02,
+       "high": 5586.2,
+       "high_date": "2026-01-29",
+       "low": 3962.5,
+       "low_date": "2026-06-30"
+      }
+     }
+    },
+    {
+     "as_of": "2026-08-25",
+     "atr_pct_14d": 3.68,
+     "close_vs_sma200_pct": 26.76,
+     "close_vs_sma50_pct": 31.3,
+     "currency": "USD",
+     "drawdown_from_52w_high_pct": -0.11,
+     "high_52w": 135.29,
+     "high_52w_date": "2026-08-25",
+     "highest_volume_day": {
+      "date": "2025-09-19",
+      "volume": 42540200.0
+     },
+     "last_close": 135.14,
+     "low_52w": 70.16,
+     "low_52w_date": "2025-08-26",
+     "max_drawdown_1y_pct": -32.1,
+     "metric_kind": "return",
+     "n_bars": 300,
+     "name": "Newmont Goldcorp Corp",
+     "range_position_52w_pct": 99.77,
+     "range_read": "near 52-week highs",
+     "realized_vol_30d_annual_pct": 47.74,
+     "realized_vol_90d_annual_pct": 50.63,
+     "realized_vol_percentile_1y": 44.05,
+     "rvol": 0.99,
+     "rvol_read": "normal volume",
+     "ticker": "NEM.US",
+     "trend_read": "uptrend — above both the 50-day and 200-day average",
+     "up_down_volume_ratio_1mo": 3.01,
+     "vol_trend_read": "volatility steady",
+     "volume_conviction_read": "accumulation — heavier volume on up days",
+     "volume_trend_read": "volume steady",
+     "volume_vs_1y_avg_pct": -23.92,
+     "windows": {
+      "1mo": {
+       "change_abs": 43.62,
+       "change_pct": 47.66,
+       "high": 135.29,
+       "high_date": "2026-08-25",
+       "low": 88.98,
+       "low_date": "2026-07-29"
+      },
+      "1w": {
+       "change_abs": 19.16,
+       "change_pct": 16.52,
+       "high": 135.29,
+       "high_date": "2026-08-25",
+       "low": 115.83,
+       "low_date": "2026-08-18"
+      },
+      "1y": {
+       "change_abs": 63.47,
+       "change_pct": 88.56,
+       "high": 135.29,
+       "high_date": "2026-08-25",
+       "low": 70.16,
+       "low_date": "2025-08-26"
+      },
+      "3mo": {
+       "change_abs": 23.79,
+       "change_pct": 21.37,
+       "high": 135.29,
+       "high_date": "2026-08-25",
+       "low": 88.75,
+       "low_date": "2026-07-17"
+      },
+      "ytd": {
+       "change_abs": 35.72,
+       "change_pct": 35.93,
+       "high": 135.29,
+       "high_date": "2026-08-25",
+       "low": 88.75,
+       "low_date": "2026-07-17"
+      }
+     }
+    },
+    {
+     "as_of": "2026-08-25",
+     "atr_pct_14d": 3.77,
+     "close_vs_sma200_pct": 21.47,
+     "close_vs_sma50_pct": 37.12,
+     "currency": "USD",
+     "drawdown_from_52w_high_pct": -11.98,
+     "high_52w": 254.61,
+     "high_52w_date": "2026-03-02",
+     "highest_volume_day": {
+      "date": "2025-09-19",
+      "volume": 9138200.0
+     },
+     "last_close": 224.11,
+     "low_52w": 134.38,
+     "low_52w_date": "2026-07-17",
+     "max_drawdown_1y_pct": -45.8,
+     "metric_kind": "return",
+     "n_bars": 300,
+     "name": "Agnico Eagle Mines Limited",
+     "range_position_52w_pct": 74.63,
+     "range_read": "upper half of the 52-week range",
+     "realized_vol_30d_annual_pct": 50.8,
+     "realized_vol_90d_annual_pct": 50.33,
+     "realized_vol_percentile_1y": 75.0,
+     "rvol": 0.99,
+     "rvol_read": "normal volume",
+     "ticker": "AEM.US",
+     "trend_read": "uptrend — above both the 50-day and 200-day average",
+     "up_down_volume_ratio_1mo": 5.54,
+     "vol_trend_read": "volatility steady",
+     "volume_conviction_read": "accumulation — heavier volume on up days",
+     "volume_trend_read": "volume steady",
+     "volume_vs_1y_avg_pct": 21.18,
+     "windows": {
+      "1mo": {
+       "change_abs": 80.4,
+       "change_pct": 55.95,
+       "high": 224.41,
+       "high_date": "2026-08-25",
+       "low": 139.9,
+       "low_date": "2026-07-29"
+      },
+      "1w": {
+       "change_abs": 37.17,
+       "change_pct": 19.88,
+       "high": 224.41,
+       "high_date": "2026-08-25",
+       "low": 184.62,
+       "low_date": "2026-08-18"
+      },
+      "1y": {
+       "change_abs": 85.73,
+       "change_pct": 61.95,
+       "high": 254.61,
+       "high_date": "2026-03-02",
+       "low": 134.38,
+       "low_date": "2026-07-17"
+      },
+      "3mo": {
+       "change_abs": 43.98,
+       "change_pct": 24.42,
+       "high": 224.41,
+       "high_date": "2026-08-25",
+       "low": 134.38,
+       "low_date": "2026-07-17"
+      },
+      "ytd": {
+       "change_abs": 55.3,
+       "change_pct": 32.76,
+       "high": 254.61,
+       "high_date": "2026-03-02",
+       "low": 134.38,
+       "low_date": "2026-07-17"
+      }
+     }
+    },
+    {
+     "as_of": "2026-08-25",
+     "atr_pct_14d": 3.61,
+     "close_vs_sma200_pct": 16.69,
+     "close_vs_sma50_pct": 24.63,
+     "currency": "USD",
+     "drawdown_from_52w_high_pct": -9.52,
+     "high_52w": 54.01,
+     "high_52w_date": "2026-01-29",
+     "highest_volume_day": {
+      "date": "2025-09-19",
+      "volume": 71168500.0
+     },
+     "last_close": 48.87,
+     "low_52w": 25.56,
+     "low_52w_date": "2025-08-28",
+     "max_drawdown_1y_pct": -33.41,
+     "metric_kind": "return",
+     "n_bars": 300,
+     "name": "Barrick Mining Corporation",
+     "range_position_52w_pct": 81.93,
+     "range_read": "upper half of the 52-week range",
+     "realized_vol_30d_annual_pct": 46.32,
+     "realized_vol_90d_annual_pct": 50.05,
+     "realized_vol_percentile_1y": 45.63,
+     "rvol": 0.92,
+     "rvol_read": "normal volume",
+     "ticker": "B.US",
+     "trend_read": "uptrend — above both the 50-day and 200-day average",
+     "up_down_volume_ratio_1mo": 1.87,
+     "vol_trend_read": "volatility steady",
+     "volume_conviction_read": "accumulation — heavier volume on up days",
+     "volume_trend_read": "volume steady",
+     "volume_vs_1y_avg_pct": -24.58,
+     "windows": {
+      "1mo": {
+       "change_abs": 12.18,
+       "change_pct": 33.2,
+       "high": 49.14,
+       "high_date": "2026-08-25",
+       "low": 35.49,
+       "low_date": "2026-07-29"
+      },
+      "1w": {
+       "change_abs": 6.78,
+       "change_pct": 16.11,
+       "high": 49.14,
+       "high_date": "2026-08-25",
+       "low": 41.51,
+       "low_date": "2026-08-18"
+      },
+      "1y": {
+       "change_abs": 22.7,
+       "change_pct": 86.73,
+       "high": 54.01,
+       "high_date": "2026-01-29",
+       "low": 25.56,
+       "low_date": "2025-08-28"
+      },
+      "3mo": {
+       "change_abs": 6.95,
+       "change_pct": 16.57,
+       "high": 49.14,
+       "high_date": "2026-08-25",
+       "low": 34.03,
+       "low_date": "2026-07-17"
+      },
+      "ytd": {
+       "change_abs": 5.86,
+       "change_pct": 13.64,
+       "high": 54.01,
+       "high_date": "2026-01-29",
+       "low": 34.03,
+       "low_date": "2026-07-17"
+      }
+     }
+    },
+    {
+     "as_of": "2026-08-25",
+     "atr_pct_14d": 3.63,
+     "close_vs_sma200_pct": 14.91,
+     "close_vs_sma50_pct": 31.2,
+     "currency": "USD",
+     "drawdown_from_52w_high_pct": -14.07,
+     "high_52w": 38.96,
+     "high_52w_date": "2026-01-26",
+     "highest_volume_day": {
+      "date": "2025-09-02",
+      "volume": 32164500.0
+     },
+     "last_close": 33.48,
+     "low_52w": 19.67,
+     "low_52w_date": "2025-08-26",
+     "max_drawdown_1y_pct": -40.66,
+     "metric_kind": "return",
+     "n_bars": 300,
+     "name": "Kinross Gold Corporation",
+     "range_position_52w_pct": 71.59,
+     "range_read": "upper half of the 52-week range",
+     "realized_vol_30d_annual_pct": 51.25,
+     "realized_vol_90d_annual_pct": 55.14,
+     "realized_vol_percentile_1y": 47.22,
+     "rvol": 0.93,
+     "rvol_read": "normal volume",
+     "ticker": "KGC.US",
+     "trend_read": "uptrend — above both the 50-day and 200-day average",
+     "up_down_volume_ratio_1mo": 2.17,
+     "vol_trend_read": "volatility steady",
+     "volume_conviction_read": "accumulation — heavier volume on up days",
+     "volume_trend_read": "volume steady",
+     "volume_vs_1y_avg_pct": -17.66,
+     "windows": {
+      "1mo": {
+       "change_abs": 10.0,
+       "change_pct": 42.6,
+       "high": 33.48,
+       "high_date": "2026-08-25",
+       "low": 22.34,
+       "low_date": "2026-07-31"
+      },
+      "1w": {
+       "change_abs": 6.4,
+       "change_pct": 23.62,
+       "high": 33.48,
+       "high_date": "2026-08-25",
+       "low": 26.96,
+       "low_date": "2026-08-18"
+      },
+      "1y": {
+       "change_abs": 13.36,
+       "change_pct": 66.38,
+       "high": 38.96,
+       "high_date": "2026-01-26",
+       "low": 19.67,
+       "low_date": "2025-08-26"
+      },
+      "3mo": {
+       "change_abs": 4.03,
+       "change_pct": 13.68,
+       "high": 33.48,
+       "high_date": "2026-08-25",
+       "low": 22.26,
+       "low_date": "2026-07-17"
+      },
+      "ytd": {
+       "change_abs": 5.43,
+       "change_pct": 19.36,
+       "high": 38.96,
+       "high_date": "2026-01-26",
+       "low": 22.26,
+       "low_date": "2026-07-17"
+      }
+     }
+    },
+    {
+     "as_of": "2026-08-25",
+     "atr_pct_14d": 3.59,
+     "close_vs_sma200_pct": 28.96,
+     "close_vs_sma50_pct": 35.6,
+     "currency": "USD",
+     "drawdown_from_52w_high_pct": -0.79,
+     "high_52w": 165.03,
+     "high_52w_date": "2026-03-02",
+     "highest_volume_day": {
+      "date": "2025-09-19",
+      "volume": 8717736.0
+     },
+     "last_close": 163.72,
+     "low_52w": 92.01,
+     "low_52w_date": "2025-10-28",
+     "max_drawdown_1y_pct": -37.38,
+     "metric_kind": "return",
+     "n_bars": 300,
+     "name": "Wheaton Precious Metals Corp",
+     "range_position_52w_pct": 98.21,
+     "range_read": "near 52-week highs",
+     "realized_vol_30d_annual_pct": 50.82,
+     "realized_vol_90d_annual_pct": 53.42,
+     "realized_vol_percentile_1y": 63.49,
+     "rvol": 1.02,
+     "rvol_read": "normal volume",
+     "ticker": "WPM.US",
+     "trend_read": "uptrend — above both the 50-day and 200-day average",
+     "up_down_volume_ratio_1mo": 3.45,
+     "vol_trend_read": "volatility steady",
+     "volume_conviction_read": "accumulation — heavier volume on up days",
+     "volume_trend_read": "volume steady",
+     "volume_vs_1y_avg_pct": 6.62,
+     "windows": {
+      "1mo": {
+       "change_abs": 54.28,
+       "change_pct": 49.6,
+       "high": 163.9,
+       "high_date": "2026-08-25",
+       "low": 106.16,
+       "low_date": "2026-07-29"
+      },
+      "1w": {
+       "change_abs": 31.2,
+       "change_pct": 23.54,
+       "high": 163.9,
+       "high_date": "2026-08-25",
+       "low": 131.59,
+       "low_date": "2026-08-18"
+      },
+      "1y": {
+       "change_abs": 67.6,
+       "change_pct": 70.32,
+       "high": 165.03,
+       "high_date": "2026-03-02",
+       "low": 92.01,
+       "low_date": "2025-10-28"
+      },
+      "3mo": {
+       "change_abs": 33.82,
+       "change_pct": 26.03,
+       "high": 163.9,
+       "high_date": "2026-08-25",
+       "low": 101.46,
+       "low_date": "2026-07-17"
+      },
+      "ytd": {
+       "change_abs": 46.72,
+       "change_pct": 39.93,
+       "high": 165.03,
+       "high_date": "2026-03-02",
+       "low": 101.46,
+       "low_date": "2026-07-17"
+      }
+     }
+    }
+   ],
+   "unresolved": []
+  }
+ ],
+ "answer_to_user": "Gold (the metal) — GOLD.COMM last ~$4,716/oz. It's in a strong uptrend (above both its 50- and 200-day averages), +8.0% over the past week, +16.8% over the past month and +39.2% over the past year (upper half of its 52-week range, ~15.6% off the peak). So yes, it's ripping.\n\nThe MINERS are giving you leveraged beta to it — they've outrun the metal:\n• Newmont (NEM.US, ~$142bn) — +48% 1mo / +89% 1y\n• Agnico Eagle (AEM.US, ~$114bn) — +56% 1mo / +62% 1y\n• Barrick (B.US, ~$80bn) — +33% 1mo / +87% 1y\n• Kinross (KGC.US, ~$40bn) — +43% 1mo / +66% 1y\n• Wheaton Precious Metals (WPM.US, ~$74bn, streamer) — +50% 1mo / +70% 1y\n\nOther large names in the cohort: Franco-Nevada (FNV.US, royalty, ~$52bn), Royal Gold (RGLD.US), Alamos (AGI.US), IAMGold (IAG.US), Eldorado (EGO.US), B2Gold (BTG.US).\n\nRead: the metal is up ~39% over the year but the leading miners are up 60-90% — classic operating-leverage kicker (their margins expand faster than the gold price). Metal ≈ steady trend; miners = higher-beta expression of the same move. Note the miner-heavy names are largely Canada-domiciled, shown here on their US listings."
+}

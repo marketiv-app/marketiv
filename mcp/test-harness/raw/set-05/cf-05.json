@@ -1,0 +1,2224 @@
+{
+  "id": "cf-05",
+  "question": "Give me quality tech companies in Asia — return on equity above 15% — where the stock dropped more than 25% from its 52-week high but the business is still growing revenue.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "roe",
+            "pattern": "above",
+            "threshold": 0.15
+          },
+          {
+            "concept": "revenue",
+            "pattern": "compound_growth",
+            "threshold": 0.0
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "off_high_by",
+                "b": "0.25"
+              }
+            ]
+          }
+        ],
+        "gics": "45",
+        "country": [
+          "CN",
+          "JP",
+          "KR",
+          "TW",
+          "HK",
+          "IN",
+          "SG",
+          "TH",
+          "MY",
+          "ID",
+          "PH",
+          "VN"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 10,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "atr_pct": {
+            "definition": "Average True Range ÷ price — volatility as a fraction of price."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0303,
+              "free_cash_flow_usd": 4697267.567047,
+              "gross_margin": 0.5359,
+              "market_cap_usd": 35458874.9312,
+              "net_income_usd": 4845725.73644,
+              "net_margin": 0.3201,
+              "operating_margin": 0.3177,
+              "pe": 8.510638,
+              "roa": 0.2243
+            },
+            "ta": {
+              "adx": 16.8156,
+              "atr_pct": 0.0418,
+              "close_vs_ema200": -0.0565,
+              "rsi14": 40.79
+            }
+          },
+          "head_listing_id": 49395,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.231,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2595
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Asia Medical & Agricultural Laboratory & Research Center PCL",
+          "score": 1.0,
+          "ticker": "AMARC.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0406,
+              "free_cash_flow_usd": 426925996.5,
+              "gross_margin": 0.282,
+              "market_cap_usd": 122025102409.728,
+              "net_income_usd": 811217897.79,
+              "net_margin": 0.1182,
+              "operating_margin": 0.1331,
+              "pe": 112.5,
+              "roa": 0.1409
+            },
+            "ta": {
+              "adx": 33.2495,
+              "atr_pct": 0.0402,
+              "close_vs_ema200": -0.0386,
+              "rsi14": 32.6519
+            }
+          },
+          "head_listing_id": 49564,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1867,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2565
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Delta Electronics (Thailand) Public Company Limited",
+          "score": 1.0,
+          "ticker": "DELTA.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0061,
+              "free_cash_flow_usd": 11730152.1322,
+              "gross_margin": 0.3198,
+              "market_cap_usd": 111972000.0,
+              "net_income_usd": 12046811.2425,
+              "net_margin": 0.1879,
+              "operating_margin": 0.2329,
+              "pe": 9.160305,
+              "roa": 0.1869
+            },
+            "ta": {
+              "adx": 25.6866,
+              "atr_pct": 0.0306,
+              "close_vs_ema200": -0.1895,
+              "rsi14": 30.1692
+            }
+          },
+          "head_listing_id": 49776,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0742,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2453
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "MEB Corp. PCL",
+          "score": 1.0,
+          "ticker": "MEB.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0373,
+              "free_cash_flow_usd": 6815863.7849,
+              "gross_margin": 0.6879,
+              "market_cap_usd": 59597996.1472,
+              "net_income_usd": 7010815.6924,
+              "net_margin": 0.3334,
+              "operating_margin": 0.4182,
+              "pe": 10.521739,
+              "roa": 0.3127
+            },
+            "ta": {
+              "adx": 27.4271,
+              "atr_pct": 0.0393,
+              "close_vs_ema200": -0.2385,
+              "rsi14": 41.6508
+            }
+          },
+          "head_listing_id": 49824,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1678,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.4245
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Netbay Public Company Limited",
+          "score": 1.0,
+          "ticker": "NETBAY.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0424,
+              "free_cash_flow_usd": 6957159.4911,
+              "gross_margin": 0.2045,
+              "market_cap_usd": 38656302.0928,
+              "net_income_usd": 3897664.1408,
+              "net_margin": 0.0964,
+              "operating_margin": 0.1167,
+              "pe": 10.403226,
+              "roa": 0.1185
+            },
+            "ta": {
+              "adx": 31.3738,
+              "atr_pct": 0.0406,
+              "close_vs_ema200": -0.0357,
+              "rsi14": 33.3215
+            }
+          },
+          "head_listing_id": 49993,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1338,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1576
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "nForce Secure Public Company Limited",
+          "score": 1.0,
+          "ticker": "SECURE.BK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.3439,
+              "free_cash_flow_usd": 2608959.7721,
+              "gross_margin": 0.0377,
+              "market_cap_usd": 219347933.23520002,
+              "net_income_usd": 24650452.6073,
+              "net_margin": 0.0169,
+              "operating_margin": 0.0157,
+              "pe": 10.105263,
+              "roa": 0.0498
+            },
+            "ta": {
+              "adx": 17.948,
+              "atr_pct": 0.0229,
+              "close_vs_ema200": -0.0547,
+              "rsi14": 43.7662
+            }
+          },
+          "head_listing_id": 50083,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0666,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1593
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Synnex (Thailand) Public Company Limited",
+          "score": 1.0,
+          "ticker": "SYNEX.BK"
+        },
+        {
+          "also_known_as": [
+            "117.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 2.0794,
+              "free_cash_flow_usd": -14686815.0,
+              "gross_margin": 0.258522647775724,
+              "market_cap_usd": 326865560.98560005,
+              "net_income_usd": 19083207.0,
+              "net_margin": 0.196541897096401,
+              "operating_margin": 0.0319859790717026,
+              "pe": 17.517338,
+              "roa": 0.0576791790434348
+            },
+            "ta": {
+              "adx": 18.9577,
+              "atr_pct": 0.1585,
+              "close_vs_ema200": 0.3646,
+              "rsi14": 47.2317
+            }
+          },
+          "head_listing_id": 50369,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.234,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.229670877187548
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Tianli Holdings Group Ltd",
+          "score": 1.0,
+          "ticker": "0117.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.5493,
+              "free_cash_flow_usd": -7472128.4,
+              "gross_margin": 0.164187346720787,
+              "market_cap_usd": 531881049.19040006,
+              "net_income_usd": 34564670.8,
+              "net_margin": 0.0780740075058357,
+              "operating_margin": 0.108787350121788,
+              "pe": 16.52,
+              "roa": 0.0940562379796466
+            },
+            "ta": {
+              "adx": 16.4692,
+              "atr_pct": 0.0447,
+              "close_vs_ema200": -0.1342,
+              "rsi14": 44.9547
+            }
+          },
+          "head_listing_id": 51129,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.0403,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.213237872761659
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Karrie International Holdings Ltd",
+          "score": 1.0,
+          "ticker": "1050.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2307,
+              "free_cash_flow_usd": 242212000.0,
+              "gross_margin": 0.10249213297852,
+              "market_cap_usd": 2677962382.9504004,
+              "net_income_usd": 196904000.0,
+              "net_margin": 0.0562574177426977,
+              "operating_margin": 0.0662292638913571,
+              "pe": 13.235765,
+              "roa": 0.131873489747697
+            },
+            "ta": {
+              "adx": 22.4099,
+              "atr_pct": 0.0475,
+              "close_vs_ema200": -0.0847,
+              "rsi14": 57.2227
+            }
+          },
+          "head_listing_id": 51437,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4637,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.316907024522376
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Cowell e Holdings Inc",
+          "score": 1.0,
+          "ticker": "1415.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.0964,
+              "free_cash_flow_usd": -637872.4,
+              "gross_margin": 0.108944872355454,
+              "market_cap_usd": 195868681.88160002,
+              "net_income_usd": 5302035.2,
+              "net_margin": 0.0186346462166313,
+              "operating_margin": 0.0288489006984853,
+              "pe": 36.631016,
+              "roa": 0.0450286142799399
+            },
+            "ta": {
+              "adx": 13.1531,
+              "atr_pct": 0.0947,
+              "close_vs_ema200": 0.3619,
+              "rsi14": 43.282
+            }
+          },
+          "head_listing_id": 51479,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2299,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.150001534237872
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Pangaea Connectivity Technology Ltd",
+          "score": 1.0,
+          "ticker": "1473.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0335,
+              "free_cash_flow_usd": 50965000.0,
+              "gross_margin": 0.56954604130809,
+              "market_cap_usd": 1092965553.9712002,
+              "net_income_usd": 45466000.0,
+              "net_margin": 0.349351487582985,
+              "operating_margin": 0.399618883698058,
+              "pe": 24.023114,
+              "roa": 0.398188856387171
+            },
+            "ta": {
+              "adx": 14.5422,
+              "atr_pct": 0.0503,
+              "close_vs_ema200": -0.0337,
+              "rsi14": 39.6966
+            }
+          },
+          "head_listing_id": 51512,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1447,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.789121077478478
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Plover Bay Technologies Ltd",
+          "score": 1.0,
+          "ticker": "1523.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 2.9708,
+              "free_cash_flow_usd": 86426376.4,
+              "gross_margin": 0.566718650127259,
+              "market_cap_usd": 1508346987.9296002,
+              "net_income_usd": 124777471.0,
+              "net_margin": 0.333348195475056,
+              "operating_margin": 0.5054562212358,
+              "pe": 20.174742,
+              "roa": 0.0400029742413423
+            },
+            "ta": {
+              "adx": 14.6623,
+              "atr_pct": 0.0391,
+              "close_vs_ema200": -0.1202,
+              "rsi14": 51.3155
+            }
+          },
+          "head_listing_id": 51642,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.121,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.179835752283626
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "SUNeVision Holdings Ltd",
+          "score": 1.0,
+          "ticker": "1686.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2742,
+              "free_cash_flow_usd": 5070208.0,
+              "gross_margin": 0.0385253927256537,
+              "market_cap_usd": 74097046.7328,
+              "net_income_usd": 21762598.0,
+              "net_margin": 0.0394412817677954,
+              "operating_margin": 0.0208371236211775,
+              "pe": 3.285491,
+              "roa": 0.149746259074036
+            },
+            "ta": {
+              "adx": 15.0642,
+              "atr_pct": 0.0839,
+              "close_vs_ema200": -0.1813,
+              "rsi14": 40.1795
+            }
+          },
+          "head_listing_id": 51746,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 3.3185,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.345477617937431
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Enterprise Development Holdings Ltd",
+          "score": 1.0,
+          "ticker": "1808.HK"
+        },
+        {
+          "also_known_as": [
+            "XIAOMI01.BK",
+            "XIAOMI13.BK",
+            "XIAOMI19.BK",
+            "XIAOMI23.BK",
+            "XIAOMI80.BK",
+            "81810.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1374,
+              "free_cash_flow_usd": 3056370746.0,
+              "gross_margin": 0.222630244645631,
+              "market_cap_usd": 83287671937.43361,
+              "net_income_usd": 5955004627.0,
+              "net_margin": 0.0910662614588647,
+              "operating_margin": 0.0689790953831114,
+              "pe": 14.251742,
+              "roa": 0.0913982586598487
+            },
+            "ta": {
+              "adx": 14.9564,
+              "atr_pct": 0.0446,
+              "close_vs_ema200": -0.1488,
+              "rsi14": 53.109
+            }
+          },
+          "head_listing_id": 51749,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1776,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.183065390537456
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Xiaomi Corp",
+          "score": 1.0,
+          "ticker": "1810.HK"
+        },
+        {
+          "also_known_as": [
+            "SUNNY19.BK",
+            "SUNNY80.BK",
+            "0Z4I.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2142,
+              "free_cash_flow_usd": 450241363.0,
+              "gross_margin": 0.196994220979624,
+              "market_cap_usd": 8265732481.843201,
+              "net_income_usd": 663392301.0,
+              "net_margin": 0.107314383362736,
+              "operating_margin": 0.0867681201789738,
+              "pe": 12.093588,
+              "roa": 0.0820920994246351
+            },
+            "ta": {
+              "adx": 15.5713,
+              "atr_pct": 0.0447,
+              "close_vs_ema200": -0.0517,
+              "rsi14": 54.4911
+            }
+          },
+          "head_listing_id": 52192,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.092,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.172095714839489
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Sunny Optical Technology Group Co Ltd",
+          "score": 1.0,
+          "ticker": "2382.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4096,
+              "free_cash_flow_usd": 20896447.0,
+              "gross_margin": 0.381623312118616,
+              "market_cap_usd": 575410314.7520001,
+              "net_income_usd": 19122532.0,
+              "net_margin": 0.060053279299573,
+              "operating_margin": 0.0600856133316807,
+              "pe": 30.726051,
+              "roa": 0.0788138202960734
+            },
+            "ta": {
+              "adx": 20.2734,
+              "atr_pct": 0.0537,
+              "rsi14": 26.0457
+            }
+          },
+          "head_listing_id": 52335,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1879,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.182562972580195
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Dmall Inc",
+          "score": 1.0,
+          "ticker": "2586.HK"
+        },
+        {
+          "also_known_as": [
+            "3393-OL.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4024,
+              "free_cash_flow_usd": 110607211.0,
+              "gross_margin": 0.357066667328467,
+              "market_cap_usd": 2285983216.0256004,
+              "net_income_usd": 151329178.0,
+              "net_margin": 0.105052203672498,
+              "operating_margin": 0.180408149083861,
+              "pe": 14.884627,
+              "roa": 0.0635395998956464
+            },
+            "ta": {
+              "adx": 18.8149,
+              "atr_pct": 0.0679,
+              "close_vs_ema200": -0.174,
+              "rsi14": 38.4102
+            }
+          },
+          "head_listing_id": 52668,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1982,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.181387195206869
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Wasion Group Holdings Ltd",
+          "score": 1.0,
+          "ticker": "3393.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 2.7863,
+              "free_cash_flow_usd": -19119900.5,
+              "gross_margin": 0.0723203010065062,
+              "market_cap_usd": 196049153.66400003,
+              "net_income_usd": 8552317.5,
+              "net_margin": 0.0116300668901406,
+              "operating_margin": 0.0307258835784085,
+              "pe": 25.246711,
+              "roa": 0.0416311296138354
+            },
+            "ta": {
+              "adx": 23.8217,
+              "atr_pct": 0.1168,
+              "close_vs_ema200": 0.3096,
+              "rsi14": 39.6089
+            }
+          },
+          "head_listing_id": 52988,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2863,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.207577976243386
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Apex Ace Holding Limited",
+          "score": 1.0,
+          "ticker": "6036.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.5208,
+              "free_cash_flow_usd": -29121807.0,
+              "gross_margin": 0.201570824036316,
+              "market_cap_usd": 90143144.00000001,
+              "net_income_usd": 20243795.0,
+              "net_margin": 0.0871370316226822,
+              "operating_margin": 0.106569823805494,
+              "pe": 4.320176,
+              "roa": 0.178114551190712
+            },
+            "ta": {
+              "adx": 25.6597,
+              "atr_pct": 0.0176,
+              "rsi14": 50.0193
+            }
+          },
+          "head_listing_id": 53202,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4367,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.280805213636305
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Changjiu Holdings Ltd",
+          "score": 1.0,
+          "ticker": "6959.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0043,
+              "free_cash_flow_usd": 3414678.4628,
+              "gross_margin": 0.881578585565089,
+              "market_cap_usd": 112289495.71840002,
+              "net_income_usd": 7600054.6732,
+              "net_margin": 0.319252885660295,
+              "operating_margin": 0.483263004661646,
+              "pe": 13.677639,
+              "roa": 0.172652408469516
+            },
+            "ta": {
+              "adx": 25.8115,
+              "atr_pct": 0.0545,
+              "close_vs_ema200": -0.0388,
+              "rsi14": 45.6356
+            }
+          },
+          "head_listing_id": 53313,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2395,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.203908822410432
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "TradeGo FinTech",
+          "score": 1.0,
+          "ticker": "8017.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1025,
+              "free_cash_flow_usd": -1774842.0,
+              "gross_margin": 0.60473798318439,
+              "market_cap_usd": 87552541.44000001,
+              "net_income_usd": 1300034.5,
+              "net_margin": 0.106995928295701,
+              "operating_margin": 0.136259319972503,
+              "pe": 59.760956,
+              "roa": 0.1008774553794
+            },
+            "ta": {
+              "adx": 78.6232,
+              "atr_pct": 0.0949,
+              "close_vs_ema200": -0.423,
+              "rsi14": 34.4861
+            }
+          },
+          "head_listing_id": 53424,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.64,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.196012709729918
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Aurum Pacific China Group Ltd",
+          "score": 1.0,
+          "ticker": "8148.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0353,
+              "free_cash_flow_usd": 202615413.0,
+              "gross_margin": 0.558471029692479,
+              "market_cap_usd": 1448633282.9696002,
+              "net_income_usd": 133638362.0,
+              "net_margin": 0.135656957881825,
+              "operating_margin": 0.138513416413241,
+              "pe": 10.106339,
+              "roa": 0.234302257217664
+            },
+            "ta": {
+              "adx": 12.028,
+              "atr_pct": 0.0471,
+              "close_vs_ema200": -0.1289,
+              "rsi14": 40.6181
+            }
+          },
+          "head_listing_id": 53941,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.35,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.47014073524418
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Newborn Town Inc",
+          "score": 1.0,
+          "ticker": "9911.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.2909,
+              "free_cash_flow_usd": 307856383.27905,
+              "gross_margin": 0.2647,
+              "market_cap_usd": 50218447624.60159,
+              "net_income_usd": 503935921.15695,
+              "net_margin": 0.1214,
+              "operating_margin": 0.16,
+              "pe": 64.84186,
+              "roa": 0.096
+            },
+            "ta": {
+              "adx": 16.3324,
+              "atr_pct": 0.0814,
+              "close_vs_ema200": 0.2942,
+              "rsi14": 47.9664
+            }
+          },
+          "head_listing_id": 228455,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1643,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1939
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shengyi Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "600183.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0022861014911834,
+              "free_cash_flow_usd": 77452875.73215,
+              "gross_margin": 0.3189,
+              "market_cap_usd": 4641085335.347199,
+              "net_income_usd": 165538468.5689,
+              "net_margin": 0.221,
+              "operating_margin": 0.2422,
+              "pe": 25.616541,
+              "roa": 0.1302
+            },
+            "ta": {
+              "adx": 12.6198,
+              "atr_pct": 0.055,
+              "close_vs_ema200": -0.0443,
+              "rsi14": 40.0535
+            }
+          },
+          "head_listing_id": 228732,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1156,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1813
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Xiamen Faratronic Co Ltd",
+          "score": 1.0,
+          "ticker": "600563.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.5005,
+              "free_cash_flow_usd": 2675748945.0,
+              "gross_margin": 0.0707,
+              "market_cap_usd": 194524277925.4784,
+              "net_income_usd": 5148516015.0,
+              "net_margin": 0.039,
+              "operating_margin": 0.0501,
+              "pe": 32.292683,
+              "roa": 0.0777
+            },
+            "ta": {
+              "adx": 14.6799,
+              "atr_pct": 0.0535,
+              "close_vs_ema200": 0.0001,
+              "rsi14": 43.0213
+            }
+          },
+          "head_listing_id": 229127,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2083,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2015
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Foxconn Industrial Internet Co Ltd",
+          "score": 1.0,
+          "ticker": "601138.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1029,
+              "free_cash_flow_usd": 60740294.3175,
+              "gross_margin": 0.4404,
+              "market_cap_usd": 2483998443.6224,
+              "net_income_usd": 108170629.5117,
+              "net_margin": 0.241,
+              "operating_margin": 0.32,
+              "pe": 20.714286,
+              "roa": 0.1518
+            },
+            "ta": {
+              "adx": 16.9758,
+              "atr_pct": 0.0362,
+              "close_vs_ema200": -0.0887,
+              "rsi14": 49.8079
+            }
+          },
+          "head_listing_id": 229320,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.234,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2516
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "BeiJing DaHao Technology Co Lt",
+          "score": 1.0,
+          "ticker": "603025.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.384,
+              "free_cash_flow_usd": 134009234.958,
+              "gross_margin": 0.3105,
+              "market_cap_usd": 7469884800.2048,
+              "net_income_usd": 57854079.42545,
+              "net_margin": 0.1188,
+              "operating_margin": 0.2043,
+              "pe": 94.583178,
+              "roa": 0.0441
+            },
+            "ta": {
+              "adx": 15.8583,
+              "atr_pct": 0.092,
+              "close_vs_ema200": 0.2031,
+              "rsi14": 47.2057
+            }
+          },
+          "head_listing_id": 229707,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1776,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1777
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Jiangsu Lettall Electronic Co Ltd",
+          "score": 1.0,
+          "ticker": "603629.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.015,
+              "free_cash_flow_usd": 149482953.9075,
+              "gross_margin": 0.4252,
+              "market_cap_usd": 12519689149.644798,
+              "net_income_usd": 162503816.8158,
+              "net_margin": 0.2484,
+              "operating_margin": 0.2566,
+              "pe": 72.281022,
+              "roa": 0.1951
+            },
+            "ta": {
+              "adx": 18.3238,
+              "atr_pct": 0.0705,
+              "close_vs_ema200": -0.0403,
+              "rsi14": 37.6345
+            }
+          },
+          "head_listing_id": 229847,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2944,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2374
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Fuzhou Rockchip Electronics Co Ltd",
+          "score": 1.0,
+          "ticker": "603893.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0464,
+              "free_cash_flow_usd": 36518611.601,
+              "gross_margin": 0.4821,
+              "market_cap_usd": 1851674654.208,
+              "net_income_usd": 35307877.986,
+              "net_margin": 0.2955,
+              "operating_margin": 0.3417,
+              "pe": 45.462713,
+              "roa": 0.1212
+            },
+            "ta": {
+              "adx": 30.7575,
+              "atr_pct": 0.0419,
+              "close_vs_ema200": -0.1512,
+              "rsi14": 42.9584
+            }
+          },
+          "head_listing_id": 229945,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1238,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1505
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Xiamen Leading Optics Co Ltd",
+          "score": 1.0,
+          "ticker": "605118.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.1019,
+              "free_cash_flow_usd": 25807821.404,
+              "gross_margin": 0.563,
+              "market_cap_usd": 9086053018.0096,
+              "net_income_usd": 110001233.36635,
+              "net_margin": 0.2966,
+              "operating_margin": 0.337,
+              "pe": 73.169901,
+              "roa": 0.1391
+            },
+            "ta": {
+              "adx": 9.594,
+              "atr_pct": 0.0764,
+              "close_vs_ema200": -0.0364,
+              "rsi14": 43.2972
+            }
+          },
+          "head_listing_id": 230040,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3249,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1653
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Anji Microelectronics Tech Co Ltd",
+          "score": 1.0,
+          "ticker": "688019.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0005,
+              "free_cash_flow_usd": 13054650.01225,
+              "gross_margin": 0.4037,
+              "market_cap_usd": 1940319121.3056,
+              "net_income_usd": 93591777.5692,
+              "net_margin": 0.2334,
+              "operating_margin": 0.2791,
+              "pe": 23.13913,
+              "roa": 0.1102
+            },
+            "ta": {
+              "adx": 33.372,
+              "atr_pct": 0.0413,
+              "close_vs_ema200": -0.241,
+              "rsi14": 31.7449
+            }
+          },
+          "head_listing_id": 230110,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1412,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1824
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Willfar Information Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "688100.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0024,
+              "free_cash_flow_usd": 277234972.8036,
+              "gross_margin": 0.8599,
+              "market_cap_usd": 17502636575.129597,
+              "net_income_usd": 522057950.5028,
+              "net_margin": 0.598,
+              "operating_margin": 0.2599,
+              "pe": 33.111396,
+              "roa": 0.1781
+            },
+            "ta": {
+              "adx": 24.1398,
+              "atr_pct": 0.0493,
+              "close_vs_ema200": -0.1084,
+              "rsi14": 40.3091
+            }
+          },
+          "head_listing_id": 230120,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.1513,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.238
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Beijing Kingsoft Office Software In",
+          "score": 1.0,
+          "ticker": "688111.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0549,
+              "free_cash_flow_usd": 11370411.5501,
+              "gross_margin": 0.4289,
+              "market_cap_usd": 4334615246.6432,
+              "net_income_usd": 53911246.03165,
+              "net_margin": 0.2457,
+              "operating_margin": 0.3006,
+              "pe": 61.547009,
+              "roa": 0.118
+            },
+            "ta": {
+              "adx": 18.1745,
+              "atr_pct": 0.0771,
+              "close_vs_ema200": 0.0089,
+              "rsi14": 43.7117
+            }
+          },
+          "head_listing_id": 230135,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5924,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1592
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Zhejiang Lante Optics Co Ltd",
+          "score": 1.0,
+          "ticker": "688127.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.3491,
+              "free_cash_flow_usd": 15228155.56975,
+              "gross_margin": 0.3131,
+              "market_cap_usd": 14692123691.417599,
+              "net_income_usd": 193386952.7712,
+              "net_margin": 0.1508,
+              "operating_margin": 0.1883,
+              "pe": 47.816667,
+              "roa": 0.1142
+            },
+            "ta": {
+              "adx": 13.8905,
+              "atr_pct": 0.0853,
+              "close_vs_ema200": 0.0338,
+              "rsi14": 45.5883
+            }
+          },
+          "head_listing_id": 230182,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.39,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2176
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shengyi Electronics Co. Ltd. A",
+          "score": 1.0,
+          "ticker": "688183.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0019,
+              "free_cash_flow_usd": 146106448.73195,
+              "gross_margin": 0.7715,
+              "market_cap_usd": 6360846128.742399,
+              "net_income_usd": 168896122.7802,
+              "net_margin": 0.5229,
+              "operating_margin": 0.5522,
+              "pe": 37.039508,
+              "roa": 0.1709
+            },
+            "ta": {
+              "adx": 14.4176,
+              "atr_pct": 0.0387,
+              "close_vs_ema200": -0.2327,
+              "rsi14": 41.482
+            }
+          },
+          "head_listing_id": 230187,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3469,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1823
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shanghai Friendess Electronics Tech",
+          "score": 1.0,
+          "ticker": "688188.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.6193,
+              "free_cash_flow_usd": -96865897.29645,
+              "gross_margin": 0.2408,
+              "market_cap_usd": 6047946928.9472,
+              "net_income_usd": 135632775.59945,
+              "net_margin": 0.1086,
+              "operating_margin": 0.1387,
+              "pe": 38.4,
+              "roa": 0.0901
+            },
+            "ta": {
+              "adx": 14.2681,
+              "atr_pct": 0.0477,
+              "close_vs_ema200": 0.04,
+              "rsi14": 54.6598
+            }
+          },
+          "head_listing_id": 230210,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5379,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1713
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "SmartSens Technology (Shanghai) Co. Ltd. A",
+          "score": 1.0,
+          "ticker": "688213.CG"
+        },
+        {
+          "also_known_as": [
+            "CAMBRI80.BK"
+          ],
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0014,
+              "free_cash_flow_usd": 204248409.130656,
+              "gross_margin": 0.5528,
+              "market_cap_usd": 108316925021.3888,
+              "net_income_usd": 508251738.636708,
+              "net_margin": 0.3571,
+              "operating_margin": 0.3993,
+              "pe": 221.210816,
+              "roa": 0.1895
+            },
+            "ta": {
+              "adx": 22.2958,
+              "atr_pct": 0.0838,
+              "close_vs_ema200": -0.0158,
+              "rsi14": 40.3834
+            }
+          },
+          "head_listing_id": 230244,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 1.0733,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2544
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Cambricon Technologies Corp Ltd",
+          "score": 1.0,
+          "ticker": "688256.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.4634,
+              "free_cash_flow_usd": -63525131.080796,
+              "gross_margin": 0.3466,
+              "market_cap_usd": 10878900303.462399,
+              "net_income_usd": 75284333.482666,
+              "net_margin": 0.1949,
+              "operating_margin": 0.2432,
+              "pe": 155.967711,
+              "roa": 0.1537
+            },
+            "ta": {
+              "adx": 23.2717,
+              "atr_pct": 0.078,
+              "close_vs_ema200": 0.2936,
+              "rsi14": 56.4076
+            }
+          },
+          "head_listing_id": 230295,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3308,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.2975
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Henan Shijia Photons Technology Co Ltd",
+          "score": 1.0,
+          "ticker": "688313.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 1.4298,
+              "free_cash_flow_usd": -778926447.12985,
+              "gross_margin": 0.3556,
+              "market_cap_usd": 18012029430.9888,
+              "net_income_usd": 506891039.96055,
+              "net_margin": 0.2262,
+              "operating_margin": 0.2671,
+              "pe": 30.763062,
+              "roa": 0.1428
+            },
+            "ta": {
+              "adx": 21.7755,
+              "atr_pct": 0.0847,
+              "close_vs_ema200": -0.0394,
+              "rsi14": 40.901
+            }
+          },
+          "head_listing_id": 230435,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5585,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.4107
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Biwin Storage Technology Co. Ltd. A",
+          "score": 1.0,
+          "ticker": "688525.CG"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "debt_to_equity": 0.0152,
+              "free_cash_flow_usd": 74778104.4395,
+              "gross_margin": 0.8696,
+              "market_cap_usd": 3448194265.7023997,
+              "net_income_usd": 71583273.6224,
+              "net_margin": 0.2664,
+              "operating_margin": 0.2622,
+              "pe": 45.727418,
+              "roa": 0.1212
+            },
+            "ta": {
+              "adx": 26.8118,
+              "atr_pct": 0.074,
+              "rsi14": 33.9839
+            }
+          },
+          "head_listing_id": 230506,
+          "matched": {
+            "fundamental": {
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2233,
+                "window": "3y_cagr"
+              },
+              "roe": {
+                "kind": "level",
+                "value": 0.1596
+              }
+            },
+            "ta": {
+              "off_high": {
+                "detail": {},
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "INTSIG ORD A (SHH) EQSW Exp:",
+          "score": 1.0,
+          "ticker": "688615.CG"
+        }
+      ],
+      "sort": "ta",
+      "universe": 3300,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Found 40 Asian technology companies (GICS 45, Asia countries) with ROE>15% and still-growing revenue that are down more than 25% from their 52-week high. All three conditions hold per row (roe>0.15 + revenue growth in matched.fundamental; off_high_by 25% drawdown in matched.ta). Examples: AMARC.BK, DELTA.BK, MEB.BK, NETBAY.BK."
+}

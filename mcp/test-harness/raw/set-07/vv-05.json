@@ -1,0 +1,2549 @@
+{
+ "id": "vv-05",
+ "question": "Screen banks for me — I know you value banks on price-to-book, not P/E. Show US and European banks trading below 1x book, and flag which ones have decent return on equity so I am not buying a broken bank.",
+ "tools_called": [
+  {
+   "tool": "find_fsconcept",
+   "args": {
+    "queries": [
+     "P/B price to book",
+     "return on equity"
+    ]
+   },
+   "note": "resolver — pb, roe"
+  },
+  {
+   "tool": "find_gics",
+   "args": {
+    "q": "banks"
+   },
+   "note": "resolver — group 4010 (Banks)"
+  },
+  {
+   "tool": "screen_unified",
+   "args": {
+    "fundamental": [
+     {
+      "concept": "pb",
+      "pattern": "below",
+      "threshold": 1
+     },
+     {
+      "concept": "roe",
+      "pattern": "is_positive"
+     }
+    ],
+    "gics": "4010",
+    "country": [
+     "US",
+     "DE",
+     "FR",
+     "GB",
+     "IT",
+     "ES",
+     "NL",
+     "SE",
+     "CH",
+     "BE",
+     "FI",
+     "NO",
+     "DK",
+     "AT",
+     "IE",
+     "PT",
+     "PL",
+     "GR"
+    ],
+    "asset_type": [
+     "Common Stock"
+    ],
+    "sort": "roe",
+    "limit": 20
+   },
+   "note": "P/B<1 primary; roe is_positive gate excludes negative-equity broken banks and surfaces ROE; sorted by ROE so the quality flag is visible"
+  }
+ ],
+ "raw_responses": [
+  {
+   "capped": false,
+   "count": 73,
+   "currency": "USD",
+   "results": [
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.432701379033118,
+       "market_cap_usd": 126603368.0,
+       "net_income_usd": 17441000.0,
+       "net_margin": 0.3249,
+       "pe": 11.528736,
+       "revenue_usd": 53683000.0,
+       "roa": 0.0137,
+       "total_equity_usd": 126848000.0
+      }
+     },
+     "head_listing_id": 32663,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.962046
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1375
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "OptimumBank Holdings, Inc.",
+     "score": 0.1375,
+     "ticker": "OPHC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.216880462249119,
+       "market_cap_usd": 61206320.0,
+       "net_income_usd": 8182000.0,
+       "net_margin": 0.15,
+       "pe": 7.631944,
+       "revenue_usd": 54533000.0,
+       "roa": 0.0054,
+       "total_equity_usd": 63634000.0
+      }
+     },
+     "head_listing_id": 7492,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.981898
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1286
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Citizens Holding Company",
+     "score": 0.1286,
+     "ticker": "CIZN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.63971053338608,
+       "market_cap_usd": 1306687880.5376,
+       "net_income_usd": 549466732.0,
+       "net_margin": 0.3494,
+       "pe": 9.346473,
+       "revenue_usd": 1572818537.6,
+       "roa": 0.0151,
+       "total_equity_usd": 4448969513.6
+      }
+     },
+     "head_listing_id": 238936,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.231317
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1235
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Nova Ljubljanska Banka d.d.",
+     "score": 0.1235,
+     "ticker": "NLB.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.466485849948924,
+       "market_cap_usd": 409928672.0,
+       "net_income_usd": 53108000.0,
+       "net_margin": 0.3088,
+       "pe": 7.703704,
+       "revenue_usd": 172000000.0,
+       "roa": 0.0122,
+       "total_equity_usd": 433829000.0
+      }
+     },
+     "head_listing_id": 16475,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.951196
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1224
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Primis Financial Corp",
+     "score": 0.1224,
+     "ticker": "FRST.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.48602194889707,
+       "market_cap_usd": 232202160.0,
+       "net_income_usd": 28954000.0,
+       "net_margin": 0.2924,
+       "pe": 7.974359,
+       "revenue_usd": 99031000.0,
+       "roa": 0.0106,
+       "total_equity_usd": 238643000.0
+      }
+     },
+     "head_listing_id": 32643,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.972628
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1213
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "OP Bancorp",
+     "score": 0.1213,
+     "ticker": "OPBK.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0756263080456605,
+       "market_cap_usd": 5532568576.0,
+       "net_income_usd": 691278000.0,
+       "net_margin": 0.3976,
+       "pe": 8.372937,
+       "revenue_usd": 1738705000.0,
+       "roa": 0.0166,
+       "total_equity_usd": 6278068000.0
+      }
+     },
+     "head_listing_id": 32983,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.881277
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1101
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Bank Ozk",
+     "score": 0.1101,
+     "ticker": "OZK.US"
+    },
+    {
+     "also_known_as": [
+      "0HB5.LSE",
+      "BNP.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 3.17487431580792,
+       "market_cap_usd": 138355384677.1712,
+       "net_income_usd": 15753222400.0,
+       "net_margin": 0.1539,
+       "pe": 9.463668,
+       "revenue_usd": 102357110800.0,
+       "roa": 0.0045,
+       "total_equity_usd": 150681308400.0
+      }
+     },
+     "head_listing_id": 1752791,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.908889
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.1045
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "BNP Paribas SA",
+     "score": 0.1045,
+     "ticker": "BNP.PA"
+    },
+    {
+     "also_known_as": [
+      "BCY.XETRA",
+      "BCS.US"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.82758665021084,
+       "market_cap_usd": 91465070291.76321,
+       "net_income_usd": 10395112200.0,
+       "net_margin": 0.2551,
+       "pe": 10.670807,
+       "revenue_usd": 40749423000.0,
+       "roa": 0.0045,
+       "total_equity_usd": 105181093200.0
+      }
+     },
+     "head_listing_id": 236511,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.875911
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0988
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Barclays PLC",
+     "score": 0.0988,
+     "ticker": "BARC.LSE"
+    },
+    {
+     "also_known_as": [
+      "0QS4.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 5.81972278002406,
+       "market_cap_usd": 791540400.0,
+       "net_income_usd": 204702169.6,
+       "net_margin": 0.363851639233978,
+       "pe": 19.913687,
+       "revenue_usd": 562597904.0,
+       "roa": 0.00454074720052648,
+       "total_equity_usd": 2231578636.8
+      }
+     },
+     "head_listing_id": 1754979,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.365209
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0939318233591267
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Thurgauer Kantonalbank",
+     "score": 0.0939318233591267,
+     "ticker": "TKBP.SW"
+    },
+    {
+     "also_known_as": [
+      "DB.US",
+      "0H7D.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.09117381518546,
+       "market_cap_usd": 71127085459.8656,
+       "net_income_usd": 8272954600.0,
+       "net_margin": 0.2203,
+       "pe": 9.981258,
+       "revenue_usd": 37549825000.0,
+       "roa": 0.0048,
+       "total_equity_usd": 90032772800.0
+      }
+     },
+     "head_listing_id": 241763,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.782003
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0919
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Deutsche Bank Aktiengesellschaft",
+     "score": 0.0919,
+     "ticker": "DBK.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0HAI.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 4.03001467899359,
+       "market_cap_usd": 68690932491.878395,
+       "net_income_usd": 8155308000.0,
+       "net_margin": 0.2971,
+       "pe": 9.92091,
+       "revenue_usd": 27448208200.0,
+       "roa": 0.0029,
+       "total_equity_usd": 89332604200.0
+      }
+     },
+     "head_listing_id": 1752462,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.77638
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0913
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Credit Agricole SA",
+     "score": 0.0913,
+     "ticker": "ACA.PA"
+    },
+    {
+     "also_known_as": [
+      "0RMP.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.30562905070759,
+       "market_cap_usd": 2727772269.0048003,
+       "net_income_usd": 278672300.8,
+       "net_margin": 0.37211590296496,
+       "pe": 10.032573,
+       "revenue_usd": 748885760.0,
+       "roa": 0.00656023442069062,
+       "total_equity_usd": 3153254394.4
+      }
+     },
+     "head_listing_id": 1753875,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.882211
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0911700949145043
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Banque Cantonale de Geneve",
+     "score": 0.0911700949145043,
+     "ticker": "BCGE.SW"
+    },
+    {
+     "also_known_as": [
+      "0J6Y.LSE",
+      "SGE.XETRA"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.38184306569343,
+       "market_cap_usd": 69482732542.3616,
+       "net_income_usd": 7264392000.0,
+       "net_margin": 0.0801,
+       "pe": 10.519054,
+       "revenue_usd": 90673547000.0,
+       "roa": 0.0038,
+       "total_equity_usd": 81832919000.0
+      }
+     },
+     "head_listing_id": 1753099,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.815679
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0888
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Societe Generale S.A.",
+     "score": 0.0888,
+     "ticker": "GLE.PA"
+    },
+    {
+     "also_known_as": [
+      "WSBCO.US"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.401597951146267,
+       "market_cap_usd": 4048187392.0,
+       "net_income_usd": 355995000.0,
+       "net_margin": 0.3384,
+       "pe": 11.991477,
+       "revenue_usd": 1051984000.0,
+       "roa": 0.0128,
+       "total_equity_usd": 4109685000.0
+      }
+     },
+     "head_listing_id": 48043,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.984659
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0866
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "WesBanco, Inc.",
+     "score": 0.0866,
+     "ticker": "WSBC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "market_cap_usd": 91497512.0,
+       "net_income_usd": 7923000.0,
+       "net_margin": 0.2356,
+       "pe": 10.896266,
+       "revenue_usd": 33627000.0,
+       "roa": 0.0077,
+       "total_equity_usd": 93061000.0
+      }
+     },
+     "head_listing_id": 3169,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.986465
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0851
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Auburn National Bancorporation Inc",
+     "score": 0.0851,
+     "ticker": "AUBN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.476932242287935,
+       "market_cap_usd": 113993919.468,
+       "net_income_usd": 15493018.37877,
+       "net_margin": 0.0899,
+       "pe": 7.999022,
+       "revenue_usd": 172359122.623722,
+       "roa": 0.0033,
+       "total_equity_usd": 179717439.704607
+      }
+     },
+     "head_listing_id": 243172,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.645729
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0850503903640911
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Merkur PrivatBank KgaA",
+     "score": 0.0850503903640911,
+     "ticker": "MBK.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.597862859116817,
+       "market_cap_usd": 2770321920.0,
+       "net_income_usd": 256471000.0,
+       "net_margin": 0.3278,
+       "pe": 11.817035,
+       "revenue_usd": 782484000.0,
+       "roa": 0.0093,
+       "total_equity_usd": 3022569000.0
+      }
+     },
+     "head_listing_id": 47145,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.916545
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0849
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "WaFd, Inc.",
+     "score": 0.0849,
+     "ticker": "WAFD.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0569893424059874,
+       "market_cap_usd": 1996856960.0,
+       "net_income_usd": 95950000.0,
+       "net_margin": 0.2269,
+       "pe": 24.538922,
+       "revenue_usd": 422784000.0,
+       "roa": 0.0112,
+       "total_equity_usd": 1175507000.0
+      }
+     },
+     "head_listing_id": 1115348,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.973888
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0816
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "FirstSun Capital Bancorp Common Stock",
+     "score": 0.0816,
+     "ticker": "FSUN.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.42941078336305,
+       "market_cap_usd": 187426592.0,
+       "net_income_usd": 16058000.0,
+       "net_margin": 0.1708,
+       "pe": 11.365854,
+       "revenue_usd": 94011000.0,
+       "roa": 0.0076,
+       "total_equity_usd": 197405000.0
+      }
+     },
+     "head_listing_id": 11164,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.940171
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0813
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Eagle Bancorp Montana Inc",
+     "score": 0.0813,
+     "ticker": "EBMT.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.319939979230618,
+       "market_cap_usd": 180519280.0,
+       "net_income_usd": 17338000.0,
+       "net_margin": 0.237,
+       "pe": 12.487685,
+       "revenue_usd": 73149000.0,
+       "roa": 0.0077,
+       "total_equity_usd": 214436000.0
+      }
+     },
+     "head_listing_id": 29268,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.841403
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0809
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Mainstreet Bank",
+     "score": 0.0809,
+     "ticker": "MNSB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0228163254742618,
+       "market_cap_usd": 192038144.0,
+       "net_income_usd": 15638000.0,
+       "net_margin": 0.1043,
+       "pe": 12.463636,
+       "revenue_usd": 149994000.0,
+       "roa": 0.0174,
+       "total_equity_usd": 196607000.0
+      }
+     },
+     "head_listing_id": 14840,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.955809
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0795
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Finwise Bancorp",
+     "score": 0.0795,
+     "ticker": "FINW.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.554299515800496,
+       "market_cap_usd": 462144128.0,
+       "net_income_usd": 41765000.0,
+       "net_margin": 0.3146,
+       "pe": 11.213992,
+       "revenue_usd": 132743000.0,
+       "roa": 0.0098,
+       "total_equity_usd": 535105000.0
+      }
+     },
+     "head_listing_id": 36882,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.865001
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0781
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "RBB Bancorp",
+     "score": 0.0781,
+     "ticker": "RBB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0661194373718816,
+       "market_cap_usd": 339615648.0,
+       "net_income_usd": 26409000.0,
+       "net_margin": 0.2536,
+       "pe": 25.5,
+       "revenue_usd": 104121000.0,
+       "roa": 0.01,
+       "total_equity_usd": 343988000.0
+      }
+     },
+     "head_listing_id": 3934,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.970456
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0768
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "BayCom Corp",
+     "score": 0.0768,
+     "ticker": "BCML.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.103598742995608,
+       "market_cap_usd": 92062408.0,
+       "net_income_usd": 7763000.0,
+       "net_margin": 0.1857,
+       "pe": 12.492424,
+       "revenue_usd": 41813000.0,
+       "roa": 0.0068,
+       "total_equity_usd": 104285000.0
+      }
+     },
+     "head_listing_id": 17327,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.873354
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0744
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "First US Bancshares Inc",
+     "score": 0.0744,
+     "ticker": "FUSB.US"
+    },
+    {
+     "also_known_as": [
+      "0RL9.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.471207980895011,
+       "market_cap_usd": 562053797.184,
+       "net_income_usd": 92490148.8,
+       "net_margin": 0.1711,
+       "pe": 6.029412,
+       "revenue_usd": 540522003.6,
+       "roa": 0.0069,
+       "total_equity_usd": 1264038206.4
+      }
+     },
+     "head_listing_id": 243402,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.442223
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0732
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "ProCredit Holding AG & Co KGaA",
+     "score": 0.0732,
+     "ticker": "PCZ.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0QLT.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.39732026306093,
+       "market_cap_usd": 2174306139.8016,
+       "net_income_usd": 272910573.6,
+       "net_margin": 0.415564780893944,
+       "pe": 8.143552,
+       "revenue_usd": 656722095.2,
+       "roa": 0.00601681808588412,
+       "total_equity_usd": 3759560430.4
+      }
+     },
+     "head_listing_id": 1754328,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.591149
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0729414255949982
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Graubuendner Kantonalbank",
+     "score": 0.0729414255949982,
+     "ticker": "GRKP.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.256035209436801,
+       "market_cap_usd": 8932739072.0,
+       "net_income_usd": 562313000.0,
+       "net_margin": 0.4222,
+       "pe": 12.882149,
+       "revenue_usd": 1331914000.0,
+       "roa": 0.0128,
+       "total_equity_usd": 8305259000.0
+      }
+     },
+     "head_listing_id": 33293,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.900757
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0677
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Prosperity Bancshares Inc",
+     "score": 0.0677,
+     "ticker": "PB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.35072250884594,
+       "market_cap_usd": 181996979.45920002,
+       "net_income_usd": 24000756.0,
+       "net_margin": 0.0735530978202513,
+       "pe": 7.607699,
+       "revenue_usd": 326305168.8,
+       "roa": 0.00366194736027774,
+       "total_equity_usd": 372473944.8
+      }
+     },
+     "head_listing_id": 236404,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.490074
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0655557886755228
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Arbuthnot Banking Group Plc",
+     "score": 0.0655557886755228,
+     "ticker": "ARBB.LSE"
+    },
+    {
+     "also_known_as": [
+      "0QQ4.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 3.02891238069504,
+       "market_cap_usd": 744226932.96,
+       "net_income_usd": 239102216.8,
+       "net_margin": 0.459630206287075,
+       "pe": 12.397629,
+       "revenue_usd": 520205620.8,
+       "roa": 0.00514330570564504,
+       "total_equity_usd": 3791251822.4
+      }
+     },
+     "head_listing_id": 1753892,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.203366
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0633537723345088
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Basellandschaftliche Kantonalbank",
+     "score": 0.0633537723345088,
+     "ticker": "BLKB.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.15493334859819,
+       "market_cap_usd": 501898912.0,
+       "net_income_usd": 33762000.0,
+       "net_margin": 0.2827,
+       "pe": 14.64539,
+       "revenue_usd": 119430000.0,
+       "roa": 0.0097,
+       "total_equity_usd": 560970000.0
+      }
+     },
+     "head_listing_id": 33748,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.890387
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0602
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ponce Financial Group Inc",
+     "score": 0.0602,
+     "ticker": "PDLB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0588014351938797,
+       "market_cap_usd": 87424680.0,
+       "net_income_usd": 5976000.0,
+       "net_margin": 0.1646,
+       "pe": 39.151515,
+       "revenue_usd": 36311000.0,
+       "roa": 0.006,
+       "total_equity_usd": 102661000.0
+      }
+     },
+     "head_listing_id": 41464,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.852204
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0582
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Summit State Bank",
+     "score": 0.0582,
+     "ticker": "SSBI.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.072367074040342,
+       "market_cap_usd": 134456864.0,
+       "net_income_usd": 8135000.0,
+       "net_margin": 0.2804,
+       "pe": 17.12,
+       "revenue_usd": 29011000.0,
+       "roa": 0.0113,
+       "total_equity_usd": 142378000.0
+      }
+     },
+     "head_listing_id": 27007,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.94552
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0571
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Lake Shore Bancorp Inc",
+     "score": 0.0571,
+     "ticker": "LSBK.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.199337966458602,
+       "market_cap_usd": 1819043712.0,
+       "net_income_usd": 130944000.0,
+       "net_margin": 0.2272,
+       "pe": 14.09901,
+       "revenue_usd": 576463000.0,
+       "roa": 0.0069,
+       "total_equity_usd": 2295852000.0
+      }
+     },
+     "head_listing_id": 20949,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.792318
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.057
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hope Bancorp Inc",
+     "score": 0.057,
+     "ticker": "HOPE.US"
+    },
+    {
+     "also_known_as": [
+      "0QPU.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 3.84416573502223,
+       "market_cap_usd": 2832426299.2128,
+       "net_income_usd": 194451089.3,
+       "net_margin": 0.2854,
+       "pe": 14.549762,
+       "revenue_usd": 681353855.7,
+       "roa": 0.004,
+       "total_equity_usd": 3418468533.2
+      }
+     },
+     "head_listing_id": 1755056,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.827114
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0569
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Valiant Holding AG",
+     "score": 0.0569,
+     "ticker": "VATN.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.849545175512026,
+       "market_cap_usd": 50014176.0,
+       "net_income_usd": 3035000.0,
+       "net_margin": 0.1814,
+       "pe": 15.972477,
+       "revenue_usd": 16732000.0,
+       "roa": 0.0071,
+       "total_equity_usd": 54234000.0
+      }
+     },
+     "head_listing_id": 42618,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.926258
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.056
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Texas Community Bancshares Inc",
+     "score": 0.056,
+     "ticker": "TCBS.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.26380027739251,
+       "market_cap_usd": 390270101.9552,
+       "net_income_usd": 24652580.0,
+       "net_margin": 0.0962854349951124,
+       "pe": 17.52809,
+       "revenue_usd": 256036440.0,
+       "roa": 0.00499068995655313,
+       "total_equity_usd": 451129700.0
+      }
+     },
+     "head_listing_id": 239653,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.806566
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.055886524822695
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Secure Trust Bank PLC",
+     "score": 0.055886524822695,
+     "ticker": "STB.LSE"
+    },
+    {
+     "also_known_as": [
+      "0NXR.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.04891355916121,
+       "market_cap_usd": 23830845272.6784,
+       "net_income_usd": 1306676800.0,
+       "net_margin": 0.1604,
+       "pe": 8.695955,
+       "revenue_usd": 8145028200.0,
+       "roa": 0.0051,
+       "total_equity_usd": 25352271200.0
+      }
+     },
+     "head_listing_id": 243538,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.922322
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0515
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Raiffeisen Bank International AG",
+     "score": 0.0515,
+     "ticker": "RAW.XETRA"
+    },
+    {
+     "also_known_as": [
+      "0QV3.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 6.84334214216374,
+       "market_cap_usd": 419799085.3344,
+       "net_income_usd": 27534420.0,
+       "net_margin": 0.231459387229169,
+       "pe": 16.428571,
+       "revenue_usd": 118960048.8,
+       "roa": 0.00239516620889636,
+       "total_equity_usd": 561422092.8
+      }
+     },
+     "head_listing_id": 1754317,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.767514
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0495071402566205
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Glarner Kantonalbank",
+     "score": 0.0495071402566205,
+     "ticker": "GLKBN.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.65757516822902,
+       "market_cap_usd": 112003608.0,
+       "net_income_usd": 6097000.0,
+       "net_margin": 0.1554,
+       "pe": 17.38835,
+       "revenue_usd": 39222000.0,
+       "roa": 0.005,
+       "total_equity_usd": 126573000.0
+      }
+     },
+     "head_listing_id": 35441,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.894732
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0482
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Provident Financial Holdings Inc",
+     "score": 0.0482,
+     "ticker": "PROV.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.68439008957561,
+       "market_cap_usd": 615168768.0,
+       "net_income_usd": 35861000.0,
+       "net_margin": 0.207,
+       "pe": 17.149123,
+       "revenue_usd": 173255000.0,
+       "roa": 0.0047,
+       "total_equity_usd": 763032000.0
+      }
+     },
+     "head_listing_id": 25530,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.806216
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.047
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kearny Financial Corp",
+     "score": 0.047,
+     "ticker": "KRNY.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.679271568813478,
+       "market_cap_usd": 193318608.0,
+       "net_income_usd": 9462000.0,
+       "net_margin": 0.1257,
+       "pe": 21.84252,
+       "revenue_usd": 75276000.0,
+       "roa": 0.004,
+       "total_equity_usd": 202747000.0
+      }
+     },
+     "head_listing_id": 20898,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.965329
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0467
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Hanover Bancorp Inc",
+     "score": 0.0467,
+     "ticker": "HNVR.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.631193844709669,
+       "market_cap_usd": 85405720.0,
+       "net_income_usd": 5498000.0,
+       "net_margin": 0.0916,
+       "pe": 10.27451,
+       "revenue_usd": 59995000.0,
+       "roa": 0.0037,
+       "total_equity_usd": 120703000.0
+      }
+     },
+     "head_listing_id": 2946,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.736459
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0455
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "AmeriServ Financial Inc",
+     "score": 0.0455,
+     "ticker": "ASRV.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.847239016525595,
+       "market_cap_usd": 1839432543.872,
+       "net_income_usd": 133915800.0,
+       "net_margin": 0.174045801526718,
+       "pe": 22.5,
+       "revenue_usd": 769428500.0,
+       "roa": 0.00383857770594474,
+       "total_equity_usd": 2914430700.0
+      }
+     },
+     "head_listing_id": 239166,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.642523
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0454817474566128
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Permanent TSB Group Holdings PLC",
+     "score": 0.0454817474566128,
+     "ticker": "PTSB.LSE"
+    },
+    {
+     "also_known_as": [
+      "0QLU.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.48760797650253,
+       "market_cap_usd": 594839011.7952,
+       "net_income_usd": 255862572.8,
+       "net_margin": 0.341429333818184,
+       "pe": 21.643836,
+       "revenue_usd": 642467155.2,
+       "roa": 0.00358128855135732,
+       "total_equity_usd": 5877648054.4
+      }
+     },
+     "head_listing_id": 1753902,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.10377
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0440768380245532
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Basler Kantonalbank",
+     "score": 0.0440768380245532,
+     "ticker": "BSKP.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.11574490895138,
+       "market_cap_usd": 2275481938.048,
+       "net_income_usd": 284324388.0,
+       "net_margin": 0.340875482709766,
+       "pe": 8.192824,
+       "revenue_usd": 834100433.8,
+       "roa": 0.00590533811799748,
+       "total_equity_usd": 7052112925.7
+      }
+     },
+     "head_listing_id": 1752896,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.330315
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0425652585082375
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Regionale de Credit Agricole Mutuel Brie Picardie",
+     "score": 0.0425652585082375,
+     "ticker": "CRBP2.PA"
+    },
+    {
+     "also_known_as": [
+      "0RG7.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.195656369753587,
+       "market_cap_usd": 700225703.5968001,
+       "net_income_usd": 59319170.4,
+       "net_margin": 0.138950373389049,
+       "pe": 12.170439,
+       "revenue_usd": 426909039.2,
+       "roa": 0.00441228427839272,
+       "total_equity_usd": 1483784160.8
+      }
+     },
+     "head_listing_id": 1755081,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.48546
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0410125661442004
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "VP Bank AG",
+     "score": 0.0410125661442004,
+     "ticker": "VPBN.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.585579514824798,
+       "market_cap_usd": 1611517378.8160002,
+       "net_income_usd": 70614240.0,
+       "net_margin": 0.0890702022777494,
+       "pe": 22.384615,
+       "revenue_usd": 792793080.0,
+       "roa": 0.00307719411574713,
+       "total_equity_usd": 1999838400.0
+      }
+     },
+     "head_listing_id": 238841,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.792162
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0392950881139858
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Metro Bank PLC",
+     "score": 0.0392950881139858,
+     "ticker": "MTRO.LSE"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 3.77020066389019,
+       "market_cap_usd": 283268887.4304,
+       "net_income_usd": 15496232.8,
+       "net_margin": 0.171232208328106,
+       "pe": 18.738336,
+       "revenue_usd": 90498352.8,
+       "roa": 0.00275783469898503,
+       "total_equity_usd": 435513632.4
+      }
+     },
+     "head_listing_id": 1753878,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.654658
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0369746027254584
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Banque Cantonale Du Jura SA",
+     "score": 0.0369746027254584,
+     "ticker": "BCJ.SW"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0861840363384313,
+       "market_cap_usd": 1167075507.136,
+       "net_income_usd": 158968626.9,
+       "net_margin": 0.30567797050446,
+       "pe": 7.14619,
+       "revenue_usd": 520052611.7,
+       "roa": 0.00501288300226229,
+       "total_equity_usd": 4552110512.2
+      }
+     },
+     "head_listing_id": 1752893,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.261143
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0369102141115353
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Régionale de Crédit Agricole Mutuel Alpes Provence Société coopérative",
+     "score": 0.0369102141115353,
+     "ticker": "CRAP.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0159197587227253,
+       "market_cap_usd": 2081408734.0287998,
+       "net_income_usd": 222751312.8,
+       "net_margin": 0.318992273491161,
+       "pe": 9.512528,
+       "revenue_usd": 698296890.9,
+       "roa": 0.00531921712492589,
+       "total_equity_usd": 7097745321.9
+      }
+     },
+     "head_listing_id": 1752898,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.298535
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0341443019184292
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Regionale de Credit Agricole Mutuel du Languedoc",
+     "score": 0.0341443019184292,
+     "ticker": "CRLA.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0,
+       "market_cap_usd": 95576936.0,
+       "net_income_usd": 4397000.0,
+       "net_margin": 0.2462,
+       "pe": 53.852941,
+       "revenue_usd": 17858000.0,
+       "roa": 0.0082,
+       "total_equity_usd": 129312000.0
+      }
+     },
+     "head_listing_id": 13773,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.748948
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.034
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Fifth District Bancorp, Inc. Common Stock",
+     "score": 0.034,
+     "ticker": "FDSB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.056377263971056,
+       "market_cap_usd": 628571165.7983999,
+       "net_income_usd": 82812825.9,
+       "net_margin": 0.251373699843464,
+       "pe": 7.727084,
+       "revenue_usd": 329441090.9,
+       "roa": 0.00427383330298075,
+       "total_equity_usd": 2642265631.7
+      }
+     },
+     "head_listing_id": 1752832,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.242179
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0329117416584442
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Ca Toulouse 31 CCI",
+     "score": 0.0329117416584442,
+     "ticker": "CAT31.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.012053099682987,
+       "market_cap_usd": 699249220.8768,
+       "net_income_usd": 80750052.7,
+       "net_margin": 0.29331746011427,
+       "pe": 8.81552,
+       "revenue_usd": 275299167.9,
+       "roa": 0.00496849327935048,
+       "total_equity_usd": 2774697785.6
+      }
+     },
+     "head_listing_id": 1752871,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.256552
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0306222930525068
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Régionale de Crédit Agricole du Morbihan",
+     "score": 0.0306222930525068,
+     "ticker": "CMO.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0208316096701641,
+       "market_cap_usd": 2056147444.4543998,
+       "net_income_usd": 213912870.0,
+       "net_margin": 0.270905547538642,
+       "pe": 9.690079,
+       "revenue_usd": 789621593.0,
+       "roa": 0.00469394958919821,
+       "total_equity_usd": 7383064680.8
+      }
+     },
+     "head_listing_id": 1752877,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.280755
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0303319929068776
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Régionale de Crédit Agricole Mutuel Nord de France Société coopérative",
+     "score": 0.0303319929068776,
+     "ticker": "CNDF.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0462440065070111,
+       "market_cap_usd": 1169617705.7663999,
+       "net_income_usd": 125783351.9,
+       "net_margin": 0.25200399150863,
+       "pe": 9.503412,
+       "revenue_usd": 499132379.4,
+       "roa": 0.00387368362560754,
+       "total_equity_usd": 4398392794.3
+      }
+     },
+     "head_listing_id": 1752902,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.271775
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0301141870959568
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Regionale De Credit Agricole Mutuel Sud Rhone Alpes",
+     "score": 0.0301141870959568,
+     "ticker": "CRSU.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0377420038818483,
+       "market_cap_usd": 965506642.5663999,
+       "net_income_usd": 96600279.8,
+       "net_margin": 0.271907259104466,
+       "pe": 11.827008,
+       "revenue_usd": 355269219.8,
+       "roa": 0.00487585105714047,
+       "total_equity_usd": 3673123616.7
+      }
+     },
+     "head_listing_id": 1752903,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.267595
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0276012390584686
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Reg Cred Agric Mut Tourain Poitou",
+     "score": 0.0276012390584686,
+     "ticker": "CRTO.PA"
+    },
+    {
+     "also_known_as": [
+      "0O2R.LSE"
+     ],
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0539383307965528,
+       "market_cap_usd": 3687438140.1088,
+       "net_income_usd": 277484109.9,
+       "net_margin": 0.241861069927836,
+       "pe": 13.528368,
+       "revenue_usd": 1147287200.8,
+       "roa": 0.00304764079648398,
+       "total_equity_usd": 10506224299.7
+      }
+     },
+     "head_listing_id": 1752827,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.357303
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0275581084831683
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Régionale de Crédit Agricole Mutuel de Paris et d-Ile-de-France",
+     "score": 0.0275581084831683,
+     "ticker": "CAF.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.332067804426959,
+       "market_cap_usd": 1133691426.208,
+       "net_income_usd": 100561368.2,
+       "net_margin": 0.238033138786394,
+       "pe": 11.476844,
+       "revenue_usd": 422467933.3,
+       "roa": 0.00354454424185877,
+       "total_equity_usd": 3993857831.2
+      }
+     },
+     "head_listing_id": 1752840,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.288976
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0264404519208986
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Regionale de Credit Agricole Mutuel de Normandie Seine SC",
+     "score": 0.0264404519208986,
+     "ticker": "CCN.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0187233002792605,
+       "market_cap_usd": 805719296.9408,
+       "net_income_usd": 76778392.0,
+       "net_margin": 0.244772922182733,
+       "pe": 10.708184,
+       "revenue_usd": 313671918.1,
+       "roa": 0.00309300467729411,
+       "total_equity_usd": 3182612360.6
+      }
+     },
+     "head_listing_id": 1752863,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.258328
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.025466429977448
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse régionale de Crédit Agricole Mutuel d-Ille-et-Vilaine SC",
+     "score": 0.025466429977448,
+     "ticker": "CIV.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.171385075859222,
+       "market_cap_usd": 147047856.0,
+       "net_income_usd": 4624000.0,
+       "net_margin": 0.1351,
+       "pe": 45.977273,
+       "revenue_usd": 34223000.0,
+       "roa": 0.004,
+       "total_equity_usd": 184450000.0
+      }
+     },
+     "head_listing_id": 41313,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.821084
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0251
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "SR Bancorp, Inc. Common stock",
+     "score": 0.0251,
+     "ticker": "SRBK.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.43733983373961,
+       "market_cap_usd": 44153468.0,
+       "net_income_usd": 1236000.0,
+       "net_margin": 0.1154,
+       "pe": 32.117647,
+       "revenue_usd": 10709000.0,
+       "roa": 0.0033,
+       "total_equity_usd": 49658000.0
+      }
+     },
+     "head_listing_id": 25190,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.889151
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0249
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Kentucky First Federal Bancorp",
+     "score": 0.0249,
+     "ticker": "KFFB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.180263077393698,
+       "market_cap_usd": 70712360.0,
+       "net_income_usd": 2024000.0,
+       "net_margin": 0.1832,
+       "pe": 31.446429,
+       "revenue_usd": 11047000.0,
+       "roa": 0.007,
+       "total_equity_usd": 82209000.0
+      }
+     },
+     "head_listing_id": 7679,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.869328
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0246
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Catalyst Bancorp Inc",
+     "score": 0.0246,
+     "ticker": "CLST.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.328161357201865,
+       "market_cap_usd": 44261192.0,
+       "net_income_usd": 1101560.0,
+       "net_margin": 0.1279,
+       "pe": 35.714286,
+       "revenue_usd": 8615420.0,
+       "roa": 0.0044,
+       "total_equity_usd": 47535166.0
+      }
+     },
+     "head_listing_id": 1124244,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.930933
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0232
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Marathon Bancorp, Inc. Common Stock",
+     "score": 0.0232,
+     "ticker": "MBBC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0176164179612171,
+       "market_cap_usd": 921613246.6112,
+       "net_income_usd": 74191702.6,
+       "net_margin": 0.163889249292887,
+       "pe": 12.64597,
+       "revenue_usd": 452694139.0,
+       "roa": 0.00409985341716012,
+       "total_equity_usd": 3591565370.4
+      }
+     },
+     "head_listing_id": 1752899,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.26123
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0214997357552506
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse Regionale de Credit Agricole Mutuel Loire HauteLoire",
+     "score": 0.0214997357552506,
+     "ticker": "CRLO.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.0728215925370892,
+       "market_cap_usd": 1141716219.1424,
+       "net_income_usd": 100416880.1,
+       "net_margin": 0.197819159645197,
+       "pe": 11.574714,
+       "revenue_usd": 507619586.9,
+       "roa": 0.00261004460934251,
+       "total_equity_usd": 5129642369.6
+      }
+     },
+     "head_listing_id": 1752894,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.226584
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0204684299675265
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Caisse régionale de Crédit Agricole Mutuel Atlantique Vendée",
+     "score": 0.0204684299675265,
+     "ticker": "CRAV.PA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.950528405160747,
+       "market_cap_usd": 1890380416.0,
+       "net_income_usd": 47900000.0,
+       "net_margin": 0.1094,
+       "pe": 24.148148,
+       "revenue_usd": 437722000.0,
+       "roa": 0.0021,
+       "total_equity_usd": 2411080000.0
+      }
+     },
+     "head_listing_id": 32236,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.798406
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0199
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "OceanFirst Financial Corp.",
+     "score": 0.0199,
+     "ticker": "OCFC.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.27436021915528,
+       "market_cap_usd": 116489656.0,
+       "net_income_usd": 2261000.0,
+       "net_margin": 0.091,
+       "pe": 26.530612,
+       "revenue_usd": 24856000.0,
+       "roa": 0.0021,
+       "total_equity_usd": 119144000.0
+      }
+     },
+     "head_listing_id": 48048,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.977722
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.019
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Winchester Bancorp, Inc. Common Stock",
+     "score": 0.019,
+     "ticker": "WSBK.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.736343108642506,
+       "market_cap_usd": 117041664.0,
+       "net_income_usd": 2065777.0,
+       "net_margin": 0.118,
+       "pe": 44.047619,
+       "revenue_usd": 17504106.0,
+       "roa": 0.0024,
+       "total_equity_usd": 142052370.0
+      }
+     },
+     "head_listing_id": 5464,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.817928
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0145
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Bogota Financial Corp",
+     "score": 0.0145,
+     "ticker": "BSBK.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 2.06393071523044,
+       "market_cap_usd": 108432408.0,
+       "net_income_usd": 1498000.0,
+       "net_margin": 0.0222,
+       "pe": 67.058824,
+       "revenue_usd": 67577000.0,
+       "roa": 0.0007,
+       "total_equity_usd": 158313000.0
+      }
+     },
+     "head_listing_id": 15837,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.684408
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0095
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "First Northwest Bancorp",
+     "score": 0.0095,
+     "ticker": "FNWB.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.526132798268046,
+       "market_cap_usd": 28276271.036199998,
+       "net_income_usd": 614581.30805,
+       "net_margin": 0.0137742615625673,
+       "pe": 48.0,
+       "revenue_usd": 44618094.78921,
+       "roa": 0.000505618096683704,
+       "total_equity_usd": 92048084.251267
+      }
+     },
+     "head_listing_id": 244139,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.307601
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0066991060786777
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Varengold Bank AG",
+     "score": 0.0066991060786777,
+     "ticker": "VG80.XETRA"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 1.49625445167629,
+       "market_cap_usd": 5736582656.0,
+       "net_income_usd": 48000000.0,
+       "net_margin": 0.023,
+       "pe": 466.666667,
+       "revenue_usd": 2090000000.0,
+       "roa": 0.0005,
+       "total_equity_usd": 8140000000.0
+      }
+     },
+     "head_listing_id": 15220,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.717232
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0059
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "Flagstar Financial, Inc.",
+     "score": 0.0059,
+     "ticker": "FLG.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.950920850258311,
+       "market_cap_usd": 161468256.0,
+       "net_income_usd": 701000.0,
+       "net_margin": 0.0068,
+       "pe": 130.693333,
+       "revenue_usd": 102738000.0,
+       "roa": 0.0002,
+       "total_equity_usd": 307380000.0
+      }
+     },
+     "head_listing_id": 3868,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.504876
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0023
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "BCB Bancorp Inc",
+     "score": 0.0023,
+     "ticker": "BCBP.US"
+    },
+    {
+     "context": {
+      "fundamental": {
+       "debt_to_equity": 0.248869454603276,
+       "market_cap_usd": 228688080.0,
+       "net_income_usd": 667000.0,
+       "net_margin": 0.0138,
+       "pe": 380.25,
+       "revenue_usd": 48319000.0,
+       "roa": 0.0005,
+       "total_equity_usd": 297719000.0
+      }
+     },
+     "head_listing_id": 13290,
+     "matched": {
+      "fundamental": {
+       "pb": {
+        "kind": "level",
+        "value": 0.812235
+       },
+       "roe": {
+        "kind": "level",
+        "value": 0.0022
+       }
+      }
+     },
+     "matched_legs": [
+      "fundamental"
+     ],
+     "name": "FB Bancorp, Inc. Common Stock",
+     "score": 0.0022,
+     "ticker": "FBLA.US"
+    }
+   ],
+   "sort": "roe",
+   "universe": 367,
+   "_pagination": {
+    "intended_show": 20,
+    "returned": 73,
+    "buffer_maxed": false,
+    "capped": false,
+    "count_is_floor": false,
+    "note": "Over-fetched ~4× your intended show (20) as a look-ahead buffer so 'a few more' is served from these 73 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+   }
+  }
+ ],
+ "answer_to_user": "Valuing banks on price-to-book (the right multiple for banks, not P/E): out of a 367-bank US+European universe, 73 trade below 1x book. Sorted by ROE so you can separate cheap-and-sound from cheap-and-impaired — the P/B and ROE must be read together. Best combinations (well below book AND solidly profitable): Nova Ljubljanska Banka (NLB.LSE) at 0.23x book with 12.4% ROE, Thurgauer Kantonalbank (TKBP.SW) 0.37x / 9.4%, Deutsche Bank (DBK.XETRA) 0.78x / 9.2%, Credit Agricole (ACA.PA) 0.78x / 9.1%, Societe Generale (GLE.PA) 0.82x / 8.9%, Barclays (BARC.LSE) 0.88x / 9.9%, Bank OZK (OZK.US) 0.88x / 11.0%, and BNP Paribas (BNP.PA) 0.91x / 10.5%. Among US regionals, OptimumBank (OPHC.US) and Citizens Holding (CIZN.US) sit just under book with the highest ROEs (~13-14%). Rule of thumb from this list: a bank near 1x book with double-digit ROE is arguably fairly-valued; the ones to scrutinise for a \"broken bank\" are any deep-discount names whose ROE is low — a big discount to book with weak ROE is the classic cheap-for-a-reason trap. (I required ROE>0 so genuinely loss-making banks are already excluded.)"
+}

@@ -1,0 +1,116 @@
+{
+  "set": "multi-asset",
+  "persona": "Cross-asset trader who looks at stocks, crypto, forex, and commodities — wants to find momentum and signals across all markets, not just equities.",
+  "cases": [
+    {
+      "id": "ma-01",
+      "question": "What assets across all markets — stocks, crypto, forex — are showing RSI above 70 right now?",
+      "goal": "Broad overbought scan across multiple asset types with no universe restriction.",
+      "acceptance": [
+        "Returns results from more than one asset type (not just stocks)",
+        "RSI values confirmed above 70",
+        "Red flag: returns only stocks, ignores crypto/forex"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "ma-02",
+      "question": "Which cryptocurrencies just had a bullish MACD crossover?",
+      "goal": "Crypto-specific MACD bullish signal screen.",
+      "acceptance": [
+        "Returns crypto assets only (tickers ending in .CC or crypto names)",
+        "MACD crossover is bullish (MACD line crossed above signal line)",
+        "Red flag: returns stocks instead of crypto, or no results at all"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "ma-03",
+      "question": "Show me forex pairs that are near a 52-week high right now.",
+      "goal": "Forex universe near 52-week high scan.",
+      "acceptance": [
+        "Returns forex pairs (not stocks or crypto)",
+        "Pairs are genuinely near 52-week highs",
+        "Red flag: returns equities, or claims forex screening is unsupported"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ma-04",
+      "question": "Are there any assets — doesn't matter if it's stocks, crypto, or forex — that just had a golden cross (50-day crossing above 200-day)?",
+      "goal": "Golden cross across all asset types.",
+      "acceptance": [
+        "Returns results from at least two different asset types",
+        "Correctly maps golden cross to 50MA/200MA bullish crossover",
+        "Red flag: returns only stocks, or confuses golden cross with death cross"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ma-05",
+      "question": "What crypto is really oversold right now — RSI below 30?",
+      "goal": "Crypto-specific oversold RSI screen.",
+      "acceptance": [
+        "Returns crypto assets with RSI below 30",
+        "Values confirmed in oversold territory",
+        "Red flag: returns stocks, or returns assets with RSI above 30"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "ma-06",
+      "question": "I want to find assets across all markets that have been quietly consolidating — low volatility squeeze — and might be about to make a big move.",
+      "goal": "Volatility squeeze scan across all asset types (stocks + crypto + forex).",
+      "acceptance": [
+        "Returns results from multiple asset types",
+        "Correctly maps squeeze to Bollinger compression / low volatility",
+        "Red flag: returns only stocks, or misidentifies squeeze as short squeeze"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ma-07",
+      "question": "Which forex pairs are showing a death cross — 50-day moving average crossing below the 200-day?",
+      "goal": "Forex death cross (bearish MA crossover) screen.",
+      "acceptance": [
+        "Returns forex pairs (not equities or crypto)",
+        "Correctly identifies death cross as 50MA crossing BELOW 200MA (bearish)",
+        "Red flag: returns stocks, confuses death cross with golden cross"
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "ma-08",
+      "question": "Show me the top crypto tokens that are at a 52-week high right now.",
+      "goal": "Crypto at 52-week high screen.",
+      "acceptance": [
+        "Returns crypto assets near their 52-week high",
+        "Tickers are crypto format (e.g. BTC-USD.CC)",
+        "Red flag: returns stocks or non-crypto assets"
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "ma-09",
+      "question": "I want to see everything — stocks AND crypto AND forex — that just broke out above their 20-day moving average with rising volume. Cross-market breakouts.",
+      "goal": "Multi-asset breakout above 20-day MA with volume confirmation.",
+      "acceptance": [
+        "Returns results spanning at least two asset types",
+        "Breakout condition mapped to price above MA + volume signal",
+        "Red flag: returns only one asset type, or no volume condition applied"
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "id": "ma-10",
+      "question": "Give me a picture of momentum across all markets — what asset types are strongest right now based on technical signals?",
+      "goal": "Broad cross-asset momentum screen to compare which asset class is leading.",
+      "acceptance": [
+        "Returns results or commentary covering multiple asset types",
+        "Addresses relative strength or momentum across asset classes",
+        "Red flag: returns only one asset type, or gives purely generic commentary with no data"
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}

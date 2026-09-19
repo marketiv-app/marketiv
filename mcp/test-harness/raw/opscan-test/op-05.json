@@ -1,0 +1,74 @@
+{
+  "id": "op-05",
+  "question": "Where do the big players seem to expect a really wild, scary swing coming for a stock?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "big players expect a really wild scary swing, high expected move"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "iv_rich",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "big players expect a really wild scary swing, high expected move",
+          "candidates": [
+            {
+              "pattern": "iv_rich",
+              "label": "IV rich",
+              "supported": "yes",
+              "description": "Implied vol at the high end of its own history."
+            },
+            {
+              "pattern": "event_premium",
+              "label": "Event / catalyst premium",
+              "supported": "approx",
+              "description": "Options pricing an upcoming dated catalyst."
+            },
+            {
+              "pattern": "unusual_activity",
+              "label": "Unusual options activity",
+              "supported": "yes",
+              "description": "Option/stock volume unusually high vs own history."
+            },
+            {
+              "pattern": "short_gamma_unstable",
+              "label": "Short-gamma / unstable",
+              "supported": "yes",
+              "description": "Dealers net short gamma → moves get amplified."
+            },
+            {
+              "pattern": "fear_building",
+              "label": "Fear building (crash-pricing)",
+              "supported": "yes",
+              "description": "Put-skew unusually elevated vs own history — the market pricing downside fear."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "iv_rich",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "A 'really wild, scary swing being priced in' is richly-bid implied vol — `iv_rich` (IV at the high end of its own history), with `short_gamma_unstable` and `event_premium` as related lenses. The MCP resolved it correctly. But the stock scanner isn't live yet (POC stub), so I can't give you the actual names. If you name a stock I can read whether its options are pricing an outsized move."
+}

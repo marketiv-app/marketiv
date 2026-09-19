@@ -1,0 +1,49 @@
+{
+  "id": "gi06",
+  "question": "screen for fintech stocks growing revenue fast",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [{"concept": "revenue", "pattern": "compound_growth", "cagr": 0.20}],
+        "gics": "fintech",
+        "asset_type": ["Common Stock"],
+        "sort": "mcap",
+        "limit": 20
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [{"concept": "revenue", "pattern": "compound_growth", "cagr": 0.20}],
+        "gics": "technology",
+        "exclude_gics": "45201010,45201020",
+        "asset_type": ["Common Stock"],
+        "sort": "mcap",
+        "limit": 20
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [{"concept": "revenue", "pattern": "compound_growth", "cagr": 0.20}],
+        "gics": "financial technology",
+        "asset_type": ["Common Stock"],
+        "sort": "mcap",
+        "limit": 20
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [{"concept": "revenue", "pattern": "compound_growth", "cagr": 0.20}],
+        "gics": "40201060",
+        "asset_type": ["Common Stock"],
+        "sort": "mcap",
+        "limit": 20
+      }
+    }
+  ],
+  "answer": "After three routing attempts, resolved 'fintech' to GICS sub-industry 40201060 (Transaction & Payment Processing Services). 15 exact matches: Circle Internet Group (CRCL.US, CAGR 52.7%, mcap $24.5B), Toast (TOST.US, CAGR 31.1%, mcap $21.4B), Chime Financial (CHYM.US, CAGR 29.4%, mcap $12.6B), Remitly (RELY.US, CAGR 35.8%, mcap $5.5B), Klarna (KLAR.US, CAGR 22.6%, mcap $5.4B), Paymentus (PAY.US, CAGR 34.0%, mcap $5.0B), dLocal (DLO.US, CAGR 37.7%, mcap $4.5B), Sezzle (SEZL.US, CAGR 53.1%, mcap $4.2B), Flywire (FLYW.US, CAGR 29.1%, mcap $2.3B), LINE Pay Taiwan (7722.TW, CAGR 26.8%, mcap $646M), plus 5 smaller names. All showing ≥20% revenue CAGR over 3 years.",
+  "friction": "Three-call sequence needed. Call 1: 'fintech' returned no_match (not a recognized GICS). Call 2: attempted technology sector with exclusions — the exclude_gics code format '45201010,45201020' was unrecognized. Call 3: 'financial technology' returned a reconfirm with two candidates (40201060=Transaction & Payment Processing Services prob 0.57, 45103010=Application Software prob 0.01). Call 4: used resolved code 40201060 directly — success. The term 'fintech' has no GICS equivalent and requires a reconfirm loop via 'financial technology' before a code resolves."
+}

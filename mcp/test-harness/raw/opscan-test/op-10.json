@@ -1,0 +1,62 @@
+{
+  "id": "op-10",
+  "question": "Find me stocks where people are deeply divided — half convinced it will soar, half convinced it will crash.",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "people deeply divided, half convinced it soars half convinced it crashes"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "divided_opinion",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "people deeply divided, half convinced it soars half convinced it crashes",
+          "candidates": [
+            {
+              "pattern": "divided_opinion",
+              "label": "Divided opinion",
+              "supported": "approx",
+              "description": "Positioning near zero but activity high — the crowd is split."
+            },
+            {
+              "pattern": "bearish_positioning",
+              "label": "Bearish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bearish (positioning score low, puts heavier)."
+            },
+            {
+              "pattern": "iv_vs_realized",
+              "label": "IV vs realized vol",
+              "supported": "no",
+              "description": "IV relative to realized vol — NOT supported (opana has no realized vol)."
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "divided_opinion",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "There's a `divided_opinion` pattern for exactly this — positioning near zero (net-neutral) but activity high, i.e. a split crowd — matched by the MCP (flagged 'approx'). But the scanner that would return the actual divided names isn't built yet (POC stub), so I can't give you the list. Concept supported approximately; data endpoint not live."
+}

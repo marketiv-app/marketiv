@@ -1,0 +1,138 @@
+{
+  "set": "news-event-driven",
+  "cases": [
+    {
+      "id": "ne-01",
+      "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+      "tool_calls": [
+        {"tool": "screen_stocks", "args": {"gics": "4530", "direction": "pos", "window": "7d", "order_by": "news_count", "limit": 10}},
+        {"tool": "screen_stocks", "args": {"gics": "4530", "direction": "neg", "window": "7d", "order_by": "news_count", "limit": 10}}
+      ],
+      "result_summary": "7d semis (gics 4530). Winners by news_count: NVDA (267 pos), MRVL(34), TSMC 2330.TW(32), SK Hynix(30), MU(29), AVGO(27), AMD(23), INTC(20) — each with impact.top_reason (NVDA price hike / TSMC AI-boom / SK Hynix Japan fab). Losers leg surfaces net-neg standouts: NVDA (48 neg, sell-rating/margin), AVGO(16, AI-debt credit risk), MU(11, Apple China memory), AMD(7, warrant dilution) + China small-caps (loss-widening). direction_split + _guide explicitly frame winners-vs-losers.",
+      "verdict": "PASS",
+      "reason": "Recent 7d window, ranked winners AND losers separately, each grounded in real top_reason/aspects.",
+      "defects": []
+    },
+    {
+      "id": "ne-02",
+      "question": "Why is Nvidia down today? What's the news catalyst?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "NVDA", "window": "7d", "limit": 10}}
+      ],
+      "result_summary": "NVDA 7d: dominant catalyst is Q2 BLOWOUT earnings (rev $96.2B +106%, DC $89B), stock +6.8%/+7.5%, rare 70% FY28 forecast — net POSITIVE, impact_score 5, dup_count 14. Some neg threads (Micron memory-cost margin pressure). Data contradicts the 'down today' premise: NVDA is UP on a positive catalyst.",
+      "verdict": "PASS",
+      "reason": "Ties any move to concrete dated news; honestly the catalyst is positive earnings, not a decline — an answer built on this correctly avoids inventing a bearish narrative.",
+      "defects": []
+    },
+    {
+      "id": "ne-03",
+      "question": "Give me a quick pulse on the AI theme over the last 30 days — what are the big storylines and which names are most talked about?",
+      "tool_calls": [
+        {"tool": "theme_summary", "args": {"theme": "Artificial Intelligence", "window": "30d"}}
+      ],
+      "result_summary": "AI 30d (node 10000000, window 2026-07-28..08-27). Pulse: 3573 stories, pos_share 0.574 / neg 0.122, net pos, weekly series. Most-talked (top_entities by hit_count): NVDA 516, GOOG 287, MSFT 258, AMZN 238, META 228 (net NEG), Anthropic/OpenAI (private). top_stories: MSFT +17% Azure, NVDA earnings/OpenAI $105B Ohio guarantee. aspect_heatmap (demand/capital pos, competition/regulation neg). Distinguishes theme narrative from names.",
+      "verdict": "PASS",
+      "reason": "Honors 30d, ranks most-talked names by attention, storylines from real top_stories, theme pulse separated from per-name.",
+      "defects": []
+    },
+    {
+      "id": "ne-04",
+      "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+      "tool_calls": [
+        {"tool": "screen_stocks", "args": {"gics": "10", "country": "TH", "window": "7d", "order_by": "news_count", "limit": 12}}
+      ],
+      "result_summary": "Thai energy (gics 10 + country TH), 7d: PTT (34 news, 30 pos/1 neg, 1T baht plan), BCP(24, dividend), TOP(17, +28% profit), PTTEP(14, gas PSC), BANPU(14, BESS/carbon), OR(12, dividend), SPRC/IRPC/AGE/SUSCO/PRM/EA. Each row carries pos/neg/ambiguous counts so positive-vs-negative split is groundable. All net-positive this week but per-name neg counts present. Answer to be delivered in Thai.",
+      "verdict": "PASS",
+      "reason": "Scoped Thai energy + 1wk; per-name pos/neg impact splits available; data supports a Thai-language pos/neg answer.",
+      "defects": [
+        {"desc": "All 12 names net-positive this week — genuine positive skew, not a defect; a faithful Thai answer must note losers are thin rather than force negatives.", "side": "none"}
+      ]
+    },
+    {
+      "id": "ne-05",
+      "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "TSLA", "window": "30d", "limit": 15}}
+      ],
+      "result_summary": "TSLA 30d MIXED: positives (rev +25.5%, FSD 55% attach/1.5M subs, Cybercab Austin launch Sep3, grid-equipment ban tailwind, Optimus hype) vs negatives (China 2.98M recall, EPS miss/margin 1.4%, Cybertruck +$5k price hike, Solar Roof discontinued, Optimus-2026 Polymarket odds to 9%). Per-article net_direction + relevance provided; window explicit (30d).",
+      "verdict": "PASS",
+      "reason": "Sentiment backed by specific dated items, window noted, mixed/conflicting sentiment clearly present in data.",
+      "defects": []
+    },
+    {
+      "id": "ne-06",
+      "question": "Where is options positioning most extreme right now — any names with unusually stretched put/call or crowded positioning I should know about?",
+      "tool_calls": [
+        {"tool": "find_oppattern", "args": {"queries": ["unusually stretched put/call ratio", "crowded positioning extreme"]}},
+        {"tool": "options_scan", "args": {"pattern": "crowded_one_sided", "limit": 15}}
+      ],
+      "result_summary": "find_oppattern resolved 'crowded/extreme' -> curated pattern crowded_one_sided (|positioning| near max). options_scan returned 15 extreme names with $-notional put/call ratio 'because' string: put-heavy CCL(3.96), DLR(3.24), CNI(2.56), DIA(2.12); call-heavy A(0.06), ARGX(0.01), BDX(0.09), COR(0.15). universe_note flags ~557 US optionable only; score = own-history percentile (framed vs norm).",
+      "verdict": "PASS",
+      "reason": "Real positioning extremes, framed relative to put/call norm + own-history percentile, current snapshot, US-universe caveat exposed.",
+      "defects": []
+    },
+    {
+      "id": "ne-07",
+      "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+      "tool_calls": [
+        {"tool": "theme_summary", "args": {"theme": "electric vehicles", "window": "14d"}},
+        {"tool": "screen_stocks", "args": {"megatrend": "electric vehicles", "window": "14d", "order_by": "news_count", "limit": 12}}
+      ],
+      "result_summary": "theme_summary('electric vehicles',14d) ERRORED (Server error). Fell back to screen_stocks megatrend=electric vehicles (resolved node 16020000) 14d: EA.BK(15 news, credit facility for e-bus), NEX.BK(10, 1520 e-buses), ATP30.BK(4, 3 pos/1 neg profit fall), Dongfeng, Ford(mixed), Sinotruk, Workhorse, Blue Bird, Hyundai. Ranked by news_count with per-name pos/neg direction.",
+      "verdict": "PARTIAL",
+      "reason": "14d attention-ranked names with sentiment delivered via fallback, but the natural tool (theme_summary) crashed on the EV alias and the megatrend cohort skews to Thai/China small-caps rather than the mega-cap EV story (TSLA/BYD absent).",
+      "defects": [
+        {"desc": "theme_summary(theme='electric vehicles') returns 500 Server error where screen_stocks(megatrend='electric vehicles') resolves fine — alias resolution / theme_summary path inconsistent for the EV node.", "side": "news-backend"},
+        {"desc": "EV megatrend cohort (node 16020000) surfaces mostly Thai e-bus & China truck small-caps; the marquee EV names a user expects (Tesla, BYD) do not appear in the 14d attention ranking.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "ne-08",
+      "question": "Brief me on what happened in Japanese markets around the week of the last BOJ meeting — which sectors and names reacted the most?",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "Bank of Japan BOJ policy meeting rate decision", "window": "90d", "limit": 8}},
+        {"tool": "news_feed", "args": {"country": "JP", "from_": "2026-07-28", "to": "2026-08-03", "only_scored": true, "order_by": "impact", "limit": 25}}
+      ],
+      "result_summary": "Anchor: last BOJ meeting = 2026-07-31, held policy rate STEADY (assessing prior hike) — from search_news, impacts USDJPY. news_feed JP for that week (07-28..08-03) returned 25 scored items: industrials/tech reacted most — Tokyo Electron +6.24% (earnings), Hitachi +39.5% op profit, Panasonic op profit doubled, Sumitomo post-split high, Kawasaki x Nvidia, Oriental Land +8%; autos softer (Toyota -1.28%, Nissan/Toyota quake plant halts).",
+      "verdict": "PASS",
+      "reason": "Anchored to the specified past BOJ week (not 'latest'), BOJ outcome grounded in news (hold), biggest-reacting sectors/names identified from impact.",
+      "defects": [
+        {"desc": "Country JP feed for the anchored week is earnings-heavy; direct BOJ-monetary-channel reactions on JP equities are thin, so the 'reaction to BOJ' link is contextual (BOJ hold + USDJPY) rather than per-stock monetary-tagged.", "side": "none"}
+      ]
+    },
+    {
+      "id": "ne-09",
+      "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "AMD", "window": "7d", "limit": 8}},
+        {"tool": "stock_impact", "args": {"ticker": "INTC", "window": "7d", "limit": 8}},
+        {"tool": "stock_impact", "args": {"ticker": "MU", "window": "7d", "limit": 8}}
+      ],
+      "result_summary": "All three 7d: AMD net-pos (Anthropic $45B lease, +124% YTD, UCIe/Versal design wins; minor debt-raise neg). INTC net-pos leaning (Nvidia $5B entry/+3.6%, Goldman-backed Higgsfield, $8.1B op cash flow; AMD/INTC debt-raise neg). MU more CONTESTED (memory-cost margin threat to Nvidia, reversal from +3.6% to -2%, but 84.9% gross margin beat). Head-to-head ranking derivable: INTC/AMD ahead of MU on net-tone this week.",
+      "verdict": "PASS",
+      "reason": "All three covered over 7d with concrete dated news enabling a relative head-to-head ranking, not three isolated blurbs.",
+      "defects": []
+    },
+    {
+      "id": "ne-10",
+      "question": "Find me any news suggesting a company might be an acquisition target or facing a regulatory investigation recently — the kind of catalyst-driven stuff worth watching.",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "company acquisition takeover target or regulatory investigation antitrust probe", "window": "14d", "limit": 20}}
+      ],
+      "result_summary": "Strong semantic match (top_sim 0.697). Hits are on-intent + dated: JD.com/Ceconomy EU probe (2026-08-21), Shein-Everlane US national-security probe, Novartis/Lilly/BMS eyeing Aktis Oncology, Kailera obesity takeover target, ACV Auctions strategic alternatives, Kimberly-Clark/Kenvue China antitrust, AstraZeneca-BMS mega-merger talks, Turkey/Teva antitrust, Paramount-Warner. Mix of M&A-target and regulatory-probe catalysts with entity impacts.",
+      "verdict": "PASS",
+      "reason": "Semantic (not keyword) catalyst hits genuinely matching M&A/regulatory intent, recent and dated, no fabrication.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 9,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      "theme_summary(theme='electric vehicles') returns 500 Server error while screen_stocks(megatrend='electric vehicles') resolves the same node fine — EV alias path inconsistent (news-backend, ne-07)",
+      "EV megatrend cohort (node 16020000) surfaces mostly Thai e-bus / China truck small-caps; expected mega-cap EV names (Tesla, BYD) absent from the 14d attention ranking (data-coverage, ne-07)",
+      "ne-02 premise ('Nvidia down today') is contradicted by the data (NVDA up on blowout earnings); tool correctly returns positive catalyst rather than inventing a bearish narrative — not a defect (none)"
+    ]
+  }
+}

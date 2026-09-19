@@ -1,0 +1,436 @@
+{
+ "id": "tm-01",
+ "question": "Who are the main players in the HBM memory boom right now? I want the actual companies riding the AI-memory wave, not the whole semi index.",
+ "tools_called": [
+  {
+   "tool": "find_megatrend",
+   "args": {
+    "terms": [
+     "HBM high-bandwidth memory",
+     "AI memory"
+    ]
+   },
+   "note": ""
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "10010400",
+    "limit": 25
+   },
+   "note": "picked node 10010400 'HBM & AI Memory' (tier-3) as the exact match"
+  }
+ ],
+ "raw_responses": [
+  {
+   "HBM high-bandwidth memory": [
+    {
+     "id": 56040000,
+     "name": "Memory — DRAM, NAND & HBM",
+     "tier": 2
+    }
+   ],
+   "AI memory": [
+    {
+     "id": 10010400,
+     "name": "HBM & AI Memory",
+     "tier": 3
+    }
+   ]
+  },
+  {
+   "stocks": [
+    {
+     "stock_id": 1414771,
+     "symbol": "005930",
+     "ticker": "005930.KO",
+     "type": null,
+     "name": "Samsung Electronics Co Ltd",
+     "exchange": "KO",
+     "country": "Korea",
+     "domicile": "KR",
+     "currency": "KRW",
+     "gic_code": "45202030",
+     "market_cap_usd": 1181324714967.04,
+     "market_cap_local": 1687606735667200.0,
+     "fx_rate_usd": 0.0007,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": null
+     },
+     "raw": {
+      "country": "Korea",
+      "currency": "KRW",
+      "domicile": "KR",
+      "exchange": "KO",
+      "fx_rate_usd": 0.0007,
+      "gic_code": "45202030",
+      "market_cap_local": 1687606735667200.0,
+      "market_cap_usd": 1181324714967.04,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": null
+      },
+      "name": "Samsung Electronics Co Ltd",
+      "stock_id": 1414771,
+      "symbol": "005930",
+      "ticker": "005930.KO"
+     }
+    },
+    {
+     "stock_id": 30067,
+     "symbol": "MU",
+     "ticker": "MU.US",
+     "type": null,
+     "name": "Micron Technology Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "45301010",
+     "market_cap_usd": 1091874717696.0,
+     "market_cap_local": 1091874717696.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "45301010",
+      "market_cap_local": 1091874717696.0,
+      "market_cap_usd": 1091874717696.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": null
+      },
+      "name": "Micron Technology Inc",
+      "stock_id": 30067,
+      "symbol": "MU",
+      "ticker": "MU.US"
+     }
+    },
+    {
+     "stock_id": 1414474,
+     "symbol": "000660",
+     "ticker": "000660.KO",
+     "type": null,
+     "name": "SK Hynix Inc",
+     "exchange": "KO",
+     "country": "Korea",
+     "domicile": "KR",
+     "currency": "KRW",
+     "gic_code": "45301020",
+     "market_cap_usd": 833795597428.36,
+     "market_cap_local": 1191136567754800.0,
+     "fx_rate_usd": 0.0007,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": null
+     },
+     "raw": {
+      "country": "Korea",
+      "currency": "KRW",
+      "domicile": "KR",
+      "exchange": "KO",
+      "fx_rate_usd": 0.0007,
+      "gic_code": "45301020",
+      "market_cap_local": 1191136567754800.0,
+      "market_cap_usd": 833795597428.36,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": null
+      },
+      "name": "SK Hynix Inc",
+      "stock_id": 1414474,
+      "symbol": "000660",
+      "ticker": "000660.KO"
+     }
+    },
+    {
+     "stock_id": 230030,
+     "symbol": "688008",
+     "ticker": "688008.CG",
+     "type": null,
+     "name": "Montage Technology Co Ltd",
+     "exchange": "CG",
+     "country": "China",
+     "domicile": "CN",
+     "currency": "CNY",
+     "gic_code": "45301020",
+     "market_cap_usd": 35291632238.592,
+     "market_cap_local": 237174947840.0,
+     "fx_rate_usd": 0.1488,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "China",
+      "currency": "CNY",
+      "domicile": "CN",
+      "exchange": "CG",
+      "fx_rate_usd": 0.1488,
+      "gic_code": "45301020",
+      "market_cap_local": 237174947840.0,
+      "market_cap_usd": 35291632238.592,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": "enabler"
+      },
+      "name": "Montage Technology Co Ltd",
+      "stock_id": 230030,
+      "symbol": "688008",
+      "ticker": "688008.CG"
+     }
+    },
+    {
+     "stock_id": 1415067,
+     "symbol": "034730",
+     "ticker": "034730.KO",
+     "type": null,
+     "name": "SK Holdings Co Ltd",
+     "exchange": "KO",
+     "country": "Korea",
+     "domicile": "KR",
+     "currency": "KRW",
+     "gic_code": "20105010",
+     "market_cap_usd": 20655012996.7104,
+     "market_cap_local": 29507161423872.0,
+     "fx_rate_usd": 0.0007,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": null
+     },
+     "raw": {
+      "country": "Korea",
+      "currency": "KRW",
+      "domicile": "KR",
+      "exchange": "KO",
+      "fx_rate_usd": 0.0007,
+      "gic_code": "20105010",
+      "market_cap_local": 29507161423872.0,
+      "market_cap_usd": 20655012996.7104,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": null
+      },
+      "name": "SK Holdings Co Ltd",
+      "stock_id": 1415067,
+      "symbol": "034730",
+      "ticker": "034730.KO"
+     }
+    },
+    {
+     "stock_id": 1419956,
+     "symbol": "6531",
+     "ticker": "6531.TW",
+     "type": null,
+     "name": "AP Memory Technology Corp",
+     "exchange": "TW",
+     "country": "Taiwan",
+     "domicile": "TW",
+     "currency": "TWD",
+     "gic_code": "45301020",
+     "market_cap_usd": 4374938170.1632,
+     "market_cap_local": 139329241088.0,
+     "fx_rate_usd": 0.0314,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "Taiwan",
+      "currency": "TWD",
+      "domicile": "TW",
+      "exchange": "TW",
+      "fx_rate_usd": 0.0314,
+      "gic_code": "45301020",
+      "market_cap_local": 139329241088.0,
+      "market_cap_usd": 4374938170.1632,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": "enabler"
+      },
+      "name": "AP Memory Technology Corp",
+      "stock_id": 1419956,
+      "symbol": "6531",
+      "ticker": "6531.TW"
+     }
+    },
+    {
+     "stock_id": 33887,
+     "symbol": "PENG",
+     "ticker": "PENG.US",
+     "type": null,
+     "name": "Penguin Solutions, Inc.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "45301020",
+     "market_cap_usd": 2581607168.0,
+     "market_cap_local": 2581607168.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "45301020",
+      "market_cap_local": 2581607168.0,
+      "market_cap_usd": 2581607168.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": "enabler"
+      },
+      "name": "Penguin Solutions, Inc.",
+      "stock_id": 33887,
+      "symbol": "PENG",
+      "ticker": "PENG.US"
+     }
+    },
+    {
+     "stock_id": 1419412,
+     "symbol": "5351",
+     "ticker": "5351.TWO",
+     "type": null,
+     "name": "Etron Technology",
+     "exchange": "TWO",
+     "country": "Taiwan",
+     "domicile": "TW",
+     "currency": "TWD",
+     "gic_code": "45301010",
+     "market_cap_usd": 1165933007.6672,
+     "market_cap_local": 37131624448.0,
+     "fx_rate_usd": 0.0314,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "Taiwan",
+      "currency": "TWD",
+      "domicile": "TW",
+      "exchange": "TWO",
+      "fx_rate_usd": 0.0314,
+      "gic_code": "45301010",
+      "market_cap_local": 37131624448.0,
+      "market_cap_usd": 1165933007.6672,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": "enabler"
+      },
+      "name": "Etron Technology",
+      "stock_id": 1419412,
+      "symbol": "5351",
+      "ticker": "5351.TWO"
+     }
+    },
+    {
+     "stock_id": 1421124,
+     "symbol": "394280",
+     "ticker": "394280.KQ",
+     "type": null,
+     "name": "Openedges Tech Inc",
+     "exchange": "KQ",
+     "country": "Korea",
+     "domicile": "KR",
+     "currency": "KRW",
+     "gic_code": "45103010",
+     "market_cap_usd": 158553338.6752,
+     "market_cap_local": 226504769536.0,
+     "fx_rate_usd": 0.0007,
+     "megatrend": {
+      "confidence": 0.7,
+      "exposure": "secondary",
+      "node_id": 10010400,
+      "node_name": "HBM & AI Memory",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "Korea",
+      "currency": "KRW",
+      "domicile": "KR",
+      "exchange": "KQ",
+      "fx_rate_usd": 0.0007,
+      "gic_code": "45103010",
+      "market_cap_local": 226504769536.0,
+      "market_cap_usd": 158553338.6752,
+      "megatrend": {
+       "confidence": 0.7,
+       "exposure": "secondary",
+       "node_id": 10010400,
+       "node_name": "HBM & AI Memory",
+       "role": "enabler"
+      },
+      "name": "Openedges Tech Inc",
+      "stock_id": 1421124,
+      "symbol": "394280",
+      "ticker": "394280.KQ"
+     }
+    }
+   ],
+   "count": 9,
+   "total": 9
+  }
+ ],
+ "answer_to_user": "The HBM / AI-memory theme (node 'HBM & AI Memory') has 9 curated member companies. The core leaders are the three big memory makers riding the AI wave: Samsung Electronics (005930.KO, ~$1.18T), Micron (MU.US, ~$1.09T) and SK Hynix (000660.KO, ~$834B). Around them sit supply-chain / enabler names: Montage Technology (688008.CG, memory-interface chips), AP Memory Technology (6531.TW), Etron Technology (5351.TWO), Penguin Solutions (PENG.US), Openedges Tech (394280.KQ), plus SK Holdings (034730.KO, SK Hynix's parent). So the real HBM roster is dominated by SK Hynix, Samsung and Micron, with the Taiwanese/Korean interface-and-controller names as the second tier — not the broad semi index."
+}

@@ -1,0 +1,809 @@
+{
+ "id": "tm-07",
+ "question": "Who are the uranium and nuclear-fuel players? I'm betting on the nuclear revival — miners and enrichment, wherever they trade.",
+ "tools_called": [
+  {
+   "tool": "find_megatrend",
+   "args": {
+    "terms": [
+     "uranium mining",
+     "uranium nuclear fuel"
+    ]
+   },
+   "note": "got mining node 14030100 and enrichment node 14030200"
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "14030100",
+    "limit": 30
+   },
+   "note": "uranium miners"
+  },
+  {
+   "tool": "theme_players",
+   "args": {
+    "theme": "14030200",
+    "limit": 15
+   },
+   "note": "conversion/enrichment (HALEU) names"
+  }
+ ],
+ "raw_responses": [
+  {
+   "uranium mining": [
+    {
+     "id": 14030100,
+     "name": "Uranium Mining & Development",
+     "tier": 3
+    },
+    {
+     "id": 30050100,
+     "name": "Uranium Mining",
+     "tier": 3
+    }
+   ],
+   "uranium nuclear fuel": [
+    {
+     "id": 14030200,
+     "name": "Conversion & Enrichment (HALEU)",
+     "tier": 3
+    },
+    {
+     "id": 30050200,
+     "name": "Conversion, Enrichment & Fuel",
+     "tier": 3
+    },
+    {
+     "id": 30050300,
+     "name": "Nuclear Fuel Fabrication & Fuel Technology",
+     "tier": 3
+    }
+   ]
+  },
+  {
+   "stocks": [
+    {
+     "stock_id": 6532,
+     "symbol": "CCJ",
+     "ticker": "CCJ.US",
+     "type": null,
+     "name": "Cameco Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 46584606720.0,
+     "market_cap_local": 46584606720.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 46584606720.0,
+      "market_cap_usd": 46584606720.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": "leader"
+      },
+      "name": "Cameco Corp",
+      "stock_id": 6532,
+      "symbol": "CCJ",
+      "ticker": "CCJ.US"
+     }
+    },
+    {
+     "stock_id": 32028,
+     "symbol": "NXE",
+     "ticker": "NXE.US",
+     "type": null,
+     "name": "NexGen Energy Ltd.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 7420004864.0,
+     "market_cap_local": 7420004864.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 7420004864.0,
+      "market_cap_usd": 7420004864.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": null
+      },
+      "name": "NexGen Energy Ltd.",
+      "stock_id": 32028,
+      "symbol": "NXE",
+      "ticker": "NXE.US"
+     }
+    },
+    {
+     "stock_id": 45586,
+     "symbol": "UUUU",
+     "ticker": "UUUU.US",
+     "type": null,
+     "name": "Energy Fuels Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 3991940864.0,
+     "market_cap_local": 3991940864.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 3991940864.0,
+      "market_cap_usd": 3991940864.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": "leader"
+      },
+      "name": "Energy Fuels Inc",
+      "stock_id": 45586,
+      "symbol": "UUUU",
+      "ticker": "UUUU.US"
+     }
+    },
+    {
+     "stock_id": 10439,
+     "symbol": "DNN",
+     "ticker": "DNN.US",
+     "type": null,
+     "name": "Denison Mines Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 3367120640.0,
+     "market_cap_local": 3367120640.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 3367120640.0,
+      "market_cap_usd": 3367120640.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": null
+      },
+      "name": "Denison Mines Corp",
+      "stock_id": 10439,
+      "symbol": "DNN",
+      "ticker": "DNN.US"
+     }
+    },
+    {
+     "stock_id": 51229,
+     "symbol": "1164",
+     "ticker": "1164.HK",
+     "type": null,
+     "name": "CGN Mining Co Ltd",
+     "exchange": "HK",
+     "country": "Hong Kong",
+     "domicile": "KY",
+     "currency": "HKD",
+     "gic_code": "20107010",
+     "market_cap_usd": 2824888596.48,
+     "market_cap_local": 22155988992.0,
+     "fx_rate_usd": 0.1275,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": null
+     },
+     "raw": {
+      "country": "Hong Kong",
+      "currency": "HKD",
+      "domicile": "KY",
+      "exchange": "HK",
+      "fx_rate_usd": 0.1275,
+      "gic_code": "20107010",
+      "market_cap_local": 22155988992.0,
+      "market_cap_usd": 2824888596.48,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": null
+      },
+      "name": "CGN Mining Co Ltd",
+      "stock_id": 51229,
+      "symbol": "1164",
+      "ticker": "1164.HK"
+     }
+    },
+    {
+     "stock_id": 52128,
+     "symbol": "2302",
+     "ticker": "2302.HK",
+     "type": null,
+     "name": "CNNC International Limited",
+     "exchange": "HK",
+     "country": "Hong Kong",
+     "domicile": "KY",
+     "currency": "HKD",
+     "gic_code": "20107010",
+     "market_cap_usd": 254465356.8,
+     "market_cap_local": 1995806720.0,
+     "fx_rate_usd": 0.1275,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": null
+     },
+     "raw": {
+      "country": "Hong Kong",
+      "currency": "HKD",
+      "domicile": "KY",
+      "exchange": "HK",
+      "fx_rate_usd": 0.1275,
+      "gic_code": "20107010",
+      "market_cap_local": 1995806720.0,
+      "market_cap_usd": 254465356.8,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": null
+      },
+      "name": "CNNC International Limited",
+      "stock_id": 52128,
+      "symbol": "2302",
+      "ticker": "2302.HK"
+     }
+    },
+    {
+     "stock_id": 278966,
+     "symbol": "NUCL",
+     "ticker": "NUCL.US",
+     "type": null,
+     "name": "Eagle Nuclear Energy Corp. Common stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 212974544.0,
+     "market_cap_local": 212974544.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "core",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 212974544.0,
+      "market_cap_usd": 212974544.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "core",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": "leader"
+      },
+      "name": "Eagle Nuclear Energy Corp. Common stock",
+      "stock_id": 278966,
+      "symbol": "NUCL",
+      "ticker": "NUCL.US"
+     }
+    },
+    {
+     "stock_id": 571570,
+     "symbol": "8031",
+     "ticker": "8031.JP",
+     "type": null,
+     "name": "Mitsui & Co.,Ltd",
+     "exchange": "JP",
+     "country": "Japan",
+     "domicile": "JP",
+     "currency": "JPY",
+     "gic_code": "20107010",
+     "market_cap_usd": 87692148986.5701,
+     "market_cap_local": 13919388728027.0,
+     "fx_rate_usd": 0.0063,
+     "megatrend": {
+      "confidence": 0.75,
+      "exposure": "secondary",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": null
+     },
+     "raw": {
+      "country": "Japan",
+      "currency": "JPY",
+      "domicile": "JP",
+      "exchange": "JP",
+      "fx_rate_usd": 0.0063,
+      "gic_code": "20107010",
+      "market_cap_local": 13919388728027.0,
+      "market_cap_usd": 87692148986.5701,
+      "megatrend": {
+       "confidence": 0.75,
+       "exposure": "secondary",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": null
+      },
+      "name": "Mitsui & Co.,Ltd",
+      "stock_id": 571570,
+      "symbol": "8031",
+      "ticker": "8031.JP"
+     }
+    },
+    {
+     "stock_id": 571970,
+     "symbol": "8002",
+     "ticker": "8002.JP",
+     "type": null,
+     "name": "Marubeni Corporation",
+     "exchange": "JP",
+     "country": "Japan",
+     "domicile": "JP",
+     "currency": "JPY",
+     "gic_code": "20107010",
+     "market_cap_usd": 51827363764.344,
+     "market_cap_local": 8226565676880.0,
+     "fx_rate_usd": 0.0063,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "secondary",
+      "node_id": 14030100,
+      "node_name": "Uranium Mining & Development",
+      "role": null
+     },
+     "raw": {
+      "country": "Japan",
+      "currency": "JPY",
+      "domicile": "JP",
+      "exchange": "JP",
+      "fx_rate_usd": 0.0063,
+      "gic_code": "20107010",
+      "market_cap_local": 8226565676880.0,
+      "market_cap_usd": 51827363764.344,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "secondary",
+       "node_id": 14030100,
+       "node_name": "Uranium Mining & Development",
+       "role": null
+      },
+      "name": "Marubeni Corporation",
+      "stock_id": 571970,
+      "symbol": "8002",
+      "ticker": "8002.JP"
+     }
+    }
+   ],
+   "count": 9,
+   "total": 9
+  },
+  {
+   "stocks": [
+    {
+     "stock_id": 6532,
+     "symbol": "CCJ",
+     "ticker": "CCJ.US",
+     "type": null,
+     "name": "Cameco Corp",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "CA",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 46584606720.0,
+     "market_cap_local": 46584606720.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "CA",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 46584606720.0,
+      "market_cap_usd": 46584606720.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "enabler"
+      },
+      "name": "Cameco Corp",
+      "stock_id": 6532,
+      "symbol": "CCJ",
+      "ticker": "CCJ.US"
+     }
+    },
+    {
+     "stock_id": 296118,
+     "symbol": "XE",
+     "ticker": "XE.US",
+     "type": null,
+     "name": "X-Energy, Inc. Class A Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "20106020",
+     "market_cap_usd": 5493336064.0,
+     "market_cap_local": 5493336064.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "20106020",
+      "market_cap_local": 5493336064.0,
+      "market_cap_usd": 5493336064.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "leader"
+      },
+      "name": "X-Energy, Inc. Class A Common Stock",
+      "stock_id": 296118,
+      "symbol": "XE",
+      "ticker": "XE.US"
+     }
+    },
+    {
+     "stock_id": 26123,
+     "symbol": "LEU",
+     "ticker": "LEU.US",
+     "type": null,
+     "name": "Centrus Energy Corp.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "10102050",
+     "market_cap_usd": 3858683136.0,
+     "market_cap_local": 3858683136.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "10102050",
+      "market_cap_local": 3858683136.0,
+      "market_cap_usd": 3858683136.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "leader"
+      },
+      "name": "Centrus Energy Corp.",
+      "stock_id": 26123,
+      "symbol": "LEU",
+      "ticker": "LEU.US"
+     }
+    },
+    {
+     "stock_id": 4665603,
+     "symbol": "STDN",
+     "ticker": "STDN.US",
+     "type": null,
+     "name": "Standard Nuclear, Inc.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "15101050",
+     "market_cap_usd": 2239789056.0,
+     "market_cap_local": 2239789056.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "leader"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15101050",
+      "market_cap_local": 2239789056.0,
+      "market_cap_usd": 2239789056.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "leader"
+      },
+      "name": "Standard Nuclear, Inc.",
+      "stock_id": 4665603,
+      "symbol": "STDN",
+      "ticker": "STDN.US"
+     }
+    },
+    {
+     "stock_id": 2922,
+     "symbol": "ASPI",
+     "ticker": "ASPI.US",
+     "type": null,
+     "name": "ASP Isotopes Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "15104020",
+     "market_cap_usd": 613237504.0,
+     "market_cap_local": 613237504.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 1.0,
+      "exposure": "core",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "15104020",
+      "market_cap_local": 613237504.0,
+      "market_cap_usd": 613237504.0,
+      "megatrend": {
+       "confidence": 1.0,
+       "exposure": "core",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "enabler"
+      },
+      "name": "ASP Isotopes Inc. Common Stock",
+      "stock_id": 2922,
+      "symbol": "ASPI",
+      "ticker": "ASPI.US"
+     }
+    },
+    {
+     "stock_id": 5862,
+     "symbol": "BWXT",
+     "ticker": "BWXT.US",
+     "type": null,
+     "name": "BWX Technologies Inc",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "20101010",
+     "market_cap_usd": 13718559744.0,
+     "market_cap_local": 13718559744.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "secondary",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "20101010",
+      "market_cap_local": 13718559744.0,
+      "market_cap_usd": 13718559744.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "secondary",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "enabler"
+      },
+      "name": "BWX Technologies Inc",
+      "stock_id": 5862,
+      "symbol": "BWXT",
+      "ticker": "BWXT.US"
+     }
+    },
+    {
+     "stock_id": 32469,
+     "symbol": "OKLO",
+     "ticker": "OKLO.US",
+     "type": null,
+     "name": "Oklo Inc.",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "55101010",
+     "market_cap_usd": 8235001344.0,
+     "market_cap_local": 8235001344.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.8,
+      "exposure": "secondary",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": "enabler"
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "55101010",
+      "market_cap_local": 8235001344.0,
+      "market_cap_usd": 8235001344.0,
+      "megatrend": {
+       "confidence": 0.8,
+       "exposure": "secondary",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": "enabler"
+      },
+      "name": "Oklo Inc.",
+      "stock_id": 32469,
+      "symbol": "OKLO",
+      "ticker": "OKLO.US"
+     }
+    },
+    {
+     "stock_id": 31282,
+     "symbol": "NNE",
+     "ticker": "NNE.US",
+     "type": null,
+     "name": "Nano Nuclear Energy Inc. Common Stock",
+     "exchange": "US",
+     "country": "USA",
+     "domicile": "US",
+     "currency": "USD",
+     "gic_code": "20104020",
+     "market_cap_usd": 1033152256.0,
+     "market_cap_local": 1033152256.0,
+     "fx_rate_usd": 1.0,
+     "megatrend": {
+      "confidence": 0.9,
+      "exposure": "secondary",
+      "node_id": 14030200,
+      "node_name": "Conversion & Enrichment (HALEU)",
+      "role": null
+     },
+     "raw": {
+      "country": "USA",
+      "currency": "USD",
+      "domicile": "US",
+      "exchange": "US",
+      "fx_rate_usd": 1.0,
+      "gic_code": "20104020",
+      "market_cap_local": 1033152256.0,
+      "market_cap_usd": 1033152256.0,
+      "megatrend": {
+       "confidence": 0.9,
+       "exposure": "secondary",
+       "node_id": 14030200,
+       "node_name": "Conversion & Enrichment (HALEU)",
+       "role": null
+      },
+      "name": "Nano Nuclear Energy Inc. Common Stock",
+      "stock_id": 31282,
+      "symbol": "NNE",
+      "ticker": "NNE.US"
+     }
+    }
+   ],
+   "count": 8,
+   "total": 8
+  }
+ ],
+ "answer_to_user": "The nuclear-fuel supply chain splits into two buckets. MINERS (Uranium Mining & Development): Cameco (CCJ.US) is the anchor, alongside NexGen Energy (NXE.US), Energy Fuels (UUUU.US), Denison Mines (DNN.US), plus China's CGN Mining (1164.HK) and CNNC International (2302.HK); Japanese trading houses Mitsui (8031.JP) and Marubeni (8002.JP) show up as secondary exposure. ENRICHMENT / CONVERSION (HALEU): Centrus Energy (LEU.US) is the pure-play US enricher, with Cameco again, X-Energy (XE.US), Standard Nuclear (STDN.US), ASP Isotopes (ASPI.US), and BWX Technologies (BWXT.US), Oklo (OKLO.US) and Nano Nuclear (NNE.US) as secondary. So a 'nuclear revival' basket = Cameco + NexGen + Energy Fuels + Denison on the mining side and Centrus + ASP Isotopes + X-Energy on the enrichment side, trading across the US, Hong Kong and Japan."
+}

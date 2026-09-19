@@ -1,0 +1,712 @@
+{
+  "id": "id-06",
+  "question": "อยากได้หุ้นปันผลดีๆ ในกลุ่ม REIT กับสาธารณูปโภค แถวเอเชีย เอาที่ปันผลไม่มีความเสี่ยงจะโดนตัด",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "REITs"
+      },
+      "note": "resolved REIT->6010, utilities->55"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "utilities"
+      },
+      "note": ""
+    },
+    {
+      "tool": "screen_dividends",
+      "args": {
+        "gics": "6010,55",
+        "country": "TH,SG,MY,ID,PH,VN,HK,CN,JP,KR,TW,IN",
+        "min_yield": 4,
+        "min_streak_years": 8,
+        "order_by": "streak",
+        "limit": 20
+      },
+      "note": "Asia enumerated to ISO-2; min_streak_years=8 for low cut-risk"
+    }
+  ],
+  "raw_responses": [
+    {
+      "query": "REITs",
+      "candidates": [
+        {
+          "code": "6010",
+          "name": "Equity Real Estate Investment Trusts (REITs)",
+          "level": "group"
+        }
+      ]
+    },
+    {
+      "query": "utilities",
+      "candidates": [
+        {
+          "code": "55",
+          "name": "Utilities",
+          "level": "sector"
+        },
+        {
+          "code": "5510",
+          "name": "Utilities",
+          "level": "group"
+        }
+      ]
+    },
+    {
+      "_guide": "Ranked by the FORWARD/sustainable dividend yield (dividend.yield_pct) unless order_by=streak|cagr. DON'T judge yield alone — DECOMPOSE it: (a) if yield_trailing_pct >> yield_pct a SPECIAL/one-time dividend inflated the trailing figure (not a repeatable income) — quote the forward yield_pct; (b) payout_ratio > 1 = paying out MORE than it earns (unsustainable, cut risk); (c) a high yield from a PRICE drop (near week52_low, news.net_direction=neg) + intact/growing dividend (ttm_div_yoy_pct up, positive cagr_5y_pct, no_cut_streak_yrs at its 10 ceiling) = possible VALUE, but a recent last_cut_year + negative ttm_div_yoy_pct + high payout + bad news = TRAP. no_cut_streak_yrs is a bounded RELIABILITY signal — consecutive no-cut years within a 10-YEAR window, CAPPED at 10 (10 = clean through the whole decade incl. 2020 & 2022 stress). It is NOT the dividend's full age: do NOT state a multi-decade 'aristocrat/king' streak from prior knowledge — say 'clean for 10y+ (the full tracked window)'. Explain the WHY from news.top_reason. Research-analyst voice — observations, not advice.",
+      "all": false,
+      "count": 20,
+      "has_more": true,
+      "limit": 20,
+      "mode": "dividend_screener",
+      "offset": 0,
+      "stocks": [
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 25.0,
+            "yield_pct": 7.1834,
+            "yield_trailing_pct": 7.1834
+          },
+          "eps": 8792.8868,
+          "exchange": "JP",
+          "gic_code": "60104010",
+          "market_cap_usd": null,
+          "name": "Global One Real Estate Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.071236,
+          "pe_ratio": 12.536679,
+          "stock_id": 573563,
+          "symbol": "8958",
+          "ticker": "8958.JP",
+          "week52_high": 150000.0,
+          "week52_low": 106300.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -46.3,
+            "yield_pct": 6.9387,
+            "yield_trailing_pct": 6.9387
+          },
+          "eps": 8343.407,
+          "exchange": "JP",
+          "gic_code": "60103010",
+          "market_cap_usd": null,
+          "name": "Ichigo Hotel REIT Investment Corp.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.893464,
+          "pe_ratio": 13.423773,
+          "stock_id": 572834,
+          "symbol": "3463",
+          "ticker": "3463.JP",
+          "week52_high": 143300.0,
+          "week52_low": 105600.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 214.4,
+            "yield_pct": 6.8256,
+            "yield_trailing_pct": 6.8256
+          },
+          "eps": 4998.4525,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "Sekisui House Reit. Inc.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.110316,
+          "pe_ratio": 13.773777,
+          "stock_id": 574946,
+          "symbol": "3309",
+          "ticker": "3309.JP",
+          "week52_high": 95500.0,
+          "week52_low": 73200.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 124.4,
+            "yield_pct": 6.775,
+            "yield_trailing_pct": 6.775
+          },
+          "eps": 4532.3047,
+          "exchange": "JP",
+          "gic_code": "60108030",
+          "market_cap_usd": null,
+          "name": "Nippon Hotel & Residential Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.804611,
+          "pe_ratio": 15.097628,
+          "stock_id": 572169,
+          "symbol": "3472",
+          "ticker": "3472.JP",
+          "week52_high": 85000.0,
+          "week52_low": 62300.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 5.3,
+            "yield_pct": 6.7343,
+            "yield_trailing_pct": 6.7343
+          },
+          "eps": 4061.4082,
+          "exchange": "JP",
+          "gic_code": "60103010",
+          "market_cap_usd": null,
+          "name": "Invincible Investment Corp.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.315427,
+          "pe_ratio": 15.024631,
+          "stock_id": 571640,
+          "symbol": "8963",
+          "ticker": "8963.JP",
+          "week52_high": 70400.0,
+          "week52_low": 57600.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 0.8,
+            "yield_pct": 6.7135,
+            "yield_trailing_pct": 6.7135
+          },
+          "eps": 6414.4637,
+          "exchange": "JP",
+          "gic_code": "60106010",
+          "market_cap_usd": null,
+          "name": "Samty Residential Investment Corp.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.899487,
+          "pe_ratio": 34.966974,
+          "stock_id": 572080,
+          "symbol": "3459",
+          "ticker": "3459.JP",
+          "week52_high": 122200.0,
+          "week52_low": 88000.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 10.2,
+            "yield_pct": 6.7043,
+            "yield_trailing_pct": 6.7043
+          },
+          "eps": 5461.8316,
+          "exchange": "JP",
+          "gic_code": "60104010",
+          "market_cap_usd": null,
+          "name": "One REIT. Inc.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.015856,
+          "pe_ratio": 87.522603,
+          "stock_id": 573502,
+          "symbol": "3290",
+          "ticker": "3290.JP",
+          "week52_high": 93400.0,
+          "week52_low": 72500.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -8.3,
+            "yield_pct": 6.5992,
+            "yield_trailing_pct": 6.5992
+          },
+          "eps": 6172.3447,
+          "exchange": "JP",
+          "gic_code": "60108040",
+          "market_cap_usd": null,
+          "name": "Marimo Regional Revitalization REIT, Inc.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.970868,
+          "pe_ratio": 16.621272,
+          "stock_id": 572642,
+          "symbol": "3470",
+          "ticker": "3470.JP",
+          "week52_high": 115900.0,
+          "week52_low": 100900.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 1.6,
+            "yield_pct": 6.4914,
+            "yield_trailing_pct": 6.4914
+          },
+          "eps": 5771.0737,
+          "exchange": "JP",
+          "gic_code": "60105010",
+          "market_cap_usd": null,
+          "name": "Healthcare & Medical Investment Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.980806,
+          "pe_ratio": 18.298124,
+          "stock_id": 571737,
+          "symbol": "3455",
+          "ticker": "3455.JP",
+          "week52_high": 131800.0,
+          "week52_low": 97200.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -2.4,
+            "yield_pct": 6.4267,
+            "yield_trailing_pct": 6.4267
+          },
+          "eps": 3568.1932,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "Star Asia Investment Corp.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.995738,
+          "pe_ratio": 15.175467,
+          "stock_id": 572982,
+          "symbol": "3468",
+          "ticker": "3468.JP",
+          "week52_high": 64000.0,
+          "week52_low": 52400.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 0.4,
+            "yield_pct": 6.0427,
+            "yield_trailing_pct": 6.0427
+          },
+          "eps": 6574.2563,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "NIPPON REIT Investment Corp",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.109727,
+          "pe_ratio": 11.436075,
+          "stock_id": 574945,
+          "symbol": "3296",
+          "ticker": "3296.JP",
+          "week52_high": 104100.0,
+          "week52_low": 80900.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 6.0,
+            "yield_pct": 6.0152,
+            "yield_trailing_pct": 6.0152
+          },
+          "eps": 8698.7366,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "HEIWA REAL ESTATE REIT Inc.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.240645,
+          "pe_ratio": 16.008934,
+          "stock_id": 573233,
+          "symbol": "8966",
+          "ticker": "8966.JP",
+          "week52_high": 164100.0,
+          "week52_low": 130200.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 1.3,
+            "yield_pct": 5.955,
+            "yield_trailing_pct": 5.955
+          },
+          "eps": 7801.6177,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "Tosei Reit Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.151295,
+          "pe_ratio": 16.868296,
+          "stock_id": 571889,
+          "symbol": "3451",
+          "ticker": "3451.JP",
+          "week52_high": 151700.0,
+          "week52_low": 125700.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 90.6,
+            "yield_pct": 5.6405,
+            "yield_trailing_pct": 5.6405
+          },
+          "eps": 5948.9297,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "Daiwa House REIT Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.099508,
+          "pe_ratio": 20.136366,
+          "stock_id": 574463,
+          "symbol": "8984",
+          "ticker": "8984.JP",
+          "week52_high": 144700.0,
+          "week52_low": 116600.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 102.1,
+            "yield_pct": 5.6228,
+            "yield_trailing_pct": 5.6228
+          },
+          "eps": 6609.2704,
+          "exchange": "JP",
+          "gic_code": "60107010",
+          "market_cap_usd": null,
+          "name": "AEON REIT Investment Corp.",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.040652,
+          "pe_ratio": 18.327677,
+          "stock_id": 573576,
+          "symbol": "3292",
+          "ticker": "3292.JP",
+          "week52_high": 140700.0,
+          "week52_low": 118700.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 0.0,
+            "yield_pct": 5.5873,
+            "yield_trailing_pct": 5.5873
+          },
+          "eps": 4398.085,
+          "exchange": "JP",
+          "gic_code": "60107010",
+          "market_cap_usd": null,
+          "name": "Mitsui Fudosan Retail Fund Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.209376,
+          "pe_ratio": 18.012016,
+          "stock_id": 572045,
+          "symbol": "8964",
+          "ticker": "8964.JP",
+          "week52_high": 95900.0,
+          "week52_low": 77600.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 3.9,
+            "yield_pct": 5.587,
+            "yield_trailing_pct": 5.587
+          },
+          "eps": 5636.1219,
+          "exchange": "JP",
+          "gic_code": "60106010",
+          "market_cap_usd": null,
+          "name": "Daiwa Securities Living Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.207308,
+          "pe_ratio": 16.912156,
+          "stock_id": 573401,
+          "symbol": "8986",
+          "ticker": "8986.JP",
+          "week52_high": 118800.0,
+          "week52_low": 94300.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 2.4,
+            "yield_pct": 5.5177,
+            "yield_trailing_pct": 5.5177
+          },
+          "eps": 8421.684,
+          "exchange": "JP",
+          "gic_code": "60104010",
+          "market_cap_usd": null,
+          "name": "KDX Realty Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 0.958847,
+          "pe_ratio": 17.823529,
+          "stock_id": 573395,
+          "symbol": "8972",
+          "ticker": "8972.JP",
+          "week52_high": 181300.0,
+          "week52_low": 149400.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": 9.4,
+            "yield_pct": 5.4384,
+            "yield_trailing_pct": 5.4384
+          },
+          "eps": 8581.4092,
+          "exchange": "JP",
+          "gic_code": "60101010",
+          "market_cap_usd": null,
+          "name": "United Urban Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.378451,
+          "pe_ratio": 20.87301,
+          "stock_id": 572631,
+          "symbol": "8960",
+          "ticker": "8960.JP",
+          "week52_high": 191700.0,
+          "week52_low": 155600.0
+        },
+        {
+          "country": "Japan",
+          "dividend": {
+            "cagr_5y_pct": null,
+            "ffo_payout": null,
+            "last_cut_year": null,
+            "no_cut_streak_yrs": 10,
+            "payout_ratio": null,
+            "payout_ratio_eff": null,
+            "ttm_div_yoy_pct": -17.2,
+            "yield_pct": 5.416,
+            "yield_trailing_pct": 5.416
+          },
+          "eps": 5062.9482,
+          "exchange": "JP",
+          "gic_code": "60104010",
+          "market_cap_usd": null,
+          "name": "Ichigo Office REIT Investment Corporation",
+          "news": {
+            "neg": 0,
+            "net_direction": "none",
+            "pos": 0,
+            "top_reason": null
+          },
+          "pb_ratio": 1.379773,
+          "pe_ratio": 18.481167,
+          "stock_id": 573110,
+          "symbol": "8975",
+          "ticker": "8975.JP",
+          "week52_high": 100500.0,
+          "week52_low": 83200.0
+        }
+      ],
+      "total": 55
+    }
+  ],
+  "answer_to_user": "คัดกลุ่ม REIT + สาธารณูปโภค ในเอเชีย โดยเน้น 'ความเสี่ยงจะโดนตัดต่ำ' — คือกรองเอาเฉพาะตัวที่ไม่เคยตัดปันผลตลอด 8-10 ปีที่ข้อมูลย้อนได้ (no-cut streak สูงสุด = 10 ปี ครอบคลุมช่วงวิกฤติปี 2020 และ 2022) และยีลด์ตั้งแต่ 4% ขึ้นไป ผลที่ได้ส่วนใหญ่เป็น REIT ญี่ปุ่นที่ปันผลนิ่งครบ 10 ปี เช่น Global One Real Estate REIT (8958.JP) ~7.18%, Ichigo Hotel REIT (3463.JP) ~6.94%, Sekisui House REIT (3309.JP) ~6.83%, Nippon Hotel & Residential (3472.JP) ~6.78%, Invincible Investment (8963.JP) ~6.73% และ Samty Residential REIT (3459.JP) ~6.71% — ทุกตัว streak = 10 ปี ไม่เคยตัด ข้อควรระวังสำคัญ: REIT ตามกฎต้องจ่ายกระแสเงินสดออกเกือบทั้งหมด ดังนั้น payout ratio ที่ดู 'สูง' เป็นเรื่องปกติของ REIT — ต้องมองที่ความสม่ำเสมอของการจ่าย/FFO coverage ไม่ใช่ payout บนฐานกำไร (EPS) แบบหุ้นทั่วไป ส่วนนี้เลยเป็นการดู 'ประวัติไม่ตัดปันผล' เป็นตัวชี้ความเสี่ยงต่ำ แต่ไม่ได้การันตีอนาคต แนะนำเช็ค payout/กระแสเงินสดของแต่ละตัวก่อนตัดสินใจ — และนี่เป็นข้อมูลประกอบ ไม่ใช่คำแนะนำให้ซื้อขายรายตัวนะครับ"
+}

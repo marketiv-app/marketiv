@@ -1,0 +1,32 @@
+{
+  "id": "ma-09",
+  "question": "I want to see everything — stocks AND crypto AND forex — that just broke out above their 20-day moving average with rising volume. Cross-market breakouts.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["breakout above 20-day moving average", "rising volume"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Common Stock", "Crypto", "Currency"],
+        "ta": [
+          {
+            "anchor": [{"pattern": "crossover_up", "a": "close", "b": "ema20"}],
+            "quals": [{"any": [{"pattern": "rising_volume"}]}]
+          }
+        ],
+        "limit": 20
+      }
+    }
+  ],
+  "result_summary": "Returned 80 results (capped=true). Top 20 include 5 crypto (.CC: WZRD-USD.CC, ADM-USD.CC, ALPH-USD.CC, BLESS-USD.CC, AIFUN-USD.CC) and 15 stocks (JWEL.US, MKTSF.US, 0420.HK, GENL.LSE, RHK.XETRA, NTV.LSE, TLRY.US, 084110.KQ, 0756.HK, 600095.CG, etc.). No forex (.FOREX) in top 20 — forex pairs likely have no volume data series, or volume_dryup is the norm for FX. Both the breakout (cross_close_ema20_up) and rising_volume signals confirmed in matched output. Multi-asset (stocks + crypto) confirmed.",
+  "verdict": "PARTIAL",
+  "reason": "Returns results from two asset types (stocks + crypto) with both the MA breakout and volume conditions confirmed. However, no forex appears in results despite being included in the universe — forex pairs may lack volume data, which is a known limitation not surfaced to the client.",
+  "defects": [
+    {
+      "desc": "Forex is included in asset_type but returns zero forex pairs for a volume-conditioned screen. Forex pairs typically have no tradeable volume data (FX is OTC). The server should warn the client that volume-based conditions do not apply to forex/currency assets, or automatically exclude them with a note rather than silently returning no forex results.",
+      "side": "server"
+    }
+  ]
+}

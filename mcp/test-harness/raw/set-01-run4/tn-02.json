@@ -1,0 +1,19 @@
+{
+  "id": "tn-02",
+  "question": "หุ้นไทยตัวไหนเพิ่งทำจุดสูงสุดในรอบ 52 สัปดาห์บ้าง",
+  "tool_calls": [
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [{"anchor": [{"pattern": "at_new_high"}]}],
+        "country": ["TH"],
+        "asset_type": ["Common Stock"],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "7 Thai stocks at 52-week high: AWC.BK (Asset World Corp), BCP.BK (Bangchak Corp), GEL.BK (General Engineering), GGC.BK (Global Green Chemicals RSI 85.98), MORE.BK (More Return), PTTGC.BK (PTT Global Chemical), TFG.BK (Thaifoods Group). All confirmed at_new_high signal on 2026-08-30.",
+  "verdict": "PASS",
+  "reason": "Returns 7 Thai SET-listed stocks (.BK suffix) genuinely at 52-week highs with signal confirmed 2026-08-30.",
+  "defects": []
+}

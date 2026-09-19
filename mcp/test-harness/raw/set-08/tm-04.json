@@ -1,0 +1,1467 @@
+{
+  "id": "tm-04",
+  "question": "หุ้นกลุ่ม defense ในยุโรปมีตัวไหนน่าสนใจบ้าง อยากได้ชื่อบริษัทอาวุธ/กาโลโหงยุโรป ไม่เอาของอเมริกา",
+  "tools_called": [
+    {
+      "tool": "find_megatrend",
+      "args": {
+        "terms": [
+          "defense",
+          "aerospace and defense",
+          "weapons"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "22000000",
+        "country": "DE",
+        "limit": 10
+      },
+      "note": ""
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "22000000",
+        "country": "GB",
+        "limit": 10
+      },
+      "note": ""
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "22000000",
+        "country": "FR",
+        "limit": 10
+      },
+      "note": ""
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "22000000",
+        "country": "IT",
+        "limit": 10
+      },
+      "note": "returned 0 — Leonardo not under IT market scope"
+    },
+    {
+      "tool": "theme_players",
+      "args": {
+        "theme": "22000000",
+        "country": "SE",
+        "limit": 10
+      },
+      "note": "returned 0 — Saab not under SE market scope"
+    },
+    {
+      "tool": "find_stock",
+      "args": {
+        "queries": [
+          "Leonardo SpA",
+          "Saab AB"
+        ]
+      },
+      "note": "confirm Leonardo/Saab exist (resolve to LSE cross-listings, domicile IT/SE)"
+    }
+  ],
+  "raw_responses": [
+    {
+      "defense": [
+        {
+          "id": 22000000,
+          "name": "Defense & Geopolitical Fragmentation",
+          "tier": 1
+        }
+      ],
+      "aerospace and defense": [
+        {
+          "id": 22000000,
+          "name": "Defense & Geopolitical Fragmentation",
+          "tier": 1
+        },
+        {
+          "id": 58000000,
+          "name": "Aerospace & Aviation",
+          "tier": 1
+        }
+      ],
+      "weapons": [
+        {
+          "id": 22040000,
+          "name": "Missiles, Munitions & Energetics",
+          "tier": 2
+        },
+        {
+          "id": 22050000,
+          "name": "Autonomous Systems & Counter-Drone",
+          "tier": 2
+        },
+        {
+          "id": 22080000,
+          "name": "Defense Electronics, EW & Sensors",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "stocks": [
+        {
+          "stock_id": 243461,
+          "symbol": "PTX",
+          "ticker": "PTX.XETRA",
+          "type": null,
+          "name": "Palantir Technologies Inc.",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "US",
+          "currency": "EUR",
+          "gic_code": "45103010",
+          "market_cap_usd": 428940723257.344,
+          "market_cap_local": 367716007936.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22060000,
+            "node_name": "Defense Software & C4ISR",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "US",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "45103010",
+            "market_cap_local": 367716007936.0,
+            "market_cap_usd": 428940723257.344,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22060000,
+              "node_name": "Defense Software & C4ISR",
+              "role": "leader"
+            },
+            "name": "Palantir Technologies Inc.",
+            "stock_id": 243461,
+            "symbol": "PTX",
+            "ticker": "PTX.XETRA"
+          }
+        },
+        {
+          "stock_id": 242472,
+          "symbol": "GCP",
+          "ticker": "GCP.XETRA",
+          "type": null,
+          "name": "General Electric Company",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "US",
+          "currency": "EUR",
+          "gic_code": "50202010",
+          "market_cap_usd": 354622775181.312,
+          "market_cap_local": 304005808128.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 22010000,
+            "node_name": "Defense Primes — United States",
+            "role": "enabler"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "US",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "50202010",
+            "market_cap_local": 304005808128.0,
+            "market_cap_usd": 354622775181.312,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 22010000,
+              "node_name": "Defense Primes — United States",
+              "role": "enabler"
+            },
+            "name": "General Electric Company",
+            "stock_id": 242472,
+            "symbol": "GCP",
+            "ticker": "GCP.XETRA"
+          }
+        },
+        {
+          "stock_id": 241012,
+          "symbol": "5UR",
+          "ticker": "5UR.XETRA",
+          "type": null,
+          "name": "Raytheon Technologies Corp",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "US",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 284325118402.56,
+          "market_cap_local": 243742064640.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22010000,
+            "node_name": "Defense Primes — United States",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "US",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 243742064640.0,
+            "market_cap_usd": 284325118402.56,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22010000,
+              "node_name": "Defense Primes — United States",
+              "role": "leader"
+            },
+            "name": "Raytheon Technologies Corp",
+            "stock_id": 241012,
+            "symbol": "5UR",
+            "ticker": "5UR.XETRA"
+          }
+        },
+        {
+          "stock_id": 241158,
+          "symbol": "AIR",
+          "ticker": "AIR.XETRA",
+          "type": null,
+          "name": "Airbus SE",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "NL",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 188022308995.072,
+          "market_cap_local": 161185005568.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "NL",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 161185005568.0,
+            "market_cap_usd": 188022308995.072,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "Airbus SE",
+            "stock_id": 241158,
+            "symbol": "AIR",
+            "ticker": "AIR.XETRA"
+          }
+        },
+        {
+          "stock_id": 243572,
+          "symbol": "RRU",
+          "ticker": "RRU.XETRA",
+          "type": null,
+          "name": "Rolls-Royce Holdings PLC",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "GB",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 168903053123.584,
+          "market_cap_local": 144794730496.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "GB",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 144794730496.0,
+            "market_cap_usd": 168903053123.584,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "Rolls-Royce Holdings PLC",
+            "stock_id": 243572,
+            "symbol": "RRU",
+            "ticker": "RRU.XETRA"
+          }
+        },
+        {
+          "stock_id": 243644,
+          "symbol": "SEJ1",
+          "ticker": "SEJ1.XETRA",
+          "type": null,
+          "name": "Safran SA",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 165472651730.944,
+          "market_cap_local": 141853966336.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 141853966336.0,
+            "market_cap_usd": 165472651730.944,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "Safran SA",
+            "stock_id": 243644,
+            "symbol": "SEJ1",
+            "ticker": "SEJ1.XETRA"
+          }
+        },
+        {
+          "stock_id": 241382,
+          "symbol": "BCO",
+          "ticker": "BCO.XETRA",
+          "type": null,
+          "name": "The Boeing Company",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "US",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 165290190077.952,
+          "market_cap_local": 141697548288.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22010000,
+            "node_name": "Defense Primes — United States",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "US",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 141697548288.0,
+            "market_cap_usd": 165290190077.952,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22010000,
+              "node_name": "Defense Primes — United States",
+              "role": "leader"
+            },
+            "name": "The Boeing Company",
+            "stock_id": 241382,
+            "symbol": "BCO",
+            "ticker": "BCO.XETRA"
+          }
+        },
+        {
+          "stock_id": 243071,
+          "symbol": "LOM",
+          "ticker": "LOM.XETRA",
+          "type": null,
+          "name": "Lockheed Martin Corporation",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "US",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 130839664050.176,
+          "market_cap_local": 112164306944.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22010000,
+            "node_name": "Defense Primes — United States",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "US",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 112164306944.0,
+            "market_cap_usd": 130839664050.176,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22010000,
+              "node_name": "Defense Primes — United States",
+              "role": "leader"
+            },
+            "name": "Lockheed Martin Corporation",
+            "stock_id": 243071,
+            "symbol": "LOM",
+            "ticker": "LOM.XETRA"
+          }
+        },
+        {
+          "stock_id": 241490,
+          "symbol": "BSP",
+          "ticker": "BSP.XETRA",
+          "type": null,
+          "name": "BAE Systems plc",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "GB",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 84847124525.056,
+          "market_cap_local": 72736497664.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "GB",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 72736497664.0,
+            "market_cap_usd": 84847124525.056,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "BAE Systems plc",
+            "stock_id": 241490,
+            "symbol": "BSP",
+            "ticker": "BSP.XETRA"
+          }
+        },
+        {
+          "stock_id": 243555,
+          "symbol": "RHM",
+          "ticker": "RHM.XETRA",
+          "type": null,
+          "name": "Rheinmetall AG",
+          "exchange": "XETRA",
+          "country": "Germany",
+          "domicile": "DE",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 61253969889.28,
+          "market_cap_local": 52510904320.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "Germany",
+            "currency": "EUR",
+            "domicile": "DE",
+            "exchange": "XETRA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 52510904320.0,
+            "market_cap_usd": 61253969889.28,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": "leader"
+            },
+            "name": "Rheinmetall AG",
+            "stock_id": 243555,
+            "symbol": "RHM",
+            "ticker": "RHM.XETRA"
+          }
+        }
+      ],
+      "count": 10,
+      "total": 21,
+      "note": "showing 10 of 21 — this is a curated top slice, not the full list; tell the user more exist, and raise `limit` or narrow the scope to see them"
+    },
+    {
+      "stocks": [
+        {
+          "stock_id": 239301,
+          "symbol": "RR",
+          "ticker": "RR.LSE",
+          "type": null,
+          "name": "Rolls-Royce Holdings PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "20101010",
+          "market_cap_usd": 169123965272.064,
+          "market_cap_local": 124036644864.0,
+          "fx_rate_usd": 1.3635,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22030000,
+            "node_name": "Naval Systems & Shipbuilding",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3635,
+            "gic_code": "20101010",
+            "market_cap_local": 124036644864.0,
+            "market_cap_usd": 169123965272.064,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22030000,
+              "node_name": "Naval Systems & Shipbuilding",
+              "role": "leader"
+            },
+            "name": "Rolls-Royce Holdings PLC",
+            "stock_id": 239301,
+            "symbol": "RR",
+            "ticker": "RR.LSE"
+          }
+        },
+        {
+          "stock_id": 233746,
+          "symbol": "0BOE",
+          "ticker": "0BOE.LSE",
+          "type": null,
+          "name": "Boeing Co.",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "US",
+          "currency": "USD",
+          "gic_code": "20101010",
+          "market_cap_usd": 128941350912.0,
+          "market_cap_local": 128941350912.0,
+          "fx_rate_usd": 1.0,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22010000,
+            "node_name": "Defense Primes — United States",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "USD",
+            "domicile": "US",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.0,
+            "gic_code": "20101010",
+            "market_cap_local": 128941350912.0,
+            "market_cap_usd": 128941350912.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22010000,
+              "node_name": "Defense Primes — United States",
+              "role": "leader"
+            },
+            "name": "Boeing Co.",
+            "stock_id": 233746,
+            "symbol": "0BOE",
+            "ticker": "0BOE.LSE"
+          }
+        },
+        {
+          "stock_id": 234671,
+          "symbol": "0KVV",
+          "ticker": "0KVV.LSE",
+          "type": null,
+          "name": "Airbus Group SE",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "NL",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 101159754875.0,
+          "market_cap_local": 86720750000.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "EUR",
+            "domicile": "NL",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 86720750000.0,
+            "market_cap_usd": 101159754875.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "Airbus Group SE",
+            "stock_id": 234671,
+            "symbol": "0KVV",
+            "ticker": "0KVV.LSE"
+          }
+        },
+        {
+          "stock_id": 236498,
+          "symbol": "BA",
+          "ticker": "BA.LSE",
+          "type": null,
+          "name": "BAE Systems plc",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "20101010",
+          "market_cap_usd": 84916886022.144,
+          "market_cap_local": 62278610944.0,
+          "fx_rate_usd": 1.3635,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22030000,
+            "node_name": "Naval Systems & Shipbuilding",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3635,
+            "gic_code": "20101010",
+            "market_cap_local": 62278610944.0,
+            "market_cap_usd": 84916886022.144,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22030000,
+              "node_name": "Naval Systems & Shipbuilding",
+              "role": "leader"
+            },
+            "name": "BAE Systems plc",
+            "stock_id": 236498,
+            "symbol": "BA",
+            "ticker": "BA.LSE"
+          }
+        },
+        {
+          "stock_id": 234325,
+          "symbol": "0IU8",
+          "ticker": "0IU8.LSE",
+          "type": null,
+          "name": "Safran SA",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 52907843990.0,
+          "market_cap_local": 45356060000.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 45356060000.0,
+            "market_cap_usd": 52907843990.0,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": "leader"
+            },
+            "name": "Safran SA",
+            "stock_id": 234325,
+            "symbol": "0IU8",
+            "ticker": "0IU8.LSE"
+          }
+        },
+        {
+          "stock_id": 234337,
+          "symbol": "0IW5",
+          "ticker": "0IW5.LSE",
+          "type": null,
+          "name": "Thales",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 19726343215.0,
+          "market_cap_local": 16910710000.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 16910710000.0,
+            "market_cap_usd": 19726343215.0,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": null
+            },
+            "name": "Thales",
+            "stock_id": 234337,
+            "symbol": "0IW5",
+            "ticker": "0IW5.LSE"
+          }
+        },
+        {
+          "stock_id": 239517,
+          "symbol": "SMIN",
+          "ticker": "SMIN.LSE",
+          "type": null,
+          "name": "Smiths Group PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "20105010",
+          "market_cap_usd": 10299642165.504,
+          "market_cap_local": 7553826304.0,
+          "fx_rate_usd": 1.3635,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3635,
+            "gic_code": "20105010",
+            "market_cap_local": 7553826304.0,
+            "market_cap_usd": 10299642165.504,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": null
+            },
+            "name": "Smiths Group PLC",
+            "stock_id": 239517,
+            "symbol": "SMIN",
+            "ticker": "SMIN.LSE"
+          }
+        },
+        {
+          "stock_id": 235016,
+          "symbol": "0NI1",
+          "ticker": "0NI1.LSE",
+          "type": null,
+          "name": "Rheinmetall AG",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "DE",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 9021989466.88,
+          "market_cap_local": 7734238720.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "EUR",
+            "domicile": "DE",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 7734238720.0,
+            "market_cap_usd": 9021989466.88,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": "leader"
+            },
+            "name": "Rheinmetall AG",
+            "stock_id": 235016,
+            "symbol": "0NI1",
+            "ticker": "0NI1.LSE"
+          }
+        },
+        {
+          "stock_id": 236502,
+          "symbol": "BAB",
+          "ticker": "BAB.LSE",
+          "type": null,
+          "name": "Babcock International Group PLC",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "GB",
+          "currency": "GBX",
+          "gic_code": "20201070",
+          "market_cap_usd": 7262077966.848,
+          "market_cap_local": 5326056448.0,
+          "fx_rate_usd": 1.3635,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22030000,
+            "node_name": "Naval Systems & Shipbuilding",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "GBX",
+            "domicile": "GB",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.3635,
+            "gic_code": "20201070",
+            "market_cap_local": 5326056448.0,
+            "market_cap_usd": 7262077966.848,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22030000,
+              "node_name": "Naval Systems & Shipbuilding",
+              "role": "leader"
+            },
+            "name": "Babcock International Group PLC",
+            "stock_id": 236502,
+            "symbol": "BAB",
+            "ticker": "BAB.LSE"
+          }
+        },
+        {
+          "stock_id": 235124,
+          "symbol": "0O1C",
+          "ticker": "0O1C.LSE",
+          "type": null,
+          "name": "Thyssenkrupp AG O.N.",
+          "exchange": "LSE",
+          "country": "UK",
+          "domicile": "DE",
+          "currency": "EUR",
+          "gic_code": "20106020",
+          "market_cap_usd": 6394770497.5,
+          "market_cap_local": 5482015000.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22030000,
+            "node_name": "Naval Systems & Shipbuilding",
+            "role": null
+          },
+          "raw": {
+            "country": "UK",
+            "currency": "EUR",
+            "domicile": "DE",
+            "exchange": "LSE",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20106020",
+            "market_cap_local": 5482015000.0,
+            "market_cap_usd": 6394770497.5,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22030000,
+              "node_name": "Naval Systems & Shipbuilding",
+              "role": null
+            },
+            "name": "Thyssenkrupp AG O.N.",
+            "stock_id": 235124,
+            "symbol": "0O1C",
+            "ticker": "0O1C.LSE"
+          }
+        }
+      ],
+      "count": 10,
+      "total": 69,
+      "note": "showing 10 of 69 — this is a curated top slice, not the full list; tell the user more exist, and raise `limit` or narrow the scope to see them"
+    },
+    {
+      "stocks": [
+        {
+          "stock_id": 1752487,
+          "symbol": "AIR",
+          "ticker": "AIR.PA",
+          "type": null,
+          "name": "Airbus Group SE",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "NL",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 188068464320.512,
+          "market_cap_local": 161224572928.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "NL",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 161224572928.0,
+            "market_cap_usd": 188068464320.512,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "Airbus Group SE",
+            "stock_id": 1752487,
+            "symbol": "AIR",
+            "ticker": "AIR.PA"
+          }
+        },
+        {
+          "stock_id": 1753474,
+          "symbol": "SAF",
+          "ticker": "SAF.PA",
+          "type": null,
+          "name": "Safran SA",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 164312461656.064,
+          "market_cap_local": 140859375616.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 140859375616.0,
+            "market_cap_usd": 164312461656.064,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": "leader"
+            },
+            "name": "Safran SA",
+            "stock_id": 1753474,
+            "symbol": "SAF",
+            "ticker": "SAF.PA"
+          }
+        },
+        {
+          "stock_id": 1753139,
+          "symbol": "HO",
+          "ticker": "HO.PA",
+          "type": null,
+          "name": "Thales S.A.",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 60232589805.568,
+          "market_cap_local": 51635310592.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": null
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 51635310592.0,
+            "market_cap_usd": 60232589805.568,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": null
+            },
+            "name": "Thales S.A.",
+            "stock_id": 1753139,
+            "symbol": "HO",
+            "ticker": "HO.PA"
+          }
+        },
+        {
+          "stock_id": 1752743,
+          "symbol": "AM",
+          "ticker": "AM.PA",
+          "type": null,
+          "name": "Dassault Aviation SA",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 26890840355.84,
+          "market_cap_local": 23052584960.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 23052584960.0,
+            "market_cap_usd": 26890840355.84,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "Dassault Aviation SA",
+            "stock_id": 1752743,
+            "symbol": "AM",
+            "ticker": "AM.PA"
+          }
+        },
+        {
+          "stock_id": 1753049,
+          "symbol": "EXENS",
+          "ticker": "EXENS.PA",
+          "type": null,
+          "name": "EXOSENS PROM",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "45203010",
+          "market_cap_usd": 3548152717.952,
+          "market_cap_local": 3041708288.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": "enabler"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "45203010",
+            "market_cap_local": 3041708288.0,
+            "market_cap_usd": 3548152717.952,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": "enabler"
+            },
+            "name": "EXOSENS PROM",
+            "stock_id": 1753049,
+            "symbol": "EXENS",
+            "ticker": "EXENS.PA"
+          }
+        },
+        {
+          "stock_id": 1753047,
+          "symbol": "EXA",
+          "ticker": "EXA.PA",
+          "type": null,
+          "name": "Exail Technologies S.A.",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 2464789042.304,
+          "market_cap_local": 2112978176.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.8,
+            "exposure": "core",
+            "node_id": 22050000,
+            "node_name": "Autonomous Systems & Counter-Drone",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 2112978176.0,
+            "market_cap_usd": 2464789042.304,
+            "megatrend": {
+              "confidence": 0.8,
+              "exposure": "core",
+              "node_id": 22050000,
+              "node_name": "Autonomous Systems & Counter-Drone",
+              "role": "leader"
+            },
+            "name": "Exail Technologies S.A.",
+            "stock_id": 1753047,
+            "symbol": "EXA",
+            "ticker": "EXA.PA"
+          }
+        },
+        {
+          "stock_id": 1753302,
+          "symbol": "MLHK",
+          "ticker": "MLHK.PA",
+          "type": null,
+          "name": "H&K AG",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "DE",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 1436256167.232,
+          "market_cap_local": 1231252608.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22020000,
+            "node_name": "Defense Primes — Europe & Asia",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "DE",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 1231252608.0,
+            "market_cap_usd": 1436256167.232,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22020000,
+              "node_name": "Defense Primes — Europe & Asia",
+              "role": "leader"
+            },
+            "name": "H&K AG",
+            "stock_id": 1753302,
+            "symbol": "MLHK",
+            "ticker": "MLHK.PA"
+          }
+        },
+        {
+          "stock_id": 1753050,
+          "symbol": "EXPL",
+          "ticker": "EXPL.PA",
+          "type": null,
+          "name": "EPC Groupe",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "15101050",
+          "market_cap_usd": 671125487.232,
+          "market_cap_local": 575332608.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 1.0,
+            "exposure": "core",
+            "node_id": 22040200,
+            "node_name": "Ammunition & Energetics",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "15101050",
+            "market_cap_local": 575332608.0,
+            "market_cap_usd": 671125487.232,
+            "megatrend": {
+              "confidence": 1.0,
+              "exposure": "core",
+              "node_id": 22040200,
+              "node_name": "Ammunition & Energetics",
+              "role": "leader"
+            },
+            "name": "EPC Groupe",
+            "stock_id": 1753050,
+            "symbol": "EXPL",
+            "ticker": "EXPL.PA"
+          }
+        },
+        {
+          "stock_id": 1753335,
+          "symbol": "MLUAV",
+          "ticker": "MLUAV.PA",
+          "type": null,
+          "name": "Embention Sistemas Inteligentes S.A.",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "ES",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 198144489.6,
+          "market_cap_local": 169862400.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22050100,
+            "node_name": "Loitering Munitions & Combat UAS",
+            "role": "leader"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "ES",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 169862400.0,
+            "market_cap_usd": 198144489.6,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22050100,
+              "node_name": "Loitering Munitions & Combat UAS",
+              "role": "leader"
+            },
+            "name": "Embention Sistemas Inteligentes S.A.",
+            "stock_id": 1753335,
+            "symbol": "MLUAV",
+            "ticker": "MLUAV.PA"
+          }
+        },
+        {
+          "stock_id": 1752657,
+          "symbol": "ALNSE",
+          "ticker": "ALNSE.PA",
+          "type": null,
+          "name": "NSE SA",
+          "exchange": "PA",
+          "country": "France",
+          "domicile": "FR",
+          "currency": "EUR",
+          "gic_code": "20101010",
+          "market_cap_usd": 180668546.52,
+          "market_cap_local": 154880880.0,
+          "fx_rate_usd": 1.1665,
+          "megatrend": {
+            "confidence": 0.9,
+            "exposure": "core",
+            "node_id": 22080000,
+            "node_name": "Defense Electronics, EW & Sensors",
+            "role": "enabler"
+          },
+          "raw": {
+            "country": "France",
+            "currency": "EUR",
+            "domicile": "FR",
+            "exchange": "PA",
+            "fx_rate_usd": 1.1665,
+            "gic_code": "20101010",
+            "market_cap_local": 154880880.0,
+            "market_cap_usd": 180668546.52,
+            "megatrend": {
+              "confidence": 0.9,
+              "exposure": "core",
+              "node_id": 22080000,
+              "node_name": "Defense Electronics, EW & Sensors",
+              "role": "enabler"
+            },
+            "name": "NSE SA",
+            "stock_id": 1752657,
+            "symbol": "ALNSE",
+            "ticker": "ALNSE.PA"
+          }
+        }
+      ],
+      "count": 10,
+      "total": 19,
+      "note": "showing 10 of 19 — this is a curated top slice, not the full list; tell the user more exist, and raise `limit` or narrow the scope to see them"
+    },
+    {
+      "stocks": [],
+      "count": 0,
+      "total": 0
+    },
+    {
+      "stocks": [],
+      "count": 0,
+      "total": 0
+    },
+    {
+      "count": 2,
+      "results": [
+        {
+          "match_quality": "strong",
+          "matches": [
+            {
+              "ticker": "0ONG.LSE",
+              "name": "Leonardo SpA",
+              "country": "UK",
+              "domicile": "IT",
+              "exchange": "LSE",
+              "market_cap_usd": 4101776781.5
+            }
+          ],
+          "query": "Leonardo SpA"
+        },
+        {
+          "match_quality": "strong",
+          "matches": [
+            {
+              "ticker": "0GWL.LSE",
+              "name": "SAAB AB ser. B",
+              "country": "UK",
+              "domicile": "SE",
+              "exchange": "LSE",
+              "market_cap_usd": 3135345408.0
+            }
+          ],
+          "query": "Saab AB"
+        }
+      ]
+    }
+  ],
+  "answer_to_user": "ธีม defense ยุโรป (megatrend 22000000) มีตัวจริงหลายตัว โดยตัดชื่ออเมริกัน (Lockheed, Raytheon/RTX, Boeing, GE, Palantir ที่ขึ้นในลิสต์เป็น cross-listing โดเมน US) ออกตามที่ขอ ชื่อยุโรปที่เด่น: Rheinmetall AG (เยอรมนี, RHM.XETRA — core), BAE Systems (อังกฤษ, BA.LSE), Rolls-Royce Holdings (อังกฤษ, RR.LSE), Safran (ฝรั่งเศส, SAF.PA), Thales (ฝรั่งเศส, HO.PA), Dassault Aviation (ฝรั่งเศส, AM.PA), Airbus (โดเมนเนเธอร์แลนด์, AIR.PA), Babcock International และ Smiths Group (อังกฤษ), Thyssenkrupp (เยอรมนี, ต่อเรือรบ), รวมถึงชื่อเล็กฝรั่งเศสอย่าง Exail Technologies และ Exosens นอกจากนี้ Leonardo (อิตาลี, 0ONG.LSE) และ Saab (สวีเดน, 0GWL.LSE) ก็มีในระบบ (เทรดผ่าน LSE) แม้การ query ตลาด IT/SE ตรง ๆ จะคืนค่าว่าง สรุปตัวหลักที่น่าสนใจคือ Rheinmetall, BAE, Safran, Thales, Dassault, Leonardo และ Saab."
+}

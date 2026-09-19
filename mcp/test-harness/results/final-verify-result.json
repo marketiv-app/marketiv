@@ -1,0 +1,81 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "question": "revenue grew every year for last 3 years AND P/E below own sector avg AND R&D 10-20% of revenue",
+      "tool_calls": [
+        {"tool": "find_fsconcept", "args": {"queries": ["revenue", "P/E ratio", "research and development expense", "net income", "net profit margin", "capital expenditure"]}},
+        {"tool": "find_fspattern", "args": {"queries": ["grew every year for the last 3 years", "below its own sector average", "net income has been volatile", "stayed above every year for the last 3 years"]}},
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "revenue", "pattern": "consecutive_growth", "N": 3}, {"concept": "pe", "pattern": "below_average", "vs_cohort": {"own": true}}, {"metricA": "rnd", "relation": "ratio_between", "metricB": "revenue", "min": 0.10, "max": 0.20}], "asset_type": ["Common Stock"], "limit": 5}}
+      ],
+      "result_summary": "count=20 (capped). Top hit Alphabet (GOOG): pe 17.12 < own_sector benchmark 25.25; revenue min_yoy 0.0868 over series [0.1509,0.1387,0.0868]; R&D/revenue ratio 0.15164 (61.087B / 402.836B).",
+      "evidence_check": "matched.fundamental had all three: (a) pe -> {value:17.12, cohort_benchmark:25.25, cohort_scope:'own_sector', kind:'cohort'} = BOTH company P/E and sector benchmark shown; (b) revenue -> {kind:'growth', series:[0.15,0.14,0.087], value:0.087, window:'min_yoy', years_checked:3, requested_n:3} = per-year series + years_checked present; (c) rnd -> {kind:'relation', ratio:0.15164, value_a:61.087B, value_b:402.836B, metric_b:'revenue', relation:'ratio_between'} = both operands + computed ratio shown.",
+      "confusion_note": "None. Batch resolvers made concept/pattern obvious. vs_cohort {own:true} for each-vs-own-sector was documented verbatim in schema. Relation form (ratio_between) with min/max was documented with an R&D example. No trial-error, no unknown-param errors.",
+      "verdict": "PASS",
+      "reason": "All 3 conditions intersected correctly; every satisfied condition carried its passing number (sector benchmark, ratio+operands, per-year series+years_checked). Evidence under matched.fundamental (consistent with leg name).",
+      "defects": []
+    },
+    {
+      "id": 2,
+      "question": "companies whose net income has been volatile",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_income", "pattern": "volatile"}], "asset_type": ["Common Stock"], "limit": 5}}
+      ],
+      "result_summary": "count=20. Top: NVDA net_income yoy_std 2.78; AMZN 5.42; TSMC 0.325 — all years_checked:3.",
+      "evidence_check": "matched.fundamental.net_income -> {kind:'growth', value:2.78 (yoy_std volatility figure), window:'yoy_std', years_checked:3}. Volatility value + years_checked BOTH present.",
+      "confusion_note": "None. 'volatile' pattern resolved directly; concept net_income obvious. No error.",
+      "verdict": "PASS",
+      "reason": "Volatility metric (yoy_std) and years_checked shown per row.",
+      "defects": []
+    },
+    {
+      "id": 3,
+      "question": "net profit margin stayed above 25% every year for the last 3 years",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_margin", "pattern": "sustained_above", "N": 3, "threshold": 0.25}], "asset_type": ["Common Stock"], "limit": 5}}
+      ],
+      "result_summary": "count=20. NVDA min-year margin 0.4885 (latest 0.556); MSFT 0.3596 (latest 0.4031) — both years_checked:3, all above 0.25 floor.",
+      "evidence_check": "matched.fundamental.net_margin -> {kind:'growth', value:0.4885 (window:'min_value' = binding worst year), latest:0.556, requested_n:3, years_checked:3}. Binding value (worst-year min) + years_checked present; 0.4885 > 0.25 threshold confirms pass.",
+      "confusion_note": "None. sustained_above is the curated (rank-1) pattern for 'above threshold every year'; threshold sent as 0.25 fraction per schema SCALE rule. No error.",
+      "verdict": "PASS",
+      "reason": "Binding min-year value + latest + years_checked all shown.",
+      "defects": []
+    },
+    {
+      "id": 4,
+      "question": "profit margin above 30% for 20 straight years (exceeds data depth)",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"fundamental": [{"concept": "net_margin", "pattern": "sustained_above", "N": 20, "threshold": 0.30}], "asset_type": ["Common Stock"], "limit": 5}}
+      ],
+      "result_summary": "count=0, results=[], with an explicit insufficiency note (not silent empty).",
+      "evidence_check": "notes: \"`net_margin`: the data exists, but NO company has 20 years of annual history (deepest available approx 5y) - a 0 count here is INSUFFICIENT HISTORY, not 'nobody qualified'. Re-ask with N<=5 for the best answer the data supports.\" Clearly distinguishes insufficient-history from no-match AND gives deepest feasible N (approx 5y / N<=5).",
+      "confusion_note": "None. Correctly formed screen; the server itself flags the depth limit.",
+      "verdict": "PASS",
+      "reason": "Clear INSUFFICIENT HISTORY note with deepest feasible N=5, not a bare empty/'nobody qualified'.",
+      "defects": []
+    },
+    {
+      "id": 5,
+      "question": "capex around 8% of revenue",
+      "tool_calls": [
+        {"tool": "screen_unified", "args": {"fundamental": [{"metricA": "capex", "relation": "ratio_near", "metricB": "revenue", "target": 0.08}], "asset_type": ["Common Stock"], "limit": 5}}
+      ],
+      "result_summary": "count=20. XOM capex/rev ratio 0.08755 (28.358B/323.905B); AMAT 0.07967 — both near 0.08 within default +/-10% band.",
+      "evidence_check": "matched.fundamental.capex -> {kind:'relation', ratio:0.08755, value_a:-28.358B (capex, sign-negative outflow), value_b:323.905B (revenue), metric_b:'revenue', relation:'ratio_near'}. Computed ratio + both operands present. Response also carries a _conventions note explaining capex is stored negative.",
+      "confusion_note": "None. Schema's ratio_near description gave the exact capex-around-8%-of-revenue example (target=0.08). No error.",
+      "verdict": "PASS",
+      "reason": "Ratio + both operands shown; 'around' handled by ratio_near default band.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 5,
+    "partial": 0,
+    "fail": 0,
+    "batch_used": true,
+    "resolver_calls_for_case1": 2,
+    "top_defects": [
+      "None material. Only a cosmetic observation: the fundamental evidence key is consistently `matched.fundamental` (matches leg name) across all cases; benchmark, ratio+operands, per-year series, and years_checked were all present where relevant."
+    ]
+  }
+}

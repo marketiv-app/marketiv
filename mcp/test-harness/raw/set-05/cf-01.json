@@ -1,0 +1,2294 @@
+{
+  "id": "cf-01",
+  "question": "Find me profitable companies with revenue growing over 20% a year that just broke out above their 50-day moving average.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "net_income",
+            "pattern": "is_positive"
+          },
+          {
+            "concept": "revenue",
+            "pattern": "compound_growth",
+            "threshold": 0.2
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "crossover_up",
+                "a": "close",
+                "b": "ema50"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 20,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 40,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 6903468.0,
+              "gross_margin": 0.175434610521121,
+              "market_cap_usd": 55355569.06880001,
+              "net_margin": 0.0686700044206392,
+              "operating_cash_flow_usd": 9833538.0,
+              "operating_margin": 0.102954631904679,
+              "pe": 5.596968,
+              "roe": 0.0795638022578176
+            },
+            "ta": {
+              "adx": 58.2345,
+              "close_vs_ema200": -0.0113,
+              "rsi14": 94.4745
+            }
+          },
+          "head_listing_id": 52007,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 9551828.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2211,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 4.79,
+                  "b": 4.3934
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Suxin Joyful Life Svcs Co Ltd",
+          "score": 1.0,
+          "ticker": "2152.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -1068122711.5,
+              "gross_margin": 0.801958039219211,
+              "market_cap_usd": 3472368805.0688004,
+              "net_margin": 0.215947395252141,
+              "operating_cash_flow_usd": -1064404307.0,
+              "operating_margin": 0.661908459828623,
+              "pe": 20.283688,
+              "roe": 0.0874343866296333
+            },
+            "ta": {
+              "adx": 51.0478,
+              "close_vs_ema200": 0.1283,
+              "rsi14": 84.962
+            }
+          },
+          "head_listing_id": 51729,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 172877989.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.391,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 2.845,
+                  "b": 2.1517
+                },
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Guotai Junan International Holdings Ltd",
+          "score": 0.999,
+          "ticker": "1788.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 31390000.0,
+              "gross_margin": 0.5349,
+              "market_cap_usd": 737204480.0,
+              "net_margin": 0.0216,
+              "operating_cash_flow_usd": 35371000.0,
+              "operating_margin": 0.0348,
+              "pe": 100.880952,
+              "roe": 0.0434
+            },
+            "ta": {
+              "adx": 51.035,
+              "close_vs_ema200": 0.3163,
+              "rsi14": 84.687
+            }
+          },
+          "head_listing_id": 5845,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 10891000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2325,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 42.42,
+                  "b": 28.9185
+                },
+                "kind": "signal",
+                "strength": 0.999,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bowman Consulting Group Ltd",
+          "score": 0.999,
+          "ticker": "BWMN.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 11830278.6,
+              "gross_margin": 0.744352191170778,
+              "market_cap_usd": 216046583.9217,
+              "net_margin": 0.139457389402934,
+              "operating_cash_flow_usd": 12299149.8,
+              "operating_margin": 0.208090874993302,
+              "pe": 14.803663,
+              "roe": 0.157973810712567
+            },
+            "ta": {
+              "adx": 27.3944,
+              "close_vs_ema200": 0.0238,
+              "rsi14": 64.947
+            }
+          },
+          "head_listing_id": 571904,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 14593301.1
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2138,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 1201,
+                  "b": 1044.0775
+                },
+                "kind": "signal",
+                "strength": 0.979,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Alphapolis Co., Ltd.",
+          "score": 0.979,
+          "ticker": "9467.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3374467.2,
+              "gross_margin": 0.1973,
+              "market_cap_usd": 96247502.00320001,
+              "net_margin": 0.123,
+              "operating_cash_flow_usd": 7626996.0,
+              "operating_margin": 0.1459,
+              "pe": 9.884282,
+              "roe": 0.3212
+            },
+            "ta": {
+              "adx": 39.2141,
+              "close_vs_ema200": -0.0637,
+              "rsi14": 61.2954
+            }
+          },
+          "head_listing_id": 1420047,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 9718300.8
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3236,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 220,
+                  "b": 219.3939
+                },
+                "kind": "signal",
+                "strength": 0.975,
+                "value": "2026-08-21"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Ruentex Interior Design Inc.",
+          "score": 0.975,
+          "ticker": "6881.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -11969683.3551,
+              "gross_margin": 0.5423,
+              "market_cap_usd": 728627199.3343999,
+              "net_margin": 0.1127,
+              "operating_cash_flow_usd": 12650471.35638,
+              "operating_margin": 0.1977,
+              "pe": 57.238095,
+              "roe": 0.0498
+            },
+            "ta": {
+              "adx": 31.4826,
+              "close_vs_ema200": -0.0822,
+              "rsi14": 58.8661
+            }
+          },
+          "head_listing_id": 232787,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 11094774.0292
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2468,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 19.03,
+                  "b": 16.7837
+                },
+                "kind": "signal",
+                "strength": 0.975,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "GHT Co Ltd Class A",
+          "score": 0.975,
+          "ticker": "300711.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -6304896.0,
+              "gross_margin": 0.1422,
+              "market_cap_usd": 85928137.3952,
+              "net_margin": 0.1091,
+              "operating_cash_flow_usd": -3067303.2,
+              "operating_margin": 0.0655,
+              "pe": 21.502591,
+              "roe": 0.1099
+            },
+            "ta": {
+              "adx": 29.0261,
+              "close_vs_ema200": -0.1287,
+              "rsi14": 58.1418
+            }
+          },
+          "head_listing_id": 1420288,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 3977532.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2078,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 43.55,
+                  "b": 40.0889
+                },
+                "kind": "signal",
+                "strength": 0.968,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Qing Song Health Co.,Ltd.",
+          "score": 0.968,
+          "ticker": "6931.TW"
+        },
+        {
+          "also_known_as": [
+            "388050.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 8176870.989,
+              "gross_margin": 0.3651,
+              "market_cap_usd": 131227982.23359999,
+              "net_margin": 0.0894,
+              "operating_cash_flow_usd": 10513602.197,
+              "operating_margin": 0.1316,
+              "pe": 24.197054,
+              "roe": 0.1837
+            },
+            "ta": {
+              "adx": 27.6281,
+              "close_vs_ema200": 0.0418,
+              "rsi14": 61.3908
+            }
+          },
+          "head_listing_id": 1421115,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 5421276.273
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2745,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 10430,
+                  "b": 8184.0176
+                },
+                "kind": "signal",
+                "strength": 0.963,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "G2Power Co. Ltd.",
+          "score": 0.963,
+          "ticker": "388050.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 123956000.0,
+              "gross_margin": 0.6966,
+              "market_cap_usd": 5927814144.0,
+              "net_margin": 0.1062,
+              "operating_cash_flow_usd": 168558000.0,
+              "operating_margin": 0.1549,
+              "pe": 2.257829,
+              "roe": 0.1777
+            },
+            "ta": {
+              "adx": 33.3211,
+              "rsi14": 76.3027
+            }
+          },
+          "head_listing_id": 6090,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 105135000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4646,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 20,
+                  "b": 17.014
+                },
+                "kind": "signal",
+                "strength": 0.957,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Caris Life Sciences, Inc. Common Stock",
+          "score": 0.957,
+          "ticker": "CAI.US"
+        },
+        {
+          "also_known_as": [
+            "HTHT.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 1051540000.0,
+              "gross_margin": 0.406,
+              "market_cap_usd": 14221807085.158401,
+              "net_margin": 0.1931,
+              "operating_cash_flow_usd": 1164640000.0,
+              "operating_margin": 0.2789,
+              "pe": 17.768601,
+              "roe": 0.457
+            },
+            "ta": {
+              "adx": 18.6945,
+              "close_vs_ema200": 0.0794,
+              "rsi14": 69.5312
+            }
+          },
+          "head_listing_id": 51242,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 725435000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2222,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 36.3,
+                  "b": 33.76
+                },
+                "kind": "signal",
+                "strength": 0.954,
+                "value": "2026-08-18"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Huazhu Group Ltd",
+          "score": 0.954,
+          "ticker": "1179.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 1582440.3,
+              "gross_margin": 0.39439580447934,
+              "market_cap_usd": 44310600.5076,
+              "net_margin": 0.20121219929481,
+              "operating_cash_flow_usd": 1582440.3,
+              "operating_margin": 0.114778581321369,
+              "pe": 16.364512,
+              "roe": 0.358323773533977
+            },
+            "ta": {
+              "adx": 35.424,
+              "close_vs_ema200": 0.1791,
+              "rsi14": 54.485
+            }
+          },
+          "head_listing_id": 572609,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2676240.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.7512,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 348,
+                  "b": 293.2028
+                },
+                "kind": "signal",
+                "strength": 0.953,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "fonfun corporation",
+          "score": 0.953,
+          "ticker": "2323.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 175560000.0,
+              "gross_margin": 0.1576,
+              "market_cap_usd": 6444025856.0,
+              "net_margin": 0.041,
+              "operating_cash_flow_usd": 352844000.0,
+              "operating_margin": 0.087,
+              "pe": 44.52549,
+              "roe": 0.1369
+            },
+            "ta": {
+              "adx": 14.8031,
+              "close_vs_ema200": -0.0382,
+              "rsi14": 45.8555
+            }
+          },
+          "head_listing_id": 38080,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 142510000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2928,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 119.74,
+                  "b": 109.1603
+                },
+                "kind": "signal",
+                "strength": 0.948,
+                "value": "2026-08-07"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Construction Partners Inc",
+          "score": 0.948,
+          "ticker": "ROAD.US"
+        },
+        {
+          "also_known_as": [
+            "0R2C.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -37491000.0,
+              "gross_margin": 0.3109,
+              "market_cap_usd": 2860755712.0,
+              "net_margin": 0.0891,
+              "operating_cash_flow_usd": 102974000.0,
+              "operating_margin": 0.2497,
+              "pe": 50.7,
+              "roe": 0.0922
+            },
+            "ta": {
+              "adx": 25.7643,
+              "close_vs_ema200": 0.2051,
+              "rsi14": 62.9287
+            }
+          },
+          "head_listing_id": 12713,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 65662000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3054,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 12.5,
+                  "b": 11.9217
+                },
+                "kind": "signal",
+                "strength": 0.945,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Endeavour Silver Corp.",
+          "score": 0.945,
+          "ticker": "EXK.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -7658133.6,
+              "gross_margin": 0.3292,
+              "market_cap_usd": 112992995.99360001,
+              "net_margin": 0.2011,
+              "operating_cash_flow_usd": 3755200.8,
+              "operating_margin": 0.245,
+              "pe": 5.568581,
+              "roe": 0.6299
+            },
+            "ta": {
+              "adx": 30.3113,
+              "close_vs_ema200": -0.1227,
+              "rsi14": 65.3709
+            }
+          },
+          "head_listing_id": 1419656,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 20271638.4
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3405,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 93.7,
+                  "b": 92.275
+                },
+                "kind": "signal",
+                "strength": 0.94,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kuang Hong Arts Management",
+          "score": 0.94,
+          "ticker": "6596.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 13924629.2702,
+              "gross_margin": 0.6763,
+              "market_cap_usd": 176084996.14720002,
+              "net_margin": 0.1303,
+              "operating_cash_flow_usd": 16570146.1418,
+              "operating_margin": 0.2418,
+              "pe": 15.693431,
+              "roe": 0.0364
+            },
+            "ta": {
+              "adx": 15.2909,
+              "close_vs_ema200": -0.0396,
+              "rsi14": 52.2828
+            }
+          },
+          "head_listing_id": 50003,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 8677914.4768
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2196,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 44.75,
+                  "b": 44.6926
+                },
+                "kind": "signal",
+                "strength": 0.932,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shangri-La Hotel Public Company Limited",
+          "score": 0.932,
+          "ticker": "SHANG.BK"
+        },
+        {
+          "also_known_as": [
+            "0QU6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 23598228.0,
+              "gross_margin": 0.702174495886661,
+              "market_cap_usd": 1536593838.7968001,
+              "net_margin": 0.812119886548041,
+              "operating_cash_flow_usd": 25373299.2,
+              "operating_margin": 0.484887183033005,
+              "pe": 10.878735,
+              "roe": 0.0987036173175735
+            },
+            "ta": {
+              "adx": 30.0982,
+              "close_vs_ema200": 0.0487,
+              "rsi14": 60.5632
+            }
+          },
+          "head_listing_id": 1754346,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 145216468.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2029,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 133.8,
+                  "b": 131.7269
+                },
+                "kind": "signal",
+                "strength": 0.925,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "HIAG Immobilien Holding AG",
+          "score": 0.925,
+          "ticker": "HIAG.SW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3577184.0,
+              "gross_margin": 0.260960496040292,
+              "market_cap_usd": 36245508.172800004,
+              "net_margin": 0.111704129659593,
+              "operating_cash_flow_usd": 4723200.0,
+              "operating_margin": 0.142724108629099,
+              "pe": 9.859335,
+              "roe": 0.249673690098825
+            },
+            "ta": {
+              "adx": 42.6267,
+              "close_vs_ema200": -0.0392,
+              "rsi14": 59.6357
+            }
+          },
+          "head_listing_id": 1419729,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 3684928.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2297,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 37.2,
+                  "b": 35.8372
+                },
+                "kind": "signal",
+                "strength": 0.925,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "JG Environmental Technology Co.,Ltd.",
+          "score": 0.925,
+          "ticker": "6723.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -18948573.89855,
+              "gross_margin": 0.1785,
+              "market_cap_usd": 915691310.2335999,
+              "net_margin": 0.0431,
+              "operating_cash_flow_usd": -13488084.66577,
+              "operating_margin": -0.1012,
+              "pe": 157.142857,
+              "roe": 0.0367
+            },
+            "ta": {
+              "adx": 16.3833,
+              "close_vs_ema200": -0.1261,
+              "rsi14": 65.6551
+            }
+          },
+          "head_listing_id": 230913,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 4828269.2499
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3765,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 4.18,
+                  "b": 3.9599
+                },
+                "kind": "signal",
+                "strength": 0.92,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Hna-Caissa Travel Group Co Ltd",
+          "score": 0.92,
+          "ticker": "000796.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 194712000.0,
+              "gross_margin": 0.8583,
+              "market_cap_usd": 636805120.0,
+              "net_margin": 0.4525,
+              "operating_cash_flow_usd": 197691000.0,
+              "operating_margin": 0.4841,
+              "pe": 3.534562,
+              "roe": 0.4142
+            },
+            "ta": {
+              "adx": 30.7742,
+              "close_vs_ema200": -0.0217,
+              "rsi14": 55.9242
+            }
+          },
+          "head_listing_id": 8665,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 181012102.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 15.8283,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 8.14,
+                  "b": 7.8927
+                },
+                "kind": "signal",
+                "strength": 0.913,
+                "value": "2026-08-13"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CorMedix Inc",
+          "score": 0.913,
+          "ticker": "CRMD.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -1565297.54605,
+              "gross_margin": 0.2105,
+              "market_cap_usd": 422653196.672,
+              "net_margin": 0.0487,
+              "operating_cash_flow_usd": 14136890.26893,
+              "operating_margin": 0.0982,
+              "pe": 24.875042,
+              "roe": 0.058
+            },
+            "ta": {
+              "adx": 20.2821,
+              "close_vs_ema200": -0.1744,
+              "rsi14": 51.6788
+            }
+          },
+          "head_listing_id": 231064,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 11966055.99015
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2205,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 15.41,
+                  "b": 14.5787
+                },
+                "kind": "signal",
+                "strength": 0.904,
+                "value": "2026-08-10"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Wenzhou Yuanfei Pet Toy Products Co. Ltd. A",
+          "score": 0.904,
+          "ticker": "001222.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -52126200.0,
+              "gross_margin": 0.453343716168734,
+              "market_cap_usd": 546605768.9799,
+              "net_margin": 0.0657347438795085,
+              "operating_cash_flow_usd": 31191300.0,
+              "operating_margin": 0.101156673187594,
+              "pe": 25.240964,
+              "roe": 0.225648715608293
+            },
+            "ta": {
+              "adx": 24.9537,
+              "close_vs_ema200": -0.0013,
+              "rsi14": 53.835
+            }
+          },
+          "head_listing_id": 571748,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 21804300.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2029,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 1787,
+                  "b": 1517.9491
+                },
+                "kind": "signal",
+                "strength": 0.9,
+                "value": "2026-08-14"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "LIFEDRINK COMPANY INC.",
+          "score": 0.9,
+          "ticker": "2585.JP"
+        },
+        {
+          "also_known_as": [
+            "EFC-P-D.US",
+            "EFC-PD.US"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -809021000.0,
+              "market_cap_usd": 1787314304.0,
+              "net_margin": 0.5895,
+              "operating_cash_flow_usd": -809021000.0,
+              "pe": 8.49375,
+              "roe": 0.1112
+            },
+            "ta": {
+              "adx": 14.4697,
+              "close_vs_ema200": 0.0282,
+              "rsi14": 53.8139
+            }
+          },
+          "head_listing_id": 11423,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 213501000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.9223,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 23.2117,
+                  "b": 23.0772
+                },
+                "kind": "signal",
+                "strength": 0.898,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Ellington Financial Inc.",
+          "score": 0.898,
+          "ticker": "EFC.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -299205224.7093,
+              "gross_margin": 0.0861,
+              "market_cap_usd": 3434298845.1839995,
+              "net_margin": 0.0407,
+              "operating_cash_flow_usd": -438861569.90533,
+              "operating_margin": 0.0673,
+              "pe": 40.363636,
+              "roe": 0.1227
+            },
+            "ta": {
+              "adx": 26.4279,
+              "close_vs_ema200": 0.0564,
+              "rsi14": 52.766
+            }
+          },
+          "head_listing_id": 230416,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 94382833.4966
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3091,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 95.68,
+                  "b": 82.9263
+                },
+                "kind": "signal",
+                "strength": 0.896,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Changzhou Fusion New Material Co. Ltd. A",
+          "score": 0.896,
+          "ticker": "688503.CG"
+        },
+        {
+          "also_known_as": [
+            "0R2J.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 4548557000.0,
+              "gross_margin": 0.6291,
+              "market_cap_usd": 94659846144.0,
+              "net_margin": 0.4044,
+              "operating_cash_flow_usd": 7417367000.0,
+              "operating_margin": 0.5834,
+              "pe": 16.162671,
+              "roe": 0.2054
+            },
+            "ta": {
+              "adx": 37.4529,
+              "close_vs_ema200": 0.2603,
+              "rsi14": 82.222
+            }
+          },
+          "head_listing_id": 924,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 5873933000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2753,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 165.45,
+                  "b": 157.6108
+                },
+                "kind": "signal",
+                "strength": 0.896,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Agnico Eagle Mines Limited",
+          "score": 0.896,
+          "ticker": "AEM.US"
+        },
+        {
+          "also_known_as": [
+            "WPM.LSE",
+            "SII.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -2915368000.0,
+              "gross_margin": 0.7525,
+              "market_cap_usd": 60267024384.0,
+              "net_margin": 0.6466,
+              "operating_cash_flow_usd": 2544570000.0,
+              "operating_margin": 0.7262,
+              "pe": 29.436557,
+              "roe": 0.2116
+            },
+            "ta": {
+              "adx": 30.6237,
+              "close_vs_ema200": 0.3205,
+              "rsi14": 79.9526
+            }
+          },
+          "head_listing_id": 47985,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 2050745000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2953,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 108.3,
+                  "b": 100.8871
+                },
+                "kind": "signal",
+                "strength": 0.895,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Wheaton Precious Metals Corp",
+          "score": 0.895,
+          "ticker": "WPM.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 60308778.6501,
+              "gross_margin": 0.2959,
+              "market_cap_usd": 3458114316.0831995,
+              "net_margin": 0.0446,
+              "operating_cash_flow_usd": 102011271.62655,
+              "operating_margin": 0.1116,
+              "pe": 94.027931,
+              "roe": 0.0453
+            },
+            "ta": {
+              "adx": 25.4793,
+              "close_vs_ema200": 0.061,
+              "rsi14": 57.2301
+            }
+          },
+          "head_listing_id": 232756,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 32861654.1085
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2211,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 51.17,
+                  "b": 47.2187
+                },
+                "kind": "signal",
+                "strength": 0.894,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Electric Connector Technology Co Ltd",
+          "score": 0.894,
+          "ticker": "300679.CS"
+        },
+        {
+          "also_known_as": [
+            "NEM06.BK",
+            "NEM23.BK",
+            "0R28.LSE",
+            "NMM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 9733000000.0,
+              "gross_margin": 0.5907,
+              "market_cap_usd": 122207232000.0,
+              "net_margin": 0.3336,
+              "operating_cash_flow_usd": 12628000000.0,
+              "operating_margin": 0.5523,
+              "pe": 14.625473,
+              "roe": 0.2439
+            },
+            "ta": {
+              "adx": 34.8038,
+              "close_vs_ema200": 0.303,
+              "rsi14": 76.079
+            }
+          },
+          "head_listing_id": 30817,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 8597000000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2391,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 91.19,
+                  "b": 85.5126
+                },
+                "kind": "signal",
+                "strength": 0.894,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Newmont Goldcorp Corp",
+          "score": 0.894,
+          "ticker": "NEM.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 42457207.16705,
+              "gross_margin": 0.382,
+              "market_cap_usd": 2053579812.8639998,
+              "net_margin": 0.132,
+              "operating_cash_flow_usd": 100245663.97274,
+              "operating_margin": 0.1572,
+              "pe": 25.791338,
+              "roe": 0.1966
+            },
+            "ta": {
+              "adx": 28.4805,
+              "close_vs_ema200": -0.014,
+              "rsi14": 53.1152
+            }
+          },
+          "head_listing_id": 232770,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 64197381.64225
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3207,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 43.87,
+                  "b": 40.816
+                },
+                "kind": "signal",
+                "strength": 0.89,
+                "value": "2026-08-11"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Shenzhen Sinexcel Electric Co Ltd",
+          "score": 0.89,
+          "ticker": "300693.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 304742000.0,
+              "market_cap_usd": 983197632.0,
+              "net_margin": 0.8732,
+              "operating_cash_flow_usd": 304742000.0,
+              "pe": 11.45122,
+              "roe": 0.076
+            },
+            "ta": {
+              "adx": 30.5205,
+              "close_vs_ema200": 0.0775,
+              "rsi14": 66.6698
+            }
+          },
+          "head_listing_id": 3768,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 87110000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.9219,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 9.2,
+                  "b": 8.4696
+                },
+                "kind": "signal",
+                "strength": 0.881,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Barings BDC Inc",
+          "score": 0.881,
+          "ticker": "BBDC.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 139664000.0,
+              "gross_margin": 0.3984,
+              "market_cap_usd": 3026162944.0,
+              "net_margin": 0.2728,
+              "operating_cash_flow_usd": 141739000.0,
+              "operating_margin": 0.3385,
+              "pe": 28.823529,
+              "roe": 0.2687
+            },
+            "ta": {
+              "adx": 32.9726,
+              "close_vs_ema200": 0.1876,
+              "rsi14": 69.1867
+            }
+          },
+          "head_listing_id": 40168,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 105362000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2033,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 115.64,
+                  "b": 113.9674
+                },
+                "kind": "signal",
+                "strength": 0.881,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Sprott Inc.",
+          "score": 0.881,
+          "ticker": "SII.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -35232830.49985,
+              "gross_margin": 0.1152,
+              "market_cap_usd": 626148852.6592,
+              "net_margin": 0.0015,
+              "operating_cash_flow_usd": -43565013.94388,
+              "operating_margin": 0.0144,
+              "pe": 331.09405,
+              "roe": 0.0016
+            },
+            "ta": {
+              "adx": 21.9311,
+              "close_vs_ema200": -0.1389,
+              "rsi14": 53.4605
+            }
+          },
+          "head_listing_id": 229700,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 271599.16215
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2337,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 17.94,
+                  "b": 16.7893
+                },
+                "kind": "signal",
+                "strength": 0.877,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Chahua Modern Housewares Co Ltd",
+          "score": 0.877,
+          "ticker": "603615.CG"
+        },
+        {
+          "also_known_as": [
+            "2459.HK"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -8696402.0,
+              "gross_margin": 0.317812498985705,
+              "market_cap_usd": 260338332.80000004,
+              "net_margin": 0.11953886336859,
+              "operating_cash_flow_usd": -7792356.0,
+              "operating_margin": 0.131672842079297,
+              "pe": 6.781165,
+              "roe": 0.193614912056716
+            },
+            "ta": {
+              "adx": 16.8912,
+              "rsi14": 53.3747
+            }
+          },
+          "head_listing_id": 52305,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 36866258.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.4105,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 0.63,
+                  "b": 0.5829
+                },
+                "kind": "signal",
+                "strength": 0.873,
+                "value": "2026-08-20"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Carote Ltd",
+          "score": 0.873,
+          "ticker": "2549.HK"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3574623.79695,
+              "gross_margin": 0.2376,
+              "market_cap_usd": 739049144.3712,
+              "net_margin": 0.0652,
+              "operating_cash_flow_usd": 43075914.01828,
+              "operating_margin": 0.1005,
+              "pe": 39.114754,
+              "roe": 0.0985
+            },
+            "ta": {
+              "adx": 11.8193,
+              "close_vs_ema200": -0.0296,
+              "rsi14": 57.0802
+            }
+          },
+          "head_listing_id": 232690,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 18392681.7769
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2277,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 24.7,
+                  "b": 24.3275
+                },
+                "kind": "signal",
+                "strength": 0.87,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Zhejiang Meili High Technology Co Ltd",
+          "score": 0.87,
+          "ticker": "300611.CS"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -3260899.2,
+              "gross_margin": 0.0946,
+              "market_cap_usd": 1103419098.3168,
+              "net_margin": 0.0394,
+              "operating_cash_flow_usd": -1437602.4,
+              "operating_margin": 0.0499,
+              "pe": 29.009434,
+              "roe": 0.2415
+            },
+            "ta": {
+              "adx": 45.4587,
+              "rsi14": 74.305
+            }
+          },
+          "head_listing_id": 1420327,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 35794449.6
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.9836,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 329,
+                  "b": 322.5707
+                },
+                "kind": "signal",
+                "strength": 0.87,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "ASRock Rack Incorporation",
+          "score": 0.87,
+          "ticker": "7711.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 20220033.6,
+              "gross_margin": 0.7356,
+              "market_cap_usd": 475786089.6768,
+              "net_margin": 0.3194,
+              "operating_cash_flow_usd": 20571283.2,
+              "operating_margin": 0.3448,
+              "pe": 27.069536,
+              "roe": 0.1471
+            },
+            "ta": {
+              "adx": 25.189,
+              "rsi14": 58.6471
+            }
+          },
+          "head_listing_id": 1420341,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 18064269.6
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.5049,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 382,
+                  "b": 379.7106
+                },
+                "kind": "signal",
+                "strength": 0.867,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "INTELLIGO TECHNOLOGY INC",
+          "score": 0.867,
+          "ticker": "7749.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 24182156.8,
+              "gross_margin": 0.91076901250324,
+              "market_cap_usd": 60954534.9693,
+              "net_margin": 0.166478321698937,
+              "operating_cash_flow_usd": 24484672.0,
+              "operating_margin": 0.237803844448348,
+              "pe": 17.889613,
+              "roe": 0.444397082252143
+            },
+            "ta": {
+              "adx": 29.0719,
+              "close_vs_ema200": 0.0123,
+              "rsi14": 59.1744
+            }
+          },
+          "head_listing_id": 573064,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 3469606.4
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2344,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 2448,
+                  "b": 2357.6829
+                },
+                "kind": "signal",
+                "strength": 0.867,
+                "value": "2026-08-12"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "ROBOT PAYMENT INC.",
+          "score": 0.867,
+          "ticker": "4374.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 176145000.0,
+              "gross_margin": 0.5908,
+              "market_cap_usd": 6391720448.0,
+              "net_margin": 0.2447,
+              "operating_cash_flow_usd": 400675000.0,
+              "operating_margin": 0.5123,
+              "pe": 21.798319,
+              "roe": 0.6597
+            },
+            "ta": {
+              "adx": 33.7379,
+              "rsi14": 75.7506
+            }
+          },
+          "head_listing_id": 3183,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 301128000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.329,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 65.76,
+                  "b": 61.9389
+                },
+                "kind": "signal",
+                "strength": 0.865,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Aura Minerals Inc. Common Shares",
+          "score": 0.865,
+          "ticker": "AUGO.US"
+        },
+        {
+          "also_known_as": [
+            "KIN2.XETRA",
+            "0R2D.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 3081800000.0,
+              "gross_margin": 0.5768,
+              "market_cap_usd": 32170850304.0,
+              "net_margin": 0.3752,
+              "operating_cash_flow_usd": 4456400000.0,
+              "operating_margin": 0.5205,
+              "pe": 10.311787,
+              "roe": 0.3293
+            },
+            "ta": {
+              "adx": 30.4615,
+              "close_vs_ema200": 0.2325,
+              "rsi14": 78.6607
+            }
+          },
+          "head_listing_id": 25201,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 3178600000.0
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2684,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 22.25,
+                  "b": 21.8597
+                },
+                "kind": "signal",
+                "strength": 0.862,
+                "value": "2026-08-05"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Kinross Gold Corporation",
+          "score": 0.862,
+          "ticker": "KGC.US"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": 13922105.4,
+              "gross_margin": 0.442111899444498,
+              "market_cap_usd": 27462441.4281,
+              "net_margin": 0.0643552941236295,
+              "operating_cash_flow_usd": 14656149.9,
+              "operating_margin": 0.10455527703007,
+              "pe": 6.535576,
+              "roe": 0.20324464685462
+            },
+            "ta": {
+              "adx": 32.0701,
+              "close_vs_ema200": -0.0396,
+              "rsi14": 63.169
+            }
+          },
+          "head_listing_id": 571590,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 4146042.6
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.3829,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 502,
+                  "b": 499.6916
+                },
+                "kind": "signal",
+                "strength": 0.86,
+                "value": "2026-08-06"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "CHIeru Co., Ltd.",
+          "score": 0.86,
+          "ticker": "3933.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "free_cash_flow_usd": -762464.283649999,
+              "gross_margin": 0.8745,
+              "market_cap_usd": 2691434921.7791996,
+              "net_margin": 0.0535,
+              "operating_cash_flow_usd": 19700306.20272,
+              "operating_margin": 0.0114,
+              "pe": 855.102041,
+              "roe": 0.0131
+            },
+            "ta": {
+              "adx": 20.6751,
+              "close_vs_ema200": 0.1363,
+              "rsi14": 56.5288
+            }
+          },
+          "head_listing_id": 230203,
+          "matched": {
+            "fundamental": {
+              "net_income": {
+                "kind": "level",
+                "unit": "usd",
+                "value": 3790247.29975
+              },
+              "revenue": {
+                "kind": "growth",
+                "requested_n": 3,
+                "value": 0.2019,
+                "window": "3y_cagr"
+              }
+            },
+            "ta": {
+              "cross_close_ema50_up": {
+                "detail": {
+                  "a": 41.57,
+                  "b": 37.7417
+                },
+                "kind": "signal",
+                "strength": 0.856,
+                "value": "2026-08-17"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Primarius Technologies Co. Ltd. A",
+          "score": 0.856,
+          "ticker": "688206.CG"
+        }
+      ],
+      "sort": "ta",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 40,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 40 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Found 40 profitable companies (positive net income) with revenue compounding >20%/yr that just crossed above their 50-day MA within the last ~20 sessions. Both legs verified per name (matched.fundamental has net_income>0 + revenue 3y CAGR ≥0.22; matched.ta shows the fresh cross_close_ema50_up). Top: 2152.HK, 1788.HK, BWMN.US, 9467.JP, plus more."
+}

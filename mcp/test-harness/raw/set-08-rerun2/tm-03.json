@@ -1,0 +1,637 @@
+{
+  "id": "tm-03",
+  "question": "How's the US yield curve looking — is the 2s10s still inverted, and where are short-term money-market rates sitting?",
+  "tools_called": [
+    {
+      "tool": "bond_pulse",
+      "args": {
+        "q": "US yield curve"
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "mode": "curve",
+      "country": "US",
+      "curve": [
+        {
+          "tenor": "3M",
+          "ticker": "US-3M.GB",
+          "yield": 3.792,
+          "change_bps": {
+            "1mo": 2.0,
+            "1w": 0.0,
+            "1y": -40.0,
+            "ytd": 15.0
+          }
+        },
+        {
+          "tenor": "2Y",
+          "ticker": "US-2Y.GB",
+          "yield": 4.195,
+          "change_bps": {
+            "1mo": -9.0,
+            "1w": 3.0,
+            "1y": 57.0,
+            "ytd": 71.0
+          }
+        },
+        {
+          "tenor": "5Y",
+          "ticker": "US-5Y.GB",
+          "yield": 4.349,
+          "change_bps": {
+            "1mo": -6.0,
+            "1w": 0.0,
+            "1y": 64.0,
+            "ytd": 62.0
+          }
+        },
+        {
+          "tenor": "10Y",
+          "ticker": "US-10Y.GB",
+          "yield": 4.64,
+          "change_bps": {
+            "1mo": -4.0,
+            "1w": -5.0,
+            "1y": 40.0,
+            "ytd": 47.0
+          }
+        },
+        {
+          "tenor": "30Y",
+          "ticker": "US-30Y.GB",
+          "yield": 5.173,
+          "change_bps": {
+            "1mo": -3.0,
+            "1w": -10.0,
+            "1y": 26.0,
+            "ytd": 33.0
+          }
+        }
+      ],
+      "slope": {
+        "2s10s": {
+          "value_bps": 45.9,
+          "inverted": false,
+          "read": "mid-range"
+        },
+        "10Y3M": {
+          "value_bps": 91.4,
+          "inverted": false,
+          "read": "near 52-week highs"
+        }
+      },
+      "news": [
+        {
+          "title": "Rate hike expectations for September firm slightly as July PCE beats forecasts",
+          "brief_text": "The U.S. Commerce Department's release on the 26th of the personal consumption expenditures (PCE) price index for July, which rose more than market expectations, has somewhat strengthened expectations of a rate hike at the Federal Reserve's September meeting. The July PCE price index rose 3.7% year-on-year, exceeding the economist forecast of 3.6% compiled by Reuters. On a month-on-month basis, it rose 0.2%, also exceeding the forecast of 0.1%. In response, the probability of a rate hike at the September Federal Open Market Committee (FOMC) meeting, as implied by interest rate futures markets, rose to about 44% from about 36% before the PCE release. The market also fully prices in the view that the Fed will proceed with a rate hike within the year.",
+          "url": "https://finance.yahoo.co.jp/news/detail/84ff1b6be608de4fc97899a684f91c99ca27d3e9",
+          "publisher": "Reuters",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Rate hike expectations lift yields, causing bond prices to fall.",
+                "relevance": 1
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 1
+          },
+          "news_types": [
+            "macro_economic"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-26T15:26:17+00:00"
+        },
+        {
+          "title": "Bond Yields Rise After US PCE Index Beats Expectations",
+          "brief_text": "US Treasury yields rose today after the release of the Personal Consumption Expenditures (PCE) price index, which came in higher than expected, providing support for the Federal Reserve to raise interest rates. The 10-year Treasury yield stood at 4.660%, and the 30-year yield at 5.188%. Investors have increased their bets that the Fed will accelerate its rate hikes to October, from the previously expected December. The CME Group's FedWatch Tool indicates that investors assign a 54.7% probability that the Fed will raise rates by at least 0.25% at its October meeting, up from 46.4% last week. The US Commerce Department reported that the overall PCE index rose 3.7% in July year-over-year, higher than the expected 3.6%, while the core PCE index rose 3.3%, in line with expectations. Investors are watching for a speech by Fed Chair Kevin Warsh at the annual Jackson Hole meeting on Friday for signals on the direction of interest rates, amid inflation running above the 2% target and US government debt surging past $40 trillion.",
+          "url": "https://infoquest.co.th/2026/638369",
+          "publisher": "InfoQuest",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "pos",
+                "reason": "Hot PCE data boosts rate hike expectations, lifting 10-year yield.",
+                "relevance": 1
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "pos",
+            "relevance": 1
+          },
+          "news_types": [
+            "macro_economic",
+            "forex_related"
+          ],
+          "impact_score": 3,
+          "dup_count": 2,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-26T15:01:29+00:00"
+        },
+        {
+          "title": "Dow Jones Steadies as Investors Await Nvidia Earnings and Waller Speech",
+          "brief_text": "The Dow Jones Industrial Average was nearly flat today, with investors holding back on trading while awaiting Nvidia's earnings and a speech by Federal Reserve Chair Kevin Waller at the Jackson Hole symposium, which will mark his first address at this venue. The market was pressured by a higher-than-expected PCE index, which could prompt the Fed to accelerate interest rate hikes in October. However, the Dow edged up 12.67 points, or 0.02%, to 53,590.07. Meanwhile, the FedWatch Tool indicated that investors assign a 54.7% probability that the Fed will raise rates by at least 0.25% in October, up from 46.4% last week. On the data front, the U.S. Commerce Department reported that the overall PCE index rose 3.7% in July year-over-year, above the expected 3.6%, while core PCE increased 3.3%, in line with forecasts.",
+          "url": "https://infoquest.co.th/2026/638364",
+          "publisher": "InfoQuest",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Higher PCE and expected rate hike in October push yields up.",
+                "relevance": 0.8
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.8
+          },
+          "news_types": [
+            "macro_economic"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-26T14:09:49+00:00"
+        },
+        {
+          "title": "Ethereum Holds $2,400 as ETF Inflows Reach $1 Billion and Corporate Buying Emerges",
+          "brief_text": "As Bitcoin fell 1.9% on rising U.S. Treasury yields, Ethereum declined only 1.6%, maintaining a level above $2,400. U.S. spot Ethereum ETFs saw inflows totaling approximately $1 billion over nine consecutive trading days, and Bitmain Immersion Technologies purchased an additional 32,447 ETH. While the amount of ETH waiting to enter staking increased by 1.28%, traders in prediction markets still hold positions anticipating further price declines. ETF inflows and Bitmain's buying have supported the market, keeping ETH above $2,400.",
+          "url": "https://finance.yahoo.co.jp/news/detail/3ac833c63c1e80da60ac7db934130c0284bd01d6",
+          "publisher": "NADA NEWS",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Rising U.S. Treasury yields pressure risk assets, including Ethereum.",
+                "relevance": 0.3
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.3
+          },
+          "news_types": [
+            "price_action_technical",
+            "crypto_related"
+          ],
+          "impact_score": 2,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-26T11:50:33+00:00"
+        },
+        {
+          "title": "US Stock Futures Dip Ahead of Nvidia Earnings and PCE Inflation Data",
+          "brief_text": "US stock futures edged lower today as investors reduced risk ahead of Nvidia's earnings release and the Personal Consumption Expenditures (PCE) price index. S&P 500 futures fell 0.1%, and Nasdaq 100 futures declined 0.2%, while the 10-year Treasury yield rose 2 basis points to 4.65%, despite oil prices falling for a third consecutive day. Markets are focused on Nvidia's results, due after the close, with options pricing a 5.4% move in the stock and expectations of revenue doubling year-over-year. Investors are also awaiting July PCE data, which economists forecast to rise 3.6% year-over-year, the lowest rate in four months, and a key factor for the Federal Reserve's monetary policy direction.",
+          "url": "https://moneyandbanking.co.th/2026/265674/",
+          "publisher": "Money & Banking",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "10-year Treasury yield rose 2 bps to 4.65% ahead of PCE data, indicating higher rates.",
+                "relevance": 0.5
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.5
+          },
+          "news_types": [
+            "macro_economic"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-26T09:42:42+00:00"
+        },
+        {
+          "title": "Bessent's Fiscal Consolidation Plan Risks Triple Decline if Lacking Specifics",
+          "brief_text": "US Treasury Secretary Bessent's announcement of a US Treasury buyback temporarily lowered interest rates and strengthened the yen, but market reaction was limited, and disappointment over the lack of specifics in the fiscal consolidation plan could trigger a triple decline in Japan: falling US bonds, stocks, and the dollar. The buyback is scheduled from September 9 to November 4, with the per-operation cap raised to between $2 billion and $4 billion (approximately 634 billion yen), but long-term yields have returned to pre-announcement levels. Bessent has said he will soon unveil a fiscal consolidation plan, but without concrete measures, it risks disappointing markets and leading to a triple decline. This week, events include a press conference by Bank of Japan Deputy Governor Ryozo Himino, a speech by Federal Reserve Chair Warsh at the Jackson Hole symposium, and the G20 Finance Ministers and Central Bank Governors meeting, which could destabilize markets from September to October.",
+          "url": "https://media.rakuten-sec.net/articles/-/53318",
+          "publisher": "media.rakuten-sec.net",
+          "impact": {
+            "aspects": [
+              {
+                "aspect": "monetary",
+                "direction": "neg",
+                "reason": "Treasury buyback temporarily lowered yields but long-term yields returned to pre-announcement levels; lack of specifics in fiscal consolidation could lead to rising yields.",
+                "relevance": 0.8
+              }
+            ],
+            "label_version": "1.0",
+            "net_direction": "neg",
+            "relevance": 0.8
+          },
+          "news_types": [
+            "macro_economic",
+            "forex_related"
+          ],
+          "impact_score": 3,
+          "dup_count": 1,
+          "trend": null,
+          "trend_id": null,
+          "published_at": "2026-08-26T08:13:00+00:00"
+        }
+      ],
+      "rate_positioning": {
+        "covered": true,
+        "note": "Bond-ETF price DOWN = long-end yields UP. So a NEGATIVE positioning_score = the options market leaning toward HIGHER yields (bond prices falling); positive = lower.",
+        "etfs": [
+          {
+            "etf": "TLT",
+            "tracks": "20y+ Treasuries (long end)",
+            "positioning_score": -0.4428,
+            "stale": false,
+            "audience": "Write for a GENERAL, non-expert reader. Explain in plain everyday language — do NOT use raw options jargon (gamma, skew, put/call ratio, max pain, O/S, IV, delta). If a concept is needed, say what it MEANS in one simple phrase (e.g. instead of 'dealers are short gamma' say 'the way market-makers hedge will tend to make today's price swings bigger'). Keep a number only when it helps a layperson.",
+            "flow": {
+              "os_ratio": 0.5520652381394218,
+              "signals": [
+                {
+                  "because": "option/stock volume ratio in 36th percentile of this asset's own 90d (normal for it)",
+                  "dimension": "options_activity",
+                  "driver": "os_ratio_percentile_90d",
+                  "read": "typical_for_asset",
+                  "value": 0.5521
+                }
+              ]
+            },
+            "horizons": {
+              "long_term": {
+                "positioning_score": -0.4445,
+                "metrics": {
+                  "atm_iv": 10.926786943088128,
+                  "gex_dealer_net": 26333903.490663946,
+                  "max_pain_distance_pct": 0.006859831926326609,
+                  "pcr_oi_notional": 0.9556289108418792,
+                  "skew_25d_rr": 6.136356042747449,
+                  "skew_norm": 0.561588331017022
+                },
+                "signals": [
+                  {
+                    "read": "balanced",
+                    "because": "$-notional put/call ratio 0.96 (calls heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 46th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 10.9% = 65th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within +0.7% of max-pain 84.0 (gravitational pull)"
+                  }
+                ]
+              },
+              "medium_term": {
+                "positioning_score": -1.0,
+                "metrics": {
+                  "atm_iv": 11.183527288606273,
+                  "gex_dealer_net": -32102158.815377504,
+                  "max_pain_distance_pct": 0.02545475109824355,
+                  "pcr_oi_notional": 4.822654182899851,
+                  "skew_25d_rr": 4.106938233016966,
+                  "skew_norm": 0.36723102890812426
+                },
+                "signals": [
+                  {
+                    "read": "bearish_lean",
+                    "because": "$-notional put/call ratio 4.82 (puts heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 73th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 11.2% = 73th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "unstable_amplifying",
+                    "because": "dealers net short gamma → amplify moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within +2.5% of max-pain 85.55133133819893 (gravitational pull)"
+                  }
+                ]
+              },
+              "short_term": {
+                "positioning_score": 0.3111,
+                "metrics": {
+                  "atm_iv": 10.798279524648317,
+                  "gex_dealer_net": 136955043.4800251,
+                  "max_pain_distance_pct": -0.017113021214776404,
+                  "pcr_oi_notional": 0.030776852041165113,
+                  "skew_25d_rr": 1.5112808866681178,
+                  "skew_norm": 0.13995571083508676
+                },
+                "signals": [
+                  {
+                    "read": "bullish_lean",
+                    "because": "$-notional put/call ratio 0.03 (calls heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 65th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 10.8% = 65th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within -1.7% of max-pain 82.0 (gravitational pull)"
+                  }
+                ]
+              }
+            },
+            "key_dates": [
+              {
+                "expiry": "2026-08-26",
+                "dte": 1,
+                "read": "event_premium",
+                "because": "21% of today's volume; IV +11% above neighbouring expiries → options are pricing an outsized move on this date (a scheduled catalyst is likely)"
+              },
+              {
+                "expiry": "2026-11-20",
+                "dte": 87,
+                "read": "expiry_concentration",
+                "because": "52% of total open interest sits here; 48% of today's volume → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              },
+              {
+                "expiry": "2027-02-19",
+                "dte": 178,
+                "read": "expiry_concentration",
+                "because": "26% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              }
+            ]
+          },
+          {
+            "etf": "IEF",
+            "tracks": "7-10y Treasuries (belly)",
+            "positioning_score": -0.1071,
+            "stale": false,
+            "audience": "Write for a GENERAL, non-expert reader. Explain in plain everyday language — do NOT use raw options jargon (gamma, skew, put/call ratio, max pain, O/S, IV, delta). If a concept is needed, say what it MEANS in one simple phrase (e.g. instead of 'dealers are short gamma' say 'the way market-makers hedge will tend to make today's price swings bigger'). Keep a number only when it helps a layperson.",
+            "flow": {
+              "os_ratio": 0.0968377561052505,
+              "signals": [
+                {
+                  "because": "option/stock volume ratio in 4th percentile of this asset's own 90d (options unusually quiet vs the stock)",
+                  "dimension": "options_activity",
+                  "driver": "os_ratio_percentile_90d",
+                  "read": "unusually_quiet",
+                  "value": 0.0968
+                }
+              ]
+            },
+            "horizons": {
+              "long_term": {
+                "positioning_score": 0.0,
+                "metrics": {
+                  "atm_iv": 6.567416806641203,
+                  "gex_dealer_net": 56119.739161454694,
+                  "max_pain_distance_pct": -0.061739169834808955,
+                  "pcr_oi_notional": 0.12466387842218166,
+                  "skew_25d_rr": 4.936355233705634,
+                  "skew_norm": 0.7516433597931257
+                },
+                "signals": [
+                  {
+                    "read": "bullish_lean",
+                    "because": "$-notional put/call ratio 0.12 (calls heavier)"
+                  },
+                  {
+                    "read": "put_skew_elevated",
+                    "because": "normalized put-skew in 88th percentile of this asset's own 90d (unusually steep)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 6.6% = 65th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  }
+                ]
+              },
+              "medium_term": {
+                "positioning_score": -0.8021,
+                "metrics": {
+                  "atm_iv": 5.476339378004415,
+                  "gex_dealer_net": 7022984.281621731,
+                  "max_pain_distance_pct": -0.0015297708811568822,
+                  "pcr_oi_notional": 1.3202409305469085,
+                  "skew_25d_rr": 3.2144405158864116,
+                  "skew_norm": 0.5869688297254064
+                },
+                "signals": [
+                  {
+                    "read": "bearish_lean",
+                    "because": "$-notional put/call ratio 1.32 (puts heavier)"
+                  },
+                  {
+                    "read": "typical_for_asset",
+                    "because": "normalized put-skew in 85th percentile of this asset's own 90d (normal for it)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 5.5% = 35th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within -0.2% of max-pain 93.36695112490303 (gravitational pull)"
+                  }
+                ]
+              },
+              "short_term": {
+                "positioning_score": 0.3792,
+                "metrics": {
+                  "atm_iv": 5.765003928781513,
+                  "gex_dealer_net": 24621639.732734,
+                  "max_pain_distance_pct": -0.010800983851994492,
+                  "pcr_oi_notional": 0.04400464319783011,
+                  "skew_25d_rr": 0.9661540240034608,
+                  "skew_norm": 0.16758948232107562
+                },
+                "signals": [
+                  {
+                    "read": "bullish_lean",
+                    "because": "$-notional put/call ratio 0.04 (calls heavier)"
+                  },
+                  {
+                    "read": "balanced_skew",
+                    "because": "25Δ skew / ATM IV = +0.17 (self-scaled by IV; cross-asset — own-history accruing)"
+                  },
+                  {
+                    "read": "mid_range",
+                    "because": "ATM IV 5.8% = 46th percentile of this asset's own 90d"
+                  },
+                  {
+                    "read": "pinned_suppressing",
+                    "because": "dealers net long gamma → dampen moves"
+                  },
+                  {
+                    "read": "pin_candidate",
+                    "because": "spot within -1.1% of max-pain 92.5 (gravitational pull)"
+                  }
+                ]
+              }
+            },
+            "key_dates": [
+              {
+                "expiry": "2026-08-28",
+                "dte": 3,
+                "read": "expiry_concentration",
+                "because": "44% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              },
+              {
+                "expiry": "2026-09-04",
+                "dte": 10,
+                "read": "expiry_concentration",
+                "because": "23% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              },
+              {
+                "expiry": "2026-09-25",
+                "dte": 31,
+                "read": "expiry_concentration",
+                "because": "20% of total open interest sits here; 53% of today's volume → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)"
+              }
+            ]
+          }
+        ]
+      },
+      "futures_positioning": {
+        "covered": true,
+        "tenors": [
+          {
+            "tenor": "2Y",
+            "score": 56,
+            "crowding": "crowded",
+            "read": "The hedge funds in US-2Y.GB are near the TOP of its 3-year range — about as positioned for LOWER yields as this crowd gets, so it's a crowded bet that's vulnerable to a sharp reversal if the news turns. asset managers (real money) are in their normal range — no strong smart-money tell either way. hedge funds TRIMMED the position this week (starting to unwind — the reversal often starts here). On fragility, concentration data unavailable. Vs price: price is DOWN ~2% but the crowd is ADDING — ACCUMULATION (buying the dip). Seasonally, but FOR THIS TIME OF YEAR it's only around the 22th percentile — the crowding is partly SEASONAL (normal for the calendar), so read it as less of a warning."
+          },
+          {
+            "tenor": "10Y",
+            "score": 80,
+            "crowding": "leaning",
+            "read": "The hedge funds in US-10Y.GB are on the low side of its 3-year range (leaning toward higher yields). asset managers (real money) — the group that tends to know the fundamentals — are positioned for LOWER yields. hedge funds ADDED to the position this week (building conviction). On fragility, concentration data unavailable. Seasonally, this is extreme even FOR THIS TIME OF YEAR (~6th seasonal percentile) — a genuine crowd, not just a seasonal pattern."
+          },
+          {
+            "tenor": "30Y",
+            "score": 69,
+            "crowding": "leaning",
+            "read": "The hedge funds in US-30Y.GB are on the low side of its 3-year range (leaning toward higher yields). asset managers (real money) — the group that tends to know the fundamentals — are positioned for LOWER yields. hedge funds ADDED to the position this week (building conviction). On fragility, concentration data unavailable. Seasonally, this is extreme even FOR THIS TIME OF YEAR (~2th seasonal percentile) — a genuine crowd, not just a seasonal pattern."
+          }
+        ]
+      },
+      "macro_drivers": {
+        "covered": true,
+        "drivers": [
+          {
+            "indicator": "CPI inflation",
+            "series_id": "CPIAUCSL",
+            "transform": "pc1",
+            "title": "Consumer Price Index for All Urban Consumers: All Items in U.S. City Average",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 3.304
+            },
+            "trend": "rising",
+            "percentile": 71.0,
+            "z_score": 0.02,
+            "read": "3.304 as of 2026-07-01, rising over the window (peak 8.979 on 2022-06-01, trough 0.198 on 2020-05-01); latest sits in the 71th percentile of the window."
+          },
+          {
+            "indicator": "core PCE",
+            "series_id": "PCEPILFE",
+            "transform": "pc1",
+            "title": "Personal Consumption Expenditures Excluding Food and Energy (Chain-Type Price Index)",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 3.344
+            },
+            "trend": "rising",
+            "percentile": 74.0,
+            "z_score": 0.42,
+            "read": "3.344 as of 2026-07-01, rising over the window (peak 5.606 on 2022-09-01, trough 0.97 on 2020-06-01); latest sits in the 74th percentile of the window."
+          },
+          {
+            "indicator": "nonfarm payrolls",
+            "series_id": "PAYEMS",
+            "transform": "chg",
+            "title": "All Employees, Total Nonfarm",
+            "latest": {
+              "date": "2026-07-01",
+              "value": -23.0
+            },
+            "trend": "falling",
+            "percentile": 7.0,
+            "z_score": -0.07,
+            "read": "-23.0 as of 2026-07-01, falling over the window (peak 4631.0 on 2020-06-01, trough -20469.0 on 2020-04-01); latest sits in the 7th percentile of the window."
+          },
+          {
+            "indicator": "unemployment",
+            "series_id": "UNRATE",
+            "transform": "lin",
+            "title": "Unemployment Rate",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 4.1
+            },
+            "trend": "falling",
+            "percentile": 55.0,
+            "z_score": -0.26,
+            "read": "4.1 as of 2026-07-01, falling over the window (peak 14.8 on 2020-04-01, trough 3.4 on 2023-04-01); latest sits in the 55th percentile of the window."
+          },
+          {
+            "indicator": "fed funds",
+            "series_id": "FEDFUNDS",
+            "transform": "lin",
+            "title": "Federal Funds Effective Rate",
+            "latest": {
+              "date": "2026-07-01",
+              "value": 3.63
+            },
+            "trend": "falling",
+            "percentile": 65.0,
+            "z_score": 0.66,
+            "read": "3.63 as of 2026-07-01, falling over the window (peak 5.33 on 2023-08-01, trough 0.05 on 2020-04-01); latest sits in the 65th percentile of the window."
+          }
+        ]
+      },
+      "_guide": "Rates are a CURVE. LEAD with the curve's SHAPE: read `slope.2s10s` — negative = INVERTED (a classic recession signal); positive = normal. Then the level + recent MOVE of the key tenors in BASIS POINTS (`curve[].change_bps`, NOT %). Explain the DRIVER from `macro_drivers` (the FRED macro that moves rates: CPI/core-PCE hot or cooling, jobs strong/weak, fed funds stance — quote each `read`) + `news`. `yield↑ ⇒ bond price↓`. The yield itself has no options — but for a FORWARD 'will rates rise/fall?' read, use `rate_positioning`: it's the options market on the Treasury ETFs (TLT/IEF), where ETF price DOWN = yields UP, so a NEGATIVE `positioning_score` = the market positioned for HIGHER yields. 🎯 `futures_positioning` adds the CFTC COT view (leveraged funds vs asset managers in the bond FUTURES — the basis trade; its plain `read` is invert-aware: a long future = for LOWER yields); fuse it with rate_positioning. FUSE all — curve move + macro_drivers + positioning: agreement strengthens the read, divergence is the insight. Explain any options term in plain words. `covered=false` (non-US) on rate_positioning/macro_drivers → say the US-macro/ETF proxy isn't available there. `news` empty = say so; the curve still stands. For the FULL economy/recession read, hand off to macro_pulse."
+    }
+  ],
+  "answer_to_user": "The US Treasury curve is no longer inverted — it has re-steepened:\n- 3M: 3.79%  ·  2Y: 4.20%  ·  5Y: 4.35%  ·  10Y: 4.64%  ·  30Y: 5.17%\n- 2s10s spread: +45.9 bps (positive — NOT inverted; 'mid-range')\n- 10Y-3M spread: +91.4 bps (positive, near 52-week highs)\n\nSo the answer to 'is 2s10s still inverted' is no — it's now positively sloped at about +46 bps, with the 2Y up ~71 bps YTD. Short-end money-market rates: the front of the curve sits around 3.79% at 3 months and ~4.20% at 2 years. Macro backdrop: July PCE came in hot (3.7% y/y vs 3.6% expected), lifting September rate-hike odds to ~44% — pressure that's been steepening the long end."
+}

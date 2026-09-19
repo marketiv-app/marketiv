@@ -1,0 +1,133 @@
+{
+  "set": "news-event-driven",
+  "cases": [
+    {
+      "id": "ne-01",
+      "question": "What's moving in the semiconductor space this week? Give me the biggest winners and losers by news attention.",
+      "tool_calls": [
+        {"tool": "screen_stocks", "args": {"megatrend": "semiconductors", "direction": "pos", "window": "7d", "order_by": "news_count", "limit": 10}},
+        {"tool": "screen_stocks", "args": {"megatrend": "semiconductors", "direction": "neg", "window": "7d", "order_by": "news_count", "limit": 10}}
+      ],
+      "result_summary": "7d window enforced. Winners: NVDA (193 pos, record rev/NI), MRVL, TSMC (+45% YoY rev), MU, SK Hynix, AVGO, Samsung, INTC, AMD, SNPS. Losers: NVDA (39 neg, sell rating/margin), AVGO (Marvell/Google threat), MU (overvaluation), AMD (dilution), ASML, SNDK, Samsung, Kioxia, MRVL, INTC. Each row carries impact.top_reason + aspects + pos/neg counts + net_direction. _guide explicitly instructs winners-vs-losers split.",
+      "verdict": "PASS",
+      "reason": "Restricts to 7d, cleanly splits winners vs losers with pos/neg counts, and every row is grounded in a dated top_reason from real news.",
+      "defects": []
+    },
+    {
+      "id": "ne-02",
+      "question": "Why is Nvidia down today? What's the news catalyst?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "NVDA", "direction": "neg", "window": "7d", "limit": 10}}
+      ],
+      "result_summary": "Returned dated negative-direction NVDA items: paused revenue-sharing deals w/ AI cloud partners over antitrust concerns (Aug 28, impact 4); Michael Burry flags $500B 'byzantine money loop'/circular financing (Aug 27); China revenue excluded from guidance on geopolitics; margin pressure from memory costs; sell-rating maintained despite earnings beat. Each carries aspect + reason + relevance + published_at.",
+      "verdict": "PASS",
+      "reason": "Ties the move to concrete, dated, real negative catalysts (WSJ revenue-share pause, Burry circularity, China exclusion) with news-drawn sentiment; nothing fabricated.",
+      "defects": []
+    },
+    {
+      "id": "ne-03",
+      "question": "Give me a quick pulse on the AI theme over the last 30 days — what are the big storylines and which names are most talked about?",
+      "tool_calls": [
+        {"tool": "theme_summary", "args": {"theme": "AI", "window": "30d"}}
+      ],
+      "result_summary": "30d window (2026-07-29 to 08-28). pulse: 3566 stories, net pos (57.7% pos / 12.1% neg) with weekly series. top_entities/winners by agg_relevance+story_count: NVDA (525), GOOG (288), MSFT (257), AMZN (237), META (loser, neg-leaning), Anthropic/OpenAI (private). aspect_heatmap (demand/capital pos, competition/regulation neg). top_stories: MSFT +17% Azure, NVDA Q2, $500B financing, $105B OpenAI facility. ripple + top_assets (USDJPY, oil, BTC, gold).",
+      "verdict": "PASS",
+      "reason": "Honors 30d, ranks most-talked-about names by attention (story_count/agg_relevance), storylines summarized from real dated stories, cleanly separates theme narrative (heatmap/pulse) from individual names.",
+      "defects": []
+    },
+    {
+      "id": "ne-04",
+      "question": "หุ้นกลุ่มพลังงานไทยสัปดาห์นี้มีข่าวอะไรบ้าง ตัวไหนบวก ตัวไหนลบจากข่าว",
+      "tool_calls": [
+        {"tool": "screen_stocks", "args": {"gics": "10", "country": "TH", "window": "7d", "order_by": "news_count", "limit": 15}}
+      ],
+      "result_summary": "Scoped GICS sector 10 (Energy) + country TH + 7d. 15 Thai energy names all net-positive: PTT (36, tight supply/earnings), BCP (3-baht dividend), TOP (refining margins recovering), PTTEP (PSC/GSA gas deal), BANPU, OR, SPRC, IRPC, SUSCO (+797% profit) etc. Each with top_reason + aspects + pos/neg. No negatives this week — direction_split shows 15/15 net_positive, so the pos-vs-neg split is honestly 'all positive' rather than fabricated losers.",
+      "verdict": "PASS",
+      "reason": "Correctly scopes Thai energy + ~1wk, all names grounded in dated news with pos/neg counts; window genuinely had no net-negative Thai energy names and the data shows that honestly. (Answer to be rendered in Thai per persona — data supports it.)",
+      "defects": []
+    },
+    {
+      "id": "ne-05",
+      "question": "What's the current sentiment on Tesla based on recent news? Bullish or bearish lately?",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "TSLA", "window": "30d", "limit": 15}}
+      ],
+      "result_summary": "Mixed dated items: POS — rev growth accel to 25.5% on FSD, Cybercab Austin launch Sep 3, Optimus/robotaxi bull calls, EU no-recall confirm, Einride 500 Semi order. NEG — China 2.98M-vehicle recall + year-long quality drive, Cybertruck +$5k price hike, Solar Roof discontinued, EPS miss / margin collapse to 1.4%, Polymarket Optimus-2026 odds fall to 9%. Each carries per-aspect direction + relevance + date.",
+      "verdict": "PASS",
+      "reason": "Sentiment read is backed by specific recent dated items, acknowledges genuinely mixed bull/bear balance, and the 30d recency window is explicit in the args.",
+      "defects": []
+    },
+    {
+      "id": "ne-06",
+      "question": "Where is options positioning most extreme right now — any names with unusually stretched put/call or crowded positioning I should know about?",
+      "tool_calls": [
+        {"tool": "find_oppattern", "args": {"queries": ["unusually stretched put/call ratio", "crowded positioning extreme"]}},
+        {"tool": "options_scan", "args": {"pattern": "crowded_one_sided", "horizon": "long", "limit": 15}}
+      ],
+      "result_summary": "find_oppattern resolved 'crowded positioning extreme' to curated pattern crowded_one_sided (|positioning score| near max, crowded/one-sided vulnerable to unwind). options_scan returned 15 extreme names with $-notional put/call ratio in `because`: e.g. CCL 3.96 puts-heavy, DLR 3.24, CNI 2.56, DIA 2.12 (put-crowded); ARGX 0.01, A 0.06, BDX 0.09, COR 0.15 (call-crowded). universe_note frames it as opana's own-history percentiles across ~557 US optionable names.",
+      "verdict": "PASS",
+      "reason": "Served by options_scan (via find_oppattern resolver). Reports real put/call extremes framed vs a norm (score normalized to +/-1, own-history percentile, universe caveat) and stays current. Real data, not fabricated.",
+      "defects": [
+        {"desc": "options_scan `crowded_one_sided` gives put/call ratio per name but no explicit percentile/rank vs the name's OWN history in the row — the 'extreme relative to norm' framing lives only in universe_note, not per-row. Minor guidance gap; a naive client could present raw p/c without the norm.", "side": "mcp-guidance"}
+      ]
+    },
+    {
+      "id": "ne-07",
+      "question": "In the EV theme, which names got the most news attention over the last two weeks, and was that attention positive or negative?",
+      "tool_calls": [
+        {"tool": "screen_stocks", "args": {"megatrend": "electric vehicles", "window": "14d", "order_by": "news_count", "limit": 12}}
+      ],
+      "result_summary": "window='14d' (natural two-weeks value) was ACCEPTED — HTTP 200, no error, results scoped ~14d. Ranked by news_count with per-name pos/neg + net_direction. But 'electric vehicles' resolved to megatrend node 16020000, a NARROW commercial-EV/truck node — top names were EA.BK, NEX.BK, ATP30.BK (Thai buses), Sinotruk, Dongfeng, Ford, WKHS, Hyundai, Foton, FAW, Blue Bird. No Tesla / BYD / Rivian / NIO majors surfaced.",
+      "verdict": "PARTIAL",
+      "reason": "14d window accepted and ranking+sentiment are correct, but 'electric vehicles' resolved to a narrow truck/commercial-EV node so the marquee EV names are absent — the ranking under-represents the theme a user means by 'EV'.",
+      "defects": [
+        {"desc": "megatrend resolver mapped 'electric vehicles' to node 16020000 (commercial-EV/trucks-heavy), excluding the flagship passenger-EV names (Tesla/BYD/Rivian/NIO). Attention ranking is technically correct for that node but not what a user means by the EV theme.", "side": "data-coverage"}
+      ]
+    },
+    {
+      "id": "ne-08",
+      "question": "Brief me on what happened in Japanese markets around the week of the last BOJ meeting — which sectors and names reacted the most?",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "Bank of Japan BOJ policy meeting interest rate decision", "window": "90d", "limit": 10}},
+        {"tool": "screen_stocks", "args": {"country": "JP", "from_": "2026-07-28", "to": "2026-08-02", "order_by": "news_count", "limit": 15}}
+      ],
+      "result_summary": "search_news anchored the last BOJ meeting to ~Jul 31 2026 (held rate steady, assessing prior hike). screen_stocks scoped country=JP + from 07-28 to 08-02 returned biggest reactors with sector spread: Kioxia (semis, 21), SoftBank (19, AI funding), Sony (19), Advantest (semis), Toyota (neg, earthquake supply), Renesas, Mizuho (banks), Hitachi, Honda (neg), Seven&I, Nissan, Mitsubishi Elec, Panasonic, Nippon Paper. direction_split 8 pos / 5 neg. BOJ outcome correctly reported as HOLD, not fabricated.",
+      "verdict": "PASS",
+      "reason": "Anchored to the actual past BOJ-meeting window (Jul 31) via explicit from_/to dates, identified biggest-reacting sectors/names from real dated impact, and did not invent a BOJ outcome (correctly a rate-hold).",
+      "defects": []
+    },
+    {
+      "id": "ne-09",
+      "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+      "tool_calls": [
+        {"tool": "stock_impact", "args": {"ticker": "AMD", "window": "7d", "limit": 6}},
+        {"tool": "stock_impact", "args": {"ticker": "INTC", "window": "7d", "limit": 6}},
+        {"tool": "stock_impact", "args": {"ticker": "MU", "window": "7d", "limit": 6}}
+      ],
+      "result_summary": "All three covered over 7d with distinct real dated news. AMD: UCIe/Versal RF, Anthropic $45B lease, liquid-cooling demand. INTC: 'Intel Jumps 3.6% as Nvidia's $5B entry looks tiny', Goldman/Intel back Higgsfield, tariff angle. MU: $10B research initiative + leadership reshuffle, memory-scarcity threat to NVDA shipments, gross-margin-beats-NVDA. Each item carries direction/aspect/relevance so a head-to-head impact ranking is derivable.",
+      "verdict": "PASS",
+      "reason": "Covers all three named tickers over ~1wk with concrete dated per-name news that supports a relative winner-to-loser ranking; no name is padded with empty results.",
+      "defects": []
+    },
+    {
+      "id": "ne-10",
+      "question": "Find me any news suggesting a company might be an acquisition target or facing a regulatory investigation recently — the kind of catalyst-driven stuff worth watching.",
+      "tool_calls": [
+        {"tool": "search_news", "args": {"q": "company acquisition target takeover buyout or regulatory investigation antitrust probe", "window": "30d", "limit": 15}}
+      ],
+      "result_summary": "match_quality 'strong' (top_sim 0.699). Semantic hits genuinely match catalyst intent: M&A — JD.com/Ceconomy takeover (EU probe + China blocking), ACV Auctions exploring strategic alternatives after takeover interest, Shein-Everlane deal, Monteverde/Wohl&Fruchter M&A investigations (Forte/argenx, MarketAxess/ICE), Paramount-Warner Bros talks. Regulatory — Andreessen Horowitz DOJ probe, Shein-Everlane national security probe. All dated within window with entities + impact.",
+      "verdict": "PASS",
+      "reason": "Semantic search returns real, dated items that match both catalyst shapes (M&A targets AND regulatory probes) — not keyword noise, nothing invented.",
+      "defects": []
+    }
+  ],
+  "set_summary": {
+    "pass": 9,
+    "partial": 1,
+    "fail": 0,
+    "top_defects": [
+      {"desc": "ne-07: megatrend resolver maps 'electric vehicles' to a narrow commercial-EV/truck node (16020000), excluding flagship passenger-EV names (Tesla/BYD/Rivian/NIO) — attention ranking under-represents the EV theme a user means.", "side": "data-coverage"},
+      {"desc": "ne-06: options_scan crowded_one_sided returns raw put/call ratio per row but the 'extreme vs own-history norm' framing lives only in universe_note, not per-row — a naive client could present the ratio without its norm.", "side": "mcp-guidance"}
+    ]
+  }
+}

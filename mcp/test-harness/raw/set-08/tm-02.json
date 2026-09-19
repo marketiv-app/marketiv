@@ -1,0 +1,1724 @@
+{
+  "id": "tm-02",
+  "question": "Show me cheap semiconductor names in Asia — low P/E chip makers in places like Taiwan, Korea and Japan.",
+  "tools_called": [
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "semiconductors"
+      },
+      "note": ""
+    },
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "q": "P/E ratio"
+      },
+      "note": ""
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "q": "low / cheap valuation multiple"
+      },
+      "note": "first call errored using phrase= param; retried with q="
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "pe",
+            "pattern": "low"
+          }
+        ],
+        "gics": "4530",
+        "country": [
+          "TW",
+          "KR",
+          "JP"
+        ],
+        "sort": "pe",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "query": "semiconductors",
+      "candidates": [
+        {
+          "code": "4530",
+          "name": "Semiconductors & Semiconductor Equipment",
+          "level": "group"
+        },
+        {
+          "code": "45301020",
+          "name": "Semiconductors",
+          "level": "sub_industry"
+        }
+      ]
+    },
+    {
+      "concept_resolved": "pe (P/E, valuation, better=low)"
+    },
+    {
+      "pattern_resolved": "low (Low bottom of the range)"
+    },
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "198080.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 938.0,
+              "market_cap_usd": 33691796.275199994,
+              "net_income_usd": 14151363.478,
+              "net_margin": 0.0697,
+              "normalized_pe": 2.38262385629239,
+              "revenue_usd": 203105140.273
+            }
+          },
+          "head_listing_id": 1420437,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 2.558635
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "NPD Co. Ltd",
+          "score": 2.558635,
+          "ticker": "198080.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2180.0,
+              "market_cap_usd": 51443755.4176,
+              "net_income_usd": 14837770.15,
+              "net_margin": 0.3645,
+              "normalized_pe": 4.94209202270173,
+              "revenue_usd": 40712631.463
+            }
+          },
+          "head_listing_id": 1419806,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 3.582569
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Innox Corporation",
+          "score": 3.582569,
+          "ticker": "088390.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 582.481656,
+              "market_cap_usd": 89239225.9584,
+              "net_income_usd": 25939896.451,
+              "net_margin": 0.6454,
+              "normalized_pe": 6.20331416835863,
+              "revenue_usd": 40188960.798
+            }
+          },
+          "head_listing_id": 1420955,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 3.755187
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "LET co. Ltd",
+          "score": 3.755187,
+          "ticker": "297890.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.97,
+              "market_cap_usd": 59542083.1488,
+              "net_income_usd": -2851336.8,
+              "net_margin": -0.3558,
+              "revenue_usd": 8013657.6
+            }
+          },
+          "head_listing_id": 1417774,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 3.953099
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Taiwan Oasis Technology Co., Ltd.",
+          "score": 3.953099,
+          "ticker": "3066.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 519.0,
+              "market_cap_usd": 129994306.3552,
+              "net_income_usd": 32986348.171,
+              "net_margin": 0.2828,
+              "normalized_pe": 5.58654600498036,
+              "revenue_usd": 116636390.906
+            }
+          },
+          "head_listing_id": 1419203,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 4.123314
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "HB Technology CO.LTD",
+          "score": 4.123314,
+          "ticker": "078150.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 236.0,
+              "market_cap_usd": 27736748.031999998,
+              "net_income_usd": 7211192.317,
+              "net_margin": 0.1076,
+              "normalized_pe": 3.58220970790692,
+              "revenue_usd": 67014346.357
+            }
+          },
+          "head_listing_id": 1420282,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 4.368644
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "YoungWoo DSP Co.Ltd",
+          "score": 4.368644,
+          "ticker": "143540.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 593.0,
+              "market_cap_usd": 38236465.9712,
+              "net_income_usd": 8026912.747,
+              "net_margin": 0.0463,
+              "normalized_pe": 6.4637863969394,
+              "revenue_usd": 173211140.494
+            }
+          },
+          "head_listing_id": 1419924,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 4.688027
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Hyunwoo Industrial Co. LTD",
+          "score": 4.688027,
+          "ticker": "092300.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 527.039216,
+              "market_cap_usd": 18994557.747199997,
+              "net_income_usd": 3683522.689,
+              "net_margin": 0.1279,
+              "normalized_pe": 5.1059675855702,
+              "revenue_usd": 28807982.882
+            }
+          },
+          "head_listing_id": 1418732,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 5.028089
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sungwoo Techron. Co.Ltd",
+          "score": 5.028089,
+          "ticker": "045300.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1129.646168,
+              "market_cap_usd": 111474820.71039999,
+              "net_income_usd": 21846618.514,
+              "net_margin": 0.0818,
+              "normalized_pe": 4.96784512188793,
+              "revenue_usd": 267155296.436
+            }
+          },
+          "head_listing_id": 1419751,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 5.388529
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Avaco Co. Ltd",
+          "score": 5.388529,
+          "ticker": "083930.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 39.21,
+              "market_cap_usd": 944460018.0736,
+              "net_income_usd": 78100869.6,
+              "net_margin": 0.1675,
+              "normalized_pe": 12.1147805668706,
+              "revenue_usd": 466166875.2
+            }
+          },
+          "head_listing_id": 1420440,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 5.687325
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Apacer Technology Inc",
+          "score": 5.687325,
+          "ticker": "8271.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 139.0,
+              "market_cap_usd": 18186623.795199998,
+              "net_income_usd": 3112916.982,
+              "net_margin": 0.044,
+              "normalized_pe": 5.8602016393549,
+              "revenue_usd": 70780990.931
+            }
+          },
+          "head_listing_id": 1418417,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 5.892086
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Jeong Moon Information. Co. Ltd",
+          "score": 5.892086,
+          "ticker": "033050.KQ"
+        },
+        {
+          "also_known_as": [
+            "077500.KQ"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1137.0,
+              "market_cap_usd": 119297368.064,
+              "net_income_usd": 16109445.044,
+              "net_margin": 0.0319,
+              "normalized_pe": 6.75646829365913,
+              "revenue_usd": 505559108.754
+            }
+          },
+          "head_listing_id": 1415171,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 5.980651
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Uniquest",
+          "score": 5.980651,
+          "ticker": "077500.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 425.0,
+              "market_cap_usd": 19377175.551999997,
+              "net_income_usd": 3259687.9,
+              "net_margin": 0.0635,
+              "normalized_pe": 5.850667274139,
+              "revenue_usd": 51317568.603
+            }
+          },
+          "head_listing_id": 1419255,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 6.141176
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Kodi-S Co Ltd",
+          "score": 6.141176,
+          "ticker": "080530.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.32,
+              "market_cap_usd": 76615805.4656,
+              "net_income_usd": 4590955.2,
+              "net_margin": 0.5732,
+              "normalized_pe": 16.6245146126424,
+              "revenue_usd": 8008821.6
+            }
+          },
+          "head_listing_id": 1418040,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 6.716772
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Single Well Industrial",
+          "score": 6.716772,
+          "ticker": "3490.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 24.08,
+              "market_cap_usd": 442304508.7232,
+              "net_income_usd": 39560040.0,
+              "net_margin": 0.1238,
+              "normalized_pe": 11.1829567752324,
+              "revenue_usd": 319426036.8
+            }
+          },
+          "head_listing_id": 1418963,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 6.914452
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Goldkey Technology Corporation",
+          "score": 6.914452,
+          "ticker": "3135.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 183.018302,
+              "market_cap_usd": 37314202.419199996,
+              "net_income_usd": 5019608.972,
+              "net_margin": 0.0148,
+              "normalized_pe": 14.3871573647343,
+              "revenue_usd": 339438923.586
+            }
+          },
+          "head_listing_id": 1418574,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.157754
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "WIZIT Co. Ltd",
+          "score": 7.157754,
+          "ticker": "036090.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 298.0,
+              "market_cap_usd": 28244342.783999998,
+              "net_income_usd": 3699519.467,
+              "net_margin": 0.1613,
+              "normalized_pe": 11.3822777601557,
+              "revenue_usd": 22937202.001
+            }
+          },
+          "head_listing_id": 3942400,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.281879
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "U-Tech Co Ltd",
+          "score": 7.281879,
+          "ticker": "178780.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.29,
+              "market_cap_usd": 195705428.48000002,
+              "net_income_usd": 17425886.4,
+              "net_margin": 0.6142,
+              "normalized_pe": 11.2307301900006,
+              "revenue_usd": 28373872.8
+            }
+          },
+          "head_listing_id": 1417331,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.342657
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "GTM Holdings Corp",
+          "score": 7.342657,
+          "ticker": "1437.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 10.896742,
+              "market_cap_usd": 657168317.6448001,
+              "net_income_usd": 120989575.2,
+              "net_margin": 0.0803,
+              "normalized_pe": 5.43204344505264,
+              "revenue_usd": 1506024156.0
+            }
+          },
+          "head_listing_id": 1419836,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.460946
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Radiant Opto-Electronics Corp",
+          "score": 7.460946,
+          "ticker": "6176.TW"
+        },
+        {
+          "also_known_as": [
+            "272110.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3497.0,
+              "market_cap_usd": 143067602.94399998,
+              "net_income_usd": 19139319.178,
+              "net_margin": 0.2733,
+              "normalized_pe": 7.47506228478865,
+              "revenue_usd": 70018390.253
+            }
+          },
+          "head_listing_id": 1420909,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.520732
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "KNJ Co. Ltd",
+          "score": 7.520732,
+          "ticker": "272110.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 8540.0,
+              "market_cap_usd": 453556037.22239995,
+              "net_income_usd": 56223450.675,
+              "net_margin": 0.1557,
+              "normalized_pe": 6.58759492387213,
+              "revenue_usd": 361176008.214
+            }
+          },
+          "head_listing_id": 1420365,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.903981
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SUNIC SYSTEM Co. Ltd",
+          "score": 7.903981,
+          "ticker": "171090.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 50.37,
+              "market_cap_usd": 3825124053.8112,
+              "net_income_usd": 508566271.2,
+              "net_margin": 0.2353,
+              "normalized_pe": 7.50336996379293,
+              "revenue_usd": 2161518496.8
+            }
+          },
+          "head_listing_id": 1417915,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 7.941235
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Adata Technology Co Ltd",
+          "score": 7.941235,
+          "ticker": "3260.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2824.0,
+              "market_cap_usd": 292036064.0512,
+              "net_income_usd": 37387755.342,
+              "net_margin": 0.1267,
+              "normalized_pe": 7.70535430559946,
+              "revenue_usd": 295148488.159
+            }
+          },
+          "head_listing_id": 1420910,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.038244
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "INNOX Advanced Materials Co.Ltd",
+          "score": 8.038244,
+          "ticker": "272290.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2548.0,
+              "market_cap_usd": 216812411.28959998,
+              "net_income_usd": 26429314.821,
+              "net_margin": 0.0707,
+              "normalized_pe": 8.20348210909073,
+              "revenue_usd": 374048568.887
+            }
+          },
+          "head_listing_id": 1420900,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.045526
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Advanced Process Systems Corporation",
+          "score": 8.045526,
+          "ticker": "265520.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 425.99,
+              "market_cap_usd": 201653475.7041,
+              "net_income_usd": 16793600.0,
+              "net_margin": 0.0689763945113296,
+              "revenue_usd": 243468800.0
+            }
+          },
+          "head_listing_id": 572597,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.23963
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Chiyoda Integre Co., Ltd.",
+          "score": 8.23963,
+          "ticker": "6915.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1186.0,
+              "market_cap_usd": 54504284.9792,
+              "net_income_usd": 6651291.836,
+              "net_margin": 0.0722,
+              "normalized_pe": 8.05063749035405,
+              "revenue_usd": 92155306.698
+            }
+          },
+          "head_listing_id": 1419143,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.431703
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Vissem Electronics Co. Ltd",
+          "score": 8.431703,
+          "ticker": "072950.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 791.0,
+              "market_cap_usd": 75702888.0384,
+              "net_income_usd": 8330532.679,
+              "net_margin": 0.0884,
+              "normalized_pe": 7.7689775717693,
+              "revenue_usd": 94273182.927
+            }
+          },
+          "head_listing_id": 1419107,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.912769
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Rorze Systems Corporation",
+          "score": 8.912769,
+          "ticker": "071280.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 117649.0,
+              "market_cap_usd": 104721845479.01299,
+              "net_income_usd": 10912354600.0,
+              "net_margin": 1.0066,
+              "normalized_pe": 9.54071916251113,
+              "revenue_usd": 10841185600.0
+            }
+          },
+          "head_listing_id": 1416319,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 9.647341
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SK Square Co Ltd",
+          "score": 9.647341,
+          "ticker": "402340.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2832.0,
+              "market_cap_usd": 334017377.07519996,
+              "net_income_usd": 32719589.707,
+              "net_margin": 0.163,
+              "normalized_pe": 10.2192716752028,
+              "revenue_usd": 200726939.98
+            }
+          },
+          "head_listing_id": 1420071,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 10.045904
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Worldex Industry & Trading Co. Ltd",
+          "score": 10.045904,
+          "ticker": "101160.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9686.0,
+              "market_cap_usd": 425879987.81439996,
+              "net_income_usd": 42761800.41,
+              "net_margin": 0.2327,
+              "normalized_pe": 10.4755739861721,
+              "revenue_usd": 183785935.487
+            }
+          },
+          "head_listing_id": 1418850,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 10.179729
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Protec Co. Ltd",
+          "score": 10.179729,
+          "ticker": "053610.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 114.209808,
+              "market_cap_usd": 79829257.473,
+              "net_income_usd": 7749000.0,
+              "net_margin": 0.083924672489083,
+              "revenue_usd": 92332800.0
+            }
+          },
+          "head_listing_id": 574542,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 10.25306
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Axell Corporation",
+          "score": 10.25306,
+          "ticker": "6730.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1282.0,
+              "market_cap_usd": 68362982.1952,
+              "net_income_usd": 6935630.786,
+              "net_margin": 0.1347,
+              "normalized_pe": 9.87552983026383,
+              "revenue_usd": 51482802.315
+            }
+          },
+          "head_listing_id": 1419287,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 10.280811
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "FNS TECH. Co., Ltd",
+          "score": 10.280811,
+          "ticker": "083500.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 375.0,
+              "market_cap_usd": 53015732.22399999,
+              "net_income_usd": 4397005.928,
+              "net_margin": 0.0726,
+              "normalized_pe": 12.0572346483314,
+              "revenue_usd": 60577381.067
+            }
+          },
+          "head_listing_id": 1418879,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.08
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "APS Holdings Corporation",
+          "score": 11.08,
+          "ticker": "054620.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 59.48,
+              "market_cap_usd": 179044136.7561,
+              "net_income_usd": 15888600.0,
+              "net_margin": 0.0586757247219766,
+              "revenue_usd": 270786600.0
+            }
+          },
+          "head_listing_id": 573112,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.264291
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Futaba Corp.",
+          "score": 11.264291,
+          "ticker": "6986.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 374.0,
+              "market_cap_usd": 28886437.887999997,
+              "net_income_usd": 2561396.649,
+              "net_margin": 0.0623,
+              "normalized_pe": 10.138046112718,
+              "revenue_usd": 41099774.821
+            }
+          },
+          "head_listing_id": 1419817,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.764706
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "JT Corporation",
+          "score": 11.764706,
+          "ticker": "089790.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 318.67,
+              "market_cap_usd": 310093706.3805,
+              "net_income_usd": 25905020.4,
+              "net_margin": 0.0879783364760118,
+              "revenue_usd": 294447717.9
+            }
+          },
+          "head_listing_id": 572002,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.78335
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Innotech Corporation",
+          "score": 11.78335,
+          "ticker": "9880.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 140.51,
+              "market_cap_usd": 65142247.9932,
+              "net_income_usd": 5464172.7,
+              "net_margin": 0.0930165592466608,
+              "revenue_usd": 58744085.4
+            }
+          },
+          "head_listing_id": 572725,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.949327
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SHOWA SHINKU CO., LTD.",
+          "score": 11.949327,
+          "ticker": "6384.JP"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 279.86,
+              "market_cap_usd": 221692672.1835,
+              "net_income_usd": 18571078.8,
+              "net_margin": 0.0935698182765048,
+              "revenue_usd": 198472960.0
+            }
+          },
+          "head_listing_id": 574320,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.988137
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "SK-Electronics Co., Ltd.",
+          "score": 11.988137,
+          "ticker": "6677.JP"
+        },
+        {
+          "also_known_as": [
+            "290550.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1645.0,
+              "market_cap_usd": 264756284.6208,
+              "net_income_usd": 23015875.561,
+              "net_margin": 0.0723,
+              "normalized_pe": 11.7756806475551,
+              "revenue_usd": 318499854.071
+            }
+          },
+          "head_listing_id": 1420935,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.145897
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Dk Tech Co.Ltd",
+          "score": 12.145897,
+          "ticker": "290550.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.26,
+              "market_cap_usd": 82727632.768,
+              "net_income_usd": 6855264.0,
+              "net_margin": 0.4019,
+              "normalized_pe": 12.0612917724343,
+              "revenue_usd": 17058506.4
+            }
+          },
+          "head_listing_id": 1419225,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.284345
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Feature Integration Technology Inc.",
+          "score": 12.284345,
+          "ticker": "4951.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.31,
+              "market_cap_usd": 40817976.435200006,
+              "net_income_usd": 3288355.2,
+              "net_margin": 0.1352,
+              "normalized_pe": 12.6054441063702,
+              "revenue_usd": 24325048.8
+            }
+          },
+          "head_listing_id": 1419996,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.328244
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "HY Electronic Cayman Ltd",
+          "score": 12.328244,
+          "ticker": "6573.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.77,
+              "market_cap_usd": 99388415.4368,
+              "net_income_usd": 8394235.2,
+              "net_margin": 0.397,
+              "normalized_pe": 11.7710225795652,
+              "revenue_usd": 21146829.6
+            }
+          },
+          "head_listing_id": 1419623,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.525849
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Calitech Co Ltd",
+          "score": 12.525849,
+          "ticker": "6532.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 186.0,
+              "market_cap_usd": 13907722.035199998,
+              "net_income_usd": 1081295.439,
+              "net_margin": 0.1293,
+              "normalized_pe": 14.2742912032532,
+              "revenue_usd": 8364900.992
+            }
+          },
+          "head_listing_id": 1419076,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.553763
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sejin T.S Co.Ltd",
+          "score": 12.553763,
+          "ticker": "067770.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 96.0,
+              "market_cap_usd": 62255181.00479999,
+              "net_income_usd": 5876189.424,
+              "net_margin": 0.0603,
+              "normalized_pe": 7.3768017500298,
+              "revenue_usd": 97440955.017
+            }
+          },
+          "head_listing_id": 1418836,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.8125
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "KMH Hitech Co. Ltd",
+          "score": 12.8125,
+          "ticker": "052900.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 14.65,
+              "market_cap_usd": 409710489.6,
+              "net_income_usd": 27434503.2,
+              "net_margin": 0.1236,
+              "normalized_pe": 15.1164376480008,
+              "revenue_usd": 221892902.4
+            }
+          },
+          "head_listing_id": 1419241,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.105802
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Great Giant Fibre Garment Co., Ltd.",
+          "score": 13.105802,
+          "ticker": "4441.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.932931,
+              "market_cap_usd": 675267373.8752,
+              "net_income_usd": 47877554.4,
+              "net_margin": 0.2205,
+              "normalized_pe": 14.1040490128961,
+              "revenue_usd": 217111533.6
+            }
+          },
+          "head_listing_id": 1418863,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.238791
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ITE Tech Inc",
+          "score": 13.238791,
+          "ticker": "3014.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 176.0,
+              "market_cap_usd": 11219711.999999998,
+              "net_income_usd": 966220.353,
+              "net_margin": 0.1276,
+              "normalized_pe": 11.5593754033039,
+              "revenue_usd": 7573986.497
+            }
+          },
+          "head_listing_id": 1419993,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.409091
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "LDT Inc",
+          "score": 13.409091,
+          "ticker": "096870.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2151.0,
+              "market_cap_usd": 219082958.43839997,
+              "net_income_usd": 12517869.98,
+              "net_margin": 0.1744,
+              "normalized_pe": 17.2306340821506,
+              "revenue_usd": 71797078.087
+            }
+          },
+          "head_listing_id": 1420004,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.528591
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Micro Contact Solution Co. Ltd",
+          "score": 13.528591,
+          "ticker": "098120.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 1.8,
+              "market_cap_usd": 119923218.6368,
+              "net_income_usd": 9055706.4,
+              "net_margin": 0.0898,
+              "normalized_pe": 13.2428342240424,
+              "revenue_usd": 100879615.2
+            }
+          },
+          "head_listing_id": 1419571,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.833333
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Top Union Electronics",
+          "score": 13.833333,
+          "ticker": "6266.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 2982.0,
+              "market_cap_usd": 468493139.96799994,
+              "net_income_usd": 33945960.195,
+              "net_margin": 0.0313,
+              "normalized_pe": 12.988145275506,
+              "revenue_usd": 1086125716.809
+            }
+          },
+          "head_listing_id": 1415286,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.916834
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "LX Semicon Co. Ltd.",
+          "score": 13.916834,
+          "ticker": "108320.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 908.0,
+              "market_cap_usd": 104897051.03359999,
+              "net_income_usd": 7438150.951,
+              "net_margin": 0.264,
+              "normalized_pe": 42.0634847902993,
+              "revenue_usd": 28176227.03
+            }
+          },
+          "head_listing_id": 1418683,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.030837
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "e-LITECOM CO. Ltd",
+          "score": 14.030837,
+          "ticker": "041520.KQ"
+        },
+        {
+          "also_known_as": [
+            "036170.KO"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 196.0,
+              "market_cap_usd": 116235920.99839999,
+              "net_income_usd": 8259821.409,
+              "net_margin": 0.2991,
+              "normalized_pe": 15.6494087957962,
+              "revenue_usd": 27619785.599
+            }
+          },
+          "head_listing_id": 1418576,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.362245
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Cloud Air Co.Ltd",
+          "score": 14.362245,
+          "ticker": "036170.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 17.54,
+              "market_cap_usd": 678546788.5568,
+              "net_income_usd": 46979868.0,
+              "net_margin": 0.1747,
+              "normalized_pe": 14.4386380284114,
+              "revenue_usd": 268914172.8
+            }
+          },
+          "head_listing_id": 1420382,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.367161
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Global Mixed-Mode Technology Inc",
+          "score": 14.367161,
+          "ticker": "8081.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7108.0,
+              "market_cap_usd": 2876035013.0175996,
+              "net_income_usd": 208078434.389,
+              "net_margin": 0.2016,
+              "normalized_pe": 13.8528680306041,
+              "revenue_usd": 1032137445.731
+            }
+          },
+          "head_listing_id": 1414497,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.462577
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "DB HiTek Co Ltd",
+          "score": 14.462577,
+          "ticker": "000990.KO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 241.0,
+              "market_cap_usd": 51065652.0192,
+              "net_income_usd": 3565502.773,
+              "net_margin": 0.0656,
+              "normalized_pe": 14.3221462077937,
+              "revenue_usd": 54312973.029
+            }
+          },
+          "head_listing_id": 1419219,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.605809
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "DE&T Co. Ltd",
+          "score": 14.605809,
+          "ticker": "079810.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 15.7,
+              "market_cap_usd": 525900480.6144,
+              "net_income_usd": 41474690.4,
+              "net_margin": 0.0593,
+              "normalized_pe": 12.8090922323088,
+              "revenue_usd": 699113688.0
+            }
+          },
+          "head_listing_id": 1419120,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.617834
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Raydium Semi-Conductor",
+          "score": 14.617834,
+          "ticker": "3592.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 558.0,
+              "market_cap_usd": 91960921.2928,
+              "net_income_usd": 6449109.604,
+              "net_margin": 0.0376,
+              "normalized_pe": 9.79514954101591,
+              "revenue_usd": 171440730.251
+            }
+          },
+          "head_listing_id": 1420099,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.802867
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "ABOV Semiconductor Co. Ltd",
+          "score": 14.802867,
+          "ticker": "102120.KQ"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.09,
+              "market_cap_usd": 308486421.8112,
+              "net_income_usd": 16684262.4,
+              "net_margin": 0.1255,
+              "normalized_pe": 18.6972384089688,
+              "revenue_usd": 132973495.2
+            }
+          },
+          "head_listing_id": 1419567,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 15.068762
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Youngtek Electronics",
+          "score": 15.068762,
+          "ticker": "6261.TWO"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.17,
+              "market_cap_usd": 106977378.38080001,
+              "net_income_usd": 4589800.8,
+              "net_margin": 0.1514,
+              "normalized_pe": 23.3099598052926,
+              "revenue_usd": 30323841.6
+            }
+          },
+          "head_listing_id": 1420094,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 15.241779
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "M3 Technology Inc.",
+          "score": 15.241779,
+          "ticker": "6799.TW"
+        },
+        {
+          "context": {
+            "fundamental": {
+              "eps_diluted": 10.26,
+              "market_cap_usd": 293926779.5968,
+              "net_income_usd": 17315937.6,
+              "net_margin": 0.2717,
+              "normalized_pe": 16.9743496648313,
+              "revenue_usd": 63722443.2
+            }
+          },
+          "head_listing_id": 1419361,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 15.253411
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental"
+          ],
+          "name": "Sunplus Innovation Technology Inc.",
+          "score": 15.253411,
+          "ticker": "5236.TWO"
+        }
+      ],
+      "sort": "pe",
+      "universe": 483,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Scoping to the semiconductor GICS group (4530) across Taiwan, Korea and Japan and ranking by lowest P/E returns 60 cheap Asian chip names (list capped). The very cheapest are Korean micro-caps: NPD Co (198080.KQ, P/E ~2.6), Innox Corporation (088390.KQ, ~3.6), LET Co (297890.KQ, ~3.8), plus Taiwan Oasis Technology (3066.TWO, ~4.0) and HB Technology (078150.KQ, ~4.1). Among more sizeable names, Apacer Technology in Taiwan (8271.TW, ~/bin/zsh.94B, P/E ~5.7) and Goldkey Technology (3135.TW, P/E ~6.9) show up. Note the low-P/E tail is heavily small/micro-cap Korean and Taiwanese suppliers rather than the mega-cap foundries — if you want the big cheap names (e.g. a large-cap tier) I can add a size/market-cap floor."
+}

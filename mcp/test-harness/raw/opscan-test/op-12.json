@@ -1,0 +1,332 @@
+{
+  "id": "op-12",
+  "question": "Which call option strike should I buy on Nvidia for earnings?",
+  "tools_called": [
+    {
+      "tool": "options_sentiment",
+      "args": {
+        "ticker": "NVDA",
+        "style": "technical"
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "as_of": "2026-08-25 19:48:28.941718+00",
+      "available_from": "2026-07-17 14:42:13.153668+00",
+      "available_to": "2026-08-25 19:48:28.941718+00",
+      "requested_as_of": null,
+      "sentiment": {
+        "_guide": {
+          "baseline": "read = 'baseline_pending' or 'level' means NO own-history baseline yet → do NOT infer 'unusual'/'extreme'. Only an own-history percentile read (driver ends '_percentile_90d' / '_rank_90d') can flag something as unusual for this asset.",
+          "cross_asset": "O/S ratio and IV levels are NOT comparable across assets (index ETFs vs single stocks live on different scales). Judge 'unusual' only via a signal's own-history percentile.",
+          "how": "Each signal is precomputed. Narrate from its `read` + `because`; do not recompute or re-derive numbers.",
+          "key_dates": "A date is a catalyst only when read = 'event_premium' (options price it via IV premium). 'routine_0dte_concentration' / 'expiry_concentration' are mechanical, NOT events.",
+          "scales": {
+            "positioning_score": "[-1, +1]; + = bullish positioning, - = bearish"
+          },
+          "scope": "These are interpretation ingredients. The verdict / recommendation is YOURS to synthesize — opana stops at interpretation."
+        },
+        "flow": {
+          "os_ratio": 1.45050701673175,
+          "signals": [
+            {
+              "because": "option/stock volume ratio in 16th percentile of this asset's own 90d (normal for it)",
+              "dimension": "options_activity",
+              "driver": "os_ratio_percentile_90d",
+              "read": "typical_for_asset",
+              "value": 1.4505
+            }
+          ]
+        },
+        "horizons": {
+          "long_term": {
+            "dte_range": [
+              91,
+              365
+            ],
+            "metrics": {
+              "atm_iv": 38.84004081777923,
+              "gex_dealer_net": -2450021.293472767,
+              "max_pain_distance_pct": -0.01115976832886003,
+              "pcr_oi_notional": 1.0877107802359698,
+              "skew_25d_rr": 2.206699372796067,
+              "skew_norm": 0.05681506317536975
+            },
+            "n_contracts": 119,
+            "positioning_score": -0.3855,
+            "signals": [
+              {
+                "because": "$-notional put/call ratio 1.09 (puts heavier)",
+                "dimension": "direction",
+                "driver": "pcr_oi_notional",
+                "read": "balanced",
+                "value": 1.088
+              },
+              {
+                "because": "normalized put-skew in 15th percentile of this asset's own 90d (normal for it)",
+                "dimension": "fear_greed",
+                "driver": "skew_norm_percentile_90d",
+                "read": "typical_for_asset",
+                "value": 0.154
+              },
+              {
+                "because": "ATM IV 38.8% = 0th percentile of this asset's own 90d",
+                "dimension": "implied_volatility",
+                "driver": "iv_rank_90d",
+                "read": "compressed",
+                "value": 0.0
+              },
+              {
+                "because": "dealers net short gamma → amplify moves",
+                "dimension": "stability",
+                "driver": "gex_dealer_net",
+                "read": "unstable_amplifying",
+                "value": -2450000.0
+              },
+              {
+                "because": "spot within -1.1% of max-pain 210.0 (gravitational pull)",
+                "dimension": "pinning",
+                "driver": "max_pain_distance_pct",
+                "read": "pin_candidate",
+                "value": -0.0112
+              }
+            ]
+          },
+          "medium_term": {
+            "dte_range": [
+              8,
+              90
+            ],
+            "metrics": {
+              "atm_iv": 40.16584537204136,
+              "gex_dealer_net": 25075497.397780135,
+              "max_pain_distance_pct": -0.04211126124502695,
+              "pcr_oi_notional": 0.5521958770240165,
+              "skew_25d_rr": 2.395252200477386,
+              "skew_norm": 0.05963405421424724
+            },
+            "n_contracts": 228,
+            "positioning_score": 0.2006,
+            "signals": [
+              {
+                "because": "$-notional put/call ratio 0.55 (calls heavier)",
+                "dimension": "direction",
+                "driver": "pcr_oi_notional",
+                "read": "bullish_lean",
+                "value": 0.552
+              },
+              {
+                "because": "normalized put-skew in 50th percentile of this asset's own 90d (normal for it)",
+                "dimension": "fear_greed",
+                "driver": "skew_norm_percentile_90d",
+                "read": "typical_for_asset",
+                "value": 0.5
+              },
+              {
+                "because": "ATM IV 40.2% = 31th percentile of this asset's own 90d",
+                "dimension": "implied_volatility",
+                "driver": "iv_rank_90d",
+                "read": "mid_range",
+                "value": 0.308
+              },
+              {
+                "because": "dealers net long gamma → dampen moves",
+                "dimension": "stability",
+                "driver": "gex_dealer_net",
+                "read": "pinned_suppressing",
+                "value": 25080000.0
+              }
+            ]
+          },
+          "short_term": {
+            "dte_range": [
+              0,
+              7
+            ],
+            "metrics": {
+              "atm_iv": 80.47117928055424,
+              "gex_dealer_net": 286852550.4265146,
+              "max_pain_distance_pct": -0.00036180678017861344,
+              "pcr_oi_notional": 0.5731672560981338,
+              "skew_25d_rr": -1.7638602465617768,
+              "skew_norm": -0.021919154936356343
+            },
+            "n_contracts": 244,
+            "positioning_score": 0.7205,
+            "signals": [
+              {
+                "because": "$-notional put/call ratio 0.57 (calls heavier)",
+                "dimension": "direction",
+                "driver": "pcr_oi_notional",
+                "read": "bullish_lean",
+                "value": 0.573
+              },
+              {
+                "because": "normalized put-skew in 35th percentile of this asset's own 90d (normal for it)",
+                "dimension": "fear_greed",
+                "driver": "skew_norm_percentile_90d",
+                "read": "typical_for_asset",
+                "value": 0.346
+              },
+              {
+                "because": "ATM IV 80.5% = 100th percentile of this asset's own 90d",
+                "dimension": "implied_volatility",
+                "driver": "iv_rank_90d",
+                "read": "elevated",
+                "value": 1.0
+              },
+              {
+                "because": "dealers net long gamma → dampen moves",
+                "dimension": "stability",
+                "driver": "gex_dealer_net",
+                "read": "pinned_suppressing",
+                "value": 286900000.0
+              },
+              {
+                "because": "spot within -0.0% of max-pain 212.29316309409347 (gravitational pull)",
+                "dimension": "pinning",
+                "driver": "max_pain_distance_pct",
+                "read": "pin_candidate",
+                "value": -0.0004
+              }
+            ]
+          }
+        },
+        "key_dates": [
+          {
+            "atm_iv": 81.98404200733225,
+            "because": "50% of total open interest sits here; 87% of today's volume; IV +62% above neighbouring expiries → options are pricing an outsized move on this date (a scheduled catalyst is likely)",
+            "dte": 3,
+            "expiry": "2026-08-28",
+            "implied_event_premium_pct": 0.6191,
+            "oi_share": 0.5009,
+            "rationale_tags": [
+              "high_oi",
+              "high_volume",
+              "iv_premium_vs_adjacent"
+            ],
+            "read": "event_premium",
+            "volume_share": 0.8668
+          },
+          {
+            "atm_iv": 60.522082931816584,
+            "because": "IV +12% above neighbouring expiries → options are pricing an outsized move on this date (a scheduled catalyst is likely)",
+            "dte": 6,
+            "expiry": "2026-08-31",
+            "implied_event_premium_pct": 0.1164,
+            "oi_share": 0.0452,
+            "rationale_tags": [
+              "iv_premium_vs_adjacent"
+            ],
+            "read": "event_premium",
+            "volume_share": 0.0657
+          },
+          {
+            "atm_iv": 39.905161303543025,
+            "because": "26% of total open interest sits here → positioning clustered on this expiry but no IV premium vs neighbours (likely opex/mechanical, not a confirmed event)",
+            "dte": 87,
+            "expiry": "2026-11-20",
+            "implied_event_premium_pct": -0.1169,
+            "oi_share": 0.258,
+            "rationale_tags": [
+              "high_oi"
+            ],
+            "read": "expiry_concentration",
+            "volume_share": 0.037
+          }
+        ],
+        "n_buckets": 3,
+        "per_bucket": {
+          "long": {
+            "atm_iv": 40.16584537204136,
+            "dte_range": [
+              31,
+              90
+            ],
+            "gex_dealer_net": 25075497.397780135,
+            "gex_flip": 250.0,
+            "gex_net": 193343588.7035384,
+            "interpretation": "เอนข้างขึ้น • ยอมจ่ายแพงเพื่อ hedge ขาลง • dealers อยู่ฝั่ง long gamma (vol ถูกกด)",
+            "max_pain": 203.42683144939363,
+            "max_pain_distance_pct": -0.04211126124502695,
+            "n_contracts": 228,
+            "pcr_oi_label": "bullish",
+            "pcr_oi_notional": 0.5521958770240165,
+            "pcr_volume_notional": 0.4781364104952875,
+            "regime_tags": [
+              "positioning:bullish",
+              "fear_premium",
+              "dealers_long_gamma"
+            ],
+            "skew_25d_bf": 0.19041007973710933,
+            "skew_25d_rr": 2.395252200477386
+          },
+          "medium": null,
+          "short": {
+            "atm_iv": 80.47117928055424,
+            "dte_range": [
+              2,
+              7
+            ],
+            "gex_dealer_net": 286852550.4265146,
+            "gex_flip": 220.0,
+            "gex_net": 655169615.584824,
+            "interpretation": "เอนข้างขึ้น • dealers อยู่ฝั่ง long gamma (vol ถูกกด) • flip strike ใกล้สปอต (+3.6%) • มี pinning candidate",
+            "max_pain": 212.29316309409347,
+            "max_pain_distance_pct": -0.00036180678017861344,
+            "n_contracts": 244,
+            "pcr_oi_label": "bullish",
+            "pcr_oi_notional": 0.5731672560981338,
+            "pcr_volume_notional": 0.5046750260298655,
+            "regime_tags": [
+              "positioning:bullish",
+              "skew_neutral",
+              "dealers_long_gamma",
+              "gex_flip_in_play",
+              "max_pain_pin_candidate"
+            ],
+            "skew_25d_bf": 0.8112724092428893,
+            "skew_25d_rr": -1.7638602465617768
+          },
+          "tail": null,
+          "very_long": {
+            "atm_iv": 38.84004081777923,
+            "dte_range": [
+              91,
+              180
+            ],
+            "gex_dealer_net": -2450021.293472767,
+            "gex_flip": null,
+            "gex_net": 24744760.377990138,
+            "interpretation": "สมดุล • ยอมจ่ายแพงเพื่อ hedge ขาลง • dealers short gamma (พร้อมเร่ง vol) • มี pinning candidate",
+            "max_pain": 210.0,
+            "max_pain_distance_pct": -0.01115976832886003,
+            "n_contracts": 119,
+            "pcr_oi_label": "neutral",
+            "pcr_oi_notional": 1.0877107802359698,
+            "pcr_volume_notional": 0.8791280610747558,
+            "regime_tags": [
+              "positioning:neutral",
+              "fear_premium",
+              "dealers_short_gamma",
+              "max_pain_pin_candidate"
+            ],
+            "skew_25d_bf": 0.1498544883782742,
+            "skew_25d_rr": 2.2066993727960664
+          },
+          "very_short": null,
+          "zero_dte": null
+        },
+        "positioning_score": 0.2972,
+        "spot": 212.37
+      },
+      "snapshot_count": 28,
+      "stale": false,
+      "style": "technical",
+      "symbol": "NVDA"
+    }
+  ],
+  "answer_to_user": "The options market is clearly flagging one expiry as THE earnings/catalyst date for Nvidia: Fri 2026-08-28 (3 days out). It holds ~50% of all open interest and ~87% of today's volume, and its ATM IV is ~82% — about 62% richer than neighbouring expiries, which is the options market's way of pricing an outsized move on that date ('event_premium'). Spot is ~212.4. Max-pain sits right at spot (~212.3 short-term, 210 longer-dated), and near-dated positioning leans bullish (positioning score +0.72 short-term; put/call ~0.55–0.57, calls heavier). So if you're buying a call for earnings: the market is centered near 210–212, so a slightly out-of-the-money call on the 2026-08-28 expiry — around the 215–220 strike — is the standard 'earnings pop' play that aligns with the bullish lean. IMPORTANT CAVEATS: (1) IV on that expiry is extremely elevated (~82%, 100th percentile of its own 90 days), so you're paying up — expect a hard IV-crush right after the print, which can lose money even if NVDA moves your way modestly. (2) This tool gives positioning/interpretation, not a strike recommendation or live option prices; it doesn't return per-strike premiums, so treat the 215–220 idea as a framing, not a priced trade. Size it as risk capital and confirm live quotes before buying."
+}

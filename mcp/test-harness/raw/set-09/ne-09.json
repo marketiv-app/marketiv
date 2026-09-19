@@ -1,0 +1,1886 @@
+{
+  "id": "ne-09",
+  "question": "Between AMD, Intel and Micron — who had the better week on news? Rank them by impact.",
+  "tools_called": [
+    {
+      "tool": "stock_impact",
+      "args": {
+        "ticker": "AMD",
+        "window": "7d",
+        "limit": 40
+      },
+      "note": ""
+    },
+    {
+      "tool": "stock_impact",
+      "args": {
+        "ticker": "INTC",
+        "window": "7d",
+        "limit": 40
+      },
+      "note": ""
+    },
+    {
+      "tool": "stock_impact",
+      "args": {
+        "ticker": "MU",
+        "window": "7d",
+        "limit": 40
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    [
+      {
+        "title": "AMD and Intel Raise Billions for AI via Debt and Stock",
+        "brief_text": "Advanced Micro Devices and Intel have both raised billions for AI investment within the same week, but through contrasting strategies: AMD launched a four-part bond offering that could raise between $4 billion and $5 billion, while Intel raised $20 billion in an upsized stock offering. AMD's offering, which includes notes due in 2029, 2031, 2033, and 2036, was priced at spreads as tight as 70 basis points over Treasuries for the shortest tranche, reflecting strong investor demand. The company said it remains committed to maintaining its strong financial balance sheet, and it forecast third-quarter revenue above Wall Street estimates, with data center sales expected to more than double by 2027. Intel's offering, upsized from an initial $15 billion, was priced at $95 a share and is expected to raise $19.7 billion in net proceeds to fund capital expenditures tied to physical AI custom silicon and advanced packaging. Intel shares have surged over 165% in 2026 and quintupled over the past year, backed by the AI buildout and a 10% US government equity stake. AMD's debt strategy protects current shareholders but adds financial risk, while Intel's stock sale dilutes existing shareholders, and CFO David Zinsner has flagged a meaningful increase in spending expected in 2027, suggesting this may not be Intel's last capital call.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/advanced-micro-devices-amd-intel-170203392.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "AMD raised $4-5B via debt to fund AI investment, with strong demand and raised Q3 revenue forecast.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "corporate_action",
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T17:02:03+00:00"
+      },
+      {
+        "title": "Nvidia's AI data center market share may drop to 70%",
+        "brief_text": "Moor Insights & Strategy founder Patrick Moorhead predicts Nvidia's AI data center market share could fall from 90% to roughly 70% over the next two years, as the market more than doubles annually. Moorhead identifies Google's TPU as the top taker of unit share, benefiting companies like Broadcom and Marvell, followed by Amazon's Trainium, which underpinned Anthropic's model development. He also expects AMD to gain unit share with its new scale-up architecture, which is more similar to Nvidia's than previous designs. Regarding Bloomberg's report that OpenAI's custom chips with Broadcom outperformed Nvidia's current lineup in testing, Moorhead says he is not surprised, noting the power and performance of non-GPU architectures, but he emphasizes that GPUs offer more flexibility and longevity, while custom designs require frequent updates and cost between 200 and 500 million dollars each. Despite these challenges, Moorhead believes Nvidia's revenue won't be significantly impacted because the market is growing so fast, and in the long term, it will remain primarily a GPU world with custom inference chips for those who roll their own software.",
+        "url": "https://finance.yahoo.com/video/nvidias-ai-data-center-dominance-120000341.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "pos",
+              "reason": "Expected to gain unit share in AI data center market with new scale-up architecture.",
+              "relevance": 0.7
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.7
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T12:00:00+00:00"
+      },
+      {
+        "title": "Dick's Sporting Goods plunges 27% on revenue miss",
+        "brief_text": "Dick's Sporting Goods shares plunged more than 27% after the retailer reported revenue of $5.59 billion, below the $5.65 billion expected by analysts polled by LSEG, citing a challenging footwear market. Dynatrace rose 3% after Morgan Stanley upgraded it to overweight, while Shift4 Payments gained nearly 4% on a Wells Fargo upgrade to overweight. Moderna rallied 13% after Wolfe Research upgraded it to peer perform, and Marvell Technology jumped 5% after Susquehanna and Rosenblatt raised price targets. Advanced Micro Devices gained 5% after Raymond James upgraded it to strong buy with a $641 price target, and Kura Oncology climbed almost 10% after its CEO disclosed buying 100,000 shares. Navitas Semiconductor rose 5% after announcing a $232.8 million deal to acquire Claros.",
+        "url": "https://cnbc.com/2026/08/25/stocks-making-the-biggest-moves-midday-dks-mrvl-amd-kura.html",
+        "publisher": "CNBC",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Raymond James upgraded AMD to strong buy with a $641 price target.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "earnings_results",
+          "analyst_rating",
+          "ma_partnership"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-25T16:06:43+00:00"
+      },
+      {
+        "title": "OPAQUE, AMD, Intel, TII collaborate on TRACE open standard for AI runtime verification",
+        "brief_text": "OPAQUE, the Confidential AI company, announced TRACE, an open, portable, hardware-enforced governance record for AI agents and other confidential workloads, developed in collaboration with AMD, Intel, Microsoft, and the Technology Innovation Institute. TRACE establishes a vendor-neutral format for proving what software ran, which policies governed execution, what data classifications were involved, and which tools were invoked, and it composes existing standards including RATS, EAT, SLSA, SCITT, SPIFFE, and EAR. The specification will be governed through the Linux Foundation, with CoSAI hosting the technical workstream, and is available today with reference implementations and documentation. OPAQUE first introduced TRACE at the Confidential Computing Summit in June 2026, and its reference library passed 135,000 PyPI downloads in its first ten weeks.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/opaque-amd-intel-tii-other-130000273.html",
+        "publisher": "PR Newswire",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "AMD collaborates on TRACE, an open standard for AI runtime verification, enhancing its AI governance capabilities.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T13:00:00+00:00"
+      },
+      {
+        "title": "GEEKOM to Showcase Distributed Local AI and New PCs at IFA 2026",
+        "brief_text": "GEEKOM will return to IFA 2026 in Berlin this September, showcasing its latest advances in local AI alongside a new generation of high-performance laptops and Mini PCs. Leading the lineup is a distributed local AI solution built around four GEEKOM A9 Mega Mini PCs powered by the AMD Ryzen AI Max+ 395 processor and Radeon 8060S graphics, connected through USB4 to run DeepSeek V4 Flash locally without a traditional server rack or proprietary high-speed switch. The company will also debut the GeekBook X16 Pro thin-and-light laptop with AMD Ryzen AI 9 HX 470 and Radeon 890M graphics, the IT13 Mega Mini PC with Intel Core Ultra X7 358H and Intel Arc B390 graphics, and the A5 2027 Edition Mini PC with AMD Ryzen 7 7730U. A new A9 Mega configuration powered by the AMD Ryzen AI Max+ 388 and equipped with a Phison AI SSD can support 70-billion-parameter and larger AI models on a 64GB unified-memory platform. IFA 2026 runs September 4–8 in Berlin, where GEEKOM will exhibit at Hall 6.2, Stand 119.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/geekom-returns-ifa-2026-distributed-123000490.html",
+        "publisher": "PR Newswire",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "GEEKOM's new PCs and AI solution feature AMD Ryzen AI processors and Radeon graphics, boosting AMD's product adoption.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T12:30:00+00:00"
+      },
+      {
+        "title": "Anjuna Security Extends Confidential Computing Platform to On-Premises Data Centers",
+        "brief_text": "Anjuna Security announced the availability of its Anjuna Seaglass platform on AMD Secure Virtualization, bringing confidential computing to on-premises data centers with one-click deployment. The platform now runs on AMD EPYC datacenter CPUs with Secure Nested Paging hardware, providing hardware-enforced memory encryption and isolation for containerized workloads without code changes. Enterprises in financial services, healthcare, and government can use the same policy model and attestation workflow across cloud and on-premises environments, with support for air-gapped deployments and compliance alignment with NIST AI RMF, DORA, HIPAA, and GDPR. Anjuna Seaglass on AMD SEV is available now.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/anjuna-security-brings-confidential-computing-120000764.html",
+        "publisher": "PR Newswire",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "AMD's EPYC CPUs with SEV are the foundation of Anjuna's new on-prem confidential computing platform, expanding AMD's market reach.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T12:00:00+00:00"
+      },
+      {
+        "title": "AMD's OpenAI and Meta Wins Carry Hidden Warrant Costs",
+        "brief_text": "Morgan Stanley warns that AMD's landmark AI deals with OpenAI and Meta include warrants covering up to 160 million shares each at a $0.01 exercise price, totaling 320 million potential shares or nearly 20% of AMD's roughly 1.63 billion shares outstanding. Analyst Joseph Moore estimates AMD is effectively issuing more than $15 billion of warrants for every $15 billion to $20 billion of revenue tied to those customers, and if the warrants were treated as a cash expense, the profitability of that GPU business could disappear. AMD reported second-quarter revenue of $11.5 billion, up 50% year over year, with Data Center revenue more than doubling to $6.7 billion, but none of the warrant shares had vested as of June 27 and vesting requires large GPU purchase milestones and share-price thresholds reaching as high as $600. Insider Monkey's database showed 165 hedge funds with long positions in AMD at the end of Q2 2026, up 23% from 134 in Q1, while short interest stood at 37.75 million shares on July 31, about 2.3% of float.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/amd-winning-nvidia-nvda-customers-043310331.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Warrants could dilute nearly 20% of shares and reduce profitability of GPU business.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T04:33:10+00:00"
+      },
+      {
+        "title": "Nvidia earnings preview: strategist says ignore short-term reaction",
+        "brief_text": "Yahoo Finance Executive Editor Brian Sozzi and B. Riley Wealth chief market strategist Art Hogan discuss how investors should approach Nvidia's earnings report on Wednesday. Hogan notes Nvidia shares have fallen after earnings in six of the past eight quarters, including the last four, but says the stock is about 10% below its all-time high and trades at 20 to 21 times next 12 months earnings, which could drop to 18 times after guidance is raised. He expects revenue to exceed the $92 billion consensus and gross margins to remain around 75%, and advises long-term investors to ignore short-term noise because Nvidia sits at the center of the artificial intelligence revolution. Hogan attributes the lower valuation to concerns about vendor financing, potential consolidation among large language model builders, and competition from AMD.",
+        "url": "https://finance.yahoo.com/video/investors-approach-nvidia-earnings-145600454.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Article mentions competition from AMD as a concern for Nvidia, implying potential negative impact on AMD's rival.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T14:56:00+00:00"
+      },
+      {
+        "title": "Nvidia Faces Growing Competition in Trillion-Dollar AI Chip Market",
+        "brief_text": "Nvidia Corp. is facing increasing competition from rivals, startups, and its own biggest customers as the AI chip market is poised to cross $1 trillion in revenue. Amazon.com Inc. CEO Andy Jassy said in July that if Amazon's semiconductor operation were a standalone business, it would generate annual revenue of more than $25 billion, with sales growing by a percentage in the triple digits. Advanced Micro Devices Inc. saw its data center revenue more than double last quarter to $6.7 billion, while Broadcom Inc. expects to sell $56 billion of AI chips this year. Meanwhile, 150 companies are working on more than 200 different AI semiconductor designs, according to Jon Peddie Research, and AI labs like OpenAI and Anthropic are developing their own chips. Nvidia's earnings report on Wednesday is expected to show revenue nearly doubled last quarter to $92 billion, but some customers have been told that prices of servers containing its AI chips are going up more than 15%.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-trillion-dollar-chip-market-120003930.html",
+        "publisher": "Bloomberg",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Data center revenue more than doubled to $6.7 billion, showing strong demand for its AI chips.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "industry_thematic",
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T12:00:03+00:00"
+      },
+      {
+        "title": "Hedge funds and mutual funds split on AI trade, Goldman says",
+        "brief_text": "Hedge funds and mutual funds took sharply different approaches to individual AI stocks during the second quarter, according to Goldman Sachs. Hedge funds bought Microsoft and Amazon while mutual funds reduced positions in both, and hedge funds cut exposure to Alphabet, Meta Platforms, Nvidia, Broadcom, Lam Research, Marvell Technology, Cisco Systems, Hewlett Packard Enterprise and Applied Materials. Mutual funds bought Advanced Micro Devices, Micron Technology and Sandisk while hedge funds reduced exposure to those stocks. Goldman identified 12 AI infrastructure stocks purchased by both groups, including American Electric Power, Bloom Energy, CoreWeave, Flex, NiSource, Seagate Technology, Talen Energy and Xcel Energy. The analysis covers 991 hedge funds with $5.4 trillion of gross equity positions and 504 large-cap active mutual funds with $4.6 trillion in equity assets.",
+        "url": "https://seekingalpha.com/news/4636064-hedge-funds-and-mutual-funds-split-on-the-ai-trade-goldman?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+        "publisher": "Seeking Alpha",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Mutual funds bought Advanced Micro Devices while hedge funds reduced exposure.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-23T18:31:24+00:00"
+      },
+      {
+        "title": "AMD to Invest Over $10 Billion in Taiwan Semiconductor Ecosystem",
+        "brief_text": "Advanced Micro Devices plans to invest more than $10 billion in Taiwan through 2029 to expand advanced chip packaging, chip substrates, and AI system manufacturing capacity across the island's semiconductor ecosystem. The investment will support partners including TSMC, ASE Technology, Siliconware Precision Industries, and Powertech Technology, and help scale production of next-generation products such as AMD's Helios AI racks. AMD's Data Center revenue grew 107% year-over-year to $6.7 billion in the second quarter, and management expects data center AI revenue to grow at a compound annual growth rate above 80% over the next three to five years. CEO Lisa Su is investing now to ensure AMD can manufacture enough hardware if rapidly growing AI demand translates into large-scale deployments.",
+        "url": "https://finance.yahoo.com/technology/articles/amd-investing-more-10-billion-155000045.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "AMD announces $10B investment in Taiwan ecosystem to expand packaging and AI manufacturing capacity.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "ma_partnership",
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-23T15:50:00+00:00"
+      },
+      {
+        "title": "AMD Appoints Tim Ryan to Board After Director Retirement",
+        "brief_text": "Advanced Micro Devices has appointed Tim Ryan to its Board of Directors following the retirement of a long-serving director. Ryan brings decades of experience in technology, corporate strategy, and risk management from his prior roles at Citi and PwC. The appointment includes related changes to the composition of board committees, including a new Audit and Finance chair. AMD is a U.S.-based semiconductor company with a market value of about $766.4 billion.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/advanced-micro-devices-amd-adds-061002113.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "ambiguous",
+              "reason": "Board appointment and committee changes are governance moves with unclear direct impact on operations.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "management_governance"
+        ],
+        "impact_score": 1,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-22T06:10:02+00:00"
+      },
+      {
+        "title": "Nvidia May Cut Memory on Rubin Ultra GPU, AMD Unfazed",
+        "brief_text": "Nvidia is reportedly testing versions of its next-generation Rubin Ultra GPU with significantly less high-bandwidth memory than originally promised, with some configurations as low as 192GB to 256GB versus the 1 terabyte Jensen Huang initially announced. The move comes amid a severe industry-wide memory shortage, though Nvidia still controls more than 95% of the data center GPU market and has struck a $500 billion partnership with SK Hynix's parent company to co-develop future memory technology. Rival AMD says it has already secured the HBM it needs through ties with Samsung Electronics, SK Hynix, and Micron Technology, and its Helios AI system ships to customers including Microsoft, Meta, OpenAI, and Oracle later this year. AMD's data center revenue grew 57% year over year as of Q1 2026 and now makes up the majority of its total revenue, but Helios reportedly costs $5 million to $5.5 million per system versus $3.5 million to $4 million for Nvidia's Vera Rubin. Nvidia was the most widely held chip stock among hedge funds in Q1 2026 with 275 holders, compared to 134 for AMD.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-corporation-nvda-advanced-micro-204025825.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "AMD secured HBM supply and its Helios AI system ships to major customers, with data center revenue growing 57%.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "product_tech",
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T20:40:25+00:00"
+      },
+      {
+        "title": "AMD Holds Steady Ahead of Nvidia's AI Chip Earnings",
+        "brief_text": "Advanced Micro Devices edged about 0.1% higher to $470.19 Friday afternoon as investors awaited Nvidia's August 26 earnings, which could reset expectations for AI-accelerator players including AMD's Instinct business. AMD's second-quarter revenue surged to $11.5 billion, with data-center sales delivering roughly $6.7 billion. Anthropic has committed to buying up to two gigawatts of MI450 capacity beginning in 2027, while AMD could invest as much as $5 billion in the AI developer as deployment milestones are cleared. At $470.19, AMD trades 72.58% above its $272.45 GF Value estimate, flashing a clear overvaluation warning.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/amd-falls-nvidias-earnings-test-200822269.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "ambiguous",
+              "reason": "Anthropic's commitment to buy MI450 capacity is a demand driver, but AMD's overvaluation and reliance on Nvidia's earnings create mixed impact.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "analyst_forecast",
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T20:08:22+00:00"
+      },
+      {
+        "title": "AMD Posts Record Sales But Musk's Nvidia Pledge Sinks Stock",
+        "brief_text": "Advanced Micro Devices posted record quarterly sales and beat Wall Street forecasts, yet its stock fell more than 8% after SpaceX CEO Elon Musk said his company would build exclusively on Nvidia chips going forward. AMD reported $11.5 billion in revenue, up 50% year over year and ahead of the $11.3 billion expected, with data center revenue doubling to $6.7 billion and net income of $2.3 billion beating the $1.7 billion forecast. CEO Lisa Su reinforced guidance for server revenue to grow more than 80% in the second half of 2026, while Nvidia shares climbed 3.4% on Musk's comments without reporting new numbers. AMD also raised its long-term semiconductor market forecast to $2 trillion by 2028, with $1.4 trillion from AI accelerators, and has signed supply deals with OpenAI, Meta, and Anthropic.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/advanced-micro-devices-amd-posts-194827905.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Musk's pledge to use only Nvidia chips for SpaceX undermines AMD's competitive position in AI accelerators.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T19:48:27+00:00"
+      },
+      {
+        "title": "AMD Loses SpaceX AI Deal to Nvidia Despite Strong Data Center Growth",
+        "brief_text": "Advanced Micro Devices lost a flagship AI infrastructure deal with SpaceX to Nvidia, even as its Data Center revenue surged 107% to $6.72 billion in the second quarter. SpaceX chose Nvidia's Vera Rubin platform, reportedly claiming 20% of Nvidia's next-platform capacity, because Nvidia can offer allocation guarantees that AMD cannot match. AMD shares closed at $469.46 on Thursday, down 13.77% over the past month, despite total revenue of $11.54 billion, up 50.1% year over year. The company counts OpenAI, Meta, and Anthropic as strategic anchor customers, including a 2-gigawatt Anthropic deal on MI450 in Helios and Microsoft Azure at scale. Management raised long-term targets and expects Data Center revenue to more than double year over year in 2027.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/amd-lost-spacex-nvidia-ai-153037579.html",
+        "publisher": "24/7 Wall St.",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Lost SpaceX AI deal to Nvidia, which can offer allocation guarantees AMD cannot match.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "earnings_results",
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T15:48:24.18921+00:00"
+      },
+      {
+        "title": "Marvell Expands Google AI Chip Deal, Wedbush Sees Growth",
+        "brief_text": "Marvell Technology has expanded its partnership with Google on custom artificial intelligence chips, a move Wedbush analyst Matt Bryson views as evidence that demand for specialized silicon is broadening. The agreement, first announced in July, covers multiple custom semiconductor programs tied to Google's TPU ecosystem, including AI inference accelerators, storage and networking controllers, memory interfaces, and computing technologies placed near memory. Google also holds a warrant issued on August 18 to purchase up to 58.97 million Marvell shares at $206.58 each. Wedbush notes that Google is separately exploring potential custom-chip work with Advanced Micro Devices, which could be a meaningful opportunity. The expanded relationship is expected to strengthen Marvell's position in custom AI silicon and improve visibility into future semiconductor programs.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/marvell-google-ai-chip-deal-150720165.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "ambiguous",
+              "reason": "Google is exploring custom-chip work with AMD, but no deal confirmed.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "ma_partnership",
+          "analyst_rating"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T15:24:20.329532+00:00"
+      },
+      {
+        "title": "Riot Platforms Signs $9.1 Billion AI Computing Deal With Anthropic",
+        "brief_text": "Riot Platforms struck a $9.1 billion, 20-year computing deal with Anthropic this week, leasing 191 megawatts of power at its Rockdale, Texas campus, with the potential to grow to $16.1 billion if extended twice by five years each. The deal follows Riot's earlier agreement with AMD, giving the site what Compass Point analyst Michael Donovan called a two-tenant campus carrying $9.8 billion of contracted data center revenue. Riot's second-quarter revenue beat expectations at $174.2 million versus the $154.3 million analysts modeled, and Donovan reiterated a buy rating with a $29 price target. CleanSpark signed its own 20-year, $6.6 billion triple-net lease at its Sandersville site with a high investment-grade tenant, though its fiscal third-quarter revenue fell 30.5% year over year to $138.0 million and it swung to a $239.8 million net loss. Both companies are shifting from bitcoin mining to renting power and data center space to AI firms, but neither has yet proven the model can fully replace mining as the core business.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/riot-platforms-riot-cleanspark-clsk-014919566.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "AMD's earlier agreement with Riot is part of the AI computing deal, indicating demand for its chips.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "ma_partnership",
+          "earnings_results"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T03:00:24.86453+00:00"
+      },
+      {
+        "title": "Waymo Builds Custom Chip to Cut Nvidia Dependence",
+        "brief_text": "Alphabet's Waymo has built a custom application-specific integrated circuit for its robotaxis that is already in production in its latest generation, reducing its reliance on Nvidia and Advanced Micro Devices. The chip speeds up sensor data processing and the AI models its vehicles use to read and respond to their surroundings, and runs above 1,000 TOPS, putting it level with Nvidia's latest autonomous driving systems on that measure. It is made on Taiwan Semiconductor's 5-nanometer process. Waymo's fleet has largely been Jaguar vehicles retrofitted with autonomous technology, but the robotaxi it launched with Geely's Zeekr is now being fitted with the new chip. Waymo said the shift toward purpose-built vehicles may cut costs while giving riders more space.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/waymo-builds-own-chip-reduces-195532671.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Waymo's custom chip reduces its reliance on AMD, potentially impacting AMD's autonomous driving business.",
+              "relevance": 0.7
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.7
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-20T19:55:32+00:00"
+      },
+      {
+        "title": "AMD Falls as Google Expands $120 Billion Custom-Chip Push",
+        "brief_text": "Advanced Micro Devices slid about 0.4% to $464.20 Thursday afternoon as investors reacted to Google and other hyperscalers expanding their custom-chip efforts. Marvell's warrants can fully vest if qualifying Google purchases climb to approximately $120 billion through fiscal 2033, signaling that cloud giants are pouring billions into their own AI silicon. AMD's second-quarter revenue hit $11.5 billion, including about $6.7 billion from data centers, while its multiyear OpenAI agreement could eventually give OpenAI an option to acquire roughly 10% of the company. The stock sits 70.38% above its $272.45 GF Value estimate and trades near 119 times earnings.",
+        "url": "https://finance.yahoo.com/technology/articles/amd-falls-google-expands-120-192101116.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Google and other hyperscalers expanding custom-chip efforts threaten AMD's AI chip market share.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "analyst_forecast",
+          "price_action_technical"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-20T19:36:12.884009+00:00"
+      },
+      {
+        "title": "AMD and Intel Shares Plummet After Google-Marvell AI Chip Deal",
+        "brief_text": "AMD and Intel shares each fell 3.7% in afternoon trading after Google and Marvell Technology announced a partnership to develop custom AI chips, signaling a potential shift in market share. Marvell issued a warrant allowing Google to purchase nearly 59 million shares as part of a commercial agreement to develop custom semiconductors for Google's AI infrastructure, sending Marvell's stock soaring while competitor Broadcom fell. The deal is anticipated to intensify competition for lucrative custom AI silicon contracts with major cloud providers. AMD's shares are extremely volatile and have had 50 moves greater than 5% over the last year, and today's move indicates the market considers this news meaningful but not something that would fundamentally change its perception of the business. AMD is up 109% since the beginning of the year, but at $466.40 per share, it is still trading 19.7% below its 52-week high of $580.91 from June 2026.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/amd-intel-shares-plummet-know-233402382.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Google-Marvell custom AI chip deal intensifies competition for AI silicon contracts, threatening AMD's market share.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "ma_partnership",
+          "price_action_technical"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T23:48:36.491539+00:00"
+      },
+      {
+        "title": "Cerebras Unveils CS-4 Rack-Scale AI System",
+        "brief_text": "Cerebras Systems unveiled a new rack-scale AI system called CS-4, which it says can run large models dramatically faster than traditional GPU infrastructure. The CS-4 combines three WSE-3 Turbo processors and is the first system built around the company's next-generation Nexus rack-scale architecture, delivering up to twice the performance of its CS-3 predecessor. On the GPT-OSS-120B model, CS-4 reportedly produced more than 4,400 tokens per second per user, which Cerebras says is as much as 30 times faster than GPU-based alternatives, with up to 10 times higher throughput per watt than CS-3. First shipments are expected this quarter. The launch comes as Cerebras' inference business accelerates, with second-quarter cloud and services revenue jumping 281% year over year to $126 million, while core total revenue reached $209.9 million, up 103%, and the company ended June with $25.4 billion in remaining performance obligations.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/cerebras-makes-bold-move-against-183937513.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Cerebras claims CS-4 is up to 30x faster than GPU-based alternatives, directly challenging AMD's data center offerings.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "product_tech",
+          "earnings_results"
+        ],
+        "impact_score": 4,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T18:48:23.911292+00:00"
+      },
+      {
+        "title": "AMD Raises $5 Billion Debt for AI Push",
+        "brief_text": "Advanced Micro Devices has completed a multi-tranche debt offering of almost $5 billion to fund its push into AI and data center markets. The new capital is tied to partnerships with Microsoft and Cerebras, along with launches like Instinct Coder and potential work with Google on custom AI hardware. The bond deal arrives during a mixed stretch for AMD shares, which have pulled back about 4% over the last day and are slightly down over the past month, yet still show an 8.2% 90-day share price return and a 190.8% one-year total shareholder return. A leading narrative values the stock at $907.32 per share versus the latest close at $484.39, framing AMD as materially undervalued, though the current P/E of 122.2x is more than double the US semiconductor industry average of 50.9x.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/advanced-micro-devices-amd-raises-170958547.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "AMD raised $5 billion in debt to fund AI and data center push, strengthening its financial position.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "corporate_action",
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T17:36:32.725486+00:00"
+      },
+      {
+        "title": "Intel's Client Computing Revenue Rises 13% on AI PC Momentum",
+        "brief_text": "Intel's Client Computing and Physical AI Group revenue rose 13% year over year to $8.88 billion in the second quarter of 2026, driven by strong AI PC adoption. AI PC revenues surged 26% sequentially, and the company has expanded its Core Ultra Series 3 portfolio to more than 400 designs across consumer and commercial systems. Edge deployments represented about 10% of the group's revenue, with more than 130 customers adopting or testing Series 3 processors for edge AI and robotics. Intel expects PC consumption to decline at a low-double-digit percentage rate in 2026 due to high memory prices, but sees growth opportunities in Edge AI, Physical AI, gaming, and graphics. Competitors AMD and Qualcomm are also expanding in AI PCs and edge computing, with AMD reporting $3.1 billion in client revenues, up 23% year over year, and Qualcomm positioning its Snapdragon X2 platform for always-on agentic experiences.",
+        "url": "https://finance.yahoo.com/technology/articles/intcs-client-computing-business-gains-155100741.html",
+        "publisher": "Zacks Investment Research",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "ambiguous",
+              "reason": "AMD's client revenue growth is mentioned as a competitor, but no direct impact on AMD from Intel's news.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T17:24:26.766131+00:00"
+      },
+      {
+        "title": "Cerebras Stock Looks Like a Buy on OpenAI Relationship and Surging Revenue",
+        "brief_text": "Cerebras Systems reported second-quarter results that sent its stock down 16% over two sessions before a rebound, and the chipmaker now looks like a buy as inference demand soars. Revenue grew 74% to $180.1 million, while core sales more than doubled to $209.9 million, and core gross margin rose 940 basis points to 40.6%. Management guided third-quarter revenue to between $214 million and $216 million and raised full-year core revenue guidance to $880 million to $890 million. The company is teaming up with Advanced Micro Devices and has deals with OpenAI and Amazon Web Services, positioning it to capture a share of the AI inference market projected to reach $1.3 trillion by 2032.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-stock-looks-buy-due-111200715.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "pos",
+              "reason": "Teaming up with Cerebras to compete in AI inference market.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T11:48:23.503082+00:00"
+      },
+      {
+        "title": "Krungsri Asset Management launches two new funds targeting the global AI megatrend",
+        "brief_text": "Krungsri Asset Management is offering the Krungsri AI and Next Gen Software Fund, known as KF-AINEXT, and KF-AINEXT-FX, for sale from 19 to 25 August 2026. Both funds invest in the master fund, the Invesco AI and Next Gen Software ETF, which focuses on companies driving the development of AI and next-generation software across the entire AI value chain, from infrastructure such as semiconductors, networking systems, and cloud computing, to developers of AI platforms and models, as well as companies applying AI in various industries such as industrials and healthcare. Selected companies must derive at least 50% of revenue from theme-related businesses, and the fund selects the top 100 stocks by free-float market capitalisation, with quarterly portfolio rebalancing. The top five holdings include AMD at 8.80%, Micron Technology at 8.57%, Alphabet at 7.39%, Meta Platforms at 7.33%, and NVIDIA at 7.22%. The portfolio has an 82.06% allocation to the United States and a 52.33% weighting in semiconductors and semiconductor equipment. The master fund has delivered a one-year return of 111.51%, a three-year average annual return of 42.53%, and an average annual return since inception of 15.97% as of 30 June 2026. KF-AINEXT hedges foreign exchange risk at the fund manager's discretion, while KF-AINEXT-FX does not hedge foreign exchange risk. Both funds have a minimum initial investment of only 500 baht and carry a risk level of 6, indicating high risk.",
+        "url": "https://thunhoon.com/ksam19082026",
+        "publisher": "thunhoon.com",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "AMD is a top holding in the new AI-focused funds, indicating increased investor demand for its stock.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-19T06:45:32.328783+00:00"
+      }
+    ],
+    [
+      {
+        "title": "Intel's Operating Cash Flow Surges to $8.1 Billion in First Half",
+        "brief_text": "Intel Corporation generated $8.1 billion in cash from operations in the first six months of 2026, up sharply from $2.86 billion in the year-ago period, driven by stronger revenues and profitability. Second-quarter revenues rose 25.4% year over year to $16.1 billion, and GAAP operating income improved to $1.8 billion from a $3.1 billion loss in the prior quarter. The company benefits from strong demand from hyperscale and enterprise customers, growing adoption of its server CPUs, and improved manufacturing efficiency in Intel Foundry, which lowered wafer costs and reduced operating losses. However, heavy investment continues to weigh on free cash flow, as Intel did not produce positive adjusted free cash flow in the second quarter. Among other tech stocks, Arista Networks generated $2.78 billion in cash in the first half, up from $1.84 billion, while Celestica's second-quarter operating cash flow rose to $410.9 million from $152.4 million, with free cash flow up 22.7% to $147.1 million. Intel shares have skyrocketed 252.4% over the past year, and earnings estimates for 2026 have increased 40% to $1.47 per share.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/intel-sees-strong-cash-flow-170700151.html",
+        "publisher": "Zacks Investment Research",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Strong cash flow and revenue growth, improved profitability.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T17:07:00+00:00"
+      },
+      {
+        "title": "AMD and Intel Raise Billions for AI via Debt and Stock",
+        "brief_text": "Advanced Micro Devices and Intel have both raised billions for AI investment within the same week, but through contrasting strategies: AMD launched a four-part bond offering that could raise between $4 billion and $5 billion, while Intel raised $20 billion in an upsized stock offering. AMD's offering, which includes notes due in 2029, 2031, 2033, and 2036, was priced at spreads as tight as 70 basis points over Treasuries for the shortest tranche, reflecting strong investor demand. The company said it remains committed to maintaining its strong financial balance sheet, and it forecast third-quarter revenue above Wall Street estimates, with data center sales expected to more than double by 2027. Intel's offering, upsized from an initial $15 billion, was priced at $95 a share and is expected to raise $19.7 billion in net proceeds to fund capital expenditures tied to physical AI custom silicon and advanced packaging. Intel shares have surged over 165% in 2026 and quintupled over the past year, backed by the AI buildout and a 10% US government equity stake. AMD's debt strategy protects current shareholders but adds financial risk, while Intel's stock sale dilutes existing shareholders, and CFO David Zinsner has flagged a meaningful increase in spending expected in 2027, suggesting this may not be Intel's last capital call.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/advanced-micro-devices-amd-intel-170203392.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Intel raised $20B via stock offering, diluting shareholders, with CFO flagging increased spending ahead.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "corporate_action",
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T17:02:03+00:00"
+      },
+      {
+        "title": "Intel Unveils New AI Processors to Challenge Chip Race",
+        "brief_text": "Intel Corp. has announced a new family of processors for AI infrastructure, including Diamond Rapids, Crescent Island, and Wildcat Lake, aiming to capitalize on the AI boom. Diamond Rapids, designed for agentic AI workloads, delivers up to 256 cores and 16 memory channels, while Crescent Island is optimized for low-power AI inference and Wildcat Lake enhances AI capabilities in edge devices. The move comes as TSMC faces advanced packaging limits, potentially giving Intel an opportunity to gain business in areas where packaging capacity is as critical as chip design. Intel's stock has risen significantly over the past year, and investors will seek reassurance that this product push translates into meaningful market share gains.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/intel-may-found-opening-ai-144250683.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Intel unveils new AI processors to capitalize on AI boom, potentially gaining market share.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T14:42:50+00:00"
+      },
+      {
+        "title": "SpaceX, Tesla, Intel Break Ground on $16.8 Billion Texas Chip Fab",
+        "brief_text": "SpaceX, Tesla, and Intel have broken ground on the Terafab, the world's largest vertically integrated chipmaking factory in Grimes County, Texas. The initial phase will cost $16.8 billion, with total costs across all phases potentially surpassing $119 billion. The 100-million-square-foot facility is expected to meet SpaceX and Tesla's projected computing demand of more than 1 terawatt per year. SpaceX and Tesla will fund construction, while Intel will support development with its licensed chipmaking process and foundry operations. Approximately 75% of the chips will go to SpaceX's orbital data centers and satellite constellations, with the remaining 25% powering Tesla's Optimus robots, self-driving vehicles, and Cybercabs. Texas is supporting the project with a $30 million grant and tax abatements. SpaceX's capex surged more than sixfold year over year in the second quarter of 2026, from $2.8 billion to $18.4 billion, with $15.8 billion allocated to expanding its AI business.",
+        "url": "https://finance.yahoo.com/technology/articles/spacex-building-16-8-billion-162500056.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Intel's licensed chipmaking process and foundry operations are central to the new fab, with SpaceX and Tesla as major customers.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "ma_partnership",
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Robotics & Physical AI",
+        "trend_id": 12000000,
+        "published_at": "2026-08-25T16:25:00+00:00"
+      },
+      {
+        "title": "OPAQUE, AMD, Intel, TII collaborate on TRACE open standard for AI runtime verification",
+        "brief_text": "OPAQUE, the Confidential AI company, announced TRACE, an open, portable, hardware-enforced governance record for AI agents and other confidential workloads, developed in collaboration with AMD, Intel, Microsoft, and the Technology Innovation Institute. TRACE establishes a vendor-neutral format for proving what software ran, which policies governed execution, what data classifications were involved, and which tools were invoked, and it composes existing standards including RATS, EAT, SLSA, SCITT, SPIFFE, and EAR. The specification will be governed through the Linux Foundation, with CoSAI hosting the technical workstream, and is available today with reference implementations and documentation. OPAQUE first introduced TRACE at the Confidential Computing Summit in June 2026, and its reference library passed 135,000 PyPI downloads in its first ten weeks.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/opaque-amd-intel-tii-other-130000273.html",
+        "publisher": "PR Newswire",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Intel collaborates on TRACE, an open standard for AI runtime verification, strengthening its AI ecosystem.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T13:00:00+00:00"
+      },
+      {
+        "title": "GEEKOM to Showcase Distributed Local AI and New PCs at IFA 2026",
+        "brief_text": "GEEKOM will return to IFA 2026 in Berlin this September, showcasing its latest advances in local AI alongside a new generation of high-performance laptops and Mini PCs. Leading the lineup is a distributed local AI solution built around four GEEKOM A9 Mega Mini PCs powered by the AMD Ryzen AI Max+ 395 processor and Radeon 8060S graphics, connected through USB4 to run DeepSeek V4 Flash locally without a traditional server rack or proprietary high-speed switch. The company will also debut the GeekBook X16 Pro thin-and-light laptop with AMD Ryzen AI 9 HX 470 and Radeon 890M graphics, the IT13 Mega Mini PC with Intel Core Ultra X7 358H and Intel Arc B390 graphics, and the A5 2027 Edition Mini PC with AMD Ryzen 7 7730U. A new A9 Mega configuration powered by the AMD Ryzen AI Max+ 388 and equipped with a Phison AI SSD can support 70-billion-parameter and larger AI models on a 64GB unified-memory platform. IFA 2026 runs September 4–8 in Berlin, where GEEKOM will exhibit at Hall 6.2, Stand 119.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/geekom-returns-ifa-2026-distributed-123000490.html",
+        "publisher": "PR Newswire",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "GEEKOM's IT13 Mega Mini PC uses Intel Core Ultra X7 358H and Arc B390 graphics, increasing Intel's presence in new devices.",
+              "relevance": 0.4
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.4
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T12:30:00+00:00"
+      },
+      {
+        "title": "HSBC Doubles Intel Price Target to $200 on Foundry Inclusion",
+        "brief_text": "HSBC analyst Frank Lee doubled his price target on Intel to $200 from $100, implying roughly 129% upside from the stock's current level of $87.26, after incorporating Intel Foundry Services into the bank's valuation for the first time. The new target is the highest on Wall Street, far above the consensus target of $114.88, and comes after Intel shares fell 15.68% over the past week, the steepest decline among major chip stocks. Lee's bullish call is based on tight global advanced packaging and wafer capacity, particularly TSMC CoWoS constraints, which he expects will push hyperscalers toward Intel's EMIB packaging and 18A process node. HSBC also raised its 2026 and 2027 server CPU shipment growth estimates to 25% and 30% year over year, respectively, driving data center and AI revenue projections well above consensus. Intel's second-quarter revenue of $16.13 billion beat consensus by 11.64%, and non-GAAP EPS of $0.42 nearly doubled estimates, but the stock was pressured by a GAAP net loss of $2.16 per share tied to a $12.53 billion non-cash charge on CHIPS Act escrow shares and a $2.1 billion quarterly foundry operating loss.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/intel-skid-continues-one-biggest-114004162.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "HSBC doubles price target to $200, citing foundry inclusion and capacity constraints.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-25T11:40:04+00:00"
+      },
+      {
+        "title": "Navitas to buy Claros in $232.8M deal",
+        "brief_text": "Navitas Semiconductor agreed to acquire power management solutions provider Claros in a deal valued at up to approximately $232.8 million, sending its shares up 6% on Tuesday. The transaction includes about $216 million payable at closing in cash and Navitas Class A shares, with the remainder tied to business milestones over the following two years. Claros specializes in vertical power delivery and integrated voltage regulator technology for next-generation AI data centers, and the acquisition is expected to more than double Navitas’ identified 2030 serviceable addressable market to over $8 billion. Elsewhere, Bloom Energy and Intel rose after a congressional disclosure showed Nancy Pelosi bought positions in both companies, including shares and long-dated call options. Grand Canyon Education fell 5% after placing CFO Daniel Bachus on paid administrative leave in connection with a government investigation into a non-employee third party’s trading in the company’s stock.",
+        "url": "https://seekingalpha.com/news/4636475-biggest-stock-movers-tuesday-be-intc-and-more?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+        "publisher": "Seeking Alpha",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": null,
+              "direction": "pos",
+              "reason": "Pelosi's purchase disclosed, but no fundamental driver.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "ma_partnership",
+          "price_action_technical"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T09:01:26+00:00"
+      },
+      {
+        "title": "Intel Joins City Scale Open 5G and NextG Testing Push",
+        "brief_text": "Intel announced a collaboration on open-source 5G and NextG testing with the COSMOS testbed, Rutgers University, Columbia University, NYU, and Airspan Networks. The partnership centers on city scale trials of 5G core and O-RAN radio technology aimed at evaluating real world performance and interoperability. The project is designed to support future network evolution, including potential 6G use cases, across a mix of academic and industry partners. Intel is a large US semiconductor company with a reported market cap of $473.3b that designs and manufactures computing and related end products and services across multiple regions.",
+        "url": "https://finance.yahoo.com/technology/articles/intel-intc-joins-city-scale-190930730.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Intel collaborates on open 5G/NextG testing, advancing its network technology.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "ma_partnership",
+          "product_tech"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-24T19:09:30+00:00"
+      },
+      {
+        "title": "GF Securities Picks Marvell and Intel as AI Chip Winners",
+        "brief_text": "GF Securities has identified Marvell Technology, Mediatek, and Intel as preferred semiconductor names amid a favorable outlook for custom AI chips and advanced packaging. Analyst Henry Huang expects Nvidia's share of TSMC's CoWoS capacity to remain stable in 2027, with GPU demand expanding alongside custom accelerators, and sees Nvidia's Vera Rubin platform gaining adoption at major cloud providers including Amazon and Alphabet. The firm expects Marvell's CXL and DPU businesses tied to Google to each contribute about $3 billion by 2028, with its MPU business generating a similar amount that year, and Marvell is also expected to participate in Amazon's Trainium 3 program with estimated contributions of about $1 billion in 2026 and $2 billion in 2027. For Intel, GF Securities raised its back-end revenue forecasts to $1.1 billion for fiscal 2027 and $7 billion for fiscal 2028, citing improving visibility across AI packaging programs.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/gf-securities-picks-3-ai-173809626.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "GF Securities raised Intel's back-end revenue forecasts citing improving visibility across AI packaging programs.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T17:38:09+00:00"
+      },
+      {
+        "title": "Poland unveils Economy 2.0 strategy to attract AI, EV, and chip investment after GDP tops 1 trillion dollars",
+        "brief_text": "Poland has announced a new economic strategy called Poland Economy 2.0 to move up from a cheap-labour base to a high-value-added economy, after GDP surpassed 1 trillion dollars and the country was invited to join the G20 summit later this year. The government wants to attract foreign direct investment in advanced technology industries including AI, electric vehicles, semiconductors, and critical metals such as copper. A key project reflecting this strategy is the plan by Lumina Metals, a Canadian metals company, to invest 6.4 billion dollars to develop a copper and silver mine in the town of Nowa Sól, which could become the largest FDI project in Poland's history and is expected to create 6,000 direct jobs in a town of only 36,000 people. Meanwhile, a Taiwanese company is considering developing a Technology Park on the site where Intel had planned to build a 4.6 billion dollar semiconductor plant before cancelling the project, and the new project could be worth as much as 20 billion dollars. Foxconn, the major Taiwanese electronics manufacturer, plans to produce electric vehicles in the southern Polish city of Jaworzno under a preliminary agreement under which Poland would receive knowledge and technology transfer. Finance Minister Andrzej Domański said the quality of investment matters more than its value, and a senior adviser at the Polish Economic Institute called this type of investment Poland 2.0 Investment, which would help the country escape its role as an assembly-plant base and build its own technological capabilities. However, Lumina's mining project still needs a mining licence, which could take about five years, and the company wants the government to cut copper taxes to make the project economically viable, while the Polish government is facing a record budget deficit.",
+        "url": "https://moneyandbanking.co.th/2026/264466/",
+        "publisher": "Money & Banking",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Intel's cancelled semiconductor plant site is being considered for a Taiwanese Technology Park, highlighting its exit.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "macro_economic",
+          "ma_partnership"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Electrification & Mobility",
+        "trend_id": 16000000,
+        "published_at": "2026-08-21T04:56:18+00:00"
+      },
+      {
+        "title": "AMD and Intel Shares Plummet After Google-Marvell AI Chip Deal",
+        "brief_text": "AMD and Intel shares each fell 3.7% in afternoon trading after Google and Marvell Technology announced a partnership to develop custom AI chips, signaling a potential shift in market share. Marvell issued a warrant allowing Google to purchase nearly 59 million shares as part of a commercial agreement to develop custom semiconductors for Google's AI infrastructure, sending Marvell's stock soaring while competitor Broadcom fell. The deal is anticipated to intensify competition for lucrative custom AI silicon contracts with major cloud providers. AMD's shares are extremely volatile and have had 50 moves greater than 5% over the last year, and today's move indicates the market considers this news meaningful but not something that would fundamentally change its perception of the business. AMD is up 109% since the beginning of the year, but at $466.40 per share, it is still trading 19.7% below its 52-week high of $580.91 from June 2026.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/amd-intel-shares-plummet-know-233402382.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Google-Marvell custom AI chip deal intensifies competition, threatening Intel's market share in AI silicon.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "ma_partnership",
+          "price_action_technical"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T23:48:36.491539+00:00"
+      },
+      {
+        "title": "Wedbush Flags Surprising Move in Intel GPU Prices",
+        "brief_text": "Wedbush analyst Matt Bryson says Intel's Arc Pro B70 workstation GPU has risen as much as 48% in price over the past month, providing fresh evidence that surging memory costs are being passed through to customers. The card carries 32GB of GDDR6 ECC memory, making it particularly exposed to the tightening memory market and attractive for AI inference workloads. Per Tom's Hardware, the Arc Pro B70 has seen prices rise 30% in the US, with the ASRock Creator variant now at $1,299 versus $999 last month against a $949 MSRP, 26% in Germany, and 46% in Korea, where it moved from KRW 1,889,980 on July 21 to KRW 2,798,980 by August 16. Intel's own Korean list price has climbed to KRW 2.817 million. In its latest quarterly filing, Intel said Data Center and AI server average selling prices increased 48% year over year during the second quarter, driven mainly by a richer mix of premium products and, to a lesser extent, pricing actions designed to offset higher input costs.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/wedbush-flags-surprising-move-intel-190725379.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "pricing",
+              "direction": "pos",
+              "reason": "Intel's GPU prices rising due to memory cost pass-through and strong AI demand, with Data Center ASPs up 48%.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech",
+          "commodity_supply"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T19:07:25+00:00"
+      },
+      {
+        "title": "Intel's Client Computing Revenue Rises 13% on AI PC Momentum",
+        "brief_text": "Intel's Client Computing and Physical AI Group revenue rose 13% year over year to $8.88 billion in the second quarter of 2026, driven by strong AI PC adoption. AI PC revenues surged 26% sequentially, and the company has expanded its Core Ultra Series 3 portfolio to more than 400 designs across consumer and commercial systems. Edge deployments represented about 10% of the group's revenue, with more than 130 customers adopting or testing Series 3 processors for edge AI and robotics. Intel expects PC consumption to decline at a low-double-digit percentage rate in 2026 due to high memory prices, but sees growth opportunities in Edge AI, Physical AI, gaming, and graphics. Competitors AMD and Qualcomm are also expanding in AI PCs and edge computing, with AMD reporting $3.1 billion in client revenues, up 23% year over year, and Qualcomm positioning its Snapdragon X2 platform for always-on agentic experiences.",
+        "url": "https://finance.yahoo.com/technology/articles/intcs-client-computing-business-gains-155100741.html",
+        "publisher": "Zacks Investment Research",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Intel's Client Computing revenue rose 13% on strong AI PC adoption and expanded Core Ultra Series 3 portfolio.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T17:24:26.766131+00:00"
+      },
+      {
+        "title": "Intel CEO Buys $10 Million in Shares as Opendoor CEO Also Buys",
+        "brief_text": "Intel CEO Lip-Bu Tan bought about $10 million worth of INTC shares earlier this month at $95 a share, the same price at which Intel had just priced a $20 billion secondary offering days earlier. Intel's Q2 revenue rose 25% year over year, a massive acceleration from Q1's 7% growth, with margins jumping to about 42% and AI segment growing 59% while foundry revenue rose 31%. Wedbush analyst Matt Bryson said Intel's advanced packaging technology, EMIB, could put the company in a position to win TPU orders from Google, which would be the first real signal that an outside chip designer trusts Intel's manufacturing enough to bet its own products on it. Bears point out that server revenue growth is related to price, not volumes, with average selling prices rising 48% while unit volumes grew only about 9%, and client computing segment prices up 27% while volumes were down 8%. A major chunk of Foundry revenue in the most recent quarter was due to Intel manufacturing chips for itself, with external customer revenue coming in at only about $293 million and the segment losing approximately $2.1 billion in operating income for the quarter. Intel has a non-GAAP trailing P/E of 88.70 against a sector median of 25.65, a 246% premium, and forward P/E of 63.91 versus 23.77, a 169% premium, while EV/Sales runs 8.64 forward against 3.64 for the sector, a 138% premium. Opendoor Technologies CEO Kaz Nejatian recently bought 27,625 shares of the company after Opendoor's Q2 report missed on both revenue and earnings, with the GAAP loss per share coming in wider than expected and adjusted EBITDA flipping negative. The company sold 2,339 homes during the quarter, short of consensus and sharply lower than the 4,299 homes sold in the same period last year, but management gave upbeat forward guidance, pointing to plans to gain licenses in more states. Bulls argue the stock could rebound on reduced competition, since Zillow exited the iBuying business back in 2021, leaving Opendoor as one of the few major players still standing in the space, and management expects adjusted net income to turn positive by the end of this year, guiding for Q3 revenue growth of at least 20% year over year. On a price-to-sales basis, the stock looks cheap at 0.91 versus a sector median of 4.91, an 81% discount, and net long debt to assets is just 5.91% against a 39.94% sector median, but price-to-book paints the most cautionary picture, with Opendoor trading at 3.56 times book value versus a sector median of 1.67, a 114% premium.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/insiders-buying-intel-intc-opendoor-153115587.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "CEO buys $10M shares and Q2 revenue/margins/AI growth strong, but valuation premium noted.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "earnings_results",
+          "analyst_rating"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-19T16:00:26.694756+00:00"
+      },
+      {
+        "title": "Intel Completes US$20b Share Sale, Stock Down 6.58%",
+        "brief_text": "Intel has completed a US$20 billion follow-on equity offering of 210,526,315 common shares at US$95 each. The capital raise directly affects shareholder dilution and future funding flexibility. Intel's stock fell 6.58% over the last day but still carries a year-to-date return of 145.52% and a one-year total shareholder return of 282%. A widely followed narrative values Intel at US$500.93 per share, implying the stock is 80.7% undervalued relative to its last close of US$96.69, based on Intel's x86 software position and US foundry footprint.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/intel-intc-could-81-undervalued-001555488.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Intel completed a $20 billion share sale, causing dilution and a 6.58% stock drop.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "corporate_action"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-19T03:00:33.337514+00:00"
+      }
+    ],
+    [
+      {
+        "title": "Micron Options Price 13-Month Range From $460 to $1,884",
+        "brief_text": "Micron Technology trades at $932.97, and the options market has priced a thirteen-month range with roughly two-in-three odds that the shares finish between $460 and $1,884, implying a potential halving or doubling from today's price. The band is the middle of the distribution, with about a one-in-six chance of finishing above $1,884 and the same odds of finishing below $460. Implied volatility of 68.1% is below the stock's realized volatility of 81.7% over the past year, and Micron has returned 694.1% over the past twelve months against 19.7% for the S&P 500, though it trades about 23% below its 52-week high. The company's operating margin on $90.27 billion of trailing revenue was 65.7%, versus a three-year average of 11.2%, and management has signed 16 take-or-pay strategic customer agreements, typically five years long, with the largest carrying both a floor and ceiling price. Those deals cover only about 20% of DRAM volume and a third of NAND volume, but management expects coverage to reach roughly half or more of company revenue once all planned deals are signed.",
+        "url": "https://finance.yahoo.com/markets/options/articles/options-market-says-micron-stock-125720007.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Micron's take-or-pay customer agreements and strong operating margin indicate robust demand for its products.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-26T12:57:20+00:00"
+      },
+      {
+        "title": "Micron appoints Bhatia COO, DeBoer CTO",
+        "brief_text": "Micron Technology has appointed Manish Bhatia as president and chief operating officer, effective immediately, and Dr. Scott DeBoer as president and chief technology and products officer. Bhatia, who joined Micron in 2017, will lead global operations and business units, overseeing the company's operating P&L, capital investment, manufacturing execution, and customer demand, pricing, and delivery. DeBoer will advance the memory and storage roadmap and oversee Micron Research Labs. Meanwhile, Sumit Sadana, executive vice president and chief business officer, has transitioned to a new role as Senior Advisor to the CEO. CEO Sanjay Mehrotra said the leadership changes will strengthen execution and align the company with customer needs in the AI-enabled future.",
+        "url": "https://seekingalpha.com/news/4636958-micron-appoints-manish-bhatia-as-president-and-coo?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+        "publisher": "Seeking Alpha",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "ambiguous",
+              "reason": "Leadership changes may improve execution but no direct financial impact stated.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "management_governance"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-26T12:17:37+00:00"
+      },
+      {
+        "title": "AI Semiconductor Market Projected to Reach $255.90 Billion by 2035",
+        "brief_text": "The AI in semiconductor market is projected to grow to $255.90 billion by 2035, driven by hyperscale AI data center expansion, advanced AI-specific silicon, and edge computing adoption. Asia Pacific is expected to contribute significantly due to robust semiconductor production and AI chip development. In related market moves, Jentech Precision Industrial rose 10% to NT$5,725.00, near its 52-week high, while MPI fell 10% to NT$5,040.00. Micron Technology, which ended at $932.97 up 2.5%, opened a new training center in Boise, and NVIDIA, up 2.2% to $213.05, announced new partnerships and products including the Jetson Orin Nano 2. Broadcom closed down 0.6% at $356.74.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/ai-chips-ai-semiconductor-market-113723803.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Opened a new training center in Boise, indicating investment in workforce development.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-26T11:37:23+00:00"
+      },
+      {
+        "title": "Micron and Primemas Showcase Rack-Scale AI Memory Pooling Breakthrough",
+        "brief_text": "Micron Technology and Primemas showcased their Abaco Project collaboration on rack-scale AI memory pooling at FMS 2026. The Abaco Project uses CXL attached shared memory to pool capacity across a rack, targeting static local memory bottlenecks in AI and HPC data centers. Developed for the US Department of Energy, the project highlights Micron's role as memory partner on next generation infrastructure for scalable AI workloads.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/micron-technology-mu-showed-rack-190659119.html",
+        "publisher": "Simply Wall St",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "technology",
+              "direction": "pos",
+              "reason": "Micron showcases Abaco Project, a rack-scale AI memory pooling breakthrough with CXL attached shared memory, highlighting its role in next-gen AI infrastructure.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T19:06:59+00:00"
+      },
+      {
+        "title": "Goldman Sachs Projects Worst DRAM Shortage Since 2017",
+        "brief_text": "Goldman Sachs projects the DRAM market will swing to a 5.9% undersupply by 2027, driven by AI server demand and marking the worst such shortage since 2017. Micron's entire 2026 HBM output is sold out, with 16 contracts locking in roughly $100 billion in minimum revenue through 2030. Despite revenue projected to nearly double to $250 billion next year, Micron trades at a forward P/E near 6, well below semiconductor peers.",
+        "url": "https://finance.yahoo.com/technology/articles/memory-shortage-deepens-worst-levels-143732577.html",
+        "publisher": "24/7 Wall St.",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Micron's HBM output sold out with $100B minimum revenue through 2030.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T14:37:32+00:00"
+      },
+      {
+        "title": "Broadcom and Micron Post Blockbuster AI-Driven Quarters",
+        "brief_text": "Broadcom and Micron Technology delivered blockbuster quarters driven by the shift from AI training to inference and agentic workloads. Broadcom's fiscal Q2 revenue hit $22.2 billion, up 48% year-on-year, with AI semiconductor revenue of $10.8 billion, up 143%, and AI semiconductor orders exceeded $30 billion in the quarter. Micron's fiscal Q3 revenue reached $41.5 billion with a consolidated gross margin of 84.9% and non-GAAP EPS of $25.11, while DRAM prices rose in the low 60s percentage range sequentially. Micron secured roughly $100 billion in contracted memory revenue through five-year take-or-pay agreements, and its HBM4 is ramping twice as fast as its predecessor. Broadcom guided fiscal 2027 AI silicon revenue to be in excess of $100 billion, while Micron's Q4 guidance calls for $50 billion in revenue and roughly 86% gross margin.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-vs-micron-why-strong-135050121.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Secured ~$100B in contracted memory revenue via five-year take-or-pay agreements, with strong DRAM pricing.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-25T13:50:50+00:00"
+      },
+      {
+        "title": "Jim Cramer says data center backlash favors big tech hyperscalers",
+        "brief_text": "Jim Cramer said Monday that growing political opposition to data center construction is shifting the advantage toward the largest technology companies at the expense of smaller, speculative developers. The \"Mad Money\" host said the data center thesis, perhaps the greatest investment theme in a generation, is now under attack and may never be the same, citing Pennsylvania and Texas as illustrations where governors once advocates for data center growth have lately demanded more stringent conditions on new projects. Amazon, Alphabet, Microsoft, and Meta are best positioned to navigate the new landscape, Cramer argued, because the scale of their balance sheets lets them clear regulatory and community hurdles that would be prohibitive for smaller operators. He added that if speculative developers exit the market, hyperscalers could face less pressure on land, power, and workforce availability, which might translate into lower construction costs as they press ahead with AI infrastructure. Cramer cautioned that with the buildout trajectory in question, the market may no longer justify elevated multiples for suppliers like GE Vernova, which makes gas turbines, or memory-chip companies including Micron, Sandisk, Western Digital, and Seagate, regardless of how robust end demand proves to be. Despite his more cautious outlook for parts of the data center trade, Cramer stopped short of calling the broader theme finished, saying rules can be crafted and communities can be appeased, but the unbridled buildout is most likely over.",
+        "url": "https://finance.yahoo.com/technology/articles/jim-cramer-says-data-center-114048524.html",
+        "publisher": "CNBC",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "neg",
+              "reason": "Cramer says market may no longer justify elevated multiples for memory-chip companies like Micron despite robust end demand.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-25T11:40:48+00:00"
+      },
+      {
+        "title": "Nvidia to Raise AI Server Prices Over 15%",
+        "brief_text": "Nvidia is preparing price increases of more than 15% on many AI servers using its chips, as soaring memory costs collide with relentless data-center demand. Some of Nvidia's largest customers have been told that systems containing Grace Blackwell and next-generation Vera Rubin chips will become more expensive when shipments begin early next year, with increases varying by chip generation and memory configuration. Contract manufacturers supplying Microsoft, Alphabet and Oracle have already notified customers of the increases. Memory suppliers including Micron, Samsung and SK Hynix have struggled to expand capacity fast enough to match AI demand. Nvidia generated $81.6 billion of revenue last quarter, up 85% year over year, with Data Center revenue surging 92% to $75.2 billion and non-GAAP gross margin at 75%, and it guided fiscal second-quarter revenue to roughly $91 billion with another 75% non-GAAP gross margin. Nvidia reports fiscal second-quarter earnings on Aug. 26 after the market closes.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-makes-aggressive-move-ahead-191307970.html",
+        "publisher": "GuruFocus",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "supply",
+              "direction": "pos",
+              "reason": "Memory suppliers like Micron are struggling to expand capacity, leading to higher prices and increased demand for their products.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "product_tech",
+          "earnings_results"
+        ],
+        "impact_score": 4,
+        "dup_count": 3,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T19:13:07+00:00"
+      },
+      {
+        "title": "Direxion Daily Semiconductor Bull 3X ETF Drops 8% on China Chip Threat",
+        "brief_text": "The Direxion Daily Semiconductor Bull 3X Shares ETF fell 8% through 12:12 p.m. ET after reports that the Trump Administration will allow Apple to buy memory chips from Chinese suppliers ChangXin Memory Technologies and Yangtze Memory Technologies Corp. The decision threatens U.S. memory makers Micron and Sandisk, with Micron being the ETF's largest holding at 8.6%. Micron stock dropped about 5%, while Sandisk fell roughly 6%, and other top holdings including AMD and Nvidia also traded lower. The leveraged ETF had surged 32% in the first two weeks of August before reversing course.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/why-direxion-daily-semiconductor-bull-165455498.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Micron threatened by Apple's shift to Chinese memory suppliers, stock drops 5%.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "geopolitics",
+          "commodity_supply"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Critical Materials & Supply Chain",
+        "trend_id": 30000000,
+        "published_at": "2026-08-24T16:54:55+00:00"
+      },
+      {
+        "title": "Micron Stock Tumbles on Report Apple May Buy Chinese Memory Chips",
+        "brief_text": "Micron stock tumbled 5.5% in the first five minutes of trading Monday after tech news site WCCTech reported the Trump Administration has decided to permit Apple to purchase memory chips from Chinese suppliers ChangXin Memory Technologies and Yangtze Memory Technologies Corp. The report said the DRAM and NAND chips Apple might source from China would only be used in Apple products sold in China, limiting the threat to Micron's global market share but still posing a risk to its China business. Lynx Equity Research analyst KC Rajkumar called the sell-off an overreaction, citing concerns about the quality of Chinese chips and the inability of CXMT and YMTC to scale production sufficiently to meet Apple's needs. However, CXMT just finished raising $8.6 billion in a Shanghai IPO and plans to ramp up production immediately, with YMTC expected to follow a similar path.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/why-micron-stock-dropped-morning-141607334.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Report that Apple may buy Chinese memory chips threatens Micron's China business.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 1
+        },
+        "news_types": [
+          "regulatory_legal",
+          "analyst_rating"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-24T14:16:07+00:00"
+      },
+      {
+        "title": "YMTC files for $4.9 billion Shanghai IPO",
+        "brief_text": "Yangtze Memory Technologies filed for an initial public offering on the Shanghai Stock Exchange to raise $4.9 billion, in what would rank among China's largest semiconductor share sales in years. The Wuhan-based company, known as YMTC, said in its listing prospectus on Friday that it plans to issue between roughly 2.0 billion and 2.4 billion new shares, representing 10% to 12% of its post-offering share capital, with an overallotment option of up to 15%. The funds will be used to upgrade production lines and develop next-generation storage products, and the company expects to list in 2027. YMTC's parent company, CCSH Corporation, plans to list on Shanghai's STAR Market. The IPO comes as explosive demand from artificial intelligence has driven a surge in NAND flash chip prices, allowing YMTC's factories to run near full capacity. The company posted first-quarter revenue of 47.04 billion yuan, or $7.0 billion, a figure that surpassed what it had earned across all of 2024, while quarterly net profit reached 33.38 billion yuan, more than twice what the company earned across all of 2025. Counterpoint Research placed YMTC third in global NAND shipments, ahead of Kioxia by volume, even as it continues to lag behind both Kioxia and Micron Technology when measured by revenue. YMTC remains subject to U.S. restrictions limiting its access to certain American technologies, a factor analysts said could weigh on its longer-term growth.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/ymtc-files-4-9-billion-133941365.html",
+        "publisher": "The Wall Street Journal",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "YMTC's IPO and strong Q1 results highlight its growing NAND market share, intensifying competition for Micron.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "corporate_action"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T13:39:41+00:00"
+      },
+      {
+        "title": "Micron CEO Unveils $10 Billion Research Labs Betting Memory Is No Longer a Commodity",
+        "brief_text": "Micron Technology CEO Sanjay Mehrotra unveiled Micron Research Labs, a $10 billion investment in basic research aimed at next-generation AI memory, during a CNBC appearance from Boise last Thursday. Mehrotra framed the announcement with the claim that memory is no longer a commodity but strategic infrastructure for AI, noting Micron holds over 62,000 patents and that the lab will be headquartered in Boise with satellite campuses globally, modeled after Bell Labs. The company has signed 16 Strategic Customer Agreements, most running five years from calendar 2026 through 2030, with 14 of those deals representing roughly $100 billion in cumulative minimum revenue and covering about 20% of DRAM volume and a third of NAND volume. Mehrotra said the largest agreements include price floors that would deliver gross margins well above any past cycle peak, though only about 40% of revenue will be at fixed prices or ceilings, leaving the rest exposed to commodity pricing. Micron shares closed at $974.33 on Thursday, up 241.59% year to date and 732.62% over the trailing year, but the stock trades at a forward PE of 6 versus a trailing PE of 21, signaling expectations of lower earnings ahead.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/micron-ceo-says-memory-no-131547668.html",
+        "publisher": "24/7 Wall St.",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Micron unveils $10B research labs and signs $100B in customer agreements with price floors, boosting long-term revenue and margin outlook.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "product_tech",
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 3,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-24T13:15:47+00:00"
+      },
+      {
+        "title": "Micron CEO bets $10 billion research lab ends memory cycle",
+        "brief_text": "Micron Technology CEO Sanjay Mehrotra is arguing that the memory-chip cycle has been permanently broken, backing the claim with a planned $10 billion investment in a new Boise, Idaho research institution. The company unveiled Micron Research Labs on Aug. 20, with ground breaking in calendar 2027 and work spanning memory technologies, compute architectures, packaging and future semiconductor manufacturing. The lab sits on top of more than $250 billion Micron has separately committed to U.S. manufacturing and research through 2035. Mehrotra told CNBC that data center customers currently want about 50% more supply than Micron can commit to, and the company has disclosed 16 five-year strategic customer agreements alongside its June earnings report. Micron shares closed at $974.33 on Aug. 20, up about 4%, but still roughly 22% below their late-June record close.",
+        "url": "https://finance.yahoo.com/technology/articles/micron-ceo-doubling-down-cycle-220700946.html",
+        "publisher": "TheStreet",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "CEO states data center customers want ~50% more supply than Micron can commit, indicating strong demand.",
+              "relevance": 0.9
+            },
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Plans $10B research lab and $250B U.S. investment, signaling long-term growth and financial commitment.",
+              "relevance": 0.7
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 2,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-23T22:07:00+00:00"
+      },
+      {
+        "title": "Micron CEO Sold $37 Million in Shares Before $22 Billion Deposit Reveal",
+        "brief_text": "Micron CEO Sanjay Mehrotra sold $37 million in shares a month before announcing $22 billion in customer deposits and demand outpacing supply by 50%. On July 24, 2026, Mehrotra disposed of 40,000 shares at prices ranging from roughly $906 to $966, while Chief Accounting Officer Scott Allen sold 879 shares at $1,000.00 on July 23 and Chief People Officer April Arnzen sold on July 1 across 18 lots priced between $1,077.05 and $1,095.88. Micron closed at $974.33 on August 20, up 241.59% year to date and 732.62% over one year. The company said 14 of 16 signed take-or-pay agreements represent roughly $100 billion in cumulative revenue at minimum prices, with floor pricing supporting gross margins well above peak quarterly margins in any past cycle.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/22-billion-customer-deposits-did-201236753.html",
+        "publisher": "24/7 Wall St.",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "CEO sold $37M in shares before positive news, raising governance concerns.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "management_governance"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-23T20:12:36+00:00"
+      },
+      {
+        "title": "Hedge funds and mutual funds split on AI trade, Goldman says",
+        "brief_text": "Hedge funds and mutual funds took sharply different approaches to individual AI stocks during the second quarter, according to Goldman Sachs. Hedge funds bought Microsoft and Amazon while mutual funds reduced positions in both, and hedge funds cut exposure to Alphabet, Meta Platforms, Nvidia, Broadcom, Lam Research, Marvell Technology, Cisco Systems, Hewlett Packard Enterprise and Applied Materials. Mutual funds bought Advanced Micro Devices, Micron Technology and Sandisk while hedge funds reduced exposure to those stocks. Goldman identified 12 AI infrastructure stocks purchased by both groups, including American Electric Power, Bloom Energy, CoreWeave, Flex, NiSource, Seagate Technology, Talen Energy and Xcel Energy. The analysis covers 991 hedge funds with $5.4 trillion of gross equity positions and 504 large-cap active mutual funds with $4.6 trillion in equity assets.",
+        "url": "https://seekingalpha.com/news/4636064-hedge-funds-and-mutual-funds-split-on-the-ai-trade-goldman?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news",
+        "publisher": "Seeking Alpha",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Mutual funds bought Micron while hedge funds reduced exposure, indicating a positive view from one group.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "industry_thematic"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-23T18:31:24+00:00"
+      },
+      {
+        "title": "Nvidia May Cut Memory on Rubin Ultra GPU, AMD Unfazed",
+        "brief_text": "Nvidia is reportedly testing versions of its next-generation Rubin Ultra GPU with significantly less high-bandwidth memory than originally promised, with some configurations as low as 192GB to 256GB versus the 1 terabyte Jensen Huang initially announced. The move comes amid a severe industry-wide memory shortage, though Nvidia still controls more than 95% of the data center GPU market and has struck a $500 billion partnership with SK Hynix's parent company to co-develop future memory technology. Rival AMD says it has already secured the HBM it needs through ties with Samsung Electronics, SK Hynix, and Micron Technology, and its Helios AI system ships to customers including Microsoft, Meta, OpenAI, and Oracle later this year. AMD's data center revenue grew 57% year over year as of Q1 2026 and now makes up the majority of its total revenue, but Helios reportedly costs $5 million to $5.5 million per system versus $3.5 million to $4 million for Nvidia's Vera Rubin. Nvidia was the most widely held chip stock among hedge funds in Q1 2026 with 275 holders, compared to 134 for AMD.",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-corporation-nvda-advanced-micro-204025825.html",
+        "publisher": "Insider Monkey",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "supply",
+              "direction": "pos",
+              "reason": "Memory shortage and Nvidia's reduced HBM usage may increase demand for Micron's HBM, and AMD's ties with Micron secure supply.",
+              "relevance": 0.6
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.6
+        },
+        "news_types": [
+          "product_tech",
+          "analyst_forecast"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T20:40:25+00:00"
+      },
+      {
+        "title": "S&P 500 Q3 Earnings Expected to Rise 22.3%",
+        "brief_text": "S&P 500 earnings for the third quarter of 2026 are expected to increase 22.3% from a year earlier on 10.8% higher revenues, according to Zacks Investment Research. The forecast follows an unusually strong second quarter, when earnings are on track to rise 43.5% on 15.2% revenue growth. Estimate revisions for Q3 have been positive across 8 of 16 Zacks sectors, including Transportation, Finance, Aerospace, Industrials, Utilities, and Construction, alongside Tech and Energy. Through August 21st, 468 S&P 500 members, or 93.6% of the index, have reported Q2 results, with total earnings up 40.6% on 14.1% revenue gains, and 84% beating EPS estimates while 76.9% beat revenue estimates. The strong growth rates are benefiting from blockbuster results from Micron and Alphabet.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/q3-earnings-preview-high-expectations-203800936.html",
+        "publisher": "Zacks Investment Research",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Micron's blockbuster results contribute to strong S&P 500 earnings growth.",
+              "relevance": 0.5
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.5
+        },
+        "news_types": [
+          "macro_economic"
+        ],
+        "impact_score": 3,
+        "dup_count": 4,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-21T20:38:00+00:00"
+      },
+      {
+        "title": "Sandisk Launches NAS SSDs to Challenge Micron and Seagate",
+        "brief_text": "Sandisk Corporation has expanded into high-performance network-attached storage with the SANDISK NAS 600 SATA SSD and SANDISK NAS 800 NVMe SSD, targeting prosumers, creative professionals, and small businesses. The NAS 600 delivers sequential read speeds of up to 560 MB/s and endurance of up to 2,500 TBW on the 4TB model, while the PCIe 5.0-based NAS 800 offers sequential read/write speeds of up to 14,900/13,200 MB/s and endurance of up to 14 PBW. The launch strengthens Sandisk's competitive positioning against Micron Technology and Seagate Technology, with Micron representing a more direct NAND and SSD competitor and Seagate challenging through high-capacity hard drives and tiered-storage architectures. Sandisk shares have appreciated 575.7% year to date, and the stock trades at a forward 12-month price/earnings of 7.31X compared with the broader sector's 20.92X. For fiscal 2027, the Zacks Consensus Estimate for Sandisk's earnings is pegged at $213.30 per share, up 10.62% over the past 30 days and suggesting 200.93% growth from the year-ago estimate.",
+        "url": "https://finance.yahoo.com/technology/articles/sandisks-nas-expansion-help-challenge-163500436.html",
+        "publisher": "Zacks Investment Research",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "neg",
+              "reason": "Sandisk launches NAS SSDs directly challenging Micron's NAND and SSD market.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-21T16:35:00+00:00"
+      },
+      {
+        "title": "Micron invests $10 billion in new Boise research facility",
+        "brief_text": "Micron is building a $10 billion research facility in Boise, Idaho, as the memory chipmaker rides the AI infrastructure boom. The company is one of only three global suppliers of high-bandwidth memory, alongside SK Hynix and Samsung, which is critical for high-end AI chips. Rising demand for HBM has reduced supply of consumer DRAM, pushing up prices and boosting Micron's revenue and stock price. The Boise expansion has reportedly created millionaires in the area, though future growth could be affected if chipmakers like Nvidia adopt designs requiring less memory.",
+        "url": "https://finance.yahoo.com/video/micron-ai-boom-rolls-10-144700739.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Invests $10B in new research facility, boosting capacity and riding AI demand.",
+              "relevance": 1
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 1
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 4,
+        "dup_count": 5,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T15:12:24.233167+00:00"
+      },
+      {
+        "title": "SK Hynix to invest tens of trillions of won in chip plant in Japan",
+        "brief_text": "SK Hynix, a major South Korean chipmaker, plans to build a memory chip plant in Miyagi Prefecture in northeastern Japan, with an intended investment of tens of trillions of won. This would be the first large-scale investment by a South Korean semiconductor maker in establishing a production base in Japan. The move comes after Micron Technology and Taiwan Semiconductor Manufacturing Company previously set up plants in Japan. Sources at SK told Kyodo News that any location with sufficient infrastructure could be chosen, but no decision has been made at this time, and they could not confirm Korean media reports citing financial industry sources that Chey Tae-won, chairman of SK Group, had visited candidate sites. SK Hynix is one of the leading companies in DRAM memory chips along with Samsung Electronics and Micron Technology, and is also the world's leading producer of high-bandwidth memory chips, a key component for high-speed artificial intelligence processing. The company views the planned plant as a measure to expand production capacity amid a semiconductor boom driven by AI demand, but it also noted that the United States, which has previously pressured South Korean companies to invest in its semiconductor sector, may increase pressure on SK Hynix if the company invests in that sector in Japan.",
+        "url": "https://infoquest.co.th/2026/635565",
+        "publisher": "InfoQuest",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "competition",
+              "direction": "ambiguous",
+              "reason": "Mentioned as a peer that previously set up a plant in Japan, but no direct impact on Micron.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "ma_partnership"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Artificial Intelligence",
+        "trend_id": 10000000,
+        "published_at": "2026-08-21T07:30:44.220179+00:00"
+      },
+      {
+        "title": "Binance users see first outflows in a week when QQQ fell, selling memory stocks and rotating into crypto-related names",
+        "brief_text": "According to a weekly flow analysis of equity-linked products published by Binance Research on the 20th, the platform recorded net outflows of 42 million dollars during the period from August 13 to 19, marking a third consecutive week of outflows. The Nasdaq 100 tracking ETF QQQ fell 1.1 percent over the period, but over the past 11 weeks, weeks in which QQQ declined had seen average inflows of about 165 million dollars. This time, however, funds flowed out in a week when QQQ fell for the first time, deviating from the previous trend. The technology sector led the outflows, with net outflows of 62.3 million dollars, more than triple the previous week's 18.7 million dollars and the largest in the past 12 weeks. Selling was particularly notable in memory-related names, with Micron, SanDisk, and memory-related ETFs ranking among the top by total trading value. Meanwhile, buying was concentrated mainly in crypto-related stocks that had been declining, with Strategy seeing the largest single-stock inflow at 7.9 million dollars, Coinbase receiving 2 million dollars, and the iShares Bitcoin ETF taking in 2.4 million dollars.",
+        "url": "https://finance.yahoo.co.jp/news/detail/d796eeee22aa90c4f13efc8bc807bbb13171979f",
+        "publisher": "CoinPost",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "neg",
+              "reason": "Micron was among the top memory-related names sold, leading to net outflows in the tech sector.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "neg",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "price_action_technical",
+          "crypto_related"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-21T04:40:13+00:00"
+      },
+      {
+        "title": "Walmart Plunges 10% Despite Earnings Beat and Raised Guidance",
+        "brief_text": "Walmart shares fell about 10% on Thursday even after the retail giant beat Wall Street estimates and raised its full-year guidance, dragging all three major U.S. indexes lower. The S&P 500 was down 0.29%, the Dow Jones Industrial Average fell 0.64%, and the Nasdaq Composite dropped 0.80% as of 11:44 a.m. ET. Walmart's domestic comparable sales grew just 2.6%, well short of the roughly 3.7% analysts expected and the slowest pace since Q4 2020, while about $2.9 billion of the quarter's earnings surprise came from tariff refunds rather than core operations. The stock's 9.8% decline added to a 21.3% drop over the last three months, and with an $826 billion market cap it weighed heavily on the S&P 500 and Nasdaq. Oil prices rose about 3% after the United Arab Emirates suspended all financial transactions with Iran, and 30-year Treasury yields remained near multi-decade highs, while Treasury Secretary Scott Bessent announced bigger buybacks of long-dated debt and admitted liquidity there is very poor. Deere rose 9.4% on another beat-and-raise report, and Micron Technology gained 1.8% while SK Hynix added 3.7%.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/walmarts-10-plunge-weighs-three-170443188.html",
+        "publisher": "The Motley Fool",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Micron gained 1.8% as part of a sector move, but no company-specific news.",
+              "relevance": 0.3
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.3
+        },
+        "news_types": [
+          "earnings_results"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-20T17:36:22.66909+00:00"
+      },
+      {
+        "title": "Micron's $27 Billion Fab Bet Is Its Biggest Risk",
+        "brief_text": "Micron Technology is committing approximately $27 billion of capital spending in fiscal 2026, net of anticipated government incentives, to new fabs whose output arrives into the same year its own outlook expects memory supply to improve. The company posted a quarterly record $18.3 billion of free cash flow in fiscal Q3 2026 after $7.1 billion had already gone into plant, with trailing twelve-month revenue of $90.3 billion. More than half of the year-over-year increase in fiscal 2027 capital spending is construction as Micron pulls in clean room capacity for the ID1 and ID2 DRAM fabs in Idaho, the first fab of a New York cluster, a newly acquired site at Tongluo in Taiwan, and an advanced packaging facility in Singapore. Management expects industry supply to improve gradually in 2028 but says it has no line of sight as to when memory supply will catch up with increasing demand, while ID1 is due for first wafer output in mid-calendar 2027 and ID2 in late calendar 2028. Micron has signed 16 strategic customer agreements, take-or-pay contracts typically running five years from calendar 2026, covering roughly 20% of its DRAM volume and a third of its NAND volume, with the largest agreements generally carrying a ceiling price for existing products at the current CQ2 market price alongside a floor. Yangtze Memory Technologies has broken into the global top three in NAND shipments, finishing ahead of Micron with 14% of the global total in the second quarter, according to Counterpoint Research.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/microns-biggest-risk-written-construction-152112282.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "ambiguous",
+              "reason": "Massive capex for new fabs with uncertain supply-demand timing, but strong FCF and take-or-pay contracts provide some offset.",
+              "relevance": 0.9
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "ambiguous",
+          "relevance": 0.9
+        },
+        "news_types": [
+          "earnings_results",
+          "commodity_supply"
+        ],
+        "impact_score": 4,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-20T15:48:37.487745+00:00"
+      },
+      {
+        "title": "SK Hynix Rises 6% on $29B Buyback, SanDisk Gains 5%, Micron Climbs 3% as Memory Names Rebound",
+        "brief_text": "SK Hynix shares climbed 6% to $164.70 after the Korean memory giant approved the largest treasury share cancellation in South Korean history, a 40 trillion won, or about $28.6 billion, repurchase and cancellation plan covering roughly 24.07 million shares, or 3.3% of total shares outstanding. The move lifted memory peers, with SanDisk up 5% to $1,703 and Micron Technology up 3% to $967.93, while the Roundhill Memory ETF rose 4% to $57.26. SK Hynix also revised its 2025 to 2027 shareholder return commitment upward from a ceiling of 50% of cumulative free cash flow to a floor above that level, with fixed and special dividends under consideration and details due alongside third-quarter earnings likely in late October. The company cited a net cash position of approximately 69 trillion won, or about $49.36 billion, at the end of the second quarter, and last week approved 54 trillion won of investment to build two new fabrication plants in South Korea. Micron's buyback remains capped by CHIPS Act terms until December, while investor Cathie Wood has said she is steering clear of memory stocks, arguing memory is becoming increasingly expensive and will push engineers toward AI systems that need less of it.",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/sk-hynix-rises-6-29b-132908117.html",
+        "publisher": "Yahoo Finance",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "capital",
+              "direction": "pos",
+              "reason": "Micron shares rose 3% as part of the memory sector rebound, though its buyback is capped by CHIPS Act terms.",
+              "relevance": 0.4
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.4
+        },
+        "news_types": [
+          "corporate_action"
+        ],
+        "impact_score": 3,
+        "dup_count": 1,
+        "trend": "Semiconductors",
+        "trend_id": 56000000,
+        "published_at": "2026-08-19T13:48:24.692038+00:00"
+      },
+      {
+        "title": "Krungsri Asset Management launches two new funds targeting the global AI megatrend",
+        "brief_text": "Krungsri Asset Management is offering the Krungsri AI and Next Gen Software Fund, known as KF-AINEXT, and KF-AINEXT-FX, for sale from 19 to 25 August 2026. Both funds invest in the master fund, the Invesco AI and Next Gen Software ETF, which focuses on companies driving the development of AI and next-generation software across the entire AI value chain, from infrastructure such as semiconductors, networking systems, and cloud computing, to developers of AI platforms and models, as well as companies applying AI in various industries such as industrials and healthcare. Selected companies must derive at least 50% of revenue from theme-related businesses, and the fund selects the top 100 stocks by free-float market capitalisation, with quarterly portfolio rebalancing. The top five holdings include AMD at 8.80%, Micron Technology at 8.57%, Alphabet at 7.39%, Meta Platforms at 7.33%, and NVIDIA at 7.22%. The portfolio has an 82.06% allocation to the United States and a 52.33% weighting in semiconductors and semiconductor equipment. The master fund has delivered a one-year return of 111.51%, a three-year average annual return of 42.53%, and an average annual return since inception of 15.97% as of 30 June 2026. KF-AINEXT hedges foreign exchange risk at the fund manager's discretion, while KF-AINEXT-FX does not hedge foreign exchange risk. Both funds have a minimum initial investment of only 500 baht and carry a risk level of 6, indicating high risk.",
+        "url": "https://thunhoon.com/ksam19082026",
+        "publisher": "thunhoon.com",
+        "impact": {
+          "aspects": [
+            {
+              "aspect": "demand",
+              "direction": "pos",
+              "reason": "Micron Technology is a top holding in the new AI-focused funds, indicating increased investor demand for its stock.",
+              "relevance": 0.8
+            }
+          ],
+          "label_version": "1.0",
+          "net_direction": "pos",
+          "relevance": 0.8
+        },
+        "news_types": [
+          "product_tech"
+        ],
+        "impact_score": 2,
+        "dup_count": 1,
+        "trend": null,
+        "trend_id": null,
+        "published_at": "2026-08-19T06:45:32.328783+00:00"
+      }
+    ]
+  ],
+  "answer_to_user": "Head-to-head over the past week (7d), ranked best-to-worst on news impact:\n\n1) MICRON (MU) — best week. 25 items, 15 positive / 7 negative. The strongest catalysts: Broadcom AND Micron posting 'blockbuster AI-driven quarters' (impact-4), Goldman projecting the 'worst DRAM shortage since 2017' (impact-4, i.e. pricing power), a rack-scale AI memory-pooling breakthrough with Primemas, and Nvidia raising AI-server prices >15% (memory-cost tailwind). Small negative: Cramer's 'data-center backlash favors hyperscalers.' Clean, high-impact memory-cycle bull story.\n\n2) INTEL (INTC) — best positive RATIO (12 pos / 4 neg of 16). Highlights: operating cash flow surging to $8.1B in H1, HSBC doubling its price target to $200 on foundry inclusion (impact-3), new AI processors, and breaking ground with SpaceX/Tesla on a $16.8B Texas fab (impact-4). The main negative is the shared 'AMD and Intel raise billions via debt and stock' item (dilution/leverage read). Fewer items but consistently constructive.\n\n3) AMD — busiest but most two-sided, so a weaker net week. 26 items, 14 pos / 8 neg. Positives include the TRACE AI-verification standard collaboration; but the headline negative is impact-4: 'AMD's OpenAI and Meta wins carry hidden warrant costs' (potential ~20% dilution), plus the debt/stock-raise item. High attention, but the marquee deals come with a dilution asterisk.\n\nBottom line: Micron > Intel > AMD this week — Micron on the cleanest high-impact bull catalysts (DRAM shortage, blockbuster quarter), Intel on a strong positive ratio (cash flow, HSBC $200 PT, Texas fab), and AMD trailing because its biggest single item was the dilutive warrant-cost story. All three had material news — none needed padding."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "ma-03",
+  "question": "Show me forex pairs that are near a 52-week high right now.",
+  "tool_calls": [
+    {
+      "tool": "find_tasignal",
+      "args": {"q": ["52-week high"]}
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "asset_type": ["Currency"],
+        "ta": [{"anchor": [{"pattern": "near_high"}]}],
+        "limit": 15
+      }
+    }
+  ],
+  "result_summary": "Returned 60 results (capped=true). All tickers end in .FOREX confirming forex-only universe. Top results include AEDCAD.FOREX, AEDCHF.FOREX, AEDEUR.FOREX. Signal 'near_high' correctly maps to within 3% of 52-week high. RSI values for these pairs are in the 42-56 range (neutral momentum), and close_vs_ema200 near zero, consistent with pairs near their annual range highs but not necessarily trending strongly. Signal name in matched output is 'near_high' with strength=1.0.",
+  "verdict": "PASS",
+  "reason": "Correct forex-only universe (.FOREX tickers), near_high pattern correctly resolves 52-week proximity, all 60 results are forex pairs. No equities or crypto in results.",
+  "defects": []
+}

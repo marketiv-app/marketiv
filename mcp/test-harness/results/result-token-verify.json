@@ -1,0 +1,13 @@
+{
+  "screen1": {
+    "ta_pattern_sent": "net_change_down",
+    "matched_ta_keys_literal": ["net_change_down"],
+    "keyed_by_token": true
+  },
+  "screen2": {
+    "ta_pattern_sent": "near_low",
+    "matched_ta_keys_literal": ["near_low"],
+    "keyed_by_token": true
+  },
+  "verdict": "PASS — matched.ta is keyed by the exact pattern token the client sent (dot-accessible: matched.ta.net_change_down, matched.ta.near_low). Every inspected row across both screens had a single key equal to the sent pattern token, NOT a human sentence. Each key's value is an object {kind:'signal', strength, value:<date>, detail:{...}} (screen1 detail carried ret:-0.42 for the ~20% drop)."
+}

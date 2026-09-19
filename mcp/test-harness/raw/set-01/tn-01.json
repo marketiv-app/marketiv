@@ -1,0 +1,1764 @@
+{
+  "id": "tn-01",
+  "question": "What stocks are super overbought right now? Like RSI above 70 or whatever.",
+  "tools_called": [
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "rsi above 70 overbought"
+        ]
+      }
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "overbought",
+                "a": "rsi",
+                "b": "70"
+              }
+            ]
+          }
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "sort": "rsi",
+        "limit": 15
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": true,
+      "count": 60,
+      "currency": "USD",
+      "results": [
+        {
+          "context": {
+            "ta": {
+              "adx": 46.2763,
+              "close_vs_ema200": 0.4526,
+              "rsi14": 90.8576
+            }
+          },
+          "head_listing_id": 49628,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 9
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Global Green Chemicals Public Company Limited",
+          "score": 1.0,
+          "ticker": "GGC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.6944,
+              "close_vs_ema200": 0.3514,
+              "rsi14": 89.1461
+            }
+          },
+          "head_listing_id": 50092,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 12
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Tropical Canning (Thailand) Public Company Limited",
+          "score": 1.0,
+          "ticker": "TC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.4781,
+              "close_vs_ema200": 0.501,
+              "rsi14": 88.2921
+            }
+          },
+          "head_listing_id": 49541,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 9
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Castle Peak Holdings Public Company Limited",
+          "score": 1.0,
+          "ticker": "CPH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 42.0749,
+              "close_vs_ema200": 0.2616,
+              "rsi14": 87.4532
+            }
+          },
+          "head_listing_id": 50258,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Ziga Innovation Public Company Limited",
+          "score": 1.0,
+          "ticker": "ZIGA.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 62.4624,
+              "close_vs_ema200": 0.6713,
+              "rsi14": 86.9418
+            }
+          },
+          "head_listing_id": 49555,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 11
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "CSP Steel Center Public Company Limited",
+          "score": 1.0,
+          "ticker": "CSP.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 36.2453,
+              "close_vs_ema200": 0.4102,
+              "rsi14": 85.819
+            }
+          },
+          "head_listing_id": 49489,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "The Brooker Group Public Company Limited",
+          "score": 1.0,
+          "ticker": "BTC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 38.5421,
+              "close_vs_ema200": 1.315,
+              "rsi14": 84.2429
+            }
+          },
+          "head_listing_id": 49532,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Christiani & Nielsen (Thai) Public Company Limited",
+          "score": 1.0,
+          "ticker": "CNT.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.6511,
+              "close_vs_ema200": 0.1803,
+              "rsi14": 83.6799
+            }
+          },
+          "head_listing_id": 49670,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Intermedical Care and Lab Hospital Public Company Limited",
+          "score": 1.0,
+          "ticker": "IMH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 60.9226,
+              "close_vs_ema200": 1.15,
+              "rsi14": 83.0601
+            }
+          },
+          "head_listing_id": 49440,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 15
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Banpu Public Company Limited",
+          "score": 1.0,
+          "ticker": "BANPU.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 47.6706,
+              "close_vs_ema200": 0.2027,
+              "rsi14": 82.5682
+            }
+          },
+          "head_listing_id": 50201,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 8
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Utility Business Alliance PCL",
+          "score": 1.0,
+          "ticker": "UBA.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 45.8087,
+              "close_vs_ema200": -0.1431,
+              "rsi14": 82.3754
+            }
+          },
+          "head_listing_id": 50024,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "SMD100_SAINTMED",
+          "score": 1.0,
+          "ticker": "SMD100.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 23.8279,
+              "close_vs_ema200": 0.0987,
+              "rsi14": 81.2288
+            }
+          },
+          "head_listing_id": 50121,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Thaire Life Assurance Public Company Limited",
+          "score": 1.0,
+          "ticker": "THREL.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.5636,
+              "close_vs_ema200": 0.1982,
+              "rsi14": 80.5212
+            }
+          },
+          "head_listing_id": 50023,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Smart Concrete Public Company Limited",
+          "score": 1.0,
+          "ticker": "SMART.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 16.5021,
+              "close_vs_ema200": 0.3076,
+              "rsi14": 80.508
+            }
+          },
+          "head_listing_id": 50005,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Siam Steel International Public Company Limited",
+          "score": 1.0,
+          "ticker": "SIAM.BK"
+        },
+        {
+          "also_known_as": [
+            "36.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 62.1608,
+              "close_vs_ema200": 0.0182,
+              "rsi14": 79.7802
+            }
+          },
+          "head_listing_id": 50301,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 135
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Far East Holdings International Ltd",
+          "score": 1.0,
+          "ticker": "0036.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 51.3717,
+              "close_vs_ema200": 0.4709,
+              "rsi14": 79.7755
+            }
+          },
+          "head_listing_id": 50135,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Techno Medical Public Company Limited",
+          "score": 1.0,
+          "ticker": "TM.BK"
+        },
+        {
+          "also_known_as": [
+            "CHOWF.US"
+          ],
+          "context": {
+            "ta": {
+              "adx": 49.2395,
+              "close_vs_ema200": 0.363,
+              "rsi14": 79.5523
+            }
+          },
+          "head_listing_id": 50368,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Chow Sang Sang Holdings International Ltd",
+          "score": 1.0,
+          "ticker": "0116.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 26.9307,
+              "close_vs_ema200": 0.1115,
+              "rsi14": 79.5424
+            }
+          },
+          "head_listing_id": 50095,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "T.C.J. Asia Public Company Limited",
+          "score": 1.0,
+          "ticker": "TCJ.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.5905,
+              "rsi14": 79.1126
+            }
+          },
+          "head_listing_id": 49470,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "BKI HOLDINGS PUBLIC COMPANY LIMITED",
+          "score": 1.0,
+          "ticker": "BKIH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 61.4445,
+              "close_vs_ema200": 0.0881,
+              "rsi14": 78.7447
+            }
+          },
+          "head_listing_id": 49633,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Grand Prix International Public Company Limited",
+          "score": 1.0,
+          "ticker": "GPI.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 42.3603,
+              "close_vs_ema200": 0.3004,
+              "rsi14": 78.4353
+            }
+          },
+          "head_listing_id": 50243,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Winnergy Medical Public Company Limited",
+          "score": 1.0,
+          "ticker": "WINMED.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 36.6353,
+              "close_vs_ema200": 0.1914,
+              "rsi14": 78.4204
+            }
+          },
+          "head_listing_id": 50041,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "SPCG Public Company Limited",
+          "score": 1.0,
+          "ticker": "SPCG.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 56.5398,
+              "rsi14": 78.1782
+            }
+          },
+          "head_listing_id": 50052,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 12
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Sirisoft Public Company Limited",
+          "score": 1.0,
+          "ticker": "SRS.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 38.6738,
+              "close_vs_ema200": 0.3131,
+              "rsi14": 78.1097
+            }
+          },
+          "head_listing_id": 49809,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Make To Win Holding PCL",
+          "score": 1.0,
+          "ticker": "MTW.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.6295,
+              "close_vs_ema200": 0.4351,
+              "rsi14": 77.5278
+            }
+          },
+          "head_listing_id": 50062,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Siam Technic Concrete Public Company Limited",
+          "score": 1.0,
+          "ticker": "STECH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 34.4634,
+              "close_vs_ema200": 0.0802,
+              "rsi14": 77.3089
+            }
+          },
+          "head_listing_id": 49494,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 9
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bangkok Union Insurance Public Co. Ltd.",
+          "score": 1.0,
+          "ticker": "BUI.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 49.8834,
+              "rsi14": 76.994
+            }
+          },
+          "head_listing_id": 49803,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 8
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "M P J Logistics Public Company Limited",
+          "score": 1.0,
+          "ticker": "MPJ.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 48.2272,
+              "close_vs_ema200": 0.4133,
+              "rsi14": 76.9861
+            }
+          },
+          "head_listing_id": 50217,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 8
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Varopakorn Public Company Limited",
+          "score": 1.0,
+          "ticker": "VARO.BK"
+        },
+        {
+          "also_known_as": [
+            "158.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 43.5286,
+              "close_vs_ema200": -0.0324,
+              "rsi14": 76.8263
+            }
+          },
+          "head_listing_id": 50404,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 16
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Melbourne Enterprises Ltd",
+          "score": 1.0,
+          "ticker": "0158.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 64.7088,
+              "close_vs_ema200": 0.3126,
+              "rsi14": 76.477
+            }
+          },
+          "head_listing_id": 50141,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 12
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "TMT Steel Public Company Limited",
+          "score": 1.0,
+          "ticker": "TMT.BK"
+        },
+        {
+          "also_known_as": [
+            "147.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 32.7383,
+              "close_vs_ema200": -0.3489,
+              "rsi14": 76.0406
+            }
+          },
+          "head_listing_id": 50395,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "International Business Settlement Holdings Ltd",
+          "score": 1.0,
+          "ticker": "0147.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 68.5288,
+              "close_vs_ema200": 0.7974,
+              "rsi14": 75.9007
+            }
+          },
+          "head_listing_id": 49506,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 15
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Seafresh Industry Public Company Limited",
+          "score": 1.0,
+          "ticker": "CFRESH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 68.1921,
+              "close_vs_ema200": 0.4781,
+              "rsi14": 75.6735
+            }
+          },
+          "head_listing_id": 49655,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 9
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Halcyon Technology Public Company Limited",
+          "score": 1.0,
+          "ticker": "HTECH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 26.151,
+              "close_vs_ema200": -0.0036,
+              "rsi14": 75.4614
+            }
+          },
+          "head_listing_id": 50040,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Saha Pathanapibul Public Company Limited",
+          "score": 1.0,
+          "ticker": "SPC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 58.3928,
+              "close_vs_ema200": 0.1667,
+              "rsi14": 75.38
+            }
+          },
+          "head_listing_id": 50194,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 5
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Thai Vegetable Oil Public Company Limited",
+          "score": 1.0,
+          "ticker": "TVO.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 70.2641,
+              "close_vs_ema200": 0.529,
+              "rsi14": 74.8835
+            }
+          },
+          "head_listing_id": 49760,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 26
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Madame Bioscience Public Company Limited",
+          "score": 1.0,
+          "ticker": "MADAME.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 34.7519,
+              "close_vs_ema200": 0.4372,
+              "rsi14": 74.5948
+            }
+          },
+          "head_listing_id": 49362,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Asia Biomass Public Company Limited",
+          "score": 1.0,
+          "ticker": "ABM.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.8259,
+              "close_vs_ema200": 0.0259,
+              "rsi14": 74.4685
+            }
+          },
+          "head_listing_id": 50311,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Hong Kong Ferry Holdings Co Ltd",
+          "score": 1.0,
+          "ticker": "0050.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 73.1658,
+              "close_vs_ema200": 0.7322,
+              "rsi14": 74.2562
+            }
+          },
+          "head_listing_id": 49366,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 17
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Applied DB Public Company Limited",
+          "score": 1.0,
+          "ticker": "ADB.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 30.207,
+              "close_vs_ema200": 0.0613,
+              "rsi14": 74.241
+            }
+          },
+          "head_listing_id": 50261,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 5
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Hong Kong and China Gas Co Ltd",
+          "score": 1.0,
+          "ticker": "0003.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 31.997,
+              "close_vs_ema200": 0.0636,
+              "rsi14": 73.2697
+            }
+          },
+          "head_listing_id": 49611,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 3
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Fortune Parts Industry Public Company Limited",
+          "score": 1.0,
+          "ticker": "FPI.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 37.5156,
+              "close_vs_ema200": 0.1396,
+              "rsi14": 73.2243
+            }
+          },
+          "head_listing_id": 50155,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "TPBI PCL",
+          "score": 1.0,
+          "ticker": "TPBI.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.0111,
+              "close_vs_ema200": 0.696,
+              "rsi14": 73.1124
+            }
+          },
+          "head_listing_id": 49714,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 8
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "KCE Electronics Public Company Limited",
+          "score": 1.0,
+          "ticker": "KCE.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 31.4595,
+              "close_vs_ema200": 0.1613,
+              "rsi14": 72.6584
+            }
+          },
+          "head_listing_id": 49385,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Akkhie Prakarn Public Company Limited",
+          "score": 1.0,
+          "ticker": "AKP.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 53.7638,
+              "close_vs_ema200": 0.1618,
+              "rsi14": 72.6427
+            }
+          },
+          "head_listing_id": 50076,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Golden Lime PCL",
+          "score": 1.0,
+          "ticker": "SUTHA.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 32.121,
+              "close_vs_ema200": 0.1378,
+              "rsi14": 72.6139
+            }
+          },
+          "head_listing_id": 49540,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Charoen Pokphand Foods Public Company Limited",
+          "score": 1.0,
+          "ticker": "CPF.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 62.9602,
+              "close_vs_ema200": 0.3932,
+              "rsi14": 72.1633
+            }
+          },
+          "head_listing_id": 49936,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 10
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Regional Container Lines Public Company Limited",
+          "score": 1.0,
+          "ticker": "RCL.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.069,
+              "close_vs_ema200": 0.109,
+              "rsi14": 72.1436
+            }
+          },
+          "head_listing_id": 50075,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Susco Public Company Limited",
+          "score": 1.0,
+          "ticker": "SUSCO.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 32.3548,
+              "close_vs_ema200": 0.1344,
+              "rsi14": 72.1014
+            }
+          },
+          "head_listing_id": 49460,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Bumrungrad Hospital PCL",
+          "score": 1.0,
+          "ticker": "BH.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 31.8523,
+              "close_vs_ema200": -0.1424,
+              "rsi14": 71.9686
+            }
+          },
+          "head_listing_id": 49504,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Chamni&#39;s Eye PCL",
+          "score": 1.0,
+          "ticker": "CEYE.BK"
+        },
+        {
+          "also_known_as": [
+            "60.HK"
+          ],
+          "context": {
+            "ta": {
+              "adx": 23.8536,
+              "close_vs_ema200": 0.1462,
+              "rsi14": 71.6875
+            }
+          },
+          "head_listing_id": 50319,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Hong Kong Food Investment Holdings Ltd",
+          "score": 1.0,
+          "ticker": "0060.HK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 37.7181,
+              "close_vs_ema200": 0.0998,
+              "rsi14": 71.5794
+            }
+          },
+          "head_listing_id": 49680,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 7
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Inoue Rubber (Thailand) Public Company Limited",
+          "score": 1.0,
+          "ticker": "IRC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 44.7061,
+              "close_vs_ema200": 0.2066,
+              "rsi14": 71.3253
+            }
+          },
+          "head_listing_id": 49409,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 10
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Applicad Public Company Limited",
+          "score": 1.0,
+          "ticker": "APP.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 28.1475,
+              "close_vs_ema200": 0.1077,
+              "rsi14": 71.1089
+            }
+          },
+          "head_listing_id": 50251,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "XSpring Capital Public Company Limited",
+          "score": 1.0,
+          "ticker": "XPG.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 29.7653,
+              "close_vs_ema200": 0.2544,
+              "rsi14": 71.0781
+            }
+          },
+          "head_listing_id": 49930,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 4
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "QTC Energy Public Company Limited",
+          "score": 1.0,
+          "ticker": "QTC.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 41.5477,
+              "close_vs_ema200": 0.1952,
+              "rsi14": 70.5464
+            }
+          },
+          "head_listing_id": 49900,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "PRG Corporation Public Company Limited",
+          "score": 1.0,
+          "ticker": "PRG.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 21.0896,
+              "close_vs_ema200": 0.002,
+              "rsi14": 70.4844
+            }
+          },
+          "head_listing_id": 49598,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Eastern Technical Engineering Public Company Limited",
+          "score": 1.0,
+          "ticker": "ETE.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 33.1738,
+              "close_vs_ema200": 0.0094,
+              "rsi14": 70.3054
+            }
+          },
+          "head_listing_id": 49948,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Rich Sport Public Company Limited",
+          "score": 1.0,
+          "ticker": "RSP.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 34.6128,
+              "close_vs_ema200": 0.1225,
+              "rsi14": 70.2369
+            }
+          },
+          "head_listing_id": 50210,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Union Plastic Public Company Limited",
+          "score": 1.0,
+          "ticker": "UP.BK"
+        },
+        {
+          "context": {
+            "ta": {
+              "adx": 30.7384,
+              "close_vs_ema200": 0.2839,
+              "rsi14": 70.0374
+            }
+          },
+          "head_listing_id": 49924,
+          "matched": {
+            "ta": {
+              "rsi14_overbought": {
+                "detail": {
+                  "held": 1
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "ta"
+          ],
+          "name": "Pylon Public Company Limited",
+          "score": 1.0,
+          "ticker": "PYLON.BK"
+        }
+      ],
+      "sort": "rsi",
+      "universe": 24045,
+      "_pagination": {
+        "intended_show": 15,
+        "returned": 60,
+        "buffer_maxed": false,
+        "capped": true,
+        "count_is_floor": true,
+        "note": "Over-fetched ~4× your intended show (15) as a look-ahead buffer so 'a few more' is served from these 60 rows — do NOT re-screen for a few more. `count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+      }
+    }
+  ],
+  "answer_to_user": "Yes — here are stocks flagged overbought (RSI-14 above 70) right now, most-overbought first: GGC.BK RSI~91, TC.BK RSI~89, CPH.BK RSI~88, ZIGA.BK RSI~87, CSP.BK RSI~87, BTC.BK RSI~86, CNT.BK RSI~84, IMH.BK RSI~84. About 60+ names across the market currently sit above the 70 line — these are stretched and prone to a pullback, so treat them with caution rather than as fresh buys."
+}

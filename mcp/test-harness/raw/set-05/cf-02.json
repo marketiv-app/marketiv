@@ -1,0 +1,952 @@
+{
+  "id": "cf-02",
+  "question": "I want cheap stocks — low P/E, under 15 — that are still trading above their 200-day moving average. US large caps only.",
+  "tools_called": [
+    {
+      "tool": "find_fsconcept",
+      "args": {
+        "queries": [
+          "net income",
+          "revenue",
+          "revenue growth",
+          "P/E ratio",
+          "net margin",
+          "debt to equity",
+          "return on equity",
+          "free cash flow yield",
+          "dividend yield",
+          "dividend growth",
+          "earnings growth"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_fspattern",
+      "args": {
+        "queries": [
+          "profitable / positive",
+          "revenue growing over 20% a year",
+          "P/E below 15",
+          "above a threshold",
+          "below a threshold",
+          "high margin",
+          "low debt",
+          "dividend yield above 4%",
+          "dividend growing / raising payout",
+          "earnings growing",
+          "margins expanding",
+          "still growing revenue"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_tasignal",
+      "args": {
+        "q": [
+          "just broke out above the 50-day moving average",
+          "price above the 200-day moving average",
+          "RSI below 30 oversold after a selloff",
+          "price in an uptrend above the 200-day moving average",
+          "dropped more than 25% from its 52-week high",
+          "coming out of a volatility squeeze and starting to move up",
+          "bullish MACD crossover",
+          "down 30% and RSI reset below 40",
+          "reclaimed the 50-day moving average after a dip",
+          "bullish divergence on the daily chart"
+        ]
+      },
+      "note": "batch resolver run once for the whole set"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "healthcare sector"
+      },
+      "note": "cf-07 -> code 35"
+    },
+    {
+      "tool": "find_gics",
+      "args": {
+        "q": "technology sector"
+      },
+      "note": "cf-05 -> code 45"
+    },
+    {
+      "tool": "screen_unified",
+      "args": {
+        "fundamental": [
+          {
+            "concept": "pe",
+            "pattern": "below",
+            "threshold": 15
+          }
+        ],
+        "ta": [
+          {
+            "anchor": [
+              {
+                "pattern": "above",
+                "a": "close",
+                "b": "ema200"
+              }
+            ]
+          }
+        ],
+        "country": [
+          "US"
+        ],
+        "size": [
+          "large"
+        ],
+        "asset_type": [
+          "Common Stock"
+        ],
+        "timeframe": 1,
+        "window_bars": 0,
+        "limit": 10
+      }
+    }
+  ],
+  "raw_responses": [
+    {
+      "_conventions": {
+        "_note": "For the fields below, read the `definition` and/or `sign` before interpreting the value — a negative can MEAN something (an outflow, a benefit) and an ambiguous name needs its definition. Every other field is a plain magnitude.",
+        "fields": {
+          "adx": {
+            "definition": "Trend STRENGTH 0-100 (direction-agnostic): >25 trending, <20 ranging."
+          },
+          "close_vs_ema200": {
+            "definition": "Price distance from the N-bar EMA as a fraction (+ = above, − = below)."
+          },
+          "eps_diluted": {
+            "definition": "PER SHARE, in the company's REPORTING currency (NOT USD-normalized like the _usd fields) — don't mix it with the USD amounts."
+          },
+          "rsi14": {
+            "definition": "Momentum oscillator 0-100: >70 overbought, <30 oversold."
+          },
+          "strength": {
+            "definition": "Signal quality 0..1 (higher = cleaner pattern)."
+          }
+        }
+      },
+      "capped": false,
+      "count": 17,
+      "currency": "USD",
+      "results": [
+        {
+          "also_known_as": [
+            "0HT4.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 18.84,
+              "market_cap_usd": 135868489728.0,
+              "net_income_usd": 10520000000.0,
+              "net_margin": 0.1698,
+              "normalized_pe": 12.074045260946,
+              "revenue_usd": 61938000000.0
+            },
+            "ta": {
+              "adx": 18.9931,
+              "close_vs_ema200": 0.0596,
+              "rsi14": 51.7642
+            }
+          },
+          "head_listing_id": 8197,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 11.754246
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 23
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Capital One Financial Corporation",
+          "score": 1.0,
+          "ticker": "COF.US"
+        },
+        {
+          "also_known_as": [
+            "0JYA.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 28.84,
+              "market_cap_usd": 102840836096.0,
+              "net_income_usd": 8554000000.0,
+              "net_margin": 0.0557,
+              "normalized_pe": 12.2212138707169,
+              "revenue_usd": 153577000000.0
+            },
+            "ta": {
+              "adx": 41.7707,
+              "close_vs_ema200": 0.4706,
+              "rsi14": 72.8536
+            }
+          },
+          "head_listing_id": 29412,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.697989
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 140
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Marathon Petroleum Corp",
+          "score": 1.0,
+          "ticker": "MPC.US"
+        },
+        {
+          "also_known_as": [
+            "0KEF.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 18.16,
+              "market_cap_usd": 101457723392.0,
+              "net_income_usd": 7628000000.0,
+              "net_margin": 0.3107,
+              "normalized_pe": 13.9804379648071,
+              "revenue_usd": 24554000000.0
+            },
+            "ta": {
+              "adx": 23.2121,
+              "close_vs_ema200": 0.0828,
+              "rsi14": 39.6557
+            }
+          },
+          "head_listing_id": 34951,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.002203
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 101
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "PNC Financial Services Group Inc",
+          "score": 1.0,
+          "ticker": "PNC.US"
+        },
+        {
+          "also_known_as": [
+            "0KHZ.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 17.52,
+              "market_cap_usd": 97157611520.0,
+              "net_income_usd": 7093000000.0,
+              "net_margin": 0.0466,
+              "normalized_pe": 15.7774163016324,
+              "revenue_usd": 152167000000.0
+            },
+            "ta": {
+              "adx": 42.331,
+              "close_vs_ema200": 0.4061,
+              "rsi14": 75.8637
+            }
+          },
+          "head_listing_id": 35809,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.897831
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 115
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Phillips 66",
+          "score": 1.0,
+          "ticker": "PSX.US"
+        },
+        {
+          "also_known_as": [
+            "0KOC.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 19.93,
+              "market_cap_usd": 120477671424.0,
+              "net_income_usd": 11695000000.0,
+              "net_margin": 0.1285,
+              "normalized_pe": 10.3016392837965,
+              "revenue_usd": 91019000000.0
+            },
+            "ta": {
+              "adx": 17.103,
+              "close_vs_ema200": 0.0426,
+              "rsi14": 61.1714
+            }
+          },
+          "head_listing_id": 34190,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 10.397893
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 5
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Progressive Corp",
+          "score": 1.0,
+          "ticker": "PGR.US"
+        },
+        {
+          "also_known_as": [
+            "0LHY.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 5.01,
+              "market_cap_usd": 100946157568.0,
+              "net_income_usd": 8168000000.0,
+              "net_margin": 0.2761,
+              "normalized_pe": 12.3587362350637,
+              "revenue_usd": 29583000000.0
+            },
+            "ta": {
+              "adx": 24.7228,
+              "close_vs_ema200": 0.1044,
+              "rsi14": 44.4278
+            }
+          },
+          "head_listing_id": 45365,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.932136
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 101
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "U.S. Bancorp",
+          "score": 1.0,
+          "ticker": "USB.US"
+        },
+        {
+          "also_known_as": [
+            "0LK6.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 23.98,
+              "market_cap_usd": 100789002240.0,
+              "net_income_usd": 7212000000.0,
+              "net_margin": 0.0517,
+              "normalized_pe": 13.9751805657238,
+              "revenue_usd": 139397000000.0
+            },
+            "ta": {
+              "adx": 31.8471,
+              "close_vs_ema200": 0.4256,
+              "rsi14": 67.8578
+            }
+          },
+          "head_listing_id": 46239,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.597581
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 260
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Valero Energy Corporation",
+          "score": 1.0,
+          "ticker": "VLO.US"
+        },
+        {
+          "also_known_as": [
+            "ADBE03.BK",
+            "ADBE06.BK",
+            "ADB.XETRA",
+            "0R2Y.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 17.48,
+              "market_cap_usd": 104598159360.0,
+              "net_income_usd": 7229000000.0,
+              "net_margin": 0.2869,
+              "normalized_pe": 14.5356377730675,
+              "revenue_usd": 25198000000.0
+            },
+            "ta": {
+              "adx": 24.1258,
+              "close_vs_ema200": 0.0155,
+              "rsi14": 62.9405
+            }
+          },
+          "head_listing_id": 733,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.533181
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 5
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Adobe Systems Incorporated",
+          "score": 1.0,
+          "ticker": "ADBE.US"
+        },
+        {
+          "also_known_as": [
+            "0Q1S.LSE",
+            "BAC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.84,
+              "market_cap_usd": 201672802304.0,
+              "net_income_usd": 16172000000.0,
+              "net_margin": 0.1164,
+              "normalized_pe": 12.7347050212715,
+              "revenue_usd": 138895000000.0
+            },
+            "ta": {
+              "adx": 17.804,
+              "close_vs_ema200": 0.1004,
+              "rsi14": 70.1551
+            }
+          },
+          "head_listing_id": 47096,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.640625
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 23
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Verizon Communications Inc",
+          "score": 1.0,
+          "ticker": "VZ.US"
+        },
+        {
+          "also_known_as": [
+            "CELG-RI.US",
+            "BRM.XETRA",
+            "0R1F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.54,
+              "market_cap_usd": 134921306112.0,
+              "net_income_usd": 9282000000.0,
+              "net_margin": 0.1887,
+              "normalized_pe": 12.7958044260579,
+              "revenue_usd": 49187000000.0
+            },
+            "ta": {
+              "adx": 43.4882,
+              "close_vs_ema200": 0.1692,
+              "rsi14": 63.4169
+            }
+          },
+          "head_listing_id": 4989,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.235683
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 46
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bristol-Myers Squibb Company",
+          "score": 1.0,
+          "ticker": "BMY.US"
+        },
+        {
+          "also_known_as": [
+            "BRK-A.US",
+            "BRKB23.BK",
+            "BRKB80.BK",
+            "0R37.LSE",
+            "BRYN.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 39.767353,
+              "market_cap_usd": 1076691337216.0,
+              "net_income_usd": 67342000000.0,
+              "net_margin": 0.1602,
+              "normalized_pe": 15.9884074903626,
+              "revenue_usd": 420276000000.0
+            },
+            "ta": {
+              "adx": 20.5628,
+              "close_vs_ema200": 0.0254,
+              "rsi14": 50.1212
+            }
+          },
+          "head_listing_id": 5325,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.528619
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 53
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Berkshire Hathaway Inc",
+          "score": 1.0,
+          "ticker": "BRK-B.US"
+        },
+        {
+          "also_known_as": [
+            "BAC03.BK",
+            "NCB.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.33,
+              "market_cap_usd": 449144258560.0,
+              "net_income_usd": 31697000000.0,
+              "net_margin": 0.2732,
+              "normalized_pe": 14.1699296009086,
+              "revenue_usd": 116003000000.0
+            },
+            "ta": {
+              "adx": 32.0648,
+              "close_vs_ema200": 0.1355,
+              "rsi14": 50.5586
+            }
+          },
+          "head_listing_id": 3570,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.755196
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 71
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Bank of America Corp",
+          "score": 1.0,
+          "ticker": "BAC.US"
+        },
+        {
+          "also_known_as": [
+            "NEM06.BK",
+            "NEM23.BK",
+            "0R28.LSE",
+            "NMM.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 7.93,
+              "market_cap_usd": 122207232000.0,
+              "net_income_usd": 8597000000.0,
+              "net_margin": 0.3336,
+              "normalized_pe": 13.0485631947655,
+              "revenue_usd": 25767000000.0
+            },
+            "ta": {
+              "adx": 34.8038,
+              "close_vs_ema200": 0.303,
+              "rsi14": 76.079
+            }
+          },
+          "head_listing_id": 30817,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.625473
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 15
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Newmont Goldcorp Corp",
+          "score": 1.0,
+          "ticker": "NEM.US"
+        },
+        {
+          "also_known_as": [
+            "PHM7.XETRA",
+            "0R31.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 4.75,
+              "market_cap_usd": 108850610176.0,
+              "net_income_usd": 7973000000.0,
+              "net_margin": 0.39,
+              "normalized_pe": 12.201277336826,
+              "revenue_usd": 20444000000.0
+            },
+            "ta": {
+              "adx": 16.7643,
+              "close_vs_ema200": 0.0228,
+              "rsi14": 51.4481
+            }
+          },
+          "head_listing_id": 29307,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 13.724211
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 2
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Altria Group",
+          "score": 1.0,
+          "ticker": "MO.US"
+        },
+        {
+          "also_known_as": [
+            "0QZ1.LSE",
+            "SOBA.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 3.02,
+              "market_cap_usd": 170624401408.0,
+              "net_income_usd": 21558000000.0,
+              "net_margin": 0.1694,
+              "normalized_pe": 7.68687316391356,
+              "revenue_usd": 127239000000.0
+            },
+            "ta": {
+              "adx": 31.7642,
+              "close_vs_ema200": 0.0344,
+              "rsi14": 70.6571
+            }
+          },
+          "head_listing_id": 42336,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 8.245033
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 6
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "AT&T Inc.",
+          "score": 1.0,
+          "ticker": "T.US"
+        },
+        {
+          "also_known_as": [
+            "0R01.LSE",
+            "TRVC.XETRA"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 9.28,
+              "market_cap_usd": 230899171328.0,
+              "net_income_usd": 17839000000.0,
+              "net_margin": 0.1956,
+              "normalized_pe": 12.5212608555924,
+              "revenue_usd": 91193000000.0
+            },
+            "ta": {
+              "adx": 16.4008,
+              "close_vs_ema200": 0.0815,
+              "rsi14": 43.5909
+            }
+          },
+          "head_listing_id": 5979,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 14.925647
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 297
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-25"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Citigroup Inc.",
+          "score": 1.0,
+          "ticker": "C.US"
+        },
+        {
+          "also_known_as": [
+            "NWT.XETRA",
+            "0R2F.LSE"
+          ],
+          "context": {
+            "fundamental": {
+              "eps_diluted": 6.88,
+              "market_cap_usd": 264297529344.0,
+              "net_income_usd": 22610000000.0,
+              "net_margin": 0.2605,
+              "normalized_pe": 11.6894086397169,
+              "revenue_usd": 86796000000.0
+            },
+            "ta": {
+              "adx": 12.6758,
+              "close_vs_ema200": 0.0168,
+              "rsi14": 43.5481
+            }
+          },
+          "head_listing_id": 47495,
+          "matched": {
+            "fundamental": {
+              "pe": {
+                "kind": "level",
+                "value": 12.703488
+              }
+            },
+            "ta": {
+              "close_above_ema200": {
+                "detail": {
+                  "held": 53
+                },
+                "kind": "signal",
+                "strength": 1.0,
+                "value": "2026-08-24"
+              }
+            }
+          },
+          "matched_legs": [
+            "fundamental",
+            "ta"
+          ],
+          "name": "Wells Fargo & Company",
+          "score": 1.0,
+          "ticker": "WFC.US"
+        }
+      ],
+      "sort": "ta",
+      "universe": 126,
+      "_pagination": {
+        "intended_show": 10,
+        "returned": 17,
+        "buffer_maxed": false,
+        "capped": false,
+        "count_is_floor": false,
+        "note": "Over-fetched ~4× your intended show (10) as a look-ahead buffer so 'a few more' is served from these 17 rows — do NOT re-screen for a few more. This is the COMPLETE match set — `count` is the exact total."
+      }
+    }
+  ],
+  "answer_to_user": "Found 17 US large-cap stocks with P/E below 15 that are currently trading above their 200-day MA. Every row satisfies both legs (pe<15 in matched.fundamental + close-above-ema200 state in matched.ta), scoped to US + large size. Examples: COF.US, MPC.US, PNC.US, PSX.US, PGR.US."
+}

@@ -1,0 +1,68 @@
+{
+  "id": "op-06",
+  "question": "Which stocks is the smart money quietly pouring the biggest, most unusual bets into right now?",
+  "tools_called": [
+    {
+      "tool": "find_oppattern",
+      "args": {
+        "queries": [
+          "smart money quietly pouring biggest most unusual bets"
+        ]
+      },
+      "note": ""
+    },
+    {
+      "tool": "options_scan",
+      "args": {
+        "pattern": "unusual_activity",
+        "horizon": "both",
+        "limit": 15
+      },
+      "note": ""
+    }
+  ],
+  "raw_responses": [
+    {
+      "results": [
+        {
+          "query": "smart money quietly pouring biggest most unusual bets",
+          "candidates": [
+            {
+              "pattern": "bullish_positioning",
+              "label": "Bullish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bullish (positioning score high, calls heavier)."
+            },
+            {
+              "pattern": "bearish_positioning",
+              "label": "Bearish positioning",
+              "supported": "yes",
+              "description": "Options crowd leaning bearish (positioning score low, puts heavier)."
+            },
+            {
+              "pattern": "unusual_activity",
+              "label": "Unusual options activity",
+              "supported": "yes",
+              "description": "Option/stock volume unusually high vs own history."
+            },
+            {
+              "pattern": "options_vs_news_divergence",
+              "label": "Options vs news divergence",
+              "supported": "future",
+              "description": "Options positioning opposite to news sentiment. (planned)"
+            }
+          ]
+        }
+      ],
+      "note": "Pick the best `pattern` token(s) → options_scan(pattern=…). A `supported:'no'` candidate means opana can't scan for it yet — say so plainly, don't fabricate."
+    },
+    {
+      "_stub": true,
+      "pattern": "unusual_activity",
+      "horizon": "both",
+      "limit": 15,
+      "note": "POC stub — the /v1/options/scan endpoint is not built yet. This call only confirms the MCP picked the right pattern token + input shape."
+    }
+  ],
+  "answer_to_user": "'Big, unusual bets' is the `unusual_activity` pattern (option/stock volume unusually high vs the name's own history) — correctly matched. (Note: an 'options-vs-news divergence' lens that would better capture 'smart money going against the crowd' is listed as planned/not-yet-built.) The scanner endpoint itself isn't live yet either — it returns a POC stub — so I can't hand you the ranked list of names right now."
+}
