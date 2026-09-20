@@ -1,0 +1,17 @@
+{
+  "gate_A_process": "PASS (END-TO-END — WB works on :8090)",
+  "summary": "Collapsed find_indicator into wb_series (its only consumer) + DELETED it. wb_series now takes a structural CONCEPT (or exact indicator id) and resolves server-side via _resolve_indicator (mirror of _resolve_series: /v1/ext/wb/find → Jev pick → gate), carrying the database + picking the unit VARIANT (%GDP vs US$ vs per-capita vs constant) from `context`. Verified by calibration (8/8 ×2) AND a blind MCP test that ran END-TO-END (WB is open-data/no-key, so /v1/ext/wb/series works on :8090): the blind client resolved each concept and got REAL data + analysis + multi-country ranking. 0 find_indicator calls.",
+  "resolver_verified": "concept→indicator+variant from real output: household consumption %GDP→NE_CON_PRVT_ZS · GDP per capita→NY_GDP_PCAP_CD · real per-capita→NY_GDP_PCAP_KD (variant via context!) · life expectancy→SP_DYN_LE00_IN · govt debt %GDP→GC_DOD_TOTL_GD_ZS · annual inflation→FP_CPI_TOTL_ZG (WB carries annual) · Nvidia stock / Apple revenue → no_match (true boundaries). _is_indicator_id passthrough correct. recall floor holds.",
+  "blind_mcp_test_END_TO_END": {
+    "m1": "Thailand household consumption %GDP → wb_series(q='household consumption', country='THA', context=…) → WB_WDI_NE_CON_PRVT_ZS → REAL data 53.1%→57.8% of GDP",
+    "m2": "GDP per capita US/CN/IN → WB_WDI_NY_GDP_PCAP_CD → REAL multi-country ranking US $90k / CN $13.8k / IN $2.7k",
+    "m3": "Japan life expectancy → WB_WDI_SP_DYN_LE00_IN → REAL 84.0 yrs (2024)",
+    "m4": "Nvidia revenue → client correctly chose FINANCIALS (not wb_series) → NVDA.US $96.22B — boundary handled by tool selection"
+  },
+  "verified_from_real_data": {
+    "wb_series(q='household consumption', country='THA')": "WB_WDI_NE_CON_PRVT_ZS (+ _resolved_indicator observability)",
+    "wb_series(q='GDP per capita', country='USA,CHN,IND')": "WB_WDI_NY_GDP_PCAP_CD + ranking present"
+  },
+  "find_indicator_calls": 0,
+  "note": "This is the FIRST ext-collapse verified END-TO-END (resolve → real data), the full loop FRED (run17) couldn't show locally because :8090 lacks a FRED key. Template proven twice → find_hs next."
+}

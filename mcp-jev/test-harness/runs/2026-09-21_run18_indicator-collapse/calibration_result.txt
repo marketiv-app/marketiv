@@ -1,0 +1,26 @@
+
+===== RUN 1 =====
+  [ok ] household consumption as % of GDP      → WB_WDI_NE_CON_PRVT_ZS db=WB_WDI    (expect resolve:CON_PRVT.*ZS|CON_PRVT_ZS)
+  [ok ] GDP per capita                         → WB_WDI_NY_GDP_PCAP_CD db=WB_WDI    (expect resolve:GDP_PCAP_CD)
+  [ok ] GDP per capita in real terms           → WB_WDI_NY_GDP_PCAP_KD db=WB_WDI    (expect resolve:GDP_PCAP_KD)
+  [ok ] life expectancy                        → WB_WDI_SP_DYN_LE00_IN db=WB_WDI    (expect resolve:DYN_LE00)
+  [ok ] government debt as % of GDP            → WB_WDI_GC_DOD_TOTL_GD_ZS db=WB_WDI (expect resolve:GC_DOD|CENT_DEBT|DOD_TOTL_GD_ZS)
+  [ok ] annual inflation rate                  → WB_WDI_FP_CPI_TOTL_ZG db=WB_WDI    (expect resolve:FP_CPI_TOTL_ZG)
+  [ok ] Nvidia stock price                     → no_match                           (expect no_match:None)
+  [ok ] Apple quarterly revenue                → no_match                           (expect no_match:None)
+  _is_indicator_id: WB_WDI_NE_CON_PRVT_ZS=True 'GDP per capita'=False 'consumption'=False
+  ---- 8 pass / 0 fail ----
+
+===== RUN 2 (stability) =====
+  [ok ] household consumption as % of GDP      → WB_WDI_NE_CON_PRVT_ZS db=WB_WDI    (expect resolve:CON_PRVT.*ZS|CON_PRVT_ZS)
+  [ok ] GDP per capita                         → WB_WDI_NY_GDP_PCAP_CD db=WB_WDI    (expect resolve:GDP_PCAP_CD)
+  [ok ] GDP per capita in real terms           → WB_WDI_NY_GDP_PCAP_KD db=WB_WDI    (expect resolve:GDP_PCAP_KD)
+  [ok ] life expectancy                        → WB_WDI_SP_DYN_LE00_IN db=WB_WDI    (expect resolve:DYN_LE00)
+  [ok ] government debt as % of GDP            → WB_WDI_GC_DOD_TOTL_GD_ZS db=WB_WDI (expect resolve:GC_DOD|CENT_DEBT|DOD_TOTL_GD_ZS)
+  [ok ] annual inflation rate                  → WB_WDI_FP_CPI_TOTL_ZG db=WB_WDI    (expect resolve:FP_CPI_TOTL_ZG)
+  [ok ] Nvidia stock price                     → no_match                           (expect no_match:None)
+  [ok ] Apple quarterly revenue                → no_match                           (expect no_match:None)
+  _is_indicator_id: WB_WDI_NE_CON_PRVT_ZS=True 'GDP per capita'=False 'consumption'=False
+  ---- 8 pass / 0 fail ----
+
+TOTAL fails: run1=0 run2=0

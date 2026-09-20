@@ -109,7 +109,7 @@ _INSTRUCTIONS = (
     "reflex. Map the entity to its real drivers using your own world-knowledge: a DOMESTIC-demand business "
     "(a consumer/retail/bank/property/telecom name that sells mainly into ITS OWN country — e.g. CPALL, a "
     "local bank, a homebuilder) is driven by that COUNTRY'S STRUCTURAL health, so pull it with "
-    "`find_indicator`→`wb_series` for the stock's country (household consumption, HOUSEHOLD DEBT, GDP-per-"
+    "`wb_series` (pass a concept) for the stock's country (household consumption, HOUSEHOLD DEBT, GDP-per-"
     "capita growth, credit — the demand backdrop the price+news alone can't give); an EXPORTER / tariff- or "
     "supply-chain-exposed name → the TRADE flows (`find_hs`→`search_trade`/`top_traders`); a rate- or "
     "macro-sensitive read → the macro series (`fred_series` — pass a concept, or `macro_pulse`). Pull ONLY the "
@@ -219,7 +219,7 @@ def _lim(n: Optional[int], default: int = 20, ceiling: int = 50, floor: int = 1)
     """Bound a list tool's page size so the result stays context-friendly. Heavily-covered assets
     (GOLD, oil, mega-caps) have hundreds of impact articles — dumping them all overflows the client's
     context. `None` → default; the LLM may raise it up to `ceiling`, then should page/narrow instead.
-    `floor` guards TOP-K RESOLVERS (find_hs/find_indicator/…): they return a CANDIDATE LIST the client
+    `floor` guards TOP-K RESOLVERS (find_hs/…): they return a CANDIDATE LIST the client
     PICKS from, so a client setting limit=1 would collapse them to rank-#1 and break the design — floor it
     (e.g. 5) so a candidate list always comes back."""
     if n is None:
@@ -3610,41 +3610,120 @@ def fred_series(series_id: Annotated[str, _dq("A macro CONCEPT (any language —
     return res
 
 # ── World Bank (Data360) — cross-country structural data (open, no key, cached) ───────────────────────
-# find_indicator (FREE resolver) → wb_series (indicator + country(+multi) + analysis). Annual structural
-# data (consumption/GDP/demographics/poverty) — FRED's cross-country complement. Contract: docs/wb-api-for-mcp.md.
+# There is NO find_indicator tool — wb_series resolves a structural concept (or an exact indicator id) server-side via
+# _resolve_indicator (vector /v1/ext/wb/find → Jev pick → gate), carrying the right database + unit VARIANT. Annual
+# structural data (consumption/GDP/demographics/poverty) — FRED's cross-country complement. Contract: docs/wb-api-for-mcp.md.
+_INDICATOR_RESOLVE_INSTR = (
+    "The state has `query`: a cross-country STRUCTURAL concept the user wants a World Bank indicator for (possibly the "
+    "form 'Resolve the entity \"X\" as it is used in the user's request: \"<full request>\"' — resolve X using that "
+    "CONTEXT). Each option is a candidate World Bank indicator: its name, unit hint, and database. Pick the SINGLE "
+    "indicator + the right VARIANT the request MEANS. The variant is the code suffix / unit: `.ZS` = % of GDP or a "
+    "SHARE (compare across country sizes) · `.CD` = current US$ (absolute size) · `.KD` = constant/REAL · `.KD.ZG` = "
+    "% growth · `.PC`/`.PCAP` = PER CAPITA (living standards) · `.PP` = PPP. Read the request: 'as a share of GDP' → "
+    ".ZS; 'in dollars / total size' → .CD; 'per person / per capita' → per-capita; 'in real terms' → .KD. Prefer a "
+    "`curated` WB_WDI indicator when the request is generic. One option is `__NONE__` — choose it ONLY when the query "
+    "is NOT a World Bank structural indicator at all.")
+_INDICATOR_NONE_OPT = (
+    "None of the candidates is the World Bank structural indicator the query means. ⚠️ LAST RESORT — pick this ONLY "
+    "when the query is not World-Bank data at all: a single COMPANY / its stock or financials, a market/asset PRICE "
+    "(a stock, a commodity spot, an FX rate), or gibberish. NOTE World Bank DOES carry ANNUAL versions of inflation, "
+    "unemployment, interest rates etc. — so a genuine macro/structural concept must resolve to its candidate (never "
+    "NONE); only a truly non-World-Bank thing is NONE.")
 
-@mcp.tool(name="find_indicator", title="Find World Bank Indicator", annotations=_RO)
-def find_indicator(q: Annotated[str, _dq("A cross-country STRUCTURAL concept in ANY language — 'household consumption', "
-                                        "'GDP per capita', 'poverty rate', 'life expectancy', 'government debt', 'internet users', "
-                                        "'การบริโภค'. Returns the canonical World Bank (WDI) indicator + the right unit VARIANT.")],
-                   country: Annotated[Optional[str], _d("OPTIONAL country (name or ISO3) to validate coverage for; omit for a general search.")] = None,
-                   limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
-    """⭐ FREE resolver — a structural concept → the exact World Bank indicator id (+ unit VARIANT). ALWAYS step
-    1; never guess a code (cryptic: WB_WDI_NE_CON_PRVT_ZS). World Bank = ANNUAL, cross-country structural data
-    (consumption, GDP, demographics, poverty, trade shares) — NOT high-frequency macro (that's fred_series / FRED).
-    Returns ranked `candidates` with `indicator`, `name`, `database`, `coverage` (economies + year range),
-    `unit_hint`, `curated`. 🔵 The VARIANT matters (code suffix): `.ZS` = % of GDP/share (compare across country
-    SIZES) · `.CD` = current US$ (size) · `.KD` = constant/real · `.KD.ZG` = % growth · `.PC`/`.PCAP` = per
-    capita (living standards) · `.PP` = PPP. `curated:true` + `database=WB_WDI` = the canonical pick; higher
-    `coverage.economies` = more widely reported. Empty = not in the World Bank set — say so, don't fabricate.
-    Feeds `wb_series`."""
-    return _ext("/v1/ext/wb/find", {"q": q, "country": country, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
+def _is_indicator_id(s: str) -> bool:
+    """An exact World Bank indicator id already in hand → passthrough (skip resolve): a cryptic UPPERCASE code with an
+    underscore (WB_WDI_NE_CON_PRVT_ZS). A plain concept ('household consumption', 'GDP per capita') → resolve."""
+    s = (s or "").strip()
+    return bool(s) and " " not in s and "_" in s and s.upper() == s
+
+def _resolve_indicator(q: str, country: Optional[str] = None, context: Optional[str] = None) -> dict:
+    """Resolve ONE structural concept → the exact World Bank indicator id (+ database). Mirrors _resolve_series:
+    exact id → passthrough; else vector shortlist (/v1/ext/wb/find, full context: name+unit_hint+database) → Jev pick
+    (judged by `context`) + `__NONE__` → calibrated gate. Returns {status, query, indicator?, database?, name?,
+    confidence?, gate?, note?, candidates?}. The pick's `database` rides along as the default for wb_series."""
+    cands = mdx()._get("/v1/ext/wb/find", {"q": q, "country": country, "limit": 15}).data
+    cands = cands.get("candidates") or cands.get("indicators") or (cands if isinstance(cands, list) else [])
+    if not cands:
+        return {"status": "no_match", "query": q, "reason": "no candidate World Bank indicators", "candidates": []}
+    exact = next((c for c in cands if str(c.get("indicator", "")).lower() == q.strip().lower()), None)
+    if exact:
+        return {"status": "resolved", "query": q, "indicator": exact["indicator"], "database": exact.get("database"),
+                "name": exact.get("name"), "confidence": 1.0, "gate": "exact_key"}
+    options, meta = {}, {}
+    for c in cands:
+        ind = c.get("indicator")
+        if not ind:
+            continue
+        desc = c.get("name") or ind
+        if c.get("unit_hint"):
+            desc += f" — {c['unit_hint']}"
+        if c.get("database"):
+            desc += f" (db {c['database']})"
+        if c.get("curated"):
+            desc += " [curated]"
+        options[ind] = desc
+        meta[ind] = {"indicator": ind, "database": c.get("database"), "name": c.get("name")}
+    options["__NONE__"] = _INDICATOR_NONE_OPT
+    jev_q = (f'Resolve the entity "{q}" as it is used in the user\'s request: "{context.strip()}"'
+             if context and context.strip() and context.strip().lower() != q.strip().lower() else q)
+    r = _jev_pick(jev_q, _INDICATOR_RESOLVE_INSTR, options)
+    if r.get("pick") == "__NONE__":
+        return {"status": "no_match", "query": q, "reason": "not a World Bank structural indicator (Jev: none fit)",
+                "confidence": r.get("confidence"), "candidates": []}
+    gate = _jev_gate(r)
+    pm = meta.get(r.get("pick"), {})
+    top_cands = [{"indicator": meta[k]["indicator"], "name": meta[k]["name"], "database": meta[k]["database"],
+                  "prob": round(v, 3)} for k, v in r["probs"].items() if k in meta]
+    if gate in ("resolve", "soft"):
+        out = {"status": "resolved", "query": q, "indicator": pm.get("indicator"), "database": pm.get("database"),
+               "name": pm.get("name"), "confidence": r.get("confidence"), "gate": gate}
+        if gate == "soft":
+            alts = ", ".join(c["indicator"] for c in top_cands[1:3])
+            out["note"] = f"resolved '{q}' → {pm.get('indicator')} at lower confidence; alternatives: {alts}"
+        return out
+    reason = "two close World Bank indicators — confirm which" if gate == "reconfirm" else "no confident indicator match"
+    return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
 
 @mcp.tool(name="wb_series", title="World Bank Data + Analysis", annotations=_RO)
-def wb_series(indicator: Annotated[str, _d("ONE indicator id from find_indicator (never guess), e.g. WB_WDI_NE_CON_PRVT_ZS.")],
+def wb_series(indicator: Annotated[str, _dq("A cross-country STRUCTURAL concept (any language — 'household consumption', "
+                    "'GDP per capita', 'poverty rate', 'life expectancy', 'government debt', 'การบริโภค') OR an exact World "
+                    "Bank indicator id you already hold (WB_WDI_NE_CON_PRVT_ZS). The SERVER resolves a concept → the "
+                    "canonical indicator + the right unit VARIANT (no separate lookup). 🔴 Pass the user's FULL request in "
+                    "`context` so the server picks the VARIANT: % of GDP/share (compare across country sizes) vs current "
+                    "US$ (absolute) vs per-capita (living standards) vs constant/real. World Bank = ANNUAL structural data "
+                    "(consumption/GDP/demographics/poverty) — NOT high-frequency macro (CPI/unemployment/rates → fred_series).")],
               country: Annotated[str, _d("Country as ISO3 or a name (`Thailand`/`THA`); COMMA-SEP for a cross-country compare "
                                          "(`THA,JPN,USA`); or an aggregate (`WLD` world · `EMU` euro area · `HIC`/`MIC`/`LIC` income groups).")],
               from_: Annotated[Optional[int], _d("Start year (default ≈ last 15y, dynamic).")] = None,
               to: Annotated[Optional[int], _d("End year (default latest).")] = None,
-              database: Annotated[Optional[str], _d("The candidate's `database` from find_indicator (e.g. WB_WDI, IMF_FSIC). Optional — pass it for non-WDI series to be safe; derived if omitted.")] = None) -> dict:
+              context: Annotated[Optional[str], _d("OPTIONAL but RECOMMENDED — the user's FULL request VERBATIM (any language). Used to pick the "
+                                                   "right unit VARIANT (% of GDP vs US$ vs per-capita vs real). e.g. 'compare household spending as a share of GDP'.")] = None,
+              database: Annotated[Optional[str], _d("ADVANCED — the indicator's source database (WB_WDI, IMF_FSIC). Auto-derived from the resolved concept; override only for a non-WDI id you pass directly.")] = None) -> dict:
     """"<structural indicator> for <country>, over time / vs other countries" — World Bank annual data,
-    feature-extracted (open data, 3 credits). Returns `results:[{country, series:[{year,value}], analysis}]`
+    feature-extracted (open data, 3 credits). Pass a structural CONCEPT (the server resolves it to the canonical
+    indicator + variant) or an exact indicator id. Returns `results:[{country, series:[{year,value}], analysis}]`
     (one per country); `analysis` = `latest`(+year), `trend`, `cagr_pct`, `change`, `peak`/`trough`. ⭐ For a
     MULTI-COUNTRY call (comma-sep `country`) a top-level `ranking` orders them by the latest value — the
     cross-country compare FRED can't do. Annual STRUCTURAL data → read levels + CAGR, not high-frequency moves.
-    A country/year with no data is omitted (never interpolated). Pick the right VARIANT at find_indicator (%GDP
-    vs US$ vs per-capita). Surface `_license_note` when showing data."""
-    return _ext("/v1/ext/wb/series", {"indicator": indicator, "country": country, "from": from_, "to": to, "database": database})
+    A country/year with no data is omitted (never interpolated). The right VARIANT (%GDP vs US$ vs per-capita) is
+    picked from your `context`. A concept that isn't World-Bank structural (CPI/unemployment → fred_series) → honest
+    no_match. Surface `_license_note` when showing data."""
+    _ri = None
+    if not _is_indicator_id(indicator):                    # 🆕 collapse find_indicator: a CONCEPT → resolve server-side
+        r = _resolve_indicator(indicator, country=country, context=context)
+        if r["status"] != "resolved":
+            return {"needs_confirmation": r["status"] == "reconfirm", "confirm": {indicator: {"kind": "indicator",
+                        "status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])}},
+                    "_guide": "That isn't a unique World Bank indicator — pick one from candidates, or refine the "
+                              "concept/variant (% of GDP vs US$ vs per-capita) / add `context`, then re-call."}
+        indicator = r["indicator"]
+        if database is None:
+            database = r.get("database")                   # carry the resolved indicator's database
+        _ri = {"indicator": r["indicator"], "name": r.get("name"), "database": r.get("database"), "gate": r.get("gate")}
+    res = _ext("/v1/ext/wb/series", {"indicator": indicator, "country": country, "from": from_, "to": to, "database": database})
+    if _ri and isinstance(res, dict):
+        res["_resolved_indicator"] = _ri
+    return res
 
 # curated dashboards — the economist mental-model (which indicators make each read); series confirmed via
 # fred_series 2026-08-04. Each = (series_id, transform, label).

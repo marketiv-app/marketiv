@@ -1,0 +1,4 @@
+{"date":"2026-09-21","run":"run18_indicator-collapse","mdx_api_sha":"af0a46d2","mcp_jev_sha":"339e91c (working tree)",
+ "mdx_api_base":"http://127.0.0.1:8090 (DEBUG; WB /v1/ext/wb/series WORKS here — open data, no key — so END-TO-END verified)","server":"PORT=8902 BASE=:8090","bearer_suffix":"nine-ff",
+ "change":"Collapse find_indicator into wb_series (its only consumer) + DELETE it. wb_series takes a structural CONCEPT (or exact id) -> _resolve_indicator (vector /v1/ext/wb/find -> Jev pick -> gate) carrying the database + unit VARIANT; + context. Mirror of run17. 2nd of the ext trio.",
+ "model":"claude-opus-4-8 (blind subagent)"}
