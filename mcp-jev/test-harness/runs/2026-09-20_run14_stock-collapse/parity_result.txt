@@ -1,0 +1,43 @@
+query                      OLD rank-1       NEW pick/status    in_topk note
+--------------------------------------------------------------------------------------------------------------
+apple                      APPLE.COMM       APPLE.COMM         YES     TRAP: old rank-1 = APPLE.COMM (commodity); company is rank-2
+AAPL                       AAPL.US          AAPL.US            YES     bare symbol
+AAPL.US                    AAPL.US          AAPL.US            YES     exact full ticker (passthrough)
+microsoft                  MSFT.US          MSFT.US            YES     mega-cap by name
+nvidia                     NVDA.US          NVDA.US            YES     mega-cap by name
+NVDA                       NVDA.US          NVDA.US            YES     bare symbol
+GOOGL                      GOOG.US          GOOG.US            YES     cross-listing — GOOGL class A
+GOOG                       GOOG.US          GOOG.US            YES     cross-listing — GOOG class C
+Toyota                     7203.JP          7203.JP            YES     non-US name
+SK Hynix                   000660.KO        000660.KO          YES     non-US name (Korea)
+茅台                         600519.CG        600519.CG          YES     non-English name (Kweichow Moutai)
+トヨタ                        7203.JP          7203.JP            YES     non-English name (Toyota JP)
+英伟达                        NVDA.US          NVDA.US            YES     non-English name (NVIDIA CN)
+KBANK                      KBANK.BK         KBANK.BK           YES     SAME-NAME across markets (Thai KBANK.BK vs Korean Kbank) → expect reconfirm
+chip maker                 688321.CG        NO_MATCH           -       phrase → semantic  (old junk top-1=688321.CG)
+gold                       GOLD.COMM        GOLD.COMM          YES     commodity concept
+copper                     COPPER.COMM      COPPER.COMM        YES     commodity concept
+bitcoin                    BTC-USD.CC       BTC-USD.CC         YES     crypto
+US 10 year treasury        US-10Y.GB        US-10Y.GB          YES     bond yield (.GB, type=stock)
+SOFR                       SOFR.MM          SOFR.MM            YES     money-market rate (.MM)
+openai                     oc:52            oc:52              YES     private / off-coverage
+my lucky ticker            -                NO_MATCH           -       BOUNDARY — not a company → expect no_match  (old junk top-1=None)
+asdfghjkl                  KJL.BK           NO_MATCH           -       BOUNDARY — junk → expect no_match  (old junk top-1=KJL.BK)
+the stock that will go up  -                NO_MATCH           -       BOUNDARY — not an entity → expect no_match  (old junk top-1=None)
+--------------------------------------------------------------------------------------------------------------
+resolved=20  reconfirm=0  no_match=4
+🔴 RECALL-FLOOR failures (NEW pick NOT in OLD top_k): 0 []
+DISAGREEMENTS (NEW != OLD rank-1): 0
+
+✅ recall floor holds (every NEW resolved pick ∈ OLD top_k).
+
+======================================================================
+SCOPE EFFECT (per-consumer scope filters the candidate set):
+  'apple':
+      stock-only (financials)    → resolved  AAPL.US
+      asset (asset_pulse)        → resolved  AAPL.US
+      broad (stock_prices)       → resolved  APPLE.COMM
+  'gold':
+      stock-only (financials)    → resolved  GOLD.US
+      asset (asset_pulse)        → resolved  GOLD.LSE
+      broad (stock_prices)       → resolved  GOLD.COMM

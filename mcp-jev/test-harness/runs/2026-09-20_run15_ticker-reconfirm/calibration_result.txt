@@ -1,0 +1,36 @@
+
+===== RUN 1 =====
+  [ok ] apple stock                                  expect resolve:AAPL.US → AAPL.US
+  [ok ] apple the company                            expect resolve:AAPL.US → AAPL.US
+  [ok ] apple as a commodity                         expect resolve:APPLE.COMM → APPLE.COMM
+  [ok ] Samsung Electronics                          expect resolve:005930.KO → 005930.KO
+  [ok ] Samsung Biologics                            expect resolve:207940.KO → 207940.KO
+  [ok ] apple                                        expect resolve:AAPL.US → AAPL.US
+  [ok ] samsung                                      expect resolve:005930.KO → 005930.KO
+  [ok ] gold                                         expect resolve:GOLD.COMM → GOLD.COMM
+  [ok ] Toyota                                       expect resolve:7203.JP → 7203.JP
+  [ok ] microsoft                                    expect resolve:MSFT.US → MSFT.US
+  [ok ] NVDA                                         expect resolve:NVDA.US → NVDA.US
+  [ok ] bitcoin                                      expect resolve:BTC-USD.CC → BTC-USD.CC
+  [ok ] AAPL.US                                      expect resolve:AAPL.US → AAPL.US
+  [ok ] SOFR                                         expect reconfirm:['SOFR.MM'] → reconfirm cands=['SOFR.MM', 'SOFR.US', 'USSOFR.MM']
+  ---- 14 pass / 0 fail (soft rows excluded) ----
+
+===== RUN 2 (stability — Jev is non-deterministic) =====
+  [ok ] apple stock                                  expect resolve:AAPL.US → AAPL.US
+  [ok ] apple the company                            expect resolve:AAPL.US → AAPL.US
+  [ok ] apple as a commodity                         expect resolve:APPLE.COMM → APPLE.COMM
+  [ok ] Samsung Electronics                          expect resolve:005930.KO → 005930.KO
+  [ok ] Samsung Biologics                            expect resolve:207940.KO → 207940.KO
+  [ok ] apple                                        expect resolve:AAPL.US → AAPL.US
+  [ok ] samsung                                      expect resolve:005930.KO → 005930.KO
+  [ok ] gold                                         expect resolve:GOLD.COMM → GOLD.COMM
+  [ok ] Toyota                                       expect resolve:7203.JP → 7203.JP
+  [ok ] microsoft                                    expect resolve:MSFT.US → MSFT.US
+  [ok ] NVDA                                         expect resolve:NVDA.US → NVDA.US
+  [ok ] bitcoin                                      expect resolve:BTC-USD.CC → BTC-USD.CC
+  [ok ] AAPL.US                                      expect resolve:AAPL.US → AAPL.US
+  [ok ] SOFR                                         expect reconfirm:['SOFR.MM'] → reconfirm cands=['SOFR.MM', 'SOFR.US', 'USSOFR.MM']
+  ---- 14 pass / 0 fail (soft rows excluded) ----
+
+TOTAL fails: run1=0 run2=0

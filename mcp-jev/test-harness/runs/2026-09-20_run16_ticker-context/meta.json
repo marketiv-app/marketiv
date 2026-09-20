@@ -1,0 +1,4 @@
+{"date":"2026-09-20","run":"run16_ticker-context","mdx_api_sha":"af0a46d2","mcp_jev_sha":"4ee403f (working tree)",
+ "mdx_api_base":"http://127.0.0.1:8090 (DEBUG — correctness not latency)","server":"PORT=8902 BASE=:8090","bearer_suffix":"…9ff",
+ "change":"Restore old find_stock LANGUAGE field-desc (company name→native as-is; commodity/sector concept→English) + add a `context` field (user's full request) to all 10 ticker consumers; _resolve_ticker splits: retrieval on the ENTITY, Jev judges with CONTEXT. Fixes 'ขอราคาผลไม้ apple'→APPLE.COMM.",
+ "model":"claude-opus-4-8 (blind subagent)"}

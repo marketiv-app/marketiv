@@ -1,0 +1,3 @@
+{"agent":"B (multi-turn context)","turn1":{"user":"reviewing US money-market rates; how is EFFR?","tool_calls":[{"tool":"bond_pulse","args":{"q":"EFFR"}}],"resolved":"EFFR.MM"},
+"turn2":{"user":"And SOFR?","tool_calls":[{"tool":"bond_pulse","args":{"q":"SOFR"}}],"resolved":"SOFR.MM","note":"rates context; bond_pulse resolved cleanly (bond_pulse is not a wired ticker consumer — own path)"},
+"turn3":{"user":"switching topics — how is Apple's stock doing?","tool_calls":[{"tool":"asset_pulse","args":{"ticker":"Apple stock"}}],"resolved":"AAPL.US","note":"'stock' qualifier → the company, one-shot"}}

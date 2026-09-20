@@ -1,0 +1,19 @@
+{
+  "gate_A_process": "PASS (1 documented limitation)",
+  "summary": "find_stock collapsed into 9 ticker consumers + DELETED. Blind: 10/10 questions answered with 0 find_stock calls (tool is gone → a client cannot round-trip). 9/10 clean; 1 PARTIAL = a bare mega-cap-company word ('Apple') under BROAD scope resolves to the same-named commodity (APPLE.COMM) — an inherent company-vs-commodity ambiguity, NOT a regression (old find_stock rank-1 was also APPLE.COMM), and asset_pulse (the primary read tool, narrower scope) resolves it to AAPL.US correctly. A/B parity vs old find_stock: recall floor 0 violations, boundaries no_match where old returned junk.",
+  "parity": {"recall_floor_violations": 0, "resolved": 20, "reconfirm": 0, "no_match": 4, "note": "every NEW resolved pick ∈ OLD /v1/stocks top_k; non-stock assets (gold/bitcoin/US-10Y/SOFR) now resolve after the scope-aware instruction fix the A/B caught; boundaries (junk / 'stock that will go up') → no_match where old returned an arbitrary rank-1"},
+  "cases": [
+    {"id":"A-q1","verdict":"PASS","process":"asset_pulse(ticker='Toyota') — NL name, server resolved","output":"7203.JP, real pulse, one-shot","defects":[]},
+    {"id":"A-q2","verdict":"PASS","process":"stock_prices(ticker='NVDA') — passthrough/resolve","output":"NVDA.US price context","defects":[]},
+    {"id":"A-q3","verdict":"PASS","process":"asset_pulse(ticker='KBANK')","output":"KBANK.BK (Thai, exact-symbol fast-path); defensible auto-pick (the Korean one has a different symbol, not an exact 'KBANK' match)","defects":[]},
+    {"id":"A-q4","verdict":"PARTIAL","process":"stock_prices_batch(['Apple','Microsoft']) — MSFT.US correct; 'Apple' → APPLE.COMM (commodity) under broad scope","output":"KNOWN LIMITATION: bare company-word vs same-named commodity in broad scope; not a regression (old rank-1=APPLE.COMM); asset_pulse('Apple')→AAPL.US correct; mega-cap rule fixed the worse foreign-small-cap mis-pick","defects":[{"desc":"broad-scope bare 'Apple' silently resolves to the commodity, not AAPL.US","side":"ours-known-ambiguity"}]},
+    {"id":"A-q5","verdict":"PASS","process":"commodity_pulse('gold') — client correctly chose the commodity tool (not a ticker consumer)","output":"gold commodity pulse","defects":[]},
+    {"id":"B-q1","verdict":"PASS","process":"relationships(ticker='Samsung Electronics')","output":"005930.KO; competitors returned","defects":[]},
+    {"id":"B-q2","verdict":"PASS","process":"options_sentiment(ticker='Tesla')","output":"TSLA positioning +0.49","defects":[]},
+    {"id":"B-q3","verdict":"PASS","process":"add_to_playlist(tickers=['Nvidia','ซัมซุง','bitcoin']) — the NEW-scope consumer (beyond the plan's 6)","output":"NVDA.US + Samsung 005930.KO (Thai NL) + BTC-USD.CC all resolved+added; multilingual + multi-asset","defects":[]},
+    {"id":"B-q4","verdict":"PASS","process":"financials(tickers='トヨタ')","output":"7203.JP statements","defects":[]},
+    {"id":"B-q5","verdict":"PASS","process":"stock_prices(ticker='lucky stock') → no_match, 0 candidates","output":"honest boundary; client asked user rather than fabricate","defects":[]}
+  ],
+  "find_stock_calls": 0,
+  "resolver_roundtrips": 0
+}

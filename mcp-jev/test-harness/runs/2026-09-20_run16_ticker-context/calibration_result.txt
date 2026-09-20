@@ -1,0 +1,36 @@
+
+===== RUN 1 =====
+  [ok ] entity=apple     ctx=ขอราคาผลไม้ apple            → APPLE.COMM     (expect APPLE.COMM)
+  [ok ] entity=apple     ctx=price of the fruit apple     → APPLE.COMM     (expect APPLE.COMM)
+  [ok ] entity=apple     ctx=apple stock price            → AAPL.US        (expect AAPL.US)
+  [ok ] entity=apple     ctx=apple the company earnings   → AAPL.US        (expect AAPL.US)
+  [ok ] entity=apple     ctx=None                         → AAPL.US        (expect AAPL.US)
+  [ok ] entity=wheat     ctx=price of wheat and apple     → WHEAT.COMM     (expect WHEAT.COMM)
+  [ok ] entity=apple     ctx=price of wheat and apple     → APPLE.COMM     (expect APPLE.COMM)
+  [ok ] entity=茅台        ctx=ราคาหุ้น 茅台                  → 600519.CG      (expect 600519.CG)
+  [ok ] entity=トヨタ       ctx=トヨタの株価                       → 7203.JP        (expect 7203.JP)
+  [ok ] entity=삼성전자      ctx=삼성전자 실적                      → 005930.KO      (expect 005930.KO)
+  [ok ] entity=gold      ctx=gold price                   → GOLD.COMM      (expect GOLD.COMM)
+  [ok ] entity=crude oil ctx=crude oil price              → WTI.COMM       (expect WTI.COMM|BRENT.COMM)
+  [ok ] entity=NVDA      ctx=NVDA price                   → NVDA.US        (expect NVDA.US)
+  [ok ] entity=Toyota    ctx=how is Toyota trading        → 7203.JP        (expect 7203.JP)
+  ---- 14 pass / 0 fail ----
+
+===== RUN 2 (stability) =====
+  [ok ] entity=apple     ctx=ขอราคาผลไม้ apple            → APPLE.COMM     (expect APPLE.COMM)
+  [ok ] entity=apple     ctx=price of the fruit apple     → APPLE.COMM     (expect APPLE.COMM)
+  [ok ] entity=apple     ctx=apple stock price            → AAPL.US        (expect AAPL.US)
+  [ok ] entity=apple     ctx=apple the company earnings   → AAPL.US        (expect AAPL.US)
+  [ok ] entity=apple     ctx=None                         → AAPL.US        (expect AAPL.US)
+  [ok ] entity=wheat     ctx=price of wheat and apple     → WHEAT.COMM     (expect WHEAT.COMM)
+  [ok ] entity=apple     ctx=price of wheat and apple     → APPLE.COMM     (expect APPLE.COMM)
+  [ok ] entity=茅台        ctx=ราคาหุ้น 茅台                  → 600519.CG      (expect 600519.CG)
+  [ok ] entity=トヨタ       ctx=トヨタの株価                       → 7203.JP        (expect 7203.JP)
+  [ok ] entity=삼성전자      ctx=삼성전자 실적                      → 005930.KO      (expect 005930.KO)
+  [ok ] entity=gold      ctx=gold price                   → GOLD.COMM      (expect GOLD.COMM)
+  [ok ] entity=crude oil ctx=crude oil price              → WTI.COMM       (expect WTI.COMM|BRENT.COMM)
+  [ok ] entity=NVDA      ctx=NVDA price                   → NVDA.US        (expect NVDA.US)
+  [ok ] entity=Toyota    ctx=how is Toyota trading        → 7203.JP        (expect 7203.JP)
+  ---- 14 pass / 0 fail ----
+
+TOTAL fails: run1=0 run2=0

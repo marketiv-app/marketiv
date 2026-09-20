@@ -1,0 +1,18 @@
+{
+  "gate_A_process": "PASS",
+  "summary": "Fixed 'ขอราคาผลไม้ apple'→AAPL.US (wrong) by restoring what the find_stock collapse lost: (1) the old find_stock FIELD-DESCRIPTION language rule (company name→native as-is; commodity/sector concept→English — a native concept drifts, GOLD.COMM absent from top_k → Jev can't recover), and (2) the client's disambiguation, now via a `context` field passed to the server-side Jev. _resolve_ticker SPLITS: retrieval on the ENTITY, Jev judges with CONTEXT. Verified by calibration (14/14 ×2) AND a real BLIND MCP test (subagent read the NEW descriptions and passed context itself).",
+  "blind_mcp_test": {
+    "m1_ผลไม้_apple": "🔴 THE fix: 'ขอราคาผลไม้ apple' → stock_prices(ticker='apple', context='...fruit apple') → APPLE.COMM (Fuji apple futures). Was AAPL.US (wrong) today.",
+    "m2_native_茅台": "'ราคาหุ้น 茅台' → stock_prices(ticker='茅台' NATIVE, context='...stock price of 茅台/Moutai') → 600519.CG. Native Chinese company name resolved; 'หุ้น/stock' → the company.",
+    "m3_thai_gold": "'ขอราคาทองคำ' → the client TRANSLATED the commodity concept ทองคำ→'gold' (per the field-desc language rule) + context → GOLD.COMM. (Native ทองคำ would drift to a Lao bank.)",
+    "m4_batch": "'compare Apple and Microsoft stock prices' → stock_prices_batch(tickers=['Apple','Microsoft'], context=...) → AAPL.US, MSFT.US."
+  },
+  "verified_from_real_data": {
+    "stock_prices('apple', context='ขอราคาผลไม้ apple')": "APPLE.COMM",
+    "stock_prices('茅台', context='ราคาหุ้น 茅台')": "600519.CG",
+    "stock_prices('apple', context='apple stock price')": "AAPL.US"
+  },
+  "calibration_matrix": "context_test.py 14/14 ×2 stable (ISOLATED, NOT the MCP test): apple+fruit-ctx→APPLE.COMM · apple+stock-ctx→AAPL.US · apple+no-ctx→AAPL.US (dominant) · compound wheat/apple→WHEAT.COMM/APPLE.COMM · native 茅台/トヨタ/삼성전자 → resolve · English gold/crude oil → GOLD.COMM/WTI.COMM · controls",
+  "find_stock_calls": 0,
+  "notes": "The blind client, reading the NEW field descriptions, (a) passed the full `context` on every call, and (b) followed the language rule ITSELF — native company names as-is (茅台), commodity concepts translated to English (ทองคำ→gold). This is exactly the old find_stock contract restored + the context enhancement."
+}

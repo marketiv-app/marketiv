@@ -1,0 +1,4 @@
+{"date":"2026-09-20","run":"run15_ticker-reconfirm","mdx_api_sha":"af0a46d2","mcp_jev_sha":"4ee403f (working tree)",
+ "mdx_api_base":"http://127.0.0.1:8090 (DEBUG — correctness not latency)","server":"PORT=8902 BASE=:8090","bearer_suffix":"…9ff",
+ "change":"Fix ticker resolver: (1) fast-path guarded to ALL-UPPERCASE deliberate ticker symbols (a lowercase common word like 'apple' no longer force-picks a same-symbol commodity); (2) _ticker_instr rewritten query-driven (signal→pick · dominant-reading→pick · genuine tie→reconfirm), removed the commodity-word + mega-cap-force hardcodes. DECISION (ran): resolve to the dominant everyday reading (99% UX); reconfirm only on a genuine tie.",
+ "model":"claude-opus-4-8 (blind subagents)"}

@@ -1,0 +1,5 @@
+{"agent":"A (dominant one-shot)","q1":{"q":"How is Apple's stock doing?","tool_calls":[{"tool":"asset_pulse","args":{"ticker":"Apple stock"}}],"resolved":"AAPL.US","friction":"none"},
+"q2":{"q":"gold price lately?","tool_calls":[{"tool":"commodity_pulse","args":{"q":"gold"}}],"resolved":"GOLD.COMM","friction":"chose commodity_pulse (correct tool for a commodity)"},
+"q3":{"q":"Pull Samsung's latest financials.","tool_calls":[{"tool":"financials","args":{"tickers":"Samsung Electronics"}}],"resolved":"005930.KO","friction":"agent expanded Samsung→Samsung Electronics itself"},
+"q4":{"q":"How is Toyota trading?","tool_calls":[{"tool":"asset_pulse","args":{"ticker":"Toyota"}}],"resolved":"7203.JP","friction":"none"},
+"q5":{"q":"Nvidia recent price action","tool_calls":[{"tool":"asset_pulse","args":{"ticker":"Nvidia"}}],"resolved":"NVDA.US","friction":"none"}}

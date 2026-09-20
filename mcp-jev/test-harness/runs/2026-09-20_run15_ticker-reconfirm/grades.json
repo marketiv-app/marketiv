@@ -1,0 +1,19 @@
+{
+  "gate_A_process": "PASS",
+  "summary": "Fixed the silent-wrong-pick on ambiguous bare names. Root cause (traced): the FAST-PATH treated a lowercase common word as a deliberate ticker symbol (APPLE.COMM's symbol is literally 'APPLE') → resolved before Jev. Guarded the fast-path to ALL-UPPERCASE tokens + rewrote _ticker_instr query-driven. DECISION (ran): resolve to the dominant everyday reading (99% intent, best UX); reconfirm only on a genuine tie. Verified by an ISOLATED calibration matrix (14/14 ×2, labeled NOT-an-MCP-test) AND a REAL blind MCP test (3 subagents write own args): dominant names resolve one-shot; a genuine tie (SOFR via stock_prices) reconfirms and the blind client picks + re-calls the exact ticker (passthrough). 0 find_stock calls. Recall floor still 0 violations.",
+  "blind_mcp_test": {
+    "agentA_dominant": "Apple stock→AAPL.US · gold→GOLD.COMM(commodity_pulse) · Samsung→005930.KO · Toyota→7203.JP · Nvidia→NVDA.US — all one-shot, 0 find_stock",
+    "agentB_multiturn": "EFFR→EFFR.MM · SOFR→SOFR.MM (rates context, clean) · 'Apple stock'→AAPL.US — real clients naturally qualify + pick specialized tools",
+    "agentC_reconfirm_loop": "🔴 THE loop proof: 'price history of SOFR' → stock_prices(SOFR) → RECONFIRM {USSOFR.MM,SOFR.MM,SOFR.US} → client picked SOFR.MM (the rate) → RE-CALLED stock_prices(SOFR.MM) = exact-ticker passthrough. 'ticker symbol GOLD' → fast-path (uppercase) → GOLD.COMM, no reconfirm."
+  },
+  "verified_from_real_data": {
+    "asset_pulse('Apple stock')": "AAPL.US",
+    "financials('Samsung Electronics')": "005930.KO",
+    "stock_prices('SOFR')": "needs_confirmation (reconfirm)",
+    "stock_prices('SOFR.MM')": "resolved, metric_kind=yield (the rate)"
+  },
+  "calibration_matrix": "reconfirm_test.py 14/14 ×2 stable (ISOLATED — I write the args; a calibration harness to measure resolve-vs-reconfirm, NOT the MCP test): apple→AAPL.US · apple as commodity→APPLE.COMM · apple stock→AAPL.US · samsung→005930.KO · gold→GOLD.COMM · Toyota/microsoft/NVDA/bitcoin resolve · AAPL.US passthrough · SOFR→reconfirm",
+  "recall_floor": "parity_test.py: 0 violations; 1 disagreement vs old rank-1 = the WIN (apple: NEW→AAPL.US company vs old rank-1→APPLE.COMM fruit-commodity)",
+  "find_stock_calls": 0,
+  "notes": "reconfirm_test.py / diag / trace are ISOLATED calibration (I write args) — NOT MCP tests; the MCP test is the 3 blind subagents above (they write their own args from tools/list). Decision (a) means bare 'samsung'/'apple' resolve to the dominant reading rather than reconfirm — the 1% non-dominant intent is corrected in conversation (ran's chosen tradeoff)."
+}

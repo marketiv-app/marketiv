@@ -1,0 +1,15 @@
+{"note":"BLIND multilingual confirmation — 12/12 across TH/CN/JP/KR/ES/FR/DE + mixed. 0 find_stock. All passed context; native names as-is; commodity concepts self-translated to English.",
+ "eastAsian":{
+  "หุ้นโตโยต้า (TH)":{"call":"asset_pulse(ticker='โตโยต้า', context=…)","→":"7203.JP"},
+  "苹果公司的股价 (CN)":{"call":"asset_pulse(ticker='苹果公司', context=…)","→":"AAPL.US"},
+  "黄金现在多少钱 (CN)":{"call":"commodity_pulse(q='gold')  [client translated 黄金→gold]","→":"GOLD.COMM"},
+  "任天堂の株価 (JP)":{"call":"asset_pulse(ticker='任天堂', context=…)","→":"7974.JP"},
+  "삼성전자 주가 (KR)":{"call":"asset_pulse(ticker='삼성전자', context=…)","→":"005930.KO"},
+  "比亚迪股票 (CN)":{"call":"asset_pulse(ticker='比亚迪', context=…)","→":"002594.CS"}},
+ "europeanCommodityMixed":{
+  "acciones de Apple (ES)":{"call":"stock_prices(ticker='Apple', context=…)","→":"AAPL.US"},
+  "precio del oro (ES)":{"call":"stock_prices(ticker='gold' [translated oro→gold], context=…)","→":"GOLD.COMM"},
+  "action LVMH (FR)":{"call":"stock_prices(ticker='LVMH', context=…)","→":"MC.PA"},
+  "SAP Aktie (DE)":{"call":"stock_prices(ticker='SAP', context=…)","→":"SAP.XETRA"},
+  "น้ำมันดิบ (TH)":{"call":"stock_prices(ticker='crude oil' [translated]) → RECONFIRM {WTI/Brent/idx} → picked WTI.COMM → re-call","→":"WTI.COMM","note":"reconfirm loop handled"},
+  "比亚迪 กับ Tesla (mixed)":{"call":"stock_prices_batch(tickers=['比亚迪','Tesla'], context=…)","→":"002594.CS, TSLA.US"}}}

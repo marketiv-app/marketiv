@@ -44,8 +44,8 @@ _INSTRUCTIONS = (
     "variant. Government-bond YIELDS use `<ISO2>-<TENOR>.GB` (US-10Y.GB, JP-10Y.GB, DE-2Y.GB) and money-"
     "market RATES `<TOKEN>.MM` (SOFR.MM, EFFR.MM, EURIBOR3M.MM); a yield/rate MOVE reads in BASIS POINTS "
     "(`change_bps`), never as a % of the yield — and a yield has no options/PE/market-cap, so those lenses "
-    "being absent for a `.GB`/`.MM` ticker is EXPECTED, not a failure. Resolve any of these with find_stock "
-    "(US 10-year treasury→US-10Y.GB, SOFR→SOFR.MM) then asset_pulse/stock_prices. "
+    "being absent for a `.GB`/`.MM` ticker is EXPECTED, not a failure. Just pass the name or ticker to "
+    "asset_pulse/stock_prices — they resolve it server-side (US 10-year treasury→US-10Y.GB, SOFR→SOFR.MM). "
     "News tools accept a time range (`from_`/`to` ISO or `window` like "
     "'90d'/'qtd'/'1y'); to compare periods, call the tool once per period and compare. "
     "⚠️ NEWS coverage starts 2026-01-01 — there is NO news before 2026; for an older period say so "
@@ -80,9 +80,9 @@ _INSTRUCTIONS = (
     "cohort (a different membership), and the tradable ETF's options positioning (it does the concept→ETF "
     "mapping for you; full 64-ETF set in marketdx://policy). So: a specific TICKER/company → `asset_pulse`; "
     "a sector/theme CONCEPT → `theme_pulse`. ⚠️ For a NON-US company or when unsure of the exact ticker "
-    "(esp. Asian/European names — we use our OWN suffixes, Korea=.KO not .KS, so a guess 404s), resolve it "
-    "FIRST with `find_stock(<name>)` and use the returned `ticker`. Also resolves commodities/crypto/"
-    "private (gold→GOLD, openai→oc:52). "
+    "(esp. Asian/European names — we use our OWN suffixes, Korea=.KO not .KS, so a guess 404s), just pass the "
+    "plain NAME to asset_pulse/stock_impact/stock_prices — they resolve it server-side (any asset class incl "
+    "commodities/crypto/private); an ambiguous name comes back as a reconfirm to pick from. "
     "Prefer these composites over calling stock_impact / "
     "options_sentiment one at a time; use those only to DRILL deeper afterwards. Synthesize where news and "
     "positioning AGREE or DIVERGE; if the user HOLDS the name, tie the read back to their position. "
@@ -100,8 +100,8 @@ _INSTRUCTIONS = (
     "currency-neutral). EQUITY ONLY — an ETF/commodity/bond/crypto has no company financials. 🔴 But a plain "
     "'how is <stock> doing / น่าลงทุนไหม' does NOT need a separate financials call: `asset_pulse` on a stock "
     "ALREADY embeds the fundamentals summary (the `fundamentals` block) — read that; reach for `financials` "
-    "only when they want a dedicated compare, quarterly, or full statements. Resolve NAMES → tickers with "
-    "find_stock first. Narrate the PLAIN read for a beginner; translate any raw XBRL tag into everyday words. "
+    "only when they want a dedicated compare, quarterly, or full statements. Pass NAMES straight to these tools — "
+    "they resolve names → tickers server-side. Narrate the PLAIN read for a beginner; translate any raw XBRL tag into everyday words. "
     "🧠 ANALYTICAL MINDSET — when the user asks you to ASSESS or read an OUTLOOK ('how's X', 'แนวโน้ม', "
     "'น่าสนใจไหม', 'should I worry', 'is it cheap') rather than a bare price/number: asset_pulse/theme_pulse "
     "is the CORE read, but it is NOT the whole answer. Before you conclude, ASK YOURSELF what OFF-INSTRUMENT "
@@ -117,24 +117,23 @@ _INSTRUCTIONS = (
     "then SYNTHESIZE: does the structural/macro/trade backdrop CONFIRM or CONTRADICT the price+news? Never "
     "gather just to look thorough — but never leave a domestic-consumer, exporter, or macro-sensitive read "
     "backdrop-BLIND either (that is the difference between a data readout and an analyst's answer). The "
-    "stock's country + sector (from find_stock / asset_pulse) is enough to know WHICH backdrop applies. "
+    "stock's country + sector (from asset_pulse / financials) is enough to know WHICH backdrop applies. "
     "To SUMMARIZE a whole scope — a news CATEGORY (e.g. "
     "'สรุปข่าว commodity' → news_type='commodity_supply'), a country/market, an impact channel (aspect), "
     "a GICS sector, a megatrend, or any AND-mix — use `brief` (the composed 'how is <X> doing right now?' "
-    "picture), NOT search_news/news_feed (those return a raw article LIST, not a summary). Resolve a "
-    "trend term via find_megatrend; follow marketdx://policy for voice, scope, and the response stance. "
+    "picture), NOT search_news/news_feed (those return a raw article LIST, not a summary). A sector/trend term "
+    "in `brief`/`theme_pulse` is resolved server-side; follow marketdx://policy for voice, scope, and stance. "
     "NOTES — the user keeps a personal INVESTMENT KNOWLEDGE BASE via `write_note` (their notes join this "
     "same graph and are retrievable by entity later — the point is to fight scattered knowledge). Act as a "
     "proactive librarian: after a SUBSTANTIVE investment answer — a sector/mechanism explainer, a dated "
     "market read (with its 'why'), a thesis, a comparison, a decision — briefly OFFER to keep it "
     "('เก็บเข้าโน้ตไหม?'), and save right away on any explicit 'save this / จดไว้'. When you save, pass the "
-    "tickers + megatrend ids you already resolved this turn so the note links to the graph — and if the note "
-    "is about a SECTOR/TREND/mechanism (e.g. 'what is HBM') rather than one specific stock, do one quick "
-    "`find_megatrend([...])` at save time to link the theme (that's how it's found by interest later). 🔴 "
-    "LIKEWISE for a COMMODITY / asset you discussed only via the TRADE tools or keyword news: `find_hs` / "
-    "`search_trade` give an HS code (e.g. rice→1006), NOT a MarketDX ticker, and `search_news` keyword doesn't "
-    "resolve one either — so at save time do a quick `find_stock` to get the real ticker (rice→RICE.COMM, "
-    "copper→COPPER.COMM) and pass it, or the note won't link to the commodity in the graph. (A stock chat "
+    "stocks + sector/theme this turn is about so the note links to the graph — `write_note` RESOLVES names "
+    "server-side: put stock NAMES/tickers in `stocks`, and the sector/trend word(s) straight in `gics` (plain "
+    "English is fine — a curated theme is routed to a megatrend automatically). 🔴 LIKEWISE a COMMODITY you "
+    "discussed only via the TRADE tools or keyword news (`find_hs`/`search_trade` give an HS code e.g. rice→1006, "
+    "NOT a ticker) — just put the commodity NAME in `stocks` (rice→resolved to RICE.COMM, copper→COPPER.COMM) so "
+    "the note links to it in the graph. (A stock chat "
     "usually resolved the ticker already; a commodity/trade chat often has NOT — this is the easy miss.) Do NOT offer on "
     "chit-chat, trivia lookups (e.g. 'what's NVDA's ticker'), or off-topic / non-investment turns; don't "
     "nag more than once, and never save pure filler."
@@ -183,8 +182,18 @@ def _dt(desc: str):  # noqa: ANN201 — exact-ticker field
 # reaches for on a single-company ask (measured: clients try `ticker=` first, hit an error, retry with `tickers`).
 def _dts(desc: str):  # noqa: ANN201
     return Field(description=desc, validation_alias=AliasChoices("tickers", "ticker", "symbols", "symbol"))
-_TICKER = "A MarketDX ticker (resolve via find_stock if unsure — mdx uses its OWN suffixes: Korea `.KO`, " \
-    "Taiwan `.TW`, commodities `.COMM`, bonds `<ISO2>-<TENOR>.GB`, rates `.MM`). US mega-caps: bare `AAPL`."
+_TICKER = "A MarketDX ticker OR a plain company/asset NAME — the SERVER resolves it for you (no separate lookup step). " \
+    "🌐 LANGUAGE: a COMPANY / specific-asset NAME passes AS-IS in the user's own language (茅台/トヨタ/삼성 resolve " \
+    "natively — do NOT translate a proper name, translation risks a wrong match); but a generic COMMODITY / SECTOR " \
+    "CONCEPT must be ENGLISH (ทองคำ/黄金→'gold', 原油→'crude oil', 半導体→'semiconductors') — a raw non-English concept " \
+    "word DRIFTS and misses. 🔴 Pass the user's FULL request in `context` (any language) so the server can tell which " \
+    "'apple' you mean (the company vs the fruit-commodity), etc. If it's still genuinely ambiguous you get a " \
+    "`needs_confirmation` reconfirm listing candidates — settle it from your CONVERSATION context if obvious (re-call " \
+    "with the chosen exact ticker) or ASK the user, then re-call. An exact ticker passes straight through (mdx uses its " \
+    "OWN suffixes: Korea `.KO`, Taiwan `.TW`, commodities `.COMM`, crypto `.CC`, FX `.FOREX`, bonds `.GB`, rates `.MM`)."
+_TK_CONTEXT = "OPTIONAL but RECOMMENDED — paste the user's FULL request VERBATIM (any language: 'ขอราคาผลไม้ apple', " \
+    "'compare Apple and Microsoft stock'). The server uses it to disambiguate which candidate each `ticker` entity " \
+    "means (the apple COMPANY vs the fruit COMMODITY; which Samsung). One context per call, shared by all tickers here."
 _WINDOW = "News-recency window: `7d`/`30d`/`90d`/`180d`/`1y` or `mtd`/`qtd`/`ytd`. Omit → a sensible default. " \
     "(Price history is unaffected — this only scopes the NEWS lens.)"
 _LIMIT = "Max rows (default 20, hard cap 50). Keep SMALL + narrow the scope; page/refine rather than dump — " \
@@ -210,7 +219,7 @@ def _lim(n: Optional[int], default: int = 20, ceiling: int = 50, floor: int = 1)
     """Bound a list tool's page size so the result stays context-friendly. Heavily-covered assets
     (GOLD, oil, mega-caps) have hundreds of impact articles — dumping them all overflows the client's
     context. `None` → default; the LLM may raise it up to `ceiling`, then should page/narrow instead.
-    `floor` guards TOP-K RESOLVERS (find_stock/find_series/…): they return a CANDIDATE LIST the client
+    `floor` guards TOP-K RESOLVERS (find_series/find_hs/…): they return a CANDIDATE LIST the client
     PICKS from, so a client setting limit=1 would collapse them to rank-#1 and break the design — floor it
     (e.g. 5) so a candidate list always comes back."""
     if n is None:
@@ -676,29 +685,60 @@ def _resolve_fsconcept(q: str, scope_types: tuple = ("field", "ratio", "valuatio
 #    canonical head — that is the consuming endpoint's job (financials→head, stock_prices→the literal listing);
 #    a shared resolver must stay identity-only or it would break price/pulse (GOOGL.US≠GOOG.US price). See
 #    resolver-replacement-design.md §13.
-_TICKER_RESOLVE_INSTR = (
-    "The state has `query`: a company identifier a user typed — a NAME, a bare ticker SYMBOL, an alias, or a "
-    "non-English company name — to resolve to ONE exact listing. Each option is a candidate listing: its company "
-    "name, ticker, asset type, and country/exchange. Select the SINGLE option that IS the company the user means. "
-    "For a bare SYMBOL, match the listing whose ticker symbol equals it (GOOGL → the GOOGL share class, not the "
-    "GOOG one) UNLESS only one class is present. For a NAME, match the company of that name. When the same name or "
-    "symbol exists in DIFFERENT countries, or as a DIFFERENT entity (a company vs a same-named commodity/fund), and "
-    "the query gives no country/context to settle it, prefer the largest, most prominent company but do not invent "
-    "certainty. One option is `__NONE__` — read its description; choose it ONLY when no candidate is a real company "
-    "matching the query. Match on identity, not surface spelling.")
+# SCOPE-AWARE instruction/NONE — the acceptable asset classes depend on the CONSUMING tool's scope. A stock-only
+# scope (financials/relationships) must REJECT a commodity/crypto/bond as no_match; a broad price/pulse scope must
+# RESOLVE them (they're valid tradables). So the wording is built from `scope`, not hardcoded to companies. (The
+# parity A/B run14 caught the company-centric version wrongly no_match'ing gold/bitcoin/US-10Y/SOFR/SPY.)
+_TYPE_LABEL = {
+    "stock":     "a listed company / stock (this class ALSO covers a government-bond YIELD `<ISO2>-<TENOR>.GB` and a money-market RATE `<TOKEN>.MM`)",
+    "etf":       "an ETF / fund",
+    "commodity": "a commodity (metal / energy / agri, e.g. GOLD.COMM)",
+    "crypto":    "a cryptocurrency",
+    "forex":     "a currency / FX pair",
+    "private":   "a private / off-coverage company (oc:…)",
+}
+def _ticker_instr(scope: tuple) -> str:
+    accepted = "; ".join(_TYPE_LABEL.get(t, t) for t in scope)
+    return (
+        "The state has `query`: what identifies ONE instrument to resolve. It may be a bare name/symbol, OR the form "
+        "'Resolve the entity \"X\" as it is used in the user's request: \"<full request>\"' — in that case resolve the "
+        "ENTITY X, using the full request as the disambiguating CONTEXT (e.g. entity 'apple' in request 'ราคาผลไม้ apple' "
+        "/ 'price of the fruit apple' → the apple COMMODITY; in 'apple stock price' → the company). Each option is a "
+        "candidate listing: name, ticker, asset type, country/exchange, and a market-cap size hint. The ONLY asset "
+        f"classes acceptable for THIS request are: {accepted}. The query (+ its context) is your primary evidence:\n"
+        "1. If the query WORDING points to ONE candidate, pick it confidently: a fuller/proper NAME that matches one "
+        "('Apple Inc', 'Samsung Electronics'); a KIND word — stock/shares/equity, commodity/futures/spot, ETF/fund, "
+        "crypto/coin, currency/FX, bond/yield/rate — → the candidate of that class; a metric only ONE kind has "
+        "(earnings/revenue/PE/dividend/market-cap → a COMPANY, never a commodity); a country/exchange; or an exact "
+        "ticker SYMBOL (a bare symbol → the listing whose symbol equals it: GOOGL → the GOOGL class, not GOOG, unless "
+        "only one is present).\n"
+        "2. If the query is a BARE word/symbol with NO such signal, judge whether it has ONE overwhelmingly dominant "
+        "everyday meaning among the candidates. YES — a raw-material word ('gold'/'copper') ≈ the spot commodity; ONE "
+        "famous entity ('Toyota'/'Nvidia') with only tiny same-named others → pick that dominant one. NO — the bare "
+        "word genuinely SPLITS across distinct real things (SEVERAL real companies of comparable stature; OR a major "
+        "company AND a same-named commodity that are BOTH ordinary readings, e.g. 'apple' = the tech giant AND an apple "
+        "fruit commodity) → you are genuinely UNCERTAIN: DO NOT guess one. SPREAD your probability across the tied "
+        "candidates (keep your top confidence MODERATE) so the ambiguity is handed back to the user to settle from "
+        "their own context — do not concentrate on a single guess.\n"
+        "3. `__NONE__`: only when NO candidate is an accepted-class instrument that the query names.\n"
+        "Use the market-cap / name / type hints ONLY as evidence of what each candidate is and which meaning is "
+        "dominant — do NOT mechanically 'always pick the biggest'. Match on identity + the query's intent, not spelling.")
+def _ticker_none(scope: tuple) -> str:
+    return (
+        "None of the listings is an instrument (of the accepted classes for this request) that the query names. "
+        "⚠️ LAST RESORT — pick this ONLY when the query is not a resolvable instrument at all (pure gibberish / not a "
+        "real name or symbol), or every candidate belongs to an asset class this request does NOT accept. A name, "
+        "symbol, commodity, crypto, FX, bond/rate, or ETF that DOES match a candidate of an ACCEPTED class must "
+        "resolve to that candidate, never to NONE.")
 
-_TICKER_NONE_OPT = (
-    "None of the listings above is the company the user means. ⚠️ LAST RESORT ONLY — pick this when the query is "
-    "NOT a company at all (a commodity, crypto, ETF/fund, bond, currency, index, or gibberish) or none of the "
-    "candidates is remotely the right company. A bare symbol or loose company name that DOES match one of the "
-    "candidates must resolve to that candidate, never to NONE.")
-
-def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = None) -> dict:
-    """Resolve ONE company identifier (name / bare symbol / alias / non-English name) → the exact MarketDX
-    ticker, SCOPED to asset `scope` (financials = ('stock',)). Flow: a full ticker (already carries an exchange
-    suffix, e.g. AAPL.US) passes through untouched — the {key} half of dual-mode; else vector shortlist
-    (/v1/stocks, the retrieval find_stock uses) → Jev pick + `__NONE__` → calibrated gate. IDENTITY only — the
-    head/listing mapping is the consuming endpoint's job (see §13). Returns
+def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = None,
+                    context: Optional[str] = None) -> dict:
+    """Resolve ONE entity (company name / bare symbol / alias / non-English name) → the exact MarketDX ticker,
+    SCOPED to asset `scope`. RETRIEVAL uses `q` (the ENTITY — a company name passes native; a commodity/sector
+    concept must be English, per the field contract). `context` = the user's FULL request; it is what JEV judges
+    with, so it can tell which candidate the entity means ('apple' the company vs the fruit-commodity). Flow: full
+    ticker (AAPL.US) → passthrough; else vector shortlist on `q` → Jev pick (judged by `context`, falling back to
+    `q`) + `__NONE__` → calibrated gate. IDENTITY only — head/listing mapping is the endpoint's job. Returns
     {status: resolved|reconfirm|no_match, query, ticker?, name?, confidence?, gate?, note?, candidates?}."""
     matches = mdx()._get("/v1/stocks", {"q": q, "country": country, "limit": 15}).data.get("matches", [])
     cands = [m for m in matches if m.get("type") in scope]   # SCOPE: only asset classes this tool accepts
@@ -712,26 +752,42 @@ def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = 
     def _syms(m):  # every symbol this row could have matched the query on (its own + the cross-listing it collapsed)
         return {t.split(".")[0].upper() for t in (m.get("ticker"), m.get("matched_via"), m.get("symbol")) if t}
     qn = q.strip().upper()
-    # FAST-PATH: a UNIQUE row whose symbol (or the cross-listing it matched via) == the query → unambiguous identity,
-    # no Jev, no spurious reconfirm (NVDA/RDDT/MSFT/GOOGL). Several rows (same symbol across countries) → fall to Jev.
+    # FAST-PATH: a UNIQUE row whose symbol == the query → unambiguous ticker entry, no Jev (NVDA/RDDT/MSFT/GOOGL).
+    # 🔴 GUARD: only when the user typed a DELIBERATE TICKER SYMBOL — an ALL-UPPERCASE single token (`NVDA`, `AAPL`,
+    # `KBANK`). A lowercase common WORD ('apple', 'gold', 'samsung') that merely happens to equal a commodity's symbol
+    # ('APPLE'/'GOLD') must NOT fast-path — it defers to Jev, which reads the word's meaning (apple → the company /
+    # genuinely ambiguous, not the Fuji-apple commodity). Several rows (same symbol across countries) → Jev too.
+    ticker_shaped = q.strip().isupper() and " " not in q.strip() and "." not in q.strip()
     exact = [m for m in cands if m.get("match_type") in ("symbol", "cross_listing", "exact") and qn in _syms(m)]
-    if len(exact) == 1:
+    if ticker_shaped and len(exact) == 1:
         return {"status": "resolved", "query": q, "ticker": exact[0].get("ticker"), "name": exact[0].get("name"),
                 "confidence": 1.0, "gate": "exact_symbol"}
+    def _mc(m):  # market-cap size hint → lets Jev prefer a mega-cap COMPANY over a same-named MINOR commodity/fund
+        v = m.get("market_cap_usd")
+        if not v: return None
+        if v >= 1e12: return f"~${v/1e12:.1f}T mkt cap (mega-cap)"
+        if v >= 1e9:  return f"~${v/1e9:.0f}B mkt cap"
+        if v >= 1e6:  return f"~${v/1e6:.0f}M mkt cap"
+        return None
     options, meta = {}, {}
     for m in cands:
         idt = m.get("ticker")                                # IDENTITY = the canonical/primary listing to return
         if not idt:
             continue
         parts = [p for p in (m.get("type"), m.get("country") or m.get("region"),
-                             (f"exch {m['exchange']}" if m.get("exchange") else None)) if p]
+                             (f"exch {m['exchange']}" if m.get("exchange") else None), _mc(m)) if p]
         desc = f"{m.get('name', '')} ({idt})" + (" — " + ", ".join(parts) if parts else "")
         if m.get("match_type") == "cross_listing" and m.get("matched_via"):
             desc += f" [matched the query via {m['matched_via']} — same company]"
         options[idt] = desc
         meta[idt] = {"ticker": idt, "name": m.get("name")}
-    options["__NONE__"] = _TICKER_NONE_OPT
-    r = _jev_pick(q, _TICKER_RESOLVE_INSTR, options)
+    options["__NONE__"] = _ticker_none(scope)
+    # JEV judges with the user's FULL request (context) so it can disambiguate which candidate the entity means;
+    # the ENTITY (`q`) is stated explicitly so Jev knows WHICH thing to resolve within a compound request. No
+    # context → fall back to the bare entity (still resolves the dominant reading).
+    jev_q = (f'Resolve the entity "{q}" as it is used in the user\'s request: "{context.strip()}"'
+             if context and context.strip() and context.strip().lower() != q.strip().lower() else q)
+    r = _jev_pick(jev_q, _ticker_instr(scope), options)
     if r.get("pick") == "__NONE__":
         return {"status": "no_match", "query": q, "reason": "not a listed company matching the query (Jev: none fit)",
                 "confidence": r.get("confidence"), "candidates": []}
@@ -748,6 +804,71 @@ def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = 
         return out
     reason = "same name/symbol across markets or entities — confirm which" if gate == "reconfirm" else "no confident company match"
     return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
+
+# ── TICKER-ARG collapse (find_stock → its consumers). Per-consumer SCOPE = the asset classes that tool legitimately
+#    accepts. Verified from live /v1/stocks `type` values: stock (INCLUDES bond-yield .GB + money-market rate .MM),
+#    etf, commodity, crypto, forex, private. `_ticker_arg`/`_tickers_arg` mirror the financials walk (server.py ~2430):
+#    an exact full ticker passes through (no Jev); a name/symbol/phrase → _resolve_ticker → resolved | batched reconfirm.
+_SCOPE_STOCK      = ("stock",)                                              # financials, relationships (companies)
+_SCOPE_OPTIONABLE = ("stock", "etf")                                       # options_sentiment (US-optionable)
+_SCOPE_ASSET      = ("stock", "etf", "crypto")                             # asset_pulse (company/ETF/crypto; commodity→commodity_pulse per its own doc)
+_SCOPE_PRICED     = ("stock", "etf", "commodity", "crypto", "forex")       # stock_prices(_batch) (priced instruments; private has no prices)
+_SCOPE_BROAD      = ("stock", "etf", "commodity", "crypto", "forex", "private")  # stock_impact (news impact on any asset)
+
+def _is_full_ticker(tok: str) -> bool:
+    """A real full ticker `SYMBOL.EXCH` — the suffix is an exchange code (≥2 LETTERS: US/TW/LSE/KO/COMM/CC/GB/MM/
+    FOREX…) → dual-mode PASSTHROUGH (identity already in hand). A dotted symbol whose suffix is NOT alpha (BRK.B —
+    ".B" is a share class) is NOT a full ticker → falls to resolve (mirrors financials server.py:2422-2426)."""
+    suffix = tok.rsplit(".", 1)[1] if "." in tok else ""
+    return len(suffix) >= 2 and suffix.isalpha()
+
+_TICKER_CONFIRM_GUIDE = ("This name/ticker isn't uniquely resolved — pick the exact `ticker` from candidates (or add "
+                         "`country` to disambiguate a same-name company across markets), then RE-CALL with it (a full "
+                         "ticker `SYMBOL.EXCH` passes straight through, no re-resolve).")
+_TK_COUNTRY = ("OPTIONAL market disambiguator — pass ONLY when `ticker` is a plain NAME that collides across markets "
+               "(the Thai vs Korean 'KBANK'); omit for a distinctive name or an exact ticker (an unneeded country "
+               "silently 0-matches). A country NAME or ISO-2 code ('South Korea'/'KR'); the server normalizes, so pass "
+               "the NAME when unsure — never GUESS a 2-letter code ('CH' = Switzerland, not China).")
+
+def _ticker_arg(val, scope=_SCOPE_STOCK, country=None, context=None):
+    """Resolve ONE ticker arg: exact full ticker → passthrough; else name/symbol/phrase → `_resolve_ticker` (SCOPED,
+    disambiguated by `context` = the user's full request). Returns (ticker|None, confirm|None, detail). `confirm` !=
+    None on reconfirm/no_match — the caller returns it verbatim (kind='ticker'). `detail` = observability."""
+    tok = str(val or "").strip()
+    if not tok:
+        return None, None, {}
+    if _is_full_ticker(tok):
+        return tok, None, {}
+    r = _resolve_ticker(tok, scope=scope, country=country, context=context)
+    if r["status"] == "resolved":
+        det = {"ticker": r.get("ticker"), "confidence": r.get("confidence"), "gate": r.get("gate")}
+        if r.get("note"): det["note"] = r["note"]
+        return r["ticker"], None, {tok: det}
+    return None, {"needs_confirmation": True, "resolved": {},
+                  "confirm": {tok: {"kind": "ticker", "status": r["status"], "reason": r.get("reason"),
+                                    "candidates": r.get("candidates", [])}},
+                  "_guide": _TICKER_CONFIRM_GUIDE}, {}
+
+def _tickers_arg(vals, scope=_SCOPE_PRICED, country=None, context=None):
+    """Plural — resolve a list/CSV of ticker args → (tickers:list, confirm|None, detail). Full tickers pass through;
+    the rest resolve (each disambiguated by the shared `context` = the user's full request); ANY pending token → ONE
+    batched reconfirm (return WITHOUT querying). Mirrors financials' tk_pending walk so a watchlist resolves in one shot."""
+    toks = [str(t).strip() for t in (vals if isinstance(vals, list) else str(vals).split(",")) if str(t).strip()]
+    out, detail, pend = [], {}, {}
+    for tok in toks:
+        if _is_full_ticker(tok):
+            out.append(tok); continue
+        r = _resolve_ticker(tok, scope=scope, country=country, context=context)
+        if r["status"] == "resolved":
+            det = {"ticker": r.get("ticker"), "confidence": r.get("confidence"), "gate": r.get("gate")}
+            if r.get("note"): det["note"] = r["note"]
+            out.append(r["ticker"]); detail[tok] = det
+        else:
+            pend[tok] = {"kind": "ticker", "status": r["status"], "reason": r.get("reason"),
+                         "candidates": r.get("candidates", [])}
+    if pend:
+        return [], {"needs_confirmation": True, "resolved": detail, "confirm": pend, "_guide": _TICKER_CONFIRM_GUIDE}, detail
+    return out, None, detail
 
 # ── FSPATTERN resolution — the find_fspattern refactor: SHAPE axis (the temporal pattern to screen on), same
 #    vector→Jev→gate pattern as _resolve_fsconcept. Resolver picks the SHAPE only; its `params` (threshold/N/…)
@@ -1199,7 +1320,10 @@ def stock_impact(ticker: Annotated[str, _dt(_TICKER)],
                  collapse: Annotated[Optional[bool], _d(_COLLAPSE)] = None,
                  from_: Annotated[Optional[str], _d(_FROM)] = None,
                  to: Annotated[Optional[str], _d(_TO)] = None,
-                 window: Annotated[Optional[str], _d(_WINDOW)] = None) -> list:
+                 country: Annotated[Optional[str], _d(_TK_COUNTRY)] = None,
+                 window: Annotated[Optional[str], _d(_WINDOW)] = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> list:
     """How news moved a specific company/asset (incl commodities like GOLD.COMM) — per-article impact
     (direction + aspect + why), most recent first. Near-duplicate stories are MERGED by default (each row
     = one story + `dup_count`); `collapse=false` for the raw feed. `limit` = how many (default 20, max 50)
@@ -1209,6 +1333,9 @@ def stock_impact(ticker: Annotated[str, _dt(_TICKER)],
     🔵 BONDS/RATES: a specific tenor/rate (`US-2Y.GB`, `SOFR.MM`) with no news of its own returns the
     country's benchmark-10Y macro news tagged `scope:'curve_macro'` + `macro_source` — narrate those as
     curve-wide central-bank context, not tenor-specific."""
+    tk, cf, _det = _ticker_arg(ticker, scope=_SCOPE_BROAD, country=country, context=context)  # 🆕 collapse find_stock (news = any asset)
+    if cf: return cf
+    ticker = tk
     # RAW endpoint (not the SDK StockNews model — it drops the `scope`/`macro_source` curve-macro tags a
     # bond/rate borrows from its benchmark 10Y); slim to narratable fields (which now keep those tags).
     params = {"direction": direction, "from": from_ or _win(window), "to": to, "limit": _lim(limit)}
@@ -1225,7 +1352,8 @@ def options_sentiment(
     as_of: Annotated[Optional[str], _d("As-of date YYYY-MM-DD (point-in-time positioning).")] = None,
     tickers: Annotated[Optional[List[str]], _d("Batch form — several tickers at once (instead of `ticker`).")] = None,
     dates: Annotated[Optional[List[str]], _d("Specific expiry dates YYYY-MM-DD to focus the read on.")] = None,
-) -> dict:
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """What the US OPTIONS MARKET is saying — the POSITIONING lens (~547 popular US optionable names,
     stocks + ETFs). Pairs with the news→impact read: for "how is <X> doing?" fetch THIS *and*
     `stock_impact`/`news_feed` and fuse them (news = what's happening + WHY; options = how the market is
@@ -1257,12 +1385,17 @@ def options_sentiment(
         cols = list(dates) if dates else ([as_of] if as_of else [])
         if not syms:
             return {"error": "batch mode needs `tickers=[...]` (and optionally `dates=[...]`)"}
+        syms, cf, _det = _tickers_arg(syms, scope=_SCOPE_OPTIONABLE, context=context)  # 🆕 collapse find_stock (US-optionable)
+        if cf: return cf
         body = {"tickers": syms, "as_of": [c for c in cols if c], "style": style}
         resp = mdx()._http._client.post("/v1/options/sentiment", json=body)
         _check(resp)
         return resp.json()
     if not ticker:
         return {"error": "pass `ticker=<symbol>` for a single read, or `tickers=[...]` for a batch compare"}
+    tk, cf, _det = _ticker_arg(ticker, scope=_SCOPE_OPTIONABLE, context=context)       # 🆕 collapse find_stock
+    if cf: return cf
+    ticker = tk
     params = {"style": style}
     if as_of:
         params["as_of"] = as_of
@@ -1320,82 +1453,6 @@ def options_scan(
     _check(resp)
     return resp.json()
 
-_FIND_KEEP = ("ticker", "symbol", "name", "type", "country", "domicile", "region", "region_iso2",
-              "exchange", "market_cap_usd", "similarity", "match_type", "mode")
-
-@mcp.tool(title="Find Stock / Resolve Ticker", annotations=_RO)
-def find_stock(q: Annotated[Optional[str], _dq("Free-text to resolve to ONE exact ticker — a company NAME, a ticker "
-                   "(full/prefix), an alias, a phrase, or a non-English name. 🌐 translate a generic COMMODITY/SECTOR "
-                   "concept to English first (ทองคำ→'gold'); a COMPANY name passes as-is (茅台/トヨタ resolve).")] = None,
-               queries: Annotated[Optional[List[str]], _d("BATCH form — resolve SEVERAL names in ONE call (e.g. building a "
-                   "playlist). Returns per-query `match_quality`. Use instead of `q`.")] = None,
-               country: Annotated[Optional[str], Field(description=(
-                   "OPTIONAL market filter. Pass ONLY to disambiguate a same-name company across countries "
-                   "(the Thai vs Korean 'KBANK') — omit it for a distinctive name (an unneeded/mismatched "
-                   "country silently 0-matches). Accepts a country NAME or an ISO-2 code; the server "
-                   "normalizes ('South Korea'->KR, 'UK'/'England'->GB, 'Switzerland'->CH), so pass the NAME "
-                   "when unsure. NEVER guess a 2-letter code ('CH' is Switzerland not China)."))] = None,
-               limit: Annotated[Optional[int], _d("Max candidate matches (default handles it). Returns a CANDIDATE LIST for YOU to pick the fit — do NOT set it to 1 (min 5 anyway); rank #1 isn't always the answer.")] = None):
-    """Resolve ANY free-text — a company NAME, a ticker (full or prefix), an alias, a phrase, or a
-    non-English name — to the EXACT MarketDX `ticker`. 🔴 Use this BEFORE asset_pulse / stock_impact
-    whenever you're not 100% sure of the exact ticker — ESPECIALLY for NON-US companies: MarketDX uses
-    its OWN exchange suffixes (Korea = `.KO`, not the common `.KS`; Taiwan = `.TW`; etc.) so GUESSING a
-    foreign ticker usually 404s. Also resolves commodities (gold→`GOLD`), crypto (`BTC`), and off-coverage
-    PRIVATE companies (openai→`oc:52`). Matching = lexical first (symbol/prefix/alias/name), then a
-    SEMANTIC fallback so a phrase ('chip maker') or another language still resolves. Returns matches with
-    a ready-to-use `ticker` (paste straight into asset_pulse/stock_impact), `type` (stock/etf/commodity/
-    crypto/forex/private), `name`, `country`/`region`, `market_cap_usd`, `similarity`. Also resolves
-    government-bond YIELDS (US 10-year treasury→`US-10Y.GB`, `<ISO2>-<TENOR>.GB`) and money-market RATES
-    (SOFR→`SOFR.MM`, `<TOKEN>.MM`) — feed the returned `.GB`/`.MM` ticker into asset_pulse/stock_prices, and
-    note commodities have no country (a `region` is served instead). `country` restricts to a
-    market. 🌐 **Speak the user's language, but RESOLVE in ENGLISH:** for a generic ASSET-CLASS concept —
-    a COMMODITY (ทองคำ/黄金/金→"gold", น้ำมัน/原油→"crude oil", ทองแดง/铜→"copper", คาร์บอน/碳→"carbon"), a
-    SECTOR (半導体→"semiconductors"), an INDEX — pass the ENGLISH canonical term to `q` (the resolver is
-    English-canonical; a raw non-English concept word MISSES — "ทองคำ" resolved to a Lao BANK). A COMPANY
-    proper name you can pass AS-IS (the DB carries native names: 茅台→Kweichow Moutai, トヨタ→Toyota,
-    英伟达→NVIDIA all resolve). Then answer in the user's language.
-    🌍 **`country` is OPTIONAL — pass it ONLY to disambiguate a market**, keeping `q` to the INSTRUMENT: a
-    same-name company across countries (the Thai vs Korean "KBANK"), or a same-shape parametric ticker
-    (JP-30s10s vs GB-30s10s). Do NOT add it routinely — a distinctive name ("SK Hynix", "Toyota") resolves
-    fine WITHOUT it, and an unneeded/mismatched country filter silently 0-matches. It accepts a country
-    NAME **or** an ISO-2 code — the server normalizes ("South Korea"→KR, "UK"/"England"→GB, "Switzerland"→
-    CH, "Germany"→DE) — so when unsure of the code, just pass the NAME. ⚠️ never GUESS a 2-letter code
-    ("CH" is Switzerland, not China; "GE" is Georgia, not Germany) — pass the name and let the server map it.
-    Take the top match; for a US mega-cap you already know the ticker (AAPL) you can skip this.
-    🔴 BATCH — to resolve SEVERAL names in ONE call (e.g. adding many stocks to a playlist, or comparing
-    several names), pass `queries=["apple","ซัมซุง","xiaomi"]` instead of `q`. Returns
-    `{results:[{query, match_quality, matches}]}` where `match_quality` = `strong` (one dominant match →
-    auto-accept), `weak` (ambiguous/several close → disambiguate or ASK the user which), or `none`.
-    This saves N round-trips vs calling find_stock once per name. 🔴 DISAMBIGUATE even on `strong`: if 2+
-    matches share ≈equal top similarity but are DIFFERENT entities — different asset TYPE (a company vs a
-    same-named commodity, e.g. `AAPL.US` vs `APPLE.COMM`) or different COUNTRY (`KBANK.BK` 🇹🇭 vs a Korean
-    `Kbank`) — that tie IS the ambiguity: ASK the user which they mean rather than blind-picking match #1
-    (never silently return a commodity when a mega-cap company shares the word). 🔴 An exact ticker-SYMBOL
-    match does NOT override this: symbol-match only orders the display, it does NOT settle which same-named
-    REAL company (in another country) the user meant — still ASK. Auto-pick only when the others are clearly
-    not the same kind of thing, or context settles it. The QUERY'S OWN wording often settles it → then
-    ANSWER, don't over-ask: an asset-TYPE word ("stock"/หุ้น excludes a commodity; "commodity" picks it), a
-    COUNTRY word (Thai vs Korean), or a more-specific name (กสิกร=Kasikorn) mapping to ONE candidate. Ask
-    ONLY when the wording is bare/generic and 2+ real different-entity candidates remain. 🧵 CONVERSATIONAL
-    context is a prior too — apply it SYMMETRICALLY, even against the exact-symbol default: after discussing
-    KOREAN names, a bare "KBANK" more likely means the Korean Kbank than the Thai KBANK.BK — don't silently
-    default to the symbol match; ASK, surfacing the context-implied one first. (Don't use context only when
-    it agrees with the symbol match.)"""
-    if queries:
-        resp = mdx()._http._client.post(
-            "/v1/stocks/resolve",
-            json={"queries": queries, "country": country, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
-        _check(resp)
-        data = resp.json()
-        for r in data.get("results", []):
-            r["matches"] = [{k: m[k] for k in _FIND_KEEP if k in m} for m in r.get("matches", [])]
-        return data
-    if not q:
-        raise ValueError("pass q=<name> (single) or queries=[…] (batch)")
-    rows = mdx()._get("/v1/stocks", {"q": q, "country": country,
-                                     "limit": _lim(limit, default=8, ceiling=25, floor=5)}).data.get("matches", [])
-    return [{k: m[k] for k in _FIND_KEEP if k in m} for m in rows]
-
 @mcp.tool(title="Theme Players", annotations=_RO)
 def theme_players(theme: Annotated[str, _d("A megatrend theme — name/slug (resolved for you) or node id.")],
                   country: Annotated[Optional[str], _d("`all` (DEFAULT) = the whole cross-market roster — use this for 'who are the players in <theme>'. Or an ISO-2 market to scope to ONE venue. ⚠️ keyed by LISTING VENUE, not domicile: a foreign name lists under the market it TRADES on (Leonardo/Saab under GB via their LSE line, Novo under US/DE, Cameco under US) — so a home-country query (IT/SE/DK/CA) can return 0 even though the company IS a member. When in doubt use `all`.")] = "all",
@@ -1427,10 +1484,16 @@ def private_movers(theme: Annotated[str, _d("A megatrend theme — name/slug (re
 
 @mcp.tool(title="Company Relationships", annotations=_RO)
 def relationships(ticker: Annotated[str, _dt(_TICKER)],
-                  limit: Annotated[Optional[int], _d("Max competitors + peers each (default/cap per _lim).")] = None) -> dict:
+                  country: Annotated[Optional[str], _d(_TK_COUNTRY)] = None,
+                  limit: Annotated[Optional[int], _d("Max competitors + peers each (default/cap per _lim).")] = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """Competitors + peers of a company (news-derived relationship graph). `limit` caps EACH list
     (default 15, max 50). Each side carries `total`/`count`/`note` — a big `total` (peers often run to
     hundreds) means you're seeing a TOP slice; say so rather than implying it's the complete set."""
+    tk, cf, _det = _ticker_arg(ticker, scope=_SCOPE_STOCK, country=country, context=context)  # 🆕 collapse find_stock (a company)
+    if cf: return cf
+    ticker = tk
     cli = mdx()
     ref = cli.stock(ticker)
     n = _lim(limit, default=15)
@@ -1535,14 +1598,16 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
                note_type: Annotated[Optional[Literal["reference","tracking","thesis","decision"]], _d("`reference` (concept/understanding) | `tracking` (dated market read) | `thesis` | `decision`.")] = None,
                category: Annotated[Optional[str], _d("Optional free-text category.")] = None,
                tags: Annotated[Optional[List[str]], _d("Free-text tags for retrieval.")] = None,
-               stocks: Annotated[Optional[List[str]], _d("PRIMARY tickers the note is ABOUT (MarketDX tickers you already resolved this turn). Server maps → canonical ids. ⚠️ A COMMODITY discussed via the trade tools has only an HS code (rice→1006), NOT a ticker — resolve it with find_stock first (rice→RICE.COMM) so the note links to the commodity.")] = None,
+               stocks: Annotated[Optional[List[str]], _d("PRIMARY stocks/assets the note is ABOUT — an exact MarketDX ticker OR a plain NAME the SERVER resolves (any asset class; an ambiguous name → reconfirm). ⚠️ A COMMODITY discussed via the trade tools has only an HS code (rice→1006), NOT a ticker — just put the NAME here ('rice'→resolved to RICE.COMM) so the note links to the commodity.")] = None,
                mentioned_stocks: Annotated[Optional[List[str]], _d("Secondary tickers merely referenced (a peer named in passing).")] = None,
-               megatrend_ids: Annotated[Optional[List[int]], _d("Megatrend node ids (from find_megatrend) — REQUIRED to link a theme/sector note to the graph.")] = None,
-               gics: Annotated[Optional[List[str]], _d("GICS codes to tag a sector note (derived free if the note names representative stocks).")] = None,
+               megatrend_ids: Annotated[Optional[List[int]], _d("ADVANCED — raw megatrend node id(s) if you already hold one (e.g. a theme tool's `megatrend.id`). Normally just name the theme in `gics` and the server routes it to a megatrend.")] = None,
+               gics: Annotated[Optional[List[str]], _d("The note's INDUSTRY/SECTOR or THEME — a GICS code OR plain English ('banks', 'semiconductors', 'AI'); the server resolves each and routes a curated theme to a megatrend link. (Derived free if the note names representative stocks.)")] = None,
                portfolio_id: Annotated[Optional[int], _d("Link the note to one of the user's portfolios, if relevant.")] = None,
                agent: Annotated[Optional[AgentName], _d("Which app is writing the note — set to the surface you run in "
                    "(e.g. `claude` | `chatgpt` | `marketdx-web`); the server falls back to the connection's client info.")] = None,
-               ctx: Context = None) -> dict:
+               ctx: Context = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """🔴 WRITE — save a NOTE to the user's account (this PERSISTS data; it is NOT a read/lookup). Typical
     flow: FIRST give the user your complete answer as usual, THEN — as the final step of the turn — call
     `write_note` once to keep it.
@@ -1564,27 +1629,23 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
       • `tags` — a few keywords for retrieval.
 
     ENTITY LINKS — this is what makes the note findable later by interest and joinable to the graph, so
-    fill them whenever the note touches specific things. For identifiers you ALREADY resolved this turn,
-    REUSE them (don't re-resolve); the server canonicalizes and links them (and reports what linked):
-      • `stocks` — the MarketDX ticker(s) this note is ABOUT (its subjects) — the one you PICKED from
-        `find_stock` (e.g. `005930.KO`); a bare US symbol (`AAPL`) also works.
-      • `mentioned_stocks` — tickers merely referenced, not the focus.
-      • `megatrend_ids` — the megatrend node id(s) this note sits under, from `find_megatrend` (returns
-        {id,name,tier} candidates — YOU pick) or a theme tool's output (`theme_pulse` → `megatrend.id`).
-        Reuse an id you already have — never guess a number.
-      • `gics` — the note's established INDUSTRY/SECTOR — codes OR plain English ('banks', 'semiconductors'); the
-        server resolves each (or reuse a theme tool's `gics_code` output).
+    fill them whenever the note touches specific things. The server RESOLVES names for you (it canonicalizes and
+    links them, and reports what linked) — pass plain names, or reuse identifiers you already hold this turn:
+      • `stocks` — the stock(s)/asset(s) this note is ABOUT (its subjects) — an exact ticker (`005930.KO`,
+        `AAPL`) OR a plain NAME the server resolves (an ambiguous name comes back as a reconfirm to pick from).
+      • `mentioned_stocks` — stocks merely referenced, not the focus (same name-or-ticker resolution).
+      • `gics` — the note's INDUSTRY/SECTOR or THEME — a code OR plain English ('banks', 'semiconductors', 'AI');
+        the server resolves each and routes a curated theme to a megatrend link.
+      • `megatrend_ids` — ADVANCED: a raw node id you already hold (a theme tool's `megatrend.id`); normally you
+        don't set this — name the theme in `gics` instead.
       • `portfolio_id` — if the note is about one of the user's portfolios (from `list_portfolios`).
 
-    🧭 RESOLVE THE NOTE'S HOME BEFORE SAVING — link the theme/sector, not just the stocks. Classify what the
-    note is about and resolve it FIRST (write_note is the last step): an emerging TREND/tech/mechanism ("what
-    is HBM", "how a foundry works", "solid-state batteries") → `find_megatrend([terms])` → pick → `megatrend_ids`;
-    an established INDUSTRY/SECTOR ("retail", "airlines", "banking", "pharma" — these have NO megatrend node) →
-    put the sector word(s) straight in `gics` (plain English is fine, the server resolves each); both may apply.
-    A note whose subject is a trend or a sector,
-    saved with EMPTY `megatrend_ids`/`gics`, means you SKIPPED this step. The only correct empties: a single-
-    stock note (stocks only) or a general concept with no home (P/E, EBITDA — `find_*` returns `[]`, don't
-    force it; tags/body still make it findable by semantic search).
+    🧭 LINK THE NOTE'S HOME — the theme/sector, not just the stocks. If the note is about a TREND/tech/mechanism
+    ("what is HBM", "solid-state batteries") or an established INDUSTRY/SECTOR ("retail", "airlines", "pharma"),
+    put the word(s) straight in `gics` (plain English — the server resolves each and routes a theme→megatrend).
+    A note whose subject is a trend or a sector, saved with EMPTY `gics`, means you SKIPPED this. The only correct
+    empties: a single-stock note (stocks only) or a general concept with no home (P/E, EBITDA — don't force it;
+    tags/body still make it findable by semantic search).
 
     WHEN TO SAVE — this is the investor's knowledge base; CAPTURE substantive investment content generously
     (reference/understanding, a dated market-read WITH its 'why', a thesis/decision, curated research). Value
@@ -1601,6 +1662,12 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
 
     Owner-scoped. Returns `{id, created_at, linked}` where `linked` confirms what was tied to the graph
     (resolved ids + any `unresolved` names)."""
+    if stocks:  # 🆕 collapse find_stock — a NAME or an exact ticker; ANY pending → reconfirm before saving
+        stocks, _cf, _ = _tickers_arg(stocks, scope=_SCOPE_BROAD, context=context)
+        if _cf: return _cf
+    if mentioned_stocks:
+        mentioned_stocks, _cf, _ = _tickers_arg(mentioned_stocks, scope=_SCOPE_BROAD, context=context)
+        if _cf: return _cf
     if gics:  # UNIFIED: gics tags may be codes OR plain English → resolve; a THEME concept becomes a megatrend link
         _g, _t, _cf, _ = _scope_resolve(gics)
         if _cf: return _cf
@@ -1631,7 +1698,9 @@ def query_notes(q: Annotated[Optional[str], _d("Semantic query text — recall n
                 note_type: Annotated[Optional[Literal["reference","tracking","thesis","decision"]], _d("Filter by type (reference/tracking/thesis/decision).")] = None,
                 since: Annotated[Optional[str], _d("Only notes since this date/window (e.g. `30d` or YYYY-MM-DD).")] = None,
                 limit: Annotated[Optional[int], _d(_LIMIT)] = None,
-                relation: Annotated[Optional[str], _d("With `stock=`: `direct` (note ABOUT it) | `indirect` (merely referenced) | `any` (default).")] = None) -> dict:
+                relation: Annotated[Optional[str], _d("With `stock=`: `direct` (note ABOUT it) | `indirect` (merely referenced) | `any` (default).")] = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """Recall the USER'S OWN saved notes — their personal investment knowledge base (owner-scoped, only
     ever their notes). Two combinable ways:
       • SEMANTIC recall via `q` — natural language ("what did I say about foundry manufacturing?"); results
@@ -1653,8 +1722,9 @@ def query_notes(q: Annotated[Optional[str], _d("Semantic query text — recall n
     params: dict = {}
     if q:
         params["q"] = q
-    if stock:
-        params["stock"] = stock
+    if stock:  # 🆕 collapse find_stock — a name/ticker filter → resolved (best-effort; raw passthrough if not unique)
+        _tk, _cf, _ = _ticker_arg(stock, scope=_SCOPE_BROAD, context=context)
+        params["stock"] = _tk or stock
     if relation:
         params["relation"] = relation
     if theme:  # UNIFIED: a theme name → megatrend node (best-effort filter; skip if not a theme)
@@ -1715,16 +1785,19 @@ def create_playlist(name: Annotated[str, _d("The new playlist's display name.")]
 
 @mcp.tool(title="Add to Playlist", annotations=_WRITE)
 def add_to_playlist(playlist_id: Annotated[int, _d("The playlist's id (from list_playlists).")],
-                    tickers: Annotated[List[str], _d("MarketDX tickers to add (resolve names via find_stock first).")]) -> dict:
-    """🔴 WRITE — add one or more STOCKS to a playlist (batch, idempotent).
-    🔴 RESOLVE FIRST: turn each name into an EXACT MarketDX ticker with `find_stock` BEFORE calling this
-    — ESPECIALLY non-US / crypto / foreign-language names ("btcusd"→`BTC-USD.CC`, "ซัมซุง"→pick the right
-    Samsung from find_stock's candidates); a US mega-cap you already know (AAPL) may be passed directly.
-    For several names, resolve them in ONE `find_stock(queries=[…])` call. `playlist_id` from
-    `list_playlists`. Re-adding an existing ticker is a harmless no-op. Returns
-    `{added, skipped, item_count}` — ⚠️ RELAY any `skipped` (e.g. a ticker that didn't resolve) to the
-    user; never drop it silently."""
-    items = [{"kind": "stock", "ref_id": t, "label": t} for t in tickers]
+                    tickers: Annotated[List[str], _d("Stocks to add — an EXACT MarketDX ticker (`AAPL.US`, `BTC-USD.CC`) "
+                        "OR a plain NAME/symbol ('Apple', 'ซัมซุง', 'btcusd') which the SERVER resolves for you (any "
+                        "asset class). An ambiguous/same-name-across-markets one comes back as a reconfirm to pick from.")],
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
+    """🔴 WRITE — add one or more STOCKS/assets to a playlist (batch, idempotent). Each entry may be an exact
+    MarketDX ticker OR a name/symbol the server resolves (any asset class: stock/ETF/commodity/crypto/FX). An
+    ambiguous name (e.g. same name across markets) returns a `needs_confirmation` reconfirm — pick the exact ticker
+    and re-call. `playlist_id` from `list_playlists`. Re-adding an existing ticker is a harmless no-op. Returns
+    `{added, skipped, item_count}` — ⚠️ RELAY any `skipped` to the user; never drop it silently."""
+    tks, cf, _det = _tickers_arg(tickers, scope=_SCOPE_BROAD, context=context)  # 🆕 collapse find_stock (playlists hold any asset)
+    if cf: return cf
+    items = [{"kind": "stock", "ref_id": t, "label": t} for t in tks]
     return _pl_write("POST", f"/v1/playlists/{playlist_id}/items", {"items": items})
 
 @mcp.tool(title="Remove from Playlist", annotations=_WRITE)
@@ -1822,7 +1895,10 @@ def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/inde
                                    "commodity_pulse, for a BOND/RATE use bond_pulse.")],
                 window: Annotated[Optional[str], _d(_WINDOW)] = None,
                 limit: Annotated[Optional[int], _d(_LIMIT)] = None,
-                style: Annotated[str, _d("Options narration style: `plain` (layperson, default) | `technical`.")] = "plain") -> dict:
+                country: Annotated[Optional[str], _d(_TK_COUNTRY)] = None,
+                style: Annotated[str, _d("Options narration style: `plain` (layperson, default) | `technical`.")] = "plain",
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """⭐ THE tool for "how is <ticker> doing right now?" — gathers EVERY lens in ONE call so the answer
     is never half-informed (the whole point: you decide ONCE, the server guarantees completeness). Fans
     out server-side, in parallel, to:
@@ -1844,6 +1920,9 @@ def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/inde
     cross-asset O/S·IV compare, verdict is yours). `options.covered=false` (non-US / not in the ~547) →
     answer from `impact` and say options isn't available; never fabricate positioning. If the user HOLDS
     the ticker, tie the read to their position (facts, not advice)."""
+    tk, cf, _det = _ticker_arg(ticker, scope=_SCOPE_ASSET, country=country, context=context)  # 🆕 collapse find_stock (company/ETF/crypto)
+    if cf: return cf
+    ticker = tk
     cli = mdx()  # bind the caller's client in THIS thread — the contextvar key isn't set inside workers
     frm = _win(window)
     def _impact():
@@ -1945,7 +2024,10 @@ def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/inde
 @mcp.tool(title="Stock Prices", annotations=_RO)
 def stock_prices(ticker: Annotated[str, _dt(_TICKER)],
                  to: Annotated[Optional[str], _d("As-of date `YYYY-MM-DD` — features computed as of that day (point-in-time). Omit → latest.")] = None,
-                 from_: Annotated[Optional[str], _d("Lower bound of price history `YYYY-MM-DD`. Narrowing below ~1y nulls the long windows. Price history goes back DECADES (unlike news, 2026+).")] = None) -> dict:
+                 from_: Annotated[Optional[str], _d("Lower bound of price history `YYYY-MM-DD`. Narrowing below ~1y nulls the long windows. Price history goes back DECADES (unlike news, 2026+).")] = None,
+                 country: Annotated[Optional[str], _d(_TK_COUNTRY)] = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """Price context for a tradable ticker (stock / ETF / index-ETF / forex / crypto / commodity), split &
     dividend-ADJUSTED — a DIGESTED read, NOT a raw bar series: windowed changes (1w/1mo/3mo/ytd/1y), 52-week
     range + `drawdown_from_52w_high_pct` (how far below the peak), realized vol + `realized_vol_percentile_1y`
@@ -1962,16 +2044,22 @@ def stock_prices(ticker: Annotated[str, _dt(_TICKER)],
     "the bond fell ~4%" narration (label it an ESTIMATE; for an exact bond return point to a bond ETF like
     TLT/IEF). Volume fields (`rvol`, `up_down_volume_ratio_1mo`, …) are `null` for a yield — don't present
     volume conviction; and yield↑ ⇒ bond price↓."""
-    return mdx()._get(f"/v1/stocks/{ticker}/prices", {"to": to, "from": from_}).data
+    tk, cf, _det = _ticker_arg(ticker, scope=_SCOPE_PRICED, country=country, context=context)  # 🆕 collapse find_stock (priced instrument)
+    if cf: return cf
+    return mdx()._get(f"/v1/stocks/{tk}/prices", {"to": to, "from": from_}).data
 
 @mcp.tool(title="Batch Stock Prices", annotations=_RO)
 def stock_prices_batch(tickers: Annotated[List[str], _d("UP TO 50 MarketDX tickers (a watchlist/cohort). Returns `results` in input order + `unresolved`.")],
                        to: Annotated[Optional[str], _d("As-of date `YYYY-MM-DD` (point-in-time). Omit → latest.")] = None,
-                       from_: Annotated[Optional[str], _d("Lower bound of price history `YYYY-MM-DD` (below ~1y nulls the long windows).")] = None) -> dict:
+                       from_: Annotated[Optional[str], _d("Lower bound of price history `YYYY-MM-DD` (below ~1y nulls the long windows).")] = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """The same digested price context for UP TO 50 tickers in ONE call — a watchlist / cohort snapshot
     ("which of these names are most extended, or deepest in drawdown"). Returns `results` (in input order)
     + `unresolved` (unknown / no-price-history tickers). `to`/`from_` as in `stock_prices`."""
-    return mdx()._get("/v1/stocks/prices", {"tickers": ",".join(tickers), "to": to, "from": from_}).data
+    tks, cf, _det = _tickers_arg(tickers, scope=_SCOPE_PRICED, context=context)  # 🆕 collapse find_stock (batch; ONE reconfirm for ambiguous)
+    if cf: return cf
+    return mdx()._get("/v1/stocks/prices", {"tickers": ",".join(tks), "to": to, "from": from_}).data
 
 def _options_brief(o: Optional[dict]) -> dict:
     """Compact an options-sentiment payload for a bundle: keep positioning_score + flow + per-horizon
@@ -2349,8 +2437,8 @@ def cot_extremes(
 def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separated COMMON-STOCK companies to read/compare "
                                           "financial statements for. EACH entry can be EITHER an exact MarketDX ticker "
                                           "('AAPL.US', '2330.TW') — used directly — OR a bare symbol / company name "
-                                          "('AAPL', 'Apple', 'トヨタ') which the SERVER resolves for you (no separate find_stock "
-                                          "call). 🔴 If an entry is AMBIGUOUS (same name/symbol across markets or entities) or "
+                                          "('AAPL', 'Apple', 'トヨタ') which the SERVER resolves for you (no separate lookup "
+                                          "step). 🔴 If an entry is AMBIGUOUS (same name/symbol across markets or entities) or "
                                           "is NOT a company, the tool returns `needs_confirmation` — follow its `_guide`. NOT for "
                                           "ETF/commodity/bond/crypto — no company financials.")],
                period: Annotated[Optional[str], _d(
@@ -2379,7 +2467,9 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
                    "ratios/multiples (ROE, P/E) live in the DIGEST, not here.")] = None,
                currency: Annotated[Optional[str], _d("Convert ABSOLUTE totals to this currency (e.g. USD) at each "
                                                      "period's date so cross-currency companies compare — margins/growth "
-                                                     "are currency-neutral anyway. A multi-company compare defaults to USD.")] = None) -> dict:
+                                                     "are currency-neutral anyway. A multi-company compare defaults to USD.")] = None,
+               context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
+               ) -> dict:
     """⭐ Company FINANCIAL STATEMENTS — income / balance / cash-flow + auto-detected abnormality SIGNALS.
     Read ONE company or COMPARE up to 8 (revenue, growth, margins, ROE, FCF…).
     🔴 To compare/analyse SEVERAL companies, pass them ALL in ONE call (`tickers='TSLA.US,MSFT.US'`) — do NOT call once
@@ -2419,13 +2509,12 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
         tok = raw.strip()
         if not tok:
             continue
-        # passthrough ONLY a real full ticker `SYMBOL.EXCH` (suffix = an exchange code, ≥2 letters: US/TW/LSE/KO/
-        # COMM/CC/GB/MM…). A dotted symbol whose suffix is NOT an exchange (BRK.B — ".B" is a share class) falls to
-        # resolve, not a broken passthrough. (backend resolve_head maps the full ticker → canonical head.)
-        suffix = tok.rsplit(".", 1)[1] if "." in tok else ""
-        if len(suffix) >= 2 and suffix.isalpha():
+        # passthrough ONLY a real full ticker `SYMBOL.EXCH` (BRK.B's ".B" is a share class → resolve, not a broken
+        # passthrough). NOTE: financials keeps this INLINE walk (not the shared _tickers_arg) because its reconfirm is
+        # COMBINED with the fields axis below — one envelope surfaces bad ticker(s) AND bad field(s) together.
+        if _is_full_ticker(tok):
             tk_list.append(tok); continue
-        r = _resolve_ticker(tok, scope=("stock",))   # financials = common stocks only
+        r = _resolve_ticker(tok, scope=_SCOPE_STOCK, context=context)   # financials = common stocks only
         if r["status"] == "resolved":
             tk_list.append(r["ticker"]); tk_ok.append(r)
             tk_detail[tok] = {"ticker": r.get("ticker"), "confidence": r.get("confidence"), "gate": r.get("gate"),
@@ -3188,7 +3277,7 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
         if _t:
             mt = ",".join([str(x) for x in _t] + ([mt] if mt else []))
     if not (mt or gics or country):
-        return {"error": "screen_stocks needs at least one scope: megatrend (node id from find_megatrend), gics, or country."}
+        return {"error": "screen_stocks needs at least one scope: megatrend (a theme name/id), gics (a sector name/code), or country."}
     params = {"megatrend": mt, "gics": gics, "country": country, "direction": direction,
               "aspect": aspect, "order_by": order_by, "min_impact": min_impact,
               "min_relevance": min_relevance, "min_market_cap_usd": min_market_cap_usd,

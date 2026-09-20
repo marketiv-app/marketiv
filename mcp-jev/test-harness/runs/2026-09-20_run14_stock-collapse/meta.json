@@ -1,0 +1,8 @@
+{
+  "date": "2026-09-20", "run": "run14_stock-collapse",
+  "mdx_api_sha": "367cbe9f", "mdx_api_base": "http://127.0.0.1:8090 (DEBUG — judge correctness not latency)",
+  "mcp_jev_sha": "4ee403f (working tree — find_stock collapsed into 9 consumers + DELETED)",
+  "server": "PORT=8902 BASE=http://127.0.0.1:8090", "bearer_suffix": "…9ff",
+  "change": "Collapsed find_stock into its ticker consumers (asset_pulse/stock_impact/stock_prices/stock_prices_batch/options_sentiment/relationships + write_note/add_to_playlist/query_notes; financials already inline); DELETED find_stock; scope-aware resolver instruction; mkt-cap prominence hint.",
+  "model": "claude-opus-4-8 (blind subagents)"
+}
