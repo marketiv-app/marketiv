@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+# ⛔⛔ RETIRED 2026-09-20 — DO NOT RUN. This is the OLD pre-collapse MCP server (still has 19 find_* tools
+#     and mounts NO TYPESAFE_API_KEY). Prod `marketdx-mcp` is now served from ../mcp-jev (find_* collapsed +
+#     DELETED, Jev resolution server-side, rev 00169+). Running THIS deploy.sh would OVERWRITE prod with the
+#     old find_* server AND break the Jev resolver — a full rollback of the resolver-collapse work.
+#     → Deploy from ../mcp-jev/deploy.sh instead. See Ava-Advisor docs/architecture/mcp-resolver-collapse.md.
+echo "⛔ RETIRED: this old (find_*) MCP server must NOT be deployed — use ../mcp-jev/deploy.sh instead." >&2
+echo "   (running it would roll prod back to the find_* version and drop TYPESAFE_API_KEY)." >&2
+exit 1
+# ---- original script below (dead; kept for reference only) ----
 # Deploy the MarketDX MCP server to Cloud Run (us-east1) — hosted Streamable HTTP.
 # Usage:  ./deploy.sh
 # Env:    PROJECT (default ava-advisor-26c7b)  REGION (default us-east1)
