@@ -1,0 +1,24 @@
+
+===== RUN 1 =====
+  [ok ] inflation                → CPIAUCSL tf=pc1        (expect resolve:CPIAUCSL tf=pc1)
+  [ok ] core PCE                 → PCEPILFE tf=pc1        (expect resolve:PCEPILFE tf=None)
+  [ok ] core inflation           → CPILFESL tf=pc1        (expect resolve:CPILFESL|PCEPILFE tf=None)
+  [ok ] unemployment rate        → UNRATE tf=lin          (expect resolve:UNRATE tf=lin)
+  [ok ] 10 year treasury yield   → DGS10 tf=lin           (expect resolve:DGS10 tf=None)
+  [ok ] fed funds rate           → FEDFUNDS tf=lin        (expect resolve:FEDFUNDS|DFF tf=None)
+  [ok ] ISM manufacturing PMI    → no_match               (expect no_match:None tf=None)
+  _is_series_id: CPIAUCSL=True DGS10=True 'GDP'=False 'inflation'=False 'core PCE'=False
+  ---- 7 pass / 0 fail ----
+
+===== RUN 2 (stability) =====
+  [ok ] inflation                → CPIAUCSL tf=pc1        (expect resolve:CPIAUCSL tf=pc1)
+  [ok ] core PCE                 → PCEPILFE tf=pc1        (expect resolve:PCEPILFE tf=None)
+  [ok ] core inflation           → CPILFESL tf=pc1        (expect resolve:CPILFESL|PCEPILFE tf=None)
+  [ok ] unemployment rate        → UNRATE tf=lin          (expect resolve:UNRATE tf=lin)
+  [ok ] 10 year treasury yield   → DGS10 tf=lin           (expect resolve:DGS10 tf=None)
+  [ok ] fed funds rate           → FEDFUNDS tf=lin        (expect resolve:FEDFUNDS|DFF tf=None)
+  [ok ] ISM manufacturing PMI    → no_match               (expect no_match:None tf=None)
+  _is_series_id: CPIAUCSL=True DGS10=True 'GDP'=False 'inflation'=False 'core PCE'=False
+  ---- 7 pass / 0 fail ----
+
+TOTAL fails: run1=0 run2=0

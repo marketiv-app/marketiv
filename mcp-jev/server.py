@@ -112,7 +112,7 @@ _INSTRUCTIONS = (
     "`find_indicator`→`wb_series` for the stock's country (household consumption, HOUSEHOLD DEBT, GDP-per-"
     "capita growth, credit — the demand backdrop the price+news alone can't give); an EXPORTER / tariff- or "
     "supply-chain-exposed name → the TRADE flows (`find_hs`→`search_trade`/`top_traders`); a rate- or "
-    "macro-sensitive read → the macro series (`find_series`→`fred_series`, or `macro_pulse`). Pull ONLY the "
+    "macro-sensitive read → the macro series (`fred_series` — pass a concept, or `macro_pulse`). Pull ONLY the "
     "1–2 backdrops that would actually move the conclusion (cheap, high-signal — find_* resolvers are FREE), "
     "then SYNTHESIZE: does the structural/macro/trade backdrop CONFIRM or CONTRADICT the price+news? Never "
     "gather just to look thorough — but never leave a domestic-consumer, exporter, or macro-sensitive read "
@@ -219,7 +219,7 @@ def _lim(n: Optional[int], default: int = 20, ceiling: int = 50, floor: int = 1)
     """Bound a list tool's page size so the result stays context-friendly. Heavily-covered assets
     (GOLD, oil, mega-caps) have hundreds of impact articles — dumping them all overflows the client's
     context. `None` → default; the LLM may raise it up to `ceiling`, then should page/narrow instead.
-    `floor` guards TOP-K RESOLVERS (find_series/find_hs/…): they return a CANDIDATE LIST the client
+    `floor` guards TOP-K RESOLVERS (find_hs/find_indicator/…): they return a CANDIDATE LIST the client
     PICKS from, so a client setting limit=1 would collapse them to rank-#1 and break the design — floor it
     (e.g. 5) so a candidate list always comes back."""
     if n is None:
@@ -3491,40 +3491,123 @@ def trade_balance(reporter: Annotated[str, _d("Reporting country — name / ISO 
                 {"reporter": reporter, "partner": partner, "codes": _codes(codes) or "TOTAL", "period": period})
 
 # ── Macro (FRED) — economic time series + regime/dashboard reads ─────────────────────────────────────
-# find_series (FREE resolver) → fred_series (one series + analysis) → macro_pulse (curated dashboards).
+# There is NO find_series tool — fred_series resolves a macro concept (or an exact series_id) server-side via
+# _resolve_series (vector /v1/ext/fred/find → Jev pick → gate), carrying the RIGHT transform. macro_pulse = dashboards.
 # Centralized key + cross-user cache server-side (no BYOK). Design: docs/product/macro-pulse-design.md.
+_SERIES_RESOLVE_INSTR = (
+    "The state has `query`: a macro concept the user wants a FRED time series for (possibly the form 'Resolve the "
+    "entity \"X\" as it is used in the user's request: \"<full request>\"' — resolve X using that CONTEXT). Each option "
+    "is a candidate FRED series: its title, units/frequency/seasonal-adjustment, the suggested transform, and whether "
+    "it is curated. Pick the SINGLE series the request MEANS. Disambiguate by intent: HEADLINE vs CORE (CPIAUCSL / all-"
+    "items vs CPILFESL / PCEPILFE ex-food-energy — 'core' → the ex-food-energy one); the price INDEX vs a market "
+    "BREAKEVEN/expectation (CPIAUCSL vs T10YIE); SA vs NSA; PCE vs CPI; a RATE/level series vs a stock. Prefer the "
+    "`curated` / canonical series when the request is generic ('inflation' → the headline CPI). One option is "
+    "`__NONE__` — read its description; choose it ONLY when the query is NOT a FRED macro series at all.")
+_SERIES_NONE_OPT = (
+    "None of the candidates is the FRED macro series the query means. ⚠️ LAST RESORT — pick this ONLY when the query is "
+    "not a FRED time series at all (a survey diffusion index like ISM/PMI that FRED doesn't carry; a commodity SPOT "
+    "price → belongs in commodity_pulse; a single company; gibberish). A real macro concept that DOES match a "
+    "candidate must resolve to it, never to NONE.")
 
-@mcp.tool(name="find_series", title="Find Macro Series (FRED)", annotations=_RO)
-def find_series(q: Annotated[str, _dq("A macro concept ONLY, in ANY language — 'inflation', 'unemployment', 'core PCE', "
-                                     "'fed funds', '10y yield', 'housing starts', 'อัตราว่างงาน'. ⛔ Do NOT put a country in `q`: "
-                                     "for a NON-US country put its code in the `country` param ('Japanese inflation' → q='inflation', "
-                                     "country='JP'), US is the default. Returns the canonical FRED series + the RIGHT default transform.")],
-                country: Annotated[Optional[str], _d("OPTIONAL ISO-2 to bias to a country's series (JP, DE) — put the nationality from the "
-                                     "question HERE, not in `q`. FRED intl coverage is uneven; omit for US (the default).")] = None,
-                limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
-    """⭐ FREE resolver — a macro concept → the exact FRED `series_id` (+ the transform to apply). ALWAYS step 1;
-    never guess a series_id (cryptic: CPIAUCSL, PCEPILFE, LRHUTTTTJPM156S). Returns ranked `candidates` with
-    `series_id`, `title`, `units`, `frequency`, `seasonal_adjustment`, `coverage`, and — crucially —
-    `suggested_transform` (+reason): a price INDEX reads as YoY % (`pc1`), real GDP as annualized % (`pca`), a
-    rate/ratio as its level (`lin`). PICK by intent: core vs headline (CPILFESL vs CPIAUCSL), SA vs NSA, PCE vs
-    CPI. `curated:true` + high popularity = the canonical pick. Empty candidates = FRED doesn't have it (ISM/PMI;
-    commodity SPOT prices → use commodity_pulse) — say so, don't fabricate. Feeds `fred_series`."""
-    return _ext("/v1/ext/fred/find", {"q": q, "country": country, "limit": _lim(limit, default=8, ceiling=25, floor=5)})
+def _resolve_series(q: str, country: Optional[str] = None, context: Optional[str] = None) -> dict:
+    """Resolve ONE macro concept → the exact FRED `series_id` (+ the transform to apply). Mirrors _resolve_fspattern:
+    exact series_id → passthrough; else vector shortlist (/v1/ext/fred/find, full context: title+units+freq+SA+
+    suggested_transform) → Jev pick (judged by `context`) + `__NONE__` → calibrated gate. Returns
+    {status, query, series_id?, transform?, title?, confidence?, gate?, note?, candidates?}. The pick's
+    suggested_transform rides along as the DEFAULT for fred_series (the client may still override)."""
+    cands = mdx()._get("/v1/ext/fred/find", {"q": q, "country": country, "limit": 15}).data
+    cands = cands.get("candidates") or cands.get("series") or (cands if isinstance(cands, list) else [])
+    if not cands:
+        return {"status": "no_match", "query": q, "reason": "no candidate FRED series", "candidates": []}
+    # FAST-PATH: the client already sent an exact FRED series_id → use it, skip Jev.
+    exact = next((c for c in cands if str(c.get("series_id", "")).lower() == q.strip().lower()), None)
+    if exact:
+        return {"status": "resolved", "query": q, "series_id": exact["series_id"],
+                "transform": exact.get("suggested_transform"), "title": exact.get("title"),
+                "confidence": 1.0, "gate": "exact_key"}
+    options, meta = {}, {}
+    for c in cands:
+        sid = c.get("series_id")
+        if not sid:
+            continue
+        bits = [b for b in (c.get("title"), c.get("units"), c.get("frequency"),
+                            c.get("seasonal_adjustment")) if b]
+        desc = " · ".join(bits) or sid
+        if c.get("suggested_transform"):
+            desc += f" → transform {c['suggested_transform']}"
+        if c.get("curated"):
+            desc += " [curated]"
+        options[sid] = desc
+        meta[sid] = {"series_id": sid, "transform": c.get("suggested_transform"), "title": c.get("title")}
+    options["__NONE__"] = _SERIES_NONE_OPT
+    jev_q = (f'Resolve the entity "{q}" as it is used in the user\'s request: "{context.strip()}"'
+             if context and context.strip() and context.strip().lower() != q.strip().lower() else q)
+    r = _jev_pick(jev_q, _SERIES_RESOLVE_INSTR, options)
+    if r.get("pick") == "__NONE__":
+        return {"status": "no_match", "query": q, "reason": "not a FRED macro series (Jev: none fit)",
+                "confidence": r.get("confidence"), "candidates": []}
+    gate = _jev_gate(r)
+    pm = meta.get(r.get("pick"), {})
+    top_cands = [{"series_id": meta[k]["series_id"], "title": meta[k]["title"],
+                  "transform": meta[k]["transform"], "prob": round(v, 3)} for k, v in r["probs"].items() if k in meta]
+    if gate in ("resolve", "soft"):
+        out = {"status": "resolved", "query": q, "series_id": pm.get("series_id"), "transform": pm.get("transform"),
+               "title": pm.get("title"), "confidence": r.get("confidence"), "gate": gate}
+        if gate == "soft":
+            alts = ", ".join(c["series_id"] for c in top_cands[1:3])
+            out["note"] = f"resolved '{q}' → {pm.get('series_id')} at lower confidence; alternatives: {alts}"
+        return out
+    reason = "two close FRED series — confirm which" if gate == "reconfirm" else "no confident FRED series match"
+    return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
+
+def _is_series_id(s: str) -> bool:
+    """A cryptic FRED series_id already in hand → passthrough (skip resolve): an UPPERCASE single token that either
+    carries a DIGIT (DGS10/T10YIE) or is long (≥6: CPIAUCSL/UNRATE/PCEPILFE). A short bare word ('GDP','CPI','PCE') is
+    a CONCEPT → resolve (safer: 'CPI'→CPIAUCSL, not a broken passthrough)."""
+    s = (s or "").strip()
+    return bool(s) and " " not in s and s.isupper() and (any(ch.isdigit() for ch in s) or len(s) >= 6)
 
 @mcp.tool(name="fred_series", title="Macro Series + Analysis (FRED)", annotations=_RO)
-def fred_series(series_id: Annotated[str, _d("ONE FRED series_id from find_series (never guess). Comma-sep = rejected; compare two = call twice + diff.")],
+def fred_series(series_id: Annotated[str, _dq("A macro CONCEPT (any language — 'inflation', 'core PCE', 'unemployment "
+                    "rate', '10y yield', 'อัตราว่างงาน') OR an exact FRED series_id you already hold (CPIAUCSL). The "
+                    "SERVER resolves a concept → the canonical series + the RIGHT transform (no separate lookup). "
+                    "🌐 a macro concept is safest in ENGLISH (a native concept may drift). 🔴 Pass the user's FULL "
+                    "request in `context` so the server picks the right VARIANT (headline vs CORE CPI, SA vs NSA, PCE "
+                    "vs CPI). ⛔ ONE concept per call — compare two = call twice + diff. For a NON-US concept put the "
+                    "country in `country`, NOT in this field ('Japanese inflation' → series_id='inflation', country='JP').")],
                 transform: Annotated[Optional[str], _d("FRED units transform — `lin` (level: a rate/ratio) · `pc1` (YoY %: inflation/price index) · "
-                                                       "`pca` (annualized %: real GDP) · `pch` (period %) · `chg`/`ch1` (abs Δ). Default = the series' suggested_transform.")] = None,
+                                                       "`pca` (annualized %: real GDP) · `pch` (period %) · `chg`/`ch1` (abs Δ). Omit → the resolved series' suggested transform.")] = None,
                 from_: Annotated[Optional[str], _d("Start — ISO date or relative window `10y`/`5y`/`qtd` (dynamic, anchored to today).")] = None,
-                to: Annotated[Optional[str], _d("End — ISO date. Omit → latest.")] = None) -> dict:
+                to: Annotated[Optional[str], _d("End — ISO date. Omit → latest.")] = None,
+                country: Annotated[Optional[str], _d("OPTIONAL ISO-2 to bias a CONCEPT to a country's series (JP, DE) — the nationality from the "
+                                                     "question goes HERE, not in `series_id`. FRED intl coverage is uneven; omit for US (default).")] = None,
+                context: Annotated[Optional[str], _d("OPTIONAL but RECOMMENDED — the user's FULL request VERBATIM (any language). Used to pick the "
+                                                     "right series VARIANT (headline vs core, SA vs NSA). e.g. 'is US core inflation still sticky?'")] = None) -> dict:
     """"What is <macro indicator> / is it high vs history / how has it moved" — ONE FRED series, feature-extracted.
-    Returns `series` (transformed points) + an `analysis` block: `latest` (+date — always say as-of-when),
-    `trend`, `change` (vs prior/YoY/window), `peak`/`trough`, and 🔑 `percentile`+`z_score` vs the window's own
-    history (the money-shot for "high or low?" — e.g. unemployment 8th pct = historically very low), `volatility`,
-    a one-line `read`. 🔵 `transform` matters: "inflation" = pc1 (YoY %) of a price index, NOT the level; a rate
-    (UNRATE/FEDFUNDS/yields) = lin. QUOTE the `read`; narrate the percentile. Compare two = call once per
-    series_id and diff. US-govt series are public domain (`_license_note`)."""
-    return _ext("/v1/ext/fred/series", {"series_id": series_id, "transform": transform, "from": from_, "to": to})
+    Pass a macro CONCEPT (the server resolves it to the canonical series_id + the right transform) or an exact id.
+    Returns `series` (transformed points) + an `analysis` block: `latest` (+date — always say as-of-when), `trend`,
+    `change` (vs prior/YoY/window), `peak`/`trough`, and 🔑 `percentile`+`z_score` vs the window's own history (the
+    money-shot for "high or low?" — e.g. unemployment 8th pct = historically very low), `volatility`, a one-line
+    `read`. 🔵 `transform` matters and is auto-picked from the resolved series ("inflation" = pc1 YoY % of a price
+    index, a rate = lin) — override only deliberately. QUOTE the `read`; narrate the percentile. Compare two = call
+    once per concept and diff. A concept that isn't a FRED series (ISM/PMI, a commodity SPOT price → commodity_pulse)
+    → honest no_match, not a fabrication. US-govt series are public domain (`_license_note`)."""
+    _rs = None
+    if not _is_series_id(series_id):                       # 🆕 collapse find_series: a CONCEPT → resolve server-side
+        r = _resolve_series(series_id, country=country, context=context)
+        if r["status"] != "resolved":
+            return {"needs_confirmation": r["status"] == "reconfirm", "confirm": {series_id: {"kind": "series",
+                        "status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])}},
+                    "_guide": "That isn't a unique FRED series — pick a `series_id` from candidates, or refine the "
+                              "concept (core vs headline, SA vs NSA, PCE vs CPI) / add `context`, then re-call."}
+        series_id = r["series_id"]
+        if transform is None:
+            transform = r.get("transform")               # carry the resolved series' suggested transform
+        _rs = {"series_id": r["series_id"], "title": r.get("title"), "transform": r.get("transform"), "gate": r.get("gate")}
+    res = _ext("/v1/ext/fred/series", {"series_id": series_id, "transform": transform, "from": from_, "to": to})
+    if _rs and isinstance(res, dict):
+        res["_resolved_series"] = _rs
+    return res
 
 # ── World Bank (Data360) — cross-country structural data (open, no key, cached) ───────────────────────
 # find_indicator (FREE resolver) → wb_series (indicator + country(+multi) + analysis). Annual structural
@@ -3538,7 +3621,7 @@ def find_indicator(q: Annotated[str, _dq("A cross-country STRUCTURAL concept in 
                    limit: Annotated[Optional[int], _d("Candidates (default 8, max 25).")] = None) -> dict:
     """⭐ FREE resolver — a structural concept → the exact World Bank indicator id (+ unit VARIANT). ALWAYS step
     1; never guess a code (cryptic: WB_WDI_NE_CON_PRVT_ZS). World Bank = ANNUAL, cross-country structural data
-    (consumption, GDP, demographics, poverty, trade shares) — NOT high-frequency macro (that's find_series/FRED).
+    (consumption, GDP, demographics, poverty, trade shares) — NOT high-frequency macro (that's fred_series / FRED).
     Returns ranked `candidates` with `indicator`, `name`, `database`, `coverage` (economies + year range),
     `unit_hint`, `curated`. 🔵 The VARIANT matters (code suffix): `.ZS` = % of GDP/share (compare across country
     SIZES) · `.CD` = current US$ (size) · `.KD` = constant/real · `.KD.ZG` = % growth · `.PC`/`.PCAP` = per
@@ -3564,7 +3647,7 @@ def wb_series(indicator: Annotated[str, _d("ONE indicator id from find_indicator
     return _ext("/v1/ext/wb/series", {"indicator": indicator, "country": country, "from": from_, "to": to, "database": database})
 
 # curated dashboards — the economist mental-model (which indicators make each read); series confirmed via
-# find_series 2026-08-04. Each = (series_id, transform, label).
+# fred_series 2026-08-04. Each = (series_id, transform, label).
 _MACRO_DASH = {
     "economy": [("GDPC1", "pca", "real GDP growth"), ("INDPRO", "pc1", "industrial production"),
                 ("CPIAUCSL", "pc1", "CPI inflation"), ("PCEPILFE", "pc1", "core PCE"),
@@ -3608,10 +3691,10 @@ def _fred_slim(cli, sid: str, tf: str, label: str, frm: str = "10y") -> dict:
 
 @mcp.tool(title="Macro Pulse (FRED)", annotations=_RO)
 def macro_pulse(scope: Annotated[str, _d("A macro DASHBOARD: `economy` (overall regime) · `inflation` · `labor` · `consumer` · "
-                                         "`housing` · `recession-risk`. For ONE indicator use find_series→fred_series; for the "
+                                         "`housing` · `recession-risk`. For ONE indicator use fred_series (pass a concept); for the "
                                          "rates/yield-curve use bond_pulse.")],
                 window: Annotated[Optional[str], _d("History window for each indicator's percentile/trend (default `10y`; e.g. `5y`/`20y`).")] = None,
-                country: Annotated[Optional[str], _d("OPTIONAL ISO-2 — v0 dashboards are US; non-US returns a note (use find_series?country=XX per indicator).")] = None) -> dict:
+                country: Annotated[Optional[str], _d("OPTIONAL ISO-2 — v0 dashboards are US; non-US returns a note (use fred_series(q=<concept>, country=XX) per indicator).")] = None) -> dict:
     """⭐ "How is <the economy / consumer / labor market / housing / inflation> doing? / recession risk / soft-
     landing or stagflation?" — the MACRO REGIME & DASHBOARD read. Fuses the key indicators for a SCOPE, each
     feature-extracted (latest + where it sits vs its OWN history = `percentile` + trend), so you SYNTHESIZE the
@@ -3625,15 +3708,15 @@ def macro_pulse(scope: Annotated[str, _d("A macro DASHBOARD: `economy` (overall 
         duration) — NOT advice or a forecast; hand judgment back; if the user holds names, tie the regime to them.
       • Boundaries: no ISM/PMI on FRED; commodity SPOT → commodity_pulse; rates/curve detail → bond_pulse;
         external/trade → the Comtrade tools. A component with `error` = that series wasn't available; say so.
-    For ONE indicator → find_series+fred_series; THIS is the multi-indicator regime composite."""
+    For ONE indicator → fred_series (pass a concept); THIS is the multi-indicator regime composite."""
     key = _MACRO_ALIASES.get(scope.strip().lower(), scope.strip().lower())
     dash = _MACRO_DASH.get(key)
     if not dash:
         return {"error": f"unknown scope '{scope}'. Use one of: {', '.join(_MACRO_DASH)} "
-                         f"(or find_series+fred_series for a single indicator)."}
+                         f"(or fred_series with a concept for a single indicator)."}
     if country and country.strip().upper() not in ("US", "USA", "UNITED STATES"):
-        return {"scope": key, "note": f"macro_pulse dashboards are US-only in v0; for {country} resolve each "
-                "indicator via find_series?country=… then fred_series (FRED intl coverage is uneven)."}
+        return {"scope": key, "note": f"macro_pulse dashboards are US-only in v0; for {country} query each "
+                "indicator via fred_series(q=<concept>, country=…) (FRED intl coverage is uneven)."}
     frm = window or "10y"
     cli = mdx()   # resolve in the MAIN thread — the auth contextvar doesn't cross into worker threads
     from concurrent.futures import ThreadPoolExecutor

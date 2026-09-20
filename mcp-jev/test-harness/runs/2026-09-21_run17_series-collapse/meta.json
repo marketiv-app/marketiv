@@ -1,0 +1,4 @@
+{"date":"2026-09-21","run":"run17_series-collapse","mdx_api_sha":"af0a46d2","mcp_jev_sha":"ad2fce9 (working tree)",
+ "mdx_api_base":"http://127.0.0.1:8090 (DEBUG — /v1/ext/fred/series data-fetch returns Server error here, a backend-config issue; resolver /v1/ext/fred/find works)","server":"PORT=8902 BASE=:8090","bearer_suffix":"nine-ff",
+ "change":"Collapse find_series into fred_series (its only consumer) + DELETE it. fred_series takes a macro CONCEPT (or exact id) -> _resolve_series (vector /v1/ext/fred/find -> Jev pick -> gate) carrying the suggested transform; + context + country params. PILOT for the ext trio.",
+ "model":"claude-opus-4-8 (blind subagent)"}
