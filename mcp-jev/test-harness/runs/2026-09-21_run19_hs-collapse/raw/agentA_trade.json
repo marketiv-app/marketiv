@@ -1,0 +1,6 @@
+{"agent":"A (blind trade, own args)","note":"0 find_hs calls (tool gone); client used the 4 trade tools with a CONCEPT in `codes` + `context`. The comtrade DATA path returned 500 'Server error' on :8090 because the debug backend lacks BYOK_ENC_SECRET (comtrade.rs:74 internal() BEFORE the graceful byok_missing 402) — a :8090 config gap, NOT run19 (a pass-through code 2709 errors identically). Resolver correctness proven by calibration 7/7.",
+ "m1":{"user":"crude oil exports Saudi Arabia","call":"search_trade(reporter='Saudi Arabia', codes='crude oil', context=…)","intended_code":"2709 / 270900","result":"500 (:8090 BYOK_ENC_SECRET missing)"},
+ "m2":{"user":"top copper ORE exporters","call":"top_traders(codes='copper ore', context=…)","intended_code":"2603 (ore)","result":"500 (backend)"},
+ "m3":{"user":"buyers of Thailand rice","call":"top_partners(reporter='Thailand', codes='rice', context=…)","intended_code":"1006 (roll-up)","result":"500 (backend)"},
+ "m4":{"user":"US net importer of semiconductors","call":"trade_balance(reporter='USA', codes='semiconductors', context=…)","intended_code":"8541/8542","result":"500 (backend)"},
+ "m5":{"user":"ยางพารา top exporters (TH)","call":"top_traders(codes='ยางพารา', context=TH)","intended_code":"4001 natural rubber","result":"500 (backend)"}}

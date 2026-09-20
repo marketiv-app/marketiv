@@ -1,0 +1,4 @@
+{"date":"2026-09-21","run":"run19_hs-collapse","mdx_api_sha":"af0a46d2","mcp_jev_sha":"acf8231 (working tree)",
+ "mdx_api_base":"http://127.0.0.1:8090 (DEBUG; comtrade DATA path 500s here — lacks BYOK_ENC_SECRET config; the FREE resolver /v1/ext/hs/find works)","server":"PORT=8902 BASE=:8090","bearer_suffix":"nine-ff",
+ "change":"Collapse find_hs into its 4 trade consumers (search_trade/top_partners/top_traders/trade_balance) + DELETE it. Each `codes` takes a concept OR code, resolved via _resolve_hs (vector /v1/ext/hs/find -> Jev pick -> gate) with supply-STAGE disambiguation + 4-digit family ROLL-UP; + context/type. _hs_codes_arg plural. LAST find_* — tools/list now has ZERO find_*.",
+ "model":"claude-opus-4-8 (blind subagent)"}

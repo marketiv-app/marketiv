@@ -111,7 +111,7 @@ _INSTRUCTIONS = (
     "local bank, a homebuilder) is driven by that COUNTRY'S STRUCTURAL health, so pull it with "
     "`wb_series` (pass a concept) for the stock's country (household consumption, HOUSEHOLD DEBT, GDP-per-"
     "capita growth, credit — the demand backdrop the price+news alone can't give); an EXPORTER / tariff- or "
-    "supply-chain-exposed name → the TRADE flows (`find_hs`→`search_trade`/`top_traders`); a rate- or "
+    "supply-chain-exposed name → the TRADE flows (`search_trade`/`top_traders` — pass a product concept in `codes`); a rate- or "
     "macro-sensitive read → the macro series (`fred_series` — pass a concept, or `macro_pulse`). Pull ONLY the "
     "1–2 backdrops that would actually move the conclusion (cheap, high-signal — find_* resolvers are FREE), "
     "then SYNTHESIZE: does the structural/macro/trade backdrop CONFIRM or CONTRADICT the price+news? Never "
@@ -131,7 +131,7 @@ _INSTRUCTIONS = (
     "stocks + sector/theme this turn is about so the note links to the graph — `write_note` RESOLVES names "
     "server-side: put stock NAMES/tickers in `stocks`, and the sector/trend word(s) straight in `gics` (plain "
     "English is fine — a curated theme is routed to a megatrend automatically). 🔴 LIKEWISE a COMMODITY you "
-    "discussed only via the TRADE tools or keyword news (`find_hs`/`search_trade` give an HS code e.g. rice→1006, "
+    "discussed only via the TRADE tools or keyword news (`search_trade` etc. resolve a product concept to an HS code e.g. rice→1006, "
     "NOT a ticker) — just put the commodity NAME in `stocks` (rice→resolved to RICE.COMM, copper→COPPER.COMM) so "
     "the note links to it in the graph. (A stock chat "
     "usually resolved the ticker already; a commodity/trade chat often has NOT — this is the easy miss.) Do NOT offer on "
@@ -219,7 +219,7 @@ def _lim(n: Optional[int], default: int = 20, ceiling: int = 50, floor: int = 1)
     """Bound a list tool's page size so the result stays context-friendly. Heavily-covered assets
     (GOLD, oil, mega-caps) have hundreds of impact articles — dumping them all overflows the client's
     context. `None` → default; the LLM may raise it up to `ceiling`, then should page/narrow instead.
-    `floor` guards TOP-K RESOLVERS (find_hs/…): they return a CANDIDATE LIST the client
+    `floor` guards any TOP-K resolver endpoint: it returns a CANDIDATE LIST the client
     PICKS from, so a client setting limit=1 would collapse them to rank-#1 and break the design — floor it
     (e.g. 5) so a candidate list always comes back."""
     if n is None:
@@ -2013,8 +2013,8 @@ def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/inde
                    "backdrop; not listed = not material, don't invent a supply chain), `revenue_by_region` "
                    "(where it sells — the WHERE for trade + the cross-border gate) and `currency_exposures`. "
                    "For a GOODS/exporter or a policy/tariff-exposed name, you MAY deepen with the trade tools "
-                   "(find_hs→search_trade/top_traders/trade_balance): enumerate the firm's material product "
-                   "lines from `description`, resolve each via find_hs, and pull flows for the regions in "
+                   "(the trade tools search_trade/top_traders/trade_balance): enumerate the firm's material product "
+                   "lines from `description`, pass each product concept in the trade tool's `codes`, and pull flows for the regions in "
                    "`revenue_by_region`. 🔴 But GATE it: Comtrade is cross-border EXIM only (no domestic "
                    "consumption) — a DOMESTIC-demand business (revenue_by_region home-only) has NO trade "
                    "angle; say so, don't force one. Empty `related_assets`/`revenue_by_region` = no "
@@ -2360,7 +2360,7 @@ def commodity_pulse(q: Annotated[str, _dq("A COMMODITY concept, in ENGLISH — t
                    "commodity has NO options / PE / competitors — do not mention or flag them as missing. "
                    "`impact` empty = no news in coverage (2026-01-01+), say so plainly; price still stands. "
                    "🌐 TRADE LENS: a commodity IS a traded good → for the PHYSICAL supply/demand behind the "
-                   "price you MAY deepen with the trade tools: find_hs(this commodity) → `top_traders` (who "
+                   "price you MAY deepen with the trade tools: `top_traders`(codes=this commodity) (who "
                    "produces/exports the most, or whose exports are growing/streaking), `top_partners` / "
                    "`search_trade` on the swing buyer (China imports rising/falling), `trade_balance`. Adds "
                    "the flow substrate news+price can't (e.g. 'global import demand +X%, China −2 quarters, "
@@ -3379,53 +3379,131 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
 
 
 # ── Trade & Customs (UN Comtrade) — international merchandise + services trade flows ─────────────────
-# find_hs is FREE (our HS/EBOPS reference); the query tools are BYOK (the user's own Comtrade key, metered
-# Flat(5)). Pattern: resolve (find_hs, free) → LLM picks code(s) → query. See docs/product/
-# mcp-trade-tools-design.md (Ava repo) for the full entity→trade bridge + gate hierarchy.
+# There is NO find_hs tool — the 4 trade tools (search_trade/top_partners/top_traders/trade_balance) resolve a good/
+# service CONCEPT (or an exact HS/EBOPS code) in their `codes` server-side via _resolve_hs (vector /v1/ext/hs/find →
+# Jev pick → gate), picking the right SUPPLY STAGE. The query tools are BYOK (the user's own Comtrade key, metered
+# Flat(5)). See docs/product/mcp-trade-tools-design.md (Ava repo) for the entity→trade bridge + gate hierarchy.
+_HS_RESOLVE_INSTR = (
+    "The state has `query`: a tradable GOOD or SERVICE concept the user wants a trade CODE for (possibly the form "
+    "'Resolve the entity \"X\" as it is used in the user's request: \"<full request>\"' — resolve X using that "
+    "CONTEXT). Each option is a candidate code: its title, the `excl:` note (which NAMES the sibling codes, i.e. the "
+    "other supply-chain STAGES), and its 4-digit parent. Pick the SINGLE code the request MEANS, at (1) the right "
+    "SUPPLY STAGE — for a raw material the same word spans ORE/concentrate vs unrefined vs REFINED vs scrap; the "
+    "`excl:` note tells them apart ('copper ore' → the ore code, whose excl names 'refined copper cathodes'; 'refined "
+    "copper' → the refined one) — and (2) the right GRANULARITY: a SPECIFIC product → its leaf code; a BROAD / 'all X "
+    "/ the whole <material>' request → the matching 'ALL of HS <parent>' roll-up option (the whole 4-digit family, "
+    "Comtrade-aggregated, e.g. all rice → 1006; semiconductor devices → the 8541 family / integrated circuits → 8542) "
+    "rather than one arbitrary leaf. One option is `__NONE__` — choose it ONLY when the query is NOT a tradable "
+    "good/service at all.")
+_HS_NONE_OPT = (
+    "None of the candidates is the trade code the query means. ⚠️ LAST RESORT — pick this ONLY when the query is not a "
+    "tradable good/service at all (a non-trade concept, a company, a market price, gibberish), OR it is clearly the "
+    "WRONG type for this request (a SERVICE searched among goods codes, or vice-versa). A real tradable good/service "
+    "that DOES match a candidate must resolve to it, never to NONE.")
+_HS_CODES = ("Product/service CODE(s) OR CONCEPT(s). A numeric HS/EBOPS code (`2709`, or `0207,0203` for a basket) "
+             "passes straight through; a plain CONCEPT ('crude oil', 'copper ore', 'ทองแดง', 'semiconductors') is "
+             "resolved server-side to the code at the right SUPPLY STAGE (ore vs refined). Several entries = merged; a "
+             "4-digit code aggregates the whole family. A stage-ambiguous concept comes back as a reconfirm to pick from.")
+_HS_CTX = ("OPTIONAL but RECOMMENDED — the user's FULL request VERBATIM (any language). Used to pick the right code + "
+           "SUPPLY STAGE (ore vs concentrate vs refined) and leaf-vs-family granularity for a `codes` concept.")
 
-@mcp.tool(name="find_hs", title="Find HS / Trade Code", annotations=_RO)
-def find_hs(q: Annotated[str, _dq(
-                "The tradable GOOD or SERVICE to resolve — a concept in ANY language (crude oil, รถยนต์ไฟฟ้า, "
-                "semiconductors, tourism). Derive it from what the entity actually DEALS IN (read its "
-                "description/gics: a company's PRODUCTS for goods, its SERVICE type for a services firm). Pass "
-                "the SPECIFIC tradable form — 'hot-rolled steel coil' NOT bare 'steel' (which drifts to finished "
-                "articles), 'crude oil' NOT 'OIL.COMM'. ONE concept per call; a multi-line business → call once "
-                "PER material line. If unsure what it materially sells, verify before guessing.")],
-            type: Annotated[str, _d(
-                "`goods` (default, HS merchandise) | `services` (EBOPS — travel/tourism, financial, computer/IT, "
-                "royalties/IP, transport, insurance, …). Route a SERVICES firm here: hotel/airline→'travel', "
-                "bank→'financial', software/cloud→'computer services'. If a goods search scores LOW (<0.65) for a "
-                "services-type business, retry with type=services.")] = "goods",
-            limit: Annotated[Optional[int], _d("Candidates (default 15, max 50; larger for a broad/family query).")] = None) -> dict:
-    """⭐ FREE resolver — a concept → the exact trade CODE(s) (HS for goods, EBOPS for services). ALWAYS step 1
-    of any trade query; never guess a code. Multilingual (EN/TH/JA). Returns ranked `candidates` with the
-    evidence to PICK: `code`, `title`, `aliases`/`includes`/`excludes` (excludes NAME the sibling codes → use
-    them to disambiguate), `parent_code`, `siblings`, `score`.
-      • YOU pick from the evidence (the server never decides). NARROW concept → the single best leaf;
-        BROAD/family → the basket (pass the leaves) OR roll up to the shared 4-digit `parent_code` (Comtrade
-        aggregates the family, e.g. 1006 = all rice) — prefer the roll-up for "all X".
-      • `score` = confidence: ~0.7+ clean; <0.65 → probably the wrong `type` (try services) or a non-tradable
-        concept → don't force it.
-      • AMBIGUOUS top candidates that are genuinely DIFFERENT concepts (pet food 230910 vs livestock feed
-        230990) → ASK the user which, before spending a trade call.
-      • MULTI-STAGE commodities — candidates may be different SUPPLY-CHAIN STAGES of one material (uranium:
-        ore 261210 vs natural/processed 284410 vs enriched; steel: semi-finished vs hot-rolled coil; copper:
-        ore 2603 vs refined 7403). These are DIFFERENT markets with different country rankings → pick the
-        stage the user means (or ask), and state which stage your answer covers.
-      • ENUMERATE a conglomerate's material lines and call once per line (a whole-description search lands on
-        the dominant line only). FREE — enumerate broadly, then pull metered trade data selectively.
-    Feeds the `codes` of `search_trade` / `top_partners` / `top_traders` / `trade_balance`."""
-    return _ext("/v1/ext/hs/find", {"q": q, "type": type, "limit": _lim(limit, default=15, ceiling=50, floor=5)})
+def _is_hs_code(s: str) -> bool:
+    """An exact HS/EBOPS code already in hand → passthrough (skip resolve): a numeric token (HS 2–8 digits, EBOPS
+    3-digit). A concept ('crude oil', 'ทองแดง') → resolve."""
+    s = (s or "").strip()
+    return bool(s) and s.replace(".", "").isdigit()
+
+def _resolve_hs(q: str, type: str = "goods", context: Optional[str] = None) -> dict:
+    """Resolve ONE good/service concept → the exact trade CODE (HS goods / EBOPS services) at the right supply stage.
+    Mirrors _resolve_series: exact code → passthrough; else vector shortlist (/v1/ext/hs/find, full context:
+    title+excludes+parent) → Jev pick (judged by `context`) + `__NONE__` → calibrated gate. Returns
+    {status, query, code?, title?, parent_code?, confidence?, gate?, note?, candidates?}."""
+    cands = mdx()._get("/v1/ext/hs/find", {"q": q, "type": type, "limit": 15}).data
+    cands = cands.get("candidates") or (cands if isinstance(cands, list) else [])
+    if not cands:
+        return {"status": "no_match", "query": q, "reason": f"no candidate {type} codes", "candidates": []}
+    exact = next((c for c in cands if str(c.get("code", "")).lower() == q.strip().lower()), None)
+    if exact:
+        return {"status": "resolved", "query": q, "code": exact["code"], "title": exact.get("title"),
+                "parent_code": exact.get("parent_code"), "confidence": 1.0, "gate": "exact_key"}
+    options, meta = {}, {}
+    for c in cands:
+        code = c.get("code")
+        if not code:
+            continue
+        desc = c.get("title") or code
+        excl = c.get("excludes")
+        if excl:
+            desc += " — excl: " + ("; ".join(excl) if isinstance(excl, list) else str(excl))
+        if c.get("parent_code"):
+            desc += f" (parent {c['parent_code']})"
+        options[code] = desc
+        meta[code] = {"code": code, "title": c.get("title"), "parent_code": c.get("parent_code")}
+    # ROLL-UP: a 4-digit PARENT with ≥2 leaf children in the shortlist becomes a pickable synthetic option ("all
+    # <family>", Comtrade-aggregated) — so an "all X / whole family" request resolves to the aggregate code (all rice
+    # → 1006), which the OLD find_hs client had to roll up to manually via `parent_code`.
+    fam: dict = {}
+    for c in cands:
+        pc = c.get("parent_code")
+        if pc and str(pc) != str(c.get("code")):
+            fam.setdefault(str(pc), []).append(c.get("title") or c.get("code"))
+    for pc, kids in fam.items():
+        if len(kids) >= 2 and pc not in options:
+            options[pc] = f"ALL of HS {pc} — the WHOLE 4-digit family (Comtrade aggregates it); covers e.g.: " + "; ".join(kids[:4])
+            meta[pc] = {"code": pc, "title": f"HS {pc} (whole family)", "parent_code": pc}
+    options["__NONE__"] = _HS_NONE_OPT
+    jev_q = (f'Resolve the entity "{q}" as it is used in the user\'s request: "{context.strip()}"'
+             if context and context.strip() and context.strip().lower() != q.strip().lower() else q)
+    r = _jev_pick(jev_q, _HS_RESOLVE_INSTR, options)
+    if r.get("pick") == "__NONE__":
+        return {"status": "no_match", "query": q, "reason": f"not a tradable {type} concept (Jev: none fit)",
+                "confidence": r.get("confidence"), "candidates": []}
+    gate = _jev_gate(r)
+    pm = meta.get(r.get("pick"), {})
+    top_cands = [{"code": meta[k]["code"], "title": meta[k]["title"], "parent_code": meta[k]["parent_code"],
+                  "prob": round(v, 3)} for k, v in r["probs"].items() if k in meta]
+    if gate in ("resolve", "soft"):
+        out = {"status": "resolved", "query": q, "code": pm.get("code"), "title": pm.get("title"),
+               "parent_code": pm.get("parent_code"), "confidence": r.get("confidence"), "gate": gate}
+        if gate == "soft":
+            alts = ", ".join(c["code"] for c in top_cands[1:3])
+            out["note"] = f"resolved '{q}' → {pm.get('code')} at lower confidence; alternatives: {alts}"
+        return out
+    reason = "different products or supply stages — confirm which" if gate == "reconfirm" else "no confident trade-code match"
+    return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
+
+def _hs_codes_arg(vals, type: str = "goods", context: Optional[str] = None):
+    """Plural — resolve a list/CSV of trade `codes` args → (codes:list, confirm|None, detail). A numeric token passes
+    through (exact HS/EBOPS code); a concept → `_resolve_hs`; ANY pending → ONE batched reconfirm (kind='hs')."""
+    if not vals:
+        return [], None, {}
+    toks = [str(t).strip() for t in (vals if isinstance(vals, list) else str(vals).split(",")) if str(t).strip()]
+    out, detail, pend = [], {}, {}
+    for tok in toks:
+        if _is_hs_code(tok):
+            out.append(tok); continue
+        r = _resolve_hs(tok, type=type, context=context)
+        if r["status"] == "resolved":
+            out.append(r["code"]); detail[tok] = {"code": r.get("code"), "title": r.get("title"), "gate": r.get("gate")}
+        else:
+            pend[tok] = {"kind": "hs", "status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])}
+    if pend:
+        return [], {"needs_confirmation": True, "resolved": detail, "confirm": pend,
+                    "_guide": "A product/service isn't a unique trade code — pick a `code` from candidates (mind the "
+                              "SUPPLY STAGE: ore vs refined), or refine the concept / add `context`, then re-call (a "
+                              "numeric HS/EBOPS code passes straight through)."}, detail
+    return out, None, detail
 
 @mcp.tool(name="search_trade", title="Trade Flows Over Time", annotations=_RO)
 def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO / M49 (`Thailand`/`THA`/`764`); resolved server-side.")],
-                 codes: Annotated[Union[List[str], str], _d("HS/EBOPS code(s) from find_hs (never guess). Several = merged; a 4-digit code aggregates the family.")],
+                 codes: Annotated[Union[List[str], str], _d(_HS_CODES)],
                  partner: Annotated[Optional[str], _d("Partner country, or `World` (default) = all combined.")] = None,
                  flow: Annotated[Optional[Literal["export","import","both"]], _d("`export` (default) | `import` | `both`.")] = None,
                  period: Annotated[Optional[str], _d("`last10` annual / `last12` monthly (default) · a year `2023` · list `2020,2021` · range `2015:2024` · `latest`. DYNAMIC — never hardcode a year.")] = None,
                  type: Annotated[str, _d("`goods` (default, HS) | `services` (EBOPS — VALUE-ONLY: no volume/price axes, no mirror).")] = "goods",
                  freq: Annotated[Optional[str], _d("`annual` (default) | `monthly` (YYYYMM, fresher; goods only).")] = None,
-                 mirror: Annotated[Optional[bool], _d("Also return the partner-REPORTED figure + `discrepancy` (FOB/CIF gap). Use for China esp. / when quoting a precise number. Goods only.")] = None) -> dict:
+                 mirror: Annotated[Optional[bool], _d("Also return the partner-REPORTED figure + `discrepancy` (FOB/CIF gap). Use for China esp. / when quoting a precise number. Goods only.")] = None,
+                 context: Annotated[Optional[str], _d(_HS_CTX)] = None) -> dict:
     """One trade FLOW over time (BYOK, 5 credits) — "how much <product> did <A> export to <B>?". Returns
     `series` (per-period value_usd / netweight / qty) PLUS an `analysis` block (decomposed like our
     price-features: value / volume / unit-price each with trend / cagr_pct / peak / trough / biggest_swing, +
@@ -3436,34 +3514,40 @@ def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO /
     decomposition/`analysis`). Surface `_license_note` when showing data. ~1 req/sec server-paced — don't fan out.
     BYOK: no key → an `error`/`note` with a connect CTA (relay it; you may answer from general knowledge
     meanwhile)."""
+    codes_r, cf, _det = _hs_codes_arg(codes, type=type, context=context)  # 🆕 collapse find_hs (concept OR code)
+    if cf: return cf
     return _ext("/v1/ext/comtrade/search",
-                {"reporter": reporter, "codes": _codes(codes), "partner": partner, "flow": flow,
+                {"reporter": reporter, "codes": codes_r, "partner": partner, "flow": flow,
                  "period": period, "type": type, "freq": freq, "mirror": mirror})
 
 @mcp.tool(name="top_partners", title="Top Trade Partners", annotations=_RO)
 def top_partners(reporter: Annotated[str, _d("Reporting country — name / ISO / M49.")],
-                 codes: Annotated[Union[List[str], str], _d("HS/EBOPS code(s) from find_hs.")],
+                 codes: Annotated[Union[List[str], str], _d(_HS_CODES)],
                  flow: Annotated[Optional[Literal["export","import","both"]], _d("`export` (default) → biggest BUYERS · `import` → biggest SUPPLIERS · `both`.")] = None,
                  period: Annotated[Optional[str], _d("Default `latest`; a year / list / range / `lastN`. Dynamic.")] = None,
                  type: Annotated[str, _d("`goods` (default) | `services`.")] = "goods",
-                 limit: Annotated[Optional[int], _d("Top-N partners (default 10, max 50).")] = None) -> dict:
+                 limit: Annotated[Optional[int], _d("Top-N partners (default 10, max 50).")] = None,
+                 context: Annotated[Optional[str], _d(_HS_CTX)] = None) -> dict:
     """"Who buys/sells <a GIVEN country>'s <product>?" (BYOK, 5cr). Ranks that reporter's partners →
     `ranked:[{partner, value_usd, share_pct}]` + `total_value_usd`. flow=export → biggest BUYERS; import →
     biggest SUPPLIERS. (Ranks the PARTNERS of ONE country — vs `top_traders`, which ranks the countries
     themselves.) BYOK note relayed on 402."""
+    codes_r, cf, _det = _hs_codes_arg(codes, type=type, context=context)  # 🆕 collapse find_hs
+    if cf: return cf
     return _ext("/v1/ext/comtrade/top-partners",
-                {"reporter": reporter, "codes": _codes(codes), "flow": flow, "period": period,
+                {"reporter": reporter, "codes": codes_r, "flow": flow, "period": period,
                  "type": type, "limit": _lim(limit, default=10, ceiling=50)})
 
 @mcp.tool(name="top_traders", title="Rank Countries by Trade", annotations=_RO)
-def top_traders(codes: Annotated[Union[List[str], str], _d("HS code(s) from find_hs — SUMMED per country (0207,0203 = chicken+pork combined). GOODS only.")],
+def top_traders(codes: Annotated[Union[List[str], str], _d(_HS_CODES + " GOODS only — SUMMED per country.")],
                 flow: Annotated[Optional[Literal["export","import","both"]], _d("`import` (default) | `export` | `both`.")] = None,
                 scope: Annotated[Optional[str], _d("`world` (default) · continent (`asia`/`europe`/`africa`/`americas`/`oceania`) · subregion · econ group (`asean`/`eu`/`g7`) · CSV of ISO-2. (Region is OUR layer.)")] = None,
                 rank_by: Annotated[Optional[str], _d("`value` (default, period sum) · `growth` (CAGR, ≥2 periods) · `streak` (consecutive-move run, ≥2).")] = None,
                 order: Annotated[Optional[str], _d("value/growth → `desc`(default)/`asc` · STREAK → run direction (`desc`=consecutive INCREASES, `asc`=DECREASES).")] = None,
                 period: Annotated[Optional[str], _d("Dynamic. Defaults: value=`latest`, growth=`last5`, streak=`last10`.")] = None,
                 limit: Annotated[Optional[int], _d("Top-N (default 10, max 50).")] = None,
-                min_value_usd: Annotated[Optional[float], _d("Floor to drop tiny-base noise (growth/streak default 1e6).")] = None) -> dict:
+                min_value_usd: Annotated[Optional[float], _d("Floor to drop tiny-base noise (growth/streak default 1e6).")] = None,
+                context: Annotated[Optional[str], _d(_HS_CTX)] = None) -> dict:
     """⭐ Rank COUNTRIES by their trade of a product, in ONE call (BYOK, 5cr; GOODS only) — "which country
     imports/exports the most / grows fastest / declines / rose N years straight". `codes` are summed per
     country; `scope` narrows to a region/bloc. `rank_by`: `value` → {rank,partner,value_usd,share_pct} ·
@@ -3471,24 +3555,32 @@ def top_traders(codes: Annotated[Union[List[str], str], _d("HS code(s) from find
     ⚠️ growth/streak spans can differ per country — CAGR annualizes so the ranking is fair; state the real
     `from`/`to` years from the payload. "#2 exporter" = the rank:2 row. "BOTH X and Y up 5y" → call per
     commodity and INTERSECT the lists yourself. An empty/short list = a real answer; relay it, don't fabricate."""
+    codes_r, cf, _det = _hs_codes_arg(codes, type="goods", context=context)  # 🆕 collapse find_hs (goods only)
+    if cf: return cf
     return _ext("/v1/ext/comtrade/top-traders",
-                {"codes": _codes(codes), "flow": flow, "scope": scope, "rank_by": rank_by, "order": order,
+                {"codes": codes_r, "flow": flow, "scope": scope, "rank_by": rank_by, "order": order,
                  "period": period, "limit": _lim(limit, default=10, ceiling=50), "min_value_usd": min_value_usd})
 
 @mcp.tool(name="trade_balance", title="Trade Balance", annotations=_RO)
 def trade_balance(reporter: Annotated[str, _d("Reporting country — name / ISO / M49.")],
                   partner: Annotated[Optional[str], _d("Partner country, or `World` (default).")] = None,
-                  codes: Annotated[Optional[Union[List[str], str]], _d("HS code(s) for a PRODUCT balance; omit → `TOTAL` (all commodities, a macro read). GOODS only.")] = None,
-                  period: Annotated[Optional[str], _d("Default `latest`; a year / list / range / `lastN`. Dynamic.")] = None) -> dict:
+                  codes: Annotated[Optional[Union[List[str], str]], _d("For a PRODUCT balance: HS code(s) OR a CONCEPT (resolved server-side at the right stage). OMIT → `TOTAL` (all commodities, a macro read). GOODS only.")] = None,
+                  period: Annotated[Optional[str], _d("Default `latest`; a year / list / range / `lastN`. Dynamic.")] = None,
+                  context: Annotated[Optional[str], _d(_HS_CTX)] = None) -> dict:
     """Exports vs imports vs NET balance (BYOK, 5cr; GOODS only) — "is <A> a net exporter to <B> (of <X>)?".
     Returns `rows:[{year, exports_usd, imports_usd, balance_usd}]` (balance = exports − imports; + = surplus).
-    `codes` defaults to TOTAL (all commodities) for a macro/country read; pass HS codes (from find_hs) for one
+    `codes` defaults to TOTAL (all commodities) for a macro/country read; pass an HS code OR a product concept for one
     product. 🔎 CHECK the `basis` field in the response — it says whether you got a `commodity-specific` balance
     or the all-commodity `TOTAL`; if you meant a product balance but `basis` says TOTAL, you forgot `codes`.
     ⭐ Signature use for TARIFF / trade-war news (US↔China): pull the actual balance to quantify what the
     news sentiment only gestures at. BYOK note relayed on 402."""
+    codes_out = "TOTAL"
+    if codes:                                              # 🆕 collapse find_hs (a PRODUCT balance — concept OR code)
+        codes_r, cf, _det = _hs_codes_arg(codes, type="goods", context=context)
+        if cf: return cf
+        codes_out = codes_r or "TOTAL"
     return _ext("/v1/ext/comtrade/balance",
-                {"reporter": reporter, "partner": partner, "codes": _codes(codes) or "TOTAL", "period": period})
+                {"reporter": reporter, "partner": partner, "codes": codes_out, "period": period})
 
 # ── Macro (FRED) — economic time series + regime/dashboard reads ─────────────────────────────────────
 # There is NO find_series tool — fred_series resolves a macro concept (or an exact series_id) server-side via

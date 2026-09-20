@@ -1,0 +1,24 @@
+
+===== RUN 1 =====
+  [ok ] crude oil        [goods   ] → 270900 (Crude oil (petroleum))             (expect resolve:^2709)
+  [ok ] copper ore       [goods   ] → 260300 (Copper ores and concentrates)      (expect resolve:^2603)
+  [ok ] refined copper   [goods   ] → 740311 (Refined copper cathodes — unwr)    (expect resolve:^74)
+  [ok ] rice             [goods   ] → 1006 (HS 1006 (whole family))              (expect resolve:^1006)
+  [ok ] integrated circuits [goods   ] → 8542 (HS 8542 (whole family))              (expect resolve:^8542)
+  [ok ] tourism          [services] → 236 (Travel / tourism)                     (expect resolve:^2)
+  [ok ] my favorite hobby [goods   ] → no_match                                   (expect no_match:None)
+  _is_hs_code: 2709=True '0207,0203'=False 'crude oil'=False
+  ---- 7 pass / 0 fail ----
+
+===== RUN 2 (stability) =====
+  [ok ] crude oil        [goods   ] → 270900 (Crude oil (petroleum))             (expect resolve:^2709)
+  [ok ] copper ore       [goods   ] → 260300 (Copper ores and concentrates)      (expect resolve:^2603)
+  [ok ] refined copper   [goods   ] → 740311 (Refined copper cathodes — unwr)    (expect resolve:^74)
+  [ok ] rice             [goods   ] → 1006 (HS 1006 (whole family))              (expect resolve:^1006)
+  [ok ] integrated circuits [goods   ] → 8542 (HS 8542 (whole family))              (expect resolve:^8542)
+  [ok ] tourism          [services] → 236 (Travel / tourism)                     (expect resolve:^2)
+  [ok ] my favorite hobby [goods   ] → no_match                                   (expect no_match:None)
+  _is_hs_code: 2709=True '0207,0203'=False 'crude oil'=False
+  ---- 7 pass / 0 fail ----
+
+TOTAL fails: run1=0 run2=0
