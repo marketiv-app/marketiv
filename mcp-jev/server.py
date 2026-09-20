@@ -1309,6 +1309,11 @@ def news_feed(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     (default 20, max 50); narrow the filters rather than paging deep. TIME-SCOPE with `from_`/`to` (ISO)
     or a `window` ('90d','qtd','ytd','1y'). To COMPARE periods, call once per period and compare the
     results. ⚠️ News starts 2026-01-01 — older ranges return nothing (no coverage, not 'no news')."""
+    # 🆕 collapse find_megatrend: `megatrend` may be a name/slug/plain-English concept — resolve to node id(s)
+    # via the unified resolver (mirror of brief/screen_stocks); backend /v1/news accepts INT ids only.
+    if megatrend:
+        megatrend, _me = _theme_nodes(megatrend)
+        if _me: return _me
     return _ser(mdx().news(megatrend=megatrend, country=country, aspect=aspect, direction=direction,
                           news_type=news_type, only_scored=only_scored, min_relevance=min_relevance,
                           collapse=collapse, from_=from_ or _win(window), to=to, limit=_lim(limit)).to_list())
