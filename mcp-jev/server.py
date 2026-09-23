@@ -315,6 +315,18 @@ def _check(resp):
         raise ValueError(str(msg))
     return resp
 
+def _parallel_map(fn, items, max_workers: int = 8):
+    """Run fn(item) for each item CONCURRENTLY (fan-out, not a serial loop). 🔴 The per-request API key lives in a
+    ContextVar (`_req_key`) that worker threads do NOT inherit — so copy THIS (request) thread's context once per
+    item and run each task inside its own copy, or `mdx()` would raise 'no MarketDX API key' in the workers
+    (bit us on prod: env-key local runs mask it). Preserves input order."""
+    items = list(items)
+    if not items:
+        return []
+    ctxs = [_contextvars.copy_context() for _ in items]   # captured on the request thread (has _req_key)
+    with _futures.ThreadPoolExecutor(max_workers=min(max_workers, len(items))) as ex:
+        return list(ex.map(lambda it_ctx: it_ctx[1].run(fn, it_ctx[0]), zip(items, ctxs)))
+
 def _bget(path: str, params: Optional[dict] = None) -> dict:
     """Backend GET → `.data`, with bounded retry+backoff on TRANSIENT 429/5xx/timeout (same `_retry` policy as
     the Jev calls). Use for the RESOLVER retrieval leg (the vector `/find` + `/v1/stocks` endpoints) so a
@@ -363,7 +375,7 @@ def _deepseek(system: str, user: str, temperature: float) -> dict:
 _JEV_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 _JEV_MODEL = "jev-latest"
 
-import time as _time, random as _random, urllib.error as _uerr, concurrent.futures as _futures
+import time as _time, random as _random, urllib.error as _uerr, concurrent.futures as _futures, contextvars as _contextvars
 _RETRY_STATUS = {429, 500, 502, 503, 504, 529}   # transient — retry with backoff
 _RETRY_ATTEMPTS = 3
 
@@ -943,8 +955,7 @@ def _tickers_arg(vals, scope=_SCOPE_PRICED, country=None, context=None):
             concept_toks.append(tok)
     if concept_toks:                      # 🆕 PARALLEL retrieval — independent /v1/stocks GETs, never a serial loop
         mdx()                             # warm the cached httpx client before fan-out (dodge a first-create race)
-        with _futures.ThreadPoolExecutor(max_workers=min(8, len(concept_toks))) as ex:
-            preps = list(ex.map(lambda t: _ticker_prep(t, scope, country, context), concept_toks))
+        preps = _parallel_map(lambda t: _ticker_prep(t, scope, country, context), concept_toks)
         for tok, prep in zip(concept_toks, preps):
             if prep.get("_pending"):
                 prepped[tok] = prep
@@ -3605,8 +3616,7 @@ def _hs_codes_arg(vals, type: str = "goods", context: Optional[str] = None):
             concept_toks.append(tok)
     if concept_toks:                      # 🆕 PARALLEL retrieval — independent /v1/ext/hs/find GETs, no serial loop
         mdx()
-        with _futures.ThreadPoolExecutor(max_workers=min(8, len(concept_toks))) as ex:
-            preps = list(ex.map(lambda t: _hs_prep(t, type, context), concept_toks))
+        preps = _parallel_map(lambda t: _hs_prep(t, type, context), concept_toks)
         for tok, prep in zip(concept_toks, preps):
             if prep.get("_pending"):
                 prepped[tok] = prep
