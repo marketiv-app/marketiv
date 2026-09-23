@@ -2274,6 +2274,9 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     "Chinese + American banks" = q='banks', country='CN,US'; "semis + cloud in China" = q='semiconductors,cloud', country='CN'.
     `window` = 7d/30d/90d/1y/…"""
     cli = mdx()
+    _taxonomy()  # 🔴 warm the global node cache on THIS (authed) thread — the _theme worker calls _node_out →
+                 # _taxonomy(), which COLD-loads via mdx(); in a worker the request key ContextVar is unset →
+                 # "no MarketDX API key" (intermittent: only when _TAX was still cold). Warming here fixes it.
     from concurrent.futures import ThreadPoolExecutor
     # ── q may carry SEVERAL concepts (CSV) — resolve each independently, then aggregate the scope axes ──
     concepts = [c.strip() for c in q.split(",") if c.strip()] or [q]
