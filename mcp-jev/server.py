@@ -113,7 +113,8 @@ _INSTRUCTIONS = (
     "capita growth, credit — the demand backdrop the price+news alone can't give); an EXPORTER / tariff- or "
     "supply-chain-exposed name → the TRADE flows (`search_trade`/`top_traders` — pass a product concept in `codes`); a rate- or "
     "macro-sensitive read → the macro series (`fred_series` — pass a concept, or `macro_pulse`). Pull ONLY the "
-    "1–2 backdrops that would actually move the conclusion (cheap, high-signal — find_* resolvers are FREE), "
+    "1–2 backdrops that would actually move the conclusion (cheap, high-signal — each tool resolves a plain "
+    "concept server-side, no separate lookup step), "
     "then SYNTHESIZE: does the structural/macro/trade backdrop CONFIRM or CONTRADICT the price+news? Never "
     "gather just to look thorough — but never leave a domestic-consumer, exporter, or macro-sensitive read "
     "backdrop-BLIND either (that is the difference between a data readout and an analyst's answer). The "
@@ -1324,8 +1325,8 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
       • `aspect` — an impact CHANNEL. aspect='tariff' → "everything moving via tariffs".
       • `gics` — a GICS sector/industry: a CODE prefix (sector 25 / group 2550 / industry 255010) OR plain English
         ('banks'), often × country. 'European banks' = gics='banks' + country=EU codes (server resolves the sector).
-      • `megatrend` — a theme node id/slug. For a NAMED theme use `theme_summary` (it resolves free text);
-        use `megatrend` here only when you already have the id or want to AND it with another scope.
+      • `megatrend` — a theme name/slug/plain-English concept (resolved server-side) or an int node id; CSV
+        for several. AND it with another scope here, or use `theme_summary` for a single NAMED theme.
     Combine (AND): news_type='commodity_supply'+country='JP' = commodity news in Japan; gics='2550'+
     country='GB,DE,FR,IT,ES,NL' = a European retail pulse. `window` = 7d/30d/90d/180d/1y/mtd/qtd/ytd (or
     pass from_/to as ISO dates). ≥1 scope is REQUIRED (it never scans everything). ⚠️ News coverage starts
@@ -1408,7 +1409,8 @@ def news_feed(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     stories are MERGED by default (+`dup_count`); `collapse=false` for the raw feed. `limit` = how many
     (default 20, max 50); narrow the filters rather than paging deep. TIME-SCOPE with `from_`/`to` (ISO)
     or a `window` ('90d','qtd','ytd','1y'). To COMPARE periods, call once per period and compare the
-    results. ⚠️ News starts 2026-01-01 — older ranges return nothing (no coverage, not 'no news')."""
+    results. ⚠️ News starts 2026-01-01 — older ranges return nothing (no coverage, not 'no news').
+    `megatrend` accepts a plain name/slug/concept ('foundry', 'AI chips') — resolved server-side to node id(s)."""
     # 🆕 collapse find_megatrend: `megatrend` may be a name/slug/plain-English concept — resolve to node id(s)
     # via the unified resolver (mirror of brief/screen_stocks); backend /v1/news accepts INT ids only.
     if megatrend:
@@ -1451,8 +1453,8 @@ def stock_impact(ticker: Annotated[str, _dt(_TICKER)],
 
 @mcp.tool(title="Options Sentiment", annotations=_RO)
 def options_sentiment(
-    ticker: Annotated[Optional[str], _dt("A US-listed OPTIONABLE ticker (~547 names) or an index-ETF proxy (S&P→SPY, "
-                                         "Nasdaq→QQQ). Non-US / uncovered → `covered:false` (not an error).")] = None,
+    ticker: Annotated[Optional[str], _dt("A US-listed OPTIONABLE ticker OR a plain company name (resolved server-side) — ~547 names — or an "
+                                         "index-ETF proxy (S&P→SPY, Nasdaq→QQQ). Non-US / uncovered → `covered:false` (not an error).")] = None,
     style: Annotated[str, _d("Narration style: `plain` (layperson, default) | `technical`.")] = "plain",
     as_of: Annotated[Optional[str], _d("As-of date YYYY-MM-DD (point-in-time positioning).")] = None,
     tickers: Annotated[Optional[List[str]], _d("Batch form — several tickers at once (instead of `ticker`).")] = None,
@@ -1729,7 +1731,7 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
         collapse a table into a sentence. If the answer led with a table, the body leads with the same table.
         Use clear ABSOLUTE column headers (`FY2025`, not `Latest`/`FY-1`) so the figures stay unambiguous.
       • `summary` — a 1–2 sentence gist for scanning later.
-      • `note_type` — one of `thesis` / `reference` / `snapshot` / `decision` / `watchlist`.
+      • `note_type` — one of `reference` (concept/understanding) / `tracking` (dated market read) / `thesis` / `decision`.
       • `category` — a free bucket, e.g. `research` / `portfolio` / `idea`.
       • `tags` — a few keywords for retrieval.
 
@@ -1812,7 +1814,7 @@ def query_notes(q: Annotated[Optional[str], _d("Semantic query text — recall n
         are ranked by MEANING with a `similarity` score (cross-language OK).
       • Structured filters: `stock` (a ticker → their notes about it), `theme` (a sector/trend NAME →
         resolved to the megatrend, subtree included), `gics` (6-digit code), `tag`, `note_type`
-        (thesis/reference/snapshot/decision/watchlist), `since` (e.g. '30d').
+        (reference/tracking/thesis/decision), `since` (e.g. '30d').
     📌 `stock` + `relation` (direct|indirect|any, default any) splits how a note relates to that ticker —
     same idea as newsfeed direct/indirect: `direct` = the note is ABOUT it (a subject); `indirect` = it's
     only REFERENCED (e.g. a peer named in a note about ANOTHER stock — a "NVDA vs peers" note surfaces
@@ -2154,7 +2156,7 @@ def stock_prices(ticker: Annotated[str, _dt(_TICKER)],
     return mdx()._get(f"/v1/stocks/{tk}/prices", {"to": to, "from": from_}).data
 
 @mcp.tool(title="Batch Stock Prices", annotations=_RO)
-def stock_prices_batch(tickers: Annotated[List[str], _d("UP TO 50 MarketDX tickers (a watchlist/cohort). Returns `results` in input order + `unresolved`.")],
+def stock_prices_batch(tickers: Annotated[List[str], _d("UP TO 50 items, EACH a MarketDX ticker OR a plain company/asset NAME — the SERVER resolves names (pass `context` to disambiguate); a watchlist/cohort. Returns `results` in input order + `unresolved`.")],
                        to: Annotated[Optional[str], _d("As-of date `YYYY-MM-DD` (point-in-time). Omit → latest.")] = None,
                        from_: Annotated[Optional[str], _d("Lower bound of price history `YYYY-MM-DD` (below ~1y nulls the long windows).")] = None,
                context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
