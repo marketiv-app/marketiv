@@ -315,6 +315,12 @@ def _check(resp):
         raise ValueError(str(msg))
     return resp
 
+def _bget(path: str, params: Optional[dict] = None) -> dict:
+    """Backend GET → `.data`, with bounded retry+backoff on TRANSIENT 429/5xx/timeout (same `_retry` policy as
+    the Jev calls). Use for the RESOLVER retrieval leg (the vector `/find` + `/v1/stocks` endpoints) so a
+    momentary backend blip doesn't fail a resolution. A non-transient error (404/400/402) raises as before."""
+    return _retry(lambda: mdx()._get(path, params or {}).data, what="backend")
+
 def _ext(path: str, params: dict) -> dict:
     """Call a `/v1/ext/*` (HS/Comtrade) endpoint and RELAY a user-actionable failure as a friendly dict
     (with the server's plain-language `note` + any BYOK CTA fields) instead of raising — so the client LLM
@@ -322,7 +328,7 @@ def _ext(path: str, params: dict) -> dict:
     `byok_invalid` (402), rate-limit (429), bad-param (400) all come back this way; the `note` says whether
     to fall back to general knowledge meanwhile."""
     try:
-        return mdx()._get(path, params).data
+        return _retry(lambda: mdx()._get(path, params).data, what="backend")
     except MarketDXError as e:
         out: dict = {"error": str(e), "note": getattr(e, "note", None)}
         resp = getattr(e, "response", None)
@@ -357,26 +363,78 @@ def _deepseek(system: str, user: str, temperature: float) -> dict:
 _JEV_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 _JEV_MODEL = "jev-latest"
 
-def _jev_pick(query: str, instructions: str, options: dict) -> dict:
-    """ONE Jev Choice over `options` ({choice_key: description}). Returns
-    {pick, confidence, p1, p2, gap, probs} — p1/p2 = top-two probabilities, gap = their margin."""
+import time as _time, random as _random, urllib.error as _uerr
+_RETRY_STATUS = {429, 500, 502, 503, 504, 529}   # transient — retry with backoff
+_RETRY_ATTEMPTS = 3
+
+def _retry(fn, *, what="upstream"):
+    """Bounded retry+backoff for TRANSIENT upstream failures (429/5xx/timeout/conn). Runs INSIDE the user's
+    request → capped (3 attempts, ≤8s/step). Honors `Retry-After`. NEVER retries a deterministic 4xx
+    (400/401/402/404 → raise immediately, e.g. bad-param / byok_missing / not-found)."""
+    for i in range(_RETRY_ATTEMPTS):
+        try:
+            return fn()
+        except (_uerr.URLError, MarketDXError) as e:
+            if isinstance(e, _uerr.HTTPError):
+                transient = e.code in _RETRY_STATUS
+                ra = e.headers.get("Retry-After") if e.headers else None
+            elif isinstance(e, _uerr.URLError):        # non-HTTP URLError = timeout / conn reset / DNS
+                transient, ra = True, None
+            else:                                       # backend SDK typed error (RateLimitError/APIError)
+                transient = getattr(e, "status", None) in _RETRY_STATUS
+                ra = getattr(e, "retry_after", None)
+            if not transient or i == _RETRY_ATTEMPTS - 1:
+                raise
+            try:
+                delay = float(ra) if ra else 0.0
+            except (TypeError, ValueError):
+                delay = 0.0
+            if delay <= 0:
+                delay = 0.4 * (2 ** i) + _random.uniform(0, 0.4)   # 0.4-0.8 / 0.8-1.2 / …
+            _time.sleep(min(delay, 8.0))
+
+def _jev_post(payload: dict, timeout: int) -> dict:
+    """POST to TypeSafe (System One) with bounded retry+backoff. Shared by _jev_pick / _jev_picks / _jev_nouls."""
     import urllib.request
     key = os.environ.get("TYPESAFE_API_KEY")
     if not key:
         raise RuntimeError("no TYPESAFE_API_KEY set (Jev resolver)")
-    body = json.dumps({"model": _JEV_MODEL, "state": {"query": query},
-                       "questions": {"pick": {"type": "choice", "instructions": instructions, "criteria": options}}},
-                      ensure_ascii=False).encode("utf-8")
+    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     req = urllib.request.Request(_JEV_ENDPOINT, data=body, method="POST",
                                  headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        a = json.loads(r.read().decode("utf-8")).get("answers", {}).get("pick", {})
+    def _do():
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read().decode("utf-8"))
+    return _retry(_do, what="jev")
+
+def _pick_stats(a: dict) -> dict:
+    """Shape ONE Jev choice answer → {pick, confidence, p1, p2, gap, probs}."""
     probs = a.get("probabilities") or {}
     top = sorted(probs.items(), key=lambda kv: kv[1], reverse=True)
     p1 = top[0][1] if top else (a.get("confidence") or 0.0)
     p2 = top[1][1] if len(top) > 1 else 0.0
     return {"pick": a.get("choice"), "confidence": a.get("confidence"),
             "p1": p1, "p2": p2, "gap": round(p1 - p2, 3), "probs": dict(top[:4])}
+
+def _jev_picks(questions: dict, state_query: str = "") -> dict:
+    """BATCH Choice — MANY picks in ONE TypeSafe call (docs: 'ask every Choice question in a single request';
+    questions run in parallel, 'adding questions barely changes response time'). `questions` =
+    {key: {"instructions": str, "options": {opt: desc}}}. Returns {key: _pick_stats(...)} — same per-key shape
+    as _jev_pick. Each key carries its OWN entity in its instructions (state.query is shared context)."""
+    if not questions:
+        return {}
+    qs = {k: {"type": "choice", "instructions": v["instructions"], "criteria": v["options"]}
+          for k, v in questions.items()}
+    answers = _jev_post({"model": _JEV_MODEL, "state": {"query": state_query}, "questions": qs}, 30).get("answers", {})
+    return {k: _pick_stats(answers.get(k) or {}) for k in questions}
+
+def _jev_pick(query: str, instructions: str, options: dict) -> dict:
+    """ONE Jev Choice over `options` ({choice_key: description}). Returns
+    {pick, confidence, p1, p2, gap, probs} — p1/p2 = top-two probabilities, gap = their margin."""
+    a = _jev_post({"model": _JEV_MODEL, "state": {"query": query},
+                   "questions": {"pick": {"type": "choice", "instructions": instructions, "criteria": options}}},
+                  20).get("answers", {}).get("pick", {})
+    return _pick_stats(a)
 
 def _jev_gate(r: dict) -> str:
     """Calibrated reconfirm gate (jev-poc/calibrate_reconfirm.py, pooled 117 — re-validate in full-loop).
@@ -397,17 +455,8 @@ def _jev_nouls(query: str, questions: dict) -> dict:
     """N independent yes/no COVERAGE decisions in ONE TypeSafe call (fan-out, cheap). `questions` = {id: instruction}.
     Returns {id: prob 0..1}. Noul = a calibrated boolean; MULTI-LABEL (keep each ≥ threshold) — unlike Choice which
     softmaxes onto one. Mirrors megatrend-mapper jev.rs `nouls`."""
-    import urllib.request
-    key = os.environ.get("TYPESAFE_API_KEY")
-    if not key:
-        raise RuntimeError("no TYPESAFE_API_KEY set (Jev resolver)")
     qs = {qid: {"type": "noul", "instructions": instr} for qid, instr in questions.items()}
-    body = json.dumps({"model": _JEV_MODEL, "state": {"query": query}, "questions": qs},
-                      ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(_JEV_ENDPOINT, data=body, method="POST",
-                                 headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        answers = json.loads(r.read().decode("utf-8")).get("answers", {})
+    answers = _jev_post({"model": _JEV_MODEL, "state": {"query": query}, "questions": qs}, 30).get("answers", {})
     out = {}
     for qid in questions:
         a = answers.get(qid) or {}
@@ -445,7 +494,7 @@ def _resolve_concept(concept: str) -> dict:
 
 def _resolve_concept_uncached(concept: str) -> dict:
     q = str(concept).strip()
-    data = mdx()._get("/v1/search/concepts", {"q": q, "limit": 12}).data
+    data = _bget("/v1/search/concepts", {"q": q, "limit": 12})
     themes = (data.get("themes") or []) if isinstance(data, dict) else []
     sectors = (data.get("sectors") or []) if isinstance(data, dict) else []
     if not themes and not sectors:
@@ -632,7 +681,7 @@ def _resolve_fsconcept(q: str, scope_types: tuple = ("field", "ratio", "valuatio
     screen_unified.concept={field,ratio,valuation}). Flow: exact-key passthrough → else vector shortlist
     (/v1/financials/find?verbose=1, FULL context parity: label+definition+description+aliases) → Jev pick + `__NONE__`
     → calibrated gate. Returns {status: resolved|reconfirm|no_match, query, key?, type?, confidence?, gate?, note?, candidates?}."""
-    data = mdx()._get("/v1/financials/find", {"q": q, "statement": statement, "limit": 15, "verbose": 1}).data
+    data = _bget("/v1/financials/find", {"q": q, "statement": statement, "limit": 15, "verbose": 1})
     all_cands = data.get("candidates", []) if isinstance(data, dict) else []
     cands = [c for c in all_cands if c.get("type", "field") in scope_types]  # SCOPE: only catalogs this input accepts
     if not cands:
@@ -740,7 +789,7 @@ def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = 
     ticker (AAPL.US) → passthrough; else vector shortlist on `q` → Jev pick (judged by `context`, falling back to
     `q`) + `__NONE__` → calibrated gate. IDENTITY only — head/listing mapping is the endpoint's job. Returns
     {status: resolved|reconfirm|no_match, query, ticker?, name?, confidence?, gate?, note?, candidates?}."""
-    matches = mdx()._get("/v1/stocks", {"q": q, "country": country, "limit": 15}).data.get("matches", [])
+    matches = _bget("/v1/stocks", {"q": q, "country": country, "limit": 15}).get("matches", [])
     cands = [m for m in matches if m.get("type") in scope]   # SCOPE: only asset classes this tool accepts
     if not cands:
         return {"status": "no_match", "query": q, "reason": f"no {'/'.join(scope)} listing matches", "candidates": []}
@@ -897,7 +946,7 @@ def _resolve_fspattern(q: str) -> dict:
     {status, query, pattern?, kind?, params?, confidence?, gate?, note?, candidates?}. The pattern's `params`
     (threshold/N/min/max/percentile/total_change) ride along for the CLIENT to fill from the user's numbers —
     the resolver never invents them."""
-    data = mdx()._get("/v1/financials/find-pattern", {"q": q, "limit": 15}).data
+    data = _bget("/v1/financials/find-pattern", {"q": q, "limit": 15})
     cands = data.get("patterns", data.get("candidates", [])) if isinstance(data, dict) else []
     if not cands:
         return {"status": "no_match", "query": q, "reason": "no candidate patterns", "candidates": []}
@@ -3423,7 +3472,7 @@ def _resolve_hs(q: str, type: str = "goods", context: Optional[str] = None) -> d
     Mirrors _resolve_series: exact code → passthrough; else vector shortlist (/v1/ext/hs/find, full context:
     title+excludes+parent) → Jev pick (judged by `context`) + `__NONE__` → calibrated gate. Returns
     {status, query, code?, title?, parent_code?, confidence?, gate?, note?, candidates?}."""
-    cands = mdx()._get("/v1/ext/hs/find", {"q": q, "type": type, "limit": 15}).data
+    cands = _bget("/v1/ext/hs/find", {"q": q, "type": type, "limit": 15})
     cands = cands.get("candidates") or (cands if isinstance(cands, list) else [])
     if not cands:
         return {"status": "no_match", "query": q, "reason": f"no candidate {type} codes", "candidates": []}
@@ -3612,7 +3661,7 @@ def _resolve_series(q: str, country: Optional[str] = None, context: Optional[str
     suggested_transform) → Jev pick (judged by `context`) + `__NONE__` → calibrated gate. Returns
     {status, query, series_id?, transform?, title?, confidence?, gate?, note?, candidates?}. The pick's
     suggested_transform rides along as the DEFAULT for fred_series (the client may still override)."""
-    cands = mdx()._get("/v1/ext/fred/find", {"q": q, "country": country, "limit": 15}).data
+    cands = _bget("/v1/ext/fred/find", {"q": q, "country": country, "limit": 15})
     cands = cands.get("candidates") or cands.get("series") or (cands if isinstance(cands, list) else [])
     if not cands:
         return {"status": "no_match", "query": q, "reason": "no candidate FRED series", "candidates": []}
@@ -3738,7 +3787,7 @@ def _resolve_indicator(q: str, country: Optional[str] = None, context: Optional[
     exact id → passthrough; else vector shortlist (/v1/ext/wb/find, full context: name+unit_hint+database) → Jev pick
     (judged by `context`) + `__NONE__` → calibrated gate. Returns {status, query, indicator?, database?, name?,
     confidence?, gate?, note?, candidates?}. The pick's `database` rides along as the default for wb_series."""
-    cands = mdx()._get("/v1/ext/wb/find", {"q": q, "country": country, "limit": 15}).data
+    cands = _bget("/v1/ext/wb/find", {"q": q, "country": country, "limit": 15})
     cands = cands.get("candidates") or cands.get("indicators") or (cands if isinstance(cands, list) else [])
     if not cands:
         return {"status": "no_match", "query": q, "reason": "no candidate World Bank indicators", "candidates": []}
