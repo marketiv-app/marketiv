@@ -363,7 +363,7 @@ def _deepseek(system: str, user: str, temperature: float) -> dict:
 _JEV_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 _JEV_MODEL = "jev-latest"
 
-import time as _time, random as _random, urllib.error as _uerr
+import time as _time, random as _random, urllib.error as _uerr, concurrent.futures as _futures
 _RETRY_STATUS = {429, 500, 502, 503, 504, 529}   # transient — retry with backoff
 _RETRY_ATTEMPTS = 3
 
@@ -935,14 +935,21 @@ def _tickers_arg(vals, scope=_SCOPE_PRICED, country=None, context=None):
             pend[tok] = {"kind": "ticker", "status": r["status"], "reason": r.get("reason"),
                          "candidates": r.get("candidates", [])}
     prepped = {}                          # tok -> prep needing a Jev decision
+    concept_toks = []
     for tok in toks:
         if _is_full_ticker(tok):
-            resolved[tok] = tok; continue                    # dual-mode passthrough — no Jev
-        prep = _ticker_prep(tok, scope, country, context)
-        if prep.get("_pending"):
-            prepped[tok] = prep
+            resolved[tok] = tok                              # dual-mode passthrough — no Jev / no retrieval
         else:
-            _record(tok, prep)                               # fast-path resolved / no_match — no Jev
+            concept_toks.append(tok)
+    if concept_toks:                      # 🆕 PARALLEL retrieval — independent /v1/stocks GETs, never a serial loop
+        mdx()                             # warm the cached httpx client before fan-out (dodge a first-create race)
+        with _futures.ThreadPoolExecutor(max_workers=min(8, len(concept_toks))) as ex:
+            preps = list(ex.map(lambda t: _ticker_prep(t, scope, country, context), concept_toks))
+        for tok, prep in zip(concept_toks, preps):
+            if prep.get("_pending"):
+                prepped[tok] = prep
+            else:
+                _record(tok, prep)                           # fast-path resolved / no_match — no Jev
     if prepped:                           # 🆕 BATCH — ALL pending tokens in ONE Jev call (was one call per token)
         qmap = {tok: {"instructions": _ticker_batch_instr(p), "options": p["options"]} for tok, p in prepped.items()}
         picks = _jev_picks(qmap, state_query="")
