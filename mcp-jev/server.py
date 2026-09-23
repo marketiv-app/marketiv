@@ -3507,8 +3507,10 @@ def _is_hs_code(s: str) -> bool:
     s = (s or "").strip()
     return bool(s) and s.replace(".", "").isdigit()
 
-def _resolve_hs(q: str, type: str = "goods", context: Optional[str] = None) -> dict:
-    """Resolve ONE good/service concept → the exact trade CODE (HS goods / EBOPS services) at the right supply stage.
+def _hs_prep(q: str, type: str = "goods", context: Optional[str] = None) -> dict:
+    """PREP (retrieval + exact passthrough + options + 4-digit roll-up) for an HS resolution — NO Jev. Returns a
+    TERMINAL dict (status set) or a `_pending` dict {jev_q, type, options, meta} to feed one/ batched Jev pick.
+    Resolve ONE good/service concept → the exact trade CODE (HS goods / EBOPS services) at the right supply stage.
     Mirrors _resolve_series: exact code → passthrough; else vector shortlist (/v1/ext/hs/find, full context:
     title+excludes+parent) → Jev pick (judged by `context`) + `__NONE__` → calibrated gate. Returns
     {status, query, code?, title?, parent_code?, confidence?, gate?, note?, candidates?}."""
@@ -3548,9 +3550,13 @@ def _resolve_hs(q: str, type: str = "goods", context: Optional[str] = None) -> d
     options["__NONE__"] = _HS_NONE_OPT
     jev_q = (f'Resolve the entity "{q}" as it is used in the user\'s request: "{context.strip()}"'
              if context and context.strip() and context.strip().lower() != q.strip().lower() else q)
-    r = _jev_pick(jev_q, _HS_RESOLVE_INSTR, options)
+    return {"_pending": True, "query": q, "jev_q": jev_q, "type": type, "options": options, "meta": meta}
+
+def _hs_finish(prep: dict, r: dict) -> dict:
+    """Gate + shape a Jev pick `r` for a prepared HS resolution — shared by the single and BATCH paths."""
+    q, meta, typ = prep["query"], prep["meta"], prep["type"]
     if r.get("pick") == "__NONE__":
-        return {"status": "no_match", "query": q, "reason": f"not a tradable {type} concept (Jev: none fit)",
+        return {"status": "no_match", "query": q, "reason": f"not a tradable {typ} concept (Jev: none fit)",
                 "confidence": r.get("confidence"), "candidates": []}
     gate = _jev_gate(r)
     pm = meta.get(r.get("pick"), {})
@@ -3566,27 +3572,57 @@ def _resolve_hs(q: str, type: str = "goods", context: Optional[str] = None) -> d
     reason = "different products or supply stages — confirm which" if gate == "reconfirm" else "no confident trade-code match"
     return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
 
+def _hs_batch_instr(prep: dict) -> str:
+    """Instructions for a BATCH HS pick entry — resolve instr + the entity/context (state.query is shared in a batch)."""
+    return _HS_RESOLVE_INSTR + "\n\nRESOLVE THE ENTITY DESCRIBED HERE: " + prep["jev_q"]
+
+def _resolve_hs(q: str, type: str = "goods", context: Optional[str] = None) -> dict:
+    """Resolve ONE good/service concept → the exact trade CODE (SINGLE path — unchanged): prep → one Jev pick → gate."""
+    prep = _hs_prep(q, type, context)
+    if not prep.get("_pending"):
+        return prep
+    r = _jev_pick(prep["jev_q"], _HS_RESOLVE_INSTR, prep["options"])
+    return _hs_finish(prep, r)
+
 def _hs_codes_arg(vals, type: str = "goods", context: Optional[str] = None):
-    """Plural — resolve a list/CSV of trade `codes` args → (codes:list, confirm|None, detail). A numeric token passes
-    through (exact HS/EBOPS code); a concept → `_resolve_hs`; ANY pending → ONE batched reconfirm (kind='hs')."""
+    """Plural — resolve a list/CSV of trade `codes` → (codes:list, confirm|None, detail). A numeric token passes through;
+    concepts are resolved in ONE batched Jev call with their retrievals fanned out in parallel; ANY pending → ONE
+    batched reconfirm (kind='hs'). Token order preserved in the output."""
     if not vals:
         return [], None, {}
     toks = [str(t).strip() for t in (vals if isinstance(vals, list) else str(vals).split(",")) if str(t).strip()]
-    out, detail, pend = [], {}, {}
-    for tok in toks:
-        if _is_hs_code(tok):
-            out.append(tok); continue
-        r = _resolve_hs(tok, type=type, context=context)
+    detail, pend, resolved = {}, {}, {}   # resolved: tok -> code (preserves input order at assembly)
+    def _record(tok, r):
         if r["status"] == "resolved":
-            out.append(r["code"]); detail[tok] = {"code": r.get("code"), "title": r.get("title"), "gate": r.get("gate")}
+            resolved[tok] = r["code"]; detail[tok] = {"code": r.get("code"), "title": r.get("title"), "gate": r.get("gate")}
         else:
             pend[tok] = {"kind": "hs", "status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])}
+    prepped, concept_toks = {}, []
+    for tok in toks:
+        if _is_hs_code(tok):
+            resolved[tok] = tok                              # exact code — dual-mode passthrough, no retrieval/Jev
+        else:
+            concept_toks.append(tok)
+    if concept_toks:                      # 🆕 PARALLEL retrieval — independent /v1/ext/hs/find GETs, no serial loop
+        mdx()
+        with _futures.ThreadPoolExecutor(max_workers=min(8, len(concept_toks))) as ex:
+            preps = list(ex.map(lambda t: _hs_prep(t, type, context), concept_toks))
+        for tok, prep in zip(concept_toks, preps):
+            if prep.get("_pending"):
+                prepped[tok] = prep
+            else:
+                _record(tok, prep)                           # exact passthrough / no_match — no Jev
+    if prepped:                           # 🆕 BATCH — ALL pending concepts in ONE Jev call (was one per token)
+        qmap = {tok: {"instructions": _hs_batch_instr(p), "options": p["options"]} for tok, p in prepped.items()}
+        picks = _jev_picks(qmap, state_query="")
+        for tok, p in prepped.items():
+            _record(tok, _hs_finish(p, picks.get(tok) or {}))
     if pend:
         return [], {"needs_confirmation": True, "resolved": detail, "confirm": pend,
                     "_guide": "A product/service isn't a unique trade code — pick a `code` from candidates (mind the "
                               "SUPPLY STAGE: ore vs refined), or refine the concept / add `context`, then re-call (a "
                               "numeric HS/EBOPS code passes straight through)."}, detail
-    return out, None, detail
+    return [resolved[t] for t in toks if t in resolved], None, detail
 
 @mcp.tool(name="search_trade", title="Trade Flows Over Time", annotations=_RO)
 def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO / M49 (`Thailand`/`THA`/`764`); resolved server-side.")],
