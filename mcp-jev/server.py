@@ -780,9 +780,12 @@ def _ticker_none(scope: tuple) -> str:
         "symbol, commodity, crypto, FX, bond/rate, or ETF that DOES match a candidate of an ACCEPTED class must "
         "resolve to that candidate, never to NONE.")
 
-def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = None,
-                    context: Optional[str] = None) -> dict:
-    """Resolve ONE entity (company name / bare symbol / alias / non-English name) → the exact MarketDX ticker,
+def _ticker_prep(q: str, scope: tuple = ("stock",), country: Optional[str] = None,
+                 context: Optional[str] = None) -> dict:
+    """PREP (retrieval + fast-path + Jev options) for a ticker resolution — NO Jev call. Returns a TERMINAL dict
+    (status set: fast-path `resolved` / `no_match`) when no decision is needed, else a `_pending` dict
+    {jev_q, scope, options, meta} to feed ONE _jev_pick (single) or a batched _jev_picks (plural).
+    Resolve ONE entity (company name / bare symbol / alias / non-English name) → the exact MarketDX ticker,
     SCOPED to asset `scope`. RETRIEVAL uses `q` (the ENTITY — a company name passes native; a commodity/sector
     concept must be English, per the field contract). `context` = the user's FULL request; it is what JEV judges
     with, so it can tell which candidate the entity means ('apple' the company vs the fruit-commodity). Flow: full
@@ -836,7 +839,11 @@ def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = 
     # context → fall back to the bare entity (still resolves the dominant reading).
     jev_q = (f'Resolve the entity "{q}" as it is used in the user\'s request: "{context.strip()}"'
              if context and context.strip() and context.strip().lower() != q.strip().lower() else q)
-    r = _jev_pick(jev_q, _ticker_instr(scope), options)
+    return {"_pending": True, "query": q, "jev_q": jev_q, "scope": scope, "options": options, "meta": meta}
+
+def _ticker_finish(prep: dict, r: dict) -> dict:
+    """Gate + shape a Jev pick `r` for a prepared ticker resolution — shared by the single and BATCH paths."""
+    q, meta = prep["query"], prep["meta"]
     if r.get("pick") == "__NONE__":
         return {"status": "no_match", "query": q, "reason": "not a listed company matching the query (Jev: none fit)",
                 "confidence": r.get("confidence"), "candidates": []}
@@ -853,6 +860,21 @@ def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = 
         return out
     reason = "same name/symbol across markets or entities — confirm which" if gate == "reconfirm" else "no confident company match"
     return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
+
+def _ticker_batch_instr(prep: dict) -> str:
+    """Instructions for a BATCH pick entry — scope instr + the entity/context (state.query is shared in a batch,
+    so the per-entity signal moves into each question's instructions; parity-verified vs the single form)."""
+    return _ticker_instr(prep["scope"]) + "\n\nRESOLVE THE ENTITY DESCRIBED HERE: " + prep["jev_q"]
+
+def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = None,
+                    context: Optional[str] = None) -> dict:
+    """Resolve ONE entity → the exact MarketDX ticker (SINGLE path — behavior unchanged): prep → one Jev pick →
+    gate. Returns {status: resolved|reconfirm|no_match, query, ticker?, name?, confidence?, gate?, note?, candidates?}."""
+    prep = _ticker_prep(q, scope, country, context)
+    if not prep.get("_pending"):
+        return prep
+    r = _jev_pick(prep["jev_q"], _ticker_instr(scope), prep["options"])
+    return _ticker_finish(prep, r)
 
 # ── TICKER-ARG collapse (find_stock → its consumers). Per-consumer SCOPE = the asset classes that tool legitimately
 #    accepts. Verified from live /v1/stocks `type` values: stock (INCLUDES bond-yield .GB + money-market rate .MM),
@@ -903,21 +925,32 @@ def _tickers_arg(vals, scope=_SCOPE_PRICED, country=None, context=None):
     the rest resolve (each disambiguated by the shared `context` = the user's full request); ANY pending token → ONE
     batched reconfirm (return WITHOUT querying). Mirrors financials' tk_pending walk so a watchlist resolves in one shot."""
     toks = [str(t).strip() for t in (vals if isinstance(vals, list) else str(vals).split(",")) if str(t).strip()]
-    out, detail, pend = [], {}, {}
-    for tok in toks:
-        if _is_full_ticker(tok):
-            out.append(tok); continue
-        r = _resolve_ticker(tok, scope=scope, country=country, context=context)
+    detail, pend, resolved = {}, {}, {}   # resolved: tok -> ticker (preserves input order at assembly)
+    def _record(tok, r):
         if r["status"] == "resolved":
             det = {"ticker": r.get("ticker"), "confidence": r.get("confidence"), "gate": r.get("gate")}
             if r.get("note"): det["note"] = r["note"]
-            out.append(r["ticker"]); detail[tok] = det
+            resolved[tok] = r["ticker"]; detail[tok] = det
         else:
             pend[tok] = {"kind": "ticker", "status": r["status"], "reason": r.get("reason"),
                          "candidates": r.get("candidates", [])}
+    prepped = {}                          # tok -> prep needing a Jev decision
+    for tok in toks:
+        if _is_full_ticker(tok):
+            resolved[tok] = tok; continue                    # dual-mode passthrough — no Jev
+        prep = _ticker_prep(tok, scope, country, context)
+        if prep.get("_pending"):
+            prepped[tok] = prep
+        else:
+            _record(tok, prep)                               # fast-path resolved / no_match — no Jev
+    if prepped:                           # 🆕 BATCH — ALL pending tokens in ONE Jev call (was one call per token)
+        qmap = {tok: {"instructions": _ticker_batch_instr(p), "options": p["options"]} for tok, p in prepped.items()}
+        picks = _jev_picks(qmap, state_query="")
+        for tok, p in prepped.items():
+            _record(tok, _ticker_finish(p, picks.get(tok) or {}))
     if pend:
         return [], {"needs_confirmation": True, "resolved": detail, "confirm": pend, "_guide": _TICKER_CONFIRM_GUIDE}, detail
-    return out, None, detail
+    return [resolved[t] for t in toks if t in resolved], None, detail
 
 # ── FSPATTERN resolution — the find_fspattern refactor: SHAPE axis (the temporal pattern to screen on), same
 #    vector→Jev→gate pattern as _resolve_fsconcept. Resolver picks the SHAPE only; its `params` (threshold/N/…)
