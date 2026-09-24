@@ -1017,8 +1017,8 @@ def _resolve_fspattern(q: str) -> dict:
         desc = f"[{c.get('kind', 'pattern')}] {c.get('label', '')}."
         if c.get("definition"):
             desc += " " + c["definition"]
-        if c.get("basis_hint"):
-            desc += f" (basis: {c['basis_hint']})"
+        # (basis_hint intentionally NOT shown: the period type is the separate `basis` field — letting it steer the
+        #  pattern pick made "3 quarters in a row" resolve to a latest-quarter pattern instead of consecutive_growth.)
         options[pat] = desc
         meta[pat] = {"pattern": pat, "kind": c.get("kind"), "label": c.get("label"), "params": c.get("params")}
     options["__NONE__"] = _FSPATTERN_NONE_OPT
@@ -2700,7 +2700,8 @@ class ScreenCondition(BaseModel):
     threshold: Optional[float] = Field(None, description="The number for `above`/`below`. 🔴 `above`/`below` are ABSOLUTE-level screens and REQUIRE a threshold — there is NO server default (above 15? 20? is arbitrary), so a bare `above`/`below` with no number 400s. So: if the USER stated a number ('P/E above 15') → send it here. If the user gave only a VAGUE quality word ('quality', 'high ROE', 'cheap') with NO number → do NOT use `above`/`below`; use the COHORT pattern `above_average` / `below_average` instead (peer-relative, needs no number, has a real default = the cohort average). Only the cohort/percentile patterns (above_average, below_average, top_quartile, high, low…) may omit a number. Never invent a threshold. SCALE: a ratio/percent metric is a FRACTION — send 0.20 for 20% (roe, margins, growth, yields). (P/E, P/B, EV/EBITDA and coverage multiples are NOT fractions — send 15 for a P/E of 15.)")
     min: Optional[float] = Field(None, description="Lower bound for `between`.")
     max: Optional[float] = Field(None, description="Upper bound for `between`.")
-    N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window in YEARS for growth/consecutive patterns — supply ONLY when the user stated the span ('over the last 3 years' → 3). Omit otherwise; the server uses the pattern's default window.")
+    N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window = the NUMBER OF PERIODS of the chosen `basis` (YEARS by default; QUARTERS when basis='quarterly') for growth/consecutive patterns — supply ONLY when the user stated the span ('over the last 3 years' → 3; 'three quarters in a row' → 3 with basis='quarterly'). Omit otherwise; the server uses the pattern's default window.")
+    basis: Optional[Literal["annual", "quarterly", "ttm"]] = Field(None, description="WHICH PERIODS the condition is judged on. 🔴 OMIT unless the user named the period type — no basis = ANNUAL (the default for every pattern). Set 'quarterly' when the user says quarter / quarterly / QoQ / 'last quarter' / 'N quarters in a row'; 'ttm' when they say TTM / trailing twelve months / 'last 12 months'. It is a SEPARATE field from `pattern` — never pick a different pattern to express the period ('grew 3 quarters in a row' = pattern consecutive_growth + N:3 + basis:'quarterly'). If the pattern can't screen that basis (or the metric is a TTM snapshot like ROE/margins), the server screens on what it can and says so in `notes` — relay that note to the user.")
     percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
     total_change: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the CUMULATIVE change over the WHOLE N-year window, as a fraction: 1.0 = doubled (2×) or halved, 0.5 = +50% (grew) / −50% (fell). Use for 'grew/fell X TIMES over the period' — 'market cap doubled in 2 years' → {pattern:'compound_growth', N:2, total_change:1.0}. 🔴 NOT per-year — that's `cagr`. (Response returns BOTH change_total and cagr so you never guess.)")
     cagr: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the ANNUALIZED rate PER YEAR, as a fraction: 0.20 = 20%/yr. Use for 'grew/fell X% per year' — 'revenue compounding 15%/yr over 5y' → {pattern:'compound_growth', N:5, cagr:0.15}. 🔴 NOT the whole-window total — that's `total_change`.")
@@ -2747,6 +2748,10 @@ def _cond_to_api(c: ScreenCondition) -> dict:
     # high = top tail). Do NOT rename to min/max_percentile here — the catalog + executor now declare `percentile`, and
     # the old rename made a hinted `percentile` call 400 ("unknown param 'max_percentile'"). One name, all layers.
     if pct is not None: p["percentile"] = pct
+    # basis → the executor's A/Q/T (top-level field OR a nested params.basis — same forgiveness as the other values)
+    b = c.basis or np.get("basis")
+    if b:
+        p["basis"] = {"annual": "A", "quarterly": "Q", "ttm": "T"}.get(str(b).lower(), str(b).upper())
     d: dict = {"concept": c.concept, "pattern": c.pattern, "params": p}
     if c.vs_cohort: d["vs_cohort"] = c.vs_cohort
     return d
@@ -2792,8 +2797,10 @@ def screen_unified(
             "resolves each (no separate resolver step). e.g. roe>20% & 3y revenue "
             "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',N:3}] "
             "(or NL: [{concept:'return on equity',pattern:'above 20%'...}] resolves the same). "
-            "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `N` (in YEARS): 'PE declining over 2 years' → "
-            "{concept:'pe',pattern:'consecutive_decline',N:2}. This is SEPARATE from the TA leg's window_bars. "
+            "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `N` (periods of its `basis`; annual by default): "
+            "'PE declining over 2 years' → {concept:'pe',pattern:'consecutive_decline',N:2}; 'revenue up >20% three quarters "
+            "in a row' → {concept:'revenue',pattern:'consecutive_growth',N:3,threshold:0.2,basis:'quarterly'}. Omit `basis` "
+            "unless the user named quarter/TTM. This is SEPARATE from the TA leg's window_bars. "
             "Omit for a TA-only screen.")] = None,
         ta: Annotated[Optional[List[TaStep]], _d(
             "The TECHNICAL leg — a THEN chain of steps (usually ONE step). Each signal's `pattern` (the SHAPE) and its "
@@ -2884,7 +2891,7 @@ def screen_unified(
     leg with the OPPOSITE-direction options behaviour. 🔴 The OPTIONS leg is US-optionable-only (~557 names), so any
     screen using it is US-capped — say so. To rank by options signal strength pass sort='options'. Returns {universe, count, sort,
     results:[{head_listing_id, ticker, name, score, matched_legs:[…],
-              matched:{ta:{…what each signal filtered on}, fundamental:{…which value passed}},
+              matched:{ta:{…what each signal filtered on}, fundamental:{<metric>:{value, basis, window?, series?, periods?, period?}}},
               context:{ta:{rsi14/adx/…latest indicators}, fundamental:{…}}}], notes}.
     🔴 The per-leg subtree key == the leg NAME you sent == its `matched_legs` token: TA evidence is under
     `matched.ta` / `context.ta`, fundamental evidence under `matched.fundamental` / `context.fundamental`
@@ -2905,7 +2912,13 @@ def screen_unified(
     the daily chart / that timeframe isn't supported" off a `count:0` — that conclusion requires a 400. A zero just
     means: loosen the filter, widen `window_bars` (e.g. a rare MONTHLY crossover may not have fired in the last few
     bars — widen the window), or report honestly "no stock matches that right now." (Technicals are computed
-    market-wide across all timeframes — no coverage-gap disclaimer.)"""
+    market-wide across all timeframes — no coverage-gap disclaimer.)
+    🔴 FUNDAMENTAL exceptions — READ `notes` before concluding anything: a `notes` entry saying "insufficient history"
+    means the 0 is NOT ENOUGH DATA (e.g. too few quarters), not "nobody qualified" — tell the user that, don't report a
+    no-match. A note saying a basis "was not applied" / "screened on the annual basis instead" / "screened on TTM" means
+    the result is on THAT basis — say so when you present it. Each fundamental evidence value carries `basis`
+    (A=annual, Q=quarterly, T/TTM=trailing twelve months) and, for a window, `periods` (YYYY-MM, newest first) —
+    describe the numbers on the basis/periods they actually are."""
     _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
     # 🆕 SERVER-SIDE UNIFIED concept resolution (collapse find_gics + find_megatrend): `gics` / `exclude_gics` (and
     # each fundamental condition's `vs_cohort.gics`) may be a bare CODE **or** plain English ('biotech', 'AI',
