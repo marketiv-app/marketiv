@@ -332,7 +332,12 @@ def _bget(path: str, params: Optional[dict] = None) -> dict:
     """Backend GET → `.data`, with bounded retry+backoff on TRANSIENT 429/5xx/timeout (same `_retry` policy as
     the Jev calls). Use for the RESOLVER retrieval leg (the vector `/find` + `/v1/stocks` endpoints) so a
     momentary backend blip doesn't fail a resolution. A non-transient error (404/400/402) raises as before."""
-    return _retry(lambda: mdx()._get(path, params or {}).data, what="backend")
+    t0, ok = _time.time(), False
+    try:
+        out = _retry(lambda: mdx()._get(path, params or {}).data, what="backend"); ok = True
+        return out
+    finally:
+        _tlog("backend", path, t0, ok)
 
 def _ext(path: str, params: dict) -> dict:
     """Call a `/v1/ext/*` (HS/Comtrade) endpoint and RELAY a user-actionable failure as a friendly dict
@@ -380,6 +385,13 @@ import time as _time, random as _random, urllib.error as _uerr, concurrent.futur
 _RETRY_STATUS = {429, 500, 502, 503, 504, 529}   # transient — retry with backoff
 _RETRY_ATTEMPTS = 3
 
+def _tlog(kind: str, what: str, t0: float, ok: bool) -> None:
+    """One structured timing line per upstream call (stderr → Cloud Logging), so a slow MCP call can be attributed to
+    backend / Jev / its own overhead (2026-09-25: ~16s outliers while mdx-api served every screen in <=2.8s)."""
+    import sys
+    print(json.dumps({"timing": kind, "what": what, "ms": round((_time.time() - t0) * 1000), "ok": ok}),
+          file=sys.stderr, flush=True)
+
 def _retry(fn, *, what="upstream"):
     """Bounded retry+backoff for TRANSIENT upstream failures (429/5xx/timeout/conn). Runs INSIDE the user's
     request → capped (3 attempts, ≤8s/step). Honors `Retry-After`. NEVER retries a deterministic 4xx
@@ -418,7 +430,12 @@ def _jev_post(payload: dict, timeout: int) -> dict:
     def _do():
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return json.loads(r.read().decode("utf-8"))
-    return _retry(_do, what="jev")
+    t0, ok = _time.time(), False
+    try:
+        out = _retry(_do, what="jev"); ok = True
+        return out
+    finally:
+        _tlog("jev", ",".join(payload.get("questions", {}).keys()), t0, ok)
 
 def _pick_stats(a: dict) -> dict:
     """Shape ONE Jev choice answer → {pick, confidence, p1, p2, gap, probs}."""
@@ -1024,8 +1041,15 @@ def _resolve_fspattern(q: str) -> dict:
     options["__NONE__"] = _FSPATTERN_NONE_OPT
     r = _jev_pick(q, _FSPATTERN_RESOLVE_INSTR, options)
     if r.get("pick") == "__NONE__":
-        return {"status": "no_match", "query": q, "reason": "not a screenable temporal shape (Jev: none of the patterns fit)",
-                "confidence": r.get("confidence"), "candidates": []}
+        # Never hand back an EMPTY list: with nothing to choose from the client guesses (2026-09-25 smoke: "revenue
+        # growth" + `above` = a revenue LEVEL screen). Return the closest shapes — Jev's next-ranked, else the
+        # vector order — so the client can pick one or ask the user.
+        ranked = [k for k, _ in sorted(r.get("probs", {}).items(), key=lambda kv: kv[1], reverse=True) if k in meta]
+        ranked += [k for k in meta if k not in ranked]
+        return {"status": "no_match", "query": q,
+                "reason": "no single pattern clearly fits — pick the closest below (or ask the user which shape they mean)",
+                "confidence": r.get("confidence"),
+                "candidates": [{"pattern": meta[k]["pattern"], "kind": meta[k]["kind"], "label": meta[k]["label"]} for k in ranked[:5]]}
     gate = _jev_gate(r)
     pm = meta.get(r.get("pick"), {})
     top_cands = [{"pattern": meta[k]["pattern"], "kind": meta[k]["kind"], "label": meta[k]["label"], "prob": round(v, 3)}
@@ -3111,7 +3135,9 @@ def screen_unified(
         if dividend_min_cagr is not None: dv["min_cagr"] = dividend_min_cagr
         body["dividend"] = dv
     if sort: body["sort"] = sort
+    _t0 = _time.time()
     resp = mdx()._http._client.post("/v1/screen", json=body)
+    _tlog("backend", "/v1/screen", _t0, getattr(resp, "status_code", 0) < 400)
     _check(resp)
     data = resp.json()
     got = len(data.get("results", [])) if isinstance(data, dict) else 0
