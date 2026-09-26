@@ -504,6 +504,7 @@ def _jev_noul(query: str, instruction: str) -> float:
 _CONCEPT_NOUL_KEEP = 0.5   # coverage threshold (calibrate from probes)
 _CONCEPT_DIRECT_BAR = 0.65  # top coverage below this = an INDIRECT (last-resort / closest-home) match → flag it
 _CONCEPT_THEME_WIN = 0.75   # theme beats gics only if its top coverage ≥ this AND ≥ the top gics
+_GICS_HOME_MARGIN = 0.15   # a 2nd GICS home is kept only within this of the top home's coverage (retail 0.94/0.93 kept; banks' custody 0.62 dropped)
 
 _concept_cache: dict = {}   # normalized-English concept → resolved envelope (in-process; the query EMBED is already
                             # persistently cached backend-side in query_embedding_cache, so this only spares the Jev
@@ -590,6 +591,10 @@ def _resolve_concept_uncached(concept: str) -> dict:
                 i += 1
             anc = s1[: i - (i % 2)] or grp
             cov.append((anc, next((n for c, n, _ in items if c == anc), items[0][1]), max(p for _, _, p in items)))
+        # A second HOME must cover the concept about as well as the first; a group scoring well below the top is a
+        # name/wording overlap (a word shared with another industry), not another home of the concept.
+        top_p = max(p for _, _, p in cov)
+        cov = [c for c in cov if c[2] >= top_p - _GICS_HOME_MARGIN]
         final = []
         for code, name, pp in sorted(cov, key=lambda x: len(x[0])):   # shortest (broadest) first
             if not any(code != o[0] and code.startswith(o[0]) for o in final):
