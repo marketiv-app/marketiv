@@ -3476,6 +3476,10 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
 @mcp.tool(title="Screen Dividends", annotations=_RO)
 def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
                      gics: Annotated[Optional[str], _d(_GICS)] = None,
+                     exclude_gics: Annotated[Optional[str], _d("OPTIONAL — EXCLUDE a sector/industry from the screen "
+                                                               "(GICS code prefix e.g. '4010', OR plain English 'banks' — the "
+                                                               "server resolves the name). 'high-yield stocks but NOT banks' = "
+                                                               "exclude_gics='banks'. A stock with no GICS classification is KEPT.")] = None,
                      min_yield: Annotated[Optional[float], _d("Min dividend yield in PERCENT (3 = 3%).")] = None,
                      max_yield: Annotated[Optional[float], _d("Max yield % — guards against trap-tier yields.")] = None,
                      min_streak_years: Annotated[Optional[int], _d("Min no-cut streak years (0–10; caps at 10 = clean across the "
@@ -3495,12 +3499,13 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
     ("retail names with high dividend", "dividend aristocrats in the US", "Thai high-yield stocks"). Ranks
     the DIVIDEND-PAYING universe (all payers, NOT just news-covered) and — the whole point — hands you the
     RAW pieces to tell a real income name from a YIELD TRAP, so YOU judge (don't trust a headline yield).
-    🔴 MULTI-METRIC dividend asks (dividend AND low P/E AND exclude a sector AND healthy financials) belong in
-    screen_unified — a `fundamental` leg (pe / health / dividend_yield) + the `dividend_min_streak_years` /
-    `dividend_min_cagr` gate. THIS tool is the dividend SPECIALIST (yield ranking + no-cut streak + yield-trap
-    decomposition): it has NO P/E filter and `gics` only INCLUDES a sector (it can't EXCLUDE banks).
-      • Scope (≥1 REQUIRED): `country` (csv ISO-2) and/or `gics` (csv GICS CODE prefixes, e.g. '2550' retail).
-        Pass a sector as a CODE or plain English ('banks'); the server resolves it. Combine freely.
+    🔴 MULTI-METRIC dividend asks that also need P/E / financial-health legs (dividend AND low P/E AND healthy
+    financials) belong in screen_unified — a `fundamental` leg (pe / health / dividend_yield) + the
+    `dividend_min_streak_years` / `dividend_min_cagr` gate. THIS tool is the dividend SPECIALIST (yield ranking +
+    no-cut streak + yield-trap decomposition): it has NO P/E filter, but it DOES include AND exclude a sector —
+    `gics` INCLUDES, `exclude_gics` EXCLUDES ('high-yield but NOT banks' = exclude_gics='banks').
+      • Scope: `country` (csv ISO-2) and/or `gics` (csv GICS CODE prefixes, e.g. '2550' retail) to INCLUDE, and/or
+        `exclude_gics` to EXCLUDE a sector. Pass a sector as a CODE or plain English ('banks'); the server resolves it.
       • `order_by` = `yield` (default) | `streak` (reliability — longest clean run in our window) | `cagr`
         (fastest dividend growth). Filters: `min_yield`/`max_yield` (PERCENT, e.g. 3 = 3%; max guards against
         traps), `min_streak_years` (≤10, see below), `min_cagr` (%), `min/max_market_cap_usd`, `max_payout`
@@ -3526,7 +3531,16 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
                     "_guide": f"'{gics}' resolved to a curated THEME, not a GICS sector — screen_dividends screens by "
                               f"sector only. Use screen_unified(gics='{gics}') with a dividend gate for a theme scope."}
         gics = ",".join(_g) if _g else None
-    params = {"country": country, "gics": gics,
+    if exclude_gics:  # resolve name→GICS code(s) to EXCLUDE. gic-only (a theme can't be excluded here); theme-only → no-op with a note.
+        _xg, _xt, _xcf, _ = _scope_resolve(exclude_gics)
+        if _xcf: return _xcf
+        if _xt and not _xg:
+            return {"needs_confirmation": True, "not_a_sector": True, "query": exclude_gics,
+                    "_guide": f"'{exclude_gics}' resolved to a curated THEME, not a GICS sector — screen_dividends can only "
+                              f"EXCLUDE a GICS sector/industry. For a theme exclusion use screen_unified(exclude_gics='{exclude_gics}') "
+                              f"with a dividend gate."}
+        exclude_gics = ",".join(_xg) if _xg else None
+    params = {"country": country, "gics": gics, "exclude_gics": exclude_gics,
               "min_yield": min_yield, "max_yield": max_yield,
               "min_streak_years": min_streak_years, "min_cagr": min_cagr,
               "min_market_cap_usd": min_market_cap_usd, "max_market_cap_usd": max_market_cap_usd,
