@@ -1,0 +1,22 @@
+{
+  "set": "trade-collapse",
+  "note": "Blind test of the collapsed trade(mode, …) tool. NO hints about tool/param names — discover from the schema. KEY risk = mode-selection: 'a country's top PARTNERS' (top_partners) vs 'which COUNTRIES trade a product the most' (top_traders) vs 'a country's product flows OVER TIME' (flows) vs 'trade BALANCE' — these are easy to confuse. Judge (a) right mode, (b) reporter/codes/partner shaped sensibly (product may need HS resolution — use plain English / a resolver where the schema says the server resolves it), (c) a valid non-error result answering the RIGHT question.",
+  "cases": [
+    { "id": "t1", "question": "Show me US semiconductor exports over the last few years — how has the value trended?",
+      "acceptance": "A time-series of US semiconductor EXPORT flows (mode=flows, reporter=US, codes≈semiconductors HS, flow=export, a multi-year period). Returns values over time. FAIL if it returns a ranking or a single balance figure instead of a trend." },
+    { "id": "t2", "question": "Who are China's biggest trading partners?",
+      "acceptance": "China's top trading PARTNERS (mode=top_partners, reporter=CN). Returns a ranked list of partner COUNTRIES for China. FAIL if it ranks products, ranks countries-by-a-product (top_traders), or returns a time series." },
+    { "id": "t3", "question": "Which countries export the most copper?",
+      "acceptance": "A ranking of COUNTRIES by copper EXPORTS (mode=top_traders, codes≈copper, flow=export). 🔴 this ranks COUNTRIES for a product — NOT one country's partners (top_partners). Returns top exporter countries (Chile/Peru/etc plausible). FAIL if mode=top_partners or flows." },
+    { "id": "t4", "question": "What is the US trade balance with China?",
+      "acceptance": "The bilateral trade BALANCE US↔China (mode=balance, reporter=US, partner=CN). Returns a balance/surplus-deficit figure. FAIL if it returns flows-over-time or a partner ranking." },
+    { "id": "t5", "question": "Which countries are the largest importers of crude oil?",
+      "acceptance": "A ranking of COUNTRIES by crude-oil IMPORTS (mode=top_traders, codes≈crude oil, flow=import). FAIL if top_partners or wrong flow direction." },
+    { "id": "t6", "question": "How have Germany's car exports changed over time?",
+      "acceptance": "A time series of Germany's car EXPORT flows (mode=flows, reporter=DE, codes≈cars/vehicles, flow=export). FAIL if a ranking or balance." },
+    { "id": "t7", "question": "Does Japan run a trade surplus or deficit overall?",
+      "acceptance": "Japan's overall trade BALANCE (mode=balance, reporter=JP, no partner = total/world). Returns a surplus/deficit read. FAIL if flows or ranking." },
+    { "id": "t8", "question": "Who does Vietnam trade with the most?",
+      "acceptance": "Vietnam's top trading PARTNERS (mode=top_partners, reporter=VN). Ranked partner countries. FAIL if it ranks products or countries-by-a-product." }
+  ]
+}

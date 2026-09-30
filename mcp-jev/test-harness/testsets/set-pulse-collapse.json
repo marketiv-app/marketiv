@@ -1,0 +1,26 @@
+{
+  "set": "pulse-collapse",
+  "note": "Blind test of the collapsed pulse(kind, target) tool. NO hints about tool/param names — discover from the schema. The KEY risk is kind-selection: a commodity must NOT go to kind=asset, a bond/rate must NOT go to kind=asset, a sector must be kind=theme. Judge (a) the right kind was chosen, (b) target shaped sensibly, (c) a valid non-error pulse about the RIGHT subject came back.",
+  "cases": [
+    { "id": "p1", "question": "How is Nvidia doing lately — anything moving the stock?",
+      "acceptance": "A single-company pulse for NVDA (kind=asset). Returns a valid pulse (price/market read + news) about Nvidia specifically. FAIL if it routed the company through a theme/commodity kind or returned an error." },
+    { "id": "p2", "question": "Give me a read on the semiconductor sector right now.",
+      "acceptance": "A sector/theme pulse (kind=theme, target≈'semiconductors'). Returns a sector-level read (multiple players / theme aggregate), NOT a single stock and NOT a commodity. FAIL if kind=asset or an error." },
+    { "id": "p3", "question": "What's happening with gold?",
+      "acceptance": "A COMMODITY pulse (kind=commodity, target≈'gold'). 🔴 gold is a COMMODITY, not a company — must NOT be kind=asset. Returns a valid gold/metal read. FAIL if routed as an equity (kind=asset) or error." },
+    { "id": "p4", "question": "How are US 10-year Treasury yields moving, and what's the curve doing?",
+      "acceptance": "A BOND/RATE pulse (kind=bond, target≈'US 10Y' or 'US yield curve'). 🔴 a government-bond yield is NOT an equity — must NOT be kind=asset. Returns yields/curve read (bps, 2s10s). FAIL if kind=asset/commodity or error." },
+    { "id": "p5", "question": "What's the read on SOFR and short-term money-market rates?",
+      "acceptance": "A rate pulse (kind=bond, target≈'SOFR'). Money-market rate → the bond/rate kind. Returns a valid rate read. FAIL if kind=asset or error." },
+    { "id": "p6", "question": "Give me the current inflation picture in the US.",
+      "acceptance": "A macro pulse (kind=macro, target≈'inflation'). A macro DASHBOARD scope, not a ticker/theme. Returns inflation indicators. FAIL if kind=asset/theme or error." },
+    { "id": "p7", "question": "How's the US labor market / jobs looking?",
+      "acceptance": "A macro pulse (kind=macro, target≈'labor'). Returns labor-market indicators. FAIL if wrong kind or error." },
+    { "id": "p8", "question": "How is copper doing — supply/demand or price moves?",
+      "acceptance": "A commodity pulse (kind=commodity, target≈'copper'). Metal = commodity, not equity. Returns a valid copper read. FAIL if kind=asset or error." },
+    { "id": "p9", "question": "Give me a pulse on the clean-energy theme.",
+      "acceptance": "A theme pulse (kind=theme, target≈'clean energy'). Returns a theme-level read. FAIL if kind=asset/commodity or error." },
+    { "id": "p10", "question": "How is my portfolio doing overall?",
+      "acceptance": "A portfolio pulse (kind=portfolio). The client must first discover the caller's portfolio id (a list_portfolios-type tool) and pass it as target, then get an owner-scoped portfolio read. FAIL if it can't route to the portfolio kind or errors on a valid id." }
+  ]
+}

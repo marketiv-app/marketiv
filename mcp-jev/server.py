@@ -183,15 +183,11 @@ def _dt(desc: str):  # noqa: ANN201 — exact-ticker field
 # reaches for on a single-company ask (measured: clients try `ticker=` first, hit an error, retry with `tickers`).
 def _dts(desc: str):  # noqa: ANN201
     return Field(description=desc, validation_alias=AliasChoices("tickers", "ticker", "symbols", "symbol"))
-_TICKER = "A MarketDX ticker OR a plain company/asset NAME — the SERVER resolves it for you (no separate lookup step). " \
-    "🌐 LANGUAGE: a COMPANY / specific-asset NAME passes AS-IS in the user's own language (茅台/トヨタ/삼성 resolve " \
-    "natively — do NOT translate a proper name, translation risks a wrong match); but a generic COMMODITY / SECTOR " \
-    "CONCEPT must be ENGLISH (ทองคำ/黄金→'gold', 原油→'crude oil', 半導体→'semiconductors') — a raw non-English concept " \
-    "word DRIFTS and misses. 🔴 Pass the user's FULL request in `context` (any language) so the server can tell which " \
-    "'apple' you mean (the company vs the fruit-commodity), etc. If it's still genuinely ambiguous you get a " \
-    "`needs_confirmation` reconfirm listing candidates — settle it from your CONVERSATION context if obvious (re-call " \
-    "with the chosen exact ticker) or ASK the user, then re-call. An exact ticker passes straight through (mdx uses its " \
-    "OWN suffixes: Korea `.KO`, Taiwan `.TW`, commodities `.COMM`, crypto `.CC`, FX `.FOREX`, bonds `.GB`, rates `.MM`)."
+_TICKER = "A MarketDX ticker OR a company/asset NAME — the SERVER resolves it (no lookup step). A COMPANY/proper NAME " \
+    "passes AS-IS in any language (茅台/トヨタ/삼성 resolve natively — never translate a name); a generic COMMODITY/SECTOR " \
+    "concept must be ENGLISH (黄金→'gold', 原油→'crude oil'). Pass the user's full request in `context` to disambiguate " \
+    "('apple' company vs fruit); if still ambiguous you get a `needs_confirmation` with candidates — resolve from " \
+    "conversation or ask, then re-call. Exact tickers pass through (mdx suffixes: Korea .KO, Taiwan .TW, commodity .COMM, crypto .CC, FX .FOREX, bond .GB, rate .MM)."
 _TK_CONTEXT = "OPTIONAL but RECOMMENDED — paste the user's FULL request VERBATIM (any language: 'ขอราคาผลไม้ apple', " \
     "'compare Apple and Microsoft stock'). The server uses it to disambiguate which candidate each `ticker` entity " \
     "means (the apple COMPANY vs the fruit COMMODITY; which Samsung). One context per call, shared by all tickers here."
@@ -1333,33 +1329,20 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
           to: Annotated[Optional[str], _d(_TO)] = None,
           interval: Annotated[Optional[Literal["day","week","month"]], _d("Time-bucketing of the pulse series: `day`|`week`|`month`.")] = None,
           lang: Annotated[Optional[Literal["en","th","ja"]], _d("Translate title/brief_text: `en`|`th`|`ja`.")] = None) -> dict:
-    """The generalized ANALYST BRIEF — one composed "how is <scope> doing right now?" picture (pulse +
-    net direction, top_stories, winners/losers, aspect_heatmap, top_entities, top_assets) for ANY
-    AND-combination of scopes. ⭐ Use this to SUMMARIZE a SCOPE — a THEME, a news CATEGORY, a COUNTRY, a
-    SECTOR, or an aspect (NOT a raw article list → that's search_news/news_feed). ⛔ NOT for a single
-    COMPANY or a market INDEX/ticker: "how is the S&P / Nasdaq / AAPL doing?" → `options_sentiment`
-    (+ `stock_impact`/`news_feed`), because an index maps to an ETF asset (S&P→SPY), not a brief scope.
-    For a SECTOR × REGION ("how are European banks doing?") the quickest path is `theme_pulse(q='banks',
-    country=…)` (fans out, resolves the code for you). Use THIS (brief) when you want the ONE precise GICS
-    cohort with no fan-out, or an AND-combo: pass the sector as a code OR plain English —
-    `brief(gics='banks', country="GB,DE,FR,IT,ES,NL,CH,SE")` (enumerate the region's ISO-2s; server resolves the sector).
-    Scope by ≥1 of (each takes a CSV for multiple values):
-      • `news_type` — a news CATEGORY. Use ONLY these EXACT names (never invent one): product_tech,
-        ma_partnership, industry_thematic, earnings_results, corporate_action, management_governance,
-        analyst_rating, macro_economic, geopolitics, commodity_supply, regulatory_legal,
-        cybersecurity_digital_trust, digital_finance_tokenization, price_action_technical, crypto_related,
-        forex_related, analyst_forecast. ("สรุปข่าว commodity" → commodity_supply; central-bank/rates →
-        macro_economic — there is NO 'monetary_policy').
-      • `country` — an ISO-2 market. country='JP' → "how is Japan doing right now?".
-      • `aspect` — an impact CHANNEL. aspect='tariff' → "everything moving via tariffs".
-      • `gics` — a GICS sector/industry: a CODE prefix (sector 25 / group 2550 / industry 255010) OR plain English
-        ('banks'), often × country. 'European banks' = gics='banks' + country=EU codes (server resolves the sector).
-      • `megatrend` — a theme name/slug/plain-English concept (resolved server-side) or an int node id; CSV
-        for several. AND it with another scope here, or use `theme_summary` for a single NAMED theme.
-    Combine (AND): news_type='commodity_supply'+country='JP' = commodity news in Japan; gics='2550'+
-    country='GB,DE,FR,IT,ES,NL' = a European retail pulse. `window` = 7d/30d/90d/180d/1y/mtd/qtd/ytd (or
-    pass from_/to as ISO dates). ≥1 scope is REQUIRED (it never scans everything). ⚠️ News coverage starts
-    2026-01-01. `node`+`ripple` appear only when a SINGLE megatrend anchors the brief."""
+    """The generalized ANALYST BRIEF — one composed "how is <scope> doing right now?" picture (pulse + net direction,
+    top_stories, winners/losers, aspect_heatmap, top_entities, top_assets) for any AND-combination of scopes. ⭐ Use to
+    SUMMARIZE a scope (theme / news category / country / sector / aspect) — NOT a raw article list (that's
+    search_news/news_feed). ⛔ NOT for a single COMPANY or market INDEX ("how is AAPL / the S&P doing?" →
+    options_sentiment + stock_impact/news_feed; an index maps to an ETF, not a brief scope). For a sector×region the
+    quickest path is theme_pulse(q='banks', country=…); use brief for one precise GICS cohort or an AND-combo.
+    Scope by ≥1 of (CSV for several) — REQUIRED (never whole-market):
+      • `news_type` — a category; use ONLY these EXACT names: product_tech, ma_partnership, industry_thematic,
+        earnings_results, corporate_action, management_governance, analyst_rating, macro_economic, geopolitics,
+        commodity_supply, regulatory_legal, cybersecurity_digital_trust, digital_finance_tokenization,
+        price_action_technical, crypto_related, forex_related, analyst_forecast. (commodity→commodity_supply;
+        central-bank/rates→macro_economic — there is NO 'monetary_policy'.)
+      • `country` (ISO-2) · `aspect` (impact channel) · `gics` (code or plain English) · `megatrend` (theme name/id).
+    ⚠️ News coverage starts 2026-01-01. `node`+`ripple` appear only when a SINGLE megatrend anchors the brief."""
     # Runtime-sanitize news_type: the client can hallucinate a name (e.g. 'monetary_policy') → the API
     # hard-errors. Drop unknowns so the valid scope still returns; flag what we dropped.
     dropped = []
@@ -1412,6 +1395,13 @@ def search_news(q: Annotated[str, _dq("Free-text SEMANTIC news query — a topic
     results = _ser(mdx().news_search(q, entity_type=entity_type, collapse=collapse,
                                      from_=frm, to=to, limit=_lim(limit)).to_list())
     sims = [r.get("similarity") for r in results if isinstance(r.get("similarity"), (int, float))]
+    # RESULT COMPACTION: drop the `raw` full-article dump (duplicates brief_text/entities — ~29% of the payload)
+    # and any null/empty fields. No information the model needs is lost.
+    for r in results:
+        if isinstance(r, dict):
+            r.pop("raw", None)
+            for k in [k for k, v in r.items() if v in (None, "", [], {})]:
+                r.pop(k, None)
     top = max(sims) if sims else 0.0
     quality = "strong" if top >= _SIM_STRONG else ("weak" if top >= _SIM_WEAK else "none")
     note = _coverage_note(frm) or (None if quality == "strong" else (
@@ -1753,28 +1743,12 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
     note-quality failure; preserving structure OUTRANKS "distilling into a paragraph". (The figures are extracted
     from these markdown tables later for charts — so a clean table with clear headers is what makes that possible.)
 
-    CONTENT:
-      • `subject` — a short title you compose (≤200 chars).
-      • `body` — the substance to keep, in MARKDOWN. Make it stand alone, but PRESERVE the structure you showed:
-        every TABLE stays a markdown table (pipe syntax), headings stay headings. "Distill" = trim wording, NOT
-        collapse a table into a sentence. If the answer led with a table, the body leads with the same table.
-        Use clear ABSOLUTE column headers (`FY2025`, not `Latest`/`FY-1`) so the figures stay unambiguous.
-      • `summary` — a 1–2 sentence gist for scanning later.
-      • `note_type` — one of `reference` (concept/understanding) / `tracking` (dated market read) / `thesis` / `decision`.
-      • `category` — a free bucket, e.g. `research` / `portfolio` / `idea`.
-      • `tags` — a few keywords for retrieval.
+    CONTENT: `subject` (short title), `body` (MARKDOWN — keep tables as tables, absolute headers like `FY2025`),
+    `summary` (1–2 sentences), `note_type` (reference/tracking/thesis/decision), `category`, `tags` — see each field.
 
-    ENTITY LINKS — this is what makes the note findable later by interest and joinable to the graph, so
-    fill them whenever the note touches specific things. The server RESOLVES names for you (it canonicalizes and
-    links them, and reports what linked) — pass plain names, or reuse identifiers you already hold this turn:
-      • `stocks` — the stock(s)/asset(s) this note is ABOUT (its subjects) — an exact ticker (`005930.KO`,
-        `AAPL`) OR a plain NAME the server resolves (an ambiguous name comes back as a reconfirm to pick from).
-      • `mentioned_stocks` — stocks merely referenced, not the focus (same name-or-ticker resolution).
-      • `gics` — the note's INDUSTRY/SECTOR or THEME — a code OR plain English ('banks', 'semiconductors', 'AI');
-        the server resolves each and routes a curated theme to a megatrend link.
-      • `megatrend_ids` — ADVANCED: a raw node id you already hold (a theme tool's `megatrend.id`); normally you
-        don't set this — name the theme in `gics` instead.
-      • `portfolio_id` — if the note is about one of the user's portfolios (from `list_portfolios`).
+    ENTITY LINKS make the note findable + joinable to the graph — fill whenever the note touches specific things;
+    the server RESOLVES plain names for you. `stocks` (the subjects) · `mentioned_stocks` (referenced) · `gics`
+    (sector/theme, code or plain English) · `megatrend_ids` (advanced raw id) · `portfolio_id`.
 
     🧭 LINK THE NOTE'S HOME — the theme/sector, not just the stocks. If the note is about a TREND/tech/mechanism
     ("what is HBM", "solid-state batteries") or an established INDUSTRY/SECTOR ("retail", "airlines", "pharma"),
@@ -2026,7 +2000,6 @@ def _slim_context(ctx: dict) -> dict:
         c["positions"] = [{k: v for k, v in p.items() if k != "value_trend"} for p in c["positions"]]
     return c
 
-@mcp.tool(title="Asset Pulse", annotations=_RO)
 def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/index-ETF/crypto — for a COMMODITY use "
                                    "commodity_pulse, for a BOND/RATE use bond_pulse.")],
                 window: Annotated[Optional[str], _d(_WINDOW)] = None,
@@ -2218,7 +2191,6 @@ def _options_brief(o: Optional[dict]) -> dict:
             "key_dates": [{"expiry": d.get("expiry"), "dte": d.get("dte"), "read": d.get("read"),
                            "because": d.get("because")} for d in (s.get("key_dates") or [])]}
 
-@mcp.tool(title="Portfolio Pulse", annotations=_RO)
 def portfolio_pulse(portfolio_id: Annotated[int, _d(_PID)],
                     top_n: Annotated[int, _d("How many top holdings (by value) to analyze with market lenses (default 3, cap 5).")] = 3,
                     window: Annotated[Optional[str], _d(_WINDOW)] = None) -> dict:
@@ -2265,7 +2237,6 @@ def portfolio_pulse(portfolio_id: Annotated[int, _d(_PID)],
                    "covered=false → skip options for that name. Facts, not advice — hand the call back."),
     }
 
-@mcp.tool(title="Theme Pulse", annotations=_RO)
 def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY — 'semiconductors', 'banks', 'energy', "
                                           "'AI', 'clean energy', 'gold' — or SEVERAL comma-separated ('semiconductors,cloud') "
                                           "to read together in one call. ⛔ Do NOT put a COUNTRY or REGION in `q`: the "
@@ -2421,7 +2392,6 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
                    "options contradicting news breadth). Narrate options from its read/because for a non-expert."),
     }
 
-@mcp.tool(title="Commodity Pulse", annotations=_RO)
 def commodity_pulse(q: Annotated[str, _dq("A COMMODITY concept, in ENGLISH — translate first (ทองคำ/黄金→'gold', "
                                              "天然ガス/原油→'natural gas'/'crude oil', 铜→'copper'). Or pass a `SYMBOL.COMM` "
                                              "ticker to skip resolution. For a COMPANY use asset_pulse; a SECTOR → theme_pulse.")],
@@ -2609,28 +2579,19 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
                                                      "are currency-neutral anyway. A multi-company compare defaults to USD.")] = None,
                context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
                ) -> dict:
-    """⭐ Company FINANCIAL STATEMENTS — income / balance / cash-flow + auto-detected abnormality SIGNALS.
-    Read ONE company or COMPARE up to 8 (revenue, growth, margins, ROE, FCF…).
-    🔴 To compare/analyse SEVERAL companies, pass them ALL in ONE call (`tickers='TSLA.US,MSFT.US'`) — do NOT call once
-    per company; a single call aligns them on a common basis + currency and costs a fraction of N separate calls. Pick
-    ONE `period` per question too (quarterly figures ALREADY carry YoY vs the same quarter — no extra annual call needed).
-    Data is a clean, current, normalized
-    feed uniform across EVERY industry (banks, autos-with-captive-finance, insurance, REITs). 🎚 ONE dial = `fields`:
-    leave it EMPTY for the DIGEST (the safe, small default — headline + ratios + capital-return + signals; covers
-    most compares); set it only for specific line items, a whole statement ('income'|'balance'|'cashflow'), or 'all'.
-    ⏱ `period` picks the time window (5y / 2022 / 2022-2023 / 5q / 2024Q2), mapped to each company's fiscal year.
-    🌐 Cross-currency compares handled — `currency=USD` (auto for multi-company); totals convert at each period's DATE.
-    🗣 The digest carries a plain `read` — narrate margins/growth/FCF/ROE in everyday words. Facts, not advice.
-    🚩 The digest may carry `_notes` — deterministic per-period flags that a year's per-share/YoY figures aren't
-    comparable (share splits & share-class/Up-C re-bases, goodwill/asset impairments or divestitures, debt carve-outs,
-    one-period source misparses). The movement and its comparability WARNING are FACTS; each note's `likely_causes` is
-    an INFERRED guess at WHY — treat it as a lead to VERIFY, not a stated fact (research it before asserting a cause).
-    📏 LIMITS (relay them if the user asks beyond): ≤8 companies/call · ≤20 specific fields/call · ~4–5 years history.
-    A non-equity (ETF/commodity/bond/crypto) or unlisted name → that entry is `ok:false` (say financials don't apply).
-    🔴 `asset_pulse` on a stock ALREADY embeds the digest — call `financials` only for a DEDICATED read/compare, a
-    specific-`fields`/statement pull, or `all`, NOT as a second call right after asset_pulse.
-    💡 Prefer the digest first: unless the data would be too big (many companies × many years) or you need a line the
-    digest lacks, the empty-`fields` digest is safer and often gives extra useful context for free."""
+    """⭐ Company FINANCIAL STATEMENTS — income / balance / cash-flow + auto-detected abnormality signals. Read ONE
+    company or COMPARE up to 8 (revenue, growth, margins, ROE, FCF…), on a clean normalized feed uniform across every
+    industry (banks, insurers, REITs).
+    🔴 To compare SEVERAL, pass them ALL in ONE call (tickers='TSLA.US,MSFT.US') — a single call aligns them on a
+    common basis+currency and costs a fraction of N calls. Pick ONE `period` (quarterly already carries YoY).
+    🎚 `fields`: leave EMPTY for the DIGEST (small default — headline + ratios + capital-return + signals; covers most
+    compares); set it for specific line items, a whole statement ('income'|'balance'|'cashflow'), or 'all'.
+    ⏱ `period` = the window (5y / 2022 / 2022-2023 / 5q / 2024Q2), mapped to each fiscal year. 🌐 currency=USD (auto for
+    multi-company) converts totals at each period's date. 🗣 The digest carries a plain `read` (facts, not advice) and may
+    carry `_notes` (per-period comparability flags — the warning is FACT, each `likely_causes` is an inferred lead to VERIFY).
+    📏 LIMITS: ≤8 companies · ≤20 fields · ~4–5y history. A non-equity/unlisted entry → `ok:false`.
+    🔴 asset_pulse on a stock ALREADY embeds this digest — call financials only for a dedicated read/compare or a
+    specific fields/statement pull, not right after asset_pulse."""
     # accept both a comma-string and a JSON array for tickers/fields (LLMs reach for either) → normalize to string.
     if isinstance(tickers, list): tickers = ",".join(str(t) for t in tickers)
     if isinstance(fields, list): fields = ",".join(str(f) for f in fields)
@@ -2717,34 +2678,34 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
     return data
 
 class ScreenCondition(BaseModel):
-    """ONE AND-ed screen condition. COMMON form = a metric + a shape + its value: put the METRIC in `concept` and
-    the SHAPE in `pattern` — EACH may be an exact key OR plain natural language; the SERVER resolves it, so you
-    send them straight here (no separate resolver step). Then set the ONE value the
-    pattern needs. RELATION form (rare) = compare two metrics: set metricA + relation + metricB instead."""
-    # extra='forbid': the TOOL owns the param set — an unknown/typo'd field is rejected HERE with a clear error
-    # (naming the bad field), never silently dropped and run with a default. See mcp-tool-guidance-audit.
+    """ONE AND-ed condition. COMMON form = `concept` (the METRIC) + `pattern` (the SHAPE) + its value. RELATION form
+    (rare) = compare two metrics: metricA + relation + metricB. SHARED RULES for every text field below: send an exact
+    key OR plain English — the server resolves it (no separate resolver step); ENGLISH only; a metric's change-over-time
+    is a `pattern`, never part of `concept`. NUMBER SCALE: ratios/margins/yields/growth-rates are FRACTIONS (0.20 = 20%);
+    P/E, P/B, EV/EBITDA and coverage multiples are RAW (15 = a P/E of 15)."""
+    # extra='forbid': an unknown/typo'd field is rejected here with a clear error, never silently dropped.
     model_config = ConfigDict(extra="forbid")
-    concept: Optional[str] = Field(None, description="The METRIC itself — a statement line, ratio or valuation multiple: an exact key (pe, roe, net_margin, revenue, debt_to_equity, …) OR plain natural language ('return on equity', 'gross margin', 'accrued interest receivable'). The server resolves it. 🔴 Name ONLY the metric: how it CHANGES over time (growth, decline, change, trend, CAGR, streak) is never part of the concept — that goes in `pattern`. 🔴 ENGLISH.")
-    pattern: Optional[str] = Field(None, description="The SHAPE — how the metric is judged: its LEVEL (above, below, between, low, high, below_average …) or how it CHANGES (latest_yoy = its latest year-over-year growth rate, the default reading of a plain growth rate; consecutive_growth, compound_growth, accelerating …). An exact key OR plain natural language ('grew every year', 'margin contracting', 'above the sector average'). The server resolves it. 🔴 A growth / decline rate of a metric is a SHAPE of that metric, never a metric of its own: put the metric in `concept` and the growth wording here, with the rate in `threshold`. 🔴 ENGLISH.")
-    threshold: Optional[float] = Field(None, description="The number the pattern compares against: the metric's own LEVEL for `above`/`below`, or the GROWTH RATE for a growth pattern (latest_yoy, consecutive_growth …). 🔴 `above`/`below` are ABSOLUTE-level screens of the metric's value (never its growth rate) and REQUIRE a threshold — there is NO server default (above 15? 20? is arbitrary), so a bare `above`/`below` with no number 400s. So: if the USER stated a number ('P/E above 15') → send it here. If the user gave only a VAGUE quality word ('quality', 'high ROE', 'cheap') with NO number → do NOT use `above`/`below`; use the COHORT pattern `above_average` / `below_average` instead (peer-relative, needs no number, has a real default = the cohort average). Only the cohort/percentile patterns (above_average, below_average, top_quartile, high, low…) may omit a number. Never invent a threshold. SCALE: ratios, percentages and growth rates are FRACTIONS — send 0.20 for 20% (roe, margins, yields, and the rate of a growth pattern). (P/E, P/B, EV/EBITDA and coverage multiples are NOT fractions — send 15 for a P/E of 15.)")
+    concept: Optional[str] = Field(None, description="The METRIC (statement line / ratio / valuation multiple): pe, roe, net_margin, revenue, 'gross margin'.")
+    pattern: Optional[str] = Field(None, description="The SHAPE — a LEVEL (above, below, between, low, high, above_average, below_average) or a CHANGE (latest_yoy, consecutive_growth/decline, compound_growth, accelerating). NL ok ('grew every year','above the sector average').")
+    threshold: Optional[float] = Field(None, description="The number `above`/`below` (REQUIRED for them — no default) or a growth pattern compares against. If the user gave only a vague quality ('cheap','high ROE') with NO number, use a cohort pattern (above_average/below_average/low/high…) which needs none.")
     min: Optional[float] = Field(None, description="Lower bound for `between`.")
     max: Optional[float] = Field(None, description="Upper bound for `between`.")
-    N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window = the NUMBER OF PERIODS of the chosen `basis` (YEARS by default; QUARTERS when basis='quarterly') for growth/consecutive patterns — supply ONLY when the user stated the span ('over the last 3 years' → 3; 'three quarters in a row' → 3 with basis='quarterly'). Omit otherwise; the server uses the pattern's default window.")
-    basis: Optional[Literal["annual", "quarterly", "ttm"]] = Field(None, description="WHICH PERIODS the condition is judged on. 🔴 OMIT unless the user named the period type — no basis = ANNUAL (the default for every pattern). Set 'quarterly' when the user says quarter / quarterly / QoQ / 'last quarter' / 'N quarters in a row'; 'ttm' when they say TTM / trailing twelve months / 'last 12 months'. It is a SEPARATE field from `pattern` — never pick a different pattern to express the period ('grew 3 quarters in a row' = pattern consecutive_growth + N:3 + basis:'quarterly'). If the pattern can't screen that basis (or the metric is a TTM snapshot like ROE/margins), the server screens on what it can and says so in `notes` — relay that note to the user.")
-    measure: Optional[Literal["sequential", "yoy"]] = Field(None, description="QUARTERLY consecutive_growth ONLY — HOW each quarter's rise is measured. 'sequential' (default) = each quarter higher than the IMMEDIATELY PRIOR quarter (QoQ; what 'N quarters in a row' usually means). 'yoy' = each of the last N quarters higher than the SAME quarter ONE YEAR EARLIER. 🔴 Set 'yoy' when the user says the quarterly streak is year-over-year / YoY ('R&D up 3 quarters yoy'), 'sequential' or OMIT for a plain 'N quarters in a row'. Ignored on annual basis (annual growth is already year-over-year). If the quarterly history is too short to measure the requested one, the server returns fewer/no rows + notes insufficient data — it does NOT silently switch to the other measure.")
-    percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` — supply ONLY when the user named a tail size ('cheapest 10%' → 0.1). Omit otherwise; `low`/`high` default to the 20% tail. For a vague degree ('very cheap') prefer a degree token over a number.")
-    total_change: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the CUMULATIVE change over the WHOLE N-year window, as a fraction: 1.0 = doubled (2×) or halved, 0.5 = +50% (grew) / −50% (fell). Use for 'grew/fell X TIMES over the period' — 'market cap doubled in 2 years' → {pattern:'compound_growth', N:2, total_change:1.0}. 🔴 NOT per-year — that's `cagr`. (Response returns BOTH change_total and cagr so you never guess.)")
-    cagr: Optional[float] = Field(None, description="compound_growth / compound_decline ONLY — the ANNUALIZED rate PER YEAR, as a fraction: 0.20 = 20%/yr. Use for 'grew/fell X% per year' — 'revenue compounding 15%/yr over 5y' → {pattern:'compound_growth', N:5, cagr:0.15}. 🔴 NOT the whole-window total — that's `total_change`.")
-    vs_cohort: Optional[dict] = Field(None, description="RARELY needed — usually OMIT. For a cohort pattern (below_average/above_average) the benchmark DEFAULTS to your screening scope (the `universe`): 'retail stocks with P/E below average' = scope `universe` to retail (the `gics` param, code-or-plain-English) and OMIT this — 'below average' then means below the RETAIL average automatically. Set this ONLY to benchmark against a DIFFERENT group than you're screening (e.g. US retail vs the GLOBAL retail average). Shape: {gics?: a GICS code PREFIX string like '45' — NOT a boolean/flag; country?: ISO-2; size?: ['large'|'mid'|'small'|'micro']; stat?: 'pooled'(default)|'median'}. 🔴 EACH STOCK vs ITS OWN SECTOR (whole-market, mixed sectors, in ONE screen — a bank judged vs banks, a tech vs tech): set {own: true} (or {own:'gics_group'} / {own:'gics_industry'} for a finer grain than the default sector). Use `own` ONLY for that cross-sector 'each vs its own' case; to compare WITHIN a single sector, scope the `universe` to that sector and omit vs_cohort instead.")
-    metricA: Optional[str] = Field(None, description="RELATION form only: the first metric — an exact key OR plain English (a statement line, ratio, or valuation multiple); the server resolves it. To use its GROWTH RATE instead of its level, set metricA_stat='growth'.")
-    relation: Optional[str] = Field(None, description="RELATION form only — how metricA relates to metricB. One of: 'higher_than' (metricA ≥ multiple×metricB, i.e. the RATIO A/B ≥ multiple), 'lower_than' (metricA ≤ multiple×metricB), 'ratio_between' (min ≤ A/B ≤ max — A is between min and max as a fraction of B), 'ratio_near' (A/B ≈ target within ±band), 'growth_faster_than' / 'growth_slower_than' (metricA's multi-year CAGR vs metricB's). Param per relation: higher/lower_than→`multiple`; ratio_between→`min`+`max`; ratio_near→`target`(+`band`, default ±10%); the growth ones take none. The bound `k` is just the number in `A vs k×B` — a FRACTION when you mean 'A is k% OF B' (0.15 = 15% of revenue), or a DIRECT ratio when the two operands are already comparable and you want A vs a multiple of B (k=1 for 'A ≤ B'; k=2 for 'A ≥ 2×B'). Operands are compared in their OWN units (e.g. a growth-rate operand is a PERCENT: 25 for 25%), so a plain-number metric vs a percent metric needs NO rescaling of k.")
-    metricB: Optional[str] = Field(None, description="RELATION form only: the second metric — an exact key OR plain English (same vocabulary as metricA); the server resolves it. Set metricB_stat='growth' to compare against its GROWTH RATE instead of its level.")
-    metricA_stat: Optional[str] = Field(None, description="RELATION form: how to read metricA — 'level' (default) or 'growth' (its N-year growth rate as a percent, e.g. 25 for 25%). Use 'growth' to build value-vs-growth ratios like PEG: {metricA:'pe', relation:'lower_than', metricB:'eps_diluted', metricB_stat:'growth', multiple:1} = P/E ÷ earnings-growth% ≤ 1. N (default 3) sets the window.")
-    metricB_stat: Optional[str] = Field(None, description="RELATION form: how to read metricB — 'level' (default) or 'growth' (its N-year growth rate as a percent). See metricA_stat.")
-    multiple: Optional[float] = Field(None, description="RELATION bound k for higher_than/lower_than — compares metricA to k×metricB (default 1 = plain metricA vs metricB). It is the raw number in 'A vs k×B', NOT always a fraction: use a FRACTION only when you mean 'A is k% OF B' ('R&D ≥ 15% of revenue' → metricA=rnd, higher_than, metricB=revenue, multiple=0.15; 'debt ≤ half of equity' → multiple=0.5); use a DIRECT ratio when the operands are already comparable ('cash ≥ 2× debt' → multiple=2; 'A ≤ B' → multiple=1). Each operand is in its OWN units (a growth-rate operand is a PERCENT, e.g. 25 for 25%), so do NOT rescale k to reconcile units. Ignored by growth_faster/slower_than.")
-    target: Optional[float] = Field(None, description="RELATION `ratio_near` only: the ratio A/B to sit near, as a FRACTION (0.15 = ~15% of metricB). 'capex around 8% of revenue' → metricA=capex, ratio_near, metricB=revenue, target=0.08.")
-    band: Optional[float] = Field(None, description="RELATION `ratio_near` only: half-width tolerance as a FRACTION of target (default 0.10 = accept target ±10%). Omit unless the user named a tightness.")
-    params: Optional[dict] = Field(None, description="Fallback ONLY — prefer the top-level threshold/min/max/N/percentile/multiple above. If you nest the value here ({threshold:…}) it's still read.")
+    N: Optional[int] = Field(None, validation_alias=AliasChoices("N", "n"), description="Window = number of `basis` periods for growth/consecutive patterns (default years; quarters if basis='quarterly'). Supply only when the user stated the span; else the pattern's default.")
+    basis: Optional[Literal["annual", "quarterly", "ttm"]] = Field(None, description="Period type — default annual; set 'quarterly' (QoQ / 'N quarters in a row') or 'ttm' only when the user named it. Separate from `pattern`; if unsupported the server screens what it can and notes it.")
+    measure: Optional[Literal["sequential", "yoy"]] = Field(None, description="Quarterly consecutive_growth only: 'sequential' (default, QoQ) or 'yoy' (each quarter vs the same quarter a year earlier).")
+    percentile: Optional[float] = Field(None, description="Tail fraction for `low`/`high` ('cheapest 10%' → 0.1); default 0.2. Supply only when the user named a tail size.")
+    total_change: Optional[float] = Field(None, description="compound_growth/decline only: CUMULATIVE change over the N-period window as a fraction (1.0 = doubled/halved, 0.5 = +50%/−50%). 'doubled in 2y' → N:2, total_change:1.0. NOT per-year (that's cagr).")
+    cagr: Optional[float] = Field(None, description="compound_growth/decline only: ANNUALIZED rate per year as a fraction ('15%/yr over 5y' → N:5, cagr:0.15). NOT the whole-window total (that's total_change).")
+    vs_cohort: Optional[dict] = Field(None, description="RARE — usually OMIT (a cohort pattern defaults to your `universe` scope). Set only to benchmark vs a DIFFERENT group: {gics?:code-prefix, country?:ISO-2, size?:[tiers], stat?:'pooled'|'median'}. For each stock vs ITS OWN sector in a mixed universe set {own:true} (or {own:'gics_group'|'gics_industry'} for finer grain).")
+    metricA: Optional[str] = Field(None, description="RELATION form: first metric. Its GROWTH RATE instead of level → metricA_stat='growth'.")
+    relation: Optional[str] = Field(None, description="RELATION form — metricA vs metricB: higher_than/lower_than (A vs multiple×B), ratio_between (min≤A/B≤max), ratio_near (A/B≈target ±band), growth_faster_than/growth_slower_than (CAGRs). Param: higher/lower→multiple; ratio_between→min+max; ratio_near→target(+band); growth→none. e.g. 'R&D ≥15% of revenue' → metricA=rnd, higher_than, metricB=revenue, multiple=0.15.")
+    metricB: Optional[str] = Field(None, description="RELATION form: second metric. Its GROWTH RATE → metricB_stat='growth'.")
+    metricA_stat: Optional[str] = Field(None, description="RELATION: read metricA as 'level' (default) or 'growth' (its N-year growth %, N default 3).")
+    metricB_stat: Optional[str] = Field(None, description="RELATION: read metricB as 'level' (default) or 'growth'.")
+    multiple: Optional[float] = Field(None, description="RELATION higher/lower_than bound k in 'A vs k×B' (default 1): a FRACTION for 'A is k% OF B' (0.15), a direct ratio otherwise (2 = 2×). Ignored by growth_faster/slower_than.")
+    target: Optional[float] = Field(None, description="RELATION ratio_near: the A/B ratio to sit near, a FRACTION (0.08 = ~8% of B).")
+    band: Optional[float] = Field(None, description="RELATION ratio_near: half-width tolerance as a fraction of target (default 0.10 = ±10%).")
+    params: Optional[dict] = Field(None, description="Fallback only — prefer the top-level fields; a nested value here is still read.")
 
 
 def _cond_to_api(c: ScreenCondition) -> dict:
@@ -2799,12 +2760,12 @@ class TaSignal(BaseModel):
     """ONE technical signal = a SHAPE (`pattern`) + its operand LINES (`a`/`b`). Each is a key/token OR plain
     English — the SERVER resolves each."""
     model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
-    pattern: str = Field(..., description="The chart SHAPE — an exact pattern key OR plain English ('golden cross', 'breaking out of a squeeze', 'rolling over'); the server resolves it. 🔴 ENGLISH. Volatility-squeeze family (all OPERAND-FREE) — 🔴 you almost never need to CHAIN these; there are exactly TWO clean single-anchor intents: (1) 'which stocks are COILING / very quiet NOW' → `bb_squeeze` with a SHORT `window_bars` (e.g. 3); each hit carries a strength 0..1 where ~1.0 = the tightest coil. (2) 'coiled THEN broke out UP/DOWN' → `squeeze_fired_up` / `squeeze_fired_dn` — these are SELF-CONTAINED (a squeeze necessarily precedes its fire), so use ONE as the anchor; do NOT build a two-step `squeeze THEN fire` chain (it needs the coil and the release to hold at the same bar and returns 0). `ttm_squeeze` / `volatility_squeeze` = the narrow Bollinger-INSIDE-Keltner (TTM/Carter) variant — use only when the user names TTM/Keltner. `squeeze_started` is advanced (a bare coil-start bar) — prefer bb_squeeze / squeeze_fired_up above. More operand-free shortcuts: `kumo_squeeze` / `kumo_expand` (ichimoku cloud thinning/thickening) and `near_ma` (price pulled back to a moving average — defaults to the 200-day; pass b='ema50'/'sma200' for another). The generic `squeeze`/`converge`/`expand` REQUIRE operands a+b and cover the same plus a MA pair (ema50/ema200…), macd, BOLLINGER BANDS (a='bb_upper', b='bb_lower'), ICHIMOKU tenkan/kijun, and PRICE-vs-MA (a='close', b='ema200') — prefer the operand-free shortcuts above when they fit. 52-week range: `at_new_high` / `near_high` / `at_new_low` / `near_low` (operand-free; near_* takes optional b=tolerance fraction) and `off_high_by` (drawdown from the 52w peak, b=fraction e.g. 0.30 — peak→now, NOT net_change's start→now). Volume: `volume_spike` (one-bar surge) and `rising_volume` (climbing N bars, set for_bars). Oscillator BAND: for 'RSI between 40 and 50' (or any oscillator inside a numeric band) use the SINGLE pattern `in_range` with a='rsi' and b='40-50' — ONE condition, do NOT AND two above/below steps (a=oscillator, b='lo-hi'; optional for_bars = held N bars in the band). Full set: crossover_up, crossover_down, touch_up, touch_down, above, below, overbought, oversold, in_range, rising, falling, ttm_squeeze, bb_squeeze, squeeze_started, squeeze_fired, squeeze, converge, expand, divergence_bull, divergence_bear, volume_spike, rising_volume, volume_dryup, net_change_up, net_change_down, at_new_high, near_high, at_new_low, near_low, off_high_by.")
-    a: Optional[str] = Field(None, description="Operand A (the SUBJECT line) — an exact token (close/ema50/rsi/macd_line) OR plain English ('the 50-day average', 'trend strength', 'the fast stochastic'); the server resolves either. For a cross/touch: the ACTIVE line that moves (two MAs → the FASTER/shorter; price-vs-MA → 'close'). For an above/below STATE: read it literally as 'a is above/below b' — 'price above the 200-day' → a='close', b='ema200'; 'the 50-day above the 200-day' → a='ema50', b='ema200'. Oscillator-vs-level → the oscillator (rsi, stoch_k, macd_line). Pass the EXACT indicator+period the user asked even if non-standard (ema45, sma150, rsi7) — the server snaps to the nearest supported line and returns a note; do NOT pre-round. Omit for operand-free patterns (volume_spike, rising_volume, divergence_bull/bear, overbought, oversold, ttm/squeeze transitions, the 52-week range patterns). Tokens: close, ema<n>, sma<n>, rsi, macd_line, macd_signal, stoch_k, adx, bb_upper, bb_lower, senkou_a, senkou_b, tenkan, kijun. If unsure which line a phrase means (e.g. 'volatility' → atr, 'trend strength' → adx, 'the 30-day average' → ema30, 'the cloud' → senkou_a/senkou_b), just send the plain-English phrase — the server resolves it; do not guess a token.")
-    b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line (a token/English, server-resolved) OR a numeric level being crossed/referenced. Two moving averages → the SLOWER (longer). Oscillator-vs-level → the level as a string ('0','30','70'). MACD-vs-signal → 'macd_signal'. 🔴 For a NET-RETURN pattern (net_change_up/net_change_down / price_up_over / price_down_over), `b` = the move MAGNITUDE as a FRACTION: 30% → '0.30' (NOT '30'). Omit if the pattern has no reference.")
-    for_bars: Optional[int] = Field(None, description="Require a state/level to have HELD for at least this many CONSECUTIVE bars of the timeframe (e.g. 'above the 200-day for a month' on a daily chart ≈ 20 bars). ⚠️ For rising/falling this is a RUN-LENGTH, not a lookback window. NOT valid on net_change / crossover / divergence (the server ERRORS) — for 'within the last N bars' use `window_bars`, not for_bars.")
-    window_bars: Optional[int] = Field(None, description="PER-SIGNAL lookback window in BARS of the timeframe — 'this condition holds WITHIN the last N bars' (recency); for a net-return pattern it is the PERIOD the return is measured over ('dropped 30% over 100 days' → window_bars=100). USE THIS to give conditions DIFFERENT windows in one screen: 'RSI crossed 80 within 20 days AND price dropped 30% over 100 days' → {crossover_up, window_bars:20} + {net_change_down b:'0.30', window_bars:100}. Omit → the screen-level window_bars default. DISTINCT from for_bars (how long a state has HELD; recency vs duration).")
-    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart timeframe — 1=daily, 2=weekly, 3=monthly. Use to MIX timeframes in ONE screen (multi-timeframe): put it on a QUALIFIER so that condition is checked on its OWN chart while the anchor stays on the screen-level `timeframe`. e.g. 'weekly holds above the 50-week AND daily just crossed up' → screen timeframe=1 (daily), anchor={crossover_up, a:'ema50', b:'ema200'}, qualifier={above, a:'close', b:'ema50', timeframe:2}. Operand periods are BARS of THIS timeframe (a '50-week MA' on weekly = a 50-bar MA → ema50). Omit → the screen-level `timeframe`. ⚠️ On an ANCHOR it must equal the screen-level `timeframe` (the anchor defines the driver chart) — a mismatch 400s; put the cross-timeframe test in a qualifier.")
+    pattern: str = Field(..., description="The chart SHAPE — a pattern key or plain English ('golden cross','breaking out of a squeeze'), server-resolved. Common: crossover_up/down, touch_up/down, above/below/in_range, overbought/oversold, rising/falling, bb_squeeze (coiling now) / squeeze_fired_up/dn (coiled-then-broke, SELF-CONTAINED — use as the anchor, don't chain squeeze-THEN-fire), converge/expand, divergence_bull/bear, volume_spike/rising_volume/volume_dryup, net_change_up/down, 52-week at_new_high/near_high/at_new_low/near_low/off_high_by, near_ma. Squeeze/52-week/volume/divergence are OPERAND-FREE (omit a/b). Oscillator band ('RSI 40-50') = ONE in_range (a='rsi', b='40-50').")
+    a: Optional[str] = Field(None, description="Operand A (SUBJECT line) — a token (close/ema50/rsi/macd_line/adx/stoch_k/bb_upper/senkou_a/tenkan…) or plain English, server-resolved. Cross/touch: the ACTIVE line (two MAs → the faster; price-vs-MA → 'close'). above/below read literally 'a is above/below b' ('price above the 200-day' → a='close',b='ema200'). Non-standard periods (ema45,rsi7) snap to the nearest. Omit for operand-free patterns.")
+    b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line (token/English) or a numeric level as a string (oscillator-vs-level → '30'/'70'; MACD-vs-signal → 'macd_signal'; two MAs → the slower). For a net-return pattern (net_change_up/down), b = the move magnitude as a FRACTION ('0.30' = 30%). Omit if the pattern has no reference.")
+    for_bars: Optional[int] = Field(None, description="A state/level must have HELD ≥ this many consecutive bars ('above the 200-day for a month' ≈ 20 daily bars); for rising/falling it's a run-length. NOT valid on net_change/crossover/divergence — for 'within the last N bars' use window_bars.")
+    window_bars: Optional[int] = Field(None, description="PER-SIGNAL lookback in bars — 'holds WITHIN the last N bars' (recency); for a net-return pattern it's the PERIOD the return is measured over ('dropped 30% over 100 days' → window_bars=100). Gives conditions DIFFERENT windows in one screen. Omit → the screen-level default. (Distinct from for_bars = how long a state has held.)")
+    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart (1=daily,2=weekly,3=monthly) to MIX timeframes — put it on a QUALIFIER (checked on its own chart) while the anchor stays on the screen-level timeframe. e.g. weekly-hold + daily-cross → screen tf=1, qualifier {above,a='close',b='ema50',timeframe:2}. Operand periods are bars of THIS tf. An ANCHOR's tf must equal the screen-level tf (else 400) — put cross-tf tests in a qualifier.")
 
 
 class TaQual(BaseModel):
@@ -2824,133 +2785,63 @@ class TaStep(BaseModel):
 @mcp.tool(name="screen_unified", title="Unified Screener (Universe × Fundamental × Technical)", annotations=_RO)
 def screen_unified(
         fundamental: Annotated[Optional[List[ScreenCondition]], _d(
-            "The FUNDAMENTAL leg — AND-ed financial conditions (INTERSECT). Each condition = a METRIC (`concept`) + a "
-            "SHAPE (`pattern`) + its value — send `concept`/`pattern` as an exact key OR plain English; the SERVER "
-            "resolves each (no separate resolver step). e.g. roe>20% & 3y revenue "
-            "growth → [{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',N:3}] "
-            "(or NL: [{concept:'return on equity',pattern:'above 20%'...}] resolves the same). "
-            "🔴 A fundamental TREND's TIME SPAN goes in THIS condition's `N` (periods of its `basis`; annual by default): "
-            "'PE declining over 2 years' → {concept:'pe',pattern:'consecutive_decline',N:2}; 'revenue up >20% three quarters "
-            "in a row' → {concept:'revenue',pattern:'consecutive_growth',N:3,threshold:0.2,basis:'quarterly'}. Omit `basis` "
-            "unless the user named quarter/TTM. This is SEPARATE from the TA leg's window_bars. "
-            "Omit for a TA-only screen.")] = None,
+            "The FUNDAMENTAL leg — AND-ed conditions (each = a METRIC `concept` + a SHAPE `pattern` + its value; key or "
+            "plain English, server-resolved). e.g. roe>20% & 3y revenue growth → "
+            "[{concept:'roe',pattern:'above',threshold:0.20},{concept:'revenue',pattern:'consecutive_growth',N:3}]. "
+            "🔴 A fundamental trend's TIME SPAN goes in that condition's `N` (periods of its `basis`, annual by default; "
+            "set basis only for quarterly/TTM) — SEPARATE from the TA leg's window_bars. Omit for a TA-only screen.")] = None,
         ta: Annotated[Optional[List[TaStep]], _d(
-            "The TECHNICAL leg — a THEN chain of steps (usually ONE step). Each signal's `pattern` (the SHAPE) and its "
-            "operands `a`/`b` (the LINES) are each an exact key/token OR plain English — the SERVER resolves each (no "
-            "separate resolver step). e.g. a golden cross with a volume spike → "
-            "[{anchor:[{pattern:'crossover_up',a:'ema50',b:'ema200'}],quals:[{any:[{pattern:'volume_spike'}]}]}] "
-            "(or NL: [{anchor:[{pattern:'golden cross',a:'the 50-day',b:'the 200-day'}],quals:[{any:[{pattern:'volume surge'}]}]}]). "
-            "🔴 'within the last N bars' can be set PER SIGNAL via each signal's own `window_bars` (so conditions may have "
-            "DIFFERENT windows — e.g. crossover within 20 + drop over 100); a signal without one falls back to the "
-            "screen-level `window_bars`. 🔴 MULTI-TIMEFRAME: mix daily/weekly/monthly in ONE screen by setting a "
-            "qualifier's own `timeframe` (1/2/3) — 'weekly holds above the 50-week AND daily just crossed up' → screen "
-            "timeframe=1, anchor crossover_up, qualifier {above, a:'close', b:'ema50', timeframe:2}. Omit for a "
-            "fundamentals-only screen.")] = None,
+            "The TECHNICAL leg — a THEN chain of steps (usually ONE). Each signal = `pattern` (SHAPE) + operands `a`/`b` "
+            "(LINES), key or plain English, server-resolved. e.g. golden cross + volume spike → "
+            "[{anchor:[{pattern:'crossover_up',a:'ema50',b:'ema200'}],quals:[{any:[{pattern:'volume_spike'}]}]}]. "
+            "'within the last N bars' = each signal's own `window_bars` (else the screen-level default); mix timeframes "
+            "by setting a qualifier's own `timeframe` (1/2/3). Omit for a fundamentals-only screen.")] = None,
         options: Annotated[Optional[str], _d(
-            "The OPTIONS leg — an options-behaviour term, an exact key OR plain English ('fear_building', 'iv_cheap', "
-            "'the options crowd getting brave', 'cheap implied vol'); the server resolves it (no separate resolver "
-            "step). Intersects the ~557 US-optionable names whose options market shows that behaviour with the other "
-            "legs — 'biotech stocks the options crowd is getting brave on' → gics='352010' + options='the crowd "
-            "getting brave'. 🔴 DIVERGENCE (options positioning FIGHTING the price trend) = send it here too ('options "
-            "positioning diverging from the price uptrend') — the server expands it into the multi-leg screen itself. "
-            "🔴 ENGLISH. US-optionable only. Omit for a non-options screen.")] = None,
+            "The OPTIONS leg — an options-behaviour term, key or plain English ('fear_building','iv_cheap','the crowd "
+            "getting brave'), server-resolved. Intersects the ~557 US-optionable names showing it; an options-vs-price "
+            "DIVERGENCE also goes here (the server expands it). US-optionable only. Omit for a non-options screen.")] = None,
         options_horizon: Annotated[Optional[Literal["long","short"]], _d("Options horizon: 'long' (default, positioning/conviction) or "
             "'short' (gamma/near-term). Only meaningful with `options`.")] = None,
-        gics: Annotated[Optional[str], _d("OPTIONAL universe SCOPE — the industry/theme CONCEPT(s) to screen within. "
-            "Pass one or MORE ATOMIC concepts, comma-separated (decompose a compound like 'banks and insurance' → "
-            "'banks,insurance'). Each may be plain English ('banks', 'semiconductors', 'AI', 'EV cars', 'cloud') OR a "
-            "raw GICS code prefix ('45'=IT sector, '3520'=biotech group, '352010'=biotech industry; shorter = broader). "
-            "🔴 The SERVER resolves each concept and DECIDES the axis for you — an established industry maps to a GICS "
-            "sector/industry, a curated megatrend maps to a THEME (you do NOT need to know our theme catalog or pick "
-            "gics-vs-theme). A single concept may resolve to MULTIPLE homes (retail → discretionary + staples retail). "
-            "If a concept isn't a recognizable industry/theme you get an honest reconfirm. 🔴 ENGLISH. Omit = all sectors.")] = None,
+        gics: Annotated[Optional[str], _d("OPTIONAL universe SCOPE — industry/theme concept(s), CSV of ATOMIC concepts "
+            "(decompose 'banks and insurance' → 'banks,insurance'). Each = English ('banks','semiconductors','AI') or a "
+            "GICS code prefix ('45'=IT sector, '352010'=biotech industry; shorter=broader); the server picks the axis "
+            "(industry→GICS, megatrend→THEME). Omit = all sectors.")] = None,
         country: Annotated[Optional[List[str]], _d("OPTIONAL operating-country scope — one or MORE ISO-2 codes, OR'd (a stock "
             "matches if in ANY of them). e.g. ['US'] · ['CN','US'] for China+US · ['TH','SG','MY']. Omit = all countries.")] = None,
-        size: Annotated[Optional[List[str]], _d("OPTIONAL market-cap size tier(s), OR'd — any of 'large'|'mid'|'small'|'micro'. "
-            "🔴 RELATIVE per-market MSCI cumulative-cap tiers (top 70% of a market's cap = 'large', 70-85% = 'mid', "
-            "85-99% = 'small', tail = 'micro') — 'small' means small FOR ITS market, NOT small in USD (mega-caps are "
-            "'large'; there is no separate 'mega'). For an ABSOLUTE USD size / 'under $X' use min/max_market_cap_usd, "
-            "not this. e.g. ['large'] · ['mid','small']. Omit = all sizes.")] = None,
-        asset_type: Annotated[Optional[List[str]], _d("OPTIONAL asset type(s), OR'd — from the asset_universe catalog: "
-            "'Common Stock','ETF','Crypto','Currency','Commodity','Bond','Index','Fund','ADR','REIT'. e.g. ['Common Stock'] · ['ETF','Fund'] · ['Crypto']. "
-            "NOTE: 'Crypto' = digital assets (BTC/ETH, exchange .CC) — SEPARATE from 'Currency' which is forex pairs (.FOREX); "
-            "gold/silver spot are 'Commodity'. Omit = all types (a typical company screen wants 'Common Stock'). Scopes the TECHNICAL universe.")] = None,
-        theme: Annotated[Optional[List[int]], _d("ADVANCED raw-passthrough — megatrend THEME node_id(s), OR'd; a stock matches "
-            "if it is a CORE member of ANY. e.g. [18000000] · [18000000,18120000]. 🔴 Normally you do NOT set this: just name "
-            "the theme concept in `gics` ('AI', 'semiconductors') and the server routes it to the theme axis automatically. "
-            "Use this only when you already hold a numeric node_id and want to skip resolution.")] = None,
-        exclude_gics: Annotated[Optional[str], _d("OPTIONAL — EXCLUDE industry/theme CONCEPT(s) from the whole screen "
-            "(NOT banks / everything-except-utilities). CSV of concepts — codes OR plain English ('banks', 'AI'); the "
-            "server resolves EACH and routes it (a GICS concept excludes the sector, a theme concept excludes the theme "
-            "members), same unified resolution as `gics`. Applies to EVERY leg (fund/ta/options/dividend) — a "
-            "universe-level negation, so 'high-yield stocks but NOT banks' = fundamental dividend_yield + exclude_gics='banks'. "
-            "The `gics` param INCLUDES; this EXCLUDES.")] = None,
+        size: Annotated[Optional[List[str]], _d("OPTIONAL market-cap size tier(s), OR'd — 'large'|'mid'|'small'|'micro'. "
+            "RELATIVE per-market MSCI tiers ('small' = small FOR ITS market, not in USD; no separate 'mega'). For an "
+            "ABSOLUTE USD size / 'under $X' use min/max_market_cap_usd instead. Omit = all sizes.")] = None,
+        asset_type: Annotated[Optional[List[str]], _d("OPTIONAL asset type(s), OR'd: 'Common Stock','ETF','Crypto','Currency','Commodity','Bond','Index','Fund','ADR','REIT'. Crypto≠Currency (forex); gold/silver=Commodity. Omit = all (a company screen usually wants 'Common Stock').")] = None,
+        theme: Annotated[Optional[List[int]], _d("ADVANCED raw-passthrough — megatrend THEME node_id(s), OR'd (core member of ANY). Normally OMIT: name the theme in `gics` ('AI') and the server routes it. Use only with a known node_id.")] = None,
+        exclude_gics: Annotated[Optional[str], _d("OPTIONAL — EXCLUDE industry/theme CONCEPT(s), CSV, codes or plain English ('banks','AI'); server-resolved & routed same as `gics`. Applies to EVERY leg ('high-yield but NOT banks' = fundamental dividend_yield + exclude_gics='banks'). `gics` INCLUDES; this EXCLUDES.")] = None,
         exclude_country: Annotated[Optional[List[str]], _d("OPTIONAL — EXCLUDE operating-country(ies), ISO-2. "
             "'global ex-US' = exclude_country=['US']. Universe-level, applies to every leg.")] = None,
         exclude_theme: Annotated[Optional[List[int]], _d("ADVANCED raw-passthrough — EXCLUDE megatrend THEME node_id(s). "
             "Normally just name the theme to exclude in `exclude_gics` ('not AI'); the server routes it. Universe-level negation across every leg.")] = None,
-        min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE min market cap in USD (e.g. 50000000000 = $50bn). This is an ABSOLUTE floor — distinct from `size` (which is a RELATIVE per-market tier: 'small' means small FOR ITS market, not small in USD). For 'companies under $X' / a USD band use min/max_market_cap_usd, NOT size.")] = None,
-        max_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE max market cap in USD (e.g. 2000000000 = under $2bn). Pair with min for a band. ABSOLUTE ceiling — use this for 'small caps under $X', not the relative `size` tier.")] = None,
+        min_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE min market cap USD (50000000000 = $50bn). Use this (not `size`) for a USD floor / 'under $X' band.")] = None,
+        max_market_cap_usd: Annotated[Optional[float], _d("OPTIONAL ABSOLUTE max market cap USD (2000000000 = under $2bn). Pair with min for a band.")] = None,
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
-        window_bars: Annotated[Optional[int], _d(
-            "TA-leg LOOKBACK in BARS of `timeframe` (daily ≈ trading days) — how far back a technical signal may have "
-            "fired, and the total span a THEN-chain must complete within. This is the '…within the last N days' knob: "
-            "'bearish divergence within 50 days' on daily → window_bars=50. Applies to the WHOLE `ta` leg. Omit → "
-            "default 30×(#steps). 🔴 SEPARATE from a fundamental trend's span (that goes in the fund condition's `N`).")] = None,
-        dividend_min_streak_years: Annotated[Optional[int], _d("OPTIONAL dividend gate — keep only stocks with a "
-            "no-cut dividend STREAK of at least N years (a reliability streak within a 10-year window, CAPPED at 10; "
-            "10 = clean through the whole tracked decade incl. 2020/2022 stress — NOT the full multi-decade age). "
-            "This is the 'dividend aristocrat / kept paying' filter. A pure MEMBERSHIP gate — combine with a "
-            "`fundamental`/`ta`/`options` base leg (for a pure dividend/yield screen use screen_dividends instead).")] = None,
-        dividend_min_cagr: Annotated[Optional[float], _d("OPTIONAL dividend gate — keep only stocks whose 5-year "
-            "dividend CAGR is at least this % (e.g. 5 = grew dividends ≥5%/yr). Pairs with the base leg like "
-            "dividend_min_streak_years; needs a `fundamental`/`ta`/`options` condition too.")] = None,
-        sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'options' (the options-leg signal strength — USE THIS when `options` is present so the tight options leg DRIVES the ranking/intersection) · 'mcap' · an OSCILLATOR present in the TA context — 'rsi' (or 'rsi14') / 'adx' — to rank by that indicator's value (e.g. 'most overbought' → sort='rsi'; default direction is highest-first) · or any fundamental metric key present in the results (pe/roe/…). NOTE: an oscillator sort ranks the returned candidate buffer, so pair it with a TA filter (e.g. rsi above 60) for a meaningful 'top by RSI'.")] = None,
-        limit: Annotated[Optional[int], _d("How many stocks you intend to SHOW the user (default 10). The tool "
-            "over-fetches a look-ahead BUFFER of ~4× this (capped 100) and returns it all, so 'show me a few more' "
-            "is served from THIS result — do NOT re-screen for a few more, just surface the next rows already here. "
-            "Wanting more than the 100-row buffer needs a fresh screen with a larger intent.")] = None) -> dict:
-    """EXECUTE a UNIFIED screen = universe ∩ fundamental ∩ technical ∩ options — the INTERSECTION of a fundamentals
-    screen, a technical screen, and an options-behaviour screen within a scope. This is the ONE screen tool: EVERY leg
-    is optional (fundamental-only = a pure fundamentals screen; ta-only = a pure technical scan of EMA/MACD cross,
-    RSI/overbought, divergence, squeeze, a-THEN-b; options-only = stocks by options-market behaviour; any combination =
-    the intersection). The grammars stay SEPARATE — the `fundamental` leg's `concept`/`pattern`, the `ta` leg's
-    `pattern`/operands, AND the `options` leg's behaviour term are ALL resolved server-side (send a key OR plain
-    English — no separate resolver step); the server resolves each leg, scopes all to the universe, and
-    intersects on head_listing_id. 🔴 An options-vs-price DIVERGENCE (options positioning fighting the price trend)
-    is just a multi-leg screen — send the divergence phrase in `options` and the server expands it (adds the price
-    leg + opposite-direction options leg + sort='options') itself; or build it yourself by pairing a `ta` price-trend
-    leg with the OPPOSITE-direction options behaviour. 🔴 The OPTIONS leg is US-optionable-only (~557 names), so any
-    screen using it is US-capped — say so. To rank by options signal strength pass sort='options'. Returns {universe, count, sort,
-    results:[{head_listing_id, ticker, name, score, matched_legs:[…],
-              matched:{ta:{…what each signal filtered on}, fundamental:{<metric>:{value, basis, window?, series?, periods?, period?}}},
-              context:{ta:{rsi14/adx/…latest indicators}, fundamental:{…}}}], notes}.
-    🔴 The per-leg subtree key == the leg NAME you sent == its `matched_legs` token: TA evidence is under
-    `matched.ta` / `context.ta`, fundamental evidence under `matched.fundamental` / `context.fundamental`
-    (NOT `technical` / `financial`). Read each leg's result back under the SAME name you screened on.
-    🔴 TIME WINDOWS are per-LEG and SEPARATE: the TA leg's "within the last N days" = top-level `window_bars`;
-    a FUNDAMENTAL trend's span (e.g. "over 2 years") = that condition's `N`. Never conflate the two.
-    🔴 PARTIAL results: when NO stock matches BOTH legs (intersection < 3), the response adds `partial:true`,
-    `intersection_count`, `legs:{ta,fundamental}`, and APPENDS each leg's top near-misses. Every row's `matched_legs`
-    lists which leg(s) it actually passed — a row with only ['ta'] or ['fundamental'] did NOT satisfy the full query.
-    NEVER present a one-leg/partial row as a full match; read `notes` (it names the tighter leg + how to broaden).
-    🔴 PAGINATION / "show me more": this returns an OVER-FETCHED buffer = min(limit×4, 100) rows in ONE call, so a
-    follow-up "give me a few more" is answered from the rows ALREADY in this result — do NOT call again for a few more,
-    just surface the next ones you already have. `count` = rows returned in THIS response (= the buffer size, capped
-    100), NOT a market-wide match total; to see more than the buffer, re-screen.
-    🔴 EMPTY RESULT ≠ MISSING FEATURE. This tool FAILS LOUD: an unsupported pattern / operand / timeframe / concept
-    returns a 400 ERROR. So if you got NO error and `count:0`, the query was VALID and the pattern/timeframe IS
-    supported — it simply matched zero stocks right now. NEVER tell the user "the tool can't do X / X only works on
-    the daily chart / that timeframe isn't supported" off a `count:0` — that conclusion requires a 400. A zero just
-    means: loosen the filter, widen `window_bars` (e.g. a rare MONTHLY crossover may not have fired in the last few
-    bars — widen the window), or report honestly "no stock matches that right now." (Technicals are computed
-    market-wide across all timeframes — no coverage-gap disclaimer.)
-    🔴 FUNDAMENTAL exceptions — READ `notes` before concluding anything: a `notes` entry saying "insufficient history"
-    means the 0 is NOT ENOUGH DATA (e.g. too few quarters), not "nobody qualified" — tell the user that, don't report a
-    no-match. A note saying a basis "was not applied" / "screened on the annual basis instead" / "screened on TTM" means
-    the result is on THAT basis — say so when you present it. Each fundamental evidence value carries `basis`
-    (A=annual, Q=quarterly, T/TTM=trailing twelve months) and, for a window, `periods` (YYYY-MM, newest first) —
-    describe the numbers on the basis/periods they actually are."""
+        window_bars: Annotated[Optional[int], _d("TA-leg LOOKBACK in bars of `timeframe` — how far back a signal may "
+            "have fired / the span a THEN-chain completes within ('…within the last N days'; 'divergence within 50 days' "
+            "→ 50). Whole `ta` leg; omit → default 30×(#steps). SEPARATE from a fundamental trend's `N`.")] = None,
+        dividend_min_streak_years: Annotated[Optional[int], _d("OPTIONAL dividend gate — keep stocks with a no-cut "
+            "dividend streak ≥ N years (reliability streak in a 10-year window, capped at 10; NOT the full age). A "
+            "membership gate — combine with a fundamental/ta/options base leg (pure dividend screen → screen_dividends).")] = None,
+        dividend_min_cagr: Annotated[Optional[float], _d("OPTIONAL dividend gate — 5-year dividend CAGR ≥ this % (5 = ≥5%/yr). Needs a fundamental/ta/options base leg too.")] = None,
+        sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'options' (use when `options` present) · 'mcap' · a TA-context oscillator ('rsi'/'adx' — 'most overbought'→'rsi') · or any fundamental metric key in the results (pe/roe/…).")] = None,
+        limit: Annotated[Optional[int], _d("How many stocks to SHOW (default 10). Over-fetches a ~4× buffer (capped 100) so 'show me a few more' is served from THIS result — don't re-screen; re-screen only to exceed the buffer.")] = None) -> dict:
+    """EXECUTE a unified screen = universe ∩ fundamental ∩ technical ∩ options (any leg optional; each grammar resolved
+    server-side — key or plain English). Returns {universe, count, sort, results:[{head_listing_id, ticker, name, score,
+    matched_legs, matched:{ta, fundamental:{<metric>:{value, basis, window?, series?, periods?}}}, context}], notes}.
+    Evidence keys == the leg name you sent (TA→matched.ta, fundamentals→matched.fundamental, NOT technical/financial);
+    `matched_legs` lists which leg(s) a row passed. A thin intersection adds partial:true + per-leg near-misses — never
+    present a partial/one-leg row as a full match; read `notes` (names the tighter leg + how to broaden).
+    Time windows are PER-LEG: TA 'within last N bars' = top-level `window_bars`; a fundamental trend's span = that
+    condition's `N`. Options leg is US-optionable only (~557 → US-capped); sort='options' ranks by it; an
+    options-vs-price divergence = just send the phrase in `options`. FAILS LOUD: an unsupported pattern/operand/concept
+    returns a 400, so count:0 with NO error = a VALID query that matched zero now (loosen / widen window_bars, don't say
+    'can't do X'); `notes` may say 'insufficient history' (not a no-match) or which basis was screened. Over-fetches a
+    ~4× buffer (cap 100) so 'show me more' is served from these rows — don't re-call."""
     _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
     # 🆕 SERVER-SIDE UNIFIED concept resolution (collapse find_gics + find_megatrend): `gics` / `exclude_gics` (and
     # each fundamental condition's `vs_cohort.gics`) may be a bare CODE **or** plain English ('biotech', 'AI',
@@ -3188,7 +3079,6 @@ _COUNTRY_KW = {
     "australia": "AU", "australian": "AU", "canada": "CA", "canadian": "CA",
 }
 
-@mcp.tool(title="Bond Pulse", annotations=_RO)
 def bond_pulse(q: Annotated[str, _dq("A COUNTRY ('US rates', 'US yield curve'), a TENOR ('US 10Y', 'JGB 2Y', "
                                          "'DE 30Y'), or a RATE ('SOFR', 'EURIBOR 3M'). Returns the whole curve + 2s10s "
                                          "slope + macro news. Covers govt-bond yields, money-market rates, and the curve.")],
@@ -3382,47 +3272,20 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
                   to: Annotated[Optional[str], _d(_TO)] = None,
                   gate: Annotated[Optional[str], _d("megatrend scope only: `both` (default, strict member AND epicenter) | `membership` (looser).")] = None,
                   limit: Annotated[Optional[int], _d(_LIMIT)] = None) -> dict:
-    """⭐ "Which stocks in <a group> are INTERESTING / winning / losing / most-talked-about — and how
-    CHEAP or EXPENSIVE do they trade?" — the cohort SCREENER. Ranks the companies in a scope by how the news
-    is hitting them (lead with the WINNERS-vs-LOSERS split), AND every row carries its **VALUATION** (P/E,
-    P/B, dividend yield, 52w) — so this is ALSO the tool for "which in <group> are cheap / EU-vs-US banks on
-    P/E–P/B / is <cohort> worth investing". 💰 A valuation / "worth investing" / cheap-vs-expensive question
-    on a GROUP → screen here and READ the fundamentals; theme_pulse/brief are NEWS pulse only (no valuation),
-    so never say "I don't have P/E" — pull it from here (P/B is best-covered; for banks/insurers P/B leads).
-    ⚠️ these rows are a NEWS-RANKED, CAPPED SUBSET of the group — NOT the full cohort. Do NOT compute a
-    "sector/peer AVERAGE" (P/E, margin, ROE…) from them to judge cheap-vs-peers: that average is a tiny biased
-    sample, unweighted, and includes bad-data outliers → wrong. For "cheaper/richer than the sector/peer AVERAGE",
-    "below/above the group average", or "undervalued vs peers" → use **screen_unified** with a `fundamental` pattern
-    `below_average`/`above_average` (a proper cap-weighted, full-universe, outlier-cleaned benchmark).
-      • Scope (≥1 REQUIRED — it never scans the whole universe): `megatrend` (one OR SEVERAL trend
-        names/ids as csv — resolved for you in one pass, same as theme_pulse: 'foundry', 'foundry,hbm',
-        '56020000'), `gics` (a GICS sector/industry — codes OR plain English, CSV; server resolves each:
-        'semis'/'453010', 'retail'/'2550', 'aerospace defense', 'biotech'), `country` (csv ISO-2; for a REGION pass every
-        country — Asia='CN,JP,KR,TW,HK,IN,SG'). Combine freely — "China+Taiwan foundry & HBM names" = ONE
-        call: country='CN,TW', megatrend='foundry,hbm'.
-      • `order_by` = `news_count` (default — most attention) | `relevance` (most central to its news) |
-        `market_cap` (biggest).
-      • `direction` = `pos` → winners only · `neg` → losers/at-risk only · omit → all, each with its own
-        net_direction. `aspect` = keep only a channel (demand/competition/capital/…).
-      • Quality floors: `min_impact` (1–5 article-importance), `min_relevance` (0–1 centrality),
-        `min_market_cap_usd`, `window` ('7d'/'30d'/'90d'/'1y'/'mtd'/'qtd'/'ytd'). `gate` (megatrend scope
-        only) = `both` (default, strict: member AND epicenter) | `membership` (looser, more leakage).
-      • TIME WINDOW: `window='7d'` = trailing recency ("this week"=7d, "this month"=30d) — SAME name/vocab
-        as brief/theme_pulse/search_news/news_feed/stock_impact. For a SPECIFIC past
-        window use `from`/`to` (YYYY-MM-DD): "last week"→the two dates, "as of <date>"→`to`. ⚠️ per-stock
-        IMPACT scoring only exists from ~2026-07-03 onward, so any window BEFORE early-July-2026 (a Q1/March
-        query) returns EMPTY — say so plainly ("no impact data that far back"); do NOT present empty as
-        "nothing happened".
-    Each row = `{symbol, name, country, gic_code, market_cap_usd, impact:{news_count, pos, neg, ambiguous,
+    """⭐ The cohort SCREENER: "which stocks in <a group> are interesting / winning / losing / most-talked-about,
+    and how cheap or expensive do they trade?" Ranks the companies in a scope by how news is hitting them (lead with
+    the winners-vs-losers split), and EVERY row carries its VALUATION (P/E, P/B, dividend yield, 52w) — so this is
+    also the tool for "which in <group> are cheap / worth investing" (theme_pulse/brief are news-only, no valuation —
+    pull P/E from here; P/B leads for banks/insurers).
+    ⚠️ Rows are a NEWS-RANKED, CAPPED SUBSET, not the full cohort — do NOT compute a sector/peer AVERAGE from them
+    (biased sample). For "cheaper/richer than the sector average / below-above the group / undervalued vs peers" use
+    screen_unified with a `below_average`/`above_average` pattern (proper cap-weighted, outlier-cleaned benchmark).
+    Scope ≥1 REQUIRED (never whole-universe): megatrend / gics / country — combine freely.
+    Each row = {symbol, name, country, gic_code, market_cap_usd, impact:{news_count, pos, neg, ambiguous,
     net_direction, top_relevance, aspects, top_reason}, fundamentals:{pe_ratio, pb_ratio, dividend_yield_pct,
-    week52_high, week52_low}}` — the `fundamentals` block is the VALUATION lens (read it for cheap/expensive).
-    Each row carries `market_cap_usd`, so for a
-    constraint we DON'T support (e.g. "SMALL-cap only", a max size) return the cohort and filter/annotate
-    from that field + your own knowledge. `direction_split` pre-tallies the cohort's winners/losers so you
-    can open with it. If a scope term isn't a MarketDX taxonomy node (a niche theme like 'protein
-    engineering'), map it to the nearest `gics`/`country` you CAN pass and lean on your world knowledge for
-    the rest. For ONE ticker use `asset_pulse`; for a sector's overall pulse use `theme_pulse`; use THIS to
-    rank the NAMES inside a group. `limit` default 10 (max 50)."""
+    week52_high, week52_low}}; `direction_split` pre-tallies winners/losers. ⚠️ per-stock impact scoring exists only
+    from ~2026-07-03 — an earlier window returns empty (say so, not "nothing happened"). One ticker → asset_pulse;
+    a group's overall pulse → theme_pulse; a sector-average benchmark → screen_unified."""
     mt = None
     if megatrend:  # UNIFIED: theme term(s) → megatrend node ids
         mt, _me = _theme_nodes(megatrend)
@@ -3495,34 +3358,20 @@ def screen_dividends(country: Annotated[Optional[str], _d(_COUNTRY_CSV)] = None,
                                                                "Fraction (0.7) or percent (70).")] = None,
                      order_by: Annotated[Optional[Literal["yield","streak","cagr"]], _d("`yield` (default) | `streak` | `cagr`.")] = None,
                      limit: Annotated[Optional[int], _d(_LIMIT)] = None) -> dict:
-    """💰 THE income screener — "which stocks in <a group> pay a high / reliable / growing DIVIDEND?"
-    ("retail names with high dividend", "dividend aristocrats in the US", "Thai high-yield stocks"). Ranks
-    the DIVIDEND-PAYING universe (all payers, NOT just news-covered) and — the whole point — hands you the
-    RAW pieces to tell a real income name from a YIELD TRAP, so YOU judge (don't trust a headline yield).
-    🔴 MULTI-METRIC dividend asks that also need P/E / financial-health legs (dividend AND low P/E AND healthy
-    financials) belong in screen_unified — a `fundamental` leg (pe / health / dividend_yield) + the
-    `dividend_min_streak_years` / `dividend_min_cagr` gate. THIS tool is the dividend SPECIALIST (yield ranking +
-    no-cut streak + yield-trap decomposition): it has NO P/E filter, but it DOES include AND exclude a sector —
-    `gics` INCLUDES, `exclude_gics` EXCLUDES ('high-yield but NOT banks' = exclude_gics='banks').
-      • Scope: `country` (csv ISO-2) and/or `gics` (csv GICS CODE prefixes, e.g. '2550' retail) to INCLUDE, and/or
-        `exclude_gics` to EXCLUDE a sector. Pass a sector as a CODE or plain English ('banks'); the server resolves it.
-      • `order_by` = `yield` (default) | `streak` (reliability — longest clean run in our window) | `cagr`
-        (fastest dividend growth). Filters: `min_yield`/`max_yield` (PERCENT, e.g. 3 = 3%; max guards against
-        traps), `min_streak_years` (≤10, see below), `min_cagr` (%), `min/max_market_cap_usd`, `max_payout`
-        (ceiling on payout_ratio — high yield with payout ≤ this = safer, not stretched).
-    🔴 `no_cut_streak_yrs` is a bounded RELIABILITY signal — consecutive no-cut years within a **10-year**
-    tracking window, so it CAPS AT 10 (10 = never cut across the whole decade, i.e. survived the 2020 &
-    2022 stress). It is NOT the company's full dividend age: DO NOT report "~50-year king / 69-year streak"
-    or any multi-decade figure from your own knowledge — say "clean for 10y+ (the full window we track)".
-    Each row's `dividend` block DECOMPOSES the yield: `yield_pct` (FORWARD/sustainable — what to quote),
-    `yield_trailing_pct` (if >> yield_pct, a SPECIAL one-time dividend inflated it — not repeatable),
-    `payout_ratio` (>1 = pays more than it earns = unsustainable), `ttm_div_yoy_pct` (is the PAYMENT up/flat/
-    CUT), `no_cut_streak_yrs` (≤10, reliability not age), `last_cut_year`, `cagr_5y_pct` — plus `week52_high/low` (is the yield high
-    because the PRICE fell?) + `pe_ratio`/`pb_ratio`/`eps` + a `news` block. 🔴 NEVER rank on yield alone: high yield +
-    recent `last_cut_year` + negative `ttm_div_yoy_pct` + high payout + bad `news` = TRAP; high yield from a
-    price drop + intact/growing dividend + long streak = possible VALUE. Read the payload's `_guide`.
-    `limit` default 15 (max 50). SCOPE (country/gics) is OPTIONAL — omit both to rank dividend payers
-    WHOLE-MARKET (the candidate scan is bounded + fast); add a scope to narrow to one market/sector."""
+    """💰 THE income screener — "which stocks pay a high / reliable / growing DIVIDEND?" Ranks the DIVIDEND-PAYING
+    universe (all payers, not just news-covered) and hands you the raw pieces to tell a real income name from a YIELD
+    TRAP (don't trust a headline yield).
+    🔴 A multi-metric ask that also needs P/E / financial-health (dividend AND low P/E AND healthy) belongs in
+    screen_unified (a `fundamental` leg + `dividend_min_streak_years`/`dividend_min_cagr` gate). THIS tool is the
+    dividend specialist (no P/E filter) but it both INCLUDES (`gics`) and EXCLUDES (`exclude_gics`) a sector.
+    Scope (country/gics) is OPTIONAL — omit both for a fast whole-market rank.
+    🔴 `no_cut_streak_yrs` is a bounded RELIABILITY signal, capped at 10 (clean across the tracked decade incl. 2020/
+    2022 stress) — NOT the dividend's full age; never state a multi-decade "aristocrat/king" streak, say "clean 10y+".
+    Each row's `dividend` block decomposes the yield: `yield_pct` (forward/sustainable — quote this), `yield_trailing_pct`
+    (>> yield_pct ⇒ a special inflated it), `payout_ratio` (>1 = unsustainable), `ttm_div_yoy_pct`, `no_cut_streak_yrs`,
+    `last_cut_year`, `cagr_5y_pct`, plus `week52_high/low` + `pe_ratio`/`pb_ratio`/`eps` + a `news` block. 🔴 Never rank on
+    yield alone: high yield + recent `last_cut_year` + negative yoy + high payout + bad news = TRAP; high yield from a
+    price drop + intact/growing dividend + long streak = possible VALUE. Read the payload's `_guide`. limit default 15 (max 50)."""
     if gics:  # UNIFIED: gics code(s) OR plain English. gics-ONLY tool — a theme concept can't be screened here (honest)
         _g, _t, _cf, _ = _scope_resolve(gics)
         if _cf: return _cf
@@ -3700,7 +3549,6 @@ def _hs_codes_arg(vals, type: str = "goods", context: Optional[str] = None):
                               "numeric HS/EBOPS code passes straight through)."}, detail
     return [resolved[t] for t in toks if t in resolved], None, detail
 
-@mcp.tool(name="search_trade", title="Trade Flows Over Time", annotations=_RO)
 def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO / M49 (`Thailand`/`THA`/`764`); resolved server-side.")],
                  codes: Annotated[Union[List[str], str], _d(_HS_CODES)],
                  partner: Annotated[Optional[str], _d("Partner country, or `World` (default) = all combined.")] = None,
@@ -3726,7 +3574,6 @@ def search_trade(reporter: Annotated[str, _d("Reporting country — name / ISO /
                 {"reporter": reporter, "codes": codes_r, "partner": partner, "flow": flow,
                  "period": period, "type": type, "freq": freq, "mirror": mirror})
 
-@mcp.tool(name="top_partners", title="Top Trade Partners", annotations=_RO)
 def top_partners(reporter: Annotated[str, _d("Reporting country — name / ISO / M49.")],
                  codes: Annotated[Union[List[str], str], _d(_HS_CODES)],
                  flow: Annotated[Optional[Literal["export","import","both"]], _d("`export` (default) → biggest BUYERS · `import` → biggest SUPPLIERS · `both`.")] = None,
@@ -3744,7 +3591,6 @@ def top_partners(reporter: Annotated[str, _d("Reporting country — name / ISO /
                 {"reporter": reporter, "codes": codes_r, "flow": flow, "period": period,
                  "type": type, "limit": _lim(limit, default=10, ceiling=50)})
 
-@mcp.tool(name="top_traders", title="Rank Countries by Trade", annotations=_RO)
 def top_traders(codes: Annotated[Union[List[str], str], _d(_HS_CODES + " GOODS only — SUMMED per country.")],
                 flow: Annotated[Optional[Literal["export","import","both"]], _d("`import` (default) | `export` | `both`.")] = None,
                 scope: Annotated[Optional[str], _d("`world` (default) · continent (`asia`/`europe`/`africa`/`americas`/`oceania`) · subregion · econ group (`asean`/`eu`/`g7`) · CSV of ISO-2. (Region is OUR layer.)")] = None,
@@ -3767,7 +3613,6 @@ def top_traders(codes: Annotated[Union[List[str], str], _d(_HS_CODES + " GOODS o
                 {"codes": codes_r, "flow": flow, "scope": scope, "rank_by": rank_by, "order": order,
                  "period": period, "limit": _lim(limit, default=10, ceiling=50), "min_value_usd": min_value_usd})
 
-@mcp.tool(name="trade_balance", title="Trade Balance", annotations=_RO)
 def trade_balance(reporter: Annotated[str, _d("Reporting country — name / ISO / M49.")],
                   partner: Annotated[Optional[str], _d("Partner country, or `World` (default).")] = None,
                   codes: Annotated[Optional[Union[List[str], str]], _d("For a PRODUCT balance: HS code(s) OR a CONCEPT (resolved server-side at the right stage). OMIT → `TOTAL` (all commodities, a macro read). GOODS only.")] = None,
@@ -3864,6 +3709,40 @@ def _is_series_id(s: str) -> bool:
     a CONCEPT → resolve (safer: 'CPI'→CPIAUCSL, not a broken passthrough)."""
     s = (s or "").strip()
     return bool(s) and " " not in s and s.isupper() and (any(ch.isdigit() for ch in s) or len(s) >= 6)
+
+@mcp.tool(name="trade", title="Trade Flows & Rankings", annotations=_RO)
+def trade(
+        mode: Annotated[Literal["flows", "top_partners", "top_traders", "balance"], _d(
+            "flows = one country's trade of a product over time · top_partners = a country's biggest trading "
+            "partners for a product · top_traders = rank COUNTRIES by trade of a product (world/region) · "
+            "balance = a country's trade balance (surplus/deficit).")],
+        reporter: Annotated[Optional[str], _d("Reporting country — name/ISO/M49 ('Thailand'/'THA'/'764'), server-resolved. REQUIRED for flows/top_partners/balance.")] = None,
+        codes: Annotated[Optional[Union[List[str], str]], _d("Product: HS code(s) OR a plain-English product ('copper','cars'), server-resolved. REQUIRED for flows/top_partners/top_traders; omit for balance → TOTAL (all goods).")] = None,
+        partner: Annotated[Optional[str], _d("Partner country, or 'World' (default). flows/balance only.")] = None,
+        flow: Annotated[Optional[Literal["export", "import", "both"]], _d("export/import/both. Defaults: flows/top_partners=export, top_traders=import.")] = None,
+        period: Annotated[Optional[str], _d("Year '2023' / list '2020,2021' / range '2015:2024' / 'lastN' / 'latest'. DYNAMIC — never hardcode. Defaults vary by mode.")] = None,
+        type: Annotated[Optional[str], _d("goods (default, HS) | services (EBOPS, value-only). flows/top_partners.")] = None,
+        freq: Annotated[Optional[str], _d("annual (default) | monthly (YYYYMM, goods only). flows only.")] = None,
+        mirror: Annotated[Optional[bool], _d("Also return the partner-reported figure + discrepancy (China esp.). flows only, goods.")] = None,
+        scope: Annotated[Optional[str], _d("top_traders only: world (default) / continent / subregion / econ group (asean/eu/g7) / CSV ISO-2.")] = None,
+        rank_by: Annotated[Optional[str], _d("top_traders only: value (default) / growth (CAGR) / streak.")] = None,
+        order: Annotated[Optional[str], _d("top_traders only: desc (default) / asc; for streak = run direction.")] = None,
+        limit: Annotated[Optional[int], _d("top_partners/top_traders: top-N (default 10, max 50).")] = None,
+        min_value_usd: Annotated[Optional[float], _d("top_traders only: floor to drop tiny-base noise.")] = None,
+        context: Annotated[Optional[str], _d(_HS_CTX)] = None) -> dict:
+    """Trade flows, partners, country rankings, and balances (UN Comtrade). Pick `mode`; each mode reads a subset of the params (see each param's note)."""
+    if mode in ("flows", "top_partners", "balance") and not reporter:
+        return {"error": f"mode '{mode}' requires `reporter` (the reporting country)."}
+    if mode in ("flows", "top_partners", "top_traders") and not codes:
+        return {"error": f"mode '{mode}' requires `codes` (the product — HS code or plain-English)."}
+    if mode == "flows":
+        return search_trade(reporter=reporter, codes=codes, partner=partner, flow=flow, period=period, type=(type or "goods"), freq=freq, mirror=mirror, context=context)
+    if mode == "top_partners":
+        return top_partners(reporter=reporter, codes=codes, flow=flow, period=period, type=(type or "goods"), limit=limit, context=context)
+    if mode == "top_traders":
+        return top_traders(codes=codes, flow=flow, scope=scope, rank_by=rank_by, order=order, period=period, limit=limit, min_value_usd=min_value_usd, context=context)
+    return trade_balance(reporter=reporter, partner=partner, codes=codes, period=period, context=context)
+
 
 @mcp.tool(name="fred_series", title="Macro Series + Analysis (FRED)", annotations=_RO)
 def fred_series(series_id: Annotated[str, _dq("A macro CONCEPT (any language — 'inflation', 'core PCE', 'unemployment "
@@ -4066,7 +3945,6 @@ def _fred_slim(cli, sid: str, tf: str, label: str, frm: str = "10y") -> dict:
     except Exception as e:
         return {"indicator": label, "series_id": sid, "error": str(e)[:80]}
 
-@mcp.tool(title="Macro Pulse (FRED)", annotations=_RO)
 def macro_pulse(scope: Annotated[str, _d("A macro DASHBOARD: `economy` (overall regime) · `inflation` · `labor` · `consumer` · "
                                          "`housing` · `recession-risk`. For ONE indicator use fred_series (pass a concept); for the "
                                          "rates/yield-curve use bond_pulse.")],
@@ -4289,6 +4167,48 @@ class _AuthASGI:
             await self.app(scope, receive, send)
         finally:
             _req_key.reset(tok)
+
+@mcp.tool(name="pulse", title="Market Pulse", annotations=_RO)
+def pulse(
+        kind: Annotated[Literal["asset", "theme", "commodity", "bond", "macro", "portfolio"], _d(
+            "WHICH pulse: `asset` (company/ETF/index-ETF/crypto) · `theme` (sector/industry/megatrend) · "
+            "`commodity` (metal/energy/agri) · `bond` (govt-yield/rate/curve) · `macro` (FRED dashboard) · "
+            "`portfolio` (an owned portfolio).")],
+        target: Annotated[str, _d(
+            "The SUBJECT for `kind`. asset: a ticker/company NAME ('NVDA','Apple'; the server resolves it). "
+            "theme: a sector/industry/theme in ENGLISH ('semiconductors','banks','AI') — put nationality in `country`, "
+            "NOT here. commodity: a commodity in English ('gold','copper','crude oil') or a SYMBOL.COMM. "
+            "bond: a country/tenor/rate ('US 10Y','JGB 2Y','SOFR','US yield curve'). "
+            "macro: a dashboard scope ('economy','inflation','labor','consumer','housing','recession-risk'). "
+            "portfolio: the numeric portfolio id (call list_portfolios first if unknown).")],
+        window: Annotated[Optional[str], _d(_WINDOW)] = None,
+        country: Annotated[Optional[str], _d(
+            "ISO-2 CSV. theme: nationality scope ('European'→'GB,DE,FR,IT,ES,NL,CH,SE'; 'Thai'→'TH'). "
+            "asset/macro: optional. Ignored by commodity/bond/portfolio.")] = None,
+        limit: Annotated[Optional[int], _d(_LIMIT + " (asset only)")] = None,
+        top_n: Annotated[Optional[int], _d("portfolio only: how many top holdings to analyze (default 3, cap 5).")] = None,
+) -> dict:
+    """ONE market-pulse read across every subject type — a news + market lens on an asset, a theme/sector, a
+    commodity, a bond/rate/curve, a macro dashboard, or your portfolio. Pick `kind`, put the subject in `target`.
+    Replaces the per-type asset/theme/commodity/bond/macro/portfolio pulse tools."""
+    if kind == "asset":
+        return asset_pulse(ticker=target, window=window, limit=limit, country=country)
+    if kind == "theme":
+        return theme_pulse(q=target, country=country, window=window or "30d")
+    if kind == "commodity":
+        return commodity_pulse(q=target, window=window)
+    if kind == "bond":
+        return bond_pulse(q=target, window=window)
+    if kind == "macro":
+        return macro_pulse(scope=target, window=window, country=country)
+    if kind == "portfolio":
+        try:
+            pid = int(str(target).strip())
+        except (ValueError, TypeError):
+            return {"error": f"portfolio `target` must be a numeric portfolio id, got {target!r} — call list_portfolios first."}
+        return portfolio_pulse(portfolio_id=pid, top_n=top_n or 3, window=window)
+    return {"error": f"unknown kind {kind!r}"}
+
 
 def main() -> None:
     """Console entry point (`marketdx-mcp`). MCP_TRANSPORT=http → hosted Streamable HTTP (per-request
