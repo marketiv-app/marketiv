@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="https://marketdx.lab.ai/playground"><b>▶ Live playground</b></a> ·
-  <a href="https://marketdx.lab.ai">Docs & pricing</a> ·
+  <a href="https://marketdx.app/playground"><b>▶ Live playground</b></a> ·
+  <a href="https://marketdx.app">Docs & pricing</a> ·
   <a href="https://github.com/MarketDX/marketdx/tree/main/datasets">Sample dataset</a>
 </p>
 
@@ -19,13 +19,13 @@
 pip install marketdx          # add [pandas] for .to_df():  pip install "marketdx[pandas]"
 ```
 
-**An API key is required.** Create a free one at **https://marketdx.lab.ai** (sign in → *API keys*), then
+**An API key is required.** Create a free one at **https://marketdx.app** (sign in → *API keys*), then
 pass it to the client (keep it out of source control — read it from an env var / secret in real apps):
 
 ```python
 from marketdx import MarketDX
 
-mdx = MarketDX(api_key="avn_live_…")                     # your key from https://marketdx.lab.ai
+mdx = MarketDX(api_key="avn_live_…")                     # your key from https://marketdx.app
 for s in mdx.news(megatrend="ai-power", impact="indirect"):
     print(s.title, [(e.name, e.impact.net_direction) for e in s.entities])
 ```
@@ -34,8 +34,8 @@ That's the whole graph: every news event, every affected entity, labeled with **
 **relevance**, the causal **aspect** (the *why*), and whether it's the **epicenter** or a **ripple** —
 across five asset classes, **including private companies** ticker feeds can't see.
 
-> **No key yet?** Explore everything with zero signup in the [playground](https://marketdx.lab.ai/playground),
-> then grab a free key at **[https://marketdx.lab.ai](https://marketdx.lab.ai)**. Every request is
+> **No key yet?** Explore everything with zero signup in the [playground](https://marketdx.app/playground),
+> then grab a free key at **[https://marketdx.app](https://marketdx.app)**. Every request is
 > authenticated with your key (`Authorization: Bearer <key>`) and metered in credits.
 
 ## Why the SDK (not just `requests`)
@@ -254,8 +254,8 @@ source of truth, so new values work without upgrading the SDK. The live list: `m
 
 `news` · `news_search` · `news_types` · `megatrends` (`.stocks` / `.off_coverage`) · `gics` (`.stocks`) ·
 `stocks` (search + screener) · `stock` (`.news` / `.competitors` / `.peers`) · `enums` · `account`.
-Full API docs: [marketdx.lab.ai](https://marketdx.lab.ai).
+Full API docs: [marketdx.app](https://marketdx.app).
 
 ## License
 
-MIT. Built by [MarketDX](https://marketdx.lab.ai) — *democratizing financial data.*
+MIT. Built by [MarketDX](https://marketdx.app) — *democratizing financial data.*
