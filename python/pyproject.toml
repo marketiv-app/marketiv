@@ -9,7 +9,7 @@ description = "The MarketDX financial impact graph, in Python — news→market 
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "MarketDX", email = "hello@marketdx.app" }]
+authors = [{ name = "MarketDX", email = "hello@marketdx.lab.ai" }]
 keywords = ["finance", "news", "market-impact", "megatrends", "impact-graph", "quant", "api", "sdk"]
 classifiers = [
     "Development Status :: 3 - Alpha",
