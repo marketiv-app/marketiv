@@ -78,10 +78,10 @@ for lab, rows in _group(disc, "question").items():
 print("\n" + "=" * 64)
 print("This was a fixed sample. The SAME shape, live, from the API:")
 key = os.environ.get("MARKETDX_KEY")
-url = ("https://api.marketdx.lab.ai"
+url = ("https://api.marketdx.app"
        "/v1/news?megatrend=10040000&include=entities,impact&impact=indirect&limit=3")
 if not key:
-    print("  (set MARKETDX_KEY to run it — free tier at https://marketdx.lab.ai)")
+    print("  (set MARKETDX_KEY to run it — free tier at https://marketdx.app)")
     print(f"  curl -H 'Authorization: Bearer $MARKETDX_KEY' \\\n    '{url}'")
 else:
     req = urllib.request.Request(url, headers={"Authorization": f"Bearer {key}"})
@@ -90,4 +90,4 @@ else:
     for e in d.get("results", []):
         ents = ", ".join(x.get("ticker") or x.get("name") for x in e.get("entities", [])[:4])
         print(f"    · {e['title'][:58]}  [{ents}]")
-    print("\n  → full docs & higher limits: https://marketdx.lab.ai")
+    print("\n  → full docs & higher limits: https://marketdx.app")

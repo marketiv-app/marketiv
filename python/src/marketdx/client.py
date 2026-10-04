@@ -19,7 +19,7 @@ from .models import (
 from .pagination import Page
 from .taxonomy import Taxonomy
 
-DEFAULT_BASE_URL = "https://api.marketdx.lab.ai"
+DEFAULT_BASE_URL = "https://api.marketdx.app"
 
 NodeRef = Union[int, str, None]  # id | slug | name
 
@@ -44,7 +44,7 @@ class MarketDX:
 
     def __init__(self, api_key: str, *, base_url: str = DEFAULT_BASE_URL, timeout: float = 30.0) -> None:
         if not api_key:
-            raise ValueError("api_key is required — get one at https://marketdx.lab.ai")
+            raise ValueError("api_key is required — get one at https://marketdx.app")
         self._http = Transport(base_url, api_key, timeout=timeout)
         self._taxonomy = Taxonomy(lambda: self._get("/v1/megatrends").data.get("nodes", []))
 

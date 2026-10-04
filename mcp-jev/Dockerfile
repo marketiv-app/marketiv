@@ -1,4 +1,4 @@
-# MarketDX MCP server — hosted (Streamable HTTP) for mcp.marketdx.lab.ai.
+# MarketDX MCP server — hosted (Streamable HTTP) for mcp.marketdx.app.
 # Per-request auth: each caller sends `Authorization: Bearer <their-key>` (or, later, an OAuth
 # token) — the server never holds a shared MarketDX key. DEEPSEEK_API_KEY (composite tools only)
 # is the one runtime secret; inject it via Cloud Run --set-secrets.

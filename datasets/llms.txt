@@ -70,6 +70,6 @@ article recurs across lenses (epicenter of one trend, ripple of another; re-surf
 ## Go live (this sample → the live graph)
 
 Same shapes, live and complete, via the MarketDX Data API:
-`GET https://api.marketdx.lab.ai/v1/news?megatrend=10040000&include=entities,impact&impact=indirect`
-(header `Authorization: Bearer <key>`). Playground (no signup): https://marketdx.lab.ai/playground ·
-Docs & pricing: https://marketdx.lab.ai
+`GET https://api.marketdx.app/v1/news?megatrend=10040000&include=entities,impact&impact=indirect`
+(header `Authorization: Bearer <key>`). Playground (no signup): https://marketdx.app/playground ·
+Docs & pricing: https://marketdx.app

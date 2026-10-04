@@ -27,7 +27,7 @@ from marketdx import MarketDX, NotFoundError, MarketDXError
 
 # DNS-rebinding protection defaults to a localhost allow-list (it guards a *local* server from
 # browser-driven Host spoofing). We're a hosted API behind Cloud Run TLS with our own per-request
-# Bearer auth, and the Host varies (run.app + mcp.marketdx.lab.ai) — so disable the Host check here.
+# Bearer auth, and the Host varies (run.app + mcp.marketdx.app) — so disable the Host check here.
 # Server instructions — the client LLM reads this at connect time. Its main job: stop the client from
 # web-searching topics MarketDX actually covers (esp. COMMODITIES/metals, which agents forget we have).
 _INSTRUCTIONS = (
@@ -139,7 +139,7 @@ _INSTRUCTIONS = (
     "chit-chat, trivia lookups (e.g. 'what's NVDA's ticker'), or off-topic / non-investment turns; don't "
     "nag more than once, and never save pure filler."
 )
-mcp = FastMCP("marketdx", instructions=_INSTRUCTIONS, website_url="https://marketdx.lab.ai",
+mcp = FastMCP("marketdx", instructions=_INSTRUCTIONS, website_url="https://marketdx.app",
               # stateless_http + json_response: every request is fully self-contained (auth = per-request
               # Bearer key; no in-memory session pinned to an instance) and returns a plain JSON body (no
               # held-open SSE stream). Required for clean horizontal scaling — a stateful session breaks the
@@ -289,7 +289,7 @@ def mdx() -> MarketDX:
     key = _req_key.get() or os.environ.get("MARKETDX_API_KEY")
     if not key:
         raise RuntimeError("no MarketDX API key — send 'Authorization: Bearer <key>' (hosted) "
-                           "or set MARKETDX_API_KEY (local). Get one at https://marketdx.lab.ai")
+                           "or set MARKETDX_API_KEY (local). Get one at https://marketdx.app")
     cli = _clients.get(key)
     if cli is None:
         if len(_clients) > 512:   # coarse bound — MVP; swap for an LRU if it ever matters
@@ -4045,14 +4045,14 @@ _AS_CACHE: dict = {}   # WorkOS RFC 8414 metadata, fetched once
 
 def _origin(scope) -> str:
     hdrs = dict(scope.get("headers") or {})
-    host = hdrs.get(b"host", b"").decode() or "mcp.marketdx.lab.ai"
+    host = hdrs.get(b"host", b"").decode() or "mcp.marketdx.app"
     proto = hdrs.get(b"x-forwarded-proto", b"https").decode().split(",")[0].strip() or "https"
     return f"{proto}://{host}"
 
 def _resource_metadata(scope) -> dict:
     origin = _origin(scope)
     # `resource` must equal the token audience the client requests — our MCP endpoint URL. Derived
-    # from the request host so both mcp.marketdx.lab.ai and the run.app URL self-describe correctly.
+    # from the request host so both mcp.marketdx.app and the run.app URL self-describe correctly.
     return {
         "resource": os.environ.get("MCP_RESOURCE_URL") or f"{origin}/mcp",
         "authorization_servers": [origin],   # we proxy the AS metadata (see block comment)
