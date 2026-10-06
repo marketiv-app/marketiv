@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "marketiv"
-version = "0.16.0"
+version = "0.16.1"
 description = "The MarketIV financial impact graph, in Python — news→market impact (why, who, direction, ripple) across stocks, commodities, FX, crypto, and private companies."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -28,8 +28,8 @@ dev = ["pandas>=1.3", "pytest>=7", "mypy>=1.0", "frictionless>=5"]
 [project.urls]
 Homepage = "https://marketiv.app"
 Playground = "https://marketiv.app/playground"
-Repository = "https://github.com/MarketIV/marketiv"
-"Sample dataset" = "https://github.com/MarketIV/marketiv/tree/main/datasets"
+Repository = "https://github.com/marketiv-app/marketiv"
+"Sample dataset" = "https://github.com/marketiv-app/marketiv/tree/main/datasets"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/marketiv"]

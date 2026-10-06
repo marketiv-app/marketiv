@@ -10,7 +10,7 @@
 <p align="center">
   <a href="https://marketiv.app/playground"><b>▶ Live playground</b></a> ·
   <a href="https://marketiv.app">Docs & pricing</a> ·
-  <a href="https://github.com/MarketIV/marketiv/tree/main/datasets">Sample dataset</a>
+  <a href="https://github.com/marketiv-app/marketiv/tree/main/datasets">Sample dataset</a>
 </p>
 
 ---
@@ -93,7 +93,7 @@ print([a["name"] for a in brief["top_assets"]])          # commodity / forex / c
 
 ## Straight to pandas
 
-`.to_df()` returns the **same columns as the [sample dataset](https://github.com/MarketIV/marketiv/tree/main/datasets)** (`impact-signals.csv`) — so
+`.to_df()` returns the **same columns as the [sample dataset](https://github.com/marketiv-app/marketiv/tree/main/datasets)** (`impact-signals.csv`) — so
 anything you prototyped on the free CSV runs unchanged on the live graph:
 
 ```python
