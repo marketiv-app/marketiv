@@ -9,8 +9,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 # mcp pinned <2: 2.0.0 moved `mcp.server.fastmcp` and breaks the import (server.py:19).
+# marketiv SDK: installed from the vendored wheel in wheels/ until `marketiv` is published on PyPI
+# (then drop wheels/ and pin "marketiv>=0.16.0" from PyPI again).
+COPY wheels/ /tmp/wheels/
 RUN pip install --no-cache-dir \
-      "mcp>=1.8.0,<2" "marketiv>=0.16.0" "openai>=1.0.0" "uvicorn>=0.30.0"
+      "mcp>=1.8.0,<2" /tmp/wheels/marketiv-0.16.0-py3-none-any.whl "openai>=1.0.0" "uvicorn>=0.30.0"
 COPY server.py policy.md favicon.ico gics_taxonomy.json ./
 
 ENV MCP_TRANSPORT=http \
