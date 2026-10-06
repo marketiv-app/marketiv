@@ -1,4 +1,4 @@
-# MarketDX MCP — quality testing
+# MarketIV MCP — quality testing
 
 Durable home for MCP quality testing: the method, a diverse question bank, dated result logs, and a
 weaknesses tracker. Goal: probe the MCP the way real investors use it, find weaknesses, fix them at the

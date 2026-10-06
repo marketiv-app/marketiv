@@ -1,6 +1,6 @@
 # MEMO — MCP time-range support (news tools)
 
-**To:** whoever is iterating the MarketDX MCP server (`mcp/server.py`)
+**To:** whoever is iterating the MarketIV MCP server (`mcp/server.py`)
 **From:** API/backend side
 **Status:** analysis + recommendation. Not yet implemented — your call to build.
 
@@ -21,7 +21,7 @@ The LLM can't do the second one. Two independent reasons — one easy, one hard.
 
 ## Layer 2 — Python SDK: also supports it (no change needed)
 
-Verified in `python/src/marketdx/client.py`:
+Verified in `python/src/marketiv/client.py`:
 - `news_search(q, *, …, from_, to, …)` ✅
 - `MegatrendRef.news(*, …, from_, to, …)` ✅
 - top-level `news(…)` and `news_by_tickers(…)` mirror the API — **confirm the exact kwarg names** (`from_` / `to`) when wiring.

@@ -1,6 +1,6 @@
-# MarketDX — Financial Impact Signals (sample dataset)
+# MarketIV — Financial Impact Signals (sample dataset)
 
-> A bounded, richly-labeled sample of the MarketDX financial impact graph: news → market impact across
+> A bounded, richly-labeled sample of the MarketIV financial impact graph: news → market impact across
 > stocks, commodities, FX, crypto, AND private companies. One row per (news event × affected entity ×
 > aspect), where `aspect` is the causal channel (WHY) and `direction` is the model's read of whether the
 > news helps or hurts the entity. It is a research / screening / feature layer — NOT a predictive price
@@ -69,7 +69,7 @@ article recurs across lenses (epicenter of one trend, ripple of another; re-surf
 
 ## Go live (this sample → the live graph)
 
-Same shapes, live and complete, via the MarketDX Data API:
-`GET https://api.marketdx.app/v1/news?megatrend=10040000&include=entities,impact&impact=indirect`
-(header `Authorization: Bearer <key>`). Playground (no signup): https://marketdx.app/playground ·
-Docs & pricing: https://marketdx.app
+Same shapes, live and complete, via the MarketIV Data API:
+`GET https://api.marketiv.app/v1/news?megatrend=10040000&include=entities,impact&impact=indirect`
+(header `Authorization: Bearer <key>`). Playground (no signup): https://marketiv.app/playground ·
+Docs & pricing: https://marketiv.app

@@ -1,21 +1,21 @@
 ---
-name: marketdx-research
+name: marketiv-research
 description: >-
-  Use for ANY investment / financial-markets question when the MarketDX (mdx) connector is available —
+  Use for ANY investment / financial-markets question when the MarketIV connector is available —
   "how is a stock, sector, market, commodity, or bond doing", news & market-impact, why an asset moved,
   options positioning, portfolio analysis, sector/theme research, and cross-country STRUCTURAL context
-  (consumer strength, household/consumer debt, demographics, trade/supply-chain flows). Encodes WHICH mdx
-  tool to reach for so you don't web-search what mdx answers better, HOW to disambiguate/present, and — the
+  (consumer strength, household/consumer debt, demographics, trade/supply-chain flows). Encodes WHICH MarketIV
+  tool to reach for so you don't web-search what MarketIV answers better, HOW to disambiguate/present, and — the
   differentiator — WHEN to fold in the structural backdrop the user didn't ask for. Trigger on tickers,
   company/sector names, market/index/commodity/rate mentions, or "how's X doing / what moved X" — INCLUDING
   a specific company's news, PUBLIC or PRIVATE (OpenAI, Anthropic, …): private companies resolve to an
-  internal oc: id via find_stock, so these are mdx questions, not web searches. Also covers commodities
+  internal oc: id via find_stock, so these are MarketIV questions, not web searches. Also covers commodities
   (gold/oil/copper/carbon), government-bond yields, money-market rates, and the yield curve.
 ---
 
-# MarketDX — using the mdx connector well
+# MarketIV — using the MarketIV connector well
 
-MarketDX (`mdx`) is a financial **news→impact graph** — it maps news to the assets and megatrends it moves
+MarketIV is a financial **news→impact graph** — it maps news to the assets and megatrends it moves
 (direction +/−, the causal **why**, the ripple to connected players) across stocks, ETFs, indices (via ETF),
 forex, crypto, commodities, government-bond yields, money-market rates, and private/off-coverage companies —
 **plus** three structural data lenses that turn a readout into an analyst's answer: **World Bank** (cross-country
@@ -24,26 +24,26 @@ serves options positioning, the megatrend taxonomy, and the user's portfolios.
 
 This skill governs behaviour: **which tool to reach for, HOW to compose an analyst answer, how to disambiguate,
 and how to present.** Each tool's *parameters* live on the tool's own schema — trust those; this skill won't
-repeat them. (Notes capture/recall is a SEPARATE skill, `marketdx-notes`.)
+repeat them. (Notes capture/recall is a SEPARATE skill, `marketiv-notes`.)
 
 ---
 
-## 1. Routing — which tool for the surface question (reach for mdx, not a web search)
+## 1. Routing — which tool for the surface question (reach for MarketIV, not a web search)
 
 **Golden rule:** any read on how a tradable asset/sector/market is *doing*, what *moved* it, or *why* — in
-ANY language — is a MarketDX question. Our news→impact + positioning **IS** the substance of "how is it doing";
+ANY language — is a MarketIV question. Our news→impact + positioning **IS** the substance of "how is it doing";
 a web search cannot supply it. A web-searched price/index LEVEL is at most ONE supplementary number, never the
 whole answer.
 
 🔴 **The golden rule covers EVENTS, not just assets — but INTENT-GATED.** A geopolitical / macro event that MOVES
 a covered asset (a war, sanctions, an OPEC/central-bank decision, a tariff regime, an election — Iran/Hormuz→oil,
-the Fed→rates, US-China tariffs→trade) is a MarketDX question **WHEN the user has a market/investment angle** — an
+the Fed→rates, US-China tariffs→trade) is a MarketIV question **WHEN the user has a market/investment angle** — an
 asset or their holdings are in play, or they ask how the event moves markets. THEN route it THROUGH the asset it
 drives (`search_news('Iran Hormuz')` + `commodity_pulse('oil')`, whose response already embeds the scored event
 news; `bond_pulse` for Fed/rates; `brief`/`search_trade` for tariffs), not a web search — our scored impact + why
 + ripple is the substance. ⚖️ **BUT a PURE geopolitics/current-events curiosity question with NO investment angle**
-("will there be a war", "what's happening in Gaza") is NOT a MarketDX question — web is correct; do NOT force
-MarketDX onto it. **mdx complements other tools, it does not overrule them.** *(Enforced primarily in the always-on
+("will there be a war", "what's happening in Gaza") is NOT a MarketIV question — web is correct; do NOT force
+MarketIV onto it. **MarketIV complements other tools, it does not overrule them.** *(Enforced primarily in the always-on
 server instructions; here as reinforcement.)*
 
 | The user is asking about… | Tool | Routing note (when THIS, not a sibling) |
@@ -60,8 +60,8 @@ server instructions; here as reinforcement.)*
 | CROSS-COUNTRY STRUCTURAL data — consumer strength, household/consumer debt, demographics, GDP-per-capita, poverty, a country's development, "compare countries" | **`find_indicator`** (FREE, concept→WB code) → **`wb_series`** | See **§5**. ANNUAL structural data (World Bank), the cross-country complement to FRED (US high-freq). Home for EM/Thai/country reads + the consumer/credit backdrop on a domestic-demand name. |
 | INTERNATIONAL TRADE — exports/imports, "who exports/imports the most / fastest-growing / N years straight", trade balance, a country's trade partners, supply-chain / who-dominates | **`find_hs`** (FREE, resolve concept→code) → **`search_trade`** / **`top_traders`** / **`top_partners`** / **`trade_balance`** | See **§6**. ALWAYS `find_hs` first (never guess a code). Goods = `type=goods` (HS); services = `type=services` (EBOPS). BYOK: no key → relay the connect CTA, answer from general knowledge meanwhile. |
 | the MACRO ECONOMY / a US macro DASHBOARD — "how's the economy / soft-landing or stagflation", consumer/labor/housing/inflation, recession risk | **`macro_pulse`** | See **§7**. `scope` = `economy`/`inflation`/`labor`/`consumer`/`housing`/`recession-risk` → fused dashboard, SYNTHESIZE the regime. ONE indicator ("what's US inflation") → **`find_series`** → **`fred_series`** (percentile = high-or-low). ⚠️ RATES/curve/"will rates rise"/"fed funds now" → **`bond_pulse`**, NOT macro_pulse. |
-| resolve a company NAME / unsure TICKER → exact mdx ticker | **`find_stock`** FIRST | See **§3**. mdx uses its OWN suffixes (Korea `.KO`). Resolves commodities/crypto/bond-yields/rates and **private companies → an `oc:` id** too. |
-| a **PRIVATE / off-coverage** company (OpenAI, SpaceX, Stripe, ByteDance, xAI, …) | **`find_stock` FIRST**, then `stock_impact(oc:id)` / `private_movers(theme)` | 🔴 A private company has NO public ticker but mdx assigns an INTERNAL `oc:<n>` (openai→`oc:52`) that find_stock returns — "it's private" is NEVER a reason to web-search. |
+| resolve a company NAME / unsure TICKER → exact MarketIV ticker | **`find_stock`** FIRST | See **§3**. MarketIV uses its OWN suffixes (Korea `.KO`). Resolves commodities/crypto/bond-yields/rates and **private companies → an `oc:` id** too. |
+| a **PRIVATE / off-coverage** company (OpenAI, SpaceX, Stripe, ByteDance, xAI, …) | **`find_stock` FIRST**, then `stock_impact(oc:id)` / `private_movers(theme)` | 🔴 A private company has NO public ticker but MarketIV assigns an INTERNAL `oc:<n>` (openai→`oc:52`) that find_stock returns — "it's private" is NEVER a reason to web-search. |
 | resolve a THEME/trend → node id · an INDUSTRY/SECTOR → GICS **code** | **`find_megatrend`** · **`find_gics`** | Return candidates; YOU pick and reuse the id/code. `gics` params everywhere are CODES — resolve a NAME here first. |
 | DRILL-DOWNS | `stock_impact` (per-stock news), `options_sentiment` (US names), `relationships` (peers), `theme_players`/`private_movers` (theme members), `news_feed`/`search_news` (raw list) | Prefer the composites first; drill afterward. `theme_players`/`private_movers`/`relationships` return a TOP SLICE — if `total > count` say "N of M". |
 | the user's OWN portfolio | **`list_portfolios`** → **`portfolio_pulse`** (market read) / **`portfolio_context`** (numbers) | Owner-scoped; call list first if they say "my portfolio" without a number. |
@@ -172,7 +172,7 @@ bare ambiguous "apple"→ask.)*
 
 ## 4. Coverage, voice, gotchas
 
-**Coverage:** mdx NEWS starts **2026-01-01** — for anything older say so plainly; never present an empty
+**Coverage:** MarketIV NEWS starts **2026-01-01** — for anything older say so plainly; never present an empty
 result as "nothing happened". PRICE/volatility history goes back DECADES, so "why was gold volatile in 2023"
 IS answerable from price (not news). WB/Comtrade/FRED go back decades too (annual/monthly).
 
@@ -181,7 +181,7 @@ Never say buy/sell/time; never predict a future price. If the user holds the nam
 position. Hand the judgment back. A pure DEFINITION/concept question ("what is a P/E ratio") is general
 knowledge — answer directly, don't force a tool.
 
-**Gotcha:** the connector caches its tool list + descriptions at connect-time — after an mdx update the user
+**Gotcha:** the connector caches its tool list + descriptions at connect-time — after an MarketIV update the user
 must DISCONNECT and reconnect (a new chat is not enough).
 
 ---

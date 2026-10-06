@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from typing import Callable, Dict, List, Optional, Union
 
-from .errors import MarketDXError
+from .errors import MarketIVError
 
 
 def slugify(s: str) -> str:
@@ -58,5 +58,5 @@ class Taxonomy:
             return hits[0][1]
         if len(hits) > 1:
             opts = ", ".join(sorted(slug for slug, _ in hits)[:8])
-            raise MarketDXError(f"megatrend {value!r} is ambiguous — matches: {opts}. Use a fuller name or the numeric id.")
-        raise MarketDXError(f"megatrend {value!r} not found. Pass a valid trend name, slug, or node id (see mdx.megatrends()).")
+            raise MarketIVError(f"megatrend {value!r} is ambiguous — matches: {opts}. Use a fuller name or the numeric id.")
+        raise MarketIVError(f"megatrend {value!r} not found. Pass a valid trend name, slug, or node id (see mdx.megatrends()).")

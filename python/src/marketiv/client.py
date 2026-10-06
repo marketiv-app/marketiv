@@ -1,4 +1,4 @@
-"""The MarketDX client — the financial impact graph in a few lines."""
+"""The MarketIV client — the financial impact graph in a few lines."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from .models import (
 from .pagination import Page
 from .taxonomy import Taxonomy
 
-DEFAULT_BASE_URL = "https://api.marketdx.app"
+DEFAULT_BASE_URL = "https://api.marketiv.app"
 
 NodeRef = Union[int, str, None]  # id | slug | name
 
@@ -31,12 +31,12 @@ def _cap(limit: Optional[int], max_items: Optional[int]) -> Optional[int]:
     return max_items if max_items is not None else limit
 
 
-class MarketDX:
-    """Client for the MarketDX Data API.
+class MarketIV:
+    """Client for the MarketIV Data API.
 
     ```python
-    from marketdx import MarketDX
-    mdx = MarketDX(api_key="avn_live_…")
+    from marketiv import MarketIV
+    mdx = MarketIV(api_key="avn_live_…")
     for s in mdx.news(megatrend="ai-power", impact="indirect"):
         print(s.title, [(e.name, e.impact.net_direction) for e in s.entities])
     ```
@@ -44,7 +44,7 @@ class MarketDX:
 
     def __init__(self, api_key: str, *, base_url: str = DEFAULT_BASE_URL, timeout: float = 30.0) -> None:
         if not api_key:
-            raise ValueError("api_key is required — get one at https://marketdx.app")
+            raise ValueError("api_key is required — get one at https://marketiv.app")
         self._http = Transport(base_url, api_key, timeout=timeout)
         self._taxonomy = Taxonomy(lambda: self._get("/v1/megatrends").data.get("nodes", []))
 
@@ -80,7 +80,7 @@ class MarketDX:
         limit: Optional[int] = 50,
         max_items: Optional[int] = None,
     ) -> "Page":
-        """News signals, one :class:`~marketdx.models.Signal` per event. Auto-paginated.
+        """News signals, one :class:`~marketiv.models.Signal` per event. Auto-paginated.
 
         ``limit`` caps how many signals you get back (default 50; pass ``limit=None`` to walk the
         **entire** match set — mind the credit cost on a broad feed). ``max_items`` is a deprecated
@@ -317,7 +317,7 @@ class MarketDX:
     def close(self) -> None:
         self._http.close()
 
-    def __enter__(self) -> "MarketDX":
+    def __enter__(self) -> "MarketIV":
         return self
 
     def __exit__(self, *exc: object) -> None:
@@ -327,7 +327,7 @@ class MarketDX:
 class MegatrendRef:
     """A bound megatrend node — its members (listed + off-coverage)."""
 
-    def __init__(self, client: MarketDX, node_id: Optional[int]) -> None:
+    def __init__(self, client: MarketIV, node_id: Optional[int]) -> None:
         self._c = client
         self.node_id = node_id
 
@@ -380,7 +380,7 @@ class MegatrendRef:
 
 
 class GicsRef:
-    def __init__(self, client: MarketDX, code: str) -> None:
+    def __init__(self, client: MarketIV, code: str) -> None:
         self._c = client
         self.code = code
 
@@ -392,7 +392,7 @@ class GicsRef:
 
 
 class StockRef:
-    def __init__(self, client: MarketDX, ticker: str) -> None:
+    def __init__(self, client: MarketIV, ticker: str) -> None:
         self._c = client
         self.ticker = ticker
 
@@ -401,7 +401,7 @@ class StockRef:
              exclude_noise: Optional[bool] = None, from_: Optional[str] = None, to: Optional[str] = None,
              order_by: Optional[str] = None, collapse: Optional[bool] = None,
              lang: Optional[str] = None, limit: Optional[int] = 50, max_items: Optional[int] = None) -> "Page":
-        """This stock's OWN impact timeline (:class:`~marketdx.models.StockNews`): each article
+        """This stock's OWN impact timeline (:class:`~marketiv.models.StockNews`): each article
         + the stock's per-article ``impact`` (net_direction + aspects), ``trend``, and
         ``relevance``. No ``entities[]`` — the stock is the subject; use ``mdx.news()`` for the
         full entity graph of an article. Filter with ``direction`` / ``aspect`` / ``min_relevance``

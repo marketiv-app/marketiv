@@ -1,8 +1,8 @@
 {
-  "name": "marketdx-impact-signals-sample",
-  "title": "MarketDX — Financial Impact Signals (sample)",
-  "description": "A bounded sample of the MarketDX financial impact graph: richly-labeled news→market impact across stocks, commodities, FX, crypto, and private companies. See README.md and SCHEMA.md. Live API: https://marketdx.app",
-  "homepage": "https://marketdx.app",
+  "name": "marketiv-impact-signals-sample",
+  "title": "MarketIV — Financial Impact Signals (sample)",
+  "description": "A bounded sample of the MarketIV financial impact graph: richly-labeled news→market impact across stocks, commodities, FX, crypto, and private companies. See README.md and SCHEMA.md. Live API: https://marketiv.app",
+  "homepage": "https://marketiv.app",
   "licenses": [{"name": "CC-BY-4.0", "title": "Creative Commons Attribution 4.0", "path": "https://creativecommons.org/licenses/by/4.0/"}],
   "keywords": ["finance", "news", "market-impact", "megatrends", "semiconductors", "ai", "commodities", "forex", "crypto", "private-companies", "knowledge-graph"],
   "resources": [

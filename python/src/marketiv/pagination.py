@@ -79,7 +79,7 @@ class Page:
         try:
             import pandas as pd
         except ImportError as e:  # pragma: no cover
-            raise ImportError("to_df() needs pandas — `pip install marketdx[pandas]`") from e
+            raise ImportError("to_df() needs pandas — `pip install marketiv[pandas]`") from e
         kw = {**self._row_kwargs, **row_kwargs}
         rows: List[Dict[str, Any]] = []
         for item in self:

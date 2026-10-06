@@ -2,7 +2,7 @@
 dataset "speak one language" without duplicating a hand-maintained copy.
 
 Asserts three things agree:
-  • SDK  — the `Literal`/tuple vocabularies in `python/src/marketdx/enums.py`
+  • SDK  — the `Literal`/tuple vocabularies in `python/src/marketiv/enums.py`
   • dataset — the `constraints.enum`s in `datasets/datapackage.json` (offline snapshot)
   • API  — the live `/v1/enums` values (the runtime source of truth)   [needs MDX_KEY]
 
@@ -24,9 +24,9 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "python" / "src"))
 
-from marketdx import enums                       # noqa: E402
-from marketdx.client import DEFAULT_BASE_URL     # noqa: E402
-from marketdx.models import SIGNAL_COLUMNS       # noqa: E402
+from marketiv import enums                       # noqa: E402
+from marketiv.client import DEFAULT_BASE_URL     # noqa: E402
+from marketiv.models import SIGNAL_COLUMNS       # noqa: E402
 
 DATAPACKAGE = json.loads((ROOT / "datasets" / "datapackage.json").read_text())
 
@@ -71,18 +71,18 @@ def test_signal_columns_match_impact_signals_schema():
 
 
 def test_base_url_is_the_api_domain():
-    assert DEFAULT_BASE_URL == "https://api.marketdx.lab.ai"
+    assert DEFAULT_BASE_URL == "https://api.marketiv.app"
     llms = (ROOT / "datasets" / "llms.txt").read_text()
-    assert "api.marketdx.lab.ai" in llms, "dataset 'Go live' URL should match the SDK base"
+    assert "api.marketiv.app" in llms, "dataset 'Go live' URL should match the SDK base"
 
 
 # ── SDK ≡ live API (needs a key — skips otherwise) ────────────────────────────
 
 @pytest.mark.skipif(not os.environ.get("MDX_KEY"), reason="set MDX_KEY for live /v1/enums checks")
 def test_sdk_matches_live_enums():
-    from marketdx import MarketDX
+    from marketiv import MarketIV
 
-    api = MarketDX(api_key=os.environ["MDX_KEY"]).enums()
+    api = MarketIV(api_key=os.environ["MDX_KEY"]).enums()
 
     def values(key: str) -> set[str]:
         vs = api[key]["values"]

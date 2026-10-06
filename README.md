@@ -1,4 +1,4 @@
-<h1 align="center">MarketDX</h1>
+<h1 align="center">MarketIV</h1>
 
 <p align="center">
   <b>The financial impact graph.</b><br>
@@ -8,14 +8,14 @@
 </p>
 
 <p align="center">
-  <a href="https://marketdx.lab.ai/playground"><b>▶ Live playground</b></a> ·
-  <a href="https://marketdx.lab.ai"><b>Docs & pricing</b></a> ·
+  <a href="https://marketiv.app/playground"><b>▶ Live playground</b></a> ·
+  <a href="https://marketiv.app"><b>Docs & pricing</b></a> ·
   <a href="datasets/"><b>Sample dataset ↓</b></a>
 </p>
 
 ---
 
-Most feeds give you a headline and a sentiment score. MarketDX labels **every affected entity on every
+Most feeds give you a headline and a sentiment score. MarketIV labels **every affected entity on every
 event, across many dimensions** — 10 causal channels (demand · supply · regulation · tariff · competition
 · pricing · capital · technology · geopolitics · monetary), per-entity direction & relevance, epicenter
 **and** ripple, across **five asset classes including non-listed companies** ticker feeds structurally
@@ -43,37 +43,37 @@ can't see, plus the **ripple** into non-obvious names.
 
 | | | |
 |---|---|---|
-| 📊 [**`datasets/`**](datasets/) | **A free sample** of the impact graph — 4,000+ labeled signals, every angle the [playground](https://marketdx.lab.ai/playground) answers. Start here. | ✅ available |
-| 🐍 [**`python/`**](python/) | The official Python SDK — the graph in three lines. **`pip install marketdx`** | ✅ available |
+| 📊 [**`datasets/`**](datasets/) | **A free sample** of the impact graph — 4,000+ labeled signals, every angle the [playground](https://marketiv.app/playground) answers. Start here. | ✅ available |
+| 🐍 [**`python/`**](python/) | The official Python SDK — the graph in three lines. **`pip install marketiv`** | ✅ available |
 | 🔌 [**`mcp/`**](mcp/) | MCP server — give your AI agent the financial impact graph. | 🔜 soon |
 
 New here? → **[browse the sample dataset](datasets/)** (no signup), then
-**[try it live](https://marketdx.lab.ai/playground)**.
+**[try it live](https://marketiv.app/playground)**.
 
 ## Quickstart
 
-**See the data** — no signup: [browse the sample dataset](datasets/) or the [live playground](https://marketdx.lab.ai/playground).
+**See the data** — no signup: [browse the sample dataset](datasets/) or the [live playground](https://marketiv.app/playground).
 
 **Use it in code** — the official Python SDK:
 
 ```bash
-pip install marketdx
+pip install marketiv
 ```
 
 ```python
-from marketdx import MarketDX
+from marketiv import MarketIV
 
-mdx = MarketDX(api_key="…")                 # free key at marketdx.lab.ai
+mdx = MarketIV(api_key="…")                 # free key at marketiv.app
 for s in mdx.news(megatrend="ai-power", impact="indirect"):
     print(s.title, [(e.name, e.impact.net_direction) for e in s.entities])
 ```
 
 Full SDK docs → [`python/`](python/).
 
-**Free to explore** — the [sample dataset](datasets/) and [playground](https://marketdx.lab.ai/playground)
-need no signup, and the API has a free tier. Paid plans unlock full & live coverage — see [pricing](https://marketdx.lab.ai).
+**Free to explore** — the [sample dataset](datasets/) and [playground](https://marketiv.app/playground)
+need no signup, and the API has a free tier. Paid plans unlock full & live coverage — see [pricing](https://marketiv.app).
 
 ## License
 
 Sample data under [CC BY 4.0](datasets/LICENSE); code (SDK, MCP) under MIT. See each directory.
-Built by **[MarketDX](https://marketdx.lab.ai)** — *democratizing financial data.*
+Built by **[MarketIV](https://marketiv.app)** — *democratizing financial data.*

@@ -191,7 +191,7 @@ class StockNews:
     Here the stock IS the subject — its per-article impact lives in ``impact``
     (net_direction + aspects), with the article's ``trend`` and ``relevance``.
     There is no ``entities[]`` (this endpoint is stock-centric); for the full
-    entity graph of an article, use :meth:`MarketDX.news`.
+    entity graph of an article, use :meth:`MarketIV.news`.
     """
 
     title: Optional[str]

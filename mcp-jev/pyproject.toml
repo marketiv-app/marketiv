@@ -1,19 +1,19 @@
 [project]
-name = "marketdx-mcp"
+name = "marketiv-mcp"
 version = "0.1.0"
-description = "MCP server for the MarketDX financial-impact graph (news→impact across stocks, commodities, FX, crypto, and private companies)."
+description = "MCP server for the MarketIV financial-impact graph (news→impact across stocks, commodities, FX, crypto, and private companies)."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 dependencies = [
     "mcp>=1.8.0,<2",        # >=1.8 streamable-http; <2 — 2.0.0 moved mcp.server.fastmcp (breaks import)
-    "marketdx>=0.14.0",
+    "marketiv>=0.16.0",
     "openai>=1.0.0",        # deepseek is OpenAI-compatible (server-side composite-tool LLM)
     "uvicorn>=0.30.0",      # ASGI server for the hosted (MCP_TRANSPORT=http) mode
 ]
 
 [project.scripts]
-marketdx-mcp = "server:main"
+marketiv-mcp = "server:main"
 
 [build-system]
 requires = ["hatchling"]

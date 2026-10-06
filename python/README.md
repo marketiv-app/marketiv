@@ -1,4 +1,4 @@
-<h1 align="center">marketdx</h1>
+<h1 align="center">marketiv</h1>
 
 <p align="center">
   <b>The financial impact graph, in Python.</b><br>
@@ -8,24 +8,24 @@
 </p>
 
 <p align="center">
-  <a href="https://marketdx.app/playground"><b>▶ Live playground</b></a> ·
-  <a href="https://marketdx.app">Docs & pricing</a> ·
-  <a href="https://github.com/MarketDX/marketdx/tree/main/datasets">Sample dataset</a>
+  <a href="https://marketiv.app/playground"><b>▶ Live playground</b></a> ·
+  <a href="https://marketiv.app">Docs & pricing</a> ·
+  <a href="https://github.com/MarketIV/marketiv/tree/main/datasets">Sample dataset</a>
 </p>
 
 ---
 
 ```bash
-pip install marketdx          # add [pandas] for .to_df():  pip install "marketdx[pandas]"
+pip install marketiv          # add [pandas] for .to_df():  pip install "marketiv[pandas]"
 ```
 
-**An API key is required.** Create a free one at **https://marketdx.app** (sign in → *API keys*), then
+**An API key is required.** Create a free one at **https://marketiv.app** (sign in → *API keys*), then
 pass it to the client (keep it out of source control — read it from an env var / secret in real apps):
 
 ```python
-from marketdx import MarketDX
+from marketiv import MarketIV
 
-mdx = MarketDX(api_key="avn_live_…")                     # your key from https://marketdx.app
+mdx = MarketIV(api_key="avn_live_…")                     # your key from https://marketiv.app
 for s in mdx.news(megatrend="ai-power", impact="indirect"):
     print(s.title, [(e.name, e.impact.net_direction) for e in s.entities])
 ```
@@ -34,8 +34,8 @@ That's the whole graph: every news event, every affected entity, labeled with **
 **relevance**, the causal **aspect** (the *why*), and whether it's the **epicenter** or a **ripple** —
 across five asset classes, **including private companies** ticker feeds can't see.
 
-> **No key yet?** Explore everything with zero signup in the [playground](https://marketdx.app/playground),
-> then grab a free key at **[https://marketdx.app](https://marketdx.app)**. Every request is
+> **No key yet?** Explore everything with zero signup in the [playground](https://marketiv.app/playground),
+> then grab a free key at **[https://marketiv.app](https://marketiv.app)**. Every request is
 > authenticated with your key (`Authorization: Bearer <key>`) and metered in credits.
 
 ## Why the SDK (not just `requests`)
@@ -93,7 +93,7 @@ print([a["name"] for a in brief["top_assets"]])          # commodity / forex / c
 
 ## Straight to pandas
 
-`.to_df()` returns the **same columns as the [sample dataset](https://github.com/MarketDX/marketdx/tree/main/datasets)** (`impact-signals.csv`) — so
+`.to_df()` returns the **same columns as the [sample dataset](https://github.com/MarketIV/marketiv/tree/main/datasets)** (`impact-signals.csv`) — so
 anything you prototyped on the free CSV runs unchanged on the live graph:
 
 ```python
@@ -237,7 +237,7 @@ mdx.account()   # {'plan': …, 'credits': {'balance', 'daily_quota', 'resets_at
 ```
 
 ```python
-from marketdx.errors import QuotaError, RateLimitError
+from marketiv.errors import QuotaError, RateLimitError
 
 try:
     signals = mdx.news(megatrend="ai-power").to_list()
@@ -254,8 +254,8 @@ source of truth, so new values work without upgrading the SDK. The live list: `m
 
 `news` · `news_search` · `news_types` · `megatrends` (`.stocks` / `.off_coverage`) · `gics` (`.stocks`) ·
 `stocks` (search + screener) · `stock` (`.news` / `.competitors` / `.peers`) · `enums` · `account`.
-Full API docs: [marketdx.app](https://marketdx.app).
+Full API docs: [marketiv.app](https://marketiv.app).
 
 ## License
 
-MIT. Built by [MarketDX](https://marketdx.app) — *democratizing financial data.*
+MIT. Built by [MarketIV](https://marketiv.app) — *democratizing financial data.*

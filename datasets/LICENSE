@@ -1,6 +1,6 @@
 Attribution 4.0 International (CC BY 4.0)
 
-This sample dataset is licensed by MarketDX under the Creative Commons
+This sample dataset is licensed by MarketIV under the Creative Commons
 Attribution 4.0 International License.
 
 You are free to:
@@ -9,8 +9,8 @@ You are free to:
              even commercially.
 
 Under the following terms:
-  - Attribution — You must give appropriate credit ("MarketDX — Financial
-    Impact Graph", with a link to https://marketdx.app and to this
+  - Attribution — You must give appropriate credit ("MarketIV — Financial
+    Impact Graph", with a link to https://marketiv.app and to this
     repository), provide a link to the license, and indicate if changes were
     made. You may do so in any reasonable manner, but not in any way that
     suggests the licensor endorses you or your use.
@@ -22,4 +22,4 @@ Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
 Human-readable summary: https://creativecommons.org/licenses/by/4.0/
 
 Note: this is a bounded historical SAMPLE for evaluation. It is not the live or
-complete MarketDX Impact Graph. See README.md.
+complete MarketIV Impact Graph. See README.md.

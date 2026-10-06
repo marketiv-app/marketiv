@@ -1,8 +1,8 @@
 """Typed exceptions.
 
 Every non-2xx response maps to one of these so callers branch on the *kind* of
-failure without inspecting status codes. All inherit from :class:`MarketDXError`
-— ``except MarketDXError`` catches everything.
+failure without inspecting status codes. All inherit from :class:`MarketIVError`
+— ``except MarketIVError`` catches everything.
 """
 
 from __future__ import annotations
@@ -10,7 +10,7 @@ from __future__ import annotations
 from typing import Optional
 
 
-class MarketDXError(Exception):
+class MarketIVError(Exception):
     """Base class for every SDK error."""
 
     def __init__(
@@ -30,19 +30,19 @@ class MarketDXError(Exception):
         self.note = note
 
 
-class AuthError(MarketDXError):
+class AuthError(MarketIVError):
     """401 — the API key is missing or invalid."""
 
 
-class QuotaError(MarketDXError):
+class QuotaError(MarketIVError):
     """402 — the daily credit quota is exhausted.
 
-    Call :meth:`MarketDX.account` (free + unmetered) any time — even while 402 —
+    Call :meth:`MarketIV.account` (free + unmetered) any time — even while 402 —
     to read your balance, quota, and reset.
     """
 
 
-class RateLimitError(MarketDXError):
+class RateLimitError(MarketIVError):
     """429 — per-minute rate limit hit. ``retry_after`` = seconds to wait."""
 
     def __init__(self, message: str, *, retry_after: Optional[float] = None, **kw: object) -> None:
@@ -50,13 +50,13 @@ class RateLimitError(MarketDXError):
         self.retry_after = retry_after
 
 
-class BadRequestError(MarketDXError):
+class BadRequestError(MarketIVError):
     """400 — invalid parameters (unknown enum value, bad id, contradictory args)."""
 
 
-class NotFoundError(MarketDXError):
+class NotFoundError(MarketIVError):
     """404 — the requested resource does not exist."""
 
 
-class ServerError(MarketDXError):
+class ServerError(MarketIVError):
     """5xx — a server-side error (detail is logged server-side, never leaked)."""

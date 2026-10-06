@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Load the MarketDX sample and walk every angle from the README — then go live.
+Load the MarketIV sample and walk every angle from the README — then go live.
 
     python3 examples/loader.py                              # analyze locally (no key)
-    MARKETDX_KEY=avn_live_... python3 examples/loader.py    # + one live API call at the end
+    MARKETIV_KEY=avn_live_... python3 examples/loader.py    # + one live API call at the end
 
 Pure stdlib. The sample is a TASTE — the last step shows the same shape, live, from the API.
 """
@@ -77,12 +77,12 @@ for lab, rows in _group(disc, "question").items():
 # ---- now do it LIVE ----
 print("\n" + "=" * 64)
 print("This was a fixed sample. The SAME shape, live, from the API:")
-key = os.environ.get("MARKETDX_KEY")
-url = ("https://api.marketdx.app"
+key = os.environ.get("MARKETIV_KEY") or os.environ.get("MARKETDX_KEY")  # MARKETDX_KEY = pre-rebrand name
+url = ("https://api.marketiv.app"
        "/v1/news?megatrend=10040000&include=entities,impact&impact=indirect&limit=3")
 if not key:
-    print("  (set MARKETDX_KEY to run it — free tier at https://marketdx.app)")
-    print(f"  curl -H 'Authorization: Bearer $MARKETDX_KEY' \\\n    '{url}'")
+    print("  (set MARKETIV_KEY to run it — free tier at https://marketiv.app)")
+    print(f"  curl -H 'Authorization: Bearer $MARKETIV_KEY' \\\n    '{url}'")
 else:
     req = urllib.request.Request(url, headers={"Authorization": f"Bearer {key}"})
     d = json.loads(urllib.request.urlopen(req, timeout=60).read())
@@ -90,4 +90,4 @@ else:
     for e in d.get("results", []):
         ents = ", ".join(x.get("ticker") or x.get("name") for x in e.get("entities", [])[:4])
         print(f"    · {e['title'][:58]}  [{ents}]")
-    print("\n  → full docs & higher limits: https://marketdx.app")
+    print("\n  → full docs & higher limits: https://marketiv.app")

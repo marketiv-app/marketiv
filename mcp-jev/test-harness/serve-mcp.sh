@@ -25,6 +25,6 @@ if [ -f "$ENVF" ]; then set -a; . "$ENVF"; set +a; fi
 lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | awk 'NR>1{print $2}' | xargs -r kill 2>/dev/null || true
 
 echo "serve-mcp: port=$PORT backend=$BASE  (python 3.12, mcp<2)  log=$LOG"
-exec env MCP_TRANSPORT=http PORT="$PORT" MARKETDX_BASE_URL="$BASE" TYPESAFE_API_KEY="${TYPESAFE_API_KEY:-}" DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY:-}" \
-  uv run --no-project --python 3.12 --with 'mcp<2',marketdx,openai,uvicorn \
+exec env MCP_TRANSPORT=http PORT="$PORT" MARKETIV_BASE_URL="$BASE" TYPESAFE_API_KEY="${TYPESAFE_API_KEY:-}" DEEPSEEK_API_KEY="${DEEPSEEK_API_KEY:-}" \
+  uv run --no-project --python 3.12 --with 'mcp<2',openai,uvicorn --with-editable "$HERE/../../python" \
   python "$SRV"

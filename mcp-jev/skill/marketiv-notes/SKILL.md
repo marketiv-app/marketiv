@@ -1,5 +1,5 @@
 ---
-name: marketdx-notes
+name: marketiv-notes
 description: >-
   Use whenever the user ASKS a substantive investment or finance question whose ANSWER is worth keeping —
   a concept or mechanism question (what is a P/E ratio, what is EBITDA, how does a chip foundry work, how
@@ -13,7 +13,7 @@ description: >-
 
 # Investment notes — capture & recall the user's knowledge base
 
-The user keeps a personal investment KNOWLEDGE BASE through the mdx notes tools (`write_note`,
+The user keeps a personal investment KNOWLEDGE BASE through the MarketIV notes tools (`write_note`,
 `query_notes`, `get_note`). Its purpose: fight fragmented knowledge — capture substantive investment
 knowledge, organized + entity-linked + retrievable later, and fuse it with live reads. This behavior is
 NOT gated on fetching data: even a pure concept explanation (no tool call) is worth offering to keep.

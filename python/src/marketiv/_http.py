@@ -1,6 +1,6 @@
 """HTTP transport — auth, request, and status→exception mapping.
 
-Kept tiny and private. The public surface is :class:`marketdx.MarketDX`.
+Kept tiny and private. The public surface is :class:`marketiv.MarketIV`.
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ from . import __version__
 from .errors import (
     AuthError,
     BadRequestError,
-    MarketDXError,
+    MarketIVError,
     NotFoundError,
     QuotaError,
     RateLimitError,
@@ -41,7 +41,7 @@ class Transport:
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Accept": "application/json",
-                "User-Agent": f"marketdx-python/{__version__}",
+                "User-Agent": f"marketiv-python/{__version__}",
             },
         )
 
@@ -51,7 +51,7 @@ class Transport:
         try:
             r = self._client.get(path, params=clean)
         except httpx.RequestError as e:  # network/DNS/timeout — not an HTTP status
-            raise MarketDXError(f"request failed: {e}") from e
+            raise MarketIVError(f"request failed: {e}") from e
         if r.is_success:
             return Response(r.json(), r.headers)
         raise _to_error(r)
@@ -75,7 +75,7 @@ def _int(v: Optional[str]) -> Optional[int]:
         return None
 
 
-def _to_error(r: httpx.Response) -> MarketDXError:
+def _to_error(r: httpx.Response) -> MarketIVError:
     note: Optional[str] = None
     try:
         body = r.json()
@@ -98,7 +98,7 @@ def _to_error(r: httpx.Response) -> MarketDXError:
         return RateLimitError(full, status=s, response=r, note=note, retry_after=_float(r.headers.get("retry-after")))
     if s >= 500:
         return ServerError(full, status=s, response=r, note=note)
-    return MarketDXError(full, status=s, response=r, note=note)
+    return MarketIVError(full, status=s, response=r, note=note)
 
 
 def _float(v: Optional[str]) -> Optional[float]:

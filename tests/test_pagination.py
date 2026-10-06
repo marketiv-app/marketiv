@@ -12,8 +12,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python" / "src"))
 
-from marketdx.client import _cap                # noqa: E402
-from marketdx.pagination import Page            # noqa: E402
+from marketiv.client import _cap                # noqa: E402
+from marketiv.pagination import Page            # noqa: E402
 
 
 class _Resp:

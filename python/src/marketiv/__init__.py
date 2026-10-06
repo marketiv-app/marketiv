@@ -1,21 +1,21 @@
-"""MarketDX — the financial impact graph, in Python.
+"""MarketIV — the financial impact graph, in Python.
 
-    from marketdx import MarketDX
-    mdx = MarketDX(api_key="…")
+    from marketiv import MarketIV
+    mdx = MarketIV(api_key="…")
     for s in mdx.news(megatrend="ai-power", impact="indirect"):
         ...
 """
 
 from __future__ import annotations
 
-__version__ = "0.10.2"
+__version__ = "0.16.0"
 
 from . import enums
-from .client import GicsRef, MarketDX, MegatrendRef, StockRef
+from .client import GicsRef, MarketIV, MegatrendRef, StockRef
 from .errors import (
     AuthError,
     BadRequestError,
-    MarketDXError,
+    MarketIVError,
     NotFoundError,
     QuotaError,
     RateLimitError,
@@ -23,7 +23,12 @@ from .errors import (
 )
 from .models import Aspect, Company, Entity, GicsCode, Impact, MegatrendNode, MemberStock, Signal, StockNews
 
+# Pre-rebrand names (MarketDX → MarketIV), kept as aliases.
+MarketDX = MarketIV
+MarketDXError = MarketIVError
+
 __all__ = [
+    "MarketIV",
     "MarketDX",
     "MegatrendRef",
     "GicsRef",
@@ -40,6 +45,7 @@ __all__ = [
     "MegatrendNode",
     "GicsCode",
     # errors
+    "MarketIVError",
     "MarketDXError",
     "AuthError",
     "QuotaError",

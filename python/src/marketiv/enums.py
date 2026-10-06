@@ -4,7 +4,7 @@ These `Literal` types give your editor/`mypy` autocomplete + typo-flagging at
 author-time (before any network call). At *runtime* the SDK does NOT validate
 against them — it passes your value straight to the API, which is the single
 source of truth (`GET /v1/enums`) and returns a clear ``400`` (→
-:class:`marketdx.errors.BadRequestError`) if the value is wrong.
+:class:`marketiv.errors.BadRequestError`) if the value is wrong.
 
 Why not hard-validate here? Forward-compatibility. When the API gains a new
 value (e.g. the ``monetary`` / ``tariff`` aspects added mid-2026), an old SDK
