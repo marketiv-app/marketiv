@@ -1,4 +1,4 @@
-"""MarketIV MCP server — gives an AI agent the MarketIV financial-impact graph as tools.
+"""Ava Advisor MCP server — gives an AI agent the Ava Advisor financial-impact graph as tools.
 
 Architecture (see docs/product/mcp-server-design.md in the Ava repo):
   • SIMPLE tools  → thin wrappers over the marketiv Python SDK (which calls the metered /v1 API).
@@ -23,21 +23,21 @@ from pydantic import Field, AliasChoices, BaseModel, ConfigDict
 from mcp.server.fastmcp import FastMCP, Context
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
-from marketiv import MarketIV, NotFoundError, MarketIVError
+from marketiv import MarketIV, NotFoundError, MarketIVError   # the SDK keeps its package/class names (internal; PyPI rename later)
 
 # DNS-rebinding protection defaults to a localhost allow-list (it guards a *local* server from
 # browser-driven Host spoofing). We're a hosted API behind Cloud Run TLS with our own per-request
-# Bearer auth, and the Host varies (run.app + mcp.marketiv.app + legacy mcp.marketdx.app) — so disable the Host check here.
+# Bearer auth, and the Host varies (run.app + mcp.ava.fund + legacy mcp.marketdx.app) — so disable the Host check here.
 # Server instructions — the client LLM reads this at connect time. Its main job: stop the client from
-# web-searching topics MarketIV actually covers (esp. COMMODITIES/metals, which agents forget we have).
+# web-searching topics Ava Advisor actually covers (esp. COMMODITIES/metals, which agents forget we have).
 _INSTRUCTIONS = (
-    "MarketIV is a financial news→impact graph: it maps news to the assets and megatrends it actually "
+    "Ava Advisor is a financial news→impact graph: it maps news to the assets and megatrends it actually "
     "moves — direction (+/−), the reason WHY, and the ripple to connected players — across STOCKS, "
     "FOREX, CRYPTO, COMMODITIES (metals like copper & gold, energy like oil & gas, agris, carbon/EU-ETS "
     "allowances, and LME-vs-onshore-China metal variants), GOVERNMENT-BOND YIELDS, MONEY-MARKET RATES, and "
     "PRIVATE / off-coverage companies. For ANY question about news, market impact, or what moved an "
     "asset or theme — INCLUDING commodities and metals (copper, gold, oil, …) — use THESE tools, not a "
-    "web search: MarketIV returns scored per-article impact + the causal 'why' + the ripple that a web "
+    "web search: Ava Advisor returns scored per-article impact + the causal 'why' + the ripple that a web "
     "search cannot. Commodities use a `SYMBOL.COMM` ticker (COPPER.COMM, GOLD.COMM, CARBON_EU.COMM, "
     "NICKEL_LME.COMM) with stock_impact, or just search_news('copper'); some metals have BOTH an "
     "onshore-China (CNY) and an LME (USD) contract, and palm oil a USD (PALMOIL) vs Bursa-MYR (PALMOIL_MY) "
@@ -52,33 +52,33 @@ _INSTRUCTIONS = (
     "plainly, never fabricate or present an empty result as 'nothing happened'. PRICE / volatility "
     "history, by contrast, goes back decades — so 'why was gold volatile in 2023' is answerable from "
     "price even though there's no 2023 news. Any read on how a tradable asset (a stock, ETF, or index) is "
-    "DOING — whatever the phrasing or language — is a MarketIV question: our news→impact + options-"
+    "DOING — whatever the phrasing or language — is a Ava Advisor question: our news→impact + options-"
     "positioning read IS the substance of 'how is it doing' (the WHY it's moving + the market's stance), "
     "which a web search cannot supply. Reach for `asset_pulse(<ticker>)` on these. 🔴 This INCLUDES a "
     "MARKET / INDEX asked in a 'right now / ตอนนี้ / current' phrasing (S&P, Nasdaq, Dow, 'the market'): "
     "map it to its ETF (S&P→SPY · Nasdaq→QQQ · Dow→DIA — WE DO COVER their options + news) and call "
     "`asset_pulse` for the news-impact + positioning that IS 'how it's doing'. A web-searched index LEVEL "
     "is at most ONE supplementary number — NEVER answer a market/index question with only a web level, and "
-    "never skip the MarketIV read (the level alone is not 'how is it doing'). asset_pulse = ONE call returning "
+    "never skip the Ava Advisor read (the level alone is not 'how is it doing'). asset_pulse = ONE call returning "
     "BOTH lenses, so the read is never half-informed. "
     "🔴🔴 This ALSO covers a GEOPOLITICAL / MACRO EVENT or SITUATION that MOVES a covered asset — a war, "
     "sanctions, an OPEC or central-bank decision, a tariff regime, an election (Iran/Hormuz→oil, the "
     "Fed→rates, US-China tariffs→trade) — WHEN the user has a MARKET / INVESTMENT angle (an asset or their "
-    "holdings are in play, or they ask how the event moves markets): THEN it is a MarketIV question, NOT a "
+    "holdings are in play, or they ask how the event moves markets): THEN it is a Ava Advisor question, NOT a "
     "web search — our 2026 news carries"
     "the scored per-article impact + the causal 'why' + the ripple that a web article lacks. Route it THROUGH "
     "the asset it drives: `search_news('Iran Hormuz')` and/or `commodity_pulse('oil')` (whose response already "
     "EMBEDS the scored event news), `bond_pulse` for a Fed/rates event, `brief`/`search_trade` for a tariff "
     "one. Then don't default to web just because it reads as 'geopolitics'; web only supplements a specific "
-    "detail MarketIV lacks (say which came from which). ⚖️ INTENT-GATED though: a PURE geopolitics / "
+    "detail Ava Advisor lacks (say which came from which). ⚖️ INTENT-GATED though: a PURE geopolitics / "
     "current-events CURIOSITY question with NO investment angle ('will there be a war', 'what's happening in "
-    "Gaza') is NOT a MarketIV question — web is correct, do NOT force MarketIV onto it. MarketIV COMPLEMENTS other "
+    "Gaza') is NOT a Ava Advisor question — web is correct, do NOT force Ava Advisor onto it. Ava Advisor COMPLEMENTS other "
     "tools, it does not overrule them. 🔵 But if the subject is a SECTOR / INDUSTRY / THEME "
     "CONCEPT rather than one ticker (semiconductors, tech, energy, banks, AI, clean energy, gold, …) → use "
     "`theme_pulse(<concept>)` instead: it resolves the concept across the THREE independent taxonomies and "
-    "returns every angle that applies, each SEPARATE — the MarketIV megatrend cohort, the GICS-sector "
+    "returns every angle that applies, each SEPARATE — the Ava Advisor megatrend cohort, the GICS-sector "
     "cohort (a different membership), and the tradable ETF's options positioning (it does the concept→ETF "
-    "mapping for you; full 64-ETF set in marketiv://policy). So: a specific TICKER/company → `asset_pulse`; "
+    "mapping for you; full 64-ETF set in avaadvisor://policy). So: a specific TICKER/company → `asset_pulse`; "
     "a sector/theme CONCEPT → `theme_pulse`. ⚠️ For a NON-US company or when unsure of the exact ticker "
     "(esp. Asian/European names — we use our OWN suffixes, Korea=.KO not .KS, so a guess 404s), just pass the "
     "plain NAME to asset_pulse/stock_impact/stock_prices — they resolve it server-side (any asset class incl "
@@ -123,7 +123,7 @@ _INSTRUCTIONS = (
     "'สรุปข่าว commodity' → news_type='commodity_supply'), a country/market, an impact channel (aspect), "
     "a GICS sector, a megatrend, or any AND-mix — use `brief` (the composed 'how is <X> doing right now?' "
     "picture), NOT search_news/news_feed (those return a raw article LIST, not a summary). A sector/trend term "
-    "in `brief`/`theme_pulse` is resolved server-side; follow marketiv://policy for voice, scope, and stance. "
+    "in `brief`/`theme_pulse` is resolved server-side; follow avaadvisor://policy for voice, scope, and stance. "
     "NOTES — the user keeps a personal INVESTMENT KNOWLEDGE BASE via `write_note` (their notes join this "
     "same graph and are retrievable by entity later — the point is to fight scattered knowledge). Act as a "
     "proactive librarian: after a SUBSTANTIVE investment answer — a sector/mechanism explainer, a dated "
@@ -139,7 +139,7 @@ _INSTRUCTIONS = (
     "chit-chat, trivia lookups (e.g. 'what's NVDA's ticker'), or off-topic / non-investment turns; don't "
     "nag more than once, and never save pure filler."
 )
-mcp = FastMCP("marketiv", instructions=_INSTRUCTIONS, website_url="https://marketiv.app",
+mcp = FastMCP("ava-advisor", instructions=_INSTRUCTIONS, website_url="https://ava.fund",
               # stateless_http + json_response: every request is fully self-contained (auth = per-request
               # Bearer key; no in-memory session pinned to an instance) and returns a plain JSON body (no
               # held-open SSE stream). Required for clean horizontal scaling — a stateful session breaks the
@@ -149,7 +149,7 @@ mcp = FastMCP("marketiv", instructions=_INSTRUCTIONS, website_url="https://marke
               json_response=True,
               transport_security=TransportSecuritySettings(enable_dns_rebinding_protection=False))
 _HERE = pathlib.Path(__file__).parent
-# Served at /favicon.ico so clients (Claude's connector card) show the MarketIV mark for this host —
+# Served at /favicon.ico so clients (Claude's connector card) show the Ava Advisor mark for this host —
 # without it, a favicon resolver strips the subdomain and grabs the apex domain's icon.
 _FAVICON = (_HERE / "favicon.ico").read_bytes() if (_HERE / "favicon.ico").exists() else b""
 # Every tool here is READ-ONLY (queries the graph / runs our own LLM — never writes user data). The
@@ -183,11 +183,11 @@ def _dt(desc: str):  # noqa: ANN201 — exact-ticker field
 # reaches for on a single-company ask (measured: clients try `ticker=` first, hit an error, retry with `tickers`).
 def _dts(desc: str):  # noqa: ANN201
     return Field(description=desc, validation_alias=AliasChoices("tickers", "ticker", "symbols", "symbol"))
-_TICKER = "A MarketIV ticker OR a company/asset NAME — the SERVER resolves it (no lookup step). A COMPANY/proper NAME " \
+_TICKER = "A Ava Advisor ticker OR a company/asset NAME — the SERVER resolves it (no lookup step). A COMPANY/proper NAME " \
     "passes AS-IS in any language (茅台/トヨタ/삼성 resolve natively — never translate a name); a generic COMMODITY/SECTOR " \
     "concept must be ENGLISH (黄金→'gold', 原油→'crude oil'). Pass the user's full request in `context` to disambiguate " \
     "('apple' company vs fruit); if still ambiguous you get a `needs_confirmation` with candidates — resolve from " \
-    "conversation or ask, then re-call. Exact tickers pass through (MarketIV suffixes: Korea .KO, Taiwan .TW, commodity .COMM, crypto .CC, FX .FOREX, bond .GB, rate .MM)."
+    "conversation or ask, then re-call. Exact tickers pass through (Ava Advisor suffixes: Korea .KO, Taiwan .TW, commodity .COMM, crypto .CC, FX .FOREX, bond .GB, rate .MM)."
 _TK_CONTEXT = "OPTIONAL but RECOMMENDED — paste the user's FULL request VERBATIM (any language: 'ขอราคาผลไม้ apple', " \
     "'compare Apple and Microsoft stock'). The server uses it to disambiguate which candidate each `ticker` entity " \
     "means (the apple COMPANY vs the fruit COMMODITY; which Samsung). One context per call, shared by all tickers here."
@@ -195,7 +195,7 @@ _WINDOW = "News-recency window: `7d`/`30d`/`90d`/`180d`/`1y` or `mtd`/`qtd`/`ytd
     "(Price history is unaffected — this only scopes the NEWS lens.)"
 _LIMIT = "Max rows (default 20, hard cap 50). Keep SMALL + narrow the scope; page/refine rather than dump — " \
     "heavily-covered assets have hundreds of articles."
-_FROM = "Lower time bound, ISO date `YYYY-MM-DD`. ⚠️ MarketIV NEWS coverage starts 2026-01-01 (nothing before)."
+_FROM = "Lower time bound, ISO date `YYYY-MM-DD`. ⚠️ Ava Advisor NEWS coverage starts 2026-01-01 (nothing before)."
 _TO = "Upper time bound, ISO date `YYYY-MM-DD`."
 _DIRECTION = "Filter by impact direction: `pos` | `neg` | `ambiguous`. Omit → all."
 _COLLAPSE = "Merge near-duplicate stories (same article from many outlets) into one row + `dup_count`. " \
@@ -255,7 +255,7 @@ def _coverage_note(from_: Optional[str]) -> Optional[str]:
     """If a requested range starts before news coverage, a caller-facing warning so the LLM never reads
     an empty/short result as 'no news happened' (it's 'no coverage')."""
     if from_ and str(from_)[:10] < _NEWS_COVERAGE_START:
-        return (f"Requested range starts before MarketIV news coverage (news begins {_NEWS_COVERAGE_START}; "
+        return (f"Requested range starts before Ava Advisor news coverage (news begins {_NEWS_COVERAGE_START}; "
                 "there is NO news before 2026). Results are limited to the covered window — do NOT present an "
                 "empty/short result as 'nothing happened'. Price/volatility history DOES go back decades.")
     return None
@@ -289,8 +289,8 @@ _clients: dict[str, MarketIV] = {}   # key → client (reuse the httpx pool acro
 def mdx() -> MarketIV:
     key = _req_key.get() or os.environ.get("MARKETIV_API_KEY") or os.environ.get("MARKETDX_API_KEY")
     if not key:
-        raise RuntimeError("no MarketIV API key — send 'Authorization: Bearer <key>' (hosted) "
-                           "or set MARKETIV_API_KEY (local). Get one at https://marketiv.app")
+        raise RuntimeError("no Ava Advisor API key — send 'Authorization: Bearer <key>' (hosted) "
+                           "or set MARKETIV_API_KEY (local). Get one at https://ava.fund")
     cli = _clients.get(key)
     if cli is None:
         if len(_clients) > 512:   # coarse bound — MVP; swap for an LRU if it ever matters
@@ -316,7 +316,7 @@ def _check(resp):
 def _parallel_map(fn, items, max_workers: int = 8):
     """Run fn(item) for each item CONCURRENTLY (fan-out, not a serial loop). 🔴 The per-request API key lives in a
     ContextVar (`_req_key`) that worker threads do NOT inherit — so copy THIS (request) thread's context once per
-    item and run each task inside its own copy, or `mdx()` would raise 'no MarketIV API key' in the workers
+    item and run each task inside its own copy, or `mdx()` would raise 'no Ava Advisor API key' in the workers
     (bit us on prod: env-key local runs mask it). Preserves input order."""
     items = list(items)
     if not items:
@@ -762,7 +762,7 @@ def _resolve_fsconcept(q: str, scope_types: tuple = ("field", "ratio", "valuatio
     return {"status": gate, "query": q, "reason": reason, "candidates": top_cands, "confidence": r.get("confidence")}
 
 # ── TICKER resolution — the find_stock refactor: same vector→Jev→gate pattern as _resolve_fsconcept, but the
-#    IDENTITY axis. Turns a bare symbol / company name → the exact MarketIV ticker. It does NOT touch the
+#    IDENTITY axis. Turns a bare symbol / company name → the exact Ava Advisor ticker. It does NOT touch the
 #    canonical head — that is the consuming endpoint's job (financials→head, stock_prices→the literal listing);
 #    a shared resolver must stay identity-only or it would break price/pulse (GOOGL.US≠GOOG.US price). See
 #    resolver-replacement-design.md §13.
@@ -817,7 +817,7 @@ def _ticker_prep(q: str, scope: tuple = ("stock",), country: Optional[str] = Non
     """PREP (retrieval + fast-path + Jev options) for a ticker resolution — NO Jev call. Returns a TERMINAL dict
     (status set: fast-path `resolved` / `no_match`) when no decision is needed, else a `_pending` dict
     {jev_q, scope, options, meta} to feed ONE _jev_pick (single) or a batched _jev_picks (plural).
-    Resolve ONE entity (company name / bare symbol / alias / non-English name) → the exact MarketIV ticker,
+    Resolve ONE entity (company name / bare symbol / alias / non-English name) → the exact Ava Advisor ticker,
     SCOPED to asset `scope`. RETRIEVAL uses `q` (the ENTITY — a company name passes native; a commodity/sector
     concept must be English, per the field contract). `context` = the user's FULL request; it is what JEV judges
     with, so it can tell which candidate the entity means ('apple' the company vs the fruit-commodity). Flow: full
@@ -900,7 +900,7 @@ def _ticker_batch_instr(prep: dict) -> str:
 
 def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = None,
                     context: Optional[str] = None) -> dict:
-    """Resolve ONE entity → the exact MarketIV ticker (SINGLE path — behavior unchanged): prep → one Jev pick →
+    """Resolve ONE entity → the exact Ava Advisor ticker (SINGLE path — behavior unchanged): prep → one Jev pick →
     gate. Returns {status: resolved|reconfirm|no_match, query, ticker?, name?, confidence?, gate?, note?, candidates?}."""
     prep = _ticker_prep(q, scope, country, context)
     if not prep.get("_pending"):
@@ -1406,7 +1406,7 @@ def search_news(q: Annotated[str, _dq("Free-text SEMANTIC news query — a topic
     top = max(sims) if sims else 0.0
     quality = "strong" if top >= _SIM_STRONG else ("weak" if top >= _SIM_WEAK else "none")
     note = _coverage_note(frm) or (None if quality == "strong" else (
-        "Weak/no semantic match — MarketIV likely has no strongly relevant news for this query. Do NOT "
+        "Weak/no semantic match — Ava Advisor likely has no strongly relevant news for this query. Do NOT "
         "present these as evidence; tell the user, and use world knowledge / another tool instead."))
     return {"match_quality": quality, "top_similarity": round(top, 3), "note": note, "results": results}
 
@@ -1668,7 +1668,7 @@ def portfolio_context(portfolio_id: Annotated[int, _d(_PID)],
     period's return/sharpe/drawdown/attribution from the default view — those numbers aren't in it; making
     them up is a hard error. If you haven't fetched a period's window, say you need to fetch it, don't guess.
 
-    HOW TO ANALYZE (research-analyst framing — see marketiv://policy):
+    HOW TO ANALYZE (research-analyst framing — see avaadvisor://policy):
     • Lead with the sharpest thing: a non-empty `flag`, or the biggest concentration / drawdown / tilt.
     • "What drove the return / drawdown / strengths & weaknesses" (for the default OR a window) → read
       `attribution.contributors[]` (per-holding `pnl_contribution` + `pct_of_nav_change` + `held` window;
@@ -1725,7 +1725,7 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
                note_type: Annotated[Optional[Literal["reference","tracking","thesis","decision"]], _d("`reference` (concept/understanding) | `tracking` (dated market read) | `thesis` | `decision`.")] = None,
                category: Annotated[Optional[str], _d("Optional free-text category.")] = None,
                tags: Annotated[Optional[List[str]], _d("Free-text tags for retrieval.")] = None,
-               stocks: Annotated[Optional[List[str]], _d("PRIMARY stocks/assets the note is ABOUT — an exact MarketIV ticker OR a plain NAME the SERVER resolves (any asset class; an ambiguous name → reconfirm). ⚠️ A COMMODITY discussed via the trade tools has only an HS code (rice→1006), NOT a ticker — just put the NAME here ('rice'→resolved to RICE.COMM) so the note links to the commodity.")] = None,
+               stocks: Annotated[Optional[List[str]], _d("PRIMARY stocks/assets the note is ABOUT — an exact Ava Advisor ticker OR a plain NAME the SERVER resolves (any asset class; an ambiguous name → reconfirm). ⚠️ A COMMODITY discussed via the trade tools has only an HS code (rice→1006), NOT a ticker — just put the NAME here ('rice'→resolved to RICE.COMM) so the note links to the commodity.")] = None,
                mentioned_stocks: Annotated[Optional[List[str]], _d("Secondary tickers merely referenced (a peer named in passing).")] = None,
                megatrend_ids: Annotated[Optional[List[int]], _d("ADVANCED — raw megatrend node id(s) if you already hold one (e.g. a theme tool's `megatrend.id`). Normally just name the theme in `gics` and the server routes it to a megatrend.")] = None,
                gics: Annotated[Optional[List[str]], _d("The note's INDUSTRY/SECTOR or THEME — a GICS code OR plain English ('banks', 'semiconductors', 'AI'); the server resolves each and routes a curated theme to a megatrend link. (Derived free if the note names representative stocks.)")] = None,
@@ -1896,13 +1896,13 @@ def create_playlist(name: Annotated[str, _d("The new playlist's display name.")]
 
 @mcp.tool(title="Add to Playlist", annotations=_WRITE)
 def add_to_playlist(playlist_id: Annotated[int, _d("The playlist's id (from list_playlists).")],
-                    tickers: Annotated[List[str], _d("Stocks to add — an EXACT MarketIV ticker (`AAPL.US`, `BTC-USD.CC`) "
+                    tickers: Annotated[List[str], _d("Stocks to add — an EXACT Ava Advisor ticker (`AAPL.US`, `BTC-USD.CC`) "
                         "OR a plain NAME/symbol ('Apple', 'ซัมซุง', 'btcusd') which the SERVER resolves for you (any "
                         "asset class). An ambiguous/same-name-across-markets one comes back as a reconfirm to pick from.")],
                context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
                ) -> dict:
     """🔴 WRITE — add one or more STOCKS/assets to a playlist (batch, idempotent). Each entry may be an exact
-    MarketIV ticker OR a name/symbol the server resolves (any asset class: stock/ETF/commodity/crypto/FX). An
+    Ava Advisor ticker OR a name/symbol the server resolves (any asset class: stock/ETF/commodity/crypto/FX). An
     ambiguous name (e.g. same name across markets) returns a `needs_confirmation` reconfirm — pick the exact ticker
     and re-call. `playlist_id` from `list_playlists`. Re-adding an existing ticker is a harmless no-op. Returns
     `{added, skipped, item_count}` — ⚠️ RELAY any `skipped` to the user; never drop it silently."""
@@ -1913,7 +1913,7 @@ def add_to_playlist(playlist_id: Annotated[int, _d("The playlist's id (from list
 
 @mcp.tool(title="Remove from Playlist", annotations=_WRITE)
 def remove_from_playlist(playlist_id: Annotated[int, _d("The playlist's id.")],
-                         tickers: Annotated[List[str], _d("MarketIV tickers to remove from the playlist.")]) -> dict:
+                         tickers: Annotated[List[str], _d("Ava Advisor tickers to remove from the playlist.")]) -> dict:
     """🔴 WRITE — remove one or more stocks (by ticker) from a playlist (batch). `playlist_id` from
     `list_playlists`. Returns `{removed, not_found, item_count}` — relay `not_found` (a ticker that
     wasn't in the playlist) to the user."""
@@ -2159,7 +2159,7 @@ def stock_prices(ticker: Annotated[str, _dt(_TICKER)],
     return mdx()._get(f"/v1/stocks/{tk}/prices", {"to": to, "from": from_}).data
 
 @mcp.tool(title="Batch Stock Prices", annotations=_RO)
-def stock_prices_batch(tickers: Annotated[List[str], _d("UP TO 50 items, EACH a MarketIV ticker OR a plain company/asset NAME — the SERVER resolves names (pass `context` to disambiguate); a watchlist/cohort. Returns `results` in input order + `unresolved`.")],
+def stock_prices_batch(tickers: Annotated[List[str], _d("UP TO 50 items, EACH a Ava Advisor ticker OR a plain company/asset NAME — the SERVER resolves names (pass `context` to disambiguate); a watchlist/cohort. Returns `results` in input order + `unresolved`.")],
                        to: Annotated[Optional[str], _d("As-of date `YYYY-MM-DD` (point-in-time). Omit → latest.")] = None,
                        from_: Annotated[Optional[str], _d("Lower bound of price history `YYYY-MM-DD` (below ~1y nulls the long windows).")] = None,
                context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
@@ -2204,7 +2204,7 @@ def portfolio_pulse(portfolio_id: Annotated[int, _d(_PID)],
     use `portfolio_context` for pure numbers/analytics (a period's sharpe, attribution, composition).
     Drill into any single holding with `asset_pulse(symbol)` for full detail. `top_n` default 3 (cap 5 —
     each holding adds credits + latency). `window` scopes the news recency. `portfolio_id` from
-    `list_portfolios`; 404 if not the user's. Analyze as an analyst (marketiv://policy PORTFOLIO)."""
+    `list_portfolios`; 404 if not the user's. Analyze as an analyst (avaadvisor://policy PORTFOLIO)."""
     cli = mdx()  # bind the caller's client in THIS thread (contextvar not set inside workers)
     frm = _win(window)
     ctx = cli.portfolio_context(portfolio_id)  # owner-scoped; surfaces 404 if not the user's
@@ -2231,7 +2231,7 @@ def portfolio_pulse(portfolio_id: Annotated[int, _d(_PID)],
         holdings_pulse = list(ex.map(_holding, top))
     return {
         "context": _slim_context(ctx), "top_n": len(top), "holdings_pulse": holdings_pulse,
-        "_guide": ("Analyze as a research analyst (marketiv://policy PORTFOLIO): LEAD with context.flags / "
+        "_guide": ("Analyze as a research analyst (avaadvisor://policy PORTFOLIO): LEAD with context.flags / "
                    "the dominant concentration / drawdown; explain the return from context…attribution; "
                    "THEN use holdings_pulse to say WHAT news + options positioning is driving the biggest "
                    "positions (tie each to its weight_pct). Narrate options from read/because; "
@@ -2255,7 +2255,7 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     AI, clean energy, …) — a concept that spans MULTIPLE INDEPENDENT taxonomies. It resolves the concept
     and fans out, in ONE call, to EVERY angle that applies (skipping ones that don't), each a SEPARATE
     lens over a DIFFERENT dataset — present them separately, do NOT merge:
-      • `theme` — the MarketIV MEGATREND cohort (our proprietary trend tree) → a brief (pulse / winners /
+      • `theme` — the Ava Advisor MEGATREND cohort (our proprietary trend tree) → a brief (pulse / winners /
         losers / top stories). Membership = companies EXPOSED to the trend (can cross GICS sectors).
       • `gics` — the standard GICS SECTOR cohort → a brief. A DIFFERENT membership (strict sector
         classification) → genuinely different winners/losers than the megatrend.
@@ -2279,7 +2279,7 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     cli = mdx()
     _taxonomy()  # 🔴 warm the global node cache on THIS (authed) thread — the _theme worker calls _node_out →
                  # _taxonomy(), which COLD-loads via mdx(); in a worker the request key ContextVar is unset →
-                 # "no MarketIV API key" (intermittent: only when _TAX was still cold). Warming here fixes it.
+                 # "no Ava Advisor API key" (intermittent: only when _TAX was still cold). Warming here fixes it.
     from concurrent.futures import ThreadPoolExecutor
     # ── q may carry SEVERAL concepts (CSV) — resolve each independently, then aggregate the scope axes ──
     concepts = [c.strip() for c in q.split(",") if c.strip()] or [q]
@@ -2311,7 +2311,7 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
 
     # Resolve concepts SEQUENTIALLY in THIS thread — _resolve → _resolve_concept does an mdx() search_concepts
     # API call, and a ThreadPoolExecutor worker does NOT inherit the request's auth contextvar (the
-    # "no MarketIV API key" bug). The expensive angle fan-out below is still parallel (it reuses the already-
+    # "no Ava Advisor API key" bug). The expensive angle fan-out below is still parallel (it reuses the already-
     # authed `cli`). Concept count is tiny (usually 1), so sequential costs nothing.
     resolved = [_resolve(c) for c in concepts]
 
@@ -2381,7 +2381,7 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     return {
         "query": q, "concepts": concepts, "window": window, "angles": angles,
         "skipped": [k for k in ("theme", "gics", "asset", "commodity") if k not in angles],
-        "_guide": ("Present each angle SEPARATELY — they are DIFFERENT cohorts/lenses: `theme` = MarketIV "
+        "_guide": ("Present each angle SEPARATELY — they are DIFFERENT cohorts/lenses: `theme` = Ava Advisor "
                    "megatrend membership (trend-exposed, may cross sectors); `gics` = standard GICS sector "
                    "classification (different winners/losers); `asset` = a LIST of per-concept ETF options "
                    "positioning; `commodity` = a LIST of per-concept underlying COMMODITY PRICE reads "
@@ -2495,7 +2495,7 @@ _POS_ALIAS = {
 @mcp.tool(title="Futures Positioning (COT)", annotations=_RO)
 def positioning(asset: Annotated[str, _dq(
         "A COMMODITY / FX / RATES / INDEX to read FUTURES positioning for — a concept IN ENGLISH (oil, gold, "
-        "copper, natural gas, US 10Y treasury, euro, S&P 500; translate first) or a MarketIV ticker "
+        "copper, natural gas, US 10Y treasury, euro, S&P 500; translate first) or a Ava Advisor ticker "
         "(WTI.COMM, US-10Y.GB, EURUSD.FOREX, SPY.US). NOT a single stock — a stock's positioning lives in "
         "OPTIONS, use options_sentiment.")]) -> dict:
     """⭐ How the FUTURES market is POSITIONED — the CFTC Commitment of Traders lens for commodities, FX,
@@ -2545,7 +2545,7 @@ def cot_extremes(
 
 @mcp.tool(title="Financials", annotations=_RO)
 def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separated COMMON-STOCK companies to read/compare "
-                                          "financial statements for. EACH entry can be EITHER an exact MarketIV ticker "
+                                          "financial statements for. EACH entry can be EITHER an exact Ava Advisor ticker "
                                           "('AAPL.US', '2330.TW') — used directly — OR a bare symbol / company name "
                                           "('AAPL', 'Apple', 'トヨタ') which the SERVER resolves for you (no separate lookup "
                                           "step). 🔴 If an entry is AMBIGUOUS (same name/symbol across markets or entities) or "
@@ -3933,7 +3933,7 @@ _MACRO_ALIASES = {"regime": "economy", "gdp": "economy", "growth": "economy", "u
 
 def _fred_slim(cli, sid: str, tf: str, label: str, frm: str = "10y") -> dict:
     """One FRED series → slim feature-extract for a dashboard (latest + percentile + trend + read).
-    ⚠️ Takes `cli` (the MarketIV client) explicitly — callers run this in ThreadPoolExecutor workers, and the
+    ⚠️ Takes `cli` (the Ava Advisor client) explicitly — callers run this in ThreadPoolExecutor workers, and the
     per-request auth key lives in a contextvar that does NOT propagate into worker threads. Resolve `cli` via
     mdx() in the MAIN thread and pass it in (same pattern the other composites use)."""
     try:
@@ -4010,7 +4010,8 @@ def suggest_cta(theme: Annotated[str, _d("A theme/scope to suggest a next-step c
     return _deepseek(curate, json.dumps(signals, ensure_ascii=False), temperature=0.4)
 
 # ── RESOURCES (injected into the client LLM's context) ───────────────────────
-@mcp.resource("marketiv://policy")
+@mcp.resource("avaadvisor://policy")
+@mcp.resource("marketiv://policy")        # MarketIV-era URI, kept so existing clients don't break
 @mcp.resource("marketdx://policy")        # pre-rebrand URI, kept so existing clients don't break
 def gate_policy() -> str:
     """The gate & framing policy (skill.md) the client LLM should follow — scope resolution, the 5
@@ -4018,7 +4019,8 @@ def gate_policy() -> str:
     p = _HERE / "policy.md"
     return p.read_text() if p.exists() else "policy.md not found"
 
-@mcp.resource("marketiv://capabilities")
+@mcp.resource("avaadvisor://capabilities")
+@mcp.resource("marketiv://capabilities")  # MarketIV-era URI alias
 @mcp.resource("marketdx://capabilities")  # pre-rebrand URI alias
 def capabilities() -> str:
     """Live coverage/capabilities map: covered markets + depth, asset classes, news window, tier-1
@@ -4048,14 +4050,14 @@ _AS_CACHE: dict = {}   # WorkOS RFC 8414 metadata, fetched once
 
 def _origin(scope) -> str:
     hdrs = dict(scope.get("headers") or {})
-    host = hdrs.get(b"host", b"").decode() or "mcp.marketiv.app"
+    host = hdrs.get(b"host", b"").decode() or "mcp.ava.fund"
     proto = hdrs.get(b"x-forwarded-proto", b"https").decode().split(",")[0].strip() or "https"
     return f"{proto}://{host}"
 
 def _resource_metadata(scope) -> dict:
     origin = _origin(scope)
     # `resource` must equal the token audience the client requests — our MCP endpoint URL. Derived
-    # from the request host so both mcp.marketiv.app and the run.app URL self-describe correctly.
+    # from the request host so both mcp.ava.fund and the run.app URL self-describe correctly.
     return {
         "resource": os.environ.get("MCP_RESOURCE_URL") or f"{origin}/mcp",
         "authorization_servers": [origin],   # we proxy the AS metadata (see block comment)

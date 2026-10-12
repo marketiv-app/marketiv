@@ -1,7 +1,7 @@
 [project]
 name = "marketiv-mcp"
 version = "0.1.0"
-description = "MCP server for the MarketIV financial-impact graph (news→impact across stocks, commodities, FX, crypto, and private companies)."
+description = "MCP server for the Ava Advisor financial-impact graph (news→impact across stocks, commodities, FX, crypto, and private companies)."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

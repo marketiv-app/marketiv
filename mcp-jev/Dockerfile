@@ -1,6 +1,6 @@
-# MarketIV MCP server — hosted (Streamable HTTP) for mcp.marketiv.app.
+# Ava Advisor MCP server — hosted (Streamable HTTP) for mcp.ava.fund.
 # Per-request auth: each caller sends `Authorization: Bearer <their-key>` (or, later, an OAuth
-# token) — the server never holds a shared MarketIV key. DEEPSEEK_API_KEY (composite tools only)
+# token) — the server never holds a shared Ava Advisor key. DEEPSEEK_API_KEY (composite tools only)
 # is the one runtime secret; inject it via Cloud Run --set-secrets.
 #
 # Install DEPENDENCIES from PyPI (all wheels — no build) and run server.py directly; we don't build
