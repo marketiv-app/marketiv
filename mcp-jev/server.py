@@ -2709,6 +2709,9 @@ class ScreenCondition(BaseModel):
     params: Optional[dict] = Field(None, description="Fallback only — prefer the top-level fields; a nested value here is still read.")
 
 
+# A condition phrase that names QUARTERS ('grew every quarter', '3 quarters in a row', 'quarterly revenue', 'QoQ').
+_QUARTER_WORD = re.compile(r"\b(quarters?|quarterly|qtrs?|qoq|q/q)\b", re.I)
+
 def _cond_to_api(c: ScreenCondition) -> dict:
     """Typed condition → the news-api's shape (metric/pattern + nested params). Keeps the client's schema flat."""
     if c.metricA and c.metricB and c.relation:
@@ -2967,8 +2970,16 @@ def screen_unified(
             if c.metricA and c.metricB and c.relation:                     # relation form (compare two metrics)
                 c.metricA = _rc(c.metricA, "concept"); c.metricB = _rc(c.metricB, "concept"); c.relation = _rc(c.relation, "pattern")
             else:                                                          # common form (metric + shape)
+                # The resolver ignores the period unit (it's `basis`), so a phrase that NAMES quarters with no basis
+                # sent would silently screen ANNUAL — infer basis=quarterly from the user's own words, and say so.
+                said_q = any(_QUARTER_WORD.search(str(v)) for v in (c.concept, c.pattern) if v)
+                raw_shape = str(c.pattern or c.concept)
                 if c.concept: c.concept = _rc(c.concept, "concept")
                 if c.pattern: c.pattern = _rc(c.pattern, "pattern")
+                if said_q and c.basis is None and not (c.params or {}).get("basis"):
+                    c.basis = "quarterly"
+                    fresolved.setdefault(raw_shape, {})["basis"] = (
+                        "quarterly (inferred: the condition names quarters and no `basis` was sent)")
         if fpending:
             return {
                 "needs_confirmation": True,
