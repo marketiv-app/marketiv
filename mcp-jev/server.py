@@ -2838,7 +2838,7 @@ def screen_unified(
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'options' (use when `options` present) · 'mcap' · a TA-context oscillator ('rsi'/'adx' — 'most overbought'→'rsi') · or any fundamental metric key in the results (pe/roe/…).")] = None,
         limit: Annotated[Optional[int], _d("How many stocks to SHOW (default 10). Over-fetches a ~4× buffer (capped 100) so 'show me a few more' is served from THIS result — don't re-screen; re-screen only to exceed the buffer.")] = None) -> dict:
     """EXECUTE a unified screen = universe ∩ fundamental ∩ technical ∩ options (any leg optional; each grammar resolved
-    server-side — key or plain English). Returns {universe, count, sort, results:[{head_listing_id, ticker, name, score,
+    server-side — key or plain English). Returns {universe, count, sort, executed_criteria (the resolved request that ran — save/re-run it verbatim), results:[{head_listing_id, ticker, name, score,
     matched_legs, matched:{ta, fundamental:{<metric>:{value, basis, window?, series?, periods?}}}, context}], notes}.
     Evidence keys == the leg name you sent (TA→matched.ta, fundamentals→matched.fundamental, NOT technical/financial);
     `matched_legs` lists which leg(s) a row passed. A thin intersection adds partial:true + per-leg near-misses — never
@@ -3076,6 +3076,11 @@ def screen_unified(
         if ta_resolved: data["_resolved_ta"] = ta_resolved
         if opt_resolved: data["_resolved_options"] = opt_resolved
         if scope_resolved: data["_resolved_scope"] = scope_resolved
+        # The EXACT criteria that ran — the /v1/screen request with every NL term already resolved to its key (concept,
+        # pattern, TA signals/lines, options pattern, gics/theme scope) and `limit` = the intended show (not the 4×
+        # look-ahead). A caller that saves a screen stores THIS and re-runs it verbatim instead of re-assembling criteria
+        # (web save-flow, 2026-10-14). Deep-copied so later mutation of `body` can't leak in.
+        data["executed_criteria"] = {**json.loads(json.dumps(body)), "limit": show}
     return data
 
 
