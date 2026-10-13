@@ -9,7 +9,7 @@ description: >-
   differentiator — WHEN to fold in the structural backdrop the user didn't ask for. Trigger on tickers,
   company/sector names, market/index/commodity/rate mentions, or "how's X doing / what moved X" — INCLUDING
   a specific company's news, PUBLIC or PRIVATE (OpenAI, Anthropic, …): private companies resolve to an
-  internal oc: id via find_stock, so these are Ava Advisor questions, not web searches. Also covers commodities
+  internal oc: id when you pass the name to any ticker tool, so these are Ava Advisor questions, not web searches. Also covers commodities
   (gold/oil/copper/carbon), government-bond yields, money-market rates, and the yield curve.
 ---
 
@@ -39,8 +39,8 @@ whole answer.
 a covered asset (a war, sanctions, an OPEC/central-bank decision, a tariff regime, an election — Iran/Hormuz→oil,
 the Fed→rates, US-China tariffs→trade) is a Ava Advisor question **WHEN the user has a market/investment angle** — an
 asset or their holdings are in play, or they ask how the event moves markets. THEN route it THROUGH the asset it
-drives (`search_news('Iran Hormuz')` + `commodity_pulse('oil')`, whose response already embeds the scored event
-news; `bond_pulse` for Fed/rates; `brief`/`search_trade` for tariffs), not a web search — our scored impact + why
+drives (`search_news('Iran Hormuz')` + `pulse(kind='commodity', target='oil')`, whose response already embeds the scored event
+news; `pulse(kind='bond')` for Fed/rates; `brief`/`trade(mode='flows')` for tariffs), not a web search — our scored impact + why
 + ripple is the substance. ⚖️ **BUT a PURE geopolitics/current-events curiosity question with NO investment angle**
 ("will there be a war", "what's happening in Gaza") is NOT a Ava Advisor question — web is correct; do NOT force
 Ava Advisor onto it. **Ava Advisor complements other tools, it does not overrule them.** *(Enforced primarily in the always-on
@@ -48,23 +48,23 @@ server instructions; here as reinforcement.)*
 
 | The user is asking about… | Tool | Routing note (when THIS, not a sibling) |
 |---|---|---|
-| ONE company / ETF / index / crypto — "how's X doing / what moved it" | **`asset_pulse`** | The full read (price + news + options + peers) in one. An INDEX → its ETF (S&P→SPY, Nasdaq→QQQ, Dow→DIA). ⚠️ NOT a commodity/bond (their own pulse). |
-| a **COMMODITY** (gold, oil, gas, copper, carbon, metals, agris) | **`commodity_pulse`** | Its own tool — the general resolver buries commodities under same-named companies, and a commodity has no options/PE. Price + supply/demand news + onshore/offshore variants. |
-| a **BOND / RATE / YIELD CURVE** ("US rates", "is the curve inverted?", US 10Y, SOFR, Bund) | **`bond_pulse`** | Rates are a CURVE → the whole curve + 2s10s slope (negative = inverted = recession signal) + macro news. Narrate moves in BASIS POINTS. Forward "will rates rise/fall?" → its `rate_positioning` (TLT/IEF options: price↓=yields↑, negative = positioned for HIGHER yields). |
-| FUTURES **POSITIONING** — is a COMMODITY / FX / RATES / INDEX trade **CROWDED** / already **priced-in**? who's the smart money? | **`positioning`** · **`cot_extremes`** | The non-equity **TWIN of `options_sentiment`** (CFTC Commitment of Traders). `positioning(<asset>)` = crowding vs its own 3y (crowded = contrarian RISK, not a timing call), smart-vs-crowd (commercial hedgers' tell), **news×positioning** (priced-in vs unwind-risk), fragility (few big traders → reverses fast); invert-aware for `.GB`/`.MM` (long futures = for LOWER yields). `cot_extremes` = which markets are most stretched RIGHT NOW. Pair with `commodity_pulse`/`bond_pulse` (news + positioning). A single STOCK → `options_sentiment`. Narrate the PLAIN reads for a beginner. |
-| a **SECTOR / THEME**, incl. a sector **IN a country/region** (semis, AI, banks; European banks, Thai retail) | **`theme_pulse`** | Fans out to SEPARATE cohorts (megatrend / GICS / ETF-options / commodity) — present separately, don't merge. 🌍 A country/region goes in the **`country`** param and `q` is the SECTOR ONLY ("European banks" → `q='banks', country='GB,DE,FR,IT,ES,NL,CH,SE'`); MULTIPLE sectors comma-sep in `q` ("semiconductors,cloud"). For the pure NEWS picture of a scope, use `brief`. |
-| just the PRICE picture — cheap/extended, drawdown, 52w range, vol | **`stock_prices`** (one) / **`stock_prices_batch`** (a watchlist) | `asset_pulse` already includes price; use these for price-only. Quote the ready `*_read` labels. |
-| WHICH names in a group are winning / losing / most-talked-about | **`screen_stocks`** | LEAD with the winners-vs-losers split; surface net-negatives separately; explain each via `top_reason`. Scope by `country` (ISO-2 or name) and/or `gics` (a CODE — resolve a sector NAME via `find_gics` first). |
-| a HIGH / RELIABLE / GROWING DIVIDEND — income screen | **`screen_dividends`** | 🔴 NEVER present the yield alone — DECOMPOSE it (yoy, streak, last cut, cagr, 52w-low, news): high yield + a cut + bad news = TRAP; high yield from a price drop + intact/growing dividend + a clean streak = VALUE. The no-cut streak CAPS at 10y — say "clean for 10y+ (the tracked window)", never claim a multi-decade "aristocrat" streak. Scope like screen_stocks (gics = CODE via find_gics). |
-| summarize a whole SCOPE — a news category, a country, a GICS sector, a megatrend, an AND-mix | **`brief`** | The composed NEWS "how is <X> doing" picture (no options lens). `gics` = a CODE (find_gics first); `country` = ISO-2 CSV. NOT `search_news`/`news_feed` (raw article LIST). |
-| CROSS-COUNTRY STRUCTURAL data — consumer strength, household/consumer debt, demographics, GDP-per-capita, poverty, a country's development, "compare countries" | **`find_indicator`** (FREE, concept→WB code) → **`wb_series`** | See **§5**. ANNUAL structural data (World Bank), the cross-country complement to FRED (US high-freq). Home for EM/Thai/country reads + the consumer/credit backdrop on a domestic-demand name. |
-| INTERNATIONAL TRADE — exports/imports, "who exports/imports the most / fastest-growing / N years straight", trade balance, a country's trade partners, supply-chain / who-dominates | **`find_hs`** (FREE, resolve concept→code) → **`search_trade`** / **`top_traders`** / **`top_partners`** / **`trade_balance`** | See **§6**. ALWAYS `find_hs` first (never guess a code). Goods = `type=goods` (HS); services = `type=services` (EBOPS). BYOK: no key → relay the connect CTA, answer from general knowledge meanwhile. |
-| the MACRO ECONOMY / a US macro DASHBOARD — "how's the economy / soft-landing or stagflation", consumer/labor/housing/inflation, recession risk | **`macro_pulse`** | See **§7**. `scope` = `economy`/`inflation`/`labor`/`consumer`/`housing`/`recession-risk` → fused dashboard, SYNTHESIZE the regime. ONE indicator ("what's US inflation") → **`find_series`** → **`fred_series`** (percentile = high-or-low). ⚠️ RATES/curve/"will rates rise"/"fed funds now" → **`bond_pulse`**, NOT macro_pulse. |
-| resolve a company NAME / unsure TICKER → exact Ava Advisor ticker | **`find_stock`** FIRST | See **§3**. Ava Advisor uses its OWN suffixes (Korea `.KO`). Resolves commodities/crypto/bond-yields/rates and **private companies → an `oc:` id** too. |
-| a **PRIVATE / off-coverage** company (OpenAI, SpaceX, Stripe, ByteDance, xAI, …) | **`find_stock` FIRST**, then `stock_impact(oc:id)` / `private_movers(theme)` | 🔴 A private company has NO public ticker but Ava Advisor assigns an INTERNAL `oc:<n>` (openai→`oc:52`) that find_stock returns — "it's private" is NEVER a reason to web-search. |
-| resolve a THEME/trend → node id · an INDUSTRY/SECTOR → GICS **code** | **`find_megatrend`** · **`find_gics`** | Return candidates; YOU pick and reuse the id/code. `gics` params everywhere are CODES — resolve a NAME here first. |
+| ONE company / ETF / index / crypto — "how's X doing / what moved it" | **`pulse(kind='asset')`** | The full read (price + news + options + peers) in one. An INDEX → its ETF (S&P→SPY, Nasdaq→QQQ, Dow→DIA). ⚠️ NOT a commodity/bond (their own pulse). |
+| a **COMMODITY** (gold, oil, gas, copper, carbon, metals, agris) | **`pulse(kind='commodity')`** | Its own tool — the general resolver buries commodities under same-named companies, and a commodity has no options/PE. Price + supply/demand news + onshore/offshore variants. |
+| a **BOND / RATE / YIELD CURVE** ("US rates", "is the curve inverted?", US 10Y, SOFR, Bund) | **`pulse(kind='bond')`** | Rates are a CURVE → the whole curve + 2s10s slope (negative = inverted = recession signal) + macro news. Narrate moves in BASIS POINTS. Forward "will rates rise/fall?" → its `rate_positioning` (TLT/IEF options: price↓=yields↑, negative = positioned for HIGHER yields). |
+| FUTURES **POSITIONING** — is a COMMODITY / FX / RATES / INDEX trade **CROWDED** / already **priced-in**? who's the smart money? | **`positioning`** · **`cot_extremes`** | The non-equity **TWIN of `options_sentiment`** (CFTC Commitment of Traders). `positioning(<asset>)` = crowding vs its own 3y (crowded = contrarian RISK, not a timing call), smart-vs-crowd (commercial hedgers' tell), **news×positioning** (priced-in vs unwind-risk), fragility (few big traders → reverses fast); invert-aware for `.GB`/`.MM` (long futures = for LOWER yields). `cot_extremes` = which markets are most stretched RIGHT NOW. Pair with `pulse(kind='commodity')`/`pulse(kind='bond')` (news + positioning). A single STOCK → `options_sentiment`. Narrate the PLAIN reads for a beginner. |
+| a **SECTOR / THEME**, incl. a sector **IN a country/region** (semis, AI, banks; European banks, Thai retail) | **`pulse(kind='theme')`** | Fans out to SEPARATE cohorts (megatrend / GICS / ETF-options / commodity) — present separately, don't merge. 🌍 A country/region goes in the **`country`** param and `q` is the SECTOR ONLY ("European banks" → `q='banks', country='GB,DE,FR,IT,ES,NL,CH,SE'`); MULTIPLE sectors comma-sep in `q` ("semiconductors,cloud"). For the pure NEWS picture of a scope, use `brief`. |
+| just the PRICE picture — cheap/extended, drawdown, 52w range, vol | **`stock_prices`** (one) / **`stock_prices_batch`** (a watchlist) | `pulse(kind='asset')` already includes price; use these for price-only. Quote the ready `*_read` labels. |
+| WHICH names in a group are winning / losing / most-talked-about | **`screen_stocks`** | LEAD with the winners-vs-losers split; surface net-negatives separately; explain each via `top_reason`. Scope by `country` (ISO-2 or name) and/or `gics` (a GICS code OR the plain-English sector — the server resolves it). |
+| a HIGH / RELIABLE / GROWING DIVIDEND — income screen | **`screen_dividends`** | 🔴 NEVER present the yield alone — DECOMPOSE it (yoy, streak, last cut, cagr, 52w-low, news): high yield + a cut + bad news = TRAP; high yield from a price drop + intact/growing dividend + a clean streak = VALUE. The no-cut streak CAPS at 10y — say "clean for 10y+ (the tracked window)", never claim a multi-decade "aristocrat" streak. Scope like screen_stocks (`gics` = code or plain English). |
+| summarize a whole SCOPE — a news category, a country, a GICS sector, a megatrend, an AND-mix | **`brief`** | The composed NEWS "how is <X> doing" picture (no options lens). `gics` = a code or plain-English sector (server-resolved); `country` = ISO-2 CSV. NOT `search_news`/`news_feed` (raw article LIST). |
+| CROSS-COUNTRY STRUCTURAL data — consumer strength, household/consumer debt, demographics, GDP-per-capita, poverty, a country's development, "compare countries" | **`wb_series`** (pass the concept — the server resolves the WB indicator + unit variant) | See **§5**. ANNUAL structural data (World Bank), the cross-country complement to FRED (US high-freq). Home for EM/Thai/country reads + the consumer/credit backdrop on a domestic-demand name. |
+| INTERNATIONAL TRADE — exports/imports, "who exports/imports the most / fastest-growing / N years straight", trade balance, a country's trade partners, supply-chain / who-dominates | **`trade(mode='flows')`** / **`trade(mode='top_traders')`** / **`trade(mode='top_partners')`** / **`trade(mode='balance')`** | See **§6**. Pass the product as a plain-English concept in `codes` (the server resolves the HS code + supply stage) — never guess a code. Goods = `type=goods` (HS); services = `type=services` (EBOPS). BYOK: no key → relay the connect CTA, answer from general knowledge meanwhile. |
+| the MACRO ECONOMY / a US macro DASHBOARD — "how's the economy / soft-landing or stagflation", consumer/labor/housing/inflation, recession risk | **`pulse(kind='macro')`** | See **§7**. `scope` = `economy`/`inflation`/`labor`/`consumer`/`housing`/`recession-risk` → fused dashboard, SYNTHESIZE the regime. ONE indicator ("what's US inflation") → **`fred_series`** (pass the concept) (percentile = high-or-low). ⚠️ RATES/curve/"will rates rise"/"fed funds now" → **`pulse(kind='bond')`**, NOT pulse(kind='macro'). |
+| a company NAME / unsure TICKER | just pass the NAME to the tool (`pulse`, `stock_impact`, `stock_prices`, `financials`, …) — server-resolved | See **§3**. Ava Advisor uses its OWN suffixes (Korea `.KO`). Resolves commodities/crypto/bond-yields/rates and **private companies → an `oc:` id** too. |
+| a **PRIVATE / off-coverage** company (OpenAI, SpaceX, Stripe, ByteDance, xAI, …) | pass the NAME to `stock_impact` (resolves to its `oc:` id) · `private_movers(theme)` | 🔴 A private company has NO public ticker but Ava Advisor assigns an INTERNAL `oc:<n>` (openai→`oc:52`) that the server resolves from the name — "it's private" is NEVER a reason to web-search. |
+| a THEME/trend or an INDUSTRY/SECTOR as a scope | pass the ENGLISH term straight into `gics` / theme / `target` | The server routes it to a megatrend node or GICS code; a `needs_confirmation` reply → pick from its candidates (or ask) and re-call. |
 | DRILL-DOWNS | `stock_impact` (per-stock news), `options_sentiment` (US names), `relationships` (peers), `theme_players`/`private_movers` (theme members), `news_feed`/`search_news` (raw list) | Prefer the composites first; drill afterward. `theme_players`/`private_movers`/`relationships` return a TOP SLICE — if `total > count` say "N of M". |
-| the user's OWN portfolio | **`list_portfolios`** → **`portfolio_pulse`** (market read) / **`portfolio_context`** (numbers) | Owner-scoped; call list first if they say "my portfolio" without a number. |
+| the user's OWN portfolio | **`list_portfolios`** → **`pulse(kind='portfolio')`** (market read) / **`portfolio_context`** (numbers) | Owner-scoped; call list first if they say "my portfolio" without a number. |
 
 ---
 
@@ -90,28 +90,28 @@ China" is the differentiated one. **GATE it — judgment, not reflex:**
 
 💰 **Valuation is a RETRIEVABLE lens — never apologise for "not having P/E".** A "worth investing? / cheap or
 expensive? / น่าลงทุนไหม" question needs the multiples: **`screen_stocks`** (and `screen_dividends`) carry
-per-name **`pe_ratio` / `pb_ratio`** in every row's `fundamentals` block, and `asset_pulse` carries a single
+per-name **`pe_ratio` / `pb_ratio`** in every row's `fundamentals` block, and `pulse(kind='asset')` carries a single
 name's. So for a COHORT ("European vs US banks — worth it?") run `screen_stocks(gics=<code>, country=…)` per
-side and read the P/E–P/B — the news pulse (theme_pulse/brief) is NOT a valuation answer. A "worth investing"
+side and read the P/E–P/B — the news pulse (pulse(kind='theme')/brief) is NOT a valuation answer. A "worth investing"
 read on pulse alone is incomplete: pull the multiples, don't say you lack them.
 
 **The dishes** — each is *LEAD tool → (conditional) structural layer → your own angle*:
 
-- **① Should I act?** (buy/sell/hold/trim/add · dip-or-trap) — the highest-frequency job. `asset_pulse`
+- **① Should I act?** (buy/sell/hold/trim/add · dip-or-trap) — the highest-frequency job. `pulse(kind='asset')`
   (price+news+options) → *if* the name has a material structural driver (domestic-demand country / concentrated
   foreign market / rate-sensitive) fold that backdrop as the risk-or-why → a **decision-relevant lean** tied to
   the user's holding/currency/horizon. Hand the judgment back — never a buy/sell call or a price prediction.
 - **② Why did it move?** — news/options first (the causal impact + market stance) → *if* the move is
   macro/commodity/FX/tariff-driven, add the chain (Comtrade/FRED/WB); else say it's idiosyncratic. Don't invent a
   narrative the data doesn't carry.
-- **③ What am I missing / the risk?** — `asset_pulse` → **actively surface the structural BLIND SPOT** they
+- **③ What am I missing / the risk?** — `pulse(kind='asset')` → **actively surface the structural BLIND SPOT** they
   didn't ask for (revenue-region concentration → that market's demand/debt; sovereign risk; supply-chain
   reliance). 🟢🟢 WB/Comtrade lead here — this job IS the hidden lens.
 - **④ Judge / stress-test my thesis.** — state bull vs bear → **stress-test with structural evidence** (WB/
   Comtrade) FOR *and* AGAINST → the strongest counter-argument. Adversarial, with a spine; not a yes-man.
-- **⑤ Compare A vs B.** — `asset_pulse` each + the **shared structural axis** (their end-markets / their exposure)
+- **⑤ Compare A vs B.** — `pulse(kind='asset')` each + the **shared structural axis** (their end-markets / their exposure)
   → take a side, not a shrug.
-- **⑥ Themes / rotation.** (is the AI trade over? picks-and-shovels?) — `theme_pulse` → supply-chain map
+- **⑥ Themes / rotation.** (is the AI trade over? picks-and-shovels?) — `pulse(kind='theme')` → supply-chain map
   (Comtrade) + thematic structural backdrop (WB by country) → who's REAL vs priced-in.
 - **⑦ Dividend / income — is it safe?** — `screen_dividends`, DECOMPOSE the yield (never quote it alone) → *if*
   domestic, the country's consumer/credit health as the payout's backing.
@@ -119,11 +119,11 @@ read on pulse alone is incomplete: pull the multiples, don't say you lack them.
   job. Decompose the chain (macro/commodity/country → the holding) with Comtrade (flows/tariff) + WB (destination
   demand) + FRED → **second-order effects**. *Pro variant:* **QUANTIFY** ($ move / rate cut → the P&L path) and
   extend to **portfolio-level** aggregate exposure (revenue-by-region × destination demand across the book).
-- **⑨ Who dominates supply / where's the chokepoint / map the chain.** — `find_hs` per stage → `top_traders`
+- **⑨ Who dominates supply / where's the chokepoint / map the chain.** — `trade(mode='top_traders')` per supply stage (name the stage in `codes`: 'copper ore' vs 'refined copper')
   (geographic concentration = structural advantage AND chokepoint risk: China/Taiwan/Russia) → upstream/
   downstream map → where the bottleneck + margin sit. "Units not spin" real-demand read via trade trends.
   (Comtrade is the LEAD here, not a backdrop.)
-- **⑩ EM / Thai / go-global.** (Vietnam 10y? SET vs SPX? invest abroad?) — `asset_pulse` + **WB structural**
+- **⑩ EM / Thai / go-global.** (Vietnam 10y? SET vs SPX? invest abroad?) — `pulse(kind='asset')` + **WB structural**
   (that country's growth/consumption/debt/demographics) → the market-level read FRED (US) can't give.
 - **⑪ Reassurance / emotional.** (down 50%, scared, FOMO) — **voice-led** (calm, facts-not-advice) → ground the
   emotion in the news/options + ONE structural fact (what actually broke vs held). Don't lecture, don't cheerlead.
@@ -136,12 +136,12 @@ with a reason — not a script.
 
 ---
 
-## 3. Resolving a name — DISAMBIGUATE, don't blind-pick (find_stock)
+## 3. Resolving a name — DISAMBIGUATE, don't blind-pick (server-side name resolution)
 
 🌐 **Answer in the user's language, but for a generic ASSET-CLASS concept (a commodity/sector/index) resolve
 in ENGLISH** (ทองคำ/黄金→"gold", 天然ガス→"natural gas", 半導体→"semiconductors"). A COMPANY proper name passes
 as-is (the DB has native names: 茅台→Kweichow Moutai, トヨタ→Toyota). *(Better still, a commodity → skip
-find_stock and go straight to `commodity_pulse`.)*
+the ticker tools and go straight to `pulse(kind='commodity')`.)*
 
 🔴 **When a name maps to 2+ genuinely DIFFERENT entities and the user's wording doesn't pin one, ASK — don't
 silently pick #1.** The two collision types:
@@ -165,7 +165,7 @@ After discussing KOREAN names (SK Hynix, Samsung), a bare "KBANK" more likely me
 Thai `KBANK.BK` — so ASK, surfacing the Korean one FIRST. It works both ways: after Thai names (PTT/CPALL),
 "KBANK" is unambiguously the Thai bank → just answer.
 
-*(Tool choice IS part of the disambiguation: "หุ้น apple"→`asset_pulse`, "apple futures"→`commodity_pulse`,
+*(Tool choice IS part of the disambiguation: "หุ้น apple"→`pulse(kind='asset')`, "apple futures"→`pulse(kind='commodity')`,
 bare ambiguous "apple"→ask.)*
 
 ---
@@ -192,9 +192,9 @@ The one substrate FRED (US, high-freq) and Comtrade (trade) lack: **annual, cros
 the shape of an economy and its consumer. This is the HOME for EM/Thai/country reads (dish ⑩) and the backdrop
 for any DOMESTIC-demand business (dishes ①③④⑦).
 
-**Resolve then read:** **`find_indicator`** (FREE — a concept → the canonical WB indicator id + the right unit
-VARIANT; never guess a code) → **`wb_series`** (the indicator × country(+multi) + an `analysis` block: latest
-as-of, trend, percentile, compare).
+**One call:** **`wb_series`** — pass the structural CONCEPT (English) + `context` (the user's request, so the
+server picks the right unit VARIANT: % of GDP vs US$ vs per-capita) and the country(+multi); it resolves the WB
+indicator itself and returns an `analysis` block (latest as-of, trend, percentile, compare). Never guess an id.
 
 **The backdrop questions it answers:**
 - **Consumer strength** — household consumption %GDP + per-capita growth: is the demand base strong / growing?
@@ -228,10 +228,10 @@ between which countries, over time** — decomposed (value/volume/price), ranked
 
 **(a) A DIRECT trade question** ("who exports the most soybeans", "coffee imports down 3y straight", "Thai
 vs Vietnamese rice exports", "is Thailand a net exporter to China") → the tools in the §1 row.
-`find_hs` (FREE) FIRST → pick the code from its evidence (`score` ~0.7+ = clean; `excludes` name the
-siblings; ambiguous *different* concepts like pet-food 230910 vs livestock-feed 230990 → **ask** which) →
-`search_trade` (a flow over time, read its `analysis`) / `top_traders` (rank countries — value / growth /
-**streak**) / `top_partners` (a country's buyers/sellers) / `trade_balance`. Pass the **specific tradable
+Pass the product as an English concept in `codes` (+ `context`) — the server resolves the HS code at the right
+SUPPLY STAGE; a `needs_confirmation` reply (e.g. pet-food 230910 vs livestock-feed 230990) → pick or **ask** which →
+`trade(mode='flows')` (a flow over time, read its `analysis`) / `trade(mode='top_traders')` (rank countries — value / growth /
+**streak**) / `trade(mode='top_partners')` (a country's buyers/sellers) / `trade(mode='balance')`. Pass the **specific tradable
 form** ("hot-rolled steel coil", not "steel"). "#2 exporter" = the rank:2 row; "both X and Y up 5y" = call per
 commodity and intersect yourself; an empty list is a real answer — relay it.
 
@@ -251,13 +251,13 @@ only after the **gate**, in order:
 
 **Deriving the keyword (world knowledge reads the payload, don't guess codes):** `price.description` + `gics`
 say what the firm makes/does → **enumerate ALL material lines** (a conglomerate like MINT = hotels **and**
-restaurants), then `find_hs` per line. `price.revenue_by_region` = the WHERE. Enumerate broadly (find_hs is
-FREE), pull metered trade data only on the material lines.
+restaurants), then pass each line as a product concept in `codes`. `price.revenue_by_region` = the WHERE. Pull
+metered trade data only on the MATERIAL lines.
 
 **Signature uses:** a MINER (BHP → output = iron ore/copper; is demand in its destination markets rising or
 FALLING? the divergence is the insight) · a policy-exposed name (NVDA → China revenue + tariff/export-control
 news → chip HS 8542 US↔China flow, NOT a materials chain) · **tariff / trade-war news** (US-China → pull the
-actual `trade_balance` to quantify what the sentiment only gestures at).
+actual `trade(mode='balance')` to quantify what the sentiment only gestures at).
 
 **Voice/limits:** quote the `analysis`/`reason` (sourced); surface `_license_note`; data goes back to 1962; a
 gap in old years = an HS-revision break, not zero trade. Same research-analyst voice.
@@ -269,22 +269,22 @@ gap in old years = an HS-revision break, not zero trade. Same research-analyst v
 Real US economic data (inflation, jobs, GDP, housing, rates, money) folded in as feature-extracted series.
 Three levels, by how the question is framed:
 
-**(a) ONE indicator** ("US inflation? / is unemployment high vs history?") → **`find_series`** (concept →
-canonical `series_id` + the RIGHT `suggested_transform`; never guess an id; put a NON-US country in the
-`country` param, not in the concept) → **`fred_series`**. 🔑 The `analysis.percentile` is the answer to "high or
+**(a) ONE indicator** ("US inflation? / is unemployment high vs history?") → **`fred_series`** with the CONCEPT
+(+ `context`) — the server resolves the canonical `series_id` + the RIGHT transform; never guess an id; put a NON-US
+country in the `country` param, not in the concept. 🔑 The `analysis.percentile` is the answer to "high or
 low" — a bare level isn't. Respect the transform: inflation = YoY % (`pc1`), a rate = level (`lin`).
 
 **(b) The ECONOMY / a DASHBOARD** ("how's the economy / consumer / labor / housing / soft-landing or
-stagflation / recession risk") → **`macro_pulse(scope)`** — fuses the domain's key indicators, each with its
+stagflation / recession risk") → **`pulse(kind='macro', target=scope)`** — fuses the domain's key indicators, each with its
 percentile+trend. **SYNTHESIZE, don't list:** place it on the growth×inflation quadrant (reflation / goldilocks
 / stagflation / slowdown), modulate with labor tightness + policy stance; lead with percentiles; give the
 regime + the MECHANISM it implies (facts, not advice); tie to the user's holdings if any.
 
 **(c) HIDDEN lens on a stock/theme** (dishes ①②③⑧) — the US driver behind a thesis: a homebuilder →
-`macro_pulse(housing)` (mortgage rate + starts); a retailer → `consumer`; a bank → the rates/curve (bond_pulse).
+`pulse(kind='macro', target=housing)` (mortgage rate + starts); a retailer → `consumer`; a bank → the rates/curve (pulse(kind='bond')).
 
 **Boundaries:** no ISM/PMI on FRED (say so). A COMMODITY spot price is NOT FRED (gold → a volatility index) →
-`commodity_pulse`. RATES / the curve / "will rates rise" / "fed funds now" → **`bond_pulse`** (it owns rates +
+`pulse(kind='commodity')`. RATES / the curve / "will rates rise" / "fed funds now" → **`pulse(kind='bond')`** (it owns rates +
 embeds the CPI/jobs/fed-funds `macro_drivers`). Cross-country structural (consumption/debt/demographics) → **World
 Bank** (§5), not FRED. Data is latest-revised, ~1 release behind — say "as of &lt;date&gt;".
 
@@ -322,4 +322,4 @@ announcement & context, then reconcile (an announced buyback *ceiling* ≠ the a
 **Limits — RELAY them plainly if the user asks beyond (the payload states them in `limits`):** ≤5 companies/call ·
 ≤20 specific fields/call · **history ~4–5 years** (an older specific year → `period_unavailable`; say the data
 doesn't reach that far, don't infer zero). A yield/rate/commodity/crypto has no statements (absence expected).
-It embeds into `asset_pulse` for a company — if you already pulled the pulse, the fundamentals may already be there.
+It embeds into `pulse(kind='asset')` for a company — if you already pulled the pulse, the fundamentals may already be there.

@@ -53,21 +53,20 @@ so only investment/economic knowledge lands.
 ### 🔴 RESOLVE-THEN-WRITE — a REQUIRED procedure, not a suggestion
 `write_note` is the LAST step. BEFORE it, classify what the note is fundamentally about and RESOLVE its
 entities — the note is findable later only by what you link now. Run these checks IN ORDER; a note may hit
-more than one (link all that apply). The resolvers return CANDIDATES → **YOU pick the right one(s)** (e.g.
-"bank" → Regional Banks vs Investment Banking — decide from the note's meaning); never guess a number.
+more than one (link all that apply). `write_note` RESOLVES plain names server-side — pass the words, never guess a code/id. If it replies
+`needs_confirmation`, pick from its candidates from the note's meaning (e.g. "bank" → Regional Banks vs
+Investment Banking) and re-call.
 
 1. **Specific companies?** (a read/thesis on named firms, "NVDA vs AMD") → you already resolved the
-   tickers via `find_stock` while answering → pass `stocks` (subjects) / `mentioned_stocks` (referenced).
+   tickers while answering (or just use the names) → pass `stocks` (subjects) / `mentioned_stocks` (referenced).
 2. **An emerging TREND / technology / mechanism?** (HBM, robotaxi, lithium, rare earths, solid-state
-   batteries, "how a foundry works") → call **`find_megatrend([terms])`** (send the trend words straight
-   from your answer — you don't need to know the taxonomy), PICK the id(s) → `megatrend_ids`.
-3. **An established INDUSTRY / SECTOR?** (retail, airlines, banking, pharma, utilities, insurance) → call
-   **`find_gics([terms])`**, PICK the code(s) → `gics`. (Sectors are NOT megatrends — retail/airlines have
-   no megatrend node; this is their lane.)
-4. **Both a trend AND a sector?** ("AI in banking", "EVs and the auto industry") → resolve BOTH.
+   batteries, "how a foundry works") → put the trend words (English) in **`gics`** — the server routes a curated
+   theme to its megatrend link (you don't need to know the taxonomy or any id).
+3. **An established INDUSTRY / SECTOR?** (retail, airlines, banking, pharma, utilities, insurance) → put the
+   sector words (English) in **`gics`** — the server resolves the GICS code(s).
+4. **Both a trend AND a sector?** ("AI in banking", "EVs and the auto industry") → put BOTH words in `gics`.
 5. **A general concept with no specific home?** (what is P/E, EBITDA, how bonds work) → link NOTHING; put
-   the keywords in `tags` + body. `find_megatrend`/`find_gics` returning `[]` CONFIRMS this — don't force a
-   match. It's still found later by semantic search + tags.
+   the keywords in `tags` + body. Don't force a sector/theme link. It's still found later by semantic search + tags.
 
 Then call `write_note` with everything you resolved, plus `note_type` (thesis | reference | snapshot |
 decision | watchlist) + `summary` + `tags`. Do the resolve calls FIRST; the server canonicalizes tickers→
@@ -81,7 +80,7 @@ general concept (step 5).
 - "what did I note about X / my notes on NVDA / my thesis on foundry" → `query_notes` (semantic `q` +
   filters: `stock`, `theme`, `tag`, `note_type`, `since`). Use `get_note(id)` for the full body.
 - 🔴 **FUSE personal + live:** pair a recalled note with a fresh read — "your NVDA thesis from last week
-  said …; here's the live `asset_pulse` now" — that personal-knowledge + live-graph combination is the point.
+  said …; here's the live `pulse(kind='asset')` now" — that personal-knowledge + live-graph combination is the point.
 
 ## Voice
 Facts and observations, not advice.

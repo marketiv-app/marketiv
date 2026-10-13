@@ -3,7 +3,7 @@
 Architecture (see docs/product/mcp-server-design.md in the Ava repo):
   • SIMPLE tools  → thin wrappers over the marketiv Python SDK (which calls the metered /v1 API).
                     The client's own LLM orchestrates these; correctness lives in the API/SDK.
-  • COMPOSITE tools (theme_pulse, suggest_cta) → multi-step pipelines that would be N client↔server
+  • COMPOSITE tools (pulse(kind='theme'), suggest_cta) → multi-step pipelines that would be N client↔server
                     roundtrips if offloaded, so they run WHOLLY server-side (a mix of the unified Jev
                     concept resolver + our own cheap LLM for the ETF/CTA-curation steps) in ONE call.
   • RESOLUTION    → an English industry/theme concept → GICS code(s) / megatrend node(s) is done SERVER-side
@@ -45,7 +45,7 @@ _INSTRUCTIONS = (
     "market RATES `<TOKEN>.MM` (SOFR.MM, EFFR.MM, EURIBOR3M.MM); a yield/rate MOVE reads in BASIS POINTS "
     "(`change_bps`), never as a % of the yield — and a yield has no options/PE/market-cap, so those lenses "
     "being absent for a `.GB`/`.MM` ticker is EXPECTED, not a failure. Just pass the name or ticker to "
-    "asset_pulse/stock_prices — they resolve it server-side (US 10-year treasury→US-10Y.GB, SOFR→SOFR.MM). "
+    "pulse(kind='asset')/stock_prices — they resolve it server-side (US 10-year treasury→US-10Y.GB, SOFR→SOFR.MM). "
     "News tools accept a time range (`from_`/`to` ISO or `window` like "
     "'90d'/'qtd'/'1y'); to compare periods, call the tool once per period and compare. "
     "⚠️ NEWS coverage starts 2026-01-01 — there is NO news before 2026; for an older period say so "
@@ -54,12 +54,12 @@ _INSTRUCTIONS = (
     "price even though there's no 2023 news. Any read on how a tradable asset (a stock, ETF, or index) is "
     "DOING — whatever the phrasing or language — is a Ava Advisor question: our news→impact + options-"
     "positioning read IS the substance of 'how is it doing' (the WHY it's moving + the market's stance), "
-    "which a web search cannot supply. Reach for `asset_pulse(<ticker>)` on these. 🔴 This INCLUDES a "
+    "which a web search cannot supply. Reach for `pulse(kind='asset', target=<ticker>)` on these. 🔴 This INCLUDES a "
     "MARKET / INDEX asked in a 'right now / ตอนนี้ / current' phrasing (S&P, Nasdaq, Dow, 'the market'): "
     "map it to its ETF (S&P→SPY · Nasdaq→QQQ · Dow→DIA — WE DO COVER their options + news) and call "
-    "`asset_pulse` for the news-impact + positioning that IS 'how it's doing'. A web-searched index LEVEL "
+    "`pulse(kind='asset')` for the news-impact + positioning that IS 'how it's doing'. A web-searched index LEVEL "
     "is at most ONE supplementary number — NEVER answer a market/index question with only a web level, and "
-    "never skip the Ava Advisor read (the level alone is not 'how is it doing'). asset_pulse = ONE call returning "
+    "never skip the Ava Advisor read (the level alone is not 'how is it doing'). pulse(kind='asset') = ONE call returning "
     "BOTH lenses, so the read is never half-informed. "
     "🔴🔴 This ALSO covers a GEOPOLITICAL / MACRO EVENT or SITUATION that MOVES a covered asset — a war, "
     "sanctions, an OPEC or central-bank decision, a tariff regime, an election (Iran/Hormuz→oil, the "
@@ -67,21 +67,21 @@ _INSTRUCTIONS = (
     "holdings are in play, or they ask how the event moves markets): THEN it is a Ava Advisor question, NOT a "
     "web search — our 2026 news carries"
     "the scored per-article impact + the causal 'why' + the ripple that a web article lacks. Route it THROUGH "
-    "the asset it drives: `search_news('Iran Hormuz')` and/or `commodity_pulse('oil')` (whose response already "
-    "EMBEDS the scored event news), `bond_pulse` for a Fed/rates event, `brief`/`search_trade` for a tariff "
+    "the asset it drives: `search_news('Iran Hormuz')` and/or `pulse(kind='commodity', target='oil')` (whose response already "
+    "EMBEDS the scored event news), `pulse(kind='bond')` for a Fed/rates event, `brief`/`trade(mode='flows')` for a tariff "
     "one. Then don't default to web just because it reads as 'geopolitics'; web only supplements a specific "
     "detail Ava Advisor lacks (say which came from which). ⚖️ INTENT-GATED though: a PURE geopolitics / "
     "current-events CURIOSITY question with NO investment angle ('will there be a war', 'what's happening in "
     "Gaza') is NOT a Ava Advisor question — web is correct, do NOT force Ava Advisor onto it. Ava Advisor COMPLEMENTS other "
     "tools, it does not overrule them. 🔵 But if the subject is a SECTOR / INDUSTRY / THEME "
     "CONCEPT rather than one ticker (semiconductors, tech, energy, banks, AI, clean energy, gold, …) → use "
-    "`theme_pulse(<concept>)` instead: it resolves the concept across the THREE independent taxonomies and "
+    "`pulse(kind='theme', target=<concept>)` instead: it resolves the concept across the THREE independent taxonomies and "
     "returns every angle that applies, each SEPARATE — the Ava Advisor megatrend cohort, the GICS-sector "
     "cohort (a different membership), and the tradable ETF's options positioning (it does the concept→ETF "
-    "mapping for you; full 64-ETF set in avaadvisor://policy). So: a specific TICKER/company → `asset_pulse`; "
-    "a sector/theme CONCEPT → `theme_pulse`. ⚠️ For a NON-US company or when unsure of the exact ticker "
+    "mapping for you; full 64-ETF set in avaadvisor://policy). So: a specific TICKER/company → `pulse(kind='asset')`; "
+    "a sector/theme CONCEPT → `pulse(kind='theme')`. ⚠️ For a NON-US company or when unsure of the exact ticker "
     "(esp. Asian/European names — we use our OWN suffixes, Korea=.KO not .KS, so a guess 404s), just pass the "
-    "plain NAME to asset_pulse/stock_impact/stock_prices — they resolve it server-side (any asset class incl "
+    "plain NAME to pulse(kind='asset')/stock_impact/stock_prices — they resolve it server-side (any asset class incl "
     "commodities/crypto/private); an ambiguous name comes back as a reconfirm to pick from. "
     "Prefer these composites over calling stock_impact / "
     "options_sentiment one at a time; use those only to DRILL deeper afterwards. Synthesize where news and "
@@ -90,7 +90,7 @@ _INSTRUCTIONS = (
     "(<asset>)` — the non-equity TWIN of options_sentiment (from CFTC Commitment of Traders): is the crowd "
     "at a 3-year extreme (crowded = contrarian RISK), is the smart money leaning against it, is the good news "
     "already PRICED INTO positioning. `cot_extremes` scans WHERE positioning is most stretched across "
-    "all markets. Pair it with commodity_pulse / bond_pulse (news + positioning). A single STOCK has no futures "
+    "all markets. Pair it with pulse(kind='commodity') / pulse(kind='bond') (news + positioning). A single STOCK has no futures "
     "positioning → its lens is OPTIONS (options_sentiment). Narrate the PLAIN reads for a beginner. "
     "💰 FUNDAMENTALS (company financial statements): `financials(tickers)` reads or COMPARES up to 8 companies' "
     "income/balance/cash-flow — revenue, growth, margins, FCF, and (US filers) EDGAR note-level quality-of-"
@@ -98,12 +98,12 @@ _INSTRUCTIONS = (
     "fundamentals COMPARE ('which of these is more profitable', 'compare Apple vs TSMC vs Samsung'), or "
     "`full`/`period=quarterly` depth. Cross-currency compares convert to USD automatically (margins/growth are "
     "currency-neutral). EQUITY ONLY — an ETF/commodity/bond/crypto has no company financials. 🔴 But a plain "
-    "'how is <stock> doing / น่าลงทุนไหม' does NOT need a separate financials call: `asset_pulse` on a stock "
+    "'how is <stock> doing / น่าลงทุนไหม' does NOT need a separate financials call: `pulse(kind='asset')` on a stock "
     "ALREADY embeds the fundamentals summary (the `fundamentals` block) — read that; reach for `financials` "
     "only when they want a dedicated compare, quarterly, or full statements. Pass NAMES straight to these tools — "
     "they resolve names → tickers server-side. Narrate the PLAIN read for a beginner; translate any raw XBRL tag into everyday words. "
     "🧠 ANALYTICAL MINDSET — when the user asks you to ASSESS or read an OUTLOOK ('how's X', 'แนวโน้ม', "
-    "'น่าสนใจไหม', 'should I worry', 'is it cheap') rather than a bare price/number: asset_pulse/theme_pulse "
+    "'น่าสนใจไหม', 'should I worry', 'is it cheap') rather than a bare price/number: pulse(kind='asset')/pulse(kind='theme') "
     "is the CORE read, but it is NOT the whole answer. Before you conclude, ASK YOURSELF what OFF-INSTRUMENT "
     "backdrop would MATERIALLY change this read, and go GATHER it — do not answer from a single tool by "
     "reflex. Map the entity to its real drivers using your own world-knowledge: a DOMESTIC-demand business "
@@ -111,19 +111,19 @@ _INSTRUCTIONS = (
     "local bank, a homebuilder) is driven by that COUNTRY'S STRUCTURAL health, so pull it with "
     "`wb_series` (pass a concept) for the stock's country (household consumption, HOUSEHOLD DEBT, GDP-per-"
     "capita growth, credit — the demand backdrop the price+news alone can't give); an EXPORTER / tariff- or "
-    "supply-chain-exposed name → the TRADE flows (`search_trade`/`top_traders` — pass a product concept in `codes`); a rate- or "
-    "macro-sensitive read → the macro series (`fred_series` — pass a concept, or `macro_pulse`). Pull ONLY the "
+    "supply-chain-exposed name → the TRADE flows (`trade(mode='flows')`/`trade(mode='top_traders')` — pass a product concept in `codes`); a rate- or "
+    "macro-sensitive read → the macro series (`fred_series` — pass a concept, or `pulse(kind='macro')`). Pull ONLY the "
     "1–2 backdrops that would actually move the conclusion (cheap, high-signal — each tool resolves a plain "
     "concept server-side, no separate lookup step), "
     "then SYNTHESIZE: does the structural/macro/trade backdrop CONFIRM or CONTRADICT the price+news? Never "
     "gather just to look thorough — but never leave a domestic-consumer, exporter, or macro-sensitive read "
     "backdrop-BLIND either (that is the difference between a data readout and an analyst's answer). The "
-    "stock's country + sector (from asset_pulse / financials) is enough to know WHICH backdrop applies. "
+    "stock's country + sector (from pulse(kind='asset') / financials) is enough to know WHICH backdrop applies. "
     "To SUMMARIZE a whole scope — a news CATEGORY (e.g. "
     "'สรุปข่าว commodity' → news_type='commodity_supply'), a country/market, an impact channel (aspect), "
     "a GICS sector, a megatrend, or any AND-mix — use `brief` (the composed 'how is <X> doing right now?' "
     "picture), NOT search_news/news_feed (those return a raw article LIST, not a summary). A sector/trend term "
-    "in `brief`/`theme_pulse` is resolved server-side; follow avaadvisor://policy for voice, scope, and stance. "
+    "in `brief`/`pulse(kind='theme')` is resolved server-side; follow avaadvisor://policy for voice, scope, and stance. "
     "NOTES — the user keeps a personal INVESTMENT KNOWLEDGE BASE via `write_note` (their notes join this "
     "same graph and are retrievable by entity later — the point is to fight scattered knowledge). Act as a "
     "proactive librarian: after a SUBSTANTIVE investment answer — a sector/mechanism explainer, a dated "
@@ -132,7 +132,7 @@ _INSTRUCTIONS = (
     "stocks + sector/theme this turn is about so the note links to the graph — `write_note` RESOLVES names "
     "server-side: put stock NAMES/tickers in `stocks`, and the sector/trend word(s) straight in `gics` (plain "
     "English is fine — a curated theme is routed to a megatrend automatically). 🔴 LIKEWISE a COMMODITY you "
-    "discussed only via the TRADE tools or keyword news (`search_trade` etc. resolve a product concept to an HS code e.g. rice→1006, "
+    "discussed only via the TRADE tools or keyword news (`trade(mode='flows')` etc. resolve a product concept to an HS code e.g. rice→1006, "
     "NOT a ticker) — just put the commodity NAME in `stocks` (rice→resolved to RICE.COMM, copper→COPPER.COMM) so "
     "the note links to it in the graph. (A stock chat "
     "usually resolved the ticker already; a commodity/trade chat often has NOT — this is the easy miss.) Do NOT offer on "
@@ -914,7 +914,7 @@ def _resolve_ticker(q: str, scope: tuple = ("stock",), country: Optional[str] = 
 #    an exact full ticker passes through (no Jev); a name/symbol/phrase → _resolve_ticker → resolved | batched reconfirm.
 _SCOPE_STOCK      = ("stock",)                                              # financials, relationships (companies)
 _SCOPE_OPTIONABLE = ("stock", "etf")                                       # options_sentiment (US-optionable)
-_SCOPE_ASSET      = ("stock", "etf", "crypto")                             # asset_pulse (company/ETF/crypto; commodity→commodity_pulse per its own doc)
+_SCOPE_ASSET      = ("stock", "etf", "crypto")                             # pulse(kind='asset') (company/ETF/crypto; commodity→pulse(kind='commodity') per its own doc)
 _SCOPE_PRICED     = ("stock", "etf", "commodity", "crypto", "forex")       # stock_prices(_batch) (priced instruments; private has no prices)
 _SCOPE_BROAD      = ("stock", "etf", "commodity", "crypto", "forex", "private")  # stock_impact (news impact on any asset)
 
@@ -1335,7 +1335,7 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
     SUMMARIZE a scope (theme / news category / country / sector / aspect) — NOT a raw article list (that's
     search_news/news_feed). ⛔ NOT for a single COMPANY or market INDEX ("how is AAPL / the S&P doing?" →
     options_sentiment + stock_impact/news_feed; an index maps to an ETF, not a brief scope). For a sector×region the
-    quickest path is theme_pulse(q='banks', country=…); use brief for one precise GICS cohort or an AND-combo.
+    quickest path is pulse(kind='theme', target='banks', country=…); use brief for one precise GICS cohort or an AND-combo.
     Scope by ≥1 of (CSV for several) — REQUIRED (never whole-market):
       • `news_type` — a category; use ONLY these EXACT names: product_tech, ma_partnership, industry_thematic,
         earnings_results, corporate_action, management_governance, analyst_rating, macro_economic, geopolitics,
@@ -1730,8 +1730,8 @@ def write_note(subject: Annotated[str, _d("Short title / subject line of the not
                megatrend_ids: Annotated[Optional[List[int]], _d("ADVANCED — raw megatrend node id(s) if you already hold one (e.g. a theme tool's `megatrend.id`). Normally just name the theme in `gics` and the server routes it to a megatrend.")] = None,
                gics: Annotated[Optional[List[str]], _d("The note's INDUSTRY/SECTOR or THEME — a GICS code OR plain English ('banks', 'semiconductors', 'AI'); the server resolves each and routes a curated theme to a megatrend link. (Derived free if the note names representative stocks.)")] = None,
                portfolio_id: Annotated[Optional[int], _d("Link the note to one of the user's portfolios, if relevant.")] = None,
-               agent: Annotated[Optional[AgentName], _d("Which app is writing the note — set to the surface you run in "
-                   "(e.g. `claude` | `chatgpt` | `marketdx-web`); the server falls back to the connection's client info.")] = None,
+               agent: Annotated[Optional[AgentName], _d("Which app is writing the note — EXACTLY one of: `Claude` | `Claude Code` | "
+                   "`Claude Coworks` | `ChatGPT` | `Codex` | `Gemini` | `Other` (case-sensitive); the server falls back to the connection's client info.")] = None,
                ctx: Context = None,
                context: Annotated[Optional[str], _d(_TK_CONTEXT)] = None,
                ) -> dict:
@@ -1828,7 +1828,7 @@ def query_notes(q: Annotated[Optional[str], _d("Semantic query text — recall n
     Returns note SUMMARIES + linked entities + `similarity` — NOT the full body (call `get_note(id)` for
     that). `limit` default 10 (max 50).
     🔴 FUSE personal + live: when the user asks about something they've likely noted, pair this with the
-    live read — e.g. `asset_pulse(NVDA)` AND "your NVDA thesis from last week said …". That personal-
+    live read — e.g. `pulse(kind='asset', target=NVDA)` AND "your NVDA thesis from last week said …". That personal-
     knowledge + live-graph combination is the whole point of the notes layer."""
     params: dict = {}
     if q:
@@ -1936,7 +1936,7 @@ _ART_KEEP = ("title", "brief_text", "url", "publisher", "article_published_at", 
 def _slim_articles(rows, n=6):
     """Keep only the narratable fields of an impact-article row (drop the big `raw` blob + ids) + cap N.
     Renames `article_published_at` → `published_at` so the date field name is consistent with search_news
-    and the rest of the API (asset_pulse used to expose the raw longer name)."""
+    and the rest of the API (pulse(kind='asset') used to expose the raw longer name)."""
     out = []
     for a in (rows or [])[:n]:
         d = {k: a[k] for k in _ART_KEEP if k in a}
@@ -2002,7 +2002,7 @@ def _slim_context(ctx: dict) -> dict:
     return c
 
 def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/index-ETF/crypto — for a COMMODITY use "
-                                   "commodity_pulse, for a BOND/RATE use bond_pulse.")],
+                                   "pulse(kind='commodity'), for a BOND/RATE use pulse(kind='bond').")],
                 window: Annotated[Optional[str], _d(_WINDOW)] = None,
                 limit: Annotated[Optional[int], _d(_LIMIT)] = None,
                 country: Annotated[Optional[str], _d(_TK_COUNTRY)] = None,
@@ -2123,7 +2123,7 @@ def asset_pulse(ticker: Annotated[str, _dt(_TICKER + " ⚠️ a COMPANY/ETF/inde
                    "backdrop; not listed = not material, don't invent a supply chain), `revenue_by_region` "
                    "(where it sells — the WHERE for trade + the cross-border gate) and `currency_exposures`. "
                    "For a GOODS/exporter or a policy/tariff-exposed name, you MAY deepen with the trade tools "
-                   "(the trade tools search_trade/top_traders/trade_balance): enumerate the firm's material product "
+                   "(the trade tools trade(mode='flows')/trade(mode='top_traders')/trade(mode='balance')): enumerate the firm's material product "
                    "lines from `description`, pass each product concept in the trade tool's `codes`, and pull flows for the regions in "
                    "`revenue_by_region`. 🔴 But GATE it: Comtrade is cross-border EXIM only (no domestic "
                    "consumption) — a DOMESTIC-demand business (revenue_by_region home-only) has NO trade "
@@ -2144,9 +2144,9 @@ def stock_prices(ticker: Annotated[str, _dt(_TICKER)],
     (is today's vol high vs its OWN year), trend vs SMA50/200, volume conviction (`up_down_volume_ratio_1mo`,
     rvol). `*_read` fields are ready plain-language labels — quote them, don't re-derive. Reach for this on
     "is it cheap/extended / how has it moved / why is it dropping" — the LEVEL that makes a news+options read
-    actionable (or use `asset_pulse` to get price + news + options in one). `to` = as-of date (point-in-time,
+    actionable (or use `pulse(kind='asset')` to get price + news + options in one). `to` = as-of date (point-in-time,
     YYYY-MM-DD, features as of that day); `from_` bounds history (narrowing below ~1y nulls the long windows).
-    For a SECTOR/theme (not one ticker) use `theme_pulse`, not this. 🔵 BONDS/RATES: if `metric_kind` ==
+    For a SECTOR/theme (not one ticker) use `pulse(kind='theme')`, not this. 🔵 BONDS/RATES: if `metric_kind` ==
     "yield" (a `.GB` govt-bond yield like US-10Y.GB or a `.MM` rate like SOFR.MM) the stored value is a
     LEVEL, not a price — narrate each window's `change_bps` in BASIS POINTS, NOT `change_pct` (a % of a
     yield is sign-inverted + the wrong unit; e.g. US-10Y 1y = "+52 bps", not "+12%"). Bonds also carry
@@ -2202,7 +2202,7 @@ def portfolio_pulse(portfolio_id: Annotated[int, _d(_PID)],
     read, so you can explain WHAT is happening to the book, not just its numbers. Prefer this over
     `portfolio_context` alone whenever the user asks how the portfolio (or a position in it) is DOING;
     use `portfolio_context` for pure numbers/analytics (a period's sharpe, attribution, composition).
-    Drill into any single holding with `asset_pulse(symbol)` for full detail. `top_n` default 3 (cap 5 —
+    Drill into any single holding with `pulse(kind='asset', target=symbol)` for full detail. `top_n` default 3 (cap 5 —
     each holding adds credits + latency). `window` scopes the news recency. `portfolio_id` from
     `list_portfolios`; 404 if not the user's. Analyze as an analyst (avaadvisor://policy PORTFOLIO)."""
     cli = mdx()  # bind the caller's client in THIS thread (contextvar not set inside workers)
@@ -2244,7 +2244,7 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
                                           "nationality ALWAYS goes in the `country` param, never here. 'European banks' → "
                                           "q='banks' + country='GB,DE,FR,IT,ES,NL,CH,SE'; 'Thai retail' → q='retail' + "
                                           "country='TH'; 'Japanese real estate' → q='real estate' + country='JP'. "
-                                          "NOT a single company/ticker (→ asset_pulse), NOT a bond/rate (→ bond_pulse).")],
+                                          "NOT a single company/ticker (→ pulse(kind='asset')), NOT a bond/rate (→ pulse(kind='bond')).")],
                 country: Annotated[Optional[str], _d("Country/region scope — CSV of ISO-2 codes. 🌍 If the question names a "
                                           "nationality or region ('European', 'Thai', 'Chinese', 'ASEAN'), put it HERE (never in "
                                           "`q`); enumerate a region into its ISO-2s YOURSELF (Europe→'GB,DE,FR,IT,ES,NL,CH,SE'; "
@@ -2266,11 +2266,11 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
     Applicable angles VARY: 'semiconductors' → theme+gics+asset; 'carbon' → theme (Carbon-Removal cohort) +
     commodity (the EUA price); 'gold' → asset (GLD options) + commodity (GOLD.COMM price); 'AI' → theme (no
     single AI ETF). `skipped` lists the angles that didn't resolve.
-    ⚠️ Use `asset_pulse(ticker)` for a SINGLE company/ETF; use `theme_pulse` for a sector/theme CONCEPT.
+    ⚠️ Use `pulse(kind='asset', target=ticker)` for a SINGLE company/ETF; use `pulse(kind='theme')` for a sector/theme CONCEPT.
     🌍 A sector IN a country/region — "how are EUROPEAN banks / THAI retail / JAPANESE real-estate doing?" —
     just pass `country` (CSV of ISO-2; enumerate the region yourself). It scopes the news angles (theme+gics)
     to companies listed there; the ETF-options + commodity angles stay global. So 'European banks' =
-    theme_pulse(q='banks', country='GB,DE,FR,IT,ES,NL,CH,SE') — ONE call, no need to pre-resolve the code.
+    pulse(kind='theme', target='banks', country='GB,DE,FR,IT,ES,NL,CH,SE') — ONE call, no need to pre-resolve the code.
     (For a single PRECISE cohort with no fan-out, `brief(gics=<sector code or name>, country=…)` is the alternative.)
     🧩 MULTIPLE sectors at once — "how are SEMICONDUCTORS and CLOUD in China doing?" — comma-separate them in
     `q` ('semiconductors,cloud'); theme+gics merge into one union pulse, asset+commodity list per concept. So
@@ -2395,15 +2395,15 @@ def theme_pulse(q: Annotated[str, _dq("The SECTOR / INDUSTRY / THEME name ONLY �
 
 def commodity_pulse(q: Annotated[str, _dq("A COMMODITY concept, in ENGLISH — translate first (ทองคำ/黄金→'gold', "
                                              "天然ガス/原油→'natural gas'/'crude oil', 铜→'copper'). Or pass a `SYMBOL.COMM` "
-                                             "ticker to skip resolution. For a COMPANY use asset_pulse; a SECTOR → theme_pulse.")],
+                                             "ticker to skip resolution. For a COMPANY use pulse(kind='asset'); a SECTOR → pulse(kind='theme').")],
                     window: Annotated[Optional[str], _d(_WINDOW)] = None) -> dict:
     """⭐ "How is <a COMMODITY> doing?" — gold, oil, natural gas, copper, carbon, metals, agris, LME-vs-
     onshore-China variants. Resolves the NAME **within the commodity universe** (no company noise — a bare
     "natural gas" via the general resolver returns gas UTILITIES, not the commodity) and returns the digested
     PRICE + supply/demand & geopolitics NEWS + onshore/offshore VARIANTS. 🌐 Pass the ENGLISH concept
     (translate ทองคำ/黄金→"gold", 天然ガス/原油→"natural gas"/"crude oil" first). ⚠️ A COMMODITY has NO
-    options / PE / competitors — don't expect them. For a COMPANY use `asset_pulse`; a SECTOR/theme →
-    `theme_pulse`. `window` scopes the news recency (7d/30d/90d/…). You may also pass a `SYMBOL.COMM` ticker
+    options / PE / competitors — don't expect them. For a COMPANY use `pulse(kind='asset')`; a SECTOR/theme →
+    `pulse(kind='theme')`. `window` scopes the news recency (7d/30d/90d/…). You may also pass a `SYMBOL.COMM` ticker
     directly to skip resolution."""
     cli = mdx()
     frm = _win(window)
@@ -2415,7 +2415,7 @@ def commodity_pulse(q: Annotated[str, _dq("A COMMODITY concept, in ENGLISH — t
         comms = [m for m in ms if m.get("type") == "commodity"]
     if not comms:
         return {"error": f"no commodity matches '{q}'. Translate to the English concept (gold/crude oil/…); "
-                         "for a COMPANY use asset_pulse, a SECTOR use theme_pulse."}
+                         "for a COMPANY use pulse(kind='asset'), a SECTOR use pulse(kind='theme')."}
     t = comms[0]["ticker"]
     def _price():
         try:
@@ -2470,9 +2470,9 @@ def commodity_pulse(q: Annotated[str, _dq("A COMMODITY concept, in ENGLISH — t
                    "commodity has NO options / PE / competitors — do not mention or flag them as missing. "
                    "`impact` empty = no news in coverage (2026-01-01+), say so plainly; price still stands. "
                    "🌐 TRADE LENS: a commodity IS a traded good → for the PHYSICAL supply/demand behind the "
-                   "price you MAY deepen with the trade tools: `top_traders`(codes=this commodity) (who "
-                   "produces/exports the most, or whose exports are growing/streaking), `top_partners` / "
-                   "`search_trade` on the swing buyer (China imports rising/falling), `trade_balance`. Adds "
+                   "price you MAY deepen with the trade tools: `trade(mode='top_traders', codes=<this commodity>)` (who "
+                   "produces/exports the most, or whose exports are growing/streaking), `trade(mode='top_partners')` / "
+                   "`trade(mode='flows')` on the swing buyer (China imports rising/falling), `trade(mode='balance')`. Adds "
                    "the flow substrate news+price can't (e.g. 'global import demand +X%, China −2 quarters, "
                    "Chile exports +5y CAGR 14%'). BYOK — relay the connect CTA if no key."),
     }
@@ -2591,8 +2591,8 @@ def financials(tickers: Annotated[Union[str, List[str]], _dts("1–8 comma-separ
     multi-company) converts totals at each period's date. 🗣 The digest carries a plain `read` (facts, not advice) and may
     carry `_notes` (per-period comparability flags — the warning is FACT, each `likely_causes` is an inferred lead to VERIFY).
     📏 LIMITS: ≤8 companies · ≤20 fields · ~4–5y history. A non-equity/unlisted entry → `ok:false`.
-    🔴 asset_pulse on a stock ALREADY embeds this digest — call financials only for a dedicated read/compare or a
-    specific fields/statement pull, not right after asset_pulse."""
+    🔴 pulse(kind='asset') on a stock ALREADY embeds this digest — call financials only for a dedicated read/compare or a
+    specific fields/statement pull, not right after pulse(kind='asset')."""
     # accept both a comma-string and a JSON array for tickers/fields (LLMs reach for either) → normalize to string.
     if isinstance(tickers, list): tickers = ",".join(str(t) for t in tickers)
     if isinstance(fields, list): fields = ",".join(str(f) for f in fields)
@@ -3239,7 +3239,7 @@ def bond_pulse(q: Annotated[str, _dq("A COUNTRY ('US rates', 'US yield curve'), 
                ("PAYEMS", "chg", "nonfarm payrolls"), ("UNRATE", "lin", "unemployment"),
                ("FEDFUNDS", "lin", "fed funds")]
         from concurrent.futures import ThreadPoolExecutor as _TPE
-        with _TPE(max_workers=5) as ex2:  # `cli` captured from bond_pulse's main thread (contextvar-safe)
+        with _TPE(max_workers=5) as ex2:  # `cli` captured from pulse(kind='bond')'s main thread (contextvar-safe)
             return {"covered": True, "drivers": list(ex2.map(lambda t: _fred_slim(cli, t[0], t[1], t[2], "10y"), drv))}
     # ── futures_positioning: the CFTC COT basis-trade view (leveraged funds vs asset managers in the Treasury
     #    FUTURES) — complements rate_positioning (ETF options) with the second positioning lens. US tenors only. ──
@@ -3279,7 +3279,7 @@ def bond_pulse(q: Annotated[str, _dq("A COUNTRY ('US rates', 'US yield curve'), 
                    "curve move + macro_drivers + positioning: agreement strengthens the read, divergence is the "
                    "insight. Explain any options term in plain words. `covered=false` (non-US) on rate_positioning/"
                    "macro_drivers → say the US-macro/ETF proxy isn't available there. `news` empty = say so; the "
-                   "curve still stands. For the FULL economy/recession read, hand off to macro_pulse."),
+                   "curve still stands. For the FULL economy/recession read, hand off to pulse(kind='macro')."),
     }
 
 @mcp.tool(title="Screen Stocks", annotations=_RO)
@@ -3300,7 +3300,7 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     """⭐ The cohort SCREENER: "which stocks in <a group> are interesting / winning / losing / most-talked-about,
     and how cheap or expensive do they trade?" Ranks the companies in a scope by how news is hitting them (lead with
     the winners-vs-losers split), and EVERY row carries its VALUATION (P/E, P/B, dividend yield, 52w) — so this is
-    also the tool for "which in <group> are cheap / worth investing" (theme_pulse/brief are news-only, no valuation —
+    also the tool for "which in <group> are cheap / worth investing" (pulse(kind='theme')/brief are news-only, no valuation —
     pull P/E from here; P/B leads for banks/insurers).
     ⚠️ Rows are a NEWS-RANKED, CAPPED SUBSET, not the full cohort — do NOT compute a sector/peer AVERAGE from them
     (biased sample). For "cheaper/richer than the sector average / below-above the group / undervalued vs peers" use
@@ -3309,8 +3309,8 @@ def screen_stocks(megatrend: Annotated[Optional[str], _d(_MEGATREND)] = None,
     Each row = {symbol, name, country, gic_code, market_cap_usd, impact:{news_count, pos, neg, ambiguous,
     net_direction, top_relevance, aspects, top_reason}, fundamentals:{pe_ratio, pb_ratio, dividend_yield_pct,
     week52_high, week52_low}}; `direction_split` pre-tallies winners/losers. ⚠️ per-stock impact scoring exists only
-    from ~2026-07-03 — an earlier window returns empty (say so, not "nothing happened"). One ticker → asset_pulse;
-    a group's overall pulse → theme_pulse; a sector-average benchmark → screen_unified."""
+    from ~2026-07-03 — an earlier window returns empty (say so, not "nothing happened"). One ticker → pulse(kind='asset');
+    a group's overall pulse → pulse(kind='theme'); a sector-average benchmark → screen_unified."""
     mt = None
     if megatrend:  # UNIFIED: theme term(s) → megatrend node ids
         mt, _me = _theme_nodes(megatrend)
@@ -3608,7 +3608,7 @@ def top_partners(reporter: Annotated[str, _d("Reporting country — name / ISO /
                  context: Annotated[Optional[str], _d(_HS_CTX)] = None) -> dict:
     """"Who buys/sells <a GIVEN country>'s <product>?" (BYOK, 5cr). Ranks that reporter's partners →
     `ranked:[{partner, value_usd, share_pct}]` + `total_value_usd`. flow=export → biggest BUYERS; import →
-    biggest SUPPLIERS. (Ranks the PARTNERS of ONE country — vs `top_traders`, which ranks the countries
+    biggest SUPPLIERS. (Ranks the PARTNERS of ONE country — vs `trade(mode='top_traders')`, which ranks the countries
     themselves.) BYOK note relayed on 402."""
     codes_r, cf, _det = _hs_codes_arg(codes, type=type, context=context)  # 🆕 collapse find_hs
     if cf: return cf
@@ -3674,7 +3674,7 @@ _SERIES_RESOLVE_INSTR = (
 _SERIES_NONE_OPT = (
     "None of the candidates is the FRED macro series the query means. ⚠️ LAST RESORT — pick this ONLY when the query is "
     "not a FRED time series at all (a survey diffusion index like ISM/PMI that FRED doesn't carry; a commodity SPOT "
-    "price → belongs in commodity_pulse; a single company; gibberish). A real macro concept that DOES match a "
+    "price → belongs in pulse(kind='commodity'); a single company; gibberish). A real macro concept that DOES match a "
     "candidate must resolve to it, never to NONE.")
 
 def _resolve_series(q: str, country: Optional[str] = None, context: Optional[str] = None) -> dict:
@@ -3792,7 +3792,7 @@ def fred_series(series_id: Annotated[str, _dq("A macro CONCEPT (any language —
     money-shot for "high or low?" — e.g. unemployment 8th pct = historically very low), `volatility`, a one-line
     `read`. 🔵 `transform` matters and is auto-picked from the resolved series ("inflation" = pc1 YoY % of a price
     index, a rate = lin) — override only deliberately. QUOTE the `read`; narrate the percentile. Compare two = call
-    once per concept and diff. A concept that isn't a FRED series (ISM/PMI, a commodity SPOT price → commodity_pulse)
+    once per concept and diff. A concept that isn't a FRED series (ISM/PMI, a commodity SPOT price → pulse(kind='commodity'))
     → honest no_match, not a fabrication. US-govt series are public domain (`_license_note`)."""
     _rs = None
     if not _is_series_id(series_id):                       # 🆕 collapse find_series: a CONCEPT → resolve server-side
@@ -3972,7 +3972,7 @@ def _fred_slim(cli, sid: str, tf: str, label: str, frm: str = "10y") -> dict:
 
 def macro_pulse(scope: Annotated[str, _d("A macro DASHBOARD: `economy` (overall regime) · `inflation` · `labor` · `consumer` · "
                                          "`housing` · `recession-risk`. For ONE indicator use fred_series (pass a concept); for the "
-                                         "rates/yield-curve use bond_pulse.")],
+                                         "rates/yield-curve use pulse(kind='bond').")],
                 window: Annotated[Optional[str], _d("History window for each indicator's percentile/trend (default `10y`; e.g. `5y`/`20y`).")] = None,
                 country: Annotated[Optional[str], _d("OPTIONAL ISO-2 — v0 dashboards are US; non-US returns a note (use fred_series(q=<concept>, country=XX) per indicator).")] = None) -> dict:
     """⭐ "How is <the economy / consumer / labor market / housing / inflation> doing? / recession risk / soft-
@@ -3986,7 +3986,7 @@ def macro_pulse(scope: Annotated[str, _d("A macro DASHBOARD: `economy` (overall 
         money-shot — "unemployment 8th pct of its history = historically very low". State each as-of date.
       • Voice: the regime + the MECHANISM it implies (e.g. rising real yields historically pressure gold / long-
         duration) — NOT advice or a forecast; hand judgment back; if the user holds names, tie the regime to them.
-      • Boundaries: no ISM/PMI on FRED; commodity SPOT → commodity_pulse; rates/curve detail → bond_pulse;
+      • Boundaries: no ISM/PMI on FRED; commodity SPOT → pulse(kind='commodity'); rates/curve detail → pulse(kind='bond');
         external/trade → the Comtrade tools. A component with `error` = that series wasn't available; say so.
     For ONE indicator → fred_series (pass a concept); THIS is the multi-indicator regime composite."""
     key = _MACRO_ALIASES.get(scope.strip().lower(), scope.strip().lower())
@@ -4010,7 +4010,7 @@ def macro_pulse(scope: Annotated[str, _d("A macro DASHBOARD: `economy` (overall 
                    "vs inflation). LEAD with each indicator's `percentile` — where it sits vs its OWN history is "
                    "the answer to 'high or low' (a bare level isn't). Quote each `read` + its as-of date. Then "
                    "the MECHANISM/implication (facts, not advice; hand judgment back; tie to the user's holdings "
-                   "if any). Route out where relevant: rates/curve → bond_pulse, commodity spot → commodity_pulse, "
+                   "if any). Route out where relevant: rates/curve → pulse(kind='bond'), commodity spot → pulse(kind='commodity'), "
                    "trade/external → the Comtrade tools. Any indicator with `error` = unavailable, say so."),
         "_license_note": "Macro data via FRED; US-government series are public domain.",
     }
@@ -4216,12 +4216,13 @@ def pulse(
             "asset/macro: optional. Ignored by commodity/bond/portfolio.")] = None,
         limit: Annotated[Optional[int], _d(_LIMIT + " (asset only)")] = None,
         top_n: Annotated[Optional[int], _d("portfolio only: how many top holdings to analyze (default 3, cap 5).")] = None,
+        context: Annotated[Optional[str], _d("asset only — " + _TK_CONTEXT)] = None,
 ) -> dict:
     """ONE market-pulse read across every subject type — a news + market lens on an asset, a theme/sector, a
     commodity, a bond/rate/curve, a macro dashboard, or your portfolio. Pick `kind`, put the subject in `target`.
     Replaces the per-type asset/theme/commodity/bond/macro/portfolio pulse tools."""
     if kind == "asset":
-        return asset_pulse(ticker=target, window=window, limit=limit, country=country)
+        return asset_pulse(ticker=target, window=window, limit=limit, country=country, context=context)
     if kind == "theme":
         return theme_pulse(q=target, country=country, window=window or "30d")
     if kind == "commodity":
