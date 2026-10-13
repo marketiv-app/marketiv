@@ -2836,7 +2836,9 @@ def screen_unified(
             "membership gate — combine with a fundamental/ta/options base leg (pure dividend screen → screen_dividends).")] = None,
         dividend_min_cagr: Annotated[Optional[float], _d("OPTIONAL dividend gate — 5-year dividend CAGR ≥ this % (5 = ≥5%/yr). Needs a fundamental/ta/options base leg too.")] = None,
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'options' (use when `options` present) · 'mcap' · a TA-context oscillator ('rsi'/'adx' — 'most overbought'→'rsi') · or any fundamental metric key in the results (pe/roe/…).")] = None,
-        limit: Annotated[Optional[int], _d("How many stocks to SHOW (default 10). Over-fetches a ~4× buffer (capped 100) so 'show me a few more' is served from THIS result — don't re-screen; re-screen only to exceed the buffer.")] = None) -> dict:
+        limit: Annotated[Optional[int], _d("How many stocks to SHOW (default 10). Over-fetches a ~4× buffer (capped 100) so 'show me a few more' is served from THIS result — don't re-screen; re-screen only to exceed the buffer.")] = None,
+        count_total: Annotated[Optional[bool], _d("Set true ONLY when the user asks HOW MANY match ('how many stocks…', 'is it more than 500?'): "
+            "returns the exact `total` up to 500, else `total_over: 500`. Slower (runs every leg in full) — omit for a normal screen.")] = None) -> dict:
     """EXECUTE a unified screen = universe ∩ fundamental ∩ technical ∩ options (any leg optional; each grammar resolved
     server-side — key or plain English). Returns {universe, count, sort, executed_criteria (the resolved request that ran — save/re-run it verbatim), results:[{head_listing_id, ticker, name, score,
     matched_legs, matched:{ta, fundamental:{<metric>:{value, basis, window?, series?, periods?}}}, context}], notes}.
@@ -3049,6 +3051,7 @@ def screen_unified(
         if dividend_min_cagr is not None: dv["min_cagr"] = dividend_min_cagr
         body["dividend"] = dv
     if sort: body["sort"] = sort
+    if count_total: body["count_total"] = True
     _t0 = _time.time()
     resp = mdx()._http._client.post("/v1/screen", json=body)
     _tlog("backend", "/v1/screen", _t0, getattr(resp, "status_code", 0) < 400)
@@ -3065,11 +3068,13 @@ def screen_unified(
             "returned": got,
             "buffer_maxed": got >= 100,
             "capped": capped,
-            "count_is_floor": capped,
+            "count_is_floor": capped and "total" not in data,
             "note": (f"Over-fetched ~4× your intended show ({show}) as a look-ahead buffer so 'a few more' is served "
                      f"from these {got} rows — do NOT re-screen for a few more. "
-                     + ("`count` is a FLOOR — the buffer filled, so MORE stocks match than shown; there is no exact "
-                        "market-wide total (say 'at least N', or re-screen with a larger intent / tighter filter to narrow)."
+                     + (f"The exact total match count is {data['total']} (`total`)." if "total" in data
+                        else f"More than {data['total_over']} stocks match (`total_over`) — say 'over {data['total_over']}'." if "total_over" in data
+                        else "`count` is a FLOOR — the buffer filled, so MORE stocks match than shown (say 'at least N'); "
+                             "if the user needs HOW MANY, re-call with count_total=true for the exact total (up to 500)."
                         if capped else "This is the COMPLETE match set — `count` is the exact total.")),
         }
         if fresolved: data["_resolved_fundamental"] = fresolved  # how each NL metric/shape was interpreted (transparency)
