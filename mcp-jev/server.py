@@ -2748,7 +2748,10 @@ def _cond_to_api(c: ScreenCondition) -> dict:
     if b:
         p["basis"] = {"annual": "A", "quarterly": "Q", "ttm": "T"}.get(str(b).lower(), str(b).upper())
     meas = pick("measure")   # quarterly consecutive_growth: sequential (QoQ) vs yoy — forwarded so the engine screens the one asked
-    if meas is not None: p["measure"] = meas
+    # `measure` only exists on consecutive_growth; on any other pattern the engine 400s "unknown param 'measure'" — a
+    # blind client that resolved 'grew vs the previous quarter' → qoq_momentum still sent measure:'sequential' (it IS
+    # sequential by definition). Drop it there instead of failing the whole screen.
+    if meas is not None and c.pattern == "consecutive_growth": p["measure"] = meas
     d: dict = {"concept": c.concept, "pattern": c.pattern, "params": p}
     if c.vs_cohort: d["vs_cohort"] = c.vs_cohort
     return d
