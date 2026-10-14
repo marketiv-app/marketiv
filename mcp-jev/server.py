@@ -2887,6 +2887,9 @@ _MA_FAMILY_WE_LACK = re.compile(r"\b(wma|hma|tema|dema|kama|vwma|smma|zlema|alma
 # chart lines that don't exist at all — no honest substitute
 _LINE_WE_LACK = re.compile(r"\b(vwap|obv|on[- ]balance volume|fibonacci|fib|pivot points?|parabolic sar|psar|supertrend)\b", re.I)
 _OWN_HISTORY = re.compile(r"\b(its own|own (\d+[- ]?(year|yr|y))?\s*(history|average|avg|mean|norm)|historical (average|avg|mean)|vs (its )?history)\b|ของตัวเอง|ค่าเฉลี่ยในอดีต", re.I)
+_OR_REASON = "fundamental conditions are AND-only — split the alternatives into separate suggestions"
+_OWN_REASON = ("comparing a stock with ITS OWN past average isn't screenable — only absolute levels (above/below a number), "
+               "peer-relative (above_average/below_average, high/low) or trends")
 _NUM_IN_TEXT = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?)\s*(x|×|%|percent)?", re.I)
 # standard indicator periods the canonical keys imply (rsi → rsi14 …) — a user saying "RSI 14" asked for nothing extra
 _IMPLIED_NUMS = {"rsi": {14.0}, "stoch": {14.0}, "adx": {14.0}, "atr": {14.0}, "macd": {12.0, 26.0, 9.0}, "bb": {20.0, 2.0}}
@@ -2938,6 +2941,9 @@ def _screen_validate_batch(criteria: list) -> list:
 # a field the client already sent as a KEY/token ('crossover_up', 'ema50', 'net_income') skips the vector+Jev round
 # trip; the batch validate then verifies it, and a lexical miss ('golden_cross' isn't a key) falls back to the resolver.
 _KEYISH = re.compile(r"^[a-z][a-z0-9_]*$")
+# which value fields a pending resolver kind fills (to build merge-ready `candidates`)
+_PENDING_FIELDS = {"ta_pattern": ("pattern",), "ta_indicator": ("a", "b"),
+                   "concept": ("concept", "metricA", "metricB"), "pattern": ("pattern", "relation")}
 _LEXICAL = {"unknown_pattern", "unsupported_operand", "unknown_concept"}
 
 def _resolve_uni_dim(dim: str, val) -> tuple:
@@ -3035,15 +3041,14 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             if isinstance(d.get("basis"), str):                              # accept the engine's A/Q/T too
                 d["basis"] = {"a": "annual", "q": "quarterly", "t": "ttm"}.get(d["basis"].strip().lower(), d["basis"])
             texts += [v for v in d.values() if isinstance(v, str)]
-            if phrase and _has_or(phrase):                                   # report the OR first: the LLM can split it,
-                ctx["out"] = {**res, "status": "invalid", "code": "fundamental_or",   # and one half may be screenable
-                              "reason": "fundamental conditions are AND-only — split the alternatives into separate suggestions"}
+            own = bool(_OWN_HISTORY.search(" ".join(str(t) for t in texts)))
+            if phrase and _has_or(phrase):                                   # FIXED ORDER: the OR first (the LLM can split
+                ctx["out"] = {**res, "status": "invalid", "code": "fundamental_or",   # it; one half may be screenable),
+                              "reason": _OR_REASON}                                   # + every other reason that applies
+                if own: ctx["out"]["also"] = [{"code": "own_history", "reason": _OWN_REASON}]
                 return ctx
-            if _OWN_HISTORY.search(" ".join(str(t) for t in texts)):
-                ctx["out"] = {**res, "status": "unsupported", "code": "own_history",
-                              "reason": "comparing a stock with ITS OWN past average isn't screenable — only absolute levels "
-                                        "(above/below a number), peer-relative (above_average/below_average, high/low) or trends",
-                              "nearest": []}
+            if own:
+                ctx["out"] = {**res, "status": "unsupported", "code": "own_history", "reason": _OWN_REASON, "nearest": []}
                 return ctx
             cond = ScreenCondition(**d)
             # the user's own words name quarters but the structured value carries no basis → quarterly (said so)
@@ -3081,7 +3086,18 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
                 if per and k and not k[-1].isdigit(): c["indicator"] = k + per
     if pending:
         no = [p for p in pending if p.get("status") == "no_match"]
-        cands = [c for p in pending for c in (p.get("candidates") or []) if (c.get("prob") is None or c["prob"] >= 0.05)][:3]
+        cands = []
+        for p in pending:                                                    # each candidate = the WHOLE fragment with
+            fields = _PENDING_FIELDS.get(p.get("kind"), ())                  # that reading swapped in → merge as-is
+            for c in p.get("candidates") or []:
+                if c.get("prob") is not None and c["prob"] < 0.05: continue
+                k = next((c[f] for f in ("indicator", "pattern", "key", "concept") if c.get(f)), None)
+                v = json.loads(json.dumps(key_val)) if isinstance(key_val, dict) else key_val
+                if isinstance(v, dict) and k is not None:
+                    for f in fields:
+                        if str(v.get(f)) == str(p.get("query")): v[f] = k
+                cands.append({"value": v, "key": k, "prob": c.get("prob")})
+        cands = cands[:3]
         ctx["out"] = {**res, "status": "unsupported" if no else "ambiguous",
                       "reason": "; ".join(f"'{p['query']}': {p.get('reason') or p.get('status')}" for p in pending),
                       "nearest" if no else "candidates": cands, "resolved": resolved}
