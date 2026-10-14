@@ -2919,7 +2919,7 @@ def _dropped(texts: list, key_value) -> list:
     blob = json.dumps(key_value).lower()
     for fam, ns in _IMPLIED_NUMS.items():
         if fam in blob: have |= ns
-    if "52w" in blob or "52_w" in blob or "new_high" in blob or "new_low" in blob or "near_high" in blob or "near_low" in blob:
+    if any(w in blob for w in ("52w", "52_w", "new_high", "new_low", "near_high", "near_low", "off_high", "off_low")):  # 52-week family
         have.add(52.0)
     out = []
     for t in texts:
