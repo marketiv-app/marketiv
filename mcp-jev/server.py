@@ -3035,6 +3035,10 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             if isinstance(d.get("basis"), str):                              # accept the engine's A/Q/T too
                 d["basis"] = {"a": "annual", "q": "quarterly", "t": "ttm"}.get(d["basis"].strip().lower(), d["basis"])
             texts += [v for v in d.values() if isinstance(v, str)]
+            if phrase and _has_or(phrase):                                   # report the OR first: the LLM can split it,
+                ctx["out"] = {**res, "status": "invalid", "code": "fundamental_or",   # and one half may be screenable
+                              "reason": "fundamental conditions are AND-only — split the alternatives into separate suggestions"}
+                return ctx
             if _OWN_HISTORY.search(" ".join(str(t) for t in texts)):
                 ctx["out"] = {**res, "status": "unsupported", "code": "own_history",
                               "reason": "comparing a stock with ITS OWN past average isn't screenable — only absolute levels "
