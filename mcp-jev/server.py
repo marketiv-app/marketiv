@@ -2763,11 +2763,15 @@ def _cond_to_api(c: ScreenCondition) -> dict:
 # find_tasignal tool — the client sends key-or-plain-English straight into a TaSignal. Field descriptions below
 # ported from docs/pipeline/ta-screener-mcp-guide.md (blind-client-validated).
 
+# Every TA pattern key, generated from the Ava resolver catalog (sync_ta_patterns.py; deploy.sh refuses a stale copy) —
+# so this description can't drift from what the engine accepts (the catalog itself is pinned by ta_scan::catalog_tests).
+_TA_PATTERNS = json.loads((pathlib.Path(__file__).resolve().parent / "ta_patterns.json").read_text())["patterns"]
+
 class TaSignal(BaseModel):
     """ONE technical signal = a SHAPE (`pattern`) + its operand LINES (`a`/`b`). Each is a key/token OR plain
     English — the SERVER resolves each."""
     model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
-    pattern: str = Field(..., description="The chart SHAPE — a pattern key or plain English ('golden cross','breaking out of a squeeze'), server-resolved. Common: crossover_up/down, touch_up/down, above/below/in_range, overbought/oversold, rising/falling, bb_squeeze (coiling now) / squeeze_fired_up/dn (coiled-then-broke, SELF-CONTAINED — use as the anchor, don't chain squeeze-THEN-fire), converge/expand, divergence_bull/bear, volume_spike/rising_volume/volume_dryup, net_change_up/down, 52-week at_new_high/near_high/at_new_low/near_low/off_high_by, near_ma. Squeeze/52-week/volume/divergence are OPERAND-FREE (omit a/b). Oscillator band ('RSI 40-50') = ONE in_range (a='rsi', b='40-50').")
+    pattern: str = Field(..., description="The chart SHAPE — a pattern key or plain English ('golden cross','breaking out of a squeeze'), server-resolved. Keys: " + ", ".join(_TA_PATTERNS) + ". bb_squeeze = coiling now; squeeze_fired_up/dn = coiled-then-broke, SELF-CONTAINED — use as the anchor, don't chain squeeze-THEN-fire. Squeeze/52-week/volume/divergence are OPERAND-FREE (omit a/b). Oscillator band ('RSI 40-50') = ONE in_range (a='rsi', b='40-50').")
     a: Optional[str] = Field(None, description="Operand A (SUBJECT line) — a token (close/ema50/rsi/macd_line/adx/stoch_k/bb_upper/senkou_a/tenkan…) or plain English, server-resolved. Cross/touch: the ACTIVE line (two MAs → the faster; price-vs-MA → 'close'). above/below read literally 'a is above/below b' ('price above the 200-day' → a='close',b='ema200'). Non-standard periods (ema45,rsi7) snap to the nearest. Omit for operand-free patterns.")
     b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line (token/English) or a numeric level as a string (oscillator-vs-level → '30'/'70'; MACD-vs-signal → 'macd_signal'; two MAs → the slower). For a net-return pattern (net_change_up/down), b = the move magnitude as a FRACTION ('0.30' = 30%). Omit if the pattern has no reference.")
     for_bars: Optional[int] = Field(None, description="A state/level must have HELD ≥ this many consecutive bars ('above the 200-day for a month' ≈ 20 daily bars); for rising/falling it's a run-length. NOT valid on net_change/crossover/divergence — for 'within the last N bars' use window_bars.")

@@ -17,6 +17,7 @@ PROJECT="${PROJECT:-ava-advisor-26c7b}"
 REGION="${REGION:-us-east1}"
 SERVICE="marketdx-mcp"
 HERE="$(cd "$(dirname "$0")" && pwd)"
+python3 "${HERE}/sync_ta_patterns.py" --check   # refuse a TaSignal.pattern description that drifted from the catalog
 
 echo "Deploying ${SERVICE} → Cloud Run (${PROJECT}/${REGION})"
 gcloud run deploy "${SERVICE}" \
