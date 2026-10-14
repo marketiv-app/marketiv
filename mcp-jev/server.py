@@ -2710,7 +2710,7 @@ class ScreenCondition(BaseModel):
 
 
 # A condition phrase that names QUARTERS ('grew every quarter', '3 quarters in a row', 'quarterly revenue', 'QoQ').
-_QUARTER_WORD = re.compile(r"\b(quarters?|quarterly|qtrs?|qoq|q/q)\b", re.I)
+_QUARTER_WORD = re.compile(r"\b(quarters?|quarterly|qtrs?|qoq|q/q)\b|ไตรมาส", re.I)
 
 def _cond_to_api(c: ScreenCondition) -> dict:
     """Typed condition → the news-api's shape (metric/pattern + nested params). Keeps the client's schema flat."""
@@ -2805,25 +2805,31 @@ def _res_fund_term(val, kind: str, resolved: dict, pending: list):
                     "reason": r.get("reason"), "candidates": r.get("candidates", [])})
     return val
 
-def _resolve_fund_conds(fundamental: list, resolved: dict, pending: list) -> None:
-    """Resolve every condition of the fundamental leg IN PLACE (metric + shape; params are the client's)."""
+_FUND_FIELDS = {"metricA": "concept", "metricB": "concept", "relation": "pattern", "concept": "concept", "pattern": "pattern"}
+
+def _resolve_fund_conds(fundamental: list, resolved: dict, pending: list, skip=None) -> None:
+    """Resolve every condition of the fundamental leg IN PLACE (metric + shape; params are the client's). Every text
+    field of every condition is resolved CONCURRENTLY (each is an independent vector+Jev call). `skip(text)` → True
+    leaves that field as sent (the builder's key fast-path; its validate verifies it)."""
+    jobs = []
     for c in fundamental:
         if c.metricA and c.metricB and c.relation:                     # relation form (compare two metrics)
-            c.metricA = _res_fund_term(c.metricA, "concept", resolved, pending)
-            c.metricB = _res_fund_term(c.metricB, "concept", resolved, pending)
-            c.relation = _res_fund_term(c.relation, "pattern", resolved, pending)
+            jobs += [(c, f) for f in ("metricA", "metricB", "relation")]
         else:                                                          # common form (metric + shape)
             # The resolver ignores the period unit (it's `basis`), so a phrase that NAMES quarters with no basis
             # sent would silently screen ANNUAL — infer basis=quarterly from the user's own words, and say so.
             said_q = any(_QUARTER_WORD.search(str(v)) for v in (c.concept, c.pattern) if v)
-            raw_shape = str(c.pattern or c.concept)
-            if c.concept: c.concept = _res_fund_term(c.concept, "concept", resolved, pending)
-            if c.pattern: c.pattern = _res_fund_term(c.pattern, "pattern", resolved, pending)
             if said_q and c.basis is None and not (c.params or {}).get("basis"):
                 c.basis = "quarterly"
-                resolved.setdefault(raw_shape, {})["basis"] = (
+                resolved.setdefault(str(c.pattern or c.concept), {})["basis"] = (
                     "quarterly (inferred: the condition names quarters and no `basis` was sent)")
+            jobs += [(c, f) for f in ("concept", "pattern") if getattr(c, f)]
+    jobs = [(c, f) for c, f in jobs if not (skip and skip(getattr(c, f)))]
+    keys = _parallel_map(lambda cf: _res_fund_term(getattr(cf[0], cf[1]), _FUND_FIELDS[cf[1]], resolved, pending), jobs)
+    for (c, f), k in zip(jobs, keys):
+        setattr(c, f, k)
 
+_ZERO_WORDS = {"zero", "zero line", "the zero line", "0 line", "the zero", "ศูนย์", "เส้นศูนย์"}
 _PRICE_WORDS = {"price", "the price", "close", "closing price", "share price", "stock price", "last price", "ราคา"}
 
 def _res_ta_term(val, kind: str, resolved: dict, pending: list):
@@ -2835,6 +2841,8 @@ def _res_ta_term(val, kind: str, resolved: dict, pending: list):
         return val                                                 # a numeric LEVEL / range → passthrough (not a line)
     if kind == "operand" and str(val).strip().lower() in _PRICE_WORDS:
         return "close"                                             # 'price' IS the close line (Jev split it close-vs-?)
+    if kind == "operand" and str(val).strip().lower() in _ZERO_WORDS:
+        return "0"                                                 # 'the zero line' is the level 0, not a chart line
     r = _resolve_tasignal(val) if kind == "pattern" else _resolve_ta_indicator(val)
     key = r.get("pattern") if kind == "pattern" else r.get("indicator")
     if r["status"] == "resolved":
@@ -2845,19 +2853,23 @@ def _res_ta_term(val, kind: str, resolved: dict, pending: list):
                     "status": r["status"], "reason": r.get("reason"), "candidates": r.get("candidates", [])})
     return val
 
-def _resolve_ta_sig(sig, resolved: dict, pending: list) -> None:
-    """Resolve one TaSignal IN PLACE (shape + both operands, each independently)."""
-    sig.pattern = _res_ta_term(sig.pattern, "pattern", resolved, pending)
-    if sig.a is not None: sig.a = _res_ta_term(sig.a, "operand", resolved, pending)
-    if sig.b is not None: sig.b = _res_ta_term(sig.b, "operand", resolved, pending)
+def _resolve_ta_sigs(sigs: list, resolved: dict, pending: list, skip=None) -> None:
+    """Resolve TaSignals IN PLACE — shape + both operands of every signal, all CONCURRENTLY (each field is an
+    independent vector+Jev call). `skip(text)` → True leaves that field as sent (the builder's key fast-path)."""
+    jobs = [(sig, f) for sig in sigs for f in ("pattern", "a", "b")
+            if getattr(sig, f) is not None and not (skip and skip(getattr(sig, f)))]
+    keys = _parallel_map(lambda sf: _res_ta_term(getattr(sf[0], sf[1]), "pattern" if sf[1] == "pattern" else "operand",
+                                                 resolved, pending), jobs)
+    for (sig, f), k in zip(jobs, keys):
+        setattr(sig, f, k)
+
+def _resolve_ta_sig(sig, resolved: dict, pending: list, skip=None) -> None:
+    """Resolve one TaSignal IN PLACE (shape + both operands, each independently, concurrently)."""
+    _resolve_ta_sigs([sig], resolved, pending, skip)
 
 def _resolve_ta_steps(ta: list, resolved: dict, pending: list) -> None:
-    for step in ta:
-        for sig in step.anchor:
-            _resolve_ta_sig(sig, resolved, pending)
-        for qual in (step.quals or []):
-            for sig in qual.any:
-                _resolve_ta_sig(sig, resolved, pending)
+    _resolve_ta_sigs([sig for step in ta for sig in list(step.anchor) + [s for q in (step.quals or []) for s in q.any]],
+                     resolved, pending)
 
 
 # ── /v1/screen/resolve — the screener BUILDER's dry-run (web chat builder, N1) ─────────────────────────────────────
@@ -2874,6 +2886,7 @@ _UNI_DIMS = ("country", "theme", "gics", "size", "asset_type", "mcap_min", "mcap
 _MA_FAMILY_WE_LACK = re.compile(r"\b(wma|hma|tema|dema|kama|vwma|smma|zlema|alma|lsma|weighted moving average|hull)\b", re.I)
 # chart lines that don't exist at all — no honest substitute
 _LINE_WE_LACK = re.compile(r"\b(vwap|obv|on[- ]balance volume|fibonacci|fib|pivot points?|parabolic sar|psar|supertrend)\b", re.I)
+_OWN_HISTORY = re.compile(r"\b(its own|own (\d+[- ]?(year|yr|y))?\s*(history|average|avg|mean|norm)|historical (average|avg|mean)|vs (its )?history)\b|ของตัวเอง|ค่าเฉลี่ยในอดีต", re.I)
 _NUM_IN_TEXT = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?)\s*(x|×|%|percent)?", re.I)
 # standard indicator periods the canonical keys imply (rsi → rsi14 …) — a user saying "RSI 14" asked for nothing extra
 _IMPLIED_NUMS = {"rsi": {14.0}, "stoch": {14.0}, "adx": {14.0}, "atr": {14.0}, "macd": {12.0, 26.0, 9.0}, "bb": {20.0, 2.0}}
@@ -2913,10 +2926,19 @@ def _dropped(texts: list, key_value) -> list:
                 out.append(m.group(0).strip())
     return out
 
-def _screen_validate(criteria: dict) -> dict:
-    r = mdx()._http._client.post("/v1/screen/validate", json=criteria)
+def _screen_validate_batch(criteria: list) -> list:
+    """ONE call to mdx-api /v1/screen/validate for many formulas (validated concurrently there, rules only — no
+    market data). → one result per formula, in order."""
+    if not criteria:
+        return []
+    r = mdx()._http._client.post("/v1/screen/validate", json={"batch": criteria})
     _check(r)
-    return r.json()
+    return r.json().get("results", [])
+
+# a field the client already sent as a KEY/token ('crossover_up', 'ema50', 'net_income') skips the vector+Jev round
+# trip; the batch validate then verifies it, and a lexical miss ('golden_cross' isn't a key) falls back to the resolver.
+_KEYISH = re.compile(r"^[a-z][a-z0-9_]*$")
+_LEXICAL = {"unknown_pattern", "unsupported_operand", "unknown_concept"}
 
 def _resolve_uni_dim(dim: str, val) -> tuple:
     """→ (include-patch {dim: value}, resolved-map, pending-list). theme/gics go through the SAME _scope_resolve as
@@ -2988,36 +3010,64 @@ def _place_into(base: dict, leg_val, place: dict) -> tuple:
         return c, "ta", {"code": "bad_place", "hint": "ta place.rel must be with | before | after | new"}
     return c, "", {"code": "bad_place", "hint": "place.leg must be universe | fundamental | ta"}
 
-def _resolve_fragment(base: dict, frag: dict, base_v: dict) -> dict:
+def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
+    """Phase 1 (per fragment, run concurrently): parse + resolve + place. → a ctx with either a final `out` (decided
+    without a validate: bad shape, unsupported, OR, ambiguous) or `merged` (+ optional `trial`) to validate."""
     place = frag.get("place") or {}
     leg, phrase, val = place.get("leg"), frag.get("phrase"), frag.get("value")
-    res: dict = {"place": place}
-    resolved, pending = {}, []
+    ctx: dict = {"frag": frag, "place": place, "leg": leg, "phrase": phrase, "res": {"place": place},
+                 "resolved": {}, "fast": fast, "raw_ops": {}}
+    res, resolved, pending = ctx["res"], ctx["resolved"], []
     texts = [phrase] if phrase else []
+    skip = (lambda t: isinstance(t, str) and bool(_KEYISH.match(t))) if fast else None
     try:
         if leg == "ta":
             d = dict(val) if isinstance(val, dict) else {"pattern": phrase or val}
+            if "within" in d: place = ctx["place"] = {**place, "within": d.pop("within")}  # a qualifier window sent in value
             texts += [v for v in d.values() if isinstance(v, str)]
             sig = TaSignal(**d)
-            raw_ops = {k: getattr(sig, k) for k in ("a", "b") if getattr(sig, k)}
-            _resolve_ta_sig(sig, resolved, pending)
+            ctx["raw_ops"] = {k: getattr(sig, k) for k in ("a", "b") if getattr(sig, k)}
+            ctx["skipped"] = any(skip(getattr(sig, f)) for f in ("pattern", "a", "b") if getattr(sig, f)) if skip else False
+            _resolve_ta_sig(sig, resolved, pending, skip)
             key_val = sig.model_dump(exclude_none=True)
         elif leg == "fundamental":
             d = dict(val) if isinstance(val, dict) else {"concept": phrase or val, "pattern": phrase or val}
+            if isinstance(d.get("basis"), str):                              # accept the engine's A/Q/T too
+                d["basis"] = {"a": "annual", "q": "quarterly", "t": "ttm"}.get(d["basis"].strip().lower(), d["basis"])
             texts += [v for v in d.values() if isinstance(v, str)]
+            if _OWN_HISTORY.search(" ".join(str(t) for t in texts)):
+                ctx["out"] = {**res, "status": "unsupported", "code": "own_history",
+                              "reason": "comparing a stock with ITS OWN past average isn't screenable — only absolute levels "
+                                        "(above/below a number), peer-relative (above_average/below_average, high/low) or trends",
+                              "nearest": []}
+                return ctx
             cond = ScreenCondition(**d)
-            _resolve_fund_conds([cond], resolved, pending)
+            # the user's own words name quarters but the structured value carries no basis → quarterly (said so)
+            if cond.basis is None and not (cond.params or {}).get("basis") and phrase and _QUARTER_WORD.search(phrase):
+                cond.basis = "quarterly"
+                resolved["basis"] = "quarterly (inferred: the phrase names quarters and no `basis` was sent)"
+            ctx["skipped"] = any(skip(getattr(cond, f)) for f in _FUND_FIELDS if getattr(cond, f)) if skip else False
+            _resolve_fund_conds([cond], resolved, pending, skip)
             key_val = _cond_to_api(cond)
         elif leg == "universe":
             dim = place.get("dim")
             if dim not in _UNI_DIMS:
-                return {**res, "status": "invalid", "code": "bad_place", "hint": f"universe dim must be one of {list(_UNI_DIMS)}"}
-            key_val, resolved, pending = _resolve_uni_dim(dim, val if val is not None else phrase)
+                ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": f"universe dim must be one of {list(_UNI_DIMS)}"}
+                return ctx
+            if isinstance(val, dict):                                        # {"country": [...]} → its list
+                val = val.get(dim) if dim in val else next(iter(val.values()), None)
+            key_val, r2, pending = _resolve_uni_dim(dim, val if val is not None else phrase)
+            resolved.update(r2)
             texts = []                                                       # numbers in a scope are its own (mcap)
         else:
-            return {**res, "status": "invalid", "code": "bad_place", "hint": "place.leg must be universe | fundamental | ta"}
+            ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": "place.leg must be universe | fundamental | ta"}
+            return ctx
     except Exception as e:                                                   # pydantic: unknown field / bad type
-        return {**res, "status": "invalid", "code": "bad_value", "hint": str(e).split("\n")[0][:300]}
+        errs = getattr(e, "errors", None)
+        msg = "; ".join(f"{'.'.join(str(x) for x in er.get('loc', ()))}: {er.get('msg')}" for er in errs()) if callable(errs) else str(e)
+        ctx["out"] = {**res, "status": "invalid", "code": "bad_value", "reason": msg[:400], "hint": msg[:400]}
+        return ctx
+    ctx.update({"texts": texts, "key_val": key_val})
 
     for p in pending:                                                        # candidates in USABLE key form: a line
         if p.get("kind") == "ta_indicator":                                  # the user gave a period for → append it
@@ -3025,54 +3075,62 @@ def _resolve_fragment(base: dict, frag: dict, base_v: dict) -> dict:
             for c in p.get("candidates") or []:                              # resolver does for a confident pick
                 k = str(c.get("indicator") or "")
                 if per and k and not k[-1].isdigit(): c["indicator"] = k + per
-    if pending and leg == "ta" and all(p.get("status") != "no_match" and p.get("candidates") for p in pending):
-        # only "which of two close lines/shapes?" — try the placement with each pending field's TOP candidate: if the
-        # fragment can't go there whichever line is meant (state_as_step, too_many_steps, bad_step…), say THAT.
-        trial = dict(key_val)
-        for p in pending:
-            kf = "pattern" if p["kind"] == "ta_pattern" else "indicator"
-            top = p["candidates"][0].get(kf)
-            for f in (("pattern",) if kf == "pattern" else ("a", "b")):
-                if trial.get(f) == p["query"]: trial[f] = top
-        tm, tpath, terr = _place_into(base, trial, place)
-        tv = {"errors": [terr]} if terr else _screen_validate(tm)
-        te = (tv.get("errors") or [None])[0]
-        if te and te.get("code") in ("state_as_step", "too_many_steps", "too_many_quals", "anchor_tf_mismatch", "bad_step", "ta_exists"):
-            return {**res, "status": "invalid", "code": te.get("code"), "hint": te.get("message") or te.get("hint"), "path": tpath}
     if pending:
         no = [p for p in pending if p.get("status") == "no_match"]
         cands = [c for p in pending for c in (p.get("candidates") or []) if (c.get("prob") is None or c["prob"] >= 0.05)][:3]
-        return {**res, "status": "unsupported" if no else "ambiguous",
-                "reason": "; ".join(f"'{p['query']}': {p.get('reason') or p.get('status')}" for p in pending),
-                "nearest" if no else "candidates": cands, "resolved": resolved}
+        ctx["out"] = {**res, "status": "unsupported" if no else "ambiguous",
+                      "reason": "; ".join(f"'{p['query']}': {p.get('reason') or p.get('status')}" for p in pending),
+                      "nearest" if no else "candidates": cands, "resolved": resolved}
+        if not no and leg == "ta" and all(p.get("candidates") for p in pending):
+            # only "which of two close lines/shapes?" — also validate the placement with each field's TOP candidate:
+            # if it can't go there whichever is meant (state_as_step, too_many_steps…), the answer is THAT.
+            trial = dict(key_val)
+            for p in pending:
+                kf = "pattern" if p["kind"] == "ta_pattern" else "indicator"
+                top = p["candidates"][0].get(kf)
+                for f in (("pattern",) if kf == "pattern" else ("a", "b")):
+                    if trial.get(f) == p["query"]: trial[f] = top
+            tm, tpath, terr = _place_into(base, trial, place)
+            if terr and terr["code"] in ("bad_step", "ta_exists", "bad_place"):
+                ctx["out"] = {**res, "status": "invalid", "reason": terr["hint"], "path": tpath, **terr}
+            elif not terr:
+                ctx["trial"], ctx["trial_path"] = tm, tpath
+        return ctx
     if leg == "ta":
-        lack = [t for t in raw_ops.values() if _LINE_WE_LACK.search(str(t))]
+        lack = [t for t in ctx["raw_ops"].values() if _LINE_WE_LACK.search(str(t))]
         if lack:
-            return {**res, "status": "unsupported", "reason": f"no such chart line: {', '.join(lack)}", "nearest": [], "resolved": resolved}
+            ctx["out"] = {**res, "status": "unsupported", "reason": f"no such chart line: {', '.join(lack)}", "nearest": [], "resolved": resolved}
+            return ctx
     if leg == "fundamental" and phrase and _has_or(phrase):
-        return {**res, "status": "invalid", "code": "fundamental_or",
-                "hint": "fundamental conditions are AND-only — split the alternatives into separate suggestions"}
-
+        ctx["out"] = {**res, "status": "invalid", "code": "fundamental_or",
+                      "reason": "fundamental conditions are AND-only — split the alternatives into separate suggestions"}
+        return ctx
     merged, path, perr = _place_into(base, key_val, place)
     res.update({"value": key_val, "path": path})
+    ctx["path"] = path
     if perr:
-        return {**res, "status": "invalid", **perr}
-    v = _screen_validate(merged)
-    # what THIS fragment changed: its own path's snaps/assumed + a window_bars that moved + new run notes
+        ctx["out"] = {**res, "status": "invalid", "reason": perr.get("hint"), **perr}
+        return ctx
+    ctx["merged"] = merged
+    return ctx
+
+def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
+    """Phase 3: turn the fragment's validate result into its status (the diff vs base = what THIS fragment did)."""
+    res, leg, place, key_val, path = ctx["res"], ctx["leg"], ctx["place"], ctx["key_val"], ctx["path"]
     mine = lambda p: p == path or p.startswith(path + ".") or p.startswith(path + "[")
     base_wb = next((a["value"] for a in base_v.get("assumed", []) if a["path"] == "window_bars"), None)
     snaps = [s for s in v.get("snaps", []) if mine(s.get("path", ""))]
     assumed = [a for a in v.get("assumed", []) if mine(a.get("path", "")) or (a["path"] == "window_bars" and a["value"] != base_wb)]
     notes = [n for n in v.get("notes", []) if n not in set(base_v.get("notes", []))]
+    sig_path = (f"{path}.any[0]" if place.get("rel") == "with" else f"{path}.anchor[0]") if leg == "ta" else path
     if leg == "ta":                                                          # an MA family we lack, mapped by the resolver
-        sig_path = f"{path}.any[0]" if place.get("rel") == "with" else f"{path}.anchor[0]"
-        for f, t in raw_ops.items():
+        for f, t in ctx["raw_ops"].items():
             if _MA_FAMILY_WE_LACK.search(str(t)) and not any(s["path"] == f"{sig_path}.{f}" for s in snaps):
                 snaps.append({"path": f"{sig_path}.{f}", "from": t, "to": key_val.get(f),
                               "note": f"we don't have {t} — used {key_val.get(f)}"})
     if v.get("errors"):
         e = v["errors"][0]
-        out = {**res, "status": "invalid", "code": e.get("code"), "hint": e.get("message"), "errors": v["errors"]}
+        out = {**res, "status": "invalid", "code": e.get("code"), "reason": e.get("message"), "hint": e.get("message"), "errors": v["errors"]}
         if snaps: out["snaps"] = snaps
         if e.get("code") == "unsupported_pair" and leg == "ta":
             # this exact pairing isn't tracked → offer the pairings that ARE (the engine lists them), in key form
@@ -3080,12 +3138,21 @@ def _resolve_fragment(base: dict, frag: dict, base_v: dict) -> dict:
             try: alts = json.loads(m.group(1)) if m else []
             except ValueError: alts = []
             out.update({"status": "unsupported", "nearest": [{**key_val, "b": b} for b in alts[:3]]})
+            out.pop("value", None)                                           # that exact pairing can't run
         return out
-    dropped = _dropped(texts, key_val)
+    dropped = _dropped(ctx["texts"], key_val)
+    resolved = ctx["resolved"]
     confs = [r.get("confidence") for r in resolved.values() if isinstance(r, dict) and r.get("confidence") is not None]
     gates = [r.get("gate") for r in resolved.values() if isinstance(r, dict) and r.get("gate")]
     res.update({"confidence": round(min(confs), 3) if confs else 1.0, "gate": "soft" if "soft" in gates else (gates[0] if gates else "exact_key"),
                 "resolved": resolved, "assumed": assumed})
+    for sn in snaps:                                                         # the key form is what RUNS: apply swaps
+        f = sn.get("path", "").rsplit(".", 1)[-1]
+        if leg == "ta" and sn.get("path") == f"{sig_path}.{f}" and f in ("a", "b") and sn.get("to"):
+            key_val[f] = sn["to"]
+    res["value"] = key_val
+    snap_notes = {sn.get("note") for sn in snaps}
+    notes = [n for n in notes if n not in snap_notes]
     if snaps or notes or dropped:
         res["status"] = "snapped"
         if snaps:
@@ -3098,27 +3165,67 @@ def _resolve_fragment(base: dict, frag: dict, base_v: dict) -> dict:
         res["status"] = "resolved"
     return res
 
+_TRIAL_BLOCKING = ("state_as_step", "too_many_steps", "too_many_quals", "anchor_tf_mismatch")
+
 def _screen_resolve(req: dict) -> tuple:
-    """→ (http_status, body). See the block comment above."""
+    """→ (http_status, body). Phase 1: every fragment parsed + resolved CONCURRENTLY (and every field inside it);
+    phase 2: base + every placed fragment validated in ONE batch call (rules only); phase 3: statuses. A fragment whose
+    key fast-path missed (a lexical error on a field sent key-shaped) is re-resolved through the resolver, once."""
     if not isinstance(req, dict):
         return 400, {"error": "body must be a JSON object {base?, fragments[]}"}
     base, frags = req.get("base") or {}, req.get("fragments")
     if not isinstance(frags, list) or not (1 <= len(frags) <= _RESOLVE_MAX_FRAGS):
         return 400, {"error": f"`fragments` must hold 1..{_RESOLVE_MAX_FRAGS} items {{place, value?|phrase?}}"}
     t0 = _time.time()
-    base_v = _screen_validate(base) if base else {"valid": True, "errors": [], "snaps": [], "assumed": [], "notes": []}
+    frags = [f if isinstance(f, dict) else {} for f in frags]
+
+    def prep(f, fast=True):
+        try:
+            return _frag_prepare(base, f, fast)
+        except Exception as e:                                               # one bad fragment never sinks the batch
+            print(f"[screen_resolve] fragment failed: {e!r}", flush=True)
+            return {"out": {"place": f.get("place"), "status": "error", "reason": str(e)[:300]}}
+
+    def validate_round(ctxs, with_base):
+        batch, slots = ([base] if with_base else []), []
+        for i, c in enumerate(ctxs):
+            if "out" in c and "trial" not in c: continue
+            batch.append(c.get("merged") or c["trial"]); slots.append(i)
+        vs = _screen_validate_batch(batch) if batch else []
+        base_v = vs.pop(0) if with_base else None
+        return base_v, dict(zip(slots, vs))
+
+    ctxs = _parallel_map(prep, frags, max_workers=_RESOLVE_MAX_FRAGS)
+    base_v, vmap = validate_round(ctxs, with_base=bool(base))
+    base_v = base_v or {"valid": True, "errors": [], "snaps": [], "assumed": [], "notes": []}
     if not base_v.get("valid"):
-        lexical = {"unknown_pattern", "unsupported_operand", "bad_shape", "invalid", "unsupported_pair", "bad_universe"}
+        lexical = _LEXICAL | {"bad_shape", "invalid", "unsupported_pair"}
         code = "base_must_be_resolved" if any(e.get("code") in lexical for e in base_v.get("errors", [])) else "base_invalid"
         return 400, {"error": code, "errors": base_v.get("errors", []),
                      "hint": "`base` must be the current formula in KEY form (as /v1/screen ran it) — never re-send plain English"}
-    def one(f):
-        try:
-            return _resolve_fragment(base, f if isinstance(f, dict) else {}, base_v)
-        except Exception as e:                                               # one bad fragment never sinks the batch
-            print(f"[screen_resolve] fragment failed: {e!r}", flush=True)
-            return {"place": (f or {}).get("place") if isinstance(f, dict) else None, "status": "error", "hint": str(e)[:300]}
-    results = _parallel_map(one, frags, max_workers=_RESOLVE_MAX_FRAGS)
+    # a key-shaped field that isn't a key → resolve those fragments properly (rare; one more parallel round)
+    redo = [i for i, c in enumerate(ctxs) if c.get("skipped") and i in vmap
+            and any(e.get("code") in _LEXICAL for e in vmap[i].get("errors", []))]
+    if redo:
+        again = _parallel_map(lambda i: prep(frags[i], fast=False), redo, max_workers=_RESOLVE_MAX_FRAGS)
+        for i, c in zip(redo, again): ctxs[i] = c
+        _, v2 = validate_round([ctxs[i] for i in redo], with_base=False)
+        for j, i in enumerate(redo):
+            if j in v2: vmap[i] = v2[j]
+            else: vmap.pop(i, None)
+    results = []
+    for i, c in enumerate(ctxs):
+        if "trial" in c:                                                     # ambiguous: a placement error wins
+            te = (vmap.get(i, {}).get("errors") or [None])[0]
+            if te and te.get("code") in _TRIAL_BLOCKING:
+                results.append({**c["res"], "status": "invalid", "code": te["code"], "reason": te.get("message"),
+                                "hint": te.get("message"), "path": c.get("trial_path")})
+            else:
+                results.append(c["out"])
+        elif "out" in c:
+            results.append(c["out"])
+        else:
+            results.append(_frag_finish(c, vmap.get(i, {"errors": [{"code": "internal", "message": "not validated"}]}), base_v))
     return 200, {"results": results, "base": {"assumed": base_v.get("assumed", [])}, "ms": int((_time.time() - t0) * 1000)}
 
 
