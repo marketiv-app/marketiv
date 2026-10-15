@@ -45,5 +45,23 @@
   "net_change_up",
   "off_high_by",
   "off_low_by"
+ ],
+ "operand_free": [
+  "at_new_high",
+  "at_new_low",
+  "bb_squeeze",
+  "kumo_expand",
+  "kumo_squeeze",
+  "near_high",
+  "near_low",
+  "near_ma",
+  "rising_volume",
+  "squeeze_fired",
+  "squeeze_fired_dn",
+  "squeeze_fired_up",
+  "squeeze_started",
+  "ttm_squeeze",
+  "volume_dryup",
+  "volume_spike"
  ]
 }
