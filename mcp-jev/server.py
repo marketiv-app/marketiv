@@ -18,7 +18,7 @@ from __future__ import annotations
 import os, re, json, pathlib, contextvars
 from dataclasses import asdict, is_dataclass
 from typing import Annotated, Any, Optional, List, Literal, Union
-from pydantic import Field, AliasChoices, BaseModel, ConfigDict
+from pydantic import Field, AliasChoices, BaseModel, ConfigDict, field_validator
 
 from mcp.server.fastmcp import FastMCP, Context
 from mcp.server.transport_security import TransportSecuritySettings
@@ -2789,6 +2789,18 @@ _TA_CAT = json.loads((pathlib.Path(__file__).resolve().parent / "ta_patterns.jso
 _TA_PATTERNS = _TA_CAT["patterns"]
 _TA_FRACTION_B = set(_TA_CAT.get("fraction_b", []))   # patterns whose b is a fraction magnitude (off_high_by 0.3 = 30%)
 
+# chart timeframe words → the engine's code (1 daily · 2 weekly · 3 monthly). Declared in the resolve schema.
+_TF_WORDS = {"daily": 1, "day": 1, "d": 1, "1d": 1, "รายวัน": 1, "วัน": 1,
+             "weekly": 2, "week": 2, "w": 2, "1w": 2, "รายสัปดาห์": 2, "สัปดาห์": 2,
+             "monthly": 3, "month": 3, "mo": 3, "1mo": 3, "รายเดือน": 3, "เดือน": 3}
+
+def _tf_code(v):
+    if v is None or isinstance(v, int): return v
+    s = str(v).strip().lower()
+    if s.isdigit(): return int(s)
+    if s in _TF_WORDS: return _TF_WORDS[s]
+    raise ValueError(f"timeframe must be one of {sorted(set(_TF_WORDS))} or 1/2/3")
+
 class TaSignal(BaseModel):
     """ONE technical signal = a SHAPE (`pattern`) + its operand LINES (`a`/`b`). Each is a key/token OR plain
     English — the SERVER resolves each."""
@@ -2798,7 +2810,12 @@ class TaSignal(BaseModel):
     b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line (token/English) or a numeric level as a string (oscillator-vs-level → '30'/'70'; MACD-vs-signal → 'macd_signal'; two MAs → the slower). For a net-return pattern (net_change_up/down), b = the move magnitude as a FRACTION ('0.30' = 30%). Omit if the pattern has no reference.")
     for_bars: Optional[int] = Field(None, description="A state/level must have HELD ≥ this many consecutive bars ('above the 200-day for a month' ≈ 20 daily bars); for rising/falling it's a run-length. NOT valid on net_change/crossover/divergence — for 'within the last N bars' use window_bars.")
     window_bars: Optional[int] = Field(None, description="PER-SIGNAL lookback in bars — 'holds WITHIN the last N bars' (recency); for a net-return pattern it's the PERIOD the return is measured over ('dropped 30% over 100 days' → window_bars=100). Gives conditions DIFFERENT windows in one screen. Omit → the screen-level default. (Distinct from for_bars = how long a state has held.)")
-    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart (1=daily,2=weekly,3=monthly) to MIX timeframes — put it on a QUALIFIER (checked on its own chart) while the anchor stays on the screen-level timeframe. e.g. weekly-hold + daily-cross → screen tf=1, qualifier {above,a='close',b='ema50',timeframe:2}. Operand periods are bars of THIS tf. An ANCHOR's tf must equal the screen-level tf (else 400) — put cross-tf tests in a qualifier.")
+    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart (1=daily,2=weekly,3=monthly; or the words daily/weekly/monthly) to MIX timeframes — put it on a QUALIFIER (checked on its own chart) while the anchor stays on the screen-level timeframe. e.g. weekly-hold + daily-cross → screen tf=1, qualifier {above,a='close',b='ema50',timeframe:2}. Operand periods are bars of THIS tf. An ANCHOR's tf must equal the screen-level tf (else 400) — put cross-tf tests in a qualifier.")
+
+    @field_validator("timeframe", mode="before")
+    @classmethod
+    def _tf_words(cls, v):          # "weekly" / "รายสัปดาห์" → 2 (the engine's code)
+        return _tf_code(v)
 
 
 class TaQual(BaseModel):
@@ -2907,6 +2924,7 @@ def _resolve_ta_steps(ta: list, resolved: dict, pending: list) -> None:
 # checked by mdx-api /v1/screen/validate (the real legs over a probe set) — never scanned. Fragments are judged
 # INDEPENDENTLY against `base` (the user may pick one), concurrently. No LLM anywhere.
 _RESOLVE_MAX_FRAGS = 8
+_TA_MAX_OR = 3   # OR'ed signals per step — the engine's limit (capabilities ta.max_or); validate enforces it too
 _UNI_DIMS = ("country", "theme", "gics", "size", "asset_type", "mcap_min", "mcap_max")
 # moving-average families we don't carry: the engine maps them to the nearest EMA → always a SNAP, never silent
 _MA_FAMILY_WE_LACK = re.compile(r"\b(wma|hma|tema|dema|kama|vwma|smma|zlema|alma|lsma|weighted moving average|hull)\b", re.I)
@@ -3062,24 +3080,28 @@ def _place_into(base: dict, leg_val, place: dict) -> tuple:
         return c, f"fundamental[{len(f) - 1}]", None
     if leg == "ta":
         rel, ta = place.get("rel"), c.setdefault("ta", [])
+        sigs = leg_val if isinstance(leg_val, list) else [leg_val]          # a list = OR within the step
         if rel == "new":
             if ta: return c, "ta", {"code": "ta_exists", "hint": "the formula already has TA steps — place it `with`/`before`/`after` a step"}
-            ta.append({"anchor": [leg_val]})
+            ta.append({"anchor": sigs})
             return c, "ta[0]", None
         i = place.get("step")
         if not isinstance(i, int) or not (0 <= i < len(ta)):
             return c, "ta", {"code": "bad_step", "hint": f"step {i!r} isn't in the formula (it has {len(ta)} TA step(s), 0-based)"}
         if rel == "with":
-            q = {"any": [leg_val]}
+            q = {"any": sigs}
             if place.get("within") is not None: q["within"] = place["within"]
             ta[i].setdefault("quals", []).append(q)
             return c, f"ta[{i}].quals[{len(ta[i]['quals']) - 1}]", None
         if rel in ("before", "after"):
             j = i if rel == "before" else i + 1
-            ta.insert(j, {"anchor": [leg_val]})
+            ta.insert(j, {"anchor": sigs})
             return c, f"ta[{j}]", None
         return c, "ta", {"code": "bad_place", "hint": "ta place.rel must be with | before | after | new"}
-    return c, "", {"code": "bad_place", "hint": "place.leg must be universe | fundamental | ta"}
+    if leg == "timeframe":
+        c.update(leg_val)
+        return c, "timeframe", None
+    return c, "", {"code": "bad_place", "hint": "place.leg must be universe | fundamental | ta | timeframe"}
 
 def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
     """Phase 1 (per fragment, run concurrently): parse + resolve + place. → a ctx with either a final `out` (decided
@@ -3093,20 +3115,40 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
     skip = (lambda t: isinstance(t, str) and bool(_KEYISH.match(t))) if fast else None
     try:
         if leg == "ta":
-            d = dict(val) if isinstance(val, dict) else {"pattern": phrase or val}
-            if "within" in d: place = ctx["place"] = {**place, "within": d.pop("within")}  # a qualifier window sent in value
-            texts += [v for v in d.values() if isinstance(v, str)]
-            sig = TaSignal(**d)
-            ctx["raw_ops"] = {k: getattr(sig, k) for k in ("a", "b") if getattr(sig, k)}
-            ctx["skipped"] = any(skip(getattr(sig, f)) for f in ("pattern", "a", "b") if getattr(sig, f)) if skip else False
-            _resolve_ta_sig(sig, resolved, pending, skip)
-            if sig.b is None and sig.pattern in _TA_FRACTION_B and phrase:
+            # a LIST value = signals OR'ed in ONE step (anchor[] / quals[].any[]); a dict = one signal
+            items = val if isinstance(val, list) else [val if isinstance(val, dict) else {"pattern": phrase or val}]
+            if not items or len(items) > _TA_MAX_OR:
+                ctx["out"] = {**res, "status": "invalid", "code": "too_many_or",
+                              "reason": f"one step takes 1..{_TA_MAX_OR} OR'ed signals (got {len(items)})"}
+                return ctx
+            sigs = []
+            for it in items:
+                d = dict(it) if isinstance(it, dict) else {"pattern": it}
+                if "within" in d: place = ctx["place"] = {**place, "within": d.pop("within")}  # a qualifier window
+                texts += [v for v in d.values() if isinstance(v, str)]
+                sigs.append(TaSignal(**d))
+            ctx["raw_ops_list"] = [{k: getattr(g, k) for k in ("a", "b") if getattr(g, k)} for g in sigs]
+            ctx["raw_ops"] = ctx["raw_ops_list"][0]
+            ctx["skipped"] = any(skip(getattr(g, f)) for g in sigs for f in ("pattern", "a", "b") if getattr(g, f)) if skip else False
+            _resolve_ta_sigs(sigs, resolved, pending, skip)
+            sig = sigs[0]
+            # an anchor that names a chart (weekly…) on a NEW TA leg sets the FORMULA's timeframe (anchors run on it)
+            tfs = {g.timeframe for g in sigs if g.timeframe}
+            if place.get("rel") == "new" and len(tfs) == 1:
+                ctx["sets"] = {"timeframe": tfs.pop()}
+            if len(sigs) == 1 and sig.b is None and sig.pattern in _TA_FRACTION_B and phrase:
                 # "down 30% from its 52-week high": the magnitude is the ONE percent in the user's words → b = 0.30
                 pcts = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*(?:%|percent|เปอร์เซ็นต์)", phrase)]
                 if len(pcts) == 1 and 0 < pcts[0] < 100:
                     sig.b = f"{pcts[0] / 100:g}"
                     resolved["b"] = f"{sig.b} (from '{pcts[0]:g}%' in the phrase)"
-            key_val = sig.model_dump(exclude_none=True)
+            vals = [g.model_dump(exclude_none=True) for g in sigs]
+            key_val = vals if isinstance(val, list) else vals[0]
+        elif leg == "timeframe":
+            raw = val.get("timeframe") if isinstance(val, dict) else (val if val is not None else phrase)
+            key_val = {"timeframe": _tf_code(raw)}
+            ctx["sets"] = dict(key_val)
+            texts = []
         elif leg == "fundamental":
             d = dict(val) if isinstance(val, dict) else {"concept": phrase or val, "pattern": phrase or val}
             if isinstance(d.get("basis"), str):                              # accept the engine's A/Q/T too
@@ -3140,7 +3182,7 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             resolved.update(r2)
             texts = []                                                       # numbers in a scope are its own (mcap)
         else:
-            ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": "place.leg must be universe | fundamental | ta"}
+            ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": "place.leg must be universe | fundamental | ta | timeframe"}
             return ctx
     except Exception as e:                                                   # pydantic: unknown field / bad type
         errs = getattr(e, "errors", None)
@@ -3172,7 +3214,7 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
         ctx["out"] = {**res, "status": "unsupported" if no else "ambiguous",
                       "reason": "; ".join(f"'{p['query']}': {p.get('reason') or p.get('status')}" for p in pending),
                       "nearest" if no else "candidates": cands, "resolved": resolved}
-        if not no and leg == "ta" and all(p.get("candidates") for p in pending):
+        if not no and leg == "ta" and isinstance(key_val, dict) and all(p.get("candidates") for p in pending):
             # only "which of two close lines/shapes?" — also validate the placement with each field's TOP candidate:
             # if it can't go there whichever is meant (state_as_step, too_many_steps…), the answer is THAT.
             trial = dict(key_val)
@@ -3188,7 +3230,7 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
                 ctx["trial"], ctx["trial_path"] = tm, tpath
         return ctx
     if leg == "ta":
-        lack = [t for t in ctx["raw_ops"].values() if _LINE_WE_LACK.search(str(t))]
+        lack = [t for ro in ctx.get("raw_ops_list", [ctx["raw_ops"]]) for t in ro.values() if _LINE_WE_LACK.search(str(t))]
         if lack:
             ctx["out"] = {**res, "status": "unsupported", "reason": f"no such chart line: {', '.join(lack)}", "nearest": [], "resolved": resolved}
             return ctx
@@ -3197,6 +3239,8 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
                       "reason": "fundamental conditions are AND-only — split the alternatives into separate suggestions"}
         return ctx
     merged, path, perr = _place_into(base, key_val, place)
+    if ctx.get("sets") and not perr:
+        merged.update(ctx["sets"])                                           # formula-level fields this fragment sets
     res.update({"value": key_val, "path": path})
     ctx["path"] = path
     if perr:
@@ -3213,12 +3257,15 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
     snaps = [s for s in v.get("snaps", []) if mine(s.get("path", ""))]
     assumed = [a for a in v.get("assumed", []) if mine(a.get("path", "")) or (a["path"] == "window_bars" and a["value"] != base_wb)]
     notes = [n for n in v.get("notes", []) if n not in set(base_v.get("notes", []))]
-    sig_path = (f"{path}.any[0]" if place.get("rel") == "with" else f"{path}.anchor[0]") if leg == "ta" else path
+    is_list = isinstance(key_val, list)
+    kv_list = key_val if is_list else [key_val]
+    sig_paths = [(f"{path}.any[{k}]" if place.get("rel") == "with" else f"{path}.anchor[{k}]") for k in range(len(kv_list))] if leg == "ta" else [path]
     if leg == "ta":                                                          # an MA family we lack, mapped by the resolver
-        for f, t in ctx["raw_ops"].items():
-            if _MA_FAMILY_WE_LACK.search(str(t)) and not any(s["path"] == f"{sig_path}.{f}" for s in snaps):
-                snaps.append({"path": f"{sig_path}.{f}", "from": t, "to": key_val.get(f),
-                              "note": f"we don't have {t} — used {key_val.get(f)}"})
+        for k, ro in enumerate(ctx.get("raw_ops_list", [ctx["raw_ops"]])):
+            for f, t in ro.items():
+                if _MA_FAMILY_WE_LACK.search(str(t)) and not any(s["path"] == f"{sig_paths[k]}.{f}" for s in snaps):
+                    snaps.append({"path": f"{sig_paths[k]}.{f}", "from": t, "to": kv_list[k].get(f),
+                                  "note": f"we don't have {t} — used {kv_list[k].get(f)}"})
     if v.get("errors"):
         e = v["errors"][0]
         out = {**res, "status": "invalid", "code": e.get("code"), "reason": e.get("message"), "hint": e.get("message"), "errors": v["errors"]}
@@ -3229,14 +3276,18 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
             for k in ("needed", "available", "max", "basis", "metric"):
                 if e.get(k) is not None: out[k] = e[k]
             out["nearest"] = e.get("nearest") or []
-        if e.get("code") == "operand_not_for_pattern" and leg == "ta":
+        if e.get("code") == "anchor_tf_mismatch" and leg == "ta":
+            # a step's main signal runs on the FORMULA's chart → offer setting that instead (or put it in a qualifier)
+            tf = next((g.get("timeframe") for g in kv_list if g.get("timeframe")), None)
+            if tf: out["nearest"] = [{"place": {"leg": "timeframe"}, "value": {"timeframe": tf}}]
+        if e.get("code") == "operand_not_for_pattern" and leg == "ta" and not is_list:
             # e.g. divergence on stochastic: the engine names the lines it CAN read it on → nearest = those, ready to merge
             m = re.search(r"available on: (\[.*?\])", e.get("message") or "")
             try: alts = json.loads(m.group(1)) if m else []
             except ValueError: alts = []
             out.update({"status": "unsupported", "nearest": [{**key_val, "a": a} for a in alts[:3]]})
             out.pop("value", None)
-        if e.get("code") == "unsupported_pair" and leg == "ta":
+        if e.get("code") == "unsupported_pair" and leg == "ta" and not is_list:
             # this exact pairing isn't tracked → offer the pairings that ARE (the engine lists them), in key form
             m = re.search(r"available reference operands: (\[.*?\])", e.get("message") or "")
             try: alts = json.loads(m.group(1)) if m else []
@@ -3254,9 +3305,11 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
     # and its swaps (snaps, reported) — so a saved formula never carries a spelling the engine rewrites
     for sn in list(v.get("canonical", [])) + snaps:
         f = sn.get("path", "").rsplit(".", 1)[-1]
-        if leg == "ta" and sn.get("path") == f"{sig_path}.{f}" and f in ("a", "b") and sn.get("to"):
-            key_val[f] = sn["to"]
+        for k, sp in enumerate(sig_paths):
+            if leg == "ta" and sn.get("path") == f"{sp}.{f}" and f in ("a", "b") and sn.get("to"):
+                kv_list[k][f] = sn["to"]
     res["value"] = key_val
+    if ctx.get("sets"): res["sets"] = ctx["sets"]                           # merge: criteria.update(sets)
     snap_notes = {sn.get("note") for sn in snaps}
     notes = [n for n in notes if n not in snap_notes]
     if snaps or notes or dropped:
@@ -3272,6 +3325,47 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
     return res
 
 _TRIAL_BLOCKING = ("state_as_step", "too_many_steps", "too_many_quals", "anchor_tf_mismatch")
+
+def _resolve_schema() -> dict:
+    """The INPUT contract of POST /v1/screen/resolve — what a fragment may carry and how a result merges. Generated from
+    the SAME models / constants the resolver validates with (TaSignal, ScreenCondition, _UNI_DIMS, _TF_WORDS …), so it
+    can't drift from what is accepted. Public (GET /v1/screen/resolve/schema); embedded by /v1/screen/capabilities."""
+    ta_fields = TaSignal.model_json_schema()
+    fund_fields = ScreenCondition.model_json_schema()
+    tf = {"field": "timeframe", "values": {"daily": 1, "weekly": 2, "monthly": 3}, "words": sorted(_TF_WORDS),
+          "rule": "A step's main signal runs on the FORMULA timeframe (criteria.timeframe). Set it with place {leg:'timeframe'} "
+                  "or by giving the anchor a timeframe when placing a NEW TA leg (result.sets carries it). A per-signal "
+                  "timeframe on a same-time condition (rel 'with') mixes charts; on a later step it must equal the formula's "
+                  "(else invalid anchor_tf_mismatch with nearest = the {leg:'timeframe'} fix)."}
+    or_rule = {"shape": "value as a LIST of 1..max_or signals (each a TaSignal)", "max": _TA_MAX_OR,
+               "means": "the signals are OR'ed within ONE step — anchor[] when rel is new/before/after, quals[].any[] when rel is with",
+               "result": "value comes back as a list in the same order"}
+    return {
+        "version": 1,
+        "endpoint": "POST /v1/screen/resolve {base, fragments[1..%d]}" % _RESOLVE_MAX_FRAGS,
+        "fragment": {"place": "where it goes (see places)", "value": "the leg's shape below; text fields may be plain English",
+                     "phrase": "the user's own words (optional; used for numbers / quarters / dropped)"},
+        "places": [
+            {"leg": "universe", "dim": list(_UNI_DIMS), "value": "a list of values (OR within the dim) or {dim: list}",
+             "merge": "append every key of result.value into universe.include[0][key] (gics: comma string; mcap_*: set)"},
+            {"leg": "fundamental", "value": "ScreenCondition", "merge": "push result.value into fundamental[] (AND)"},
+            {"leg": "ta", "rel": "new", "value": "TaSignal or a list (OR)", "merge": "ta = [{anchor: value-as-list}] (only when the formula has no TA)"},
+            {"leg": "ta", "rel": "before|after", "step": "0-based index of an existing step", "value": "TaSignal or a list (OR)",
+             "merge": "insert {anchor: value-as-list} at step / step+1 (THEN order)"},
+            {"leg": "ta", "rel": "with", "step": "0-based", "within": "optional ± bars (default 5)", "value": "TaSignal or a list (OR)",
+             "merge": "push {any: value-as-list, within?} into ta[step].quals (AND with the step)"},
+            {"leg": "timeframe", "value": "'daily'|'weekly'|'monthly' (or 1/2/3, or a word in timeframe.words)",
+             "merge": "criteria.timeframe = result.value.timeframe"},
+        ],
+        "sets": "a result may carry `sets` {field: value} — formula-level fields to apply (criteria.update(sets)) alongside value",
+        "ta": {"fields": ta_fields, "or": or_rule, "timeframe": tf},
+        "fundamental": {"fields": fund_fields,
+                        "units": "ratios / margins / growth rates are FRACTIONS (0.20 = 20%); P/E, P/B, EV/EBITDA multiples are raw; "
+                                 "basis annual|quarterly|ttm (or A/Q/T); N = periods of that basis"},
+        "universe": {"dims": list(_UNI_DIMS), "country": "ISO-2 codes", "theme_gics": "English concepts (resolver picks the axis)",
+                     "mcap": "USD number"},
+        "statuses": ["resolved", "snapped", "ambiguous", "unsupported", "invalid", "error"],
+    }
 
 def _screen_resolve(req: dict) -> tuple:
     """→ (http_status, body). Phase 1: every fragment parsed + resolved CONCURRENTLY (and every field inside it);
@@ -4653,6 +4747,10 @@ class _AuthASGI:
         path = scope.get("path", "")
         auth = dict(scope.get("headers") or {}).get(b"authorization", b"").decode()
         key = auth[7:].strip() if auth[:7].lower() == "bearer " else None
+
+        # The builder's resolve INPUT contract — public, static per deploy (no data behind it).
+        if path == "/v1/screen/resolve/schema":
+            return await _send_json(send, 200, _resolve_schema())
 
         # Public branding asset (no auth) — the connector's icon.
         if path == "/favicon.ico":
