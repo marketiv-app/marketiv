@@ -634,7 +634,8 @@ def _scope_resolve(val):
             continue
         for ref in r["refs"]:
             (gcodes if ref["type"] == "gics" else tids).append(ref["id"] if ref["type"] == "gics" else int(ref["id"]))
-        rmap[t] = {"axis": r["axis"], "ids": [ref["id"] for ref in r["refs"]], "indirect": r.get("indirect", False)}
+        rmap[t] = {"axis": r["axis"], "ids": [ref["id"] for ref in r["refs"]], "names": [ref.get("name") for ref in r["refs"]],
+                   "indirect": r.get("indirect", False)}
     if pend:
         return [], [], {"needs_confirmation": True, "resolved": rmap, "confirm": pend,
                         "_guide": "A universe-scope term isn't a recognized sector/theme — pick one from its candidates "
@@ -707,12 +708,49 @@ _NONE_OPT = (
     "worded phrasing of a real financial concept; whenever the query is even loosely in the financial-statement "
     "domain, prefer the nearest real concept. Pick NONE only when nothing here is remotely what the user means.")
 
+# EXACT screener keys (metric → catalog type · pattern → {kind, params}) from /v1/screen/vocab, cached IN-PROCESS.
+# An exact key then resolves with NO backend call: the vector /find leg needs mdx-api's DB, and when its pool is
+# saturated (crawl burst, 2026-10-15) a partial shortlist missing `pe` let Jev pick `net_ppe` — the exact key must
+# never depend on that. Refreshed hourly IN THE BACKGROUND (vocab can take seconds; no request waits on it): until
+# the first load lands, or while a refresh fails, callers take the /find path with the last good sets.
+_VOCAB_TTL = 3600
+_VOCAB_TYPE = {"statement": "field", "ratio": "ratio", "valuation": "valuation"}
+_VOCAB_KEYS: dict = {"t": 0.0, "concept": {}, "pattern": {}, "busy": False}
+_vocab_lock = __import__("threading").Lock()
+
+def _vocab_refresh() -> None:
+    try:
+        f = (mdx()._get("/v1/screen/vocab", {}).data or {}).get("fundamental") or {}
+        concept = {str(m["metric"]).lower(): (m["metric"], _VOCAB_TYPE[g])
+                   for g, ms in (f.get("metrics") or {}).items() if g in _VOCAB_TYPE for m in ms if m.get("metric")}
+        pattern = {str(x["concept"]).lower(): x for x in (f.get("patterns") or []) if x.get("concept")}
+        if not (concept and pattern):
+            raise ValueError("vocab has no metrics/patterns")
+        _VOCAB_KEYS.update(t=_time.time(), concept=concept, pattern=pattern)
+    except Exception as e:
+        print(f"[vocab_keys] refresh failed, keeping {len(_VOCAB_KEYS['concept'])} cached keys: {e!r}", flush=True)
+        _VOCAB_KEYS["t"] = _time.time() - _VOCAB_TTL + 60      # try again in a minute
+    finally:
+        _VOCAB_KEYS["busy"] = False
+
+def _vocab_keys() -> dict:
+    with _vocab_lock:
+        if _VOCAB_KEYS["busy"] or _time.time() - _VOCAB_KEYS["t"] < _VOCAB_TTL:
+            return _VOCAB_KEYS
+        _VOCAB_KEYS["busy"] = True
+    ctx = _contextvars.copy_context()                         # carries the caller's API key into the thread
+    __import__("threading").Thread(target=ctx.run, args=(_vocab_refresh,), daemon=True).start()
+    return _VOCAB_KEYS
+
 def _resolve_fsconcept(q: str, scope_types: tuple = ("field", "ratio", "valuation"), statement: Optional[str] = None) -> dict:
     """Resolve ONE natural-language OR exact-key term → the catalog concept, SCOPED to `scope_types`
     (the set of catalogs the calling tool's input legitimately accepts: financials.fields={field};
     screen_unified.concept={field,ratio,valuation}). Flow: exact-key passthrough → else vector shortlist
     (/v1/financials/find?verbose=1, FULL context parity: label+definition+description+aliases) → Jev pick + `__NONE__`
     → calibrated gate. Returns {status: resolved|reconfirm|no_match, query, key?, type?, confidence?, gate?, note?, candidates?}."""
+    hit = None if statement else _vocab_keys()["concept"].get(q.strip().lower())
+    if hit and hit[1] in scope_types:                    # exact screener key → no backend call (see _vocab_keys)
+        return {"status": "resolved", "query": q, "key": hit[0], "type": hit[1], "confidence": 1.0, "gate": "exact_key"}
     data = _bget("/v1/financials/find", {"q": q, "statement": statement, "limit": 15, "verbose": 1})
     all_cands = data.get("candidates", []) if isinstance(data, dict) else []
     cands = [c for c in all_cands if c.get("type", "field") in scope_types]  # SCOPE: only catalogs this input accepts
@@ -1017,6 +1055,10 @@ def _resolve_fspattern(q: str) -> dict:
     {status, query, pattern?, kind?, params?, confidence?, gate?, note?, candidates?}. The pattern's `params`
     (threshold/N/min/max/percentile/total_change) ride along for the CLIENT to fill from the user's numbers —
     the resolver never invents them."""
+    hit = _vocab_keys()["pattern"].get(q.strip().lower())
+    if hit:                                              # exact pattern key → no backend call (see _vocab_keys)
+        return {"status": "resolved", "query": q, "pattern": hit["concept"], "kind": hit.get("kind"),
+                "params": hit.get("params"), "confidence": 1.0, "gate": "exact_key"}
     data = _bget("/v1/financials/find-pattern", {"q": q, "limit": 15})
     cands = data.get("patterns", data.get("candidates", [])) if isinstance(data, dict) else []
     if not cands:
@@ -3029,10 +3071,17 @@ _PENDING_FIELDS = {"ta_pattern": ("pattern",), "ta_indicator": ("a", "b"),
                    "concept": ("concept", "metricA", "metricB"), "pattern": ("pattern", "relation")}
 _LEXICAL = {"unknown_pattern", "unsupported_operand", "unknown_concept"}
 
+# a bare "commodities" is TWO things: the commodities themselves (asset_type Commodity — gold, oil, copper …) or shares
+# of commodity companies (GICS Energy / Materials). Resolving it silently to GICS gave a stock screen (2026-10-15).
+_COMMODITY_WORD = re.compile(r"^\s*(?:the\s+)?(?:commodit(?:y|ies)|สินค้าโภคภัณฑ์|โภคภัณฑ์)\s*$", re.I)
+
+def _uni_tokens(val) -> list:
+    return val if isinstance(val, list) else [t for t in re.split(r"\s*(?:,|\bor\b|หรือ)\s*", str(val)) if t.strip()]
+
 def _resolve_uni_dim(dim: str, val) -> tuple:
     """→ (include-patch {dim: value}, resolved-map, pending-list). theme/gics go through the SAME _scope_resolve as
     screen_unified (it decides the axis: a concept may land as a GICS code and/or a theme id)."""
-    toks = val if isinstance(val, list) else [t for t in re.split(r"\s*(?:,|\bor\b|หรือ)\s*", str(val)) if t.strip()]
+    toks = _uni_tokens(val)
     if dim in ("theme", "gics"):
         gc, tids, cf, rmap = _scope_resolve([str(t) for t in toks])
         if cf:
@@ -3180,10 +3229,32 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
                 val = val.get(dim) if dim in val else next(iter(val.values()), None)
             key_val, r2, pending = _resolve_uni_dim(dim, val if val is not None else phrase)
             resolved.update(r2)
+            toks = [str(t) for t in _uni_tokens(val if val is not None else phrase)]
+            if dim in ("theme", "gics") and not pending and toks and all(_COMMODITY_WORD.match(t) for t in toks):
+                names = ", ".join(n for r in r2.values() for n in (r.get("names") or []) if n)
+                ctx["out"] = {**res, "status": "ambiguous", "resolved": resolved,
+                              "reason": f"'{toks[0]}' can mean the commodities themselves (gold, oil, copper …) or shares of "
+                                        f"commodity companies ({names or 'GICS'}) — ask which",
+                              "candidates": [
+                                  {"place": {"leg": "universe", "dim": "asset_type"}, "value": {"asset_type": ["Commodity"]},
+                                   "key": "Commodity", "label": "the commodities themselves (asset type Commodity: gold, oil, copper …)"},
+                                  {"value": key_val, "key": ",".join(str(x) for v in key_val.values() for x in v),
+                                   "label": f"shares of commodity companies ({names or 'GICS'})"}]}
+                return ctx
+            # the resolver picks the axis; when it lands on the OTHER one than the place asked for, say so (snapped)
+            other = {"theme": "gics", "gics": "theme"}.get(dim)
+            for t, r in r2.items():
+                if other and r.get("axis") == other:
+                    what = "GICS sector/industry" if other == "gics" else "megatrend theme"
+                    ctx.setdefault("notes", []).append(
+                        f"'{t}' isn't a {'megatrend theme' if dim == 'theme' else 'GICS sector'} — matched {what} "
+                        f"{', '.join(n for n in (r.get('names') or []) if n) or ', '.join(map(str, r.get('ids') or []))} instead")
             texts = []                                                       # numbers in a scope are its own (mcap)
         else:
             ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": "place.leg must be universe | fundamental | ta | timeframe"}
             return ctx
+    except (_Busy, MarketIVError):
+        raise                                                                # backend trouble, not a bad value → prep
     except Exception as e:                                                   # pydantic: unknown field / bad type
         errs = getattr(e, "errors", None)
         msg = "; ".join(f"{'.'.join(str(x) for x in er.get('loc', ()))}: {er.get('msg')}" for er in errs()) if callable(errs) else str(e)
@@ -3256,7 +3327,7 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
     base_wb = next((a["value"] for a in base_v.get("assumed", []) if a["path"] == "window_bars"), None)
     snaps = [s for s in v.get("snaps", []) if mine(s.get("path", ""))]
     assumed = [a for a in v.get("assumed", []) if mine(a.get("path", "")) or (a["path"] == "window_bars" and a["value"] != base_wb)]
-    notes = [n for n in v.get("notes", []) if n not in set(base_v.get("notes", []))]
+    notes = [n for n in v.get("notes", []) if n not in set(base_v.get("notes", []))] + ctx.get("notes", [])
     is_list = isinstance(key_val, list)
     kv_list = key_val if is_list else [key_val]
     sig_paths = [(f"{path}.any[{k}]" if place.get("rel") == "with" else f"{path}.anchor[{k}]") for k in range(len(kv_list))] if leg == "ta" else [path]
@@ -3358,6 +3429,9 @@ def _resolve_schema() -> dict:
              "merge": "criteria.timeframe = result.value.timeframe"},
         ],
         "sets": "a result may carry `sets` {field: value} — formula-level fields to apply (criteria.update(sets)) alongside value",
+        "alternatives": "`candidates` (ambiguous) and `nearest` (unsupported / invalid) items are ready to merge: {value, label?} "
+                        "at the fragment's own place, unless the item carries its own `place` (merge it THERE instead — "
+                        "e.g. 'commodities' → {place:{leg:'universe',dim:'asset_type'}, value:{asset_type:['Commodity']}})",
         "ta": {"fields": ta_fields, "or": or_rule, "timeframe": tf},
         "fundamental": {"fields": fund_fields,
                         "units": "ratios / margins / growth rates are FRACTIONS (0.20 = 20%); P/E, P/B, EV/EBITDA multiples are raw; "
@@ -3384,6 +3458,11 @@ def _screen_resolve(req: dict) -> tuple:
             return _frag_prepare(base, f, fast)
         except _Busy:
             raise                                                            # whole call → fast 503 retryable
+        except MarketIVError as e:
+            if getattr(e, "status", None) in (502, 503, 504):                # the resolver's /find still busy after
+                raise _Busy(str(e))                                          # its retries → same fast 503
+            print(f"[screen_resolve] fragment failed: {e!r}", flush=True)
+            return {"out": {"place": f.get("place"), "status": "error", "reason": str(e)[:300]}}
         except Exception as e:                                               # one bad fragment never sinks the batch
             print(f"[screen_resolve] fragment failed: {e!r}", flush=True)
             return {"out": {"place": f.get("place"), "status": "error", "reason": str(e)[:300]}}
