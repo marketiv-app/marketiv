@@ -1086,10 +1086,30 @@ def _period_from(q: str) -> str:
     m = re.search(r"\d+", str(q))
     return m.group(0) if m else ""
 
+class _Busy(Exception):
+    """mdx-api answered 5xx / timed out after a short retry — a transient overload (e.g. its DB pool saturated by a
+    crawl burst, 2026-10-15), not a bad request. /v1/screen/resolve maps it to a FAST 503 {retryable:true}."""
+
+def _post_retry(path: str, body: dict, timeout: float = 8.0):
+    """POST to mdx-api with ONE quick retry on 5xx / timeout (bounded: ≤ 2 × timeout), else _Busy. 4xx → _check."""
+    last = None
+    for i in range(2):
+        try:
+            r = mdx()._http._client.post(path, json=body, timeout=timeout)
+        except Exception as e:                                    # timeout / connection reset
+            last = e
+        else:
+            if r.status_code < 500:
+                _check(r)
+                return r
+            last = RuntimeError(f"{path} → HTTP {r.status_code}")
+        if i == 0:
+            _time.sleep(0.4 + _random.uniform(0, 0.3))
+    raise _Busy(str(last))
+
 def _find_signal(q: str) -> dict:
     """One phrase → both axes ({signals, indicators}) from /v1/ta/find-signal (batch-of-1)."""
-    data = mdx()._http._client.post("/v1/ta/find-signal", json={"queries": [q], "limit": 15})
-    _check(data)
+    data = _post_retry("/v1/ta/find-signal", {"queries": [q], "limit": 15})
     res = (data.json().get("results") or [{}])
     return res[0] if res else {}
 
@@ -2947,8 +2967,7 @@ def _screen_validate_batch(criteria: list) -> list:
     market data). → one result per formula, in order."""
     if not criteria:
         return []
-    r = mdx()._http._client.post("/v1/screen/validate", json={"batch": criteria})
-    _check(r)
+    r = _post_retry("/v1/screen/validate", {"batch": criteria})
     return r.json().get("results", [])
 
 # a field the client already sent as a KEY/token ('crossover_up', 'ema50', 'net_income') skips the vector+Jev round
@@ -3177,6 +3196,13 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
             for k in ("needed", "available", "max", "basis", "metric"):
                 if e.get(k) is not None: out[k] = e[k]
             out["nearest"] = e.get("nearest") or []
+        if e.get("code") == "operand_not_for_pattern" and leg == "ta":
+            # e.g. divergence on stochastic: the engine names the lines it CAN read it on → nearest = those, ready to merge
+            m = re.search(r"available on: (\[.*?\])", e.get("message") or "")
+            try: alts = json.loads(m.group(1)) if m else []
+            except ValueError: alts = []
+            out.update({"status": "unsupported", "nearest": [{**key_val, "a": a} for a in alts[:3]]})
+            out.pop("value", None)
         if e.get("code") == "unsupported_pair" and leg == "ta":
             # this exact pairing isn't tracked → offer the pairings that ARE (the engine lists them), in key form
             m = re.search(r"available reference operands: (\[.*?\])", e.get("message") or "")
@@ -3227,6 +3253,8 @@ def _screen_resolve(req: dict) -> tuple:
     def prep(f, fast=True):
         try:
             return _frag_prepare(base, f, fast)
+        except _Busy:
+            raise                                                            # whole call → fast 503 retryable
         except Exception as e:                                               # one bad fragment never sinks the batch
             print(f"[screen_resolve] fragment failed: {e!r}", flush=True)
             return {"out": {"place": f.get("place"), "status": "error", "reason": str(e)[:300]}}
@@ -4648,8 +4676,12 @@ class _AuthASGI:
             try:
                 import asyncio
                 status, out = await asyncio.to_thread(_screen_resolve, body)   # to_thread carries the key ContextVar
+            except _Busy as e:
+                print(f"[screen_resolve] upstream busy: {e}", flush=True)
+                status, out = 503, {"error": "the screener backend is busy — retry in a moment", "code": "busy", "retryable": True}
             except Exception as e:
-                status, out = 502, {"error": f"resolve failed: {str(e)[:300]}"}
+                print(f"[screen_resolve] failed: {e!r}", flush=True)
+                status, out = 502, {"error": f"resolve failed: {str(e)[:300]}", "retryable": False}
             finally:
                 _req_key.reset(tok)
             return await _send_json(send, status, out)
