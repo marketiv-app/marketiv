@@ -3250,7 +3250,9 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
     gates = [r.get("gate") for r in resolved.values() if isinstance(r, dict) and r.get("gate")]
     res.update({"confidence": round(min(confs), 3) if confs else 1.0, "gate": "soft" if "soft" in gates else (gates[0] if gates else "exact_key"),
                 "resolved": resolved, "assumed": assumed})
-    for sn in snaps:                                                         # the key form is what RUNS: apply swaps
+    # the key form is what RUNS: apply the engine's canonical spelling (alias, same meaning: EMA20 → ema20, rsi → rsi14)
+    # and its swaps (snaps, reported) — so a saved formula never carries a spelling the engine rewrites
+    for sn in list(v.get("canonical", [])) + snaps:
         f = sn.get("path", "").rsplit(".", 1)[-1]
         if leg == "ta" and sn.get("path") == f"{sig_path}.{f}" and f in ("a", "b") and sn.get("to"):
             key_val[f] = sn["to"]
