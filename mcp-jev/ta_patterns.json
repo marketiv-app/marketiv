@@ -39,5 +39,11 @@
   "ttm_squeeze",
   "volume_dryup",
   "volume_spike"
+ ],
+ "fraction_b": [
+  "net_change_down",
+  "net_change_up",
+  "off_high_by",
+  "off_low_by"
  ]
 }

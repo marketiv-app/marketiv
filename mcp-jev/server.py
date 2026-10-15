@@ -2765,7 +2765,9 @@ def _cond_to_api(c: ScreenCondition) -> dict:
 
 # Every TA pattern key, generated from the Ava resolver catalog (sync_ta_patterns.py; deploy.sh refuses a stale copy) —
 # so this description can't drift from what the engine accepts (the catalog itself is pinned by ta_scan::catalog_tests).
-_TA_PATTERNS = json.loads((pathlib.Path(__file__).resolve().parent / "ta_patterns.json").read_text())["patterns"]
+_TA_CAT = json.loads((pathlib.Path(__file__).resolve().parent / "ta_patterns.json").read_text())
+_TA_PATTERNS = _TA_CAT["patterns"]
+_TA_FRACTION_B = set(_TA_CAT.get("fraction_b", []))   # patterns whose b is a fraction magnitude (off_high_by 0.3 = 30%)
 
 class TaSignal(BaseModel):
     """ONE technical signal = a SHAPE (`pattern`) + its operand LINES (`a`/`b`). Each is a key/token OR plain
@@ -2895,6 +2897,9 @@ _OR_REASON = "fundamental conditions are AND-only — split the alternatives int
 _OWN_REASON = ("comparing a stock with ITS OWN past average isn't screenable — only absolute levels (above/below a number), "
                "peer-relative (above_average/below_average, high/low) or trends")
 _NUM_IN_TEXT = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?)\s*(x|×|%|percent)?", re.I)
+# a number followed by a time unit ("3 months", "2 สัปดาห์") — carried when the value holds a bar window (the unit was
+# converted to bars: 3 months → window_bars 63), so it isn't a dropped number
+_TIME_UNIT = re.compile(r"\s*(days?|d\b|weeks?|wks?|months?|mos?\b|years?|yrs?|quarters?|bars?|sessions?|วัน|สัปดาห์|อาทิตย์|เดือน|ปี|ไตรมาส|แท่ง)", re.I)
 # standard indicator periods the canonical keys imply (rsi → rsi14 …) — a user saying "RSI 14" asked for nothing extra
 _IMPLIED_NUMS = {"rsi": {14.0}, "stoch": {14.0}, "adx": {14.0}, "atr": {14.0}, "macd": {12.0, 26.0, 9.0}, "bb": {20.0, 2.0}}
 _OR_WORD = re.compile(r"\bor\b|หรือ", re.I)
@@ -2925,10 +2930,14 @@ def _dropped(texts: list, key_value) -> list:
         if fam in blob: have |= ns
     if any(w in blob for w in ("52w", "52_w", "new_high", "new_low", "near_high", "near_low", "off_high", "off_low")):  # 52-week family
         have.add(52.0)
+    has_window = isinstance(key_value, dict) and any(key_value.get(k) is not None for k in ("window_bars", "for_bars"))
     out = []
     for t in texts:
-        for m in _NUM_IN_TEXT.finditer(str(t or "")):
+        t = str(t or "")
+        for m in _NUM_IN_TEXT.finditer(t):
             v = float(m.group(1))
+            if has_window and not m.group(2) and _TIME_UNIT.match(t, m.end()):
+                continue                                                   # converted into the bar window
             if round(v, 6) not in have and m.group(0).strip() not in out:
                 out.append(m.group(0).strip())
     return out
@@ -3039,6 +3048,12 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             ctx["raw_ops"] = {k: getattr(sig, k) for k in ("a", "b") if getattr(sig, k)}
             ctx["skipped"] = any(skip(getattr(sig, f)) for f in ("pattern", "a", "b") if getattr(sig, f)) if skip else False
             _resolve_ta_sig(sig, resolved, pending, skip)
+            if sig.b is None and sig.pattern in _TA_FRACTION_B and phrase:
+                # "down 30% from its 52-week high": the magnitude is the ONE percent in the user's words → b = 0.30
+                pcts = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*(?:%|percent|เปอร์เซ็นต์)", phrase)]
+                if len(pcts) == 1 and 0 < pcts[0] < 100:
+                    sig.b = f"{pcts[0] / 100:g}"
+                    resolved["b"] = f"{sig.b} (from '{pcts[0]:g}%' in the phrase)"
             key_val = sig.model_dump(exclude_none=True)
         elif leg == "fundamental":
             d = dict(val) if isinstance(val, dict) else {"concept": phrase or val, "pattern": phrase or val}
