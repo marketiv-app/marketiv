@@ -2962,6 +2962,39 @@ def _dropped(texts: list, key_value) -> list:
                 out.append(m.group(0).strip())
     return out
 
+# A /v1/screen 400 the CLIENT can fix by re-calling — returned as a structured answer + a concrete re-call hint, not a
+# tool error. Only fetched on a 400 (no cost on a normal screen): /v1/screen/validate has the structured details.
+_FIX_GUIDE = {
+    "insufficient_history": lambda e: (
+        f"The data can't evaluate this yet: the condition needs {e.get('needed')} periods of history, the deepest "
+        f"available is {e.get('available')}. Tell the user plainly — this is NOT 'no stock qualified'. Then re-call "
+        f"screen_unified with N={e.get('max')} on {e.get('path')} (`nearest` shows it) or ask which they prefer."
+        if e.get("max") else
+        "This metric has no usable history on this basis yet — tell the user plainly; do not present an empty result."),
+    "state_as_step": lambda e: (
+        "A STATE (true right now — above a line, a level, a range, rising/falling) has no date, so it can't come BEFORE "
+        f"another THEN step ({e.get('path')}). Re-call with it as a same-time qualifier of a step (`quals`) or as the "
+        "LAST step."),
+    "operand_not_for_pattern": lambda e: (
+        f"{e.get('message')} — re-call with `a` set to one of those lines (or drop the condition)."),
+}
+
+def _screen_fixable_400(body: dict):
+    try:
+        v = _screen_validate_batch([body])[0]
+    except Exception:
+        return None
+    errs = [e for e in (v.get("errors") or []) if e.get("code") in _FIX_GUIDE]
+    if not errs:
+        return None
+    e = errs[0]
+    out = {"needs_rewrite": True, "count": None, "code": e.get("code"), "path": e.get("path"), "error": e.get("message"),
+           "_guide": _FIX_GUIDE[e["code"]](e)}
+    for k in ("needed", "available", "max", "nearest"):
+        if e.get(k) not in (None, []): out[k] = e[k]
+    if len(errs) > 1: out["also"] = [{"code": x.get("code"), "path": x.get("path"), "error": x.get("message")} for x in errs[1:]]
+    return out
+
 def _screen_validate_batch(criteria: list) -> list:
     """ONE call to mdx-api /v1/screen/validate for many formulas (validated concurrently there, rules only — no
     market data). → one result per formula, in order."""
@@ -3520,6 +3553,9 @@ def screen_unified(
     _t0 = _time.time()
     resp = mdx()._http._client.post("/v1/screen", json=body)
     _tlog("backend", "/v1/screen", _t0, getattr(resp, "status_code", 0) < 400)
+    if getattr(resp, "status_code", 0) == 400:
+        fix = _screen_fixable_400(body)
+        if fix: return fix
     _check(resp)
     data = resp.json()
     got = len(data.get("results", [])) if isinstance(data, dict) else 0
