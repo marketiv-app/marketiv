@@ -17,7 +17,11 @@ PROJECT="${PROJECT:-ava-advisor-26c7b}"
 REGION="${REGION:-us-east1}"
 SERVICE="marketdx-mcp"
 HERE="$(cd "$(dirname "$0")" && pwd)"
-python3 "${HERE}/sync_ta_patterns.py" --check   # refuse a TaSignal.pattern description that drifted from the catalog
+# The server loads mdx-api's public criteria schema at start (its single source for TA patterns / limits / codes) and
+# refuses to start without it — check it's reachable first, so a bad deploy fails here and not as a crash-looping revision.
+SCHEMA_URL="${SCREEN_SCHEMA_URL:-https://api.ava.fund/v1/screen/schema}"
+curl -sf -o /dev/null --max-time 60 "${SCHEMA_URL}" || { echo "✗ criteria schema unreachable at ${SCHEMA_URL} — the MCP would refuse to start (deploy mdx-api first?)"; exit 1; }
+echo "criteria schema reachable ✓"
 
 echo "Deploying ${SERVICE} → Cloud Run (${PROJECT}/${REGION})"
 gcloud run deploy "${SERVICE}" \

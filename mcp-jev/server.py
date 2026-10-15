@@ -2825,34 +2825,100 @@ def _cond_to_api(c: ScreenCondition) -> dict:
 # find_tasignal tool — the client sends key-or-plain-English straight into a TaSignal. Field descriptions below
 # ported from docs/pipeline/ta-screener-mcp-guide.md (blind-client-validated).
 
-# Every TA pattern key, generated from the Ava resolver catalog (sync_ta_patterns.py; deploy.sh refuses a stale copy) —
-# so this description can't drift from what the engine accepts (the catalog itself is pinned by ta_scan::catalog_tests).
-_TA_CAT = json.loads((pathlib.Path(__file__).resolve().parent / "ta_patterns.json").read_text())
-_TA_PATTERNS = _TA_CAT["patterns"]
-_TA_FRACTION_B = set(_TA_CAT.get("fraction_b", []))   # patterns whose b is a fraction magnitude (off_high_by 0.3 = 30%)
+# ── The criteria schema (mdx-api GET /v1/screen/schema, generated from the engine) is the SINGLE source for the TA
+# pattern keys, operand kinds, step limits, timeframe codes and universe dims used below — in the tool descriptions and
+# in the resolver's checks. Loaded at import = container start; an MCP that can't read it does NOT start (Cloud Run
+# keeps serving the previous revision), so nothing here can drift from what the engine accepts. Runtime values
+# (limits / codes / dims) refresh hourly in the background; tool descriptions are fixed for the instance's life.
+_SCHEMA_URL = os.environ.get("SCREEN_SCHEMA_URL") or ((os.environ.get("MARKETIV_BASE_URL") or os.environ.get("MARKETDX_BASE_URL")
+                                                       or "https://api.ava.fund").rstrip("/") + "/v1/screen/schema")
 
-# chart timeframe words → the engine's code (1 daily · 2 weekly · 3 monthly). Declared in the resolve schema.
-_TF_WORDS = {"daily": 1, "day": 1, "d": 1, "1d": 1, "รายวัน": 1, "วัน": 1,
-             "weekly": 2, "week": 2, "w": 2, "1w": 2, "รายสัปดาห์": 2, "สัปดาห์": 2,
-             "monthly": 3, "month": 3, "mo": 3, "1mo": 3, "รายเดือน": 3, "เดือน": 3}
+def _fetch_schema(etag: Optional[str] = None):
+    """→ (schema, etag), or (None, etag) when unchanged (304). Public endpoint — no user key needed."""
+    import urllib.request
+    req = urllib.request.Request(_SCHEMA_URL, headers={"If-None-Match": etag} if etag else {})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.loads(r.read()), r.headers.get("ETag")
+    except _uerr.HTTPError as e:
+        if e.code == 304: return None, etag
+        raise
+
+def _derive_schema(sch: dict) -> dict:
+    ta = sch["ta"]
+    ops = lambda p: p.get("operands") or {}
+    def operand_free(p):   # takes no a, and b is absent / ignored / a tolerance with a default / an optional line
+        a, b = ops(p).get("a"), ops(p).get("b")
+        return a is None and (b is None or b.get("kind") in ("unused", "tolerance") or (b.get("optional") and "lines" in b))
+    return {
+        "patterns": sorted(p["pattern"] for p in ta["patterns"]),
+        "operand_free": sorted(p["pattern"] for p in ta["patterns"] if operand_free(p)),
+        # b is a FRACTION (net_change 0.30 = 30%, near_high 0.05 …): one "%" in the user's words fills it
+        "fraction_b": {p["pattern"] for p in ta["patterns"] if (ops(p).get("b") or {}).get("unit") == "fraction"},
+        "steps": ta["limits"]["steps"], "anchor_or": ta["limits"]["anchor_or"],
+        "quals": ta["limits"]["quals"], "qual_or": ta["limits"]["qual_or"],
+        "within": ta["step"]["quals"]["item"]["within"]["default"],
+        "tf": {v["label"]["en"].lower(): v["value"] for v in sch["request"]["timeframe"]["values"]},
+        "uni_dims": tuple(sch["universe"]["cohort"].keys()),
+        "window_default": sch["request"]["window_bars"]["default"],
+    }
+
+def _load_schema_at_start() -> tuple:
+    f = os.environ.get("SCREEN_SCHEMA_FILE")                       # offline tests: a saved copy of the endpoint
+    if f: return _derive_schema(json.loads(pathlib.Path(f).read_text())), None
+    last = None
+    for i in range(4):
+        try:
+            sch, etag = _fetch_schema()
+            return _derive_schema(sch), etag
+        except Exception as e:
+            last = e
+            _time.sleep(1.5 * (i + 1))
+    raise RuntimeError(f"cannot read the criteria schema at {_SCHEMA_URL} ({last!r}) — refusing to start without it")
+
+_S, _S_ETAG = _load_schema_at_start()
+
+def _schema_refresh_loop():
+    global _S_ETAG
+    while True:
+        _time.sleep(3600)
+        try:
+            sch, etag = _fetch_schema(_S_ETAG)
+            if sch is not None:
+                d = _derive_schema(sch)
+                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims"):
+                    _S[k] = d[k]                                   # runtime values only — descriptions stay per instance
+                _S_ETAG = etag
+        except Exception as e:
+            print(f"[schema] refresh failed, keeping the loaded values: {e!r}", flush=True)
+
+if not os.environ.get("SCREEN_SCHEMA_FILE"):
+    __import__("threading").Thread(target=_schema_refresh_loop, daemon=True).start()
+
+# timeframe WORDS (resolver vocabulary, Thai included) → the schema's timeframe label → its code
+_TF_WORDS = {"daily": "daily", "day": "daily", "d": "daily", "1d": "daily", "รายวัน": "daily", "วัน": "daily",
+             "weekly": "weekly", "week": "weekly", "w": "weekly", "1w": "weekly", "รายสัปดาห์": "weekly", "สัปดาห์": "weekly",
+             "monthly": "monthly", "month": "monthly", "mo": "monthly", "1mo": "monthly", "รายเดือน": "monthly", "เดือน": "monthly"}
 
 def _tf_code(v):
     if v is None or isinstance(v, int): return v
     s = str(v).strip().lower()
     if s.isdigit(): return int(s)
-    if s in _TF_WORDS: return _TF_WORDS[s]
-    raise ValueError(f"timeframe must be one of {sorted(set(_TF_WORDS))} or 1/2/3")
+    if s in _TF_WORDS and _TF_WORDS[s] in _S["tf"]: return _S["tf"][_TF_WORDS[s]]
+    raise ValueError(f"timeframe must be one of {sorted(set(_TF_WORDS))} or {'/'.join(map(str, _S['tf'].values()))}")
+
+_TF_CODES = ",".join(f"{c}={w}" for w, c in _S["tf"].items())       # "1=daily,2=weekly,3=monthly" for descriptions
 
 class TaSignal(BaseModel):
     """ONE technical signal = a SHAPE (`pattern`) + its operand LINES (`a`/`b`). Each is a key/token OR plain
     English — the SERVER resolves each."""
     model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
-    pattern: str = Field(..., description="The chart SHAPE — a pattern key or plain English ('golden cross','breaking out of a squeeze'), server-resolved. Keys: " + ", ".join(_TA_PATTERNS) + ". bb_squeeze = coiling now; squeeze_fired_up/dn = coiled-then-broke, SELF-CONTAINED — use as the anchor, don't chain squeeze-THEN-fire. NO OPERAND NEEDED (omit a/b; a few take an optional b): " + ", ".join(_TA_CAT.get("operand_free", [])) + ". Divergence takes only `a` = the oscillator: rsi (default) or macd; hidden divergence rsi only — other lines are refused. Oscillator band ('RSI 40-50') = ONE in_range (a='rsi', b='40-50').")
+    pattern: str = Field(..., description="The chart SHAPE — a pattern key or plain English ('golden cross','breaking out of a squeeze'), server-resolved. Keys: " + ", ".join(_S["patterns"]) + ". bb_squeeze = coiling now; squeeze_fired_up/dn = coiled-then-broke, SELF-CONTAINED — use as the anchor, don't chain squeeze-THEN-fire. NO OPERAND NEEDED (omit a/b; a few take an optional b): " + ", ".join(_S["operand_free"]) + ". Divergence takes only `a` = the oscillator: rsi (default) or macd; hidden divergence rsi only — other lines are refused. Oscillator band ('RSI 40-50') = ONE in_range (a='rsi', b='40-50').")
     a: Optional[str] = Field(None, description="Operand A (SUBJECT line) — a token (close/ema50/rsi/macd_line/adx/stoch_k/bb_upper/senkou_a/tenkan…) or plain English, server-resolved. Cross/touch: the ACTIVE line (two MAs → the faster; price-vs-MA → 'close'). above/below read literally 'a is above/below b' ('price above the 200-day' → a='close',b='ema200'). Non-standard periods (ema45,rsi7) snap to the nearest. Omit for operand-free patterns.")
     b: Optional[str] = Field(None, description="Operand B — the PASSIVE reference line (token/English) or a numeric level as a string (oscillator-vs-level → '30'/'70'; MACD-vs-signal → 'macd_signal'; two MAs → the slower). For a net-return pattern (net_change_up/down), b = the move magnitude as a FRACTION ('0.30' = 30%). Omit if the pattern has no reference.")
     for_bars: Optional[int] = Field(None, description="A state/level must have HELD ≥ this many consecutive bars ('above the 200-day for a month' ≈ 20 daily bars); for rising/falling it's a run-length. NOT valid on net_change/crossover/divergence — for 'within the last N bars' use window_bars.")
     window_bars: Optional[int] = Field(None, description="PER-SIGNAL lookback in bars — 'holds WITHIN the last N bars' (recency); for a net-return pattern it's the PERIOD the return is measured over ('dropped 30% over 100 days' → window_bars=100). Gives conditions DIFFERENT windows in one screen. Omit → the screen-level default. (Distinct from for_bars = how long a state has held.)")
-    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart (1=daily,2=weekly,3=monthly; or the words daily/weekly/monthly) to MIX timeframes — put it on a QUALIFIER (checked on its own chart) while the anchor stays on the screen-level timeframe. e.g. weekly-hold + daily-cross → screen tf=1, qualifier {above,a='close',b='ema50',timeframe:2}. Operand periods are bars of THIS tf. An ANCHOR's tf must equal the screen-level tf (else 400) — put cross-tf tests in a qualifier.")
+    timeframe: Optional[int] = Field(None, description="PER-CONDITION chart (" + _TF_CODES + "; or the words daily/weekly/monthly) to MIX timeframes — put it on a QUALIFIER (checked on its own chart) while the anchor stays on the screen-level timeframe. e.g. weekly-hold + daily-cross → screen tf=1, qualifier {above,a='close',b='ema50',timeframe:2}. Operand periods are bars of THIS tf. An ANCHOR's tf must equal the screen-level tf (else 400) — put cross-tf tests in a qualifier.")
 
     @field_validator("timeframe", mode="before")
     @classmethod
@@ -2863,15 +2929,15 @@ class TaSignal(BaseModel):
 class TaQual(BaseModel):
     """An AND qualifier at a moment — a group of signals combined with OR (≥1 must hold)."""
     model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
-    any: List[TaSignal] = Field(..., description="Signals combined with OR; at least one must hold. Max 3.")
-    within: Optional[int] = Field(None, description="± tolerance in trading bars around the anchor (default 5; use 0 for a persistent state like 'is above').")
+    any: List[TaSignal] = Field(..., description=f"Signals combined with OR; at least one must hold. Max {_S['qual_or']}.")
+    within: Optional[int] = Field(None, description=f"± tolerance in trading bars around the anchor (default {_S['within']}; use 0 for a persistent state like 'is above').")
 
 
 class TaStep(BaseModel):
     """ONE moment. Multiple steps = a THEN chain (step 0 happens, THEN step 1 …). Same-moment conditions go in ONE step."""
     model_config = ConfigDict(extra="forbid")  # unknown/typo'd field → rejected here, not silently dropped
-    anchor: List[TaSignal] = Field(..., description="Primary signal(s) for this moment; multiple = OR; also the sort key. Max 3.")
-    quals: Optional[List[TaQual]] = Field(None, description="Extra conditions that must ALL hold at this moment (AND). Max 4.")
+    anchor: List[TaSignal] = Field(..., description=f"Primary signal(s) for this moment; multiple = OR; also the sort key. Max {_S['anchor_or']}.")
+    quals: Optional[List[TaQual]] = Field(None, description=f"Extra conditions that must ALL hold at this moment (AND). Max {_S['quals']}.")
 
 
 def _res_fund_term(val, kind: str, resolved: dict, pending: list):
@@ -2966,8 +3032,6 @@ def _resolve_ta_steps(ta: list, resolved: dict, pending: list) -> None:
 # checked by mdx-api /v1/screen/validate (the real legs over a probe set) — never scanned. Fragments are judged
 # INDEPENDENTLY against `base` (the user may pick one), concurrently. No LLM anywhere.
 _RESOLVE_MAX_FRAGS = 8
-_TA_MAX_OR = 3   # OR'ed signals per step — the engine's limit (capabilities ta.max_or); validate enforces it too
-_UNI_DIMS = ("country", "theme", "gics", "size", "asset_type", "mcap_min", "mcap_max")
 # moving-average families we don't carry: the engine maps them to the nearest EMA → always a SNAP, never silent
 _MA_FAMILY_WE_LACK = re.compile(r"\b(wma|hma|tema|dema|kama|vwma|smma|zlema|alma|lsma|weighted moving average|hull)\b", re.I)
 # chart lines that don't exist at all — no honest substitute
@@ -3166,9 +3230,10 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
         if leg == "ta":
             # a LIST value = signals OR'ed in ONE step (anchor[] / quals[].any[]); a dict = one signal
             items = val if isinstance(val, list) else [val if isinstance(val, dict) else {"pattern": phrase or val}]
-            if not items or len(items) > _TA_MAX_OR:
+            max_or = _S["qual_or"] if place.get("rel") == "with" else _S["anchor_or"]     # the engine's limits (schema)
+            if not items or len(items) > max_or:
                 ctx["out"] = {**res, "status": "invalid", "code": "too_many_or",
-                              "reason": f"one step takes 1..{_TA_MAX_OR} OR'ed signals (got {len(items)})"}
+                              "reason": f"one step takes 1..{max_or} OR'ed signals (got {len(items)})"}
                 return ctx
             sigs = []
             for it in items:
@@ -3185,7 +3250,7 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             tfs = {g.timeframe for g in sigs if g.timeframe}
             if place.get("rel") == "new" and len(tfs) == 1:
                 ctx["sets"] = {"timeframe": tfs.pop()}
-            if len(sigs) == 1 and sig.b is None and sig.pattern in _TA_FRACTION_B and phrase:
+            if len(sigs) == 1 and sig.b is None and sig.pattern in _S["fraction_b"] and phrase:
                 # "down 30% from its 52-week high": the magnitude is the ONE percent in the user's words → b = 0.30
                 pcts = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*(?:%|percent|เปอร์เซ็นต์)", phrase)]
                 if len(pcts) == 1 and 0 < pcts[0] < 100:
@@ -3222,8 +3287,8 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             key_val = _cond_to_api(cond)
         elif leg == "universe":
             dim = place.get("dim")
-            if dim not in _UNI_DIMS:
-                ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": f"universe dim must be one of {list(_UNI_DIMS)}"}
+            if dim not in _S["uni_dims"]:
+                ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": f"universe dim must be one of {list(_S['uni_dims'])}"}
                 return ctx
             if isinstance(val, dict):                                        # {"country": [...]} → its list
                 val = val.get(dim) if dim in val else next(iter(val.values()), None)
@@ -3399,16 +3464,16 @@ _TRIAL_BLOCKING = ("state_as_step", "too_many_steps", "too_many_quals", "anchor_
 
 def _resolve_schema() -> dict:
     """The INPUT contract of POST /v1/screen/resolve — what a fragment may carry and how a result merges. Generated from
-    the SAME models / constants the resolver validates with (TaSignal, ScreenCondition, _UNI_DIMS, _TF_WORDS …), so it
+    the SAME models / constants the resolver validates with (TaSignal, ScreenCondition, and the criteria-schema values in _S), so it
     can't drift from what is accepted. Public (GET /v1/screen/resolve/schema); embedded by /v1/screen/capabilities."""
     ta_fields = TaSignal.model_json_schema()
     fund_fields = ScreenCondition.model_json_schema()
-    tf = {"field": "timeframe", "values": {"daily": 1, "weekly": 2, "monthly": 3}, "words": sorted(_TF_WORDS),
+    tf = {"field": "timeframe", "values": dict(_S["tf"]), "words": sorted(_TF_WORDS),
           "rule": "A step's main signal runs on the FORMULA timeframe (criteria.timeframe). Set it with place {leg:'timeframe'} "
                   "or by giving the anchor a timeframe when placing a NEW TA leg (result.sets carries it). A per-signal "
                   "timeframe on a same-time condition (rel 'with') mixes charts; on a later step it must equal the formula's "
                   "(else invalid anchor_tf_mismatch with nearest = the {leg:'timeframe'} fix)."}
-    or_rule = {"shape": "value as a LIST of 1..max_or signals (each a TaSignal)", "max": _TA_MAX_OR,
+    or_rule = {"shape": "value as a LIST of 1..max_or signals (each a TaSignal)", "max": _S["anchor_or"], "max_with": _S["qual_or"],
                "means": "the signals are OR'ed within ONE step — anchor[] when rel is new/before/after, quals[].any[] when rel is with",
                "result": "value comes back as a list in the same order"}
     return {
@@ -3417,13 +3482,13 @@ def _resolve_schema() -> dict:
         "fragment": {"place": "where it goes (see places)", "value": "the leg's shape below; text fields may be plain English",
                      "phrase": "the user's own words (optional; used for numbers / quarters / dropped)"},
         "places": [
-            {"leg": "universe", "dim": list(_UNI_DIMS), "value": "a list of values (OR within the dim) or {dim: list}",
+            {"leg": "universe", "dim": list(_S["uni_dims"]), "value": "a list of values (OR within the dim) or {dim: list}",
              "merge": "append every key of result.value into universe.include[0][key] (gics: comma string; mcap_*: set)"},
             {"leg": "fundamental", "value": "ScreenCondition", "merge": "push result.value into fundamental[] (AND)"},
             {"leg": "ta", "rel": "new", "value": "TaSignal or a list (OR)", "merge": "ta = [{anchor: value-as-list}] (only when the formula has no TA)"},
             {"leg": "ta", "rel": "before|after", "step": "0-based index of an existing step", "value": "TaSignal or a list (OR)",
              "merge": "insert {anchor: value-as-list} at step / step+1 (THEN order)"},
-            {"leg": "ta", "rel": "with", "step": "0-based", "within": "optional ± bars (default 5)", "value": "TaSignal or a list (OR)",
+            {"leg": "ta", "rel": "with", "step": "0-based", "within": f"optional ± bars (default {_S['within']})", "value": "TaSignal or a list (OR)",
              "merge": "push {any: value-as-list, within?} into ta[step].quals (AND with the step)"},
             {"leg": "timeframe", "value": "'daily'|'weekly'|'monthly' (or 1/2/3, or a word in timeframe.words)",
              "merge": "criteria.timeframe = result.value.timeframe"},
@@ -3436,7 +3501,7 @@ def _resolve_schema() -> dict:
         "fundamental": {"fields": fund_fields,
                         "units": "ratios / margins / growth rates are FRACTIONS (0.20 = 20%); P/E, P/B, EV/EBITDA multiples are raw; "
                                  "basis annual|quarterly|ttm (or A/Q/T); N = periods of that basis"},
-        "universe": {"dims": list(_UNI_DIMS), "country": "ISO-2 codes", "theme_gics": "English concepts (resolver picks the axis)",
+        "universe": {"dims": list(_S["uni_dims"]), "country": "ISO-2 codes", "theme_gics": "English concepts (resolver picks the axis)",
                      "mcap": "USD number"},
         "statuses": ["resolved", "snapped", "ambiguous", "unsupported", "invalid", "error"],
     }
@@ -3551,7 +3616,7 @@ def screen_unified(
         timeframe: Annotated[Optional[int], _d("Chart for the TA leg: 1=daily (default) · 2=weekly · 3=monthly. TA operand periods & for_bars are counted in BARS of this timeframe.")] = None,
         window_bars: Annotated[Optional[int], _d("TA-leg LOOKBACK in bars of `timeframe` — how far back a signal may "
             "have fired / the span a THEN-chain completes within ('…within the last N days'; 'divergence within 50 days' "
-            "→ 50). Whole `ta` leg; omit → default 30×(#steps). SEPARATE from a fundamental trend's `N`.")] = None,
+            "→ 50). Whole `ta` leg; omit → default " + str(_S["window_default"]) + ". SEPARATE from a fundamental trend's `N`.")] = None,
         dividend_min_streak_years: Annotated[Optional[int], _d("OPTIONAL dividend gate — keep stocks with a no-cut "
             "dividend streak ≥ N years (reliability streak in a 10-year window, capped at 10; NOT the full age). A "
             "membership gate — combine with a fundamental/ta/options base leg (pure dividend screen → screen_dividends).")] = None,
