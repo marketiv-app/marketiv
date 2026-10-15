@@ -3156,6 +3156,12 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
         e = v["errors"][0]
         out = {**res, "status": "invalid", "code": e.get("code"), "reason": e.get("message"), "hint": e.get("message"), "errors": v["errors"]}
         if snaps: out["snaps"] = snaps
+        if e.get("code") == "insufficient_history":
+            # the data can't evaluate this N yet (it deepens as statements load) — surface the engine's live limit and
+            # the same condition at that limit, ready to merge (the web turns it into a "use the max" button)
+            for k in ("needed", "available", "max", "basis", "metric"):
+                if e.get(k) is not None: out[k] = e[k]
+            out["nearest"] = e.get("nearest") or []
         if e.get("code") == "unsupported_pair" and leg == "ta":
             # this exact pairing isn't tracked → offer the pairings that ARE (the engine lists them), in key form
             m = re.search(r"available reference operands: (\[.*?\])", e.get("message") or "")
