@@ -1426,8 +1426,11 @@ def brief(news_type: Annotated[Optional[str], _d(_NEWS_TYPE)] = None,
         _mts = [str(x) for x in _t]
     if _mts:
         megatrend = ",".join(_mts + ([megatrend] if megatrend else []))
-    res = mdx().brief(megatrend=megatrend, news_type=news_type, country=country, aspect=aspect,
-                      gics=gics, window=window, from_=from_, to=to, interval=interval, lang=lang)
+    # straight to /v1/brief: `megatrend` is already resolved to node ids here — the SDK's brief() re-resolves it as ONE
+    # name/slug, so the comma list a multi-theme concept yields ('semiconductors' → 4 themes) failed "not found"
+    params = {"megatrend": megatrend, "news_type": news_type, "country": country, "aspect": aspect, "gics": gics,
+              "window": window, "interval": interval, "from": from_, "to": to, "lang": lang}
+    res = mdx()._get("/v1/brief", {k: v for k, v in params.items() if v is not None}).data
     if dropped and isinstance(res, dict):
         res["_warning"] = (f"Ignored invalid news_type(s) {dropped} — not real categories. Valid names: "
                            f"{sorted(_NEWS_TYPES)}. (There is no 'monetary_policy'; use 'macro_economic'.)")
