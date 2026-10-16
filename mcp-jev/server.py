@@ -500,7 +500,6 @@ def _jev_noul(query: str, instruction: str) -> float:
 #    embed) → coverage Noul per candidate (ONE _jev_nouls call) → theme-priority-with-guard. No gazetteer/deepseek.
 _CONCEPT_NOUL_KEEP = 0.5   # coverage threshold (calibrate from probes)
 _CONCEPT_DIRECT_BAR = 0.65  # top coverage below this = an INDIRECT (last-resort / closest-home) match → flag it
-_CONCEPT_THEME_WIN = 0.75   # theme beats gics only if its top coverage ≥ this AND ≥ the top gics
 _GICS_HOME_MARGIN = 0.15   # a 2nd GICS home is kept only within this of the top home's coverage (retail 0.94/0.93 kept; banks' custody 0.62 dropped)
 
 _concept_cache: dict = {}   # normalized-English concept → resolved envelope (in-process; the query EMBED is already
@@ -552,14 +551,17 @@ def _resolve_concept_uncached(concept: str) -> dict:
     kept = [(qid, probs.get(qid, 0.0)) for qid in qmap if probs.get(qid, 0.0) >= _CONCEPT_NOUL_KEEP]
     themes_k = sorted([(meta[k].copy(), p) for k, p in kept if meta[k]["axis"] == "theme"], key=lambda x: -x[1])
     gics_k = sorted([(meta[k].copy(), p) for k, p in kept if meta[k]["axis"] == "gics"], key=lambda x: -x[1])
-    # theme-priority WITH BREADTH GUARD. A curated theme is the higher-value grouping (client can't know it), so it
-    # WINS when it's a strong fit (≥_CONCEPT_THEME_WIN). BUT when a strong GICS also exists, only let the theme win if
+    # theme-priority WITH BREADTH GUARD. A curated theme is the higher-value grouping (client can't know it), so a
+    # kept theme WINS. BUT when a strong GICS also exists, only let the theme win if
     # it covers ROUGHLY THE WHOLE concept — not a narrow slice: 'semiconductors'→"Semiconductors" theme = whole → win;
     # 'healthcare'→"Home Healthcare & Hospice" = a slice → fall to the GICS Health Care sector. (One extra Noul, only
     # in the both-strong case.)
     theme_top = themes_k[0][1] if themes_k else 0.0
     gics_top = gics_k[0][1] if gics_k else 0.0
-    prefer_theme = bool(themes_k) and (not gics_k or theme_top >= _CONCEPT_THEME_WIN)
+    # A kept theme ALWAYS outranks GICS (user decision 2026-10-16): the curated theme is the grouping the client can't
+    # know; a GICS name that only shares letters with the query ('HBM' → Homebuilding 0.52 vs "HBM & AI Memory" 0.74)
+    # used to win whenever the theme fell under 0.75. Only the breadth guard below can still hand it to GICS.
+    prefer_theme = bool(themes_k)
     if prefer_theme and gics_k and gics_top >= 0.75:
         tn = themes_k[0][0]["name"]
         breadth = _jev_noul(q, f"An investor asks for the '{q}' group. Does the theme «{tn}» cover ROUGHLY THE WHOLE "
