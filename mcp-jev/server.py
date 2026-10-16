@@ -1285,13 +1285,18 @@ def _resolve_oppattern(q: str) -> dict:
     if not cands:
         return {"status": "no_match", "query": q, "reason": "no candidate options patterns", "candidates": []}
     def _carry(c):  # the fields the caller needs to ROUTE (scan/compose/unsupported)
-        out = {"pattern": c.get("pattern"), "temporal_mode": c.get("temporal_mode"),
+        out = {"pattern": c.get("pattern"), "temporal_mode": c.get("temporal_mode"), "dimension": c.get("dimension"),
                "exec_path": c.get("exec_path"), "supported": c.get("supported")}
         if c.get("compose_recipe") is not None: out["compose_recipe"] = c.get("compose_recipe")
         return out
-    # FAST-PATH: the client already sent an exact pattern token → use it, skip Jev (compare to ENDPOINT candidates).
-    qn = q.strip().lower()
-    exact = next((c for c in cands if str(c.get("pattern", "")).lower() == qn), None)
+    # FAST-PATH: the client already sent an exact pattern token — or the catalog's own label for it (a client reading the
+    # schema's list copies "Fear building (crash-pricing)"; its near-twin "Fear building fast (rising)" made Jev split
+    # 0.54/0.46, 2026-10-17) → use it, skip Jev (compare to ENDPOINT candidates).
+    norm = lambda t: re.sub(r"\s+", " ", str(t or "")).strip().lower()
+    bare = lambda t: re.sub(r"\s*\([^)]*\)", "", norm(t)).strip()
+    qn = norm(q)
+    exact = (next((c for c in cands if norm(c.get("pattern")) == qn), None)
+             or next((c for c in cands if c.get("label") and (norm(c["label"]) == qn or bare(c["label"]) == qn)), None))
     if exact:
         return {"status": "resolved", "query": q, "confidence": 1.0, "gate": "exact_key", **_carry(exact)}
     options, meta = {}, {}
@@ -2868,6 +2873,7 @@ def _derive_schema(sch: dict) -> dict:
         "window_default": sch["request"]["window_bars"]["default"],
         # the dividend gate's fields (min_streak_years range, min_cagr presets) — the builder's dividend place reads them
         "div": (sch.get("dividend") or {}).get("fields") or {},
+        "opt": (sch.get("options") or {}).get("fields") or {},
     }
 
 def _load_schema_at_start() -> tuple:
@@ -2893,7 +2899,7 @@ def _schema_refresh_loop():
             sch, etag = _fetch_schema(_S_ETAG)
             if sch is not None:
                 d = _derive_schema(sch)
-                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims", "div"):
+                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims", "div", "opt"):
                     _S[k] = d[k]                                   # runtime values only — descriptions stay per instance
                 _S_ETAG = etag
         except Exception as e:
@@ -3440,6 +3446,8 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
                                         + (f" ({rec['blocker']})" if rec.get("blocker") else "") + " — not a single options condition"}
                 return ctx
             key_val = {k: v for k, v in {**d, "pattern": ro["pattern"]}.items() if v is not None}
+            if ro.get("dimension") == "horizon":                             # it compares both expiries itself — the
+                key_val.pop("horizon", None)                                 # engine ignores a horizon there
             if q != phrase: texts.append(q)
             cur = (base or {}).get("options")
             if isinstance(cur, dict) and cur.get("pattern") and cur.get("pattern") != key_val["pattern"]:
@@ -3649,7 +3657,9 @@ def _resolve_schema() -> dict:
                               "min_streak_years; a dividend YIELD is a fundamental metric, not this place"},
         "options": {"pattern": "resolved like screen_unified.options (key passthrough, else the words → the closest "
                                "options-behaviour pattern); composite patterns (options vs price) are not a single place",
-                    "horizon": "short_term | long_term", "min_strength": "0..1 (optional)", "scope": "US optionable stocks only"},
+                    "horizon": ((_S.get("opt") or {}).get("horizon") or {}).get("note") or "short_term | long_term",
+                    "min_strength": ((_S.get("opt") or {}).get("min_strength") or {}).get("note") or "optional",
+                    "scope": "US optionable stocks only"},
         "statuses": ["resolved", "snapped", "ambiguous", "unsupported", "invalid", "error"],
         "caveat": "a result may carry `caveat` (text): the value is fine but the formula can't run as it stands (e.g. a "
                   "dividend gate with no other leg) — merge it and say so",
