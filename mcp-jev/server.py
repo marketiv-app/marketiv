@@ -1278,6 +1278,19 @@ def _resolve_oppattern(q: str) -> dict:
     (/v1/options/find-pattern, full context: dimension+temporal_mode+label+description) → Jev pick + `__NONE__` →
     calibrated gate. Carries `temporal_mode`, `exec_path`, `supported`, and `compose_recipe` (when present) so the
     caller can route scan vs compose vs unsupported."""
+    # LOCAL FAST-PATH: a key or the catalog's own label (what a client reading the schema sends) resolves from the
+    # criteria schema's pattern list, no network — the vector shortlist + Jev cost 1–3 s per call, and the screener
+    # chat sends every offered choice through here twice (choices check + preview count). A composite (exec compose)
+    # still goes the long way: its recipe lives in the catalog row, not in the schema.
+    norm = lambda t: re.sub(r"\s+", " ", str(t or "")).strip().lower()
+    bare = lambda t: re.sub(r"\s*\([^)]*\)", "", norm(t)).strip()
+    qn0 = norm(q)
+    for pv in (((_S.get("opt") or {}).get("pattern") or {}).get("values") or []):
+        lab = ((pv.get("label") or {}).get("en")) or ""
+        if qn0 and (norm(pv.get("value")) == qn0 or norm(lab) == qn0 or bare(lab) == qn0) and (pv.get("exec") or "scan") == "scan":
+            return {"status": "resolved", "query": q, "confidence": 1.0, "gate": "exact_key", "pattern": pv.get("value"),
+                    "temporal_mode": pv.get("tense") or "level", "dimension": pv.get("dimension"), "exec_path": "scan",
+                    "supported": "approx" if pv.get("approximate") else "yes"}
     resp = mdx()._http._client.post("/v1/options/find-pattern", json={"q": q, "limit": 15})
     _check(resp)
     data = resp.json()
