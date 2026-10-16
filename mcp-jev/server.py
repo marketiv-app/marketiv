@@ -2904,10 +2904,11 @@ _TF_WORDS = {"daily": "daily", "day": "daily", "d": "daily", "1d": "daily", "ร
              "monthly": "monthly", "month": "monthly", "mo": "monthly", "1mo": "monthly", "รายเดือน": "monthly", "เดือน": "monthly"}
 
 def _tf_code(v):
-    if v is None or isinstance(v, int): return v
+    if v is None: return v
     s = str(v).strip().lower()
-    if s.isdigit(): return int(s)
-    if s in _TF_WORDS and _TF_WORDS[s] in _S["tf"]: return _S["tf"][_TF_WORDS[s]]
+    if isinstance(v, int) or s.isdigit():                                # a code must be one the schema declares — the
+        if int(s) in _S["tf"].values(): return int(s)                    # engine would clamp 20 to monthly, silently
+    elif s in _TF_WORDS and _TF_WORDS[s] in _S["tf"]: return _S["tf"][_TF_WORDS[s]]
     raise ValueError(f"timeframe must be one of {sorted(set(_TF_WORDS))} or {'/'.join(map(str, _S['tf'].values()))}")
 
 _TF_CODES = ",".join(f"{c}={w}" for w, c in _S["tf"].items())       # "1=daily,2=weekly,3=monthly" for descriptions
@@ -3149,6 +3150,14 @@ def _resolve_uni_dim(dim: str, val) -> tuple:
     """→ (include-patch {dim: value}, resolved-map, pending-list). theme/gics go through the SAME _scope_resolve as
     screen_unified (it decides the axis: a concept may land as a GICS code and/or a theme id)."""
     toks = _uni_tokens(val)
+    if dim == "theme":                                                   # a bare id in the THEME dim is a theme id — 8
+        ids = [int(str(t).strip()) for t in toks if str(t).strip().isdigit()]   # digits like a GICS code, never one
+        words = [t for t in toks if not str(t).strip().isdigit()]
+        if ids and not words: return {"theme": ids}, {}, []
+        if ids:
+            patch, rmap, pend = _resolve_uni_dim(dim, words)
+            if not pend: patch["theme"] = ids + [i for i in patch.get("theme", []) if i not in ids]
+            return patch, rmap, pend
     if dim in ("theme", "gics"):
         gc, tids, cf, rmap = _scope_resolve([str(t) for t in toks])
         if cf:
@@ -3263,7 +3272,10 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
             key_val = vals if isinstance(val, list) else vals[0]
         elif leg == "timeframe":
             raw = val.get("timeframe") if isinstance(val, dict) else (val if val is not None else phrase)
-            key_val = {"timeframe": _tf_code(raw)}
+            try: key_val = {"timeframe": _tf_code(raw)}
+            except ValueError as e:
+                ctx["out"] = {**res, "status": "invalid", "code": "bad_timeframe", "reason": str(e)}
+                return ctx
             ctx["sets"] = dict(key_val)
             texts = []
         elif leg == "fundamental":
