@@ -2866,6 +2866,8 @@ def _derive_schema(sch: dict) -> dict:
         "tf": {v["label"]["en"].lower(): v["value"] for v in sch["request"]["timeframe"]["values"]},
         "uni_dims": tuple(sch["universe"]["cohort"].keys()),
         "window_default": sch["request"]["window_bars"]["default"],
+        # the dividend gate's fields (min_streak_years range, min_cagr presets) — the builder's dividend place reads them
+        "div": (sch.get("dividend") or {}).get("fields") or {},
     }
 
 def _load_schema_at_start() -> tuple:
@@ -2891,7 +2893,7 @@ def _schema_refresh_loop():
             sch, etag = _fetch_schema(_S_ETAG)
             if sch is not None:
                 d = _derive_schema(sch)
-                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims"):
+                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims", "div"):
                     _S[k] = d[k]                                   # runtime values only — descriptions stay per instance
                 _S_ETAG = etag
         except Exception as e:
@@ -3182,6 +3184,40 @@ def _resolve_uni_dim(dim: str, val) -> tuple:
             return {}, {}, [{"kind": dim, "query": str(val), "status": "no_match", "reason": "a number in USD (5e10 = $50B)", "candidates": []}]
     return {dim: [str(t).strip() for t in toks]}, {}, []                 # size / asset_type: engine enums, validated below
 
+# ── the dividend gate from the user's words: a % = the 5-year dividend CAGR, "N years" = the no-cut streak ──────────
+_DIV_PCT = re.compile(r"(-?\d+(?:\.\d+)?)\s*(?:%|percent|เปอร์เซ็นต์)", re.I)
+_DIV_YEARS = re.compile(r"(\d+)\s*\+?\s*(?:years?|yrs?|y\b|ปี)", re.I)
+# words that say the YEARS are a streak (not the CAGR window): no cut / in a row / consistently …
+_DIV_STREAK = re.compile(r"\b(no[- ]cuts?|never (?:cut|reduced?|lowered)|not? (?:cut|reduced?)|streak|consecutive|straight|in a row|"
+                         r"uninterrupted|unbroken|consistent(?:ly)?|every year|reliabl[ey])\b|ไม่(?:เคย)?(?:ลด|ตัด|หด)|ติดต่อกัน|ติดกัน|"
+                         r"ต่อเนื่อง|สม่ำเสมอ|ทุกปี", re.I)
+# a dividend YIELD is a fundamental metric (dividend_yield), not this gate
+_DIV_YIELD = re.compile(r"\byield\b|อัตราผลตอบแทน|อัตราปันผล|ปันผลสูง|ปันผลเยอะ", re.I)
+
+def _div_words(text: str) -> tuple:
+    """→ (value | None, texts-to-check-for-dropped-numbers). None = the words name no streak and no growth rate."""
+    t = str(text or "")
+    pcts, years = [float(m.group(1)) for m in _DIV_PCT.finditer(t)], [int(m.group(1)) for m in _DIV_YEARS.finditer(t)]
+    out = {}
+    if pcts: out["min_cagr"] = pcts[0]
+    if years and (not pcts or _DIV_STREAK.search(t)): out["min_streak_years"] = years[0]
+    if "min_cagr" in out and "min_streak_years" not in out:                # "5% a year over 5 years": the CAGR's own window
+        t = _DIV_YEARS.sub(lambda m: "" if m.group(1) == "5" else m.group(0), t)
+    return (out or None), [t]
+
+def _div_candidates() -> list:
+    """merge-ready readings of a dividend wish that names no number, from the schema's own ranges / presets."""
+    f = _S.get("div") or {}
+    rng = (f.get("min_streak_years") or {}).get("range") or {}
+    lo, hi = int(rng.get("min", 1)), int(rng.get("max", 10))
+    out = [{"value": {"min_streak_years": n}, "key": "min_streak_years", "label": f"no dividend cut for {n}+ years"}
+           for n in dict.fromkeys([max(lo, (lo + hi) // 2), hi])]
+    pre = (f.get("min_cagr") or {}).get("presets") or []
+    if pre:
+        x = pre[len(pre) // 2]
+        out.append({"value": {"min_cagr": x}, "key": "min_cagr", "label": f"dividend grew ≥ {x:g}% a year (5-year CAGR)"})
+    return out[:3]
+
 def _place_into(base: dict, leg_val, place: dict) -> tuple:
     """Insert ONE resolved fragment into a deep copy of `base` at `place` (the web's merge table). → (criteria, path,
     error|None). Same rules the web's merge() applies — here only to validate the placement, never stored."""
@@ -3228,7 +3264,14 @@ def _place_into(base: dict, leg_val, place: dict) -> tuple:
     if leg == "timeframe":
         c.update(leg_val)
         return c, "timeframe", None
-    return c, "", {"code": "bad_place", "hint": "place.leg must be universe | fundamental | ta | timeframe"}
+    if leg == "dividend":                                                    # one gate: its fields AND together
+        cur = c.get("dividend") if isinstance(c.get("dividend"), dict) else {}
+        c["dividend"] = {**cur, **leg_val}
+        return c, "dividend", None
+    if leg == "options":                                                     # one options pattern per formula
+        c["options"] = leg_val
+        return c, "options", None
+    return c, "", {"code": "bad_place", "hint": "place.leg must be universe | fundamental | ta | timeframe | dividend | options"}
 
 def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
     """Phase 1 (per fragment, run concurrently): parse + resolve + place. → a ctx with either a final `out` (decided
@@ -3332,8 +3375,78 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
                         f"'{t}' isn't a {'megatrend theme' if dim == 'theme' else 'GICS sector'} — matched {what} "
                         f"{', '.join(n for n in (r.get('names') or []) if n) or ', '.join(map(str, r.get('ids') or []))} instead")
             texts = []                                                       # numbers in a scope are its own (mcap)
+        elif leg == "dividend":
+            if isinstance(val, dict):
+                extra = sorted(set(val) - set(_S["div"] or ("min_streak_years", "min_cagr")))
+                if extra:
+                    ctx["out"] = {**res, "status": "invalid", "code": "bad_value",
+                                  "reason": f"dividend takes {sorted(_S['div'])} (got {extra})"}
+                    return ctx
+                key_val = {k: v for k, v in val.items() if v is not None}
+            else:
+                words = val if val is not None else phrase
+                if _DIV_YIELD.search(str(words or "")):
+                    ctx["out"] = {**res, "status": "unsupported", "code": "dividend_yield", "nearest": [],
+                                  "reason": "a dividend YIELD is a fundamental metric (place it under fundamental) — the dividend "
+                                            "place screens the no-cut streak and the 5-year dividend growth"}
+                    return ctx
+                key_val, texts = _div_words(words)
+                if key_val is None:
+                    ctx["out"] = {**res, "status": "ambiguous", "candidates": _div_candidates(),
+                                  "reason": f"'{words}' names no streak length and no growth rate — ask which"}
+                    return ctx
+            rng = ((_S["div"] or {}).get("min_streak_years") or {}).get("range") or {}
+            hi, lo = rng.get("max"), rng.get("min", 1)
+            n, g = key_val.get("min_streak_years"), key_val.get("min_cagr")
+            bad = ("min_streak_years must be a whole number of years" if n is not None and (isinstance(n, bool) or not isinstance(n, (int, float)) or n != int(n) or n < lo)
+                   else "min_cagr must be a number in PERCENT (5 = 5%)" if g is not None and (isinstance(g, bool) or not isinstance(g, (int, float)))
+                   else None if key_val else "dividend needs min_streak_years and/or min_cagr")
+            if bad:
+                ctx["out"] = {**res, "status": "invalid", "code": "bad_value", "reason": bad}
+                return ctx
+            if n is not None: key_val["min_streak_years"] = n = int(n)
+            if isinstance(n, (int, float)) and hi and n > hi:                # the streak is counted in a capped window
+                key_val["min_streak_years"] = hi
+                ctx.setdefault("notes", []).append(f"the no-cut streak is counted up to {hi} years — used {hi}")
+                texts = [str(t).replace(str(int(n)), "", 1) for t in texts]
+        elif leg == "options":
+            d = dict(val) if isinstance(val, dict) else {"pattern": val if val is not None else phrase}
+            extra = sorted(set(d) - {"pattern", "horizon", "min_strength"})
+            q = str(d.get("pattern") or "").strip()
+            if extra or not q:
+                ctx["out"] = {**res, "status": "invalid", "code": "bad_value",
+                              "reason": f"options takes pattern (a key or plain words), horizon?, min_strength? (got {extra or 'no pattern'})"}
+                return ctx
+            ro = _resolve_oppattern(q)                                       # the SAME resolver as screen_unified.options
+            resolved[q] = {k: ro.get(k) for k in ("pattern", "confidence", "gate") if ro.get(k) is not None}
+            ep = ro.get("exec_path") or "scan"
+            if ro["status"] == "no_match":
+                ctx["out"] = {**res, "status": "unsupported", "reason": f"'{q}': {ro.get('reason')}", "nearest": [], "resolved": resolved}
+                return ctx
+            if ro["status"] != "resolved":
+                ctx["out"] = {**res, "status": "ambiguous", "reason": f"'{q}': {ro.get('reason')}", "resolved": resolved,
+                              "candidates": [{"value": {**{k: v for k, v in d.items() if v is not None}, "pattern": c["pattern"]},
+                                              "key": c["pattern"], "label": c.get("label"), "prob": c.get("prob")}
+                                             for c in ro.get("candidates") or [] if (c.get("prob") or 0) >= 0.05][:3]}
+                return ctx
+            if ep == "unsupported" or str(ro.get("supported")) == "no":
+                ctx["out"] = {**res, "status": "unsupported", "nearest": [], "resolved": resolved,
+                              "reason": f"'{q}' → {ro.get('pattern')}: there is no options data to screen this"}
+                return ctx
+            if ep != "scan":                                                 # a composite (options vs price …): not ONE leg
+                rec = ro.get("compose_recipe") or {}
+                ctx["out"] = {**res, "status": "unsupported", "code": "options_composite", "nearest": [], "resolved": resolved,
+                              "reason": f"'{q}' → {ro.get('pattern')} combines options with another leg"
+                                        + (f" ({rec['blocker']})" if rec.get("blocker") else "") + " — not a single options condition"}
+                return ctx
+            key_val = {k: v for k, v in {**d, "pattern": ro["pattern"]}.items() if v is not None}
+            if q != phrase: texts.append(q)
+            cur = (base or {}).get("options")
+            if isinstance(cur, dict) and cur.get("pattern") and cur.get("pattern") != key_val["pattern"]:
+                ctx.setdefault("notes", []).append(f"replaces the formula's options condition ({cur['pattern']}) — one per formula")
         else:
-            ctx["out"] = {**res, "status": "invalid", "code": "bad_place", "reason": "place.leg must be universe | fundamental | ta | timeframe"}
+            ctx["out"] = {**res, "status": "invalid", "code": "bad_place",
+                          "reason": "place.leg must be universe | fundamental | ta | timeframe | dividend | options"}
             return ctx
     except (_Busy, MarketIVError):
         raise                                                                # backend trouble, not a bad value → prep
@@ -3419,6 +3532,11 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
                 if _MA_FAMILY_WE_LACK.search(str(t)) and not any(s["path"] == f"{sig_paths[k]}.{f}" for s in snaps):
                     snaps.append({"path": f"{sig_paths[k]}.{f}", "from": t, "to": kv_list[k].get(f),
                                   "note": f"we don't have {t} — used {kv_list[k].get(f)}"})
+    caveat = None
+    if leg == "dividend":                                                    # a gate with nothing to gate YET: the value is
+        errs = v.get("errors") or []                                         # right, the formula just can't run alone
+        caveat = next((e.get("message") for e in errs if e.get("code") == "dividend_needs_base"), None)
+        v = {**v, "errors": [e for e in errs if e.get("code") != "dividend_needs_base"]}
     if v.get("errors"):
         e = v["errors"][0]
         out = {**res, "status": "invalid", "code": e.get("code"), "reason": e.get("message"), "hint": e.get("message"), "errors": v["errors"]}
@@ -3463,6 +3581,7 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
                 kv_list[k][f] = sn["to"]
     res["value"] = key_val
     if ctx.get("sets"): res["sets"] = ctx["sets"]                           # merge: criteria.update(sets)
+    if caveat: res["caveat"] = caveat
     snap_notes = {sn.get("note") for sn in snaps}
     notes = [n for n in notes if n not in snap_notes]
     if snaps or notes or dropped:
@@ -3509,6 +3628,11 @@ def _resolve_schema() -> dict:
              "merge": "push {any: value-as-list, within?} into ta[step].quals (AND with the step)"},
             {"leg": "timeframe", "value": "'daily'|'weekly'|'monthly' (or 1/2/3, or a word in timeframe.words)",
              "merge": "criteria.timeframe = result.value.timeframe"},
+            {"leg": "dividend", "value": "{min_streak_years?, min_cagr?} (see dividend.fields) or the user's words",
+             "merge": "criteria.dividend = {...criteria.dividend, ...result.value} (a membership gate: the formula needs "
+                      "another leg to run — result.caveat says so when it has none)"},
+            {"leg": "options", "value": "{pattern, horizon?, min_strength?} — pattern = an options-behaviour key or plain words; "
+                                        "or the words alone", "merge": "criteria.options = result.value (ONE per formula; US optionable stocks only)"},
         ],
         "sets": "a result may carry `sets` {field: value} — formula-level fields to apply (criteria.update(sets)) alongside value",
         "alternatives": "`candidates` (ambiguous) and `nearest` (unsupported / invalid) items are ready to merge: {value, label?} "
@@ -3520,7 +3644,15 @@ def _resolve_schema() -> dict:
                                  "basis annual|quarterly|ttm (or A/Q/T); N = periods of that basis"},
         "universe": {"dims": list(_S["uni_dims"]), "country": "ISO-2 codes", "theme_gics": "English concepts (resolver picks the axis)",
                      "mcap": "USD number"},
+        "dividend": {"fields": _S.get("div") or {},
+                     "words": "a % = min_cagr (5-year dividend CAGR, percent); 'N years' with no-cut / in-a-row words = "
+                              "min_streak_years; a dividend YIELD is a fundamental metric, not this place"},
+        "options": {"pattern": "resolved like screen_unified.options (key passthrough, else the words → the closest "
+                               "options-behaviour pattern); composite patterns (options vs price) are not a single place",
+                    "horizon": "short_term | long_term", "min_strength": "0..1 (optional)", "scope": "US optionable stocks only"},
         "statuses": ["resolved", "snapped", "ambiguous", "unsupported", "invalid", "error"],
+        "caveat": "a result may carry `caveat` (text): the value is fine but the formula can't run as it stands (e.g. a "
+                  "dividend gate with no other leg) — merge it and say so",
     }
 
 def _screen_resolve(req: dict) -> tuple:
@@ -3561,6 +3693,9 @@ def _screen_resolve(req: dict) -> tuple:
     ctxs = _parallel_map(prep, frags, max_workers=_RESOLVE_MAX_FRAGS)
     base_v, vmap = validate_round(ctxs, with_base=bool(base))
     base_v = base_v or {"valid": True, "errors": [], "snaps": [], "assumed": [], "notes": []}
+    if any(e.get("code") == "dividend_needs_base" for e in base_v.get("errors", [])):
+        errs = [e for e in base_v["errors"] if e.get("code") != "dividend_needs_base"]   # a lone dividend gate is a draft
+        base_v = {**base_v, "errors": errs, "valid": not errs}                           # waiting for its base leg
     if not base_v.get("valid"):
         lexical = _LEXICAL | {"bad_shape", "invalid", "unsupported_pair"}
         code = "base_must_be_resolved" if any(e.get("code") in lexical for e in base_v.get("errors", [])) else "base_invalid"
