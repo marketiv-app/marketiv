@@ -3197,7 +3197,10 @@ def _screen_check(body: dict, show: int, mode: str, resolved: dict) -> dict:
     for k in ("snaps", "assumed", "canonical", "notes"):
         if v.get(k): out[k] = v[k]
     out.update({k: x for k, x in resolved.items() if x})
-    if mode == "count":
+    if mode == "count" and not any(crit.get(k) for k in ("ta", "fundamental", "options", "dividend")):
+        # a scope alone is a valid draft but nothing to count yet (/v1/screen/count needs a condition)
+        out.update({"count": None, "note": "a scope alone does not run — add a condition"})
+    elif mode == "count":
         t1 = _time.time()
         r = _post_retry("/v1/screen/count", {"queries": [crit], "cap": 500}, timeout=30.0).json()
         _tlog("backend", "/v1/screen/count", t1, True)
@@ -4025,10 +4028,13 @@ def screen_unified(
     # ≥1 executable leg required — the screen is an INTERSECTION of fundamental ∩ ta within a scope; a scope alone
     # (gics/country/size, no leg) is a plain list, which screen_stocks serves. Guard here with a helpful redirect
     # rather than letting the API 400 (F6b: the bare-universe 400 body wasn't reaching the client clearly).
-    if not fundamental and not ta and not options:
+    # A builder DRAFT (mode check / count) may be a scope alone — mdx-api /v1/screen/validate accepts it; only a run
+    # needs a leg (eval T1 "หุ้นธีมหุ่นยนต์": the chat could not check the first step of a formula).
+    if not fundamental and not ta and not options and mode not in ("check", "count"):
         return {"error": "screen_unified needs at least one of `fundamental`, `ta`, or `options` — it returns the "
                          "INTERSECTION of financial / technical / options-behaviour screens within a scope. For a plain "
-                         "universe list (gics/country/size only, no filter) use screen_stocks instead."}
+                         "universe list (gics/country/size only, no filter) use screen_stocks instead; to check a "
+                         "scope-only draft formula, call with mode='check'."}
     show = _lim(limit, default=10, ceiling=100)
     fetch = min(show * 4, 100)
     body: dict = {"limit": fetch}

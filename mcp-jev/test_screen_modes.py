@@ -55,5 +55,26 @@ stub(lambda b: [{"valid": False, "errors": [DIV]}], lambda b: {"results": [{"cou
 r = S._screen_check({"ta": [{"anchor": [{"pattern": "divergence_bull", "a": "stoch_k"}]}]}, 10, "count", {})
 ok("count on an invalid formula never counts", r["ok"] is False and r["nearest"] and all(c[0] == "validate" for c in calls), calls)
 
+# a scope alone: a valid draft — check validates it; count does not call /v1/screen/count (it needs a condition)
+SCOPE = {"universe": {"include": [{"gics": "452030", "asset_type": ["Common Stock"]}]}, "limit": 40}
+stub(lambda b: [{"valid": True, "errors": []}], lambda b: {"results": [{"code": "invalid", "error": "need at least one"}]})
+r = S._screen_check(dict(SCOPE), 10, "check", {})
+ok("scope-only check ok", r["ok"] and r["executed_criteria"] == {"universe": SCOPE["universe"], "limit": 10}, r)
+stub(lambda b: [{"valid": True, "errors": []}], lambda b: {"results": [{"code": "invalid", "error": "need at least one"}]})
+r = S._screen_check(dict(SCOPE), 10, "count", {})
+ok("scope-only count: ok, no count, a note, no count call", r["ok"] and r["count"] is None and r.get("note") and [c[0] for c in calls] == ["validate"], (r, calls))
+# the run guard stays for run, and points drafts at mode='check'; check / count go past it
+g = S.screen_unified(country="US")
+ok("run without a leg still refused, mentions mode='check'", "error" in g and "mode='check'" in g["error"], g)
+seen = {}
+keep = S._screen_check
+S._screen_check = lambda body, show, mode, resolved: seen.update(body=body, mode=mode) or {"ok": True}
+try:
+    for m in ("check", "count"):
+        S.screen_unified(country="US", mode=m)
+        ok(f"{m} with a scope alone reaches the check", seen.get("mode") == m and "universe" in seen.get("body", {}), seen)
+finally:
+    S._screen_check = keep
+
 ok("mode is a declared parameter", "mode" in S.screen_unified.__annotations__)
 print("PASS" if not fails else f"{fails} failed"); sys.exit(1 if fails else 0)
