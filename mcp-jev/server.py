@@ -3177,9 +3177,41 @@ def _sigs_at(body: dict, path: str) -> list:
     return [(f"ta[{i}].quals[{k}].any[{j}]", s) for k, q in enumerate(st.get("quals") or [])
             for j, s in enumerate((q or {}).get("any") or []) if isinstance(s, dict)]
 
-def _screen_fixable_400(body: dict):
+def _screen_check(body: dict, show: int, mode: str, resolved: dict) -> dict:
+    """screen_unified mode='check' / 'count': the formula as a run would send it (every field resolved by the same
+    code), validated by mdx-api /v1/screen/validate (rules only, no market data) and, for 'count', counted with ONE
+    POST /v1/screen/count — no scan, no rows. A formula that can't run → the same answer as a run's 400
+    (_screen_fixable_400 → _error_suggestions)."""
+    t0 = _time.time()
+    crit = {k: x for k, x in json.loads(json.dumps(body)).items() if k not in ("limit", "count_total")}
+    v = _screen_validate_batch([crit])[0]
+    _tlog("backend", "/v1/screen/validate", t0, True)
+    if v.get("errors"):
+        fix = _screen_fixable_400(crit, v)
+        if not fix:
+            e = v["errors"][0]
+            fix = {"needs_rewrite": True, "count": None, "code": e.get("code"), "path": e.get("path"), "error": e.get("message"),
+                   "_guide": e.get("message")}
+        return {"ok": False, "mode": mode, **fix, "ms": int((_time.time() - t0) * 1000)}
+    out = {"ok": True, "mode": mode, "executed_criteria": {**crit, "limit": show}}
+    for k in ("snaps", "assumed", "canonical", "notes"):
+        if v.get(k): out[k] = v[k]
+    out.update({k: x for k, x in resolved.items() if x})
+    if mode == "count":
+        t1 = _time.time()
+        r = _post_retry("/v1/screen/count", {"queries": [crit], "cap": 500}, timeout=30.0).json()
+        _tlog("backend", "/v1/screen/count", t1, True)
+        x = (r.get("results") or [{}])[0]
+        if x.get("count") is None:
+            return {**out, "ok": False, "error": x.get("error") or r.get("error") or "count failed", "ms": int((_time.time() - t0) * 1000)}
+        out.update({"count": x["count"], "capped": bool(x.get("capped"))})
+        if x.get("notes"): out["notes"] = list(dict.fromkeys((out.get("notes") or []) + x["notes"]))
+    out["ms"] = int((_time.time() - t0) * 1000)
+    return out
+
+def _screen_fixable_400(body: dict, v: Optional[dict] = None):
     try:
-        v = _screen_validate_batch([body])[0]
+        v = v if v is not None else _screen_validate_batch([body])[0]
     except Exception:
         return None
     errs = v.get("errors") or []
@@ -3927,7 +3959,14 @@ def screen_unified(
         sort: Annotated[Optional[str], _d("Rank key: 'ta' (default, TA chain score) · 'options' (use when `options` present) · 'mcap' · a TA-context oscillator ('rsi'/'adx' — 'most overbought'→'rsi') · or any fundamental metric key in the results (pe/roe/…).")] = None,
         limit: Annotated[Optional[int], _d("How many stocks to SHOW (default 10). Over-fetches a ~4× buffer (capped 100) so 'show me a few more' is served from THIS result — don't re-screen; re-screen only to exceed the buffer.")] = None,
         count_total: Annotated[Optional[bool], _d("Set true ONLY when the user asks HOW MANY match ('how many stocks…', 'is it more than 500?'): "
-            "returns the exact `total` up to 500, else `total_over: 500`. Slower (runs every leg in full) — omit for a normal screen.")] = None) -> dict:
+            "returns the exact `total` up to 500, else `total_over: 500`. Slower (runs every leg in full) — omit for a normal screen.")] = None,
+        mode: Annotated[Optional[Literal["run", "check", "count"]], _d(
+            "What to do with the formula. 'run' (default) = screen and return the stocks. 'check' = NO scan, no market "
+            "data: resolve every field exactly as a run does and validate the formula (rules only, fast) → {ok, "
+            "executed_criteria, snaps/notes}, or the same needs_rewrite answer (code, path, error, _guide, nearest) when "
+            "it cannot run — use it to try a formula or a choice BEFORE you offer it. 'count' = 'check' + how many stocks "
+            "match (exact up to 500, `capped` above) — use it when only how many is needed. No rows in check/count; "
+            "count_total is for 'run' only.")] = None) -> dict:
     """EXECUTE a unified screen = universe ∩ fundamental ∩ technical ∩ options (any leg optional; each grammar resolved
     server-side — key or plain English). Returns {universe, count, sort, executed_criteria (the resolved request that ran — save/re-run it verbatim), results:[{head_listing_id, ticker, name, score,
     matched_legs, matched:{ta, fundamental:{<metric>:{value, basis, window?, series?, periods?}}}, context}], notes}.
@@ -4093,6 +4132,9 @@ def screen_unified(
         body["dividend"] = dv
     if sort: body["sort"] = sort
     if count_total: body["count_total"] = True
+    if mode in ("check", "count"):
+        return _screen_check(body, show, mode, {"_resolved_fundamental": fresolved, "_resolved_ta": ta_resolved,
+                                                 "_resolved_options": opt_resolved, "_resolved_scope": scope_resolved})
     _t0 = _time.time()
     resp = mdx()._http._client.post("/v1/screen", json=body)
     _tlog("backend", "/v1/screen", _t0, getattr(resp, "status_code", 0) < 400)
