@@ -18,7 +18,7 @@ from __future__ import annotations
 import os, re, json, pathlib, contextvars
 from dataclasses import asdict, is_dataclass
 from typing import Annotated, Any, Optional, List, Literal, Union
-from pydantic import Field, AliasChoices, BaseModel, ConfigDict, field_validator
+from pydantic import Field, AliasChoices, BaseModel, ConfigDict, field_validator, model_validator, ValidationError
 
 from mcp.server.fastmcp import FastMCP, Context
 from mcp.server.transport_security import TransportSecuritySettings
@@ -3913,6 +3913,47 @@ def _screen_resolve(req: dict) -> tuple:
     return 200, {"results": results, "base": {"assumed": base_v.get("assumed", [])}, "ms": int((_time.time() - t0) * 1000)}
 
 
+# ── the SAVED formula shape (what screen_unified returns as executed_criteria, what the web / chat store) → the tool's
+# own arguments. ONE place owns both shapes, so a client can send back what it got (with its change) verbatim.
+_CRIT_TOP = ("universe", "ta", "fundamental", "options", "timeframe", "window_bars", "dividend", "sort", "limit", "count_total")
+_CRIT_INC = {"gics": "gics", "country": "country", "size": "size", "asset_type": "asset_type", "theme": "theme",
+             "mcap_min": "min_market_cap_usd", "mcap_max": "max_market_cap_usd"}
+_CRIT_EXC = {"gics": "exclude_gics", "country": "exclude_country", "theme": "exclude_theme"}
+
+def _criteria_to_args(c) -> dict:
+    if not isinstance(c, dict):
+        return {"error": "`criteria` must be an object — a formula in the saved shape (executed_criteria)"}
+    bad = sorted(set(c) - set(_CRIT_TOP))
+    if bad:
+        return {"error": f"`criteria` has unknown field(s) {bad} — a saved formula has: {', '.join(_CRIT_TOP)}"}
+    a: dict = {}
+    u = c.get("universe") or {}
+    if not isinstance(u, dict) or set(u) - {"include", "exclude"}:
+        return {"error": "`criteria.universe` = {include:[{…}], exclude:[{…}]}"}
+    for part, table in (("include", _CRIT_INC), ("exclude", _CRIT_EXC)):
+        groups = u.get(part) or []
+        if not isinstance(groups, list) or len(groups) > 1:
+            return {"error": f"`criteria.universe.{part}` holds at most ONE group here (several OR'd groups are not supported by this tool)"}
+        for k, v in (groups[0] if groups else {}).items():
+            if k not in table:
+                return {"error": f"`criteria.universe.{part}[0].{k}` is not a scope field — use: {', '.join(table)}"}
+            a[table[k]] = ",".join(map(str, v)) if (table[k] in ("gics", "exclude_gics") and isinstance(v, list)) else v
+    try:
+        if c.get("ta") is not None: a["ta"] = [TaStep.model_validate(x) for x in c["ta"]]
+        if c.get("fundamental") is not None: a["fundamental"] = [ScreenCondition.model_validate(x) for x in c["fundamental"]]
+    except ValidationError as e:
+        er = e.errors()[0]
+        return {"error": f"`criteria` has a condition this tool does not read: {list(er.get('loc', ()))} — {er.get('msg')}"}
+    if c.get("options") is not None: a["options"] = c["options"]           # {pattern, horizon?, min_strength?} or a term
+    d = c.get("dividend") or {}
+    if not isinstance(d, dict) or set(d) - {"min_streak_years", "min_cagr"}:
+        return {"error": "`criteria.dividend` = {min_streak_years?, min_cagr?}"}
+    if d.get("min_streak_years") is not None: a["dividend_min_streak_years"] = d["min_streak_years"]
+    if d.get("min_cagr") is not None: a["dividend_min_cagr"] = d["min_cagr"]
+    for k in ("timeframe", "window_bars", "sort", "limit", "count_total"):
+        if c.get(k) is not None: a[k] = c[k]
+    return a
+
 @mcp.tool(name="screen_unified", title="Unified Screener (Universe × Fundamental × Technical)", annotations=_RO)
 def screen_unified(
         fundamental: Annotated[Optional[List[ScreenCondition]], _d(
@@ -3969,7 +4010,15 @@ def screen_unified(
             "executed_criteria, snaps/notes}, or the same needs_rewrite answer (code, path, error, _guide, nearest) when "
             "it cannot run — use it to try a formula or a choice BEFORE you offer it. 'count' = 'check' + how many stocks "
             "match (exact up to 500, `capped` above) — use it when only how many is needed. No rows in check/count; "
-            "count_total is for 'run' only.")] = None) -> dict:
+            "count_total is for 'run' only.")] = None,
+        criteria: Annotated[Optional[dict], _d(
+            "A WHOLE formula in the saved shape — the `executed_criteria` a screen_unified call returned, or the user's "
+            "saved formula ({universe:{include:[{country,gics,size,theme,asset_type,mcap_min,mcap_max}], exclude:[…]}, "
+            "ta, fundamental:[{concept,pattern,params}], options:{pattern,horizon}, timeframe, window_bars, dividend}). "
+            "To change a formula you got back, send it here WITH YOUR CHANGE APPLIED — resolved keys stay as they are, "
+            "plain-English fields inside are resolved as usual. Works with every `mode`. Do not also send the separate "
+            "formula fields (fundamental, ta, options, gics, country, …) — one or the other; sort / limit / count_total / "
+            "mode may go with it.")] = None) -> dict:
     """EXECUTE a unified screen = universe ∩ fundamental ∩ technical ∩ options (any leg optional; each grammar resolved
     server-side — key or plain English). Returns {universe, count, sort, executed_criteria (the resolved request that ran — save/re-run it verbatim), results:[{head_listing_id, ticker, name, score,
     matched_legs, matched:{ta, fundamental:{<metric>:{value, basis, window?, series?, periods?}}}, context}], notes}.
@@ -3982,6 +4031,26 @@ def screen_unified(
     returns a 400, so count:0 with NO error = a VALID query that matched zero now (loosen / widen window_bars, don't say
     'can't do X'); `notes` may say 'insufficient history' (not a no-match) or which basis was screened. Over-fetches a
     ~4× buffer (cap 100) so 'show me more' is served from these rows — don't re-call."""
+    if criteria is not None:
+        given = {"fundamental": fundamental, "ta": ta, "options": options, "options_horizon": options_horizon, "gics": gics,
+                 "country": country, "size": size, "asset_type": asset_type, "theme": theme, "exclude_gics": exclude_gics,
+                 "exclude_country": exclude_country, "exclude_theme": exclude_theme, "min_market_cap_usd": min_market_cap_usd,
+                 "max_market_cap_usd": max_market_cap_usd, "timeframe": timeframe, "window_bars": window_bars,
+                 "dividend_min_streak_years": dividend_min_streak_years, "dividend_min_cagr": dividend_min_cagr}
+        mixed = [k for k, v in given.items() if v is not None]
+        if mixed:
+            return {"error": f"send the formula EITHER whole in `criteria` OR as separate fields — not both (also got: "
+                             f"{', '.join(mixed)}). Apply your change inside `criteria`."}
+        conv = _criteria_to_args(criteria)
+        if "error" in conv: return conv
+        for k, v in (("sort", sort), ("limit", limit), ("count_total", count_total)):
+            if v is not None: conv[k] = v
+        return screen_unified(**conv, mode=mode)
+    _ox: dict = {}
+    if isinstance(options, dict):                                            # the saved shape {pattern, horizon, min_strength}
+        options_horizon = options_horizon or options.get("horizon")
+        _ox = {k: v for k, v in options.items() if k not in ("pattern", "horizon") and v is not None}
+        options = options.get("pattern")
     _lst = lambda v: None if v is None else (v if isinstance(v, list) else [v])  # forgive a client that sends a scalar
     # 🆕 SERVER-SIDE UNIFIED concept resolution (collapse find_gics + find_megatrend): `gics` / `exclude_gics` (and
     # each fundamental condition's `vs_cohort.gics`) may be a bare CODE **or** plain English ('biotech', 'AI',
@@ -4050,7 +4119,7 @@ def screen_unified(
     fresolved: dict = {}
     ta_resolved: dict = {}
     opt_resolved: dict = {}
-    options_extra: dict = {}
+    options_extra: dict = dict(_ox)
     # 🆕 SERVER-SIDE resolution of the OPTIONS leg (collapse find_oppattern): the `options` term may be an exact key
     # OR plain English → resolve here. `exec_path` routes: scan → use the key; compose(live) → EXPAND the recipe's
     # legs server-side (inject its ta example + set the options pattern/sort — reuse the ta walk + assembly below, no
@@ -4179,6 +4248,32 @@ def screen_unified(
         # (web save-flow, 2026-10-14). Deep-copied so later mutation of `body` can't leak in.
         data["executed_criteria"] = {**json.loads(json.dumps(body)), "limit": show}
     return data
+
+
+def _forbid_unknown_args(name: str) -> None:
+    """A top-level argument the tool does not declare is REFUSED with the list it does take — FastMCP's argument
+    model ignores extras by default, so a call with only a made-up key ran an EMPTY formula and reported success."""
+    t = mcp._tool_manager.get_tool(name)
+    base = t.fn_metadata.arg_model
+    allowed = {f.alias or k for k, f in base.model_fields.items()} | set(base.model_fields)
+
+    class _Strict(base):
+        model_config = ConfigDict(**{**base.model_config, "extra": "forbid", "title": base.__name__})
+
+        @model_validator(mode="before")
+        @classmethod
+        def _known(cls, v):
+            if isinstance(v, dict):
+                bad = sorted(k for k in v if k not in allowed)
+                if bad:
+                    raise ValueError(f"unknown argument(s) {bad} — {name} takes: {', '.join(sorted(base.model_fields))}. "
+                                     "A saved formula (executed_criteria) goes whole into `criteria`.")
+            return v
+    _Strict.__name__ = _Strict.__qualname__ = base.__name__
+    t.fn_metadata.arg_model = _Strict
+    t.parameters["additionalProperties"] = False
+
+_forbid_unknown_args("screen_unified")
 
 
 _CURVE_TENORS = ("3M", "2Y", "5Y", "10Y", "30Y")
