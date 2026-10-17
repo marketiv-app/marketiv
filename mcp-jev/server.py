@@ -2887,6 +2887,10 @@ def _derive_schema(sch: dict) -> dict:
         # the dividend gate's fields (min_streak_years range, min_cagr presets) — the builder's dividend place reads them
         "div": (sch.get("dividend") or {}).get("fields") or {},
         "opt": (sch.get("options") or {}).get("fields") or {},
+        # each TA pattern's operand spec + meaning, in the schema's order — what an unsupported condition's alternatives
+        # are read from (_ta_alternatives); data only, nothing ranked
+        "ta_ops": [(p["pattern"], ops(p), p.get("gloss") or (p.get("label") or {}).get("en") or "",
+                    tuple(k for k, v in (p.get("params") or {}).items() if v is not None)) for p in ta["patterns"]],
     }
 
 def _load_schema_at_start() -> tuple:
@@ -2912,7 +2916,7 @@ def _schema_refresh_loop():
             sch, etag = _fetch_schema(_S_ETAG)
             if sch is not None:
                 d = _derive_schema(sch)
-                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims", "div", "opt"):
+                for k in ("fraction_b", "steps", "anchor_or", "quals", "qual_or", "within", "tf", "uni_dims", "div", "opt", "ta_ops"):
                     _S[k] = d[k]                                   # runtime values only — descriptions stay per instance
                 _S_ETAG = etag
         except Exception as e:
@@ -3536,6 +3540,86 @@ def _frag_prepare(base: dict, frag: dict, fast: bool = True) -> dict:
     ctx["merged"] = merged
     return ctx
 
+# ── alternatives for an unsupported TA condition — DATA ONLY (user decision 2026-10-17: the MCP makes no judgment,
+# no ranking; the LLM that called it chooses and explains). Two rules, both read from the engine:
+#   R1 same pattern, an operand value the engine accepts — mdx-api validate's `allowed` {operand, values}
+#      (older mdx-api: the same list read from its message)
+#   R2 other patterns that accept the SAME operands the user asked for — the schema's operand specs, in schema order
+# Every item is a ready-to-merge signal (key form) in `nearest`; `nearest_meta[i]` says which rule and what it means.
+_ALT_CAP = 16                                                         # a size bound, not a choice
+
+def _allowed_of(e: dict) -> Optional[dict]:
+    a = e.get("allowed")
+    if isinstance(a, dict) and a.get("operand") in ("a", "b") and isinstance(a.get("values"), list):
+        return a
+    msg = e.get("message") or ""
+    for tag, operand in (("available reference operands: ", "b"), ("available on: ", "a")):
+        m = re.search(re.escape(tag) + r"(\[.*?\])", msg)
+        if m:
+            try: return {"operand": operand, "values": json.loads(m.group(1))}
+            except ValueError: pass
+    return None
+
+def _level_ok(levels, b) -> bool:
+    try: x = float(b)
+    except (TypeError, ValueError): return False
+    if not isinstance(levels, dict): return False
+    if x in [float(v) for v in levels.get("values") or [] if isinstance(v, (int, float))]: return True
+    if not levels.get("any"): return x in [float(v) for v in levels.get("presets") or []]
+    r = levels.get("range") or {}
+    return (r.get("min") is None or x >= r["min"]) and (r.get("max") is None or x <= r["max"])
+
+def _b_ok(spec, b) -> bool:
+    """does an operand-b spec ({lines, levels}) accept b?"""
+    if not isinstance(spec, dict): return False
+    return str(b).lower() in [str(l).lower() for l in spec.get("lines") or []] or _level_ok(spec.get("levels"), b)
+
+def _pairs_for(ops: dict, a, b) -> list:
+    """the (a, b) pairs a pattern's operands accept that keep the user's own a / b — [] when none. a = None: the pattern
+    takes no a, or (when it does) every a it accepts with this b. b = None: the pattern needs no b."""
+    sa, sb = ops.get("a"), ops.get("b")
+    a_vals = [str(x).lower() for x in ((sa or {}).get("values") or [])]
+    if b is None:
+        if sb and not sb.get("optional"): return []
+        if a is None: return [(None, None)] if sa is None or sa.get("optional") else []
+        return [(a, None)] if a in a_vals else []
+    if not sb: return []
+    by_a = sb.get("by_a")
+    if by_a is None:                                                         # b does not depend on a
+        if not _b_ok(sb, b): return []
+        if a is None: return [(None, b)] if sa is None or sa.get("optional") else []
+        return [(a, b)] if sa is not None and a in a_vals else []
+    if a is not None:
+        return [(a, b)] if _b_ok(by_a.get(a), b) else []
+    return [(x, b) for x, spec in by_a.items() if _b_ok(spec, b)]
+
+def _ta_alternatives(key_val: dict, allowed: Optional[dict]) -> Optional[dict]:
+    if not isinstance(key_val, dict) or not key_val.get("pattern"): return None
+    pat = key_val["pattern"]
+    a = str(key_val["a"]).lower() if key_val.get("a") not in (None, "") else None
+    b = str(key_val["b"]).lower() if key_val.get("b") not in (None, "") else None
+    glosses = {p: g for p, _, g, _ in _S["ta_ops"]}
+    # the user's other settings (timeframe, for_bars, window …) go with an alternative whose pattern takes them
+    extra = {k: v for k, v in key_val.items() if k not in ("pattern", "a", "b") and v is not None}
+    items, meta = [], []
+    def add(sig, rule):
+        if sig not in items:
+            items.append(sig); meta.append({"rule": rule, "means": glosses.get(sig["pattern"], "")})
+    if allowed:                                                              # R1
+        for v in allowed.get("values") or []:
+            add({**key_val, allowed["operand"]: v}, "same pattern, an operand the engine accepts")
+    for p, ops, _, params in _S["ta_ops"]:                                   # R2
+        if p == pat: continue
+        for pa, pb in _pairs_for(ops, a, b):
+            sig = {"pattern": p, **{k: v for k, v in extra.items() if k in params}}
+            if pa is not None: sig["a"] = pa
+            if pb is not None: sig["b"] = pb
+            add(sig, "same operands, another pattern")
+    total = len(items)
+    out = {"nearest": items[:_ALT_CAP], "nearest_meta": meta[:_ALT_CAP]}
+    if total > _ALT_CAP: out.update({"nearest_capped": True, "nearest_total": total})
+    return out
+
 def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
     """Phase 3: turn the fragment's validate result into its status (the diff vs base = what THIS fragment did)."""
     res, leg, place, key_val, path = ctx["res"], ctx["leg"], ctx["place"], ctx["key_val"], ctx["path"]
@@ -3572,20 +3656,12 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
             # a step's main signal runs on the FORMULA's chart → offer setting that instead (or put it in a qualifier)
             tf = next((g.get("timeframe") for g in kv_list if g.get("timeframe")), None)
             if tf: out["nearest"] = [{"place": {"leg": "timeframe"}, "value": {"timeframe": tf}}]
-        if e.get("code") == "operand_not_for_pattern" and leg == "ta" and not is_list:
-            # e.g. divergence on stochastic: the engine names the lines it CAN read it on → nearest = those, ready to merge
-            m = re.search(r"available on: (\[.*?\])", e.get("message") or "")
-            try: alts = json.loads(m.group(1)) if m else []
-            except ValueError: alts = []
-            out.update({"status": "unsupported", "nearest": [{**key_val, "a": a} for a in alts[:3]]})
-            out.pop("value", None)
-        if e.get("code") == "unsupported_pair" and leg == "ta" and not is_list:
-            # this exact pairing isn't tracked → offer the pairings that ARE (the engine lists them), in key form
-            m = re.search(r"available reference operands: (\[.*?\])", e.get("message") or "")
-            try: alts = json.loads(m.group(1)) if m else []
-            except ValueError: alts = []
-            out.update({"status": "unsupported", "nearest": [{**key_val, "b": b} for b in alts[:3]]})
-            out.pop("value", None)                                           # that exact pairing can't run
+        if e.get("code") in ("operand_not_for_pattern", "unsupported_pair") and leg == "ta" and not is_list:
+            # what the engine DOES run near this condition, as data — the caller (an LLM) chooses; nothing ranked here
+            alts = _ta_alternatives(key_val, _allowed_of(e))
+            if alts is not None:
+                out.update({"status": "unsupported", **alts})
+                out.pop("value", None)                                       # that exact condition can't run
         return out
     dropped = _dropped(ctx["texts"], key_val)
     resolved = ctx["resolved"]
