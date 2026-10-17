@@ -3131,22 +3131,83 @@ _FIX_GUIDE = {
         f"another THEN step ({e.get('path')}). Re-call with it as a same-time qualifier of a step (`quals`) or as the "
         "LAST step."),
     "operand_not_for_pattern": lambda e: (
-        f"{e.get('message')} — re-call with `a` set to one of those lines (or drop the condition)."),
+        f"{e.get('message')} — re-call with `a` set to one of those lines (or drop the condition). `nearest` lists "
+        "what the engine runs near it, ready to merge (`nearest_meta` says which rule and what each means)."),
+    "unsupported_pair": lambda e: (
+        f"{e.get('message')} — the engine does not store this pairing. `nearest` lists what it does run near it, ready "
+        f"to merge at {e.get('at') or e.get('path')} (`nearest_meta`: same pattern with an accepted operand, or the same "
+        "operands with another pattern, and what each means) — re-call with one, or ask the user which."),
+    "anchor_tf_mismatch": lambda e: (
+        f"{e.get('message')} — a step's main signal runs on the formula's chart. Re-call with the formula timeframe "
+        "set to the signal's (`nearest`), or move this signal into a qualifier (`quals`), where it keeps its own."),
 }
+
+def _error_suggestions(e: dict, leg: str, sigs: list) -> dict:
+    """ONE mapping from a /v1/screen/validate error to what can be offered instead — DATA only, nothing ranked. Shared
+    by the builder route (/v1/screen/resolve → _frag_finish) and the screen_unified tool (_screen_fixable_400), so a
+    client gets the same alternatives whichever way it asked. `sigs` = the TA signal(s) the error refers to.
+    → {nearest?, nearest_meta?, nearest_capped?, nearest_total?, status?, needed/available/max/basis/metric?, _guide?}"""
+    code, out = e.get("code"), {}
+    if code == "insufficient_history":
+        # the data can't evaluate this N yet (it deepens as statements load) — the engine's live limit and the same
+        # condition at that limit, ready to merge (the web turns it into a "use the max" button)
+        for k in ("needed", "available", "max", "basis", "metric"):
+            if e.get(k) is not None: out[k] = e[k]
+        out["nearest"] = e.get("nearest") or []
+    elif code == "anchor_tf_mismatch" and leg == "ta":
+        # a step's main signal runs on the FORMULA's chart → offer setting that instead (or put it in a qualifier)
+        tf = next((g.get("timeframe") for g in sigs if isinstance(g, dict) and g.get("timeframe")), None)
+        if tf: out["nearest"] = [{"place": {"leg": "timeframe"}, "value": {"timeframe": tf}}]
+    elif code in ("operand_not_for_pattern", "unsupported_pair") and leg == "ta" and len(sigs) == 1:
+        # what the engine DOES run near this condition, as data — the caller (an LLM) chooses
+        alts = _ta_alternatives(sigs[0], _allowed_of(e))
+        if alts is not None: out.update({"status": "unsupported", **alts})
+    if code in _FIX_GUIDE: out["_guide"] = _FIX_GUIDE[code](e)
+    return out
+
+def _sigs_at(body: dict, path: str) -> list:
+    """the TA signals a validate error path names in a screen body → [(exact path, signal)]: 'ta[i].anchor' → its OR
+    terms, 'ta[i].quals' → every qualifier term"""
+    m = re.match(r"ta\[(\d+)\]\.(anchor|quals)", path or "")
+    steps = body.get("ta") or []
+    if not m or int(m.group(1)) >= len(steps): return []
+    i, part, st = int(m.group(1)), m.group(2), steps[int(m.group(1))]
+    if part == "anchor":
+        return [(f"ta[{i}].anchor[{k}]", s) for k, s in enumerate(st.get("anchor") or []) if isinstance(s, dict)]
+    return [(f"ta[{i}].quals[{k}].any[{j}]", s) for k, q in enumerate(st.get("quals") or [])
+            for j, s in enumerate((q or {}).get("any") or []) if isinstance(s, dict)]
 
 def _screen_fixable_400(body: dict):
     try:
         v = _screen_validate_batch([body])[0]
     except Exception:
         return None
-    errs = [e for e in (v.get("errors") or []) if e.get("code") in _FIX_GUIDE]
+    errs = v.get("errors") or []
     if not errs:
         return None
-    e = errs[0]
-    out = {"needs_rewrite": True, "count": None, "code": e.get("code"), "path": e.get("path"), "error": e.get("message"),
-           "_guide": _FIX_GUIDE[e["code"]](e)}
-    for k in ("needed", "available", "max", "nearest"):
-        if e.get(k) not in (None, []): out[k] = e[k]
+    e = dict(errs[0])
+    leg = (e.get("path") or "").split("[")[0].split(".")[0]
+    cands = _sigs_at(body, e.get("path")) if leg == "ta" else []
+    if len(cands) > 1 and e.get("code") == "anchor_tf_mismatch":
+        tf = body.get("timeframe") or 1
+        cands = [c for c in cands if c[1].get("timeframe") not in (None, tf)] or cands
+    elif len(cands) > 1:
+        # the error names a step part with several terms: find the one(s) the engine refuses, each validated alone
+        try:
+            alone = _screen_validate_batch([{"ta": [{"anchor": [{k: x for k, x in s.items() if k != "timeframe"}]}]} for _, s in cands])
+            bad = [c for c, r in zip(cands, alone) if any(x.get("code") == e.get("code") for x in (r.get("errors") or []))]
+            cands = bad or cands
+        except Exception:
+            pass
+    if len(cands) == 1: e["at"] = cands[0][0]
+    sug = _error_suggestions(e, leg, [s for _, s in cands][:1] if len(cands) == 1 else [s for _, s in cands])
+    if "_guide" not in sug and not sug.get("nearest"):
+        return None                                                          # nothing the client can act on → a plain 400
+    out = {"needs_rewrite": True, "count": None, "code": e.get("code"), "path": e.get("path"), "error": e.get("message")}
+    if e.get("at"): out["at"] = e["at"]
+    out["_guide"] = sug.pop("_guide", None) or e.get("message")
+    sug.pop("status", None)
+    out.update({k: x for k, x in sug.items() if x not in (None, [])})
     if len(errs) > 1: out["also"] = [{"code": x.get("code"), "path": x.get("path"), "error": x.get("message")} for x in errs[1:]]
     return out
 
@@ -3646,22 +3707,13 @@ def _frag_finish(ctx: dict, v: dict, base_v: dict) -> dict:
         e = v["errors"][0]
         out = {**res, "status": "invalid", "code": e.get("code"), "reason": e.get("message"), "hint": e.get("message"), "errors": v["errors"]}
         if snaps: out["snaps"] = snaps
-        if e.get("code") == "insufficient_history":
-            # the data can't evaluate this N yet (it deepens as statements load) — surface the engine's live limit and
-            # the same condition at that limit, ready to merge (the web turns it into a "use the max" button)
-            for k in ("needed", "available", "max", "basis", "metric"):
-                if e.get(k) is not None: out[k] = e[k]
-            out["nearest"] = e.get("nearest") or []
-        if e.get("code") == "anchor_tf_mismatch" and leg == "ta":
-            # a step's main signal runs on the FORMULA's chart → offer setting that instead (or put it in a qualifier)
-            tf = next((g.get("timeframe") for g in kv_list if g.get("timeframe")), None)
-            if tf: out["nearest"] = [{"place": {"leg": "timeframe"}, "value": {"timeframe": tf}}]
-        if e.get("code") in ("operand_not_for_pattern", "unsupported_pair") and leg == "ta" and not is_list:
-            # what the engine DOES run near this condition, as data — the caller (an LLM) chooses; nothing ranked here
-            alts = _ta_alternatives(key_val, _allowed_of(e))
-            if alts is not None:
-                out.update({"status": "unsupported", **alts})
-                out.pop("value", None)                                       # that exact condition can't run
+        # what can be offered instead — the SAME mapping screen_unified's failure path uses (_error_suggestions)
+        sug = _error_suggestions(e, leg, kv_list if leg == "ta" else [])
+        sug.pop("_guide", None)                                              # the builder shows `reason`; the guide is for LLM clients
+        if leg == "ta" and is_list and e.get("code") in ("operand_not_for_pattern", "unsupported_pair"):
+            sug = {}                                                         # an OR list: which term failed is not known here
+        out.update(sug)
+        if sug.get("status") == "unsupported": out.pop("value", None)        # that exact condition can't run
         return out
     dropped = _dropped(ctx["texts"], key_val)
     resolved = ctx["resolved"]
